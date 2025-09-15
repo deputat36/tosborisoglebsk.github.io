@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Документы | ТОС Борисоглебский ГО</title>
+  <title>Карточка ТОС | Борисоглебский ГО</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -13,14 +13,14 @@
       <div class="logo">ТОС</div>
       <div>
         <div class="brand-title">Борисоглебский городской округ</div>
-        <div class="brand-sub">Документы</div>
+        <div class="brand-sub">Карточка ТОС</div>
       </div>
     </div>
     <nav class="nav">
       <a href="index.html">Главная</a>
       <a href="toses.html">ТОСы округа</a>
       <a href="news.html">Новости</a>
-      <a class="active" href="docs.html">Документы</a>
+      <a href="docs.html">Документы</a>
       <a href="map.html">Карта</a>
       <a href="contacts.html">Контакты</a>
     </nav>
@@ -28,9 +28,15 @@
 </header>
 
 <main class="container">
-  <h1>Документы</h1>
-  <p class="muted">Загружайте PDF/DOC в папку <code>/docs</code> и добавляйте записи в <code>data/docs.json</code>.</p>
-  <ul id="doc-list" class="doc-list"></ul>
+  <div id="tos-card" class="tos-card"></div>
+  <section>
+    <h2>Новости ТОС</h2>
+    <div id="tos-news" class="cards"></div>
+  </section>
+  <section>
+    <h2>Документы ТОС</h2>
+    <ul id="tos-docs" class="doc-list"></ul>
+  </section>
 </main>
 
 <footer class="site-footer">
@@ -42,7 +48,9 @@
 
 <script src="js/app.js"></script>
 <script>
-  App.renderDocs('doc-list');
+  App.renderTosCard('tos-card');
+  App.renderTosNews('tos-news');
+  App.renderTosDocs('tos-docs');
 </script>
 </body>
 </html>
