@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<title>Материал — ТОС Борисоглебск</title>
+<title>Полезные статьи — ТОС Борисоглебск</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="css/style.css">
 <script defer src="js/app.js"></script>
 
-<meta name="description" content="Подробная новость или полезная статья для жителей и активистов ТОСов Борисоглебского городского округа.">
+<meta name="description" content="Полезные статьи и инструкции по работе территориальных общественных самоуправлений Борисоглебского городского округа.">
 </head>
-<body data-page="article">
+<body data-page="articles">
 <header class="site-header">
   <div class="container">
     <nav class="navbar">
@@ -45,12 +45,12 @@
   <div class="container">
     <div class="section-header">
       <div>
-        <h1 class="section-title">Материал</h1>
-        <p class="section-subtitle">Полный текст новости или полезной статьи.</p>
+        <h1 class="section-title">Полезные статьи и инструкции</h1>
+        <p class="section-subtitle">Сборник материалов для председателей, активистов и жителей ТОСов.</p>
       </div>
-      <a href="news.html" class="section-link">← Вернуться к списку</a>
+      <span class="section-link">Контент загружается из JSON-файла <code>data/articles.json</code>.</span>
     </div>
-    <div data-block="article">
+    <div class="grid" data-grid="articles-list">
       <!-- наполняется через JS -->
     </div>
   </div>

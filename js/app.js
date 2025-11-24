@@ -47,9 +47,21 @@ async function initIndexPage() {
           <div class="hero-list-name">${t.name || "ТОС"}</div>
           <div class="hero-list-meta">${t.locality || ""}</div>
         </div>
-        <div class="hero-list-tag">Активен</div>
+        <div class="hero-list-tag">${t.status || "Активен"}</div>
       `;
       heroList.appendChild(li);
+    });
+  }
+
+  // Map preview
+  const mapPreview = document.querySelector('[data-map-preview]');
+  if (mapPreview) {
+    mapPreview.innerHTML = "";
+    tosList.slice(0, 6).forEach(t => {
+      const li = document.createElement('li');
+      li.className = 'map-preview-item';
+      li.innerHTML = `<strong>${t.name}</strong><br><span style="color:var(--muted); font-size:11px;">${t.locality || ''}</span>`;
+      mapPreview.appendChild(li);
     });
   }
 
@@ -119,7 +131,7 @@ async function initTosesPage() {
       items = items.filter(x => (x.status || "").toLowerCase() === status.toLowerCase());
     }
     if (q) {
-      items = items.filter(x => 
+      items = items.filter(x =>
         (x.name || "").toLowerCase().includes(q) ||
         (x.locality || "").toLowerCase().includes(q) ||
         (x.chair || "").toLowerCase().includes(q)
@@ -190,6 +202,7 @@ async function initTosPage() {
         ${tos.reg_date ? `<p><strong>Дата регистрации:</strong> ${formatDate(tos.reg_date)}</p>` : ""}
         ${tos.site ? `<p><strong>Страница ТОС:</strong> <a href="${tos.site}" target="_blank" rel="noopener">${tos.site}</a></p>` : ""}
         ${tos.notes ? `<p><strong>Примечания:</strong> ${tos.notes}</p>` : ""}
+        ${tos.lat && tos.lng ? `<p><strong>Координаты:</strong> ${tos.lat}, ${tos.lng}</p>` : ""}
       </div>
     </div>
   `;
@@ -297,6 +310,105 @@ async function initDocsPage() {
   });
 }
 
+// Статьи
+async function initArticlesPage() {
+  const articles = await loadJSON("data/articles.json");
+  const listEl = document.querySelector('[data-grid="articles-list"]');
+  if (!listEl) return;
+  listEl.innerHTML = "";
+
+  articles.forEach(item => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-header">
+        <div>
+          <div class="card-title">${item.title}</div>
+          <div class="card-body">${item.excerpt}</div>
+        </div>
+        <span class="card-pill">${item.category || 'Материал'}</span>
+      </div>
+      <div class="card-meta">
+        <span>${formatDate(item.date)}</span>
+        <a href="article.html?type=article&slug=${encodeURIComponent(item.slug)}">Читать полностью</a>
+      </div>
+    `;
+    listEl.appendChild(card);
+  });
+}
+
+// Карта
+async function initMapPage() {
+  if (typeof L === 'undefined') return;
+  const mapEl = document.getElementById('map');
+  if (!mapEl) return;
+
+  const map = L.map('map').setView([51.367, 42.083], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  const tosList = await loadJSON('data/toses.json');
+  const geo = await loadJSON('data/map.geojson');
+  const markers = L.layerGroup().addTo(map);
+
+  tosList.filter(t => t.lat && t.lng).forEach(t => {
+    const marker = L.marker([t.lat, t.lng]).addTo(markers);
+    marker.bindPopup(`
+      <div style="font-weight:700; margin-bottom:4px;">ТОС «${t.name}»</div>
+      <div style="font-size:12px; color:#4b5563;">${t.locality || ''}</div>
+      <div style="font-size:12px; margin-top:4px;">${t.chair ? 'Председатель: ' + t.chair : ''}</div>
+      <a href="tos.html?slug=${encodeURIComponent(t.slug)}" style="font-size:12px; color:#2563eb;">Открыть карточку</a>
+    `);
+  });
+
+  if (geo && geo.features) {
+    const geoLayer = L.geoJSON(geo, {
+      style: {
+        color: '#38bdf8',
+        weight: 2,
+        fillColor: '#22c55e',
+        fillOpacity: 0.08
+      }
+    }).addTo(map);
+    try {
+      map.fitBounds(geoLayer.getBounds(), { padding: [12, 12] });
+    } catch {
+      // ignore
+    }
+  }
+
+  const listEl = document.querySelector('[data-map-list]');
+  if (listEl) {
+    listEl.innerHTML = '';
+    tosList.slice(0, 30).forEach(t => {
+      const item = document.createElement('div');
+      item.className = 'map-list-item';
+      item.innerHTML = `
+        <div>
+          <div class="map-list-title">${t.name}</div>
+          <div class="map-list-meta">${t.locality || ''}</div>
+          ${t.chair ? `<div class="map-list-meta">Председатель: ${t.chair}</div>` : ''}
+        </div>
+        <a href="tos.html?slug=${encodeURIComponent(t.slug)}">Перейти</a>
+      `;
+      item.addEventListener('click', () => {
+        if (t.lat && t.lng) {
+          map.flyTo([t.lat, t.lng], 13);
+        }
+      });
+      listEl.appendChild(item);
+    });
+  }
+
+  const countsEl = document.querySelector('[data-map-counts]');
+  if (countsEl) {
+    const active = tosList.filter(t => (t.status || '').toLowerCase() === 'активен').length;
+    const withCoords = tosList.filter(t => t.lat && t.lng).length;
+    countsEl.innerHTML = `<span><strong>${withCoords}</strong> ТОСов имеют координаты</span><span><strong>${active}</strong> активных из ${tosList.length}</span>`;
+  }
+}
+
 // Отметка активного пункта меню
 function highlightActiveNav() {
   const path = window.location.pathname.split("/").pop() || "index.html";
@@ -319,4 +431,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "news") initNewsPage();
   if (page === "article") initArticlePage();
   if (page === "docs") initDocsPage();
+  if (page === "articles") initArticlesPage();
+  if (page === "map") initMapPage();
 });

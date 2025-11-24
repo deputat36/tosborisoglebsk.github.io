@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<title>Карта ТОСов — ТОС Борисоглебск</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-TzR7Fej8LuwZQ+Q0jrISFRCGDpa2BkLomqKgJo0vvVuv5AO9M/dwZ0pniS3pSkeCZMt2rt7NmBGG99nmCaTKfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<link rel="stylesheet" href="css/style.css">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j7kP5gyIy/4mI77RdF3d7GgsfHkRbquqY7N0gXU=" crossorigin=""></script>
+<script defer src="js/app.js"></script>
+
+<meta name="description" content="Интерактивная карта территориального общественного самоуправления Борисоглебского городского округа: границы ТОСов, контакты и быстрый переход в каталог.">
+</head>
+<body data-page="map">
+<header class="site-header">
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-left">
+        <div class="logo-mark">Т</div>
+        <div class="brand">
+          <span class="brand-title">ТОС Борисоглебск</span>
+          <span class="brand-subtitle">Каталог ТОСов и полезные материалы</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" data-nav="index">Главная</a>
+        <a href="toses.html" data-nav="toses">Каталог ТОСов</a>
+        <a href="map.html" data-nav="map">Карта</a>
+        <a href="news.html" data-nav="news">Новости и статьи</a>
+        <a href="docs.html" data-nav="docs">Документы</a>
+        <a href="contacts.html" data-nav="contacts">Контакты</a>
+      </div>
+      <div class="nav-cta">
+        <a href="toses.html" class="primary">Найти свой ТОС</a>
+      </div>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h1 class="section-title">Интерактивная карта ТОСов</h1>
+        <p class="section-subtitle">Границы и точки ТОСов БГО в формате GeoJSON и открытых карт OSM.</p>
+      </div>
+      <span class="section-link">Источник данных: <code>data/map.geojson</code> и координаты в <code>data/toses.json</code>.</span>
+    </div>
+    <div class="map-layout">
+      <div class="map-panel">
+        <div id="map" class="map"></div>
+        <div class="map-legend">
+          <div class="legend-title">Легенда</div>
+          <div class="legend-row"><span class="legend-dot legend-dot-green"></span>Активный ТОС</div>
+          <div class="legend-row"><span class="legend-line"></span>Граница ТОС (GeoJSON)</div>
+          <div class="legend-row">Клик по маркеру → переход в карточку</div>
+        </div>
+      </div>
+      <div class="map-sidebar">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Быстрый поиск</div>
+            <span class="card-pill">Маршрутизация</span>
+          </div>
+          <div class="card-body">
+            <p>Кликните по маркеру на карте или выберите ТОС в списке ниже, чтобы открыть карточку с контактами и границами.</p>
+          </div>
+          <div class="card-meta" data-map-counts>
+            <span>Загрузка...</span>
+          </div>
+        </div>
+        <div class="map-list" data-map-list>
+          <div class="map-list-item">Идет загрузка данных...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-row">
+      <div>© ТОСы Борисоглебского городского округа, 23.11.2025. Сайт создан для информирования жителей.</div>
+      <div class="footer-links">
+        <a href="docs.html">Нормативные документы</a>
+        <a href="news.html">Новости</a>
+        <a href="contacts.html">Обратная связь</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
