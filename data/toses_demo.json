@@ -1,0 +1,30 @@
+[
+  {
+    "name": "ТОС Уютный",
+    "location": "г. Борисоглебск",
+    "boundaries": "Ул. Уютная, 1, 3, 5",
+    "founded": 2022,
+    "chairperson": "Ковтун Алексей Вадимович",
+    "contacts": "8-980-245-74-71",
+    "social_links": [
+      "https://vk.com/tos_bsk"
+    ],
+    "population": 300,
+    "description": "Дружное сообщество новых домов, активно благоустраивает двор и территорию.",
+    "slug": "tos-uyutny"
+  },
+  {
+    "name": "ТОС Миролюбие",
+    "location": "п. Миролюбие",
+    "boundaries": "Весь поселок",
+    "founded": 2014,
+    "chairperson": "Власова Татьяна Владимировна",
+    "contacts": "8-951-561-69-05",
+    "social_links": [
+      "https://vk.com/club230786289"
+    ],
+    "population": 31,
+    "description": "Слаженная команда активистов улучшает жизнь поселка.",
+    "slug": "tos-mirolyubie"
+  }
+]
