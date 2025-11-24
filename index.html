@@ -5,6 +5,8 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1424">
+  <link rel="canonical" href="https://tosborisoglebsk.ru/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -44,57 +46,57 @@
   </div>
 </header>
 <main>
-  <section class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div>
-          <span class="hero-kicker">Борисоглебский городской округ · ТОС</span>
-          <h1 class="hero-title">Все ТОСы округа в одном понятном каталоге <span class="accent">с картой и документами</span></h1>
-          <p class="hero-text">Узнайте, к какому ТОСу относится ваш дом, кто председатель и как с ним связаться. Сайт полностью работает на клиента: данные берутся из открытых JSON и обновляются через GitHub.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="toses.html"><i class="fa-solid fa-book"></i> Каталог ТОСов</a>
-            <a class="btn" href="map.html"><i class="fa-solid fa-map-location-dot"></i> Карта с границами</a>
-            <a class="btn" href="news.html"><i class="fa-solid fa-newspaper"></i> Новости и статьи</a>
-          </div>
-          <div class="hero-meta">
-            <div class="meta-item">🔍 Поиск по названию, адресу и председателю</div>
-            <div class="meta-item">📄 Нормативные акты, памятки и шаблоны документов</div>
-            <div class="meta-item">🗂️ Открытые данные: JSON, GeoJSON, GitHub Pages</div>
-          </div>
-        </div>
-        <aside class="hero-card">
-          <div class="card-header" style="margin-bottom:6px;">
-            <div class="card-title">Состояние сети ТОС БГО</div>
-            <span class="card-pill">Обновляется</span>
-          </div>
-          <div class="stat-grid">
-            <div class="stat">
-              <div class="stat-label">Всего ТОСов</div>
-              <div class="stat-value" data-stat="tos-count">—</div>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <span class="hero-kicker">Борисоглебский городской округ · официальный каталог</span>
+            <h1 class="hero-title">Быстрый и понятный доступ к каждому ТОСу <span class="accent">с картой, документами и контактами</span></h1>
+            <p class="hero-text">Мы собрали реестр ТОСов, важные документы и актуальные новости в одном месте. Данные обновляются через GitHub Pages, а интерфейс остаётся лёгким, безопасным и удобным на любом устройстве.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="toses.html"><i class="fa-solid fa-book"></i> Каталог ТОСов</a>
+              <a class="btn" href="map.html"><i class="fa-solid fa-map-location-dot"></i> Интерактивная карта</a>
+              <a class="btn" href="news.html"><i class="fa-solid fa-bolt"></i> Лента новостей</a>
             </div>
-            <div class="stat">
-              <div class="stat-label">Активных</div>
-              <div class="stat-value" data-stat="tos-active">—</div>
-            </div>
-            <div class="stat">
-              <div class="stat-label">В черте города</div>
-              <div class="stat-value" data-stat="tos-city">—</div>
+            <div class="hero-meta">
+              <div class="meta-item">🔍 Поиск по названию, адресу и председателю</div>
+              <div class="meta-item">📂 Открытые JSON и GeoJSON — можно повторно использовать</div>
+              <div class="meta-item">🛡️ Без авторизации и трекеров: только чистый контент</div>
             </div>
           </div>
-          <div class="card-body" style="margin-top:10px;">Первые ТОСы из реестра:</div>
-          <ul class="hero-list" data-hero-tos>
-            <li class="hero-list-item">
-              <div>
-                <div class="hero-list-name">Загрузка реестра...</div>
-                <div class="hero-list-meta">Пожалуйста, подождите</div>
+          <aside class="hero-card">
+            <div class="card-header" style="margin-bottom:6px;">
+              <div class="card-title">Состояние сети ТОС БГО</div>
+              <span class="card-pill">Обновляется</span>
+            </div>
+            <div class="stat-grid">
+              <div class="stat">
+                <div class="stat-label">Всего ТОСов</div>
+                <div class="stat-value" data-stat="tos-count">—</div>
               </div>
-              <span class="hero-list-tag">ТОС</span>
-            </li>
-          </ul>
-        </aside>
+              <div class="stat">
+                <div class="stat-label">Активных</div>
+                <div class="stat-value" data-stat="tos-active">—</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">В черте города</div>
+                <div class="stat-value" data-stat="tos-city">—</div>
+              </div>
+            </div>
+            <div class="card-body" style="margin-top:10px;">Первые ТОСы из реестра:</div>
+            <ul class="hero-list" data-hero-tos>
+              <li class="hero-list-item">
+                <div>
+                  <div class="hero-list-name">Загрузка реестра...</div>
+                  <div class="hero-list-meta">Пожалуйста, подождите</div>
+                </div>
+                <span class="hero-list-tag">ТОС</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   <section class="section">
     <div class="container">

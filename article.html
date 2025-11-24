@@ -5,6 +5,8 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1424">
+  <link rel="canonical" href="https://tosborisoglebsk.ru/article.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -39,13 +41,20 @@
     </nav>
   </div>
 </header>
-<main>
-  <section class="hero">
-    <div class="container">
-      <div data-block="article">Загрузка материала...</div>
-    </div>
-  </section>
-</main>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="article-layout">
+          <div data-block="article">Загрузка материала...</div>
+          <aside class="article-aside">
+            <div class="card-title" style="margin-bottom:6px;">О материале</div>
+            <p>Контент подгружается из открытых JSON-файлов <code>data/news.json</code> и <code>data/articles.json</code>. Все ссылки открываются в новой вкладке для безопасности.</p>
+            <p style="margin-bottom:0;">Если вы нашли неточность, напишите администратору через раздел «Контакты».</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
 <footer class="site-footer">
   <div class="container">
     <div class="footer-row">
