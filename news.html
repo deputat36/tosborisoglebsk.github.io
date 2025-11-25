@@ -79,6 +79,22 @@
       </div>
     </section>
   </main>
+  <!-- Скрипт ВК подключаем один раз на странице (обычно внизу перед </body>) -->
+<script type="text/javascript" src="https://vk.com/js/api/openapi.js?169"></script>
+
+<!-- Место, где будет лента новостей -->
+<div id="vk_groups"></div>
+
+<!-- Инициализация виджета для сообщества tos_bsk -->
+<script type="text/javascript">
+    VK.Widgets.Group("vk_groups", {
+        mode: 4,        // режим "лента новостей"
+        width: "100%",  // по ширине блока
+        height: "700",  // высота виджета в пикселях
+        wide: 1         // широкий вариант
+    }, "tos_bsk");
+</script>
+
 
   <footer class="site-footer">
     <div class="container">
