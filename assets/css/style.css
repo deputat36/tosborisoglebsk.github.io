@@ -331,3 +331,91 @@ a:hover {
     font-size: 22px;
   }
 }
+
+.catalog-group {
+  margin-bottom: 32px;
+}
+
+.catalog-group h2 {
+  margin: 8px 0 12px;
+}
+
+.catalog-group .catalog-list {
+  margin-top: 0;
+}
+
+/* Страницы отдельных ТОСов */
+.tos-page .page-header {
+  padding-bottom: 16px;
+}
+
+.tos-details {
+  padding: 24px 0;
+}
+
+.tos-details-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 20px;
+}
+
+.tos-logo-wrapper {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.tos-description,
+.tos-social,
+.tos-info {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 12px;
+}
+
+.tos-description p {
+  margin: 0;
+}
+
+.tos-social ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.tos-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tos-table th,
+.tos-table td {
+  text-align: left;
+  padding: 8px 6px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tos-table th {
+  width: 40%;
+  font-weight: 600;
+}
+
+.map-placeholder {
+  background: #f7f7f7;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .tos-details-grid {
+    grid-template-columns: 1fr;
+  }
+}
