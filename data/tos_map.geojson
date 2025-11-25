@@ -1,0 +1,51 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ТОС «Миролюбие»"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              42.07,
+              51.37
+            ],
+            [
+              42.075,
+              51.37
+            ],
+            [
+              42.075,
+              51.375
+            ],
+            [
+              42.07,
+              51.375
+            ],
+            [
+              42.07,
+              51.37
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "ТОС «Просторный»"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          42.085,
+          51.365
+        ]
+      }
+    }
+  ]
+}
