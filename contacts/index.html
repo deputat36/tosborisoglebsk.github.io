@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Контакты и исправления — ТОС БГО</title>
+  <meta name="description" content="Контакты портала ТОС БГО и инструкция, как прислать исправления или добавить данные в каталог/новости/документы."/>
+  <meta property="og:title" content="Контакты — ТОС БГО"/>
+  <meta property="og:description" content="Как прислать исправления или добавить данные."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/contacts/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/favicon.svg"/>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
+
+      <nav class="nav" id="site-nav" aria-label="Навигация">
+        <a href="/tos/">Каталог ТОС</a>
+        <a href="/news/">Новости</a>
+        <a href="/materials/">Материалы</a>
+        <a href="/documents/">Документы</a>
+        <a href="/map/">Карта</a>
+        <a href="/contacts/">Контакты</a>
+      </nav>
+
+      <div class="actions">
+        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <button class="btn" type="button" data-action="theme" aria-label="Переключить тему">Тема</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero">
+      <h1 class="h-title">Контакты и как прислать исправления</h1>
+      <p class="h-sub">Портал задуман так, чтобы данные было легко обновлять. Ниже — понятная инструкция.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card"><div class="card-inner prose">
+        <h2>Контакты портала</h2>
+        <ul>
+          <li>Эта страница — шаблон. Вставьте сюда реальные контакты (почта/телефон/соцсети).</li>
+          <li>Можно добавить форму Google Forms (ссылкой) для приёма исправлений.</li>
+        </ul>
+
+        <h2>Как прислать исправление (без доступа к GitHub)</h2>
+        <ol>
+          <li>Напишите: название ТОС, что именно исправить, и правильный вариант.</li>
+          <li>Если меняются границы — приложите список улиц/домов (или ссылку на карту).</li>
+          <li>Если меняются контакты — приложите актуальный телефон/почту/ссылки.</li>
+        </ol>
+
+        <h2>Как обновлять данные через GitHub (если доступ есть)</h2>
+        <ul>
+          <li>Каталог ТОС: <code>data/tos.data.js</code></li>
+          <li>Новости: <code>data/news.data.js</code></li>
+          <li>Документы: <code>data/docs.data.js</code></li>
+          <li>Карта: <code>data/tos.geo.js</code></li>
+        </ul>
+
+        <div class="notice">
+          Если хотите — добавлю “шаблон заявки на исправление” (Issue Template) в репозиторий, чтобы люди присылали данные строго по форме.
+        </div>
+      </div></div>
+
+      <div class="card"><div class="card-inner prose">
+        <h2>Инструмент импорта из Excel</h2>
+        <p>Откройте: <a class="underline" href="/tools/import.html">tools/import.html</a></p>
+        <ul>
+          <li>Выберите Excel/CSV.</li>
+          <li>Получите готовый текст для <code>data/tos.data.js</code>.</li>
+          <li>Вставьте в файл и закоммитьте.</li>
+        </ul>
+      </div></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><div class="tiny">© Портал ТОС БГО</div></div></footer>
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>
