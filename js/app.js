@@ -71,7 +71,7 @@
     // ВАЖНО:
     // Пока демо: data/toses_demo.json
     // Потом просто заменишь на data/toses.json — и всё.
-    const DATA_URL = "data/toses_demo.json";
+    const DATA_URL = "data/toses.json";
 
     let items = [];
     try {
