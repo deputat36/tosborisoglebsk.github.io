@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Запись — ТОС БГО</title>
+  <meta name="description" content="Новость/анонс ТОС БГО."/>
+  <meta property="og:title" content="Запись — ТОС БГО"/>
+  <meta property="og:description" content="Новость/анонс ТОС БГО."/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/news/view.html"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/favicon.svg"/>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body data-page="news-view">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
+
+      <nav class="nav" id="site-nav" aria-label="Навигация">
+        <a href="/tos/">Каталог ТОС</a>
+        <a href="/news/">Новости</a>
+        <a href="/materials/">Материалы</a>
+        <a href="/documents/">Документы</a>
+        <a href="/map/">Карта</a>
+        <a href="/contacts/">Контакты</a>
+      </nav>
+
+      <div class="actions">
+        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <button class="btn" type="button" data-action="theme" aria-label="Переключить тему">Тема</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero">
+      <p class="h-sub"><a class="underline" href="/news/">← Назад в ленту</a></p>
+    </section>
+
+    <section class="grid">
+      <div id="news-view"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="tiny">Если вы — председатель ТОС и хотите опубликовать новость, смотрите «Контакты».</div>
+    </div>
+  </footer>
+
+  <script src="/data/news.data.js"></script>
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>
