@@ -40,7 +40,7 @@
   <main id="main" class="container">
     <section class="hero">
       <h1 class="h-title">Карта ТОСов</h1>
-      <p class="h-sub">Минимальная версия: точки/границы из GeoJSON. Если данных нет — вы увидите инструкцию, как добавить.</p>
+      <p class="h-sub">Демо-версия с точками из каталога. Геоданные можно уточнить и расширить.</p>
     </section>
 
     <section class="grid">
@@ -48,13 +48,9 @@
         <div id="map-box"></div>
         <hr class="sep"/>
         <div class="prose">
-          <h2>Как добавить границы/точки</h2>
-          <ol>
-            <li>Откройте файл <code>data/tos.geo.js</code>.</li>
-            <li>Вставьте GeoJSON FeatureCollection в поле <code>window.DATA.tosGeo</code>.</li>
-            <li>В <code>properties</code> укажите <code>name</code>, <code>place</code>, <code>id</code> (slug из каталога).</li>
-          </ol>
-          <p>Если нужно — добавлю “инструкцию по рисованию границ” (через geojson.io) отдельной страницей.</p>
+          <h2>Что сейчас на карте</h2>
+          <p>На карте показаны демо-точки ТОС, чтобы посетители могли увидеть, как будет выглядеть полноценно заполненный раздел.</p>
+          <p>Подробные инструкции по подготовке GeoJSON вынесены в файл <code>docs/data-format.md</code> репозитория.</p>
         </div>
       </div></div>
     </section>
