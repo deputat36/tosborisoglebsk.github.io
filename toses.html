@@ -1,79 +1,70 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<title>Каталог ТОСов БГО — ТОС Борисоглебск</title>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/style.css">
-<script defer src="js/app.js"></script>
-
-<meta name="description" content="Полный реестр территориального общественного самоуправления Борисоглебского городского округа: список ТОСов, поиск по названию, адресу и председателю, статусы и границы.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Каталог ТОСов — Борисоглебский ГО</title>
+  <meta name="description" content="Каталог ТОС Борисоглебского городского округа: описания, контакты, председатели и ссылки на сообщества." />
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/app.js"></script>
 </head>
-<body data-page="toses">
-<header class="site-header">
-  <div class="container">
-    <nav class="navbar">
-      <div class="navbar-left">
-        <div class="logo-mark">Т</div>
-        <div class="brand">
-          <span class="brand-title">ТОС Борисоглебск</span>
-          <span class="brand-subtitle">Каталог ТОСов и полезные материалы</span>
+<body>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html">
+        <div class="brand-badge" aria-hidden="true"></div>
+        <div class="brand-title">
+          <strong>ТОС БГО</strong>
+          <span>Каталог и полезные материалы</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="topNav">
+        <a href="index.html">Главная</a>
+        <a class="active" href="toses.html">Каталог ТОС</a>
+        <a href="news.html">Новости</a>
+        <a href="docs.html">Документы</a>
+        <a href="map.html">Карта</a>
+        <a href="contacts.html">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn ghost" id="themeBtn" type="button" title="Светлая/тёмная тема">Тема</button>
+        <button class="burger" id="burgerBtn" type="button" aria-label="Открыть меню">≡</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container section-title">
+        <h2>Каталог ТОСов</h2>
+        <p class="hint"><span id="tosCount">0</span> записей</p>
+      </div>
+
+      <div class="container toolbar">
+        <div class="search">
+          <span class="muted">Поиск:</span>
+          <input id="tosSearch" type="search" placeholder="Например: Уютный, Чигорак, Никулина…" autocomplete="off" />
+        </div>
+        <button class="btn" id="clearSearch" type="button">Сброс</button>
+      </div>
+
+      <div class="container">
+        <div id="toses-container" class="grid">
+          <!-- карточки ТОСов -->
         </div>
       </div>
-      <div class="nav-links">
-        <a href="index.html" data-nav="index">Главная</a>
-        <a href="toses.html" data-nav="toses">Каталог ТОСов</a>
-        <a href="news.html" data-nav="news">Новости и статьи</a>
-        <a href="docs.html" data-nav="docs">Документы</a>
-        <a href="contacts.html" data-nav="contacts">Контакты</a>
-      </div>
-      <div class="nav-cta">
-        <a href="toses.html" class="primary">Найти свой ТОС</a>
-      </div>
-    </nav>
-  </div>
-</header>
-<main>
-  
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <div>
-        <h1 class="section-title">Каталог ТОСов Борисоглебского городского округа</h1>
-        <p class="section-subtitle">
-          В этом разделе собраны все ТОСы БГО. Используйте поиск по названию, населенному пункту,
-          председателю или статусу.
-        </p>
-      </div>
-      <span class="section-link">Данные формируются из опроса и официальных источников.</span>
-    </div>
-    <div class="filter-bar">
-      <input id="search" class="input" placeholder="Поиск: название, микрорайон, председатель...">
-      <select id="status-filter" class="select">
-        <option value="">Статус: все</option>
-        <option value="Активен">Только активные</option>
-        <option value="Неактивен">Неактивные / приостановлены</option>
-      </select>
-    </div>
-    <div class="grid" data-grid="toses">
-      <!-- наполняется через JS -->
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-</main>
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-row">
-      <div>© ТОСы Борисоглебского городского округа, 23.11.2025. Сайт создан для информирования жителей.</div>
-      <div class="footer-links">
-        <a href="docs.html">Нормативные документы</a>
-        <a href="news.html">Новости</a>
-        <a href="contacts.html">Обратная связь</a>
-      </div>
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>© <span id="year"></span> tosborisoglebsk.ru</div>
+      <div>Каталог обновляется из JSON</div>
     </div>
-  </div>
-</footer>
+  </footer>
+
 </body>
 </html>
