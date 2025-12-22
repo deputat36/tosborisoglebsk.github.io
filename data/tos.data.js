@@ -219,9 +219,9 @@ window.DATA.tos = [
     "founded": 2020,
     "chair": "Кабаргина Татьяна Викторовна",
     "contacts": "+7 (903) 852-94-25",
-    "social_links": "Одноклассники (ссылка не указана)",
+    "social_links": "",
     "residents": 90,
-    "description": "",
+    "description": "Ссылка на группу в Одноклассниках будет добавлена после уточнения.",
     "logo": "",
     "geo": null
   },
