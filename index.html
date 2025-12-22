@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ТОС Борисоглебского городского округа — каталог, новости, документы</title>
+  <meta name="description" content="Официально-практичный портал ТОС БГО: каталог ТОСов, новости и анонсы, полезные материалы, документы, карта и контакты."/>
+    <meta name="theme-color" content="#0b0d12"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/"/>
+<meta property="og:title" content="ТОС Борисоглебского городского округа"/>
+  <meta property="og:description" content="Каталог ТОСов, новости, документы, полезные материалы и карта. Всё в одном месте."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/favicon.svg"/>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
+
+      <nav class="nav" id="site-nav" aria-label="Навигация">
+        <a href="/tos/">Каталог ТОС</a>
+        <a href="/news/">Новости</a>
+        <a href="/materials/">Материалы</a>
+        <a href="/documents/">Документы</a>
+        <a href="/map/">Карта</a>
+        <a href="/contacts/">Контакты</a>
+      </nav>
+
+      <div class="actions">
+        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <button class="btn" type="button" data-action="theme" aria-label="Переключить тему">Тема</button>
+        <a class="btn primary" href="/tos/">Открыть каталог</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero">
+      <h1 class="h-title">Портал ТОС Борисоглебского городского округа</h1>
+      <p class="h-sub">Каталог ТОСов, новости и анонсы, документы и практические инструкции. Сделано так, чтобы председателям, активистам и жителям было удобно находить нужное.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="card-inner">
+          <div class="kpi">
+            <div class="tile"><b data-kpi="tos">—</b><span>ТОС в каталоге</span></div>
+            <div class="tile"><b data-kpi="people">—</b><span>жителей (суммарно, если указано)</span></div>
+            <div class="tile"><b>1</b><span>портал, который можно обновлять через GitHub</span></div>
+          </div>
+
+          <hr class="sep"/>
+
+          <div class="list">
+            <a class="item" href="/tos/">
+              <div class="item-top">
+                <div>
+                  <div class="badges"><span class="badge">поиск</span><span class="badge">фильтры</span></div>
+                  <h3>Каталог ТОСов</h3>
+                  <p>Быстро найти свой ТОС, контакты председателя, границы, описание и ссылки на сообщества.</p>
+                </div>
+                <div class="logo" aria-hidden="true">ТО</div>
+              </div>
+            </a>
+
+            <a class="item" href="/news/">
+              <div class="item-top">
+                <div>
+                  <div class="badges"><span class="badge">лента</span><span class="badge">анонсы</span></div>
+                  <h3>Новости и анонсы</h3>
+                  <p>Объявления, итоги конкурсов, мероприятия, важные изменения. Можно указать источник ссылкой.</p>
+                </div>
+                <div class="logo" aria-hidden="true">N</div>
+              </div>
+            </a>
+
+            <a class="item" href="/materials/">
+              <div class="item-top">
+                <div>
+                  <div class="badges"><span class="badge">инструкции</span><span class="badge">шаблоны</span></div>
+                  <h3>Полезные материалы</h3>
+                  <p>Как создать ТОС, вести деятельность, вовлекать жителей, писать проекты и работать с партнёрами.</p>
+                </div>
+                <div class="logo" aria-hidden="true">M</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="notice">
+        <b style="color:var(--text)">Важно</b><br/>
+        Этот сайт не “придумывает” данные о конкретных ТОС. Всё в каталоге берётся из файла данных репозитория.
+        Если нашли ошибку — в разделе «Контакты» есть инструкция, как прислать исправление.<br/>Каталог обновлён: <span id="home-updated">—</span>.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="cols">
+        <div>
+          <b>ТОС БГО</b>
+          <div class="tiny">Статический портал для GitHub Pages. Быстро, доступно, без серверов и платных БД.</div>
+        </div>
+        <div>
+          <div><a class="underline" href="/contacts/">Как добавить/исправить данные</a></div>
+          <div class="tiny">© Портал ТОС БГО</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/data/tos.data.js"></script>
+  <script src="/assets/js/site.js"></script>
+  <script>
+    (function(){
+      if(!window.DATA || !Array.isArray(window.DATA.tos)) return;
+      var dates = window.DATA.tos.map(function(x){ return String(x.source_updated||\"\").trim(); }).filter(Boolean).sort();
+      if(!dates.length) return;
+      var last = dates[dates.length-1];
+      var el = document.getElementById(\"home-updated\");
+      if(el) el.textContent = last;
+    })();
+  </script>
+</body>
+</html>

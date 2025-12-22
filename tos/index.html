@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Каталог ТОС Борисоглебского городского округа — поиск, контакты, границы</title>
+  <meta name="description" content="Каталог ТОС Борисоглебского городского округа: поиск по названию и границам, фильтры по населённым пунктам и типу, контакты председателей и ссылки на сообщества."/>
+  <meta name="theme-color" content="#0b0d12"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/tos/"/>
+
+  <meta property="og:title" content="Каталог ТОС — ТОС БГО"/>
+  <meta property="og:description" content="Поиск и фильтры по ТОСам: контакты председателей, границы, ссылки на сообщества."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/tos/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/favicon.svg"/>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body data-page="tos-list">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
+
+      <nav class="nav" id="site-nav" aria-label="Навигация">
+        <a href="/tos/">Каталог ТОС</a>
+        <a href="/news/">Новости</a>
+        <a href="/materials/">Материалы</a>
+        <a href="/documents/">Документы</a>
+        <a href="/map/">Карта</a>
+        <a href="/contacts/">Контакты</a>
+      </nav>
+
+      <div class="actions">
+        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <button class="btn" type="button" data-action="theme" aria-label="Переключить тему">Тема</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero">
+      <h1 class="h-title">Каталог ТОС БГО</h1>
+      <p class="h-sub">Здесь собраны данные по ТОСам: председатель, контакты, границы, ссылки на сообщества. Если нашли неточность — напишите через раздел «Контакты».</p>
+    </section>
+
+    <div class="toolbar" role="region" aria-label="Поиск и фильтры каталога ТОС">
+      <input class="input" id="tos-q" type="search" placeholder="Поиск по названию/границам/контактам…" aria-label="Поиск по каталогу"/>
+      <select class="select" id="tos-place" aria-label="Фильтр по населённому пункту/микрорайону">
+        <option value="">Все населённые пункты</option>
+      </select>
+      <select class="select" id="tos-type" aria-label="Фильтр по типу ТОС">
+        <option value="">Все типы</option>
+      </select>
+      <div style="color:var(--muted); font-size:13px;">
+        Найдено: <b style="color:var(--text)" id="tos-counter">—</b>
+      </div>
+    </div>
+
+    <section class="grid">
+      <div id="tos-list" class="list" role="list" aria-label="Список ТОС"></div>
+    </section>
+
+    <section class="grid">
+      <div class="notice">
+        <b style="color:var(--text)">Источник данных</b><br/>
+        Каталог обновлён по переписи ТОС (форма/таблица), последние изменения внесены: <span id="tos-updated">—</span>.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="tiny">© Портал ТОС БГО</div>
+    </div>
+  </footer>
+
+  <script src="/data/tos.data.js"></script>
+  <script src="/assets/js/site.js"></script>
+  <script>
+    (function(){
+      if(!window.DATA || !Array.isArray(window.DATA.tos)) return;
+      var dates = window.DATA.tos.map(function(x){ return String(x.source_updated||"").trim(); }).filter(Boolean).sort();
+      if(!dates.length) return;
+      var last = dates[dates.length-1];
+      var el = document.getElementById("tos-updated");
+      if(el) el.textContent = last;
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Карта ТОСов — ТОС БГО</title>
+  <meta name="description" content="Карта ТОСов БГО (минимальная версия): точки/границы из GeoJSON. Если геоданных нет — есть инструкция, как добавить."/>
+    <meta name="theme-color" content="#0b0d12"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/map/"/>
+<meta property="og:title" content="Карта ТОСов — ТОС БГО"/>
+  <meta property="og:description" content="Карта ТОСов (GeoJSON). Можно добавить точки и границы позже."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/map/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/favicon.svg"/>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body data-page="map">
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
+
+      <nav class="nav" id="site-nav" aria-label="Навигация">
+        <a href="/tos/">Каталог ТОС</a>
+        <a href="/news/">Новости</a>
+        <a href="/materials/">Материалы</a>
+        <a href="/documents/">Документы</a>
+        <a href="/map/">Карта</a>
+        <a href="/contacts/">Контакты</a>
+      </nav>
+
+      <div class="actions">
+        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <button class="btn" type="button" data-action="theme" aria-label="Переключить тему">Тема</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="hero">
+      <h1 class="h-title">Карта ТОСов</h1>
+      <p class="h-sub">Демо-версия с точками из каталога. Геоданные можно уточнить и расширить.</p>
+    </section>
+
+    <section class="grid">
+      <div class="card"><div class="card-inner">
+        <div id="map-box"></div>
+        <hr class="sep"/>
+        <div class="prose">
+          <h2>Что сейчас на карте</h2>
+          <p>На карте показаны демо-точки ТОС, чтобы посетители могли увидеть, как будет выглядеть полноценно заполненный раздел.</p>
+          <p>Подробные инструкции по подготовке GeoJSON вынесены в файл <code>docs/data-format.md</code> репозитория.</p>
+        </div>
+      </div></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container"><div class="tiny">Карта использует Leaflet через CDN (подгружается только если есть геоданные).</div></div></footer>
+
+  <script src="/data/tos.geo.js"></script>
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>
