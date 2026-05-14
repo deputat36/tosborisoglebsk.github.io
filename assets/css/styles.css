@@ -6,3 +6,6 @@
 .quick-list{display:grid;gap:10px}.quick-list a,.quick-list div{padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--muted)}.quick-list a:hover{color:var(--text);box-shadow:var(--shadow)}
 .badge-city{background:#e8f1ff;color:#1d4f91}.badge-village{background:#e9f8ef;color:#0f673a}.template-card{border-left:4px solid var(--brand)}
 .print-only{display:none}@media print{.header,.footer,.btn,.hero-actions{display:none!important}.card{box-shadow:none!important}.print-only{display:block}body{background:#fff;color:#111}.container{width:100%}}
+
+body.menu-open{overflow:hidden}
+.notice{display:flex;align-items:center;min-height:48px}
