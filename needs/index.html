@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Нужна помощь ТОСам БГО</title>
+  <meta name="description" content="Актуальные потребности ТОСов Борисоглебского городского округа: волонтёры, материалы, озеленение, фотоотчёты и партнёрская помощь."/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/needs/"/>
+  <meta property="og:title" content="Нужна помощь ТОСам БГО"/>
+  <meta property="og:description" content="Актуальные потребности ТОСов Борисоглебского городского округа."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/needs/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
+      <nav class="nav" id="site-nav" aria-label="Навигация">
+        <a href="/tos/">Каталог ТОС</a>
+        <a href="/news/">Новости</a>
+        <a href="/grants/">Конкурсы</a>
+        <a href="/projects/">Проекты</a>
+        <a href="/calendar/">Календарь</a>
+        <a href="/needs/">Нужна помощь</a>
+        <a href="/materials/">Материалы</a>
+        <a href="/documents/">Документы</a>
+        <a href="/contacts/">Контакты</a>
+      </nav>
+      <div class="actions">
+        <a class="btn" href="/search/">Поиск</a>
+        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <button class="btn" type="button" data-action="theme">Тема</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-card">
+        <div class="eyebrow">Взаимопомощь</div>
+        <h1>Нужна помощь ТОСам</h1>
+        <p class="lead">Раздел для жителей, бизнеса, депутатов, учреждений и активистов, которые хотят поддержать территориальные общественные самоуправления Борисоглебского городского округа.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container toolbar">
+        <input class="input" id="needs-search" placeholder="Поиск: саженцы, волонтёры, покраска, Уютный..."/>
+        <select class="select" id="needs-type-filter"><option value="">Все типы помощи</option></select>
+        <select class="select" id="needs-tos-filter"><option value="">Все ТОС</option></select>
+        <select class="select" id="needs-priority-filter"><option value="">Любой приоритет</option></select>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container list" id="needs-list"><div class="empty">Загрузка потребностей...</div></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Потребности хранятся в data/needs.json и могут редактироваться через админ-панель.</div></div></footer>
+  <script src="/assets/js/site.js"></script>
+  <script src="/assets/js/needs.js"></script>
+</body>
+</html>
