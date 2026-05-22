@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Календарь событий ТОС БГО</title>
+  <meta name="description" content="Календарь событий, дедлайнов, субботников, собраний и мероприятий ТОС Борисоглебского городского округа."/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/calendar/"/>
+  <meta property="og:title" content="Календарь событий ТОС БГО"/>
+  <meta property="og:description" content="События, дедлайны, субботники, собрания и мероприятия ТОС Борисоглебского городского округа."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/calendar/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
+      <nav class="nav" id="site-nav" aria-label="Навигация">
+        <a href="/tos/">Каталог ТОС</a>
+        <a href="/news/">Новости</a>
+        <a href="/grants/">Конкурсы</a>
+        <a href="/projects/">Проекты</a>
+        <a href="/calendar/">Календарь</a>
+        <a href="/materials/">Материалы</a>
+        <a href="/documents/">Документы</a>
+        <a href="/create-tos/">Как создать ТОС</a>
+        <a href="/contacts/">Контакты</a>
+      </nav>
+      <div class="actions">
+        <a class="btn" href="/search/">Поиск</a>
+        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
+        <button class="btn" type="button" data-action="theme">Тема</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-card">
+        <div class="eyebrow">Календарь</div>
+        <h1>Календарь событий и дедлайнов ТОС</h1>
+        <p class="lead">Собрания, субботники, конкурсы, дедлайны, обучающие встречи и важные даты для председателей и активистов ТОС Борисоглебского городского округа.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container toolbar">
+        <input class="input" id="event-search" placeholder="Поиск: конкурс, субботник, Уютный, собрание..."/>
+        <select class="select" id="event-type-filter"><option value="">Все типы</option></select>
+        <select class="select" id="event-tos-filter"><option value="">Все ТОС</option></select>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container list" id="events-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">События хранятся в data/events.json и могут редактироваться через админ-панель.</div></div></footer>
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>
