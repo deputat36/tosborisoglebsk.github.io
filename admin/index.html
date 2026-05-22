@@ -30,13 +30,14 @@
       <button class="tab" data-section="documents">Документы</button>
       <button class="tab" data-section="grants">Конкурсы</button>
       <button class="tab" data-section="projects">Проекты</button>
+      <button class="tab" data-section="events">Календарь</button>
       <hr/>
       <button class="tab" data-section="help">Инструкция</button>
     </aside>
 
     <section class="workspace">
       <div class="panel warning">
-        <b>Важно.</b> Эта админка не записывает данные прямо в GitHub. После правок скачайте JSON и замените соответствующий файл в папке <code>data/</code> репозитория. Перед массовыми правками используйте кнопку «Скачать все JSON».
+        <b>Важно.</b> Эта админка не записывает данные прямо в GitHub. После правок скачайте JSON и замените соответствующий файл в папке <code>data/</code> репозитория.
       </div>
 
       <section id="editorSection" class="panel">
@@ -55,9 +56,7 @@
 
         <div class="tools-row">
           <input id="searchInput" class="input" type="search" placeholder="Поиск по записям..."/>
-          <select id="quickFilter" class="input small-input">
-            <option value="">Все записи</option>
-          </select>
+          <select id="quickFilter" class="input small-input"><option value="">Все записи</option></select>
           <button class="btn" id="validateBtn" type="button">Проверить ошибки</button>
           <button class="btn" id="qualityBtn" type="button">Аудит качества</button>
         </div>
@@ -65,9 +64,7 @@
         <div id="validationBox" class="validation hidden"></div>
 
         <div class="editor-grid">
-          <div class="list-box">
-            <div id="itemsList" class="items-list"></div>
-          </div>
+          <div class="list-box"><div id="itemsList" class="items-list"></div></div>
           <form id="editForm" class="edit-form"></form>
         </div>
       </section>
@@ -81,15 +78,7 @@
           <li>Нажмите «Скачать JSON».</li>
           <li>В GitHub замените соответствующий файл в папке <code>data/</code>.</li>
         </ol>
-        <h3>Новые возможности</h3>
-        <ul>
-          <li><b>Скачать все JSON</b> — быстрая резервная копия данных сайта.</li>
-          <li><b>Загрузить JSON</b> — импорт файла с компьютера обратно в админку.</li>
-          <li><b>Аудит качества</b> — показывает, какие карточки заполнены хорошо, а где не хватает телефона, соцсетей, описания, логотипа или даты обновления.</li>
-          <li><b>Статус публикации</b> — для новостей, материалов и проектов можно использовать <code>published</code> или <code>draft</code>.</li>
-          <li><b>tos_slug</b> — поле для привязки новости или проекта к конкретному ТОС, например <code>uyutnyy</code>.</li>
-        </ul>
-        <h3>Какие файлы редактируются</h3>
+        <h3>Разделы</h3>
         <ul>
           <li><code>data/toses.json</code> — каталог ТОСов.</li>
           <li><code>data/news.json</code> — новости.</li>
@@ -97,17 +86,13 @@
           <li><code>data/documents.json</code> — документы.</li>
           <li><code>data/grants.json</code> — конкурсы и гранты.</li>
           <li><code>data/projects.json</code> — банк идей проектов.</li>
+          <li><code>data/events.json</code> — календарь событий.</li>
         </ul>
-        <h3>Безопасность</h3>
         <p>Админка не хранит пароли и токены. Она работает только с открытыми JSON-файлами и скачивает обновлённую версию на ваш компьютер.</p>
       </section>
     </section>
   </main>
 
-  <template id="emptyStateTemplate">
-    <div class="empty">Записей пока нет. Нажмите «Добавить запись».</div>
-  </template>
-
-  <script src="/admin/admin.js"></script>
+  <script src="/admin/admin2.js"></script>
 </body>
 </html>
