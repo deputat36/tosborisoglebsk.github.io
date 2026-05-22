@@ -1,0 +1,45 @@
+name: Update VK news
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Автообновление каждые 6 часов
+    - cron: '0 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-vk-news:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: release-2025-12-22
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Import VK posts to news.json
+        env:
+          VK_TOKEN: ${{ secrets.VK_TOKEN }}
+          # Укажи одно из двух:
+          # 1) VK_OWNER_ID: например -123456789 для сообщества
+          # 2) VK_DOMAIN: короткое имя сообщества, например tos_bgo
+          VK_OWNER_ID: ${{ vars.VK_OWNER_ID }}
+          VK_DOMAIN: ${{ vars.VK_DOMAIN }}
+          VK_HASHTAGS: ${{ vars.VK_HASHTAGS }}
+          VK_COUNT: ${{ vars.VK_COUNT }}
+          NEWS_LIMIT: ${{ vars.NEWS_LIMIT }}
+        run: node scripts/import_vk_news.js
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Auto update news from VK'
+          branch: release-2025-12-22
+          file_pattern: 'data/news.json news/* sitemap.xml'
