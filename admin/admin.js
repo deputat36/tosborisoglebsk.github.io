@@ -18,7 +18,7 @@ const DATASETS = {
     title: 'Новости', hint: 'Редактирование data/news.json', file: '/data/news.json', download: 'news.json',
     label: (x) => x.title || 'Новость без заголовка', sub: (x) => [x.date, x.category, x.status].filter(Boolean).join(' · '),
     template: () => ({ id: 'news-' + Date.now(), status: 'published', date: today(), category: 'Новости ТОС', title: '', lead: '', text: [''], source: 'Редакция портала', source_url: '', image: '', tos_slug: '' }),
-    fields: [['id','ID'], ['status','Статус', 'select:published|draft'], ['tos_slug','Привязка к ТОС: slug'], ['date','Дата'], ['category','Категория'], ['title','Заголовок'], ['lead','Краткое описание','textarea'], ['text','Текст абзацами','arrayText'], ['source','Источник'], ['source_url','Ссылка на источник'], ['image','Изображение']]
+    fields: [['id','ID'], ['status','Статус', 'select:published|draft'], ['tos_slug','Привязка к ТОС: slug', 'tosSlug'], ['date','Дата'], ['category','Категория'], ['title','Заголовок'], ['lead','Краткое описание','textarea'], ['text','Текст абзацами','arrayText'], ['source','Источник'], ['source_url','Ссылка на источник'], ['image','Изображение']]
   },
   articles: {
     title: 'Материалы', hint: 'Редактирование data/articles.json', file: '/data/articles.json', download: 'articles.json',
@@ -42,11 +42,11 @@ const DATASETS = {
     title: 'Проекты', hint: 'Редактирование data/projects.json', file: '/data/projects.json', download: 'projects.json',
     label: (x) => x.title || 'Проект без названия', sub: (x) => [x.type, x.status, x.tos_slug].filter(Boolean).join(' · '),
     template: () => ({ id: 'project-' + Date.now(), status: 'published', tos_slug: '', title: '', type: 'Идея проекта', description: '', steps: [''] }),
-    fields: [['id','ID'], ['status','Статус', 'select:published|draft'], ['tos_slug','Привязка к ТОС: slug'], ['title','Название'], ['type','Тип'], ['description','Описание','textarea'], ['steps','Шаги','arrayText']]
+    fields: [['id','ID'], ['status','Статус', 'select:published|draft'], ['tos_slug','Привязка к ТОС: slug', 'tosSlug'], ['title','Название'], ['type','Тип'], ['description','Описание','textarea'], ['steps','Шаги','arrayText']]
   }
 };
 
-const state = { section: 'toses', data: {}, selected: 0, query: '', filter: '' };
+const state = { section: 'toses', data: {}, selected: 0, query: '', filter: '', tosOptions: [] };
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
@@ -91,6 +91,15 @@ function itemQuality(item, section = state.section){
   }
   return { score: total ? Math.round(points / total * 100) : 0, issues };
 }
+async function ensureTosOptions(){
+  if(state.tosOptions.length) return state.tosOptions;
+  try{
+    const draft = localStorage.getItem(storageKey('toses'));
+    const data = draft ? JSON.parse(draft) : await (await fetch('/data/toses.json',{cache:'no-store'})).json();
+    state.tosOptions = (data || []).filter(x => x.slug).map(x => ({slug:x.slug, name:x.name || x.slug, location:x.location || ''})).sort((a,b)=>a.name.localeCompare(b.name,'ru'));
+  }catch(e){ state.tosOptions = []; }
+  return state.tosOptions;
+}
 
 async function loadSection(section){
   state.section = section;
@@ -100,6 +109,7 @@ async function loadSection(section){
   $('#editorSection').classList.toggle('hidden', section === 'help');
   $$('.tab').forEach(btn => btn.classList.toggle('active', btn.dataset.section === section));
   if(section === 'help') return;
+  await ensureTosOptions();
 
   const cfg = DATASETS[section];
   $('#sectionTitle').textContent = cfg.title;
@@ -176,11 +186,16 @@ function renderForm(){
   bindForm(item);
   renderPreview(item);
 }
+function tosSlugControl(key,value){
+  const opts = state.tosOptions.map(x => `<option value="${escapeHtml(x.slug)}">ТОС «${escapeHtml(x.name)}» — ${escapeHtml(x.slug)}${x.location ? ' · ' + escapeHtml(x.location) : ''}</option>`).join('');
+  return `<input list="tos-slug-list" data-key="${key}" value="${escapeHtml(value)}" placeholder="Например: uyutnyy"/><datalist id="tos-slug-list">${opts}</datalist><small>Начните вводить название или выберите ТОС из списка. В JSON сохранится slug.</small>`;
+}
 function renderField(item, spec){
   const [key, label] = spec;
   const type = fieldType(spec);
   const value = item[key];
-  const full = ['textarea','array','arrayText'].includes(type) ? ' full' : '';
+  const full = ['textarea','array','arrayText','tosSlug'].includes(type) ? ' full' : '';
+  if(type === 'tosSlug') return `<div class="field${full}"><label>${label}</label>${tosSlugControl(key,value)}</div>`;
   if(type.startsWith('select:')){
     const opts = type.replace('select:','').split('|');
     return `<div class="field${full}"><label>${label}</label><select data-key="${key}">${opts.map(o => `<option ${value===o?'selected':''}>${o}</option>`).join('')}</select></div>`;
@@ -191,8 +206,7 @@ function renderField(item, spec){
     return `<div class="field full array-field" data-array-key="${key}"><label>${label}</label><div class="array-list">${arr.map((v,i)=>`<div class="array-row"><textarea data-array-index="${i}">${escapeHtml(v)}</textarea><button class="btn danger" type="button" data-remove-array="${i}">×</button></div>`).join('')}</div><button class="btn" type="button" data-add-array="${key}">Добавить строку</button></div>`;
   }
   return `<div class="field${full}"><label>${label}</label><input data-key="${key}" value="${escapeHtml(value)}"/></div>`;
-}
-function bindForm(item){
+}\nfunction bindForm(item){
   $$('[data-key]').forEach(el => el.addEventListener('input', () => { item[el.dataset.key] = el.value; saveDraft(); renderList(); renderPreview(item); }));
   $$('[data-array-key]').forEach(box => {
     const key = box.dataset.arrayKey;
@@ -230,7 +244,8 @@ function renderPreview(item){
   if(state.section === 'toses'){
     box.innerHTML = `<h3>ТОС «${escapeHtml(item.name || 'без названия')}»</h3><div class="preview-grid"><div class="preview-tile"><b>${escapeHtml(item.population || '—')}</b><span>жителей</span></div><div class="preview-tile"><b>${escapeHtml(item.founded || '—')}</b><span>год создания</span></div><div class="preview-tile"><b>${escapeHtml(item.type || '—')}</b><span>тип</span></div></div><p><b>Председатель:</b> ${escapeHtml(item.chairperson || '—')}</p><p>${escapeHtml(desc).slice(0, 500)}</p><p class="quality-score">Заполнено: ${q.score}%</p>${q.issues.length?`<p><b>Что улучшить:</b> ${escapeHtml(q.issues.join(', '))}</p>`:''}`;
   } else {
-    box.innerHTML = `<h3>${escapeHtml(title)}</h3><p>${escapeHtml(desc).slice(0, 500)}</p><p class="quality-score">Заполнено: ${q.score}%</p>${item.tos_slug?`<p><b>Привязка к ТОС:</b> ${escapeHtml(item.tos_slug)}</p>`:''}${q.issues.length?`<p><b>Что улучшить:</b> ${escapeHtml(q.issues.join(', '))}</p>`:''}`;
+    const tos = state.tosOptions.find(x => x.slug === item.tos_slug);
+    box.innerHTML = `<h3>${escapeHtml(title)}</h3><p>${escapeHtml(desc).slice(0, 500)}</p><p class="quality-score">Заполнено: ${q.score}%</p>${item.tos_slug?`<p><b>Привязка к ТОС:</b> ${escapeHtml(tos ? 'ТОС «'+tos.name+'» ('+tos.slug+')' : item.tos_slug)}</p>`:''}${q.issues.length?`<p><b>Что улучшить:</b> ${escapeHtml(q.issues.join(', '))}</p>`:''}`;
   }
 }
 function validate(){
@@ -241,6 +256,7 @@ function validate(){
     const label = item.name || item.title || item.id || `запись ${i+1}`;
     const key = item.slug || item.id || item.title || item.name;
     if(key){ if(seen.has(key)) errors.push(`Дубль идентификатора: ${label}`); seen.add(key); }
+    if(item.tos_slug && state.tosOptions.length && !state.tosOptions.some(x => x.slug === item.tos_slug)) errors.push(`${label}: tos_slug «${item.tos_slug}» не найден в каталоге ТОС.`);
     if(state.section === 'toses'){
       if(!item.name) errors.push(`ТОС №${i+1}: нет названия.`);
       if(!item.slug) errors.push(`${label}: нет slug.`);
@@ -308,6 +324,7 @@ function importJsonFile(file){
       if(!Array.isArray(parsed)) throw new Error('Файл должен содержать массив JSON.');
       state.data[state.section] = parsed;
       state.selected = 0;
+      if(state.section === 'toses') state.tosOptions = [];
       saveDraft(); renderList(); renderForm(); showValidation([`Файл ${file.name} загружен в раздел «${DATASETS[state.section].title}».`], true);
     }catch(e){ showValidation([`Ошибка импорта: ${e.message}`], false); }
   };
