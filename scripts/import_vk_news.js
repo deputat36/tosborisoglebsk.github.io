@@ -3,8 +3,8 @@
   Работает через GitHub Actions без сервера и без платного хостинга.
 
   Требуемые переменные окружения:
-  - VK_TOKEN — сервисный/пользовательский токен ВК с доступом к wall.get
-  - VK_OWNER_ID или VK_DOMAIN — ID сообщества со знаком минус, например -123456789, или короткое имя сообщества
+  - VK_TOKEN — токен ВК с доступом к wall.get
+  - VK_OWNER_ID или VK_DOMAIN — ID сообщества со знаком минус или короткое имя сообщества
 
   Дополнительные переменные:
   - VK_HASHTAGS — хештеги для отбора через запятую. По умолчанию: #наСайтТОСБГО,#новостьТОСБГО,#новостиТОСБГО
@@ -17,6 +17,8 @@ const path = require('path');
 
 const ROOT = process.cwd();
 const NEWS_PATH = path.join(ROOT, 'data', 'news.json');
+const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
+const ARTICLES_PATH = path.join(ROOT, 'data', 'articles.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const SITE_URL = 'https://tosborisoglebsk.ru';
 
@@ -40,11 +42,58 @@ function escapeHtml(value) {
     .replace(/'/g, '&#039;');
 }
 
-function stripServiceHashtags(text) {
+function slugify(text) {
+  const map = {а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'c',ч:'ch',ш:'sh',щ:'sch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya'};
+  return String(text || '')
+    .toLowerCase()
+    .split('')
+    .map((ch) => map[ch] ?? ch)
+    .join('')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function hashtagVariantsForTos(tos) {
+  const values = [tos.slug, tos.name, tos.title, `тос${tos.name || ''}`, `ТОС${tos.name || ''}`]
+    .filter(Boolean)
+    .map((v) => String(v).replace(/^ТОС\s*[«"]?|[»"]$/gi, '').trim())
+    .filter(Boolean);
+  const variants = new Set();
+  for (const value of values) {
+    variants.add('#' + value.replace(/\s+/g, '').toLowerCase());
+    variants.add('#тос' + value.replace(/\s+/g, '').toLowerCase());
+    variants.add('#' + slugify(value).replace(/-/g, '').toLowerCase());
+    variants.add('#tos' + slugify(value).replace(/-/g, '').toLowerCase());
+  }
+  return [...variants].filter((v) => v.length > 1);
+}
+
+function loadTosHashtagMap() {
+  const toses = readJson(TOSES_PATH, []);
+  const map = new Map();
+  for (const tos of toses) {
+    if (!tos.slug) continue;
+    for (const tag of hashtagVariantsForTos(tos)) {
+      map.set(tag.toLowerCase(), tos.slug);
+    }
+  }
+  return map;
+}
+
+function detectTosSlug(text, tagMap) {
+  const lower = String(text || '').toLowerCase();
+  for (const [tag, slug] of tagMap.entries()) {
+    if (lower.includes(tag)) return slug;
+  }
+  return '';
+}
+
+function stripServiceHashtags(text, tagMap = new Map()) {
   let result = String(text || '');
-  for (const tag of HASHTAGS) {
-    const re = new RegExp(tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'ig');
-    result = result.replace(re, '');
+  const allTags = [...HASHTAGS, ...tagMap.keys()];
+  for (const tag of allTags) {
+    const escaped = tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    result = result.replace(new RegExp(escaped, 'ig'), '');
   }
   return result.replace(/\n{3,}/g, '\n\n').trim();
 }
@@ -54,42 +103,35 @@ function hasAllowedHashtag(text) {
   return HASHTAGS.some((tag) => lower.includes(tag));
 }
 
-function makeTitle(text) {
-  const clear = stripServiceHashtags(text).replace(/\s+/g, ' ').trim();
+function makeTitle(text, tagMap) {
+  const clear = stripServiceHashtags(text, tagMap).replace(/\s+/g, ' ').trim();
   if (!clear) return 'Новость ТОС БГО';
   const firstSentence = clear.split(/[.!?]\s/)[0].trim();
-  const title = firstSentence.length > 90 ? firstSentence.slice(0, 87).trim() + '...' : firstSentence;
-  return title || 'Новость ТОС БГО';
+  return firstSentence.length > 90 ? firstSentence.slice(0, 87).trim() + '...' : firstSentence;
 }
 
-function makeLead(text) {
-  const clear = stripServiceHashtags(text).replace(/\s+/g, ' ').trim();
+function makeLead(text, tagMap) {
+  const clear = stripServiceHashtags(text, tagMap).replace(/\s+/g, ' ').trim();
   if (!clear) return 'Новость из сообщества ВКонтакте.';
   return clear.length > 170 ? clear.slice(0, 167).trim() + '...' : clear;
 }
 
-function splitText(text) {
-  const clear = stripServiceHashtags(text);
+function splitText(text, tagMap) {
+  const clear = stripServiceHashtags(text, tagMap);
   if (!clear) return ['Новость опубликована в сообществе ВКонтакте.'];
-  return clear
-    .split(/\n\s*\n/g)
-    .map((p) => p.trim())
-    .filter(Boolean);
+  return clear.split(/\n\s*\n/g).map((p) => p.trim()).filter(Boolean);
 }
 
 function formatDate(unix) {
   const d = new Date(unix * 1000);
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function bestPhoto(attachments = []) {
-  const photo = attachments.find((a) => a.type === 'photo' && a.photo && Array.isArray(a.photo.sizes));
-  if (!photo) return '';
-  const sizes = photo.photo.sizes.slice().sort((a, b) => (b.width || 0) - (a.width || 0));
-  return sizes[0]?.url || '';
+function collectPhotos(attachments = []) {
+  return attachments
+    .filter((a) => a.type === 'photo' && a.photo && Array.isArray(a.photo.sizes))
+    .map((a) => a.photo.sizes.slice().sort((x, y) => (y.width || 0) - (x.width || 0))[0]?.url)
+    .filter(Boolean);
 }
 
 function readJson(file, fallback) {
@@ -111,44 +153,35 @@ async function callVkWallGet() {
   if (!VK_TOKEN) throw new Error('Не задан VK_TOKEN в GitHub Secrets.');
   if (!VK_OWNER_ID && !VK_DOMAIN) throw new Error('Не задан VK_OWNER_ID или VK_DOMAIN в переменных GitHub Actions.');
 
-  const params = new URLSearchParams({
-    access_token: VK_TOKEN,
-    v: VK_API_VERSION,
-    count: String(VK_COUNT),
-    extended: '0'
-  });
-
+  const params = new URLSearchParams({ access_token: VK_TOKEN, v: VK_API_VERSION, count: String(VK_COUNT), extended: '0' });
   if (VK_OWNER_ID) params.set('owner_id', VK_OWNER_ID);
   if (VK_DOMAIN) params.set('domain', VK_DOMAIN);
 
-  const url = `https://api.vk.com/method/wall.get?${params.toString()}`;
-  const res = await fetch(url);
+  const res = await fetch(`https://api.vk.com/method/wall.get?${params.toString()}`);
   const data = await res.json();
-
-  if (data.error) {
-    throw new Error(`VK API error ${data.error.error_code}: ${data.error.error_msg}`);
-  }
-
+  if (data.error) throw new Error(`VK API error ${data.error.error_code}: ${data.error.error_msg}`);
   return data.response?.items || [];
 }
 
-function convertVkPost(post) {
+function convertVkPost(post, tagMap) {
   const ownerId = post.owner_id;
   const postId = post.id;
-  const id = `vk-${Math.abs(ownerId)}-${postId}`;
-  const sourceUrl = `https://vk.com/wall${ownerId}_${postId}`;
-  const image = bestPhoto(post.attachments || []);
+  const photos = collectPhotos(post.attachments || []);
+  const tosSlug = detectTosSlug(post.text, tagMap);
 
   return {
-    id,
+    id: `vk-${Math.abs(ownerId)}-${postId}`,
+    status: 'published',
     date: formatDate(post.date),
-    category: 'Новости ТОС',
-    title: makeTitle(post.text),
-    lead: makeLead(post.text),
-    text: splitText(post.text),
+    category: tosSlug ? 'Новости ТОС' : 'Новости ТОС БГО',
+    title: makeTitle(post.text, tagMap),
+    lead: makeLead(post.text, tagMap),
+    text: splitText(post.text, tagMap),
     source: 'ВКонтакте',
-    source_url: sourceUrl,
-    image,
+    source_url: `https://vk.com/wall${ownerId}_${postId}`,
+    image: photos[0] || '',
+    images: photos,
+    tos_slug: tosSlug,
     external: true,
     imported_from: 'vk',
     vk_owner_id: ownerId,
@@ -160,93 +193,36 @@ function convertVkPost(post) {
 function generateNewsPage(news) {
   const dir = path.join(ROOT, 'news', news.id);
   fs.mkdirSync(dir, { recursive: true });
-
-  const paragraphs = Array.isArray(news.text)
-    ? news.text.map((p) => `<p>${escapeHtml(p)}</p>`).join('\n')
-    : `<p>${escapeHtml(news.text || news.lead || '')}</p>`;
-
-  const image = news.image ? `<img src="${escapeHtml(news.image)}" alt="${escapeHtml(news.title)}" style="width:100%;border-radius:24px;margin:18px 0;border:1px solid var(--line);">` : '';
-  const source = news.source_url
-    ? `<p class="source"><b>Источник:</b> ${escapeHtml(news.source || 'Источник')}<br><a href="${escapeHtml(news.source_url)}" target="_blank" rel="noopener">${escapeHtml(news.source_url)}</a></p>`
-    : `<p class="source"><b>Источник:</b> ${escapeHtml(news.source || 'Редакция портала')}</p>`;
-
-  const html = `<!doctype html>
-<html lang="ru">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>${escapeHtml(news.title)} | ТОС БГО</title>
-<meta name="description" content="${escapeHtml(news.lead)}"/>
-<link rel="canonical" href="${SITE_URL}/news/${news.id}/"/>
-<meta property="og:title" content="${escapeHtml(news.title)}"/>
-<meta property="og:description" content="${escapeHtml(news.lead)}"/>
-<meta property="og:type" content="article"/>
-<meta property="og:url" content="${SITE_URL}/news/${news.id}/"/>
-<meta property="og:image" content="${escapeHtml(news.image || `${SITE_URL}/assets/img/og-cover.svg`)}"/>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
-<link rel="stylesheet" href="/assets/css/styles.css"/>
-</head>
-<body>
-<a class="skip-link" href="#main">Перейти к содержимому</a>
-<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
-<main id="main">
-<section class="hero"><div class="container hero-card"><a class="chip" href="/news/">← Новости</a><div class="eyebrow">${escapeHtml(news.category || 'Новости')} · ${escapeHtml(news.date || '')}</div><h1>${escapeHtml(news.title)}</h1><p class="lead">${escapeHtml(news.lead)}</p></div></section>
-<section class="section"><div class="container prose">${image}${paragraphs}<hr class="sep"/>${source}</div></section>
-</main>
-<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru.</div></div><div class="tiny">Новость импортирована или обновлена автоматически.</div></div></footer>
-<script src="/assets/js/site.js"></script>
-</body>
-</html>`;
-
+  const paragraphs = Array.isArray(news.text) ? news.text.map((p) => `<p>${escapeHtml(p)}</p>`).join('\n') : `<p>${escapeHtml(news.text || news.lead || '')}</p>`;
+  const images = Array.isArray(news.images) && news.images.length
+    ? `<div class="grid">${news.images.slice(0, 8).map((url) => `<img src="${escapeHtml(url)}" alt="${escapeHtml(news.title)}" style="width:100%;border-radius:20px;border:1px solid var(--line);">`).join('')}</div>`
+    : (news.image ? `<img src="${escapeHtml(news.image)}" alt="${escapeHtml(news.title)}" style="width:100%;border-radius:24px;margin:18px 0;border:1px solid var(--line);">` : '');
+  const tosLink = news.tos_slug ? `<p><a class="btn" href="/tos/${escapeHtml(news.tos_slug)}/">Открыть связанный ТОС</a></p>` : '';
+  const source = news.source_url ? `<p class="source"><b>Источник:</b> ${escapeHtml(news.source || 'Источник')}<br><a href="${escapeHtml(news.source_url)}" target="_blank" rel="noopener">${escapeHtml(news.source_url)}</a></p>` : `<p class="source"><b>Источник:</b> ${escapeHtml(news.source || 'Редакция портала')}</p>`;
+  const html = `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${escapeHtml(news.title)} | ТОС БГО</title><meta name="description" content="${escapeHtml(news.lead)}"/><link rel="canonical" href="${SITE_URL}/news/${news.id}/"/><meta property="og:title" content="${escapeHtml(news.title)}"/><meta property="og:description" content="${escapeHtml(news.lead)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${SITE_URL}/news/${news.id}/"/><meta property="og:image" content="${escapeHtml(news.image || `${SITE_URL}/assets/img/og-cover.svg`)}"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="stylesheet" href="/assets/css/styles.css"/></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/news/">← Новости</a><div class="eyebrow">${escapeHtml(news.category || 'Новости')} · ${escapeHtml(news.date || '')}</div><h1>${escapeHtml(news.title)}</h1><p class="lead">${escapeHtml(news.lead)}</p></div></section><section class="section"><div class="container prose">${images}${paragraphs}${tosLink}<hr class="sep"/>${source}</div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru.</div></div><div class="tiny">Новость импортирована или обновлена автоматически.</div></div></footer><script src="/assets/js/site.js"></script></body></html>`;
   fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
 }
 
 function updateSitemap(newsList) {
-  const staticUrls = [
-    '/', '/tos/', '/news/', '/grants/', '/projects/', '/materials/', '/documents/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/search/'
-  ];
-
+  const staticUrls = ['/', '/tos/', '/news/', '/grants/', '/projects/', '/materials/', '/documents/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/search/'];
   let urls = staticUrls.map((u) => `${SITE_URL}${u}`);
-
-  const tosPath = path.join(ROOT, 'data', 'toses.json');
-  const toses = readJson(tosPath, []);
-  for (const tos of toses) {
-    if (tos.slug) urls.push(`${SITE_URL}/tos/${tos.slug}/`);
-  }
-
-  for (const news of newsList) {
-    if (news.id) urls.push(`${SITE_URL}/news/${news.id}/`);
-  }
-
-  const articlesPath = path.join(ROOT, 'data', 'articles.json');
-  const articles = readJson(articlesPath, []);
-  for (const article of articles) {
-    if (article.id) urls.push(`${SITE_URL}/materials/${article.id}/`);
-  }
-
+  for (const tos of readJson(TOSES_PATH, [])) if (tos.slug && tos.status !== 'draft') urls.push(`${SITE_URL}/tos/${tos.slug}/`);
+  for (const news of newsList) if (news.id && news.status !== 'draft') urls.push(`${SITE_URL}/news/${news.id}/`);
+  for (const article of readJson(ARTICLES_PATH, [])) if (article.id && article.status !== 'draft') urls.push(`${SITE_URL}/materials/${article.id}/`);
   urls = [...new Set(urls)];
-
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((u) => `<url><loc>${u}</loc></url>`)
-    .join('\n')}\n</urlset>\n`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`;
   fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
 }
 
 async function main() {
+  const tagMap = loadTosHashtagMap();
   const existing = readJson(NEWS_PATH, []);
   const existingById = new Map(existing.map((item) => [item.id, item]));
-
   const posts = await callVkWallGet();
-  const imported = posts
-    .filter((post) => !post.is_pinned)
-    .filter((post) => hasAllowedHashtag(post.text))
-    .map(convertVkPost);
+  const imported = posts.filter((post) => !post.is_pinned).filter((post) => hasAllowedHashtag(post.text)).map((post) => convertVkPost(post, tagMap));
 
   for (const item of imported) {
-    existingById.set(item.id, {
-      ...(existingById.get(item.id) || {}),
-      ...item
-    });
+    existingById.set(item.id, { ...(existingById.get(item.id) || {}), ...item });
   }
 
   const merged = Array.from(existingById.values())
@@ -254,11 +230,12 @@ async function main() {
     .slice(0, NEWS_LIMIT);
 
   writeJson(NEWS_PATH, merged);
-  for (const item of merged) generateNewsPage(item);
+  for (const item of merged.filter((item) => item.status !== 'draft')) generateNewsPage(item);
   updateSitemap(merged);
 
   console.log(`Проверено постов ВК: ${posts.length}`);
   console.log(`Импортировано/обновлено постов по хештегам: ${imported.length}`);
+  console.log(`Привязано к ТОСам: ${imported.filter((item) => item.tos_slug).length}`);
   console.log(`Всего новостей в data/news.json: ${merged.length}`);
 }
 
