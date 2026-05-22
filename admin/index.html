@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Админ-панель ТОС БГО</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="/admin/admin.css"/>
+</head>
+<body>
+  <header class="admin-header">
+    <div>
+      <div class="eyebrow">Локальная админ-панель</div>
+      <h1>Управление сайтом ТОС БГО</h1>
+      <p>Редактирование данных сайта без сервера. Изменения сохраняются в браузере, затем скачиваются JSON-файлом и загружаются в GitHub.</p>
+    </div>
+    <div class="header-actions">
+      <a class="btn" href="/" target="_blank" rel="noopener">Открыть сайт</a>
+      <button class="btn danger" id="resetLocal" type="button">Сбросить черновики</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <button class="tab active" data-section="toses">Каталог ТОС</button>
+      <button class="tab" data-section="news">Новости</button>
+      <button class="tab" data-section="articles">Материалы</button>
+      <button class="tab" data-section="documents">Документы</button>
+      <button class="tab" data-section="grants">Конкурсы</button>
+      <button class="tab" data-section="projects">Проекты</button>
+      <hr/>
+      <button class="tab" data-section="help">Инструкция</button>
+    </aside>
+
+    <section class="workspace">
+      <div class="panel warning">
+        <b>Важно.</b> Эта админка не записывает данные прямо в GitHub. После правок скачайте JSON и замените соответствующий файл в папке <code>data/</code> репозитория.
+      </div>
+
+      <section id="editorSection" class="panel">
+        <div class="toolbar">
+          <div>
+            <h2 id="sectionTitle">Каталог ТОС</h2>
+            <p id="sectionHint">Редактирование data/toses.json</p>
+          </div>
+          <div class="toolbar-actions">
+            <button class="btn" id="addItem" type="button">Добавить запись</button>
+            <button class="btn primary" id="downloadJson" type="button">Скачать JSON</button>
+          </div>
+        </div>
+
+        <div class="tools-row">
+          <input id="searchInput" class="input" type="search" placeholder="Поиск по записям..."/>
+          <button class="btn" id="validateBtn" type="button">Проверить ошибки</button>
+        </div>
+
+        <div id="validationBox" class="validation hidden"></div>
+
+        <div class="editor-grid">
+          <div class="list-box">
+            <div id="itemsList" class="items-list"></div>
+          </div>
+          <form id="editForm" class="edit-form"></form>
+        </div>
+      </section>
+
+      <section id="helpSection" class="panel hidden">
+        <h2>Как пользоваться админ-панелью</h2>
+        <ol>
+          <li>Выберите раздел слева.</li>
+          <li>Найдите нужную запись или нажмите «Добавить запись».</li>
+          <li>Отредактируйте поля. Черновик автоматически сохраняется в браузере.</li>
+          <li>Нажмите «Скачать JSON».</li>
+          <li>В GitHub замените соответствующий файл в папке <code>data/</code>.</li>
+        </ol>
+        <h3>Какие файлы редактируются</h3>
+        <ul>
+          <li><code>data/toses.json</code> — каталог ТОСов.</li>
+          <li><code>data/news.json</code> — новости.</li>
+          <li><code>data/articles.json</code> — полезные материалы.</li>
+          <li><code>data/documents.json</code> — документы.</li>
+          <li><code>data/grants.json</code> — конкурсы и гранты.</li>
+          <li><code>data/projects.json</code> — банк идей проектов.</li>
+        </ul>
+        <h3>Безопасность</h3>
+        <p>Админка не хранит пароли и токены. Она работает только с открытыми JSON-файлами и скачивает обновлённую версию на ваш компьютер.</p>
+      </section>
+    </section>
+  </main>
+
+  <template id="emptyStateTemplate">
+    <div class="empty">Записей пока нет. Нажмите «Добавить запись».</div>
+  </template>
+
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
