@@ -17,6 +17,7 @@
     </div>
     <div class="header-actions">
       <a class="btn" href="/" target="_blank" rel="noopener">Открыть сайт</a>
+      <button class="btn" id="downloadAllJson" type="button">Скачать все JSON</button>
       <button class="btn danger" id="resetLocal" type="button">Сбросить черновики</button>
     </div>
   </header>
@@ -35,7 +36,7 @@
 
     <section class="workspace">
       <div class="panel warning">
-        <b>Важно.</b> Эта админка не записывает данные прямо в GitHub. После правок скачайте JSON и замените соответствующий файл в папке <code>data/</code> репозитория.
+        <b>Важно.</b> Эта админка не записывает данные прямо в GitHub. После правок скачайте JSON и замените соответствующий файл в папке <code>data/</code> репозитория. Перед массовыми правками используйте кнопку «Скачать все JSON».
       </div>
 
       <section id="editorSection" class="panel">
@@ -46,13 +47,19 @@
           </div>
           <div class="toolbar-actions">
             <button class="btn" id="addItem" type="button">Добавить запись</button>
+            <button class="btn" id="importJson" type="button">Загрузить JSON</button>
+            <input class="hidden" id="importJsonFile" type="file" accept="application/json,.json"/>
             <button class="btn primary" id="downloadJson" type="button">Скачать JSON</button>
           </div>
         </div>
 
         <div class="tools-row">
           <input id="searchInput" class="input" type="search" placeholder="Поиск по записям..."/>
+          <select id="quickFilter" class="input small-input">
+            <option value="">Все записи</option>
+          </select>
           <button class="btn" id="validateBtn" type="button">Проверить ошибки</button>
+          <button class="btn" id="qualityBtn" type="button">Аудит качества</button>
         </div>
 
         <div id="validationBox" class="validation hidden"></div>
@@ -74,6 +81,14 @@
           <li>Нажмите «Скачать JSON».</li>
           <li>В GitHub замените соответствующий файл в папке <code>data/</code>.</li>
         </ol>
+        <h3>Новые возможности</h3>
+        <ul>
+          <li><b>Скачать все JSON</b> — быстрая резервная копия данных сайта.</li>
+          <li><b>Загрузить JSON</b> — импорт файла с компьютера обратно в админку.</li>
+          <li><b>Аудит качества</b> — показывает, какие карточки заполнены хорошо, а где не хватает телефона, соцсетей, описания, логотипа или даты обновления.</li>
+          <li><b>Статус публикации</b> — для новостей, материалов и проектов можно использовать <code>published</code> или <code>draft</code>.</li>
+          <li><b>tos_slug</b> — поле для привязки новости или проекта к конкретному ТОС, например <code>uyutnyy</code>.</li>
+        </ul>
         <h3>Какие файлы редактируются</h3>
         <ul>
           <li><code>data/toses.json</code> — каталог ТОСов.</li>
