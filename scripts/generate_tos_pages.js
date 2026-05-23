@@ -4,6 +4,10 @@ const path = require('path');
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
 const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
+const NEWS_PATH = path.join(ROOT, 'data', 'news.json');
+const PROJECTS_PATH = path.join(ROOT, 'data', 'projects.json');
+const EVENTS_PATH = path.join(ROOT, 'data', 'events.json');
+const NEEDS_PATH = path.join(ROOT, 'data', 'needs.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 
 function esc(value) {
@@ -14,28 +18,22 @@ function esc(value) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
-
-function jsonEsc(value) {
-  return JSON.stringify(String(value ?? ''));
+function readJson(file) {
+  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { return []; }
 }
-
-function arr(value) {
-  return Array.isArray(value) ? value.filter(Boolean) : [];
+function arr(value) { return Array.isArray(value) ? value.filter(Boolean) : []; }
+function phoneHref(phone) { return String(phone || '').replace(/[^+\d]/g, ''); }
+function logoPath(tos) { return tos.logo || `/assets/img/tos-logos/${tos.slug}.svg`; }
+function isPublished(x) { return x && x.status !== 'draft'; }
+function niceDate(value) {
+  if (!value) return 'Дата уточняется';
+  const d = new Date(String(value) + 'T00:00:00');
+  return Number.isNaN(d.getTime()) ? value : d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 }
-
-function phoneHref(phone) {
-  return String(phone || '').replace(/[^+\d]/g, '');
-}
-
-function logoPath(tos) {
-  return tos.logo || `/assets/img/tos-logos/${tos.slug}.svg`;
-}
-
 function description(tos) {
   const base = [tos.boundaries, tos.location].filter(Boolean).join(' ');
   return `ТОС «${tos.name}»: председатель, контакты, границы, новости, события, проекты и потребности. ${base}`.trim();
 }
-
 function socialName(url) {
   if (!url) return 'Ссылка';
   if (url.includes('vk.com')) return 'ВКонтакте';
@@ -43,12 +41,33 @@ function socialName(url) {
   if (url.includes('t.me')) return 'Telegram';
   return 'Ссылка';
 }
-
 function renderList(items, formatter, empty = '<li>Информация уточняется</li>') {
   return items.length ? items.map(formatter).join('\n') : empty;
 }
+function byDateDesc(a, b) { return String(b.date || '').localeCompare(String(a.date || '')); }
+function byDateAsc(a, b) { return String(a.date || '').localeCompare(String(b.date || '')); }
+function related(items, slug, limit, sorter = byDateDesc) {
+  return arr(items).filter(x => isPublished(x) && x.tos_slug === slug).sort(sorter).slice(0, limit);
+}
+function newsCard(n) {
+  return `<article class="list-item"><div class="meta"><span class="tag">${esc(n.category || 'Новость')}</span><span class="tag">${esc(niceDate(n.date))}</span></div><h3>${esc(n.title || 'Новость')}</h3><p>${esc(n.lead || '')}</p><div class="card-actions"><a class="btn" href="/news/${esc(n.id)}/">Читать</a>${n.source_url ? `<a class="btn" href="${esc(n.source_url)}" target="_blank" rel="noopener">Источник</a>` : ''}</div></article>`;
+}
+function eventCard(e) {
+  return `<article class="list-item"><div class="meta"><span class="tag">${esc(e.type || 'Событие')}</span><span class="tag">${esc(niceDate(e.date))}${e.time ? ' · ' + esc(e.time) : ''}</span></div><h3>${esc(e.title || 'Событие')}</h3><p>${esc(e.description || '')}</p><p class="tiny"><b>Место:</b> ${esc(e.place || 'Уточняется')}</p><div class="card-actions"><a class="btn" href="/calendar/">Календарь</a></div></article>`;
+}
+function projectCard(p) {
+  const steps = arr(p.steps).slice(0, 4).map(s => `<li>${esc(s)}</li>`).join('');
+  return `<article class="card"><div class="card-inner"><div class="tag">${esc(p.type || 'Проект')}</div><h3>${esc(p.title || 'Проект')}</h3><p>${esc(p.description || '')}</p>${steps ? `<hr class="sep"/><ul class="tiny">${steps}</ul>` : ''}<div class="card-actions"><a class="btn" href="/projects/${esc(p.id)}/">Подробнее</a></div></div></article>`;
+}
+function needCard(n) {
+  return `<article class="list-item"><div class="meta"><span class="tag">${esc(n.need_type || 'Помощь')}</span><span class="tag ${n.priority === 'Высокий' ? 'warn' : ''}">${esc(n.priority || 'Приоритет уточняется')}</span></div><h3>${esc(n.title || 'Потребность')}</h3><p>${esc(n.description || '')}</p><p class="tiny"><b>Контакт:</b> ${esc(n.contact || 'Уточняется')}</p><div class="card-actions"><a class="btn" href="/needs/">Все потребности</a><a class="btn" href="/contacts/">Предложить помощь</a></div></article>`;
+}
+function block(title, subtitle, linkText, linkUrl, content, layout = 'list') {
+  if (!content) return '';
+  return `<section class="section"><div class="container section-head"><div><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div>${linkUrl ? `<a class="btn" href="${esc(linkUrl)}">${esc(linkText || 'Открыть')}</a>` : ''}</div><div class="container ${layout}">${content}</div></section>`;
+}
 
-function makePage(tos) {
+function makePage(tos, data) {
   const title = `ТОС «${tos.name}» — контакты, границы, председатель | ТОС БГО`;
   const desc = description(tos);
   const canonical = `${SITE_URL}/tos/${tos.slug}/`;
@@ -58,6 +77,10 @@ function makePage(tos) {
   const chairLinks = arr(tos.chairperson_links);
   const socialLinks = arr(tos.social_links);
   const sameAs = [...chairLinks, ...socialLinks];
+  const relNews = related(data.news, tos.slug, 6).map(newsCard).join('');
+  const relEvents = related(data.events, tos.slug, 6, byDateAsc).map(eventCard).join('');
+  const relProjects = related(data.projects, tos.slug, 6).map(projectCard).join('');
+  const relNeeds = related(data.needs, tos.slug, 6).map(needCard).join('');
 
   const schema = {
     '@context': 'https://schema.org',
@@ -68,11 +91,7 @@ function makePage(tos) {
     areaServed: tos.location || 'Борисоглебский городской округ',
     description: desc,
     sameAs,
-    contactPoint: phones.map(phone => ({
-      '@type': 'ContactPoint',
-      telephone: phone,
-      contactType: 'председатель'
-    }))
+    contactPoint: phones.map(phone => ({ '@type': 'ContactPoint', telephone: phone, contactType: 'председатель' }))
   };
 
   return `<!doctype html>
@@ -96,121 +115,34 @@ function makePage(tos) {
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержимому</a>
-  <header class="header">
-    <div class="container header-inner">
-      <a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a>
-      <nav class="nav" id="site-nav" aria-label="Навигация">
-        <a href="/tos/">Каталог ТОС</a>
-        <a href="/news/">Новости</a>
-        <a href="/grants/">Конкурсы</a>
-        <a href="/projects/">Проекты</a>
-        <a href="/calendar/">Календарь</a>
-        <a href="/needs/">Нужна помощь</a>
-        <a href="/materials/">Материалы</a>
-        <a href="/documents/">Документы</a>
-        <a href="/create-tos/">Как создать ТОС</a>
-        <a href="/chairperson/">Председателю</a>
-        <a href="/contacts/">Контакты</a>
-      </nav>
-      <div class="actions">
-        <a class="btn" href="/search/">Поиск</a>
-        <button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button>
-        <button class="btn" type="button" data-action="theme">Тема</button>
-      </div>
-    </div>
-  </header>
-
+  <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/calendar/">Календарь</a><a href="/needs/">Нужна помощь</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/chairperson/">Председателю</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
   <main id="main">
-    <section class="hero">
-      <div class="container hero-card">
-        <a class="chip" href="/tos/">← Каталог ТОС</a>
-        <h1>ТОС «${esc(tos.name)}»</h1>
-        <p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container grid">
-        <div class="card full"><div class="card-inner">
-          <div class="kpi">
-            <div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div>
-            <div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div>
-            <div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div>
-          </div>
-          <hr class="sep"/>
-          <div class="notice"><b style="color:var(--text)">Границы ТОС</b><br>${esc(tos.boundaries || 'Границы уточняются')}</div>
-          <hr class="sep"/>
-          <div class="prose">
-            <h2>Описание</h2>
-            <p>${esc(tos.description || 'Описание пока уточняется.')}</p>
-            <h2>Председатель</h2>
-            <p>${esc(tos.chairperson || 'Информация уточняется')}</p>
-            <h2>Контакты председателя</h2>
-            <ul>
-              ${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '')}
-              ${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '')}
-              ${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Профиль/ссылка — ${esc(u)}</a></li>`, '')}
-              ${(!phones.length && !emails.length && !chairLinks.length) ? '<li>Контакты уточняются</li>' : ''}
-            </ul>
-            <h2>Сообщества ТОС</h2>
-            <ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))} — ${esc(u)}</a></li>`)}</ul>
-            <p class="tiny">Исходные контакты из анкеты: ${esc(tos.contacts_raw || '—')}</p>
-            <p class="tiny">Источник/обновление: ${esc(tos.updated_at || 'дата уточняется')}</p>
-          </div>
-          <hr class="sep"/>
-          <div class="card-actions">
-            <a class="btn" href="/tos/">← В каталог</a>
-            <a class="btn" href="/update-tos/">Сообщить об ошибке</a>
-            <button class="btn" onclick="window.print()">Распечатать карточку</button>
-          </div>
-        </div></div>
-      </div>
-    </section>
+    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn" href="/update-tos/">Сообщить об ошибке</a><a class="btn" href="/contacts/">Предложить новость</a><button class="btn" onclick="window.print()">Распечатать карточку</button></div></div></section>
+    <section class="section"><div class="container grid"><div class="card full"><div class="card-inner"><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div></div><hr class="sep"/><div class="notice"><b style="color:var(--text)">Границы ТОС</b><br>${esc(tos.boundaries || 'Границы уточняются')}</div><hr class="sep"/><div class="prose"><h2>Описание</h2><p>${esc(tos.description || 'Описание пока уточняется.')}</p><h2>Председатель</h2><p>${esc(tos.chairperson || 'Информация уточняется')}</p><h2>Контакты председателя</h2><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '')}${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '')}${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Профиль/ссылка — ${esc(u)}</a></li>`, '')}${(!phones.length && !emails.length && !chairLinks.length) ? '<li>Контакты уточняются</li>' : ''}</ul><h2>Сообщества ТОС</h2><ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))} — ${esc(u)}</a></li>`)}</ul><p class="tiny">Исходные контакты из анкеты: ${esc(tos.contacts_raw || '—')}</p><p class="tiny">Источник/обновление: ${esc(tos.updated_at || 'дата уточняется')}</p></div><hr class="sep"/><div class="card-actions"><a class="btn" href="/tos/">← В каталог</a><a class="btn" href="/update-tos/">Сообщить об ошибке</a><a class="btn" href="/contacts/">Предложить новость</a></div></div></div></div></section>
+    ${block('Новости этого ТОС', 'Публикации, привязанные к этой территории через tos_slug.', 'Все новости', '/news/', relNews, 'list')}
+    ${block('События этого ТОС', 'Собрания, субботники, дедлайны и мероприятия территории.', 'Календарь', '/calendar/', relEvents, 'list')}
+    ${block('Проекты этого ТОС', 'Идеи, планы и реализованные инициативы.', 'Все проекты', '/projects/', relProjects, 'grid')}
+    ${block('Актуальные потребности этого ТОС', 'Где территории нужна помощь жителей, партнёров или волонтёров.', 'Все потребности', '/needs/', relNeeds, 'list')}
+    <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Как помочь этому ТОС</h2><p>Можно предложить новость, фотоотчёт, помощь в благоустройстве, материалы, волонтёрское участие или уточнение данных для сайта.</p><div class="card-actions"><a class="btn primary" href="/contacts/">Связаться с редакцией сайта</a><a class="btn" href="/update-tos/">Обновить данные ТОС</a><a class="btn" href="/needs/">Посмотреть потребности</a></div></div></article></div></section>
   </main>
-
-  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Данные страницы обновляются автоматически из data/toses.json.</div></div></footer>
-  <script src="/assets/js/site.js"></script>
-  <script src="/assets/js/tos-logos.js"></script>
-</body>
-</html>`;
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Данные страницы обновляются автоматически из JSON-файлов сайта.</div></div></footer>
+  <script src="/assets/js/site.js"></script><script src="/assets/js/tos-logos.js"></script>
+</body></html>`;
 }
 
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
-}
-
-function writeFile(file, content) {
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, content, 'utf8');
-}
-
+function writeFile(file, content) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content, 'utf8'); }
 function updateSitemap(toses) {
-  let existing = '';
-  if (fs.existsSync(SITEMAP_PATH)) existing = fs.readFileSync(SITEMAP_PATH, 'utf8');
-
-  const baseUrls = [
-    '/', '/tos/', '/news/', '/grants/', '/projects/', '/calendar/', '/needs/',
-    '/materials/', '/documents/', '/create-tos/', '/chairperson/', '/update-tos/',
-    '/map/', '/contacts/', '/search/'
-  ].map(u => `${SITE_URL}${u}`);
-
-  const tosUrls = toses
-    .filter(t => t.slug && t.status !== 'draft')
-    .map(t => `${SITE_URL}/tos/${t.slug}/`);
-
+  const baseUrls = ['/', '/tos/', '/news/', '/grants/', '/projects/', '/calendar/', '/needs/', '/materials/', '/documents/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/search/'].map(u => `${SITE_URL}${u}`);
+  const tosUrls = toses.filter(t => t.slug && t.status !== 'draft').map(t => `${SITE_URL}/tos/${t.slug}/`);
   const urls = [...new Set([...baseUrls, ...tosUrls])];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`;
   fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
 }
-
 function main() {
   const toses = readJson(TOSES_PATH).filter(t => t.slug && t.status !== 'draft');
-  for (const tos of toses) {
-    const file = path.join(ROOT, 'tos', tos.slug, 'index.html');
-    writeFile(file, makePage(tos));
-  }
+  const data = { news: readJson(NEWS_PATH), projects: readJson(PROJECTS_PATH), events: readJson(EVENTS_PATH), needs: readJson(NEEDS_PATH) };
+  for (const tos of toses) writeFile(path.join(ROOT, 'tos', tos.slug, 'index.html'), makePage(tos, data));
   updateSitemap(toses);
   console.log(`Generated TOS pages: ${toses.length}`);
 }
-
 main();
