@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /audit/
+Disallow: /_private/
 Sitemap: https://tosborisoglebsk.ru/sitemap.xml
