@@ -1,0 +1,39 @@
+name: Generate material pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release-2025-12-22
+    paths:
+      - "data/articles.json"
+      - "data/toses.json"
+      - "data/news.json"
+      - "data/projects.json"
+      - "scripts/generate_material_pages.js"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate material pages
+        run: node scripts/generate_material_pages.js
+
+      - name: Commit generated files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Generate SEO material pages
+          file_pattern: materials/*/index.html sitemap.xml
