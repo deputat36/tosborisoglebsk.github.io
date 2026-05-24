@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Нужна помощь ТОСам БГО</title>
-  <meta name="description" content="Актуальные потребности ТОСов Борисоглебского городского округа: волонтёры, материалы, озеленение, фотоотчёты и партнёрская помощь."/>
+  <title>Нужна помощь ТОСам БГО — потребности, партнёры и взаимопомощь</title>
+  <meta name="description" content="Актуальные потребности ТОСов Борисоглебского городского округа: волонтёры, материалы, саженцы, транспорт, фотоотчёты, инструменты и партнёрская поддержка."/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="https://tosborisoglebsk.ru/needs/"/>
   <meta property="og:title" content="Нужна помощь ТОСам БГО"/>
-  <meta property="og:description" content="Актуальные потребности ТОСов Борисоглебского городского округа."/>
+  <meta property="og:description" content="Потребности ТОСов БГО для жителей, волонтёров, бизнеса, депутатов, учреждений и партнёров."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://tosborisoglebsk.ru/needs/"/>
   <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>
 </head>
 <body>
@@ -29,6 +30,9 @@
         <a href="/needs/">Нужна помощь</a>
         <a href="/materials/">Материалы</a>
         <a href="/documents/">Документы</a>
+        <a href="/create-tos/">Как создать ТОС</a>
+        <a href="/chairperson/">Председателю</a>
+        <a href="/map/">Карта</a>
         <a href="/contacts/">Контакты</a>
       </nav>
       <div class="actions">
@@ -42,15 +46,20 @@
   <main id="main">
     <section class="hero">
       <div class="container hero-card">
-        <div class="eyebrow">Взаимопомощь</div>
+        <div class="eyebrow">Взаимопомощь и партнёрство</div>
         <h1>Нужна помощь ТОСам</h1>
-        <p class="lead">Раздел для жителей, бизнеса, депутатов, учреждений и активистов, которые хотят поддержать территориальные общественные самоуправления Борисоглебского городского округа.</p>
+        <p class="lead">Раздел для жителей, бизнеса, депутатов, учреждений и активистов, которые хотят поддержать ТОСы Борисоглебского округа конкретным делом: материалами, волонтёрами, транспортом, фото, саженцами или информационной помощью.</p>
+        <div class="hero-actions"><a class="btn primary" href="/contacts/">Предложить помощь</a><a class="btn" href="/projects/">Посмотреть проекты</a><a class="btn" href="/documents/">Шаблон потребности</a><a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">ВК ТОС БГО</a></div>
       </div>
     </section>
 
+    <section class="section"><div class="container section-head"><div><h2>Как пользоваться разделом</h2><p>Потребность должна быть конкретной, чтобы по ней можно было быстро помочь</p></div></div><div class="container grid"><article class="card"><div class="card-inner"><h3>Жителю</h3><p>Можно помочь временем, инструментом, участием в субботнике, фото, распространением информации или небольшими материалами.</p></div></article><article class="card"><div class="card-inner"><h3>Бизнесу</h3><p>Удобнее помогать конкретно: краска, грунт, саженцы, доставка, техника, печать объявлений, призы для мероприятия.</p></div></article><article class="card"><div class="card-inner"><h3>Председателю ТОС</h3><p>Формулируйте просьбу точно: что нужно, сколько, для чего, до какого срока и кто ответственный.</p></div></article></div></section>
+
+    <section class="section"><div class="container section-head"><div><h2>Хорошая формулировка потребности</h2><p>Чем конкретнее просьба, тем выше шанс получить помощь</p></div></div><div class="container grid"><article class="card half"><div class="card-inner"><h3>Плохо</h3><div class="notice">Нужна помощь с благоустройством.<br><br>Нужны материалы.<br><br>Помогите ТОСу.</div></div></article><article class="card half"><div class="card-inner"><h3>Хорошо</h3><div class="notice">ТОС «_____» ищет 5 мешков грунта и 20 саженцев бархатцев для клумбы у ДК. Срок — до 15 мая. Ответственный: ______, телефон: ______.</div></div></article></div></section>
+
     <section class="section">
       <div class="container toolbar">
-        <input class="input" id="needs-search" placeholder="Поиск: саженцы, волонтёры, покраска, Уютный..."/>
+        <input class="input" id="needs-search" placeholder="Поиск: саженцы, волонтёры, покраска, транспорт, фото..."/>
         <select class="select" id="needs-type-filter"><option value="">Все типы помощи</option></select>
         <select class="select" id="needs-tos-filter"><option value="">Все ТОС</option></select>
         <select class="select" id="needs-priority-filter"><option value="">Любой приоритет</option></select>
@@ -60,9 +69,13 @@
     <section class="section">
       <div class="container list" id="needs-list"><div class="empty">Загрузка потребностей...</div></div>
     </section>
+
+    <section class="section"><div class="container section-head"><div><h2>Как добавить потребность</h2><p>Скопируйте шаблон и отправьте через ВК-сообщество или контакты портала</p></div></div><div class="container prose"><div class="notice">ТОС:<br>Что нужно:<br>Количество / объём:<br>Для чего нужно:<br>Где будет использоваться:<br>Срок:<br>Кто ответственный:<br>Контакт:<br>Фото / ссылка:</div><div class="card-actions"><a class="btn primary" href="https://vk.ru/tosbgo" target="_blank" rel="noopener">Отправить через ВК</a><a class="btn" href="/contacts/">Контакты</a><a class="btn" href="/update-tos/">Другие шаблоны</a></div></div></section>
+
+    <section class="section"><div class="container notice"><b>Важно:</b> раздел не предназначен для сбора персональных данных и спорных жалоб. Лучше публиковать конкретные потребности ТОС: материалы, помощь руками, техника, транспорт, фото, текст, волонтёры, партнёрская поддержка.</div></section>
   </main>
 
-  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Потребности хранятся в data/needs.json и могут редактироваться через админ-панель.</div></div></footer>
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Потребности хранятся в data/needs.json и проходят ручную проверку перед публикацией.</div></div></footer>
   <script src="/assets/js/site.js"></script>
   <script src="/assets/js/needs.js"></script>
 </body>
