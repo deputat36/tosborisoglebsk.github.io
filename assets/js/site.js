@@ -2,7 +2,19 @@ const $ = (s, r = document) => r.querySelector(s);
 const fmt = (v, f = 'Информация уточняется') => (v === undefined || v === null || String(v).trim() === '') ? f : String(v).trim();
 const esc = (v) => String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 
+function ensureLegalNav(){
+  const nav = $('#site-nav');
+  if(!nav || nav.querySelector('a[href="/legal/"]')) return;
+  const link = document.createElement('a');
+  link.href = '/legal/';
+  link.textContent = 'Правовая основа';
+  const docs = nav.querySelector('a[href="/documents/"]');
+  if(docs) docs.insertAdjacentElement('afterend', link);
+  else nav.appendChild(link);
+}
+
 function init(){
+  ensureLegalNav();
   const st = localStorage.getItem('theme');
   if(st === 'dark') document.documentElement.dataset.theme = 'dark';
   $('[data-action=theme]')?.addEventListener('click', () => {
@@ -91,7 +103,7 @@ async function renderProjects(){
 async function renderSearch(){
   const root=$('#search-results'), input=$('#site-search'); if(!root||!input) return;
   const [t,n,a,d,g,p,e,needs] = await Promise.all([getJSON('/data/toses.json'),getJSON('/data/news.json'),getJSON('/data/articles.json'),getJSON('/data/documents.json'),getJSON('/data/grants.json'),getJSON('/data/projects.json'),getJSON('/data/events.json').catch(()=>[]),getJSON('/data/needs.json').catch(()=>[])]);
-  const all=[...t.filter(isPublished).map(x=>({type:'ТОС',title:'ТОС «'+x.name+'»',text:[x.location,x.boundaries,x.chairperson,x.description].join(' '),url:'/tos/'+x.slug+'/'})),...n.filter(isPublished).map(x=>({type:'Новость',title:x.title,text:[x.lead,(x.text||[]).join(' ')].join(' '),url:'/news/'+x.id+'/'})),...a.filter(isPublished).map(x=>({type:'Материал',title:x.title,text:[x.lead,(x.content||[]).join(' ')].join(' '),url:'/materials/'+x.id+'/'})),...d.filter(isPublished).map(x=>({type:'Документ',title:x.title,text:[x.type,x.status,x.description,x.use_for,x.attention,x.date].join(' '),url:x.url?'/'+x.url:'/documents/'})),...g.map(x=>({type:'Конкурс',title:x.title,text:[x.category,x.status,x.note,x.directions,x.who,x.best_for,x.difficulty,x.start_prepare,(x.prepare||[]).join(' '),(x.project_links||[]).join(' ')].join(' '),url:'/grants/'})),...p.filter(isPublished).map(x=>({type:'Проект',title:x.title,text:[x.type,x.description,x.grant_logic,x.based_on,(x.steps||[]).join(' ')].join(' '),url:'/projects/'+x.id+'/'})),...e.filter(isPublished).map(x=>({type:'Событие',title:x.title,text:[x.type,x.description,x.place,x.tos_slug].join(' '),url:'/calendar/'})),...needs.filter(isPublished).map(x=>({type:'Нужна помощь',title:x.title,text:[x.need_type,x.priority,x.description,x.contact,x.tos_slug].join(' '),url:'/needs/'}))];
+  const all=[...t.filter(isPublished).map(x=>({type:'ТОС',title:'ТОС «'+x.name+'»',text:[x.location,x.boundaries,x.chairperson,x.description].join(' '),url:'/tos/'+x.slug+'/'})),...n.filter(isPublished).map(x=>({type:'Новость',title:x.title,text:[x.lead,(x.text||[]).join(' ')].join(' '),url:'/news/'+x.id+'/'})),...a.filter(isPublished).map(x=>({type:'Материал',title:x.title,text:[x.lead,(x.content||[]).join(' ')].join(' '),url:'/materials/'+x.id+'/'})),...d.filter(isPublished).map(x=>({type:'Документ',title:x.title,text:[x.type,x.status,x.description,x.use_for,x.attention,x.date].join(' '),url:x.url?'/'+x.url:'/documents/'})),...g.map(x=>({type:'Конкурс',title:x.title,text:[x.category,x.status,x.note,x.directions,x.who,x.best_for,x.difficulty,x.start_prepare,(x.prepare||[]).join(' '),(x.project_links||[]).join(' ')].join(' '),url:'/grants/'})),...p.filter(isPublished).map(x=>({type:'Проект',title:x.title,text:[x.type,x.description,x.grant_logic,x.based_on,(x.steps||[]).join(' ')].join(' '),url:'/projects/'+x.id+'/'})),...e.filter(isPublished).map(x=>({type:'Событие',title:x.title,text:[x.type,x.description,x.place,x.tos_slug].join(' '),url:'/calendar/'})),...needs.filter(isPublished).map(x=>({type:'Нужна помощь',title:x.title,text:[x.need_type,x.priority,x.description,x.contact,x.tos_slug].join(' '),url:'/needs/'})),{type:'Правовая основа',title:'Правовая основа ТОС простыми словами',text:'правовой навигатор документы устав БГО местное самоуправление создание ТОС председателю собрание конференция протокол устав проекты гранты отчётность',url:'/legal/'}];
   function apply(){ const q=input.value.toLowerCase().trim(); const r=!q?all:all.filter(x=>[x.title,x.text,x.type].join(' ').toLowerCase().includes(q)); root.innerHTML=r.map(x=>`<article class="list-item"><span class="tag">${esc(x.type)}</span><h3>${esc(x.title)}</h3><p>${esc((x.text||'').slice(0,220))}${(x.text||'').length>220?'...':''}</p><a class="btn" href="${esc(x.url)}">Открыть</a></article>`).join('')||'<div class="empty">Ничего не найдено.</div>'; }
   input.addEventListener('input',apply); apply();
 }
