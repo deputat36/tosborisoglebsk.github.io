@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Календарь событий ТОС БГО</title>
-  <meta name="description" content="Календарь событий, дедлайнов, субботников, собраний и мероприятий ТОС Борисоглебского городского округа."/>
+  <title>Календарь ТОС БГО — события, дедлайны и рабочий план председателя</title>
+  <meta name="description" content="Календарь ТОС Борисоглебского городского округа: события, дедлайны конкурсов, подготовка проектов, отчётность, субботники, собрания и обучение."/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="https://tosborisoglebsk.ru/calendar/"/>
-  <meta property="og:title" content="Календарь событий ТОС БГО"/>
-  <meta property="og:description" content="События, дедлайны, субботники, собрания и мероприятия ТОС Борисоглебского городского округа."/>
+  <meta property="og:title" content="Календарь ТОС БГО"/>
+  <meta property="og:description" content="События, дедлайны, субботники, собрания, гранты и рабочие контрольные точки для председателей ТОС."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://tosborisoglebsk.ru/calendar/"/>
   <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>
 </head>
 <body>
@@ -26,9 +27,12 @@
         <a href="/grants/">Конкурсы</a>
         <a href="/projects/">Проекты</a>
         <a href="/calendar/">Календарь</a>
+        <a href="/needs/">Нужна помощь</a>
         <a href="/materials/">Материалы</a>
         <a href="/documents/">Документы</a>
         <a href="/create-tos/">Как создать ТОС</a>
+        <a href="/chairperson/">Председателю</a>
+        <a href="/map/">Карта</a>
         <a href="/contacts/">Контакты</a>
       </nav>
       <div class="actions">
@@ -42,26 +46,33 @@
   <main id="main">
     <section class="hero">
       <div class="container hero-card">
-        <div class="eyebrow">Календарь</div>
-        <h1>Календарь событий и дедлайнов ТОС</h1>
-        <p class="lead">Собрания, субботники, конкурсы, дедлайны, обучающие встречи и важные даты для председателей и активистов ТОС Борисоглебского городского округа.</p>
+        <div class="eyebrow">Календарь и рабочий план</div>
+        <h1>События, дедлайны и контрольные точки ТОС</h1>
+        <p class="lead">Календарь помогает председателям и активу не пропускать конкурсы, подготовку проектов, фотоотчёты, собрания, субботники, обучение и важные даты.</p>
+        <div class="hero-actions"><a class="btn primary" href="/grants/">Конкурсы и гранты</a><a class="btn" href="/projects/">Банк проектов</a><a class="btn" href="/documents/">Шаблоны</a><a class="btn" href="/contacts/">Добавить событие</a><a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">ВК ТОС БГО</a></div>
       </div>
     </section>
 
+    <section class="section"><div class="container section-head"><div><h2>Как использовать календарь</h2><p>Это не только афиша, но и подсказка, что нужно готовить заранее</p></div></div><div class="container grid"><article class="card"><div class="card-inner"><h3>Председателю</h3><p>Проверяйте дедлайны конкурсов, сроки подготовки заявок, собрания, субботники и моменты, когда нужно собрать фотоотчёты.</p></div></article><article class="card"><div class="card-inner"><h3>Активу ТОС</h3><p>Смотрите, когда нужны волонтёры, фото, помощь с текстами, сбор предложений жителей и подготовка материалов.</p></div></article><article class="card"><div class="card-inner"><h3>Партнёрам</h3><p>Отслеживайте события, где можно помочь материалами, техникой, саженцами, призами, транспортом или информационной поддержкой.</p></div></article></div></section>
+
+    <section class="section"><div class="container section-head"><div><h2>Сезонный ориентир для ТОС</h2><p>Примерная логика года: идеи собираются заранее, а отчёты — сразу после дел</p></div></div><div class="container grid"><article class="card"><div class="card-inner"><h3>Январь — февраль</h3><p>Следить за конкурсом ТОС, проверить паспорта проектов, сметы, фото и поддержку жителей.</p></div></article><article class="card"><div class="card-inner"><h3>Март — апрель</h3><p>Искать НКО-партнёров, готовить социальные проекты, планировать весенние субботники.</p></div></article><article class="card"><div class="card-inner"><h3>Май — июнь</h3><p>Проводить благоустройство, голосования, акции, собирать фото до / процесс / после.</p></div></article><article class="card"><div class="card-inner"><h3>Август — сентябрь</h3><p>Собирать идеи на следующий сезон, изучать лучшие практики и начинать подготовку заявок заранее.</p></div></article></div></section>
+
     <section class="section">
       <div class="container toolbar">
-        <input class="input" id="event-search" placeholder="Поиск: конкурс, субботник, Уютный, собрание..."/>
+        <input class="input" id="event-search" placeholder="Поиск: конкурс, субботник, отчёт, обучение, собрание..."/>
         <select class="select" id="event-type-filter"><option value="">Все типы</option></select>
         <select class="select" id="event-tos-filter"><option value="">Все ТОС</option></select>
       </div>
     </section>
 
     <section class="section">
-      <div class="container list" id="events-list"></div>
+      <div class="container list" id="events-list"><div class="empty">Загрузка событий...</div></div>
     </section>
+
+    <section class="section"><div class="container notice"><b>Добавить событие:</b> пришлите название ТОС, дату, время, место, описание, контакт ответственного и фото или ссылку через <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество ТОС БГО</a> или раздел <a href="/contacts/">Контакты</a>.</div></section>
   </main>
 
-  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">События хранятся в data/events.json и могут редактироваться через админ-панель.</div></div></footer>
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Календарь хранится в data/events.json. Материалы проходят ручную проверку перед публикацией.</div></div></footer>
   <script src="/assets/js/site.js"></script>
   <script src="/assets/js/calendar.js"></script>
 </body>
