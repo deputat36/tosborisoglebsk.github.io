@@ -18,8 +18,23 @@ function ensureImportantNav(){
   ensureNavLink('/editorial-policy/', 'О портале', '/contacts/');
 }
 
+function injectHomePortalStatus(){
+  const isHome = location.pathname === '/' || location.pathname === '/index.html';
+  if(!isHome || $('#home-portal-status')) return;
+  const main = $('#main');
+  if(!main) return;
+  const section = document.createElement('section');
+  section.className = 'section';
+  section.id = 'home-portal-status';
+  section.innerHTML = `<div class="container grid"><article class="card full"><div class="card-inner"><div class="eyebrow">Статус и доверие</div><h2>Как работает портал и кто может прислать материалы</h2><p>tosborisoglebsk.ru — информационный и рабочий портал для ТОСов Борисоглебского городского округа. Здесь можно найти карточки ТОС, новости, проекты, потребности, документы и полезные материалы для председателей и жителей.</p><div class="notice"><b style="color:var(--text)">Важно:</b> сайт не является официальным сайтом администрации. Для официальных действий нужно сверять документы, решения и правовую информацию с актуальными официальными источниками.</div><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Материалы</span><h3>Что можно прислать</h3><p>Новость, фотоотчёт, обновление карточки ТОС, проект, потребность территории или сообщение об ошибке.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Проверка</span><h3>Как оформляется публикация</h3><p>Материал уточняется, приводится к единому формату и привязывается к нужному ТОС или разделу сайта.</p></div></article></div><div class="card-actions"><a class="btn primary" href="/editorial-policy/">О портале</a><a class="btn" href="/contacts/">Прислать материал</a><a class="btn" href="/update-tos/">Обновить данные ТОС</a><a class="btn" href="/legal/">Правовая основа</a></div></div></article></div>`;
+  const stats = $('#home-stats')?.closest('section');
+  if(stats) main.insertBefore(section, stats);
+  else main.appendChild(section);
+}
+
 function init(){
   ensureImportantNav();
+  injectHomePortalStatus();
   const st = localStorage.getItem('theme');
   if(st === 'dark') document.documentElement.dataset.theme = 'dark';
   $('[data-action=theme]')?.addEventListener('click', () => {
