@@ -30,6 +30,7 @@ function ensureNavLink(href, text, afterHref) {
 }
 
 function ensureImportantNav() {
+  ensureNavLink('/done/', 'Сделано', '/projects/');
   ensureNavLink('/legal/', 'Правовая основа', '/documents/');
   ensureNavLink('/editorial-policy/', 'О портале', '/contacts/');
 }
@@ -40,7 +41,7 @@ function ensureFooterLinks() {
   const box = document.createElement('div');
   box.className = 'tiny';
   box.id = 'footer-service-links';
-  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/editorial-policy/">О портале</a> · <a href="/contacts/">Контакты</a> · <a href="/legal/">Правовая основа</a> · <a href="/documents/">Документы</a><br><a href="/update-tos/">Обновить данные ТОС</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
+  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/editorial-policy/">О портале</a> · <a href="/contacts/">Контакты</a> · <a href="/legal/">Правовая основа</a> · <a href="/documents/">Документы</a><br><a href="/done/">Сделано ТОСами</a> · <a href="/update-tos/">Обновить данные ТОС</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
   footerGrid.appendChild(box);
 }
 
@@ -167,13 +168,14 @@ async function renderSearch() {
   const input = $('#site-search');
   if (!root || !input) return;
   try {
-    const [toses, news, articles, docs, grants, projects, events, needs] = await Promise.all([
+    const [toses, news, articles, docs, grants, projects, done, events, needs] = await Promise.all([
       getJSON('/data/toses.json').catch(() => []),
       getJSON('/data/news.json').catch(() => []),
       getJSON('/data/articles.json').catch(() => []),
       getJSON('/data/documents.json').catch(() => []),
       getJSON('/data/grants.json').catch(() => []),
       getJSON('/data/projects.json').catch(() => []),
+      getJSON('/data/done.json').catch(() => []),
       getJSON('/data/events.json').catch(() => []),
       getJSON('/data/needs.json').catch(() => [])
     ]);
@@ -185,6 +187,7 @@ async function renderSearch() {
       ...docs.filter(isPublished).map((x) => ({ type: 'Документ', title: x.title, text: [x.type, x.status, x.description, x.use_for, x.attention, x.date].join(' '), url: x.url ? `/${x.url}` : '/documents/' })),
       ...grants.map((x) => ({ type: 'Поддержка', title: x.title, text: [x.category, x.status, x.note, x.directions, x.who, x.best_for, x.difficulty, x.start_prepare, (x.prepare || []).join(' ')].join(' '), url: '/grants/' })),
       ...projects.filter(isPublished).map((x) => ({ type: 'Проект', title: x.title, text: [x.type, x.description, x.grant_logic, x.based_on, (x.steps || []).join(' ')].join(' '), url: `/projects/${x.id}/` })),
+      ...done.filter(isPublished).map((x) => ({ type: 'Сделано', title: x.title, text: [x.type, x.summary, x.before, x.done, x.result, x.participants, x.needs_details].join(' '), url: '/done/' })),
       ...events.filter(isPublished).map((x) => ({ type: 'Событие', title: x.title, text: [x.type, x.description, x.place, x.tos_slug].join(' '), url: '/calendar/' })),
       ...needs.filter(isPublished).map((x) => ({ type: 'Нужна помощь', title: x.title, text: [x.need_type, x.priority, x.description, x.contact, x.tos_slug].join(' '), url: '/needs/' })),
       { type: 'Правовая основа', title: 'Правовая основа ТОС простыми словами', text: 'правовой навигатор документы устав БГО местное самоуправление создание ТОС председателю собрание конференция протокол устав проекты гранты отчётность', url: '/legal/' },
