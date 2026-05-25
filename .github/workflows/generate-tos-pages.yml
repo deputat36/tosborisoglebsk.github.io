@@ -10,9 +10,14 @@ on:
       - 'data/news.json'
       - 'data/articles.json'
       - 'data/projects.json'
+      - 'data/events.json'
+      - 'data/needs.json'
+      - 'data/documents.json'
+      - 'data/grants.json'
+      - 'scripts/validate_data.js'
+      - 'scripts/audit_tos_data.js'
       - 'scripts/generate_tos_pages.js'
       - 'scripts/generate_sitemap.js'
-      - 'scripts/audit_tos_data.js'
 
 permissions:
   contents: write
@@ -29,6 +34,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Validate JSON data
+        run: node scripts/validate_data.js
       - name: Audit TOS data
         run: node scripts/audit_tos_data.js
       - name: Generate TOS pages
