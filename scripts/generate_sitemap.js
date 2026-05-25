@@ -39,6 +39,7 @@ function main() {
     '/news/',
     '/grants/',
     '/projects/',
+    '/done/',
     '/calendar/',
     '/needs/',
     '/materials/',
