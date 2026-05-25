@@ -1,0 +1,339 @@
+{
+  "summary": {
+    "generated_at": "2026-05-25T18:30:39.151Z",
+    "total": 24,
+    "good": 13,
+    "medium": 11,
+    "low": 0,
+    "without_phone": 4,
+    "without_email": 16,
+    "without_social": 4,
+    "without_logo": 24,
+    "weak_description": 10,
+    "duplicate_slugs": []
+  },
+  "items": [
+    {
+      "slug": "ivanovka",
+      "name": "Ивановка",
+      "location": "п. Ивановка",
+      "chairperson": "Меркурьев Андрей Петрович",
+      "updated_at": "2026-05-23",
+      "score": 64,
+      "level": "medium",
+      "issues": [
+        "нет телефона",
+        "нет email",
+        "нет соцсетей",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "podstepki",
+      "name": "Подстёпки",
+      "location": "п. Подстёпки",
+      "chairperson": "Кузнецова Елена Викторовна",
+      "updated_at": "2026-05-23",
+      "score": 64,
+      "level": "medium",
+      "issues": [
+        "нет телефона",
+        "нет email",
+        "нет соцсетей",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "kalinka",
+      "name": "Калинка",
+      "location": "п. Калинино",
+      "chairperson": "Кабаргина Татьяна Викторовна",
+      "updated_at": "2026-05-23",
+      "score": 71,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет соцсетей",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "dzerzhinskogo",
+      "name": "Дзержинского",
+      "location": "г. Борисоглебск",
+      "chairperson": "Калашникова Светлана Александровна",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет соцсетей",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "znamenie",
+      "name": "Знамение",
+      "location": "г. Борисоглебск",
+      "chairperson": "Корякин Антон Михайлович",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "mayak",
+      "name": "Маяк",
+      "location": "с. Чигорак",
+      "chairperson": "Бачурина Ольга Александровна",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "mirolyubie",
+      "name": "Миролюбие",
+      "location": "п. Миролюбие",
+      "chairperson": "Власова Татьяна Владимировна",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "pervomayskiy",
+      "name": "Первомайский",
+      "location": "с. Чигорак",
+      "chairperson": "Бозоров Рустам Сангиматович",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "petrovskoe",
+      "name": "Петровское",
+      "location": "с. Петровское",
+      "chairperson": "Ремизова Любовь Викторовна",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "port-artur",
+      "name": "Порт Артур",
+      "location": "с. Чигорак",
+      "chairperson": "Водяной Сергей Александрович",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "prostornyy",
+      "name": "Просторный",
+      "location": "г. Борисоглебск",
+      "chairperson": "Докучаева Татьяна Сергеевна",
+      "updated_at": "2026-05-23",
+      "score": 79,
+      "level": "medium",
+      "issues": [
+        "нет email",
+        "нет логотипа",
+        "слабое или пустое описание"
+      ]
+    },
+    {
+      "slug": "gubari",
+      "name": "Губари",
+      "location": "с. Губари",
+      "chairperson": "Зюзина Татьяна Владимировна",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет телефона",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "ipas",
+      "name": "Ипас",
+      "location": "с. Чигорак",
+      "chairperson": "Павленко Игорь Фёдорович",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "mechta",
+      "name": "Мечта",
+      "location": "с. Чигорак",
+      "chairperson": "Яценко Елена Александровна",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "tancyrey",
+      "name": "Танцырей",
+      "location": "с. Танцырей",
+      "chairperson": "Чернышова О. Г.",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет телефона",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "tretyaki",
+      "name": "Третьяки",
+      "location": "с. Третьяки",
+      "chairperson": "Хмаров Сергей Александрович",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "uyutnyy",
+      "name": "Уютный",
+      "location": "г. Борисоглебск",
+      "chairperson": "Ковтун Алексей Вадимович",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "chkalovec",
+      "name": "Чкаловец",
+      "location": "г. Борисоглебск",
+      "chairperson": "Сотниченко Ирина Алексеевна",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "bogana",
+      "name": "Богана",
+      "location": "с. Богана",
+      "chairperson": "Лопатина Мария Владимировна",
+      "updated_at": "2026-05-24",
+      "score": 93,
+      "level": "good",
+      "issues": [
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "vostochnyy",
+      "name": "Восточный",
+      "location": "г. Борисоглебск",
+      "chairperson": "Рогова Ольга Анатольевна",
+      "updated_at": "2026-05-23",
+      "score": 93,
+      "level": "good",
+      "issues": [
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "mahrovka",
+      "name": "Махровка",
+      "location": "с. Махровка",
+      "chairperson": "Пущина Ирина Валерьевна",
+      "updated_at": "2026-05-23",
+      "score": 93,
+      "level": "good",
+      "issues": [
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "pobeda",
+      "name": "Победа",
+      "location": "г. Борисоглебск",
+      "chairperson": "Писклова Татьяна Петровна",
+      "updated_at": "2026-05-23",
+      "score": 93,
+      "level": "good",
+      "issues": [
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "severnyy-39",
+      "name": "Северный 39",
+      "location": "г. Борисоглебск",
+      "chairperson": "Никулина Юлия Александровна",
+      "updated_at": "2026-05-23",
+      "score": 93,
+      "level": "good",
+      "issues": [
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "ulyanovka",
+      "name": "Ульяновка",
+      "location": "с. Ульяновка",
+      "chairperson": "Габрусенко Олеся Степановна",
+      "updated_at": "2026-05-23",
+      "score": 93,
+      "level": "good",
+      "issues": [
+        "нет логотипа"
+      ]
+    }
+  ]
+}
