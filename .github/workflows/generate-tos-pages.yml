@@ -12,6 +12,7 @@ on:
       - 'data/projects.json'
       - 'scripts/generate_tos_pages.js'
       - 'scripts/generate_sitemap.js'
+      - 'scripts/audit_tos_data.js'
 
 permissions:
   contents: write
@@ -28,12 +29,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Audit TOS data
+        run: node scripts/audit_tos_data.js
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
       - name: Generate extended sitemap
         run: node scripts/generate_sitemap.js
-      - name: Commit generated pages
+      - name: Commit generated pages, sitemap and audit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Generate SEO TOS pages and sitemap'
-          file_pattern: 'tos/*/index.html sitemap.xml'
+          commit_message: 'Generate SEO TOS pages, sitemap and audit'
+          file_pattern: 'tos/*/index.html sitemap.xml data/tos_audit.json'
