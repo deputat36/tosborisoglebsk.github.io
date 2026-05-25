@@ -49,14 +49,22 @@ function validateToses(toses) {
   }
 }
 
-function validateCollection(items, file, idField = 'id') {
-  uniqueBy(items, idField, file);
+function validateCollection(items, file, options = {}) {
+  const {
+    idField = 'id',
+    idRequired = true,
+    strictDate = true,
+    checkSourceUrl = true
+  } = options;
+
+  if (idField) uniqueBy(items, idField, file);
+
   for (const item of items) {
     const id = item[idField] || item.title || 'без id';
-    if (!item[idField]) errors.push(`${file}: запись без ${idField}`);
+    if (idRequired && idField && !item[idField]) errors.push(`${file}: запись без ${idField}`);
     if (!item.title) warnings.push(`${file}: ${id} — нет title`);
-    if (item.date && !isDate(item.date)) errors.push(`${file}: ${id} — date должен быть YYYY-MM-DD`);
-    if (item.source_url && !isUrl(item.source_url)) errors.push(`${file}: ${id} — некорректный source_url`);
+    if (strictDate && item.date && !isDate(item.date)) errors.push(`${file}: ${id} — date должен быть YYYY-MM-DD`);
+    if (checkSourceUrl && item.source_url && !isUrl(item.source_url)) errors.push(`${file}: ${id} — некорректный source_url`);
   }
 }
 
@@ -84,7 +92,16 @@ function main() {
   validateCollection(projects, 'data/projects.json');
   validateCollection(events, 'data/events.json');
   validateCollection(needs, 'data/needs.json');
-  validateCollection(docs, 'data/documents.json');
+
+  // В документах поле date может быть справочным: "2025", "ред. 2024", "2006".
+  // Поле id для документов тоже не обязательно, потому что они отображаются по title/url.
+  validateCollection(docs, 'data/documents.json', {
+    idField: 'title',
+    idRequired: false,
+    strictDate: false,
+    checkSourceUrl: false
+  });
+
   validateCollection(grants, 'data/grants.json');
 
   const slugs = new Set(toses.map((tos) => tos.slug).filter(Boolean));
