@@ -10,6 +10,7 @@ on:
       - 'data/news.json'
       - 'data/articles.json'
       - 'data/projects.json'
+      - 'data/done.json'
       - 'data/events.json'
       - 'data/needs.json'
       - 'data/documents.json'
