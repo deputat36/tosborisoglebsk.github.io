@@ -7,7 +7,11 @@ on:
       - release-2025-12-22
     paths:
       - 'data/toses.json'
+      - 'data/news.json'
+      - 'data/articles.json'
+      - 'data/projects.json'
       - 'scripts/generate_tos_pages.js'
+      - 'scripts/generate_sitemap.js'
 
 permissions:
   contents: write
@@ -26,8 +30,10 @@ jobs:
           node-version: '20'
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
+      - name: Generate extended sitemap
+        run: node scripts/generate_sitemap.js
       - name: Commit generated pages
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Generate SEO TOS pages'
+          commit_message: 'Generate SEO TOS pages and sitemap'
           file_pattern: 'tos/*/index.html sitemap.xml'
