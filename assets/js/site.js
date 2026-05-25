@@ -18,6 +18,16 @@ function ensureImportantNav(){
   ensureNavLink('/editorial-policy/', 'О портале', '/contacts/');
 }
 
+function ensureFooterLinks(){
+  const footerGrid = $('.footer .footer-grid') || $('.footer .container');
+  if(!footerGrid || $('#footer-service-links')) return;
+  const box = document.createElement('div');
+  box.className = 'tiny';
+  box.id = 'footer-service-links';
+  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/editorial-policy/">О портале</a> · <a href="/contacts/">Контакты</a> · <a href="/legal/">Правовая основа</a> · <a href="/documents/">Документы</a><br><a href="/update-tos/">Обновить данные ТОС</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
+  footerGrid.appendChild(box);
+}
+
 function injectHomePortalStatus(){
   const isHome = location.pathname === '/' || location.pathname === '/index.html';
   if(!isHome || $('#home-portal-status')) return;
@@ -34,6 +44,7 @@ function injectHomePortalStatus(){
 
 function init(){
   ensureImportantNav();
+  ensureFooterLinks();
   injectHomePortalStatus();
   const st = localStorage.getItem('theme');
   if(st === 'dark') document.documentElement.dataset.theme = 'dark';
