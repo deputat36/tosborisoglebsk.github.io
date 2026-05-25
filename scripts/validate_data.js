@@ -22,7 +22,8 @@ function isDate(value) {
 
 function isUrl(value) {
   if (!value) return true;
-  return /^https?:\/\//.test(String(value));
+  const text = String(value);
+  return /^https?:\/\//.test(text) || text.startsWith('/');
 }
 
 function uniqueBy(items, field, label) {
@@ -81,6 +82,7 @@ function main() {
   const news = readJson('data/news.json');
   const articles = readJson('data/articles.json');
   const projects = readJson('data/projects.json');
+  const done = readJson('data/done.json');
   const events = readJson('data/events.json');
   const needs = readJson('data/needs.json');
   const docs = readJson('data/documents.json');
@@ -90,11 +92,10 @@ function main() {
   validateCollection(news, 'data/news.json');
   validateCollection(articles, 'data/articles.json');
   validateCollection(projects, 'data/projects.json');
+  validateCollection(done, 'data/done.json');
   validateCollection(events, 'data/events.json');
   validateCollection(needs, 'data/needs.json');
 
-  // В документах поле date может быть справочным: "2025", "ред. 2024", "2006".
-  // Поле id для документов тоже не обязательно, потому что они отображаются по title/url.
   validateCollection(docs, 'data/documents.json', {
     idField: 'title',
     idRequired: false,
@@ -107,6 +108,7 @@ function main() {
   const slugs = new Set(toses.map((tos) => tos.slug).filter(Boolean));
   validateTosLinks(news, 'data/news.json', slugs);
   validateTosLinks(projects, 'data/projects.json', slugs);
+  validateTosLinks(done, 'data/done.json', slugs);
   validateTosLinks(events, 'data/events.json', slugs);
   validateTosLinks(needs, 'data/needs.json', slugs);
 
