@@ -50,6 +50,37 @@ function validateToses(toses) {
   }
 }
 
+function validateFeaturedTos(featured, slugs) {
+  if (!featured || typeof featured !== 'object' || Array.isArray(featured)) {
+    errors.push('data/featured_tos.json: должен быть объектом');
+    return;
+  }
+
+  if (featured.status === 'draft') return;
+
+  ['tos_slug', 'title', 'description'].forEach((field) => {
+    if (!featured[field]) errors.push(`data/featured_tos.json: не заполнено поле ${field}`);
+  });
+
+  if (featured.tos_slug && !slugs.has(featured.tos_slug)) {
+    errors.push(`data/featured_tos.json: tos_slug=${featured.tos_slug} не найден в data/toses.json`);
+  }
+
+  if (featured.updated_at && !isDate(featured.updated_at)) {
+    errors.push('data/featured_tos.json: updated_at должен быть YYYY-MM-DD');
+  }
+
+  ['cta_primary_url', 'cta_secondary_url', 'cta_third_url', 'source_url'].forEach((field) => {
+    if (featured[field] && !isUrl(featured[field])) {
+      errors.push(`data/featured_tos.json: некорректная ссылка ${field}=${featured[field]}`);
+    }
+  });
+
+  if (!Array.isArray(featured.why) || !featured.why.filter(Boolean).length) {
+    warnings.push('data/featured_tos.json: желательно заполнить массив why');
+  }
+}
+
 function validateCollection(items, file, options = {}) {
   const {
     idField = 'id',
@@ -87,6 +118,7 @@ function main() {
   const needs = readJson('data/needs.json');
   const docs = readJson('data/documents.json');
   const grants = readJson('data/grants.json');
+  const featuredTos = readJson('data/featured_tos.json', {});
 
   validateToses(toses);
   validateCollection(news, 'data/news.json');
@@ -106,6 +138,7 @@ function main() {
   validateCollection(grants, 'data/grants.json');
 
   const slugs = new Set(toses.map((tos) => tos.slug).filter(Boolean));
+  validateFeaturedTos(featuredTos, slugs);
   validateTosLinks(news, 'data/news.json', slugs);
   validateTosLinks(projects, 'data/projects.json', slugs);
   validateTosLinks(done, 'data/done.json', slugs);
