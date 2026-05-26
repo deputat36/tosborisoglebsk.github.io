@@ -14,6 +14,8 @@ const needsFmtDate = (value) => {
 };
 
 const needsPublished = (item) => item.status !== 'draft';
+const isClosedNeed = (item) => ['closed', 'done', 'archived'].includes(String(item.status || '').toLowerCase());
+const isPartnerNeed = (item) => [item.need_type, item.description, item.how_to_help, item.help].join(' ').toLowerCase().includes('партн');
 
 async function loadNeedsData() {
   const [needs, toses] = await Promise.all([
@@ -39,26 +41,39 @@ function priorityClass(priority) {
 function statusLabel(status) {
   if (status === 'closed' || status === 'done') return 'Закрыто';
   if (status === 'archived') return 'Архив';
+  if (status === 'in_progress') return 'В работе';
   return 'Актуально';
 }
 
 function statusClass(status) {
-  if (status === 'closed' || status === 'done') return '';
+  if (status === 'closed' || status === 'done') return 'ok';
   if (status === 'archived') return '';
   return 'warn';
+}
+
+function renderNeedsSummary(items) {
+  const root = document.querySelector('#needs-summary');
+  if (!root) return;
+  const active = items.filter((item) => !isClosedNeed(item)).length;
+  const closed = items.filter(isClosedNeed).length;
+  const high = items.filter((item) => String(item.priority || '').toLowerCase().includes('выс')).length;
+  const partner = items.filter(isPartnerNeed).length;
+  const withTos = items.filter((item) => item.tos_slug).length;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>потребностей найдено</span></div><div class="summary-tile"><b>${active}</b><span>актуальные</span></div><div class="summary-tile"><b>${high}</b><span>высокий приоритет</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div><div class="summary-tile"><b>${withTos}</b><span>привязаны к ТОС</span></div></div>`;
 }
 
 function needCard(item, toses) {
   const tosName = needsTosName(item.tos_slug, toses);
   const helpText = item.how_to_help || item.help || 'Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.';
   const resultText = item.result || item.closed_result || '';
-  return `<article class="list-item">
+  return `<article class="list-item need-card">
     <div class="meta">
       <span class="tag ${statusClass(item.status)}">${needsEsc(statusLabel(item.status))}</span>
       <span class="tag">${needsEsc(item.need_type || 'Потребность')}</span>
       <span class="tag ${priorityClass(item.priority)}">${needsEsc(item.priority || 'Приоритет уточняется')}</span>
       <span class="tag">${needsEsc(needsFmtDate(item.date))}</span>
       ${tosName ? `<span class="tag">${needsEsc(tosName)}</span>` : ''}
+      ${isPartnerNeed(item) ? '<span class="tag ok">подходит партнёрам</span>' : ''}
     </div>
     <h3>${needsEsc(item.title || 'Потребность без названия')}</h3>
     <p>${needsEsc(item.description || '')}</p>
@@ -81,6 +96,7 @@ async function renderNeeds() {
   const type = document.querySelector('#needs-type-filter');
   const tos = document.querySelector('#needs-tos-filter');
   const priority = document.querySelector('#needs-priority-filter');
+  const status = document.querySelector('#needs-status-filter');
 
   try {
     const { needs, toses } = await loadNeedsData();
@@ -97,25 +113,30 @@ async function renderNeeds() {
       const selectedType = type?.value || '';
       const selectedPriority = priority?.value || '';
       const selectedTos = tos?.value || '';
+      const selectedStatus = status?.value || '';
       const filtered = needs
         .filter((item) => !selectedType || item.need_type === selectedType)
         .filter((item) => !selectedPriority || item.priority === selectedPriority)
         .filter((item) => !selectedTos || item.tos_slug === selectedTos)
+        .filter((item) => selectedStatus !== 'active' || !isClosedNeed(item))
+        .filter((item) => selectedStatus !== 'closed' || isClosedNeed(item))
+        .filter((item) => selectedStatus !== 'partner' || isPartnerNeed(item))
         .filter((item) => {
           const tosName = needsTosName(item.tos_slug, toses);
           const hay = [item.title, item.description, item.need_type, item.priority, item.contact, item.source, item.how_to_help, item.result, tosName].join(' ').toLowerCase().replace(/ё/g, 'е');
           return !query || hay.includes(query);
         })
         .sort((a, b) => {
-          const statusA = a.status === 'closed' || a.status === 'done' || a.status === 'archived' ? 1 : 0;
-          const statusB = b.status === 'closed' || b.status === 'done' || b.status === 'archived' ? 1 : 0;
+          const statusA = isClosedNeed(a) ? 1 : 0;
+          const statusB = isClosedNeed(b) ? 1 : 0;
           if (statusA !== statusB) return statusA - statusB;
           return String(b.date || '').localeCompare(String(a.date || ''));
         });
       root.innerHTML = filtered.length ? filtered.map((item) => needCard(item, toses)).join('') : '<div class="empty">Потребности не найдены.</div>';
+      renderNeedsSummary(filtered);
     }
 
-    [search, type, tos, priority].forEach((element) => element?.addEventListener('input', apply));
+    [search, type, tos, priority, status].forEach((element) => element?.addEventListener('input', apply));
     apply();
   } catch (error) {
     root.innerHTML = '<div class="empty">Раздел не загрузился. Проверьте файл data/needs.json</div>';
