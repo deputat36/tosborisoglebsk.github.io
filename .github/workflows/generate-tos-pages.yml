@@ -15,6 +15,7 @@ on:
       - 'data/needs.json'
       - 'data/documents.json'
       - 'data/grants.json'
+      - 'data/featured_tos.json'
       - 'scripts/validate_data.js'
       - 'scripts/audit_tos_data.js'
       - 'scripts/generate_tos_pages.js'
