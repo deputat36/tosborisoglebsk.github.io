@@ -78,6 +78,7 @@ function updateSitemap(news){
     '/documents/',
     '/contacts/',
     '/sections/',
+    '/faq/',
     '/news/',
     '/grants/',
     '/calendar/',
