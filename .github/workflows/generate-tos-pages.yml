@@ -18,6 +18,8 @@ on:
       - 'data/featured_tos.json'
       - 'scripts/validate_data.js'
       - 'scripts/audit_tos_data.js'
+      - 'scripts/audit_site_links.js'
+      - 'scripts/audit_seo.js'
       - 'scripts/generate_tos_pages.js'
       - 'scripts/generate_sitemap.js'
 
@@ -44,6 +46,10 @@ jobs:
         run: node scripts/generate_tos_pages.js
       - name: Generate extended sitemap
         run: node scripts/generate_sitemap.js
+      - name: Audit internal links
+        run: node scripts/audit_site_links.js
+      - name: Audit SEO basics
+        run: node scripts/audit_seo.js
       - name: Commit generated pages, sitemap and audit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
