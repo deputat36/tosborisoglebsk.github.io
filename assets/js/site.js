@@ -30,6 +30,7 @@ function ensureNavLink(href, text, afterHref) {
 }
 
 function ensureImportantNav() {
+  ensureNavLink('/residents/', 'Жителям', '/tos/');
   ensureNavLink('/done/', 'Сделано', '/projects/');
   ensureNavLink('/legal/', 'Правовая основа', '/documents/');
   ensureNavLink('/editorial-policy/', 'О портале', '/contacts/');
@@ -41,7 +42,7 @@ function ensureFooterLinks() {
   const box = document.createElement('div');
   box.className = 'tiny';
   box.id = 'footer-service-links';
-  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/editorial-policy/">О портале</a> · <a href="/contacts/">Контакты</a> · <a href="/legal/">Правовая основа</a> · <a href="/documents/">Документы</a><br><a href="/done/">Сделано ТОСами</a> · <a href="/update-tos/">Обновить данные ТОС</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
+  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/residents/">Жителям</a> · <a href="/editorial-policy/">О портале</a> · <a href="/contacts/">Контакты</a> · <a href="/legal/">Правовая основа</a> · <a href="/documents/">Документы</a><br><a href="/done/">Сделано ТОСами</a> · <a href="/update-tos/">Обновить данные ТОС</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
   footerGrid.appendChild(box);
 }
 
@@ -190,6 +191,7 @@ async function renderSearch() {
       ...done.filter(isPublished).map((x) => ({ type: 'Сделано', title: x.title, text: [x.type, x.summary, x.before, x.done, x.result, x.participants, x.needs_details].join(' '), url: '/done/' })),
       ...events.filter(isPublished).map((x) => ({ type: 'Событие', title: x.title, text: [x.type, x.description, x.place, x.tos_slug].join(' '), url: '/calendar/' })),
       ...needs.filter(isPublished).map((x) => ({ type: 'Нужна помощь', title: x.title, text: [x.need_type, x.priority, x.description, x.contact, x.tos_slug].join(' '), url: '/needs/' })),
+      { type: 'Жителям', title: 'Жителям: как пользоваться ТОС и участвовать в жизни территории', text: 'что такое ТОС как найти свой ТОС председатель сообщить о проблеме предложить идею помочь территории чем ТОС отличается от администрации управляющей компании депутата жители Борисоглебск', url: '/residents/' },
       { type: 'Правовая основа', title: 'Правовая основа ТОС простыми словами', text: 'правовой навигатор документы устав БГО местное самоуправление создание ТОС председателю собрание конференция протокол устав проекты гранты отчётность', url: '/legal/' },
       { type: 'О портале', title: 'О портале и редакционная политика', text: 'статус портала редакционная политика кто ведёт сайт проверка материалов не официальный сайт администрации сообщить об ошибке прислать новость обновить данные ТОС контакты ВК сообщество', url: '/editorial-policy/' }
     ];
