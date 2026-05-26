@@ -44,6 +44,7 @@ function main() {
     '/documents/',
     '/contacts/',
     '/sections/',
+    '/faq/',
     '/news/',
     '/grants/',
     '/calendar/',
