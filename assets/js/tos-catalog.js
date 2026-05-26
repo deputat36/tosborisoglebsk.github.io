@@ -4,8 +4,8 @@ async function renderImprovedTosCatalog(){
   const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const fmt=(v,f='Информация уточняется')=>(v===undefined||v===null||String(v).trim()==='')?f:String(v).trim();
   const initials=n=>(n||'ТОС').replace(/ТОС|«|»|"/gi,'').trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'ТОС';
-  const socialName=u=>!u?'Ссылка':u.includes('vk.com')?'ВКонтакте':u.includes('ok.ru')?'Одноклассники':u.includes('t.me')?'Telegram':'Ссылка';
-  const isPublished=x=>x.status!=='draft';
+  const socialName=u=>!u?'Ссылка':u.includes('vk.com')||u.includes('vk.ru')?'ВКонтакте':u.includes('ok.ru')?'Одноклассники':u.includes('t.me')?'Telegram':'Ссылка';
+  const isPublished=x=>x&&x.status!=='draft';
   const hasGoodDescription=t=>t.description&&t.description.trim()&&t.description.trim()!=='Описание пока уточняется.';
   const cleanText=v=>String(v||'').toLowerCase().replace(/ё/g,'е').replace(/[.,]/g,' ').replace(/\s+/g,' ').trim();
   const normalizedLocation=raw=>{
@@ -43,33 +43,65 @@ async function renderImprovedTosCatalog(){
   const scoreClass=s=>s>=80?'ok':s>=55?'warn':'bad';
   const feature=(ok,text)=>`<span class="feature ${ok?'ok':'muted'}">${ok?'✓':'—'} ${esc(text)}</span>`;
   const logo=t=>t.logo?`<img class="tos-logo-img" src="${esc(t.logo)}" alt="Логотип ТОС «${esc(t.name)}»" loading="lazy" onerror="this.outerHTML='<div class=&quot;avatar&quot;>${esc(initials(t.name))}</div>'">`:`<div class="avatar">${esc(initials(t.name))}</div>`;
-  function card(t){
+  const relatedBySlug=(items,slug)=>items.filter(x=>isPublished(x)&&x.tos_slug===slug);
+  const activityFor=(slug,data)=>{
+    const news=relatedBySlug(data.news,slug).length;
+    const projects=relatedBySlug(data.projects,slug).length;
+    const done=relatedBySlug(data.done,slug).length;
+    const needs=relatedBySlug(data.needs,slug).length;
+    return {news,projects,done,needs,total:news+projects+done+needs};
+  };
+  function activityBadges(a){
+    return `<div class="activity-row"><a class="activity-pill ${a.news?'ok':''}" href="/news/">${a.news} нов.</a><a class="activity-pill ${a.projects?'ok':''}" href="/projects/">${a.projects} пр.</a><a class="activity-pill ${a.done?'ok':''}" href="/done/">${a.done} сдел.</a><a class="activity-pill ${a.needs?'warn':''}" href="/needs/">${a.needs} нужн.</a></div>`;
+  }
+  function card(t,data){
     const s=score(t);
+    const a=activityFor(t.slug,data);
     const typeClass=t.type==='Городской'?'badge-city':'badge-village';
     const links=(t.social_links||[]).map(u=>`<a class="tag" target="_blank" rel="noopener" href="${esc(u)}">${socialName(u)}</a>`).join('');
-    const problemTags=issues(t).slice(0,5).map(x=>`<span class="tag warn">${esc(x)}</span>`).join('');
-    return `<article class="card tos-card improved-tos-card" data-score="${s}"><div class="card-inner"><div class="tos-quality ${scoreClass(s)}"><span>Заполнено ${s}%</span><i style="width:${s}%"></i></div><div class="tos-top">${logo(t)}<div><h3>ТОС «${esc(fmt(t.name,''))}»</h3><p>${esc(normalizedLocation(t.location))} · <span class="tag ${typeClass}">${esc(fmt(t.type))}</span></p><p class="tiny">В анкете: ${esc(fmt(t.location))}</p></div></div><p style="margin-top:14px">${esc(fmt(t.description,'Описание пока уточняется.'))}</p><div class="feature-row">${feature((t.phones||[]).length,'телефон')}${feature((t.emails||[]).length,'email')}${feature((t.social_links||[]).length,'соцсети')}${feature(t.logo,'логотип')}${feature(hasGoodDescription(t),'описание')}</div><div class="meta"><span class="tag">${esc(fmt(t.founded))} год</span>${t.population?`<span class="tag">${esc(t.population)} жителей</span>`:''}${links||'<span class="tag warn">Соцсети уточняются</span>'}${problemTags}</div><hr class="sep"/><p class="tiny"><b>Председатель:</b> ${esc(fmt(t.chairperson))}<br><b>Границы:</b> ${esc(fmt(t.boundaries))}</p><div class="card-actions"><a class="btn" href="/tos/${esc(t.slug)}/">Открыть карточку</a><a class="btn" href="/update-tos/">Исправить данные</a></div></div></article>`;
+    const problemTags=issues(t).slice(0,4).map(x=>`<span class="tag warn">${esc(x)}</span>`).join('');
+    return `<article class="card tos-card improved-tos-card" data-score="${s}"><div class="card-inner"><div class="tos-quality ${scoreClass(s)}"><span>Заполнено ${s}%</span><i style="width:${s}%"></i></div><div class="tos-top">${logo(t)}<div><h3>ТОС «${esc(fmt(t.name,''))}»</h3><p>${esc(normalizedLocation(t.location))} · <span class="tag ${typeClass}">${esc(fmt(t.type))}</span></p><p class="tiny">Обновлено: ${esc(fmt(t.updated_at,'дата уточняется'))}</p></div></div><p style="margin-top:14px">${esc(fmt(t.description,'Описание пока уточняется.'))}</p>${activityBadges(a)}<div class="feature-row">${feature((t.phones||[]).length,'телефон')}${feature((t.emails||[]).length,'email')}${feature((t.social_links||[]).length,'соцсети')}${feature(t.logo,'логотип')}${feature(hasGoodDescription(t),'описание')}</div><div class="meta"><span class="tag">${esc(fmt(t.founded))} год</span>${t.population?`<span class="tag">${esc(t.population)} жителей</span>`:''}${links||'<span class="tag warn">Соцсети уточняются</span>'}${problemTags}</div><hr class="sep"/><p class="tiny"><b>Председатель:</b> ${esc(fmt(t.chairperson))}<br><b>Телефон:</b> ${esc(((t.phones||[]).join(', '))||'уточняется')}<br><b>Границы:</b> ${esc(fmt(t.boundaries))}</p><div class="card-actions"><a class="btn primary" href="/tos/${esc(t.slug)}/">Открыть</a><a class="btn" href="/news/#send-news">Прислать новость</a><a class="btn" href="/update-tos/">Исправить</a><a class="btn" href="/contacts/">Помочь</a></div></div></article>`;
+  }
+  function renderSummary(items,data){
+    const box=document.querySelector('#tos-summary');
+    if(!box)return;
+    const city=items.filter(t=>t.type==='Городской').length;
+    const rural=items.filter(t=>t.type==='Сельский').length;
+    const withPhone=items.filter(t=>(t.phones||[]).length).length;
+    const active=items.filter(t=>activityFor(t.slug,data).total>0).length;
+    box.innerHTML=`<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>ТОС найдено</span></div><div class="summary-tile"><b>${city}</b><span>городских</span></div><div class="summary-tile"><b>${rural}</b><span>сельских</span></div><div class="summary-tile"><b>${withPhone}</b><span>с телефоном</span></div><div class="summary-tile"><b>${active}</b><span>со связанными материалами</span></div></div>`;
   }
   try{
-    const data=(await fetch('/data/toses.json',{cache:'no-store'}).then(r=>r.ok?r.json():[])).filter(isPublished);
+    const [toses,news,projects,done,needs]=await Promise.all([
+      fetch('/data/toses.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]),
+      fetch('/data/news.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).catch(()=>[]),
+      fetch('/data/projects.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).catch(()=>[]),
+      fetch('/data/done.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).catch(()=>[]),
+      fetch('/data/needs.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]).catch(()=>[])
+    ]);
+    const data={news,projects,done,needs};
+    const published=toses.filter(isPublished);
     const count=document.querySelector('#tos-count');
     const search=document.querySelector('#search');
     const type=document.querySelector('#type-filter');
     const loc=document.querySelector('#location-filter');
     const contact=document.querySelector('#contact-filter');
+    const activity=document.querySelector('#activity-filter');
     const fill=document.querySelector('#fill-filter');
     const sort=document.querySelector('#sort-filter');
-    if(loc)loc.innerHTML='<option value="">Все территории</option>'+[...new Set(data.map(x=>normalizedLocation(x.location)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ru')).map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');
+    if(loc)loc.innerHTML='<option value="">Все территории</option>'+[...new Set(published.map(x=>normalizedLocation(x.location)).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'ru')).map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');
     function apply(){
       const q=cleanText(search?.value||'');
       const tv=type?.value||'';
       const lv=loc?.value||'';
       const cv=contact?.value||'';
+      const av=activity?.value||'';
       const fv=fill?.value||'';
       const sv=sort?.value||'name';
-      let items=data.filter(t=>{
+      let items=published.filter(t=>{
         const normalized=normalizedLocation(t.location);
-        const hay=cleanText([t.name,t.location,normalized,t.boundaries,t.chairperson,t.description,t.contacts_raw,(t.social_links||[]).join(' ')].join(' '));
+        const a=activityFor(t.slug,data);
+        const hay=cleanText([t.name,t.location,normalized,t.boundaries,t.chairperson,t.description,t.contacts_raw,(t.phones||[]).join(' '),(t.emails||[]).join(' '),(t.social_links||[]).join(' ')].join(' '));
         const s=score(t);
         let ok=true;
         if(q)ok=ok&&hay.includes(q);
@@ -80,6 +112,12 @@ async function renderImprovedTosCatalog(){
         if(cv==='social')ok=ok&&(t.social_links||[]).length>0;
         if(cv==='no-social')ok=ok&&!(t.social_links||[]).length;
         if(cv==='email')ok=ok&&(t.emails||[]).length>0;
+        if(av==='news')ok=ok&&a.news>0;
+        if(av==='projects')ok=ok&&a.projects>0;
+        if(av==='done')ok=ok&&a.done>0;
+        if(av==='needs')ok=ok&&a.needs>0;
+        if(av==='any')ok=ok&&a.total>0;
+        if(av==='none')ok=ok&&a.total===0;
         if(fv==='no-logo')ok=ok&&!t.logo;
         if(fv==='low')ok=ok&&s<55;
         if(fv==='medium')ok=ok&&s>=55&&s<80;
@@ -89,15 +127,17 @@ async function renderImprovedTosCatalog(){
       items.sort((a,b)=>{
         if(sv==='score-desc')return score(b)-score(a);
         if(sv==='score-asc')return score(a)-score(b);
-        if(sv==='year-desc')return String(b.founded||'').localeCompare(String(a.founded||''));
+        if(sv==='updated-desc')return String(b.updated_at||'').localeCompare(String(a.updated_at||''));
+        if(sv==='activity-desc')return activityFor(b.slug,data).total-activityFor(a.slug,data).total;
         if(sv==='location')return normalizedLocation(a.location).localeCompare(normalizedLocation(b.location),'ru');
         return String(a.name||'').localeCompare(String(b.name||''),'ru');
       });
-      root.innerHTML=items.length?items.map(card).join(''):'<div class="empty">По вашему запросу ничего не найдено.</div>';
+      root.innerHTML=items.length?items.map(t=>card(t,data)).join(''):'<div class="empty">По вашему запросу ничего не найдено.</div>';
       if(count)count.textContent=items.length;
+      renderSummary(items,data);
     }
-    [search,type,loc,contact,fill,sort].forEach(el=>el?.addEventListener('input',apply));
+    [search,type,loc,contact,activity,fill,sort].forEach(el=>el?.addEventListener('input',apply));
     apply();
-  }catch(e){root.innerHTML='<div class="empty">Каталог не загрузился. Проверьте файл data/toses.json</div>';}
+  }catch(e){root.innerHTML='<div class="empty">Каталог не загрузился. Проверьте файлы data/*.json</div>';}
 }
 renderImprovedTosCatalog();
