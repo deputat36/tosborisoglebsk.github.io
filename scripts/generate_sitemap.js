@@ -37,6 +37,7 @@ function main() {
     '/',
     '/tos/',
     '/residents/',
+    '/partners/',
     '/news/',
     '/grants/',
     '/projects/',
