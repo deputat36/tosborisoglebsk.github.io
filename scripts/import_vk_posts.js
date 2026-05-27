@@ -3,13 +3,30 @@ const path = require('path');
 const https = require('https');
 
 const ROOT = process.cwd();
+
 const VK_TOKEN = process.env.VK_TOKEN;
-const VK_DOMAIN = process.env.VK_DOMAIN || 'tosbgo';
+
+const VK_DOMAIN = String(process.env.VK_DOMAIN || 'tosbgo')
+  .replace('https://vk.ru/', '')
+  .replace('https://vk.com/', '')
+  .replace('vk.ru/', '')
+  .replace('vk.com/', '')
+  .replace('@', '')
+  .replaceAll('/', '')
+  .trim();
+
 const VK_API_VERSION = '5.199';
 const COUNT = 30;
 
 if (!VK_TOKEN) {
   console.error('Ошибка: не задан секрет VK_TOKEN');
+  console.error('Проверь GitHub → Settings → Secrets and variables → Actions → VK_TOKEN');
+  process.exit(1);
+}
+
+if (!VK_DOMAIN) {
+  console.error('Ошибка: не задан VK_DOMAIN');
+  console.error('Нужно значение вида: tosbgo');
   process.exit(1);
 }
 
@@ -27,7 +44,7 @@ function requestJson(url) {
           try {
             resolve(JSON.parse(body));
           } catch (error) {
-            reject(new Error(`Не удалось разобрать JSON: ${error.message}`));
+            reject(new Error(`Не удалось разобрать JSON от VK API: ${error.message}`));
           }
         });
       })
@@ -42,35 +59,24 @@ function cleanText(text) {
     .trim();
 }
 
-function firstImage(attachments = []) {
-  for (const attachment of attachments) {
-    if (attachment.type !== 'photo' || !attachment.photo || !Array.isArray(attachment.photo.sizes)) {
-      continue;
-    }
+function getBestPhotoUrl(photo) {
+  if (!photo || !Array.isArray(photo.sizes)) return '';
 
-    const sizes = [...attachment.photo.sizes].sort((a, b) => {
-      return (b.width || 0) - (a.width || 0);
-    });
+  const sizes = [...photo.sizes].sort((a, b) => {
+    return (b.width || 0) - (a.width || 0);
+  });
 
-    if (sizes[0]?.url) return sizes[0].url;
-  }
-
-  return '';
+  return sizes[0]?.url || '';
 }
 
 function allImages(attachments = []) {
   const result = [];
 
   for (const attachment of attachments) {
-    if (attachment.type !== 'photo' || !attachment.photo || !Array.isArray(attachment.photo.sizes)) {
-      continue;
-    }
+    if (attachment.type !== 'photo') continue;
 
-    const sizes = [...attachment.photo.sizes].sort((a, b) => {
-      return (b.width || 0) - (a.width || 0);
-    });
-
-    if (sizes[0]?.url) result.push(sizes[0].url);
+    const url = getBestPhotoUrl(attachment.photo);
+    if (url) result.push(url);
   }
 
   return result;
@@ -89,7 +95,7 @@ function normalizePost(post) {
     date_short: date.slice(0, 10),
     title: text ? text.split('\n')[0].slice(0, 120) : 'Публикация ВКонтакте',
     text,
-    image: firstImage(post.attachments || []),
+    image: images[0] || '',
     images,
     likes: post.likes?.count || 0,
     reposts: post.reposts?.count || 0,
@@ -102,6 +108,9 @@ function normalizePost(post) {
 }
 
 async function main() {
+  console.log(`VK domain: ${VK_DOMAIN}`);
+  console.log(`VK API version: ${VK_API_VERSION}`);
+
   const params = new URLSearchParams({
     domain: VK_DOMAIN,
     count: String(COUNT),
@@ -116,6 +125,15 @@ async function main() {
   if (data.error) {
     console.error('Ошибка VK API:');
     console.error(JSON.stringify(data.error, null, 2));
+
+    if (data.error.error_code === 5) {
+      console.error('Вероятная причина: неверный, устаревший или недостаточный VK_TOKEN.');
+    }
+
+    if (data.error.error_code === 100) {
+      console.error('Вероятная причина: неверный VK_DOMAIN. Нужно значение вида: tosbgo');
+    }
+
     process.exit(1);
   }
 
@@ -140,6 +158,7 @@ async function main() {
 }
 
 main().catch((error) => {
+  console.error('Ошибка импорта VK posts:');
   console.error(error);
   process.exit(1);
 });
