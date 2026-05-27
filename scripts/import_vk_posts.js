@@ -3,6 +3,7 @@ const path = require('path');
 const https = require('https');
 
 const ROOT = process.cwd();
+const VK_TOKEN = process.env.VK_TOKEN || '';
 
 const VK_DOMAIN = String(process.env.VK_DOMAIN || 'tosbgo')
   .replace('https://vk.ru/', '')
@@ -15,6 +16,11 @@ const VK_DOMAIN = String(process.env.VK_DOMAIN || 'tosbgo')
 
 const VK_API_VERSION = '5.199';
 const COUNT = 30;
+
+if (!VK_TOKEN) {
+  console.error('Ошибка: не задан VK_TOKEN. Для wall.get нужен пользовательский токен ВК.');
+  process.exit(1);
+}
 
 if (!VK_DOMAIN) {
   console.error('Ошибка: не задан VK_DOMAIN');
@@ -102,12 +108,13 @@ function normalizePost(post) {
 async function main() {
   console.log(`VK domain: ${VK_DOMAIN}`);
   console.log(`VK API version: ${VK_API_VERSION}`);
-  console.log('VK import mode: public wall request');
+  console.log('VK import mode: user token wall request');
 
   const params = new URLSearchParams({
     domain: VK_DOMAIN,
     count: String(COUNT),
     filter: 'owner',
+    access_token: VK_TOKEN,
     v: VK_API_VERSION
   });
 
@@ -118,8 +125,12 @@ async function main() {
     console.error('Ошибка VK API:');
     console.error(JSON.stringify(data.error, null, 2));
 
-    if (data.error.error_code === 5 || data.error.error_code === 27) {
-      console.error('Если публичный запрос не проходит, нужен пользовательский токен VK, а не токен сообщества.');
+    if (data.error.error_code === 27) {
+      console.error('В VK_TOKEN сейчас, вероятно, токен сообщества. Нужен пользовательский токен ВК.');
+    }
+
+    if (data.error.error_code === 5) {
+      console.error('VK_TOKEN неверный, устарел или не имеет нужного доступа.');
     }
 
     if (data.error.error_code === 100) {
