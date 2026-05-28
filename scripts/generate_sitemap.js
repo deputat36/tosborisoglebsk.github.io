@@ -67,6 +67,10 @@ function main() {
     .filter((item) => item.id && isPublished(item))
     .forEach((item) => addUrl(urls, `/news/${item.id}/`, safeDate(item.date) || today));
 
+  readJson('data/done.json')
+    .filter((item) => item.id && isPublished(item))
+    .forEach((item) => addUrl(urls, `/done/${item.id}/`, safeDate(item.date) || today));
+
   readJson('data/articles.json')
     .filter((item) => item.id && isPublished(item))
     .forEach((item) => addUrl(urls, `/materials/${item.id}/`, safeDate(item.date) || today));
