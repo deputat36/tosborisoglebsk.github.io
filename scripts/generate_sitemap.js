@@ -55,6 +55,7 @@ function main() {
     '/update-tos/',
     '/map/',
     '/editorial-policy/',
+    '/audit/',
     '/search/'
   ].forEach((url) => addUrl(urls, url, today));
 
