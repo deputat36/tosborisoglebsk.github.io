@@ -20,6 +20,7 @@ on:
       - 'scripts/audit_tos_data.js'
       - 'scripts/audit_site_links.js'
       - 'scripts/audit_seo.js'
+      - 'scripts/generate_content_audit.js'
       - 'scripts/generate_tos_pages.js'
       - 'scripts/generate_sitemap.js'
 
@@ -29,6 +30,8 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,11 +40,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Validate JSON data
         run: node scripts/validate_data.js
       - name: Audit TOS data
         run: node scripts/audit_tos_data.js
+      - name: Generate content audit
+        run: node scripts/generate_content_audit.js
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
       - name: Generate extended sitemap
@@ -54,4 +59,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Generate SEO TOS pages, sitemap and audit'
-          file_pattern: 'tos/*/index.html sitemap.xml data/tos_audit.json'
+          file_pattern: 'tos/*/index.html sitemap.xml data/tos_audit.json data/tos_content_audit.json data/site_audit.json'
