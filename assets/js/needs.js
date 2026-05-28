@@ -81,8 +81,9 @@ function needCard(item, toses) {
     ${resultText ? `<p class="tiny"><b>Результат:</b> ${needsEsc(resultText)}</p>` : ''}
     <p class="tiny"><b>Контакт:</b> ${needsEsc(item.contact || 'Уточняется')}</p>
     <div class="card-actions">
+      <a class="btn primary" href="/needs/${needsEsc(item.id)}/">Подробнее</a>
       ${item.tos_slug ? `<a class="btn" href="/tos/${needsEsc(item.tos_slug)}/">Открыть ТОС</a>` : ''}
-      <a class="btn primary" href="/contacts/">Предложить помощь</a>
+      <a class="btn" href="/contacts/">Предложить помощь</a>
       <a class="btn" href="/update-tos/#template-need">Уточнить потребность</a>
       ${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${needsEsc(item.source_url)}">Источник</a>` : ''}
     </div>
