@@ -22,6 +22,7 @@ on:
       - 'scripts/audit_seo.js'
       - 'scripts/generate_content_audit.js'
       - 'scripts/generate_done_pages.js'
+      - 'scripts/generate_need_pages.js'
       - 'scripts/generate_tos_pages.js'
       - 'scripts/generate_sitemap.js'
 
@@ -52,6 +53,8 @@ jobs:
         run: node scripts/generate_tos_pages.js
       - name: Generate done pages
         run: node scripts/generate_done_pages.js
+      - name: Generate need pages
+        run: node scripts/generate_need_pages.js
       - name: Generate extended sitemap
         run: node scripts/generate_sitemap.js
       - name: Audit internal links
@@ -61,5 +64,5 @@ jobs:
       - name: Commit generated pages, sitemap and audit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Generate SEO TOS pages, done pages, sitemap and audit'
-          file_pattern: 'tos/*/index.html done/*/index.html sitemap.xml data/tos_audit.json data/tos_content_audit.json data/site_audit.json'
+          commit_message: 'Generate SEO TOS pages, done pages, need pages, sitemap and audit'
+          file_pattern: 'tos/*/index.html done/*/index.html needs/*/index.html sitemap.xml data/tos_audit.json data/tos_content_audit.json data/site_audit.json'
