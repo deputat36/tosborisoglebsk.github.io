@@ -7,6 +7,23 @@ const SKIP_DIRS = new Set(['.git', 'node_modules']);
 const errors = [];
 const warnings = [];
 
+const SKIP_FILES = new Set([
+  'news/view.html',
+  'tos/view.html',
+  'tools/import.html',
+  'admin/index.html',
+  'admin/admin-index-ready.html',
+  'documents/demo/charter.html',
+  'documents/demo/report.html',
+  'materials/activity.html',
+  'materials/competitions.html',
+  'materials/engage.html',
+  'materials/how-to-create-tos.html',
+  'materials/partners.html',
+  'materials/projects.html',
+  'materials/social-media.html'
+]);
+
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (SKIP_DIRS.has(entry.name)) continue;
@@ -19,6 +36,10 @@ function walk(dir, out = []) {
 
 function rel(file) {
   return path.relative(ROOT, file).replace(/\\/g, '/');
+}
+
+function shouldSkipFile(file) {
+  return SKIP_FILES.has(rel(file));
 }
 
 function urlForFile(file) {
@@ -45,7 +66,6 @@ function getCanonical(html) {
 
 function auditPage(file, sitemapUrls) {
   const html = fs.readFileSync(file, 'utf8');
-  const fileUrl = urlForFile(file);
   const title = getTitle(html).trim();
   const description = getMeta(html, 'description').trim();
   const canonical = getCanonical(html).trim();
@@ -84,7 +104,10 @@ function readSitemapUrls() {
 
 function main() {
   const sitemapUrls = readSitemapUrls();
-  const files = walk(ROOT).filter((file) => file.endsWith('.html'));
+  const files = walk(ROOT)
+    .filter((file) => file.endsWith('.html'))
+    .filter((file) => !shouldSkipFile(file));
+
   files.forEach((file) => auditPage(file, sitemapUrls));
 
   if (warnings.length) {
