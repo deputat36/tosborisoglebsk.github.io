@@ -3,30 +3,44 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Аудит данных ТОС БГО — что нужно обновить</title>
-  <meta name="description" content="Рабочая страница аудита данных портала ТОС БГО: заполненность карточек, контакты, новости, потребности, проекты и истории результата."/>
+  <title>Рабочий реестр карточек ТОС БГО</title>
+  <meta name="description" content="Внутренний рабочий реестр заполненности и проверки карточек ТОС Борисоглебского городского округа."/>
+  <meta name="robots" content="noindex,nofollow"/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="https://tosborisoglebsk.ru/audit/"/>
-  <meta property="og:title" content="Аудит данных ТОС БГО"/>
-  <meta property="og:description" content="Что нужно обновить в карточках ТОС и материалах портала."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://tosborisoglebsk.ru/audit/"/>
-  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <link rel="stylesheet" href="/assets/css/design-upgrades.css"/>
+  <link rel="stylesheet" href="/assets/css/audit-registry.css"/>
 </head>
 <body>
-  <a class="skip-link" href="#main">Перейти к содержимому</a>
-  <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/residents/">Жителям</a><a href="/partners/">Партнёрам</a><a href="/projects/">Проекты</a><a href="/done/">Сделано</a><a href="/needs/">Нужна помощь</a><a href="/documents/">Документы</a><a href="/contacts/">Контакты</a><a href="/sections/">Все разделы</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
-  <main id="main">
-    <section class="hero"><div class="container hero-card"><div class="eyebrow">Рабочий аудит</div><h1>Что нужно обновить на портале ТОС БГО</h1><p class="lead">Страница для редакции и ответственных за наполнение сайта. Здесь видно, у каких ТОСов не хватает контактов, новостей, потребностей, проектов и историй результата.</p><div class="hero-actions"><a class="btn primary" href="/tos/">Каталог ТОС</a><a class="btn" href="/update-tos/">Обновить данные</a><a class="btn" href="/contacts/">Прислать материал</a></div></div></section>
-    <section class="section tight"><div class="container notice"><b>Для чего это нужно:</b> аудит помогает быстро понять, какие карточки ТОС требуют уточнения и какие материалы стоит запросить у председателей.</div></section>
-    <section class="section"><div class="container stats-grid" id="audit-summary"><div class="empty">Загрузка сводки аудита...</div></div></section>
-    <section class="section"><div class="container section-head"><div><h2>ТОСы, требующие внимания</h2><p>Сначала показываются карточки с высоким приоритетом доработки</p></div><a class="btn" href="/update-tos/">Шаблоны обновления</a></div><div class="container list" id="audit-list"><div class="empty">Загрузка аудита...</div></div></section>
-  </main>
-  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочая страница аудита для обновления данных и планирования контента.</div></div></footer>
-  <script src="/assets/js/site.js"></script>
-  <script src="/assets/js/audit.js"></script>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/tos/">Каталог</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card home-hero"><div class="eyebrow">Внутренний рабочий раздел</div><h1>Реестр проверки карточек ТОС</h1><p class="lead">Фильтруйте карточки по приоритету, заполненности и статусу проверки, фиксируйте ход запроса данных и выгружайте рабочий список.</p><div class="hero-actions"><a class="btn primary" href="/update-tos/">Форма обновления</a><a class="btn" href="/tos/">Открыть каталог</a><a class="btn" href="/contacts/">Связаться с редакцией</a></div></div></section>
+
+  <section class="section tight"><div class="container notice"><b>Важно:</b> статус работы «не запрошено / запрос отправлен / данные получены / обновлено» сохраняется только в этом браузере. Официальные сведения меняются в <code>data/toses.json</code>.</div></section>
+
+  <section class="section"><div class="container stats-grid" id="audit-summary"><div class="empty">Загрузка сводки...</div></div></section>
+
+  <section class="section tight"><div class="container audit-toolbar" aria-label="Фильтры реестра">
+    <label class="audit-field audit-search"><span>Поиск</span><input class="input" id="audit-search" type="search" placeholder="Название, населённый пункт, председатель..." autocomplete="off"/></label>
+    <label class="audit-field"><span>Приоритет</span><select class="input" id="audit-priority"><option value="">Все</option><option>Высокий</option><option>Средний</option><option>Низкий</option></select></label>
+    <label class="audit-field"><span>Проверка данных</span><select class="input" id="audit-verification"><option value="">Все</option><option value="verified">Проверено</option><option value="partial">Проверено частично</option><option value="needs_review">Требует проверки</option><option value="unknown">Данные уточняются</option><option value="stale">Устарело</option></select></label>
+    <label class="audit-field"><span>Не хватает</span><select class="input" id="audit-missing"><option value="">Любое поле</option></select></label>
+    <label class="audit-field"><span>Тип ТОС</span><select class="input" id="audit-type"><option value="">Все типы</option></select></label>
+    <label class="audit-field"><span>Рабочий статус</span><select class="input" id="audit-workflow"><option value="">Все</option><option value="new">Не запрошено</option><option value="requested">Запрос отправлен</option><option value="received">Данные получены</option><option value="updated">Карточка обновлена</option></select></label>
+    <label class="audit-field"><span>Сортировка</span><select class="input" id="audit-sort"><option value="priority">По приоритету</option><option value="score-asc">Заполненность: сначала низкая</option><option value="score-desc">Заполненность: сначала высокая</option><option value="updated-desc">Сначала недавно обновлённые</option><option value="updated-asc">Сначала давно обновлённые</option><option value="name">По названию</option></select></label>
+    <div class="audit-toolbar-actions"><button class="btn" id="audit-reset" type="button">Сбросить</button><button class="btn" id="audit-export" type="button">Скачать CSV</button></div>
+  </div></section>
+
+  <section class="section tight"><div class="container audit-results-head"><div><b id="audit-result-count">0 карточек</b><span class="tiny" id="audit-generated-at"></span></div><div class="tiny">Приоритет показывает, с каких карточек лучше начинать работу.</div></div></section>
+
+  <section class="section"><div class="container list audit-list" id="audit-list"><div class="empty">Загрузка реестра...</div></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">Рабочий реестр редакции.</div></div><div class="tiny">Раздел закрыт от поисковой индексации.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+<script src="/assets/js/audit.js"></script>
 </body>
 </html>
