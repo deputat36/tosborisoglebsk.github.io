@@ -1,10 +1,16 @@
 {
   "summary": {
-    "generated_at": "2026-06-14T18:02:56.983Z",
+    "generated_at": "2026-06-14T18:03:29.390Z",
+    "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
     "medium_priority": 15,
     "low_priority": 5,
+    "verified_count": 0,
+    "partial_count": 3,
+    "needs_review_count": 21,
+    "unknown_count": 0,
+    "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
     "without_news": 17,
@@ -41,13 +47,26 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Срочно проверить",
+      "contact_ready": false,
       "recommendations": [
         "уточнить телефон председателя или ответственного",
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
         "написать живое описание территории и активности",
-        "добавить хотя бы одну новость или объявление"
+        "добавить хотя бы одну новость или объявление",
+        "собрать минимум одну историю результата",
+        "уточнить актуальную потребность территории"
       ]
     },
     {
@@ -76,13 +95,26 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Срочно проверить",
+      "contact_ready": false,
       "recommendations": [
         "уточнить телефон председателя или ответственного",
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
         "добавить хотя бы одну новость или объявление",
-        "собрать минимум одну историю результата"
+        "собрать минимум одну историю результата",
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
       ]
     },
     {
@@ -107,6 +139,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Срочно проверить",
+      "contact_ready": true,
       "recommendations": [
         "уточнить телефон председателя или ответственного",
         "подготовить логотип или временный знак ТОС",
@@ -136,6 +179,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Срочно проверить",
+      "contact_ready": true,
       "recommendations": [
         "уточнить телефон председателя или ответственного",
         "подготовить логотип или временный знак ТОС",
@@ -169,13 +223,26 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
         "написать живое описание территории и активности",
         "добавить хотя бы одну новость или объявление",
-        "собрать минимум одну историю результата"
+        "собрать минимум одну историю результата",
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
       ]
     },
     {
@@ -203,13 +270,25 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
         "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата",
-        "уточнить актуальную потребность территории"
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
       ]
     },
     {
@@ -237,13 +316,25 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
         "написать живое описание территории и активности",
         "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата",
-        "уточнить актуальную потребность территории"
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
       ]
     },
     {
@@ -271,13 +362,25 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
         "написать живое описание территории и активности",
         "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата",
-        "уточнить актуальную потребность территории"
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
       ]
     },
     {
@@ -304,6 +407,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -337,6 +451,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -370,6 +495,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -403,6 +539,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -436,6 +583,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -469,6 +627,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -502,6 +671,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -534,6 +714,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-24",
+        "age_days": 21,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
         "добавить хотя бы одну новость или объявление",
@@ -565,6 +756,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -596,6 +798,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
         "добавить хотя бы одну новость или объявление",
@@ -627,6 +840,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
         "добавить хотя бы одну новость или объявление",
@@ -657,6 +881,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -686,6 +921,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
@@ -714,6 +960,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "partial",
+        "label": "Проверено частично",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Добавить материалы",
+      "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
         "уточнить актуальную потребность территории",
@@ -741,6 +998,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "partial",
+        "label": "Проверено частично",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Добавить материалы",
+      "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
         "уточнить актуальную потребность территории",
@@ -768,6 +1036,17 @@
         "projects": 0,
         "events": 0
       },
+      "verification": {
+        "status": "partial",
+        "label": "Проверено частично",
+        "date": "2026-05-23",
+        "age_days": 22,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Добавить материалы",
+      "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
         "уточнить актуальную потребность территории",
