@@ -26,6 +26,9 @@ async function enhanceTosLogos(){
     if(stale&&status!=='unknown')status='stale';
     return {status,label:statusLabels[status]||statusLabels.unknown,date,source:t?.verification_source||'',note:t?.verification_note||'',ageDays};
   }
+  function updateUrl(t,type='card'){
+    return `/update-tos/?tos=${encodeURIComponent(t.slug)}&type=${encodeURIComponent(type)}`;
+  }
   function logoMarkup(t,large=false){
     if(t&&t.logo)return `<img class="tos-logo-img${large?' large':''}" src="${esc(t.logo)}" alt="Логотип ТОС «${esc(t.name)}»" loading="lazy" data-fallback="${esc(initials(t.name))}">`;
     return `<div class="avatar${large?' large':''}">${esc(initials(t?.name))}</div>`;
@@ -34,7 +37,7 @@ async function enhanceTosLogos(){
     if(document.querySelector('#tos-verification-styles'))return;
     const style=document.createElement('style');
     style.id='tos-verification-styles';
-    style.textContent=`.tos-verification-strip{padding:10px 0 0}.tos-verification-box{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--card)}.tos-verification-main{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.tos-verification-badge{display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}.tos-verification-badge[data-status=verified]{background:rgba(48,135,86,.14);color:#256b45}.tos-verification-badge[data-status=partial]{background:rgba(64,120,160,.14);color:#315f80}.tos-verification-badge[data-status=needs_review],.tos-verification-badge[data-status=stale]{background:rgba(196,92,71,.14);color:#984737}.tos-verification-badge[data-status=unknown]{background:rgba(130,130,130,.13);color:var(--muted)}.tos-card-verification{margin-top:8px}.tos-card-verification .tos-verification-badge{padding:5px 8px;font-size:11px}@media(max-width:620px){.tos-verification-box{display:grid}.tos-verification-box .btn{justify-content:center}}`;
+    style.textContent=`.tos-verification-strip{padding:10px 0 0}.tos-verification-box{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--card)}.tos-verification-main{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.tos-verification-actions{display:flex;gap:8px;flex-wrap:wrap}.tos-verification-badge{display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800}.tos-verification-badge[data-status=verified]{background:rgba(48,135,86,.14);color:#256b45}.tos-verification-badge[data-status=partial]{background:rgba(64,120,160,.14);color:#315f80}.tos-verification-badge[data-status=needs_review],.tos-verification-badge[data-status=stale]{background:rgba(196,92,71,.14);color:#984737}.tos-verification-badge[data-status=unknown]{background:rgba(130,130,130,.13);color:var(--muted)}.tos-card-verification{margin-top:8px}.tos-card-verification .tos-verification-badge{padding:5px 8px;font-size:11px}@media(max-width:620px){.tos-verification-box{display:grid}.tos-verification-actions .btn{flex:1;justify-content:center}}`;
     document.head.appendChild(style);
   }
   function catalogStatus(card,t){
@@ -45,6 +48,20 @@ async function enhanceTosLogos(){
     node.innerHTML=`<span class="tos-verification-badge" data-status="${esc(info.status)}">${esc(info.label)}</span>`;
     const target=card.querySelector('.meta')||card.querySelector('.tos-top')||card.querySelector('.card-inner')||card;
     target.insertAdjacentElement('afterend',node);
+  }
+  function enhanceDetailLinks(t){
+    if(!t)return;
+    document.querySelectorAll('a[href="/update-tos/"],a[href="/contacts/"]').forEach(link=>{
+      const text=(link.textContent||'').toLowerCase();
+      if(text.includes('ошиб')||text.includes('уточн')||text.includes('данн'))link.href=updateUrl(t,'card');
+      else if(text.includes('новост'))link.href=updateUrl(t,'news');
+      else if(text.includes('проект'))link.href=updateUrl(t,'project');
+      else if(text.includes('потреб'))link.href=updateUrl(t,'need');
+      else if(text.includes('фото'))link.href=updateUrl(t,'photo');
+    });
+    document.querySelectorAll('a[href="/update-tos/#template-project"]').forEach(link=>{link.href=updateUrl(t,'project')});
+    document.querySelectorAll('a[href="/update-tos/#template-need"]').forEach(link=>{link.href=updateUrl(t,'need')});
+    document.querySelectorAll('a[href="/update-tos/#template-photo"]').forEach(link=>{link.href=updateUrl(t,'photo')});
   }
   function detailStatus(t,hero){
     if(!t||document.querySelector('.tos-verification-strip'))return;
@@ -57,7 +74,7 @@ async function enhanceTosLogos(){
     if(!details.length)details.push('Дата и источник проверки пока не указаны.');
     const section=document.createElement('section');
     section.className='tos-verification-strip';
-    section.innerHTML=`<div class="container"><div class="tos-verification-box"><div class="tos-verification-main"><span class="tos-verification-badge" data-status="${esc(info.status)}">${esc(info.label)}</span><span class="tiny">${esc(details.join(' · '))}</span></div><a class="btn" href="/update-tos/">Сообщить уточнение</a></div></div>`;
+    section.innerHTML=`<div class="container"><div class="tos-verification-box"><div class="tos-verification-main"><span class="tos-verification-badge" data-status="${esc(info.status)}">${esc(info.label)}</span><span class="tiny">${esc(details.join(' · '))}</span></div><div class="tos-verification-actions"><a class="btn" href="${esc(updateUrl(t,'card'))}">Уточнить данные</a><a class="btn" href="${esc(updateUrl(t,'news'))}">Прислать новость</a></div></div></div>`;
     const heroSection=hero.closest('.hero')||hero.parentElement;
     heroSection.insertAdjacentElement('afterend',section);
   }
@@ -77,7 +94,7 @@ async function enhanceTosLogos(){
       const t=bySlug.get(path[1]);
       const hero=document.querySelector('.hero-card h1');
       if(t&&hero&&!document.querySelector('.tos-detail-logo'))hero.insertAdjacentHTML('beforebegin',`<div class="tos-detail-logo">${logoMarkup(t,true)}</div>`);
-      if(t&&hero)detailStatus(t,hero);
+      if(t&&hero){enhanceDetailLinks(t);detailStatus(t,hero)}
     }
   }
   document.addEventListener('error',event=>{
