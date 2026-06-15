@@ -26,6 +26,10 @@ async function loadAudit() {
   return response.json();
 }
 
+function updateUrl(item, type = 'card') {
+  return `/update-tos/?tos=${encodeURIComponent(item.slug)}&type=${encodeURIComponent(type)}`;
+}
+
 function loadWorkflow() {
   try { return JSON.parse(localStorage.getItem(WORKFLOW_KEY) || '{}'); }
   catch { return {}; }
@@ -97,7 +101,7 @@ function verificationBadge(item) {
 function requestText(item) {
   const missing = (item.missing || []).join(', ').toLowerCase();
   const requested = (item.recommendations || []).map((value) => `— ${value}`).join('\n');
-  return `Здравствуйте! Проверяем карточку ТОС «${item.name || item.slug}» на портале tosborisoglebsk.ru.\n\nПросим подтвердить или уточнить данные${missing ? `: ${missing}` : ''}.\n${requested ? `\nЧто желательно прислать:\n${requested}\n` : ''}\nКарточка: https://tosborisoglebsk.ru/tos/${item.slug}/\nФорма обновления: https://tosborisoglebsk.ru/update-tos/\n\nПожалуйста, не направляйте персональные данные, которые не должны публиковаться открыто.`;
+  return `Здравствуйте! Проверяем карточку ТОС «${item.name || item.slug}» на портале tosborisoglebsk.ru.\n\nПросим подтвердить или уточнить данные${missing ? `: ${missing}` : ''}.\n${requested ? `\nЧто желательно прислать:\n${requested}\n` : ''}\nКарточка: https://tosborisoglebsk.ru/tos/${item.slug}/\nФорма обновления: https://tosborisoglebsk.ru${updateUrl(item, 'card')}\n\nДля новости: https://tosborisoglebsk.ru${updateUrl(item, 'news')}\nДля проекта: https://tosborisoglebsk.ru${updateUrl(item, 'project')}\nДля потребности: https://tosborisoglebsk.ru${updateUrl(item, 'need')}\n\nПожалуйста, не направляйте персональные данные, которые не должны публиковаться открыто.`;
 }
 
 function workflowSelect(item) {
@@ -125,7 +129,7 @@ function renderItem(item) {
       <section class="audit-card-section"><h4>Связанные материалы</h4><div class="audit-related"><span><b>${auditEsc(related.news || 0)}</b>Новости</span><span><b>${auditEsc(related.done || 0)}</b>Сделано</span><span><b>${auditEsc(related.needs || 0)}</b>Потребности</span><span><b>${auditEsc(related.projects || 0)}</b>Проекты</span><span><b>${auditEsc(related.events || 0)}</b>События</span></div></section>
     </div>
     <div class="audit-workflow">${workflowSelect(item)}<div class="audit-workflow-note">Рабочий статус сохраняется только на текущем устройстве.</div></div>
-    <div class="card-actions"><a class="btn primary" href="/tos/${auditEsc(item.slug)}/">Карточка ТОС</a><a class="btn" href="/update-tos/">Обновить данные</a><button class="btn audit-copy-request" type="button" data-slug="${auditEsc(item.slug)}">Скопировать запрос</button><a class="btn" href="/contacts/">Редакция</a></div>
+    <div class="card-actions"><a class="btn primary" href="/tos/${auditEsc(item.slug)}/">Карточка ТОС</a><a class="btn" href="${auditEsc(updateUrl(item, 'card'))}">Уточнить данные</a><a class="btn" href="${auditEsc(updateUrl(item, 'news'))}">Новость</a><a class="btn" href="${auditEsc(updateUrl(item, 'project'))}">Проект</a><button class="btn audit-copy-request" type="button" data-slug="${auditEsc(item.slug)}">Скопировать запрос</button></div>
     <div class="audit-copy-status" data-copy-status="${auditEsc(item.slug)}"></div>
   </article>`;
 }
