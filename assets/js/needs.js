@@ -16,6 +16,9 @@ const needsFmtDate = (value) => {
 const needsPublished = (item) => item.status !== 'draft';
 const isClosedNeed = (item) => ['closed', 'done', 'archived'].includes(String(item.status || '').toLowerCase());
 const isPartnerNeed = (item) => [item.need_type, item.description, item.how_to_help, item.help].join(' ').toLowerCase().includes('партн');
+const needUpdateUrl = (item) => item.tos_slug
+  ? `/update-tos/?tos=${encodeURIComponent(item.tos_slug)}&type=need`
+  : '/update-tos/?type=need';
 
 async function loadNeedsData() {
   const [needs, toses] = await Promise.all([
@@ -84,7 +87,7 @@ function needCard(item, toses) {
       <a class="btn primary" href="/needs/${needsEsc(item.id)}/">Подробнее</a>
       ${item.tos_slug ? `<a class="btn" href="/tos/${needsEsc(item.tos_slug)}/">Открыть ТОС</a>` : ''}
       <a class="btn" href="/contacts/">Предложить помощь</a>
-      <a class="btn" href="/update-tos/#template-need">Уточнить потребность</a>
+      <a class="btn" href="${needsEsc(needUpdateUrl(item))}">Уточнить потребность</a>
       ${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${needsEsc(item.source_url)}">Источник</a>` : ''}
     </div>
   </article>`;
