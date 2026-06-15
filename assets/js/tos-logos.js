@@ -57,7 +57,7 @@ async function enhanceTosLogos(){
     if(!details.length)details.push('Дата и источник проверки пока не указаны.');
     const section=document.createElement('section');
     section.className='tos-verification-strip';
-    section.innerHTML=`<div class="container"><div class="tos-verification-box"><div class="tos-verification-main"><span class="tos-verification-badge" data-status="${esc(info.status)}">${esc(info.label)}</span><span class="tiny">${esc(details.join(' · '))}</span></div><a class="btn" href="/update-tos/">Сообщить уточнение</a></div></div>`;
+    section.innerHTML=`<div class="container"><div class="tos-verification-box"><div class="tos-verification-main"><span class="tos-verification-badge" data-status="${esc(info.status)}">${esc(info.label)}</span><span class="tiny">${esc(details.join(' · '))}</span></div><a class="btn" href="/update-tos/?tos=${encodeURIComponent(t.slug)}&amp;type=card">Сообщить уточнение</a></div></div>`;
     const heroSection=hero.closest('.hero')||hero.parentElement;
     heroSection.insertAdjacentElement('afterend',section);
   }
