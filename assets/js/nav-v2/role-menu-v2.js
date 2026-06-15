@@ -1,7 +1,29 @@
-import { clearCachedProfiles, getCachedProfile, getCachedUser, getMyProfile, signOut } from './supabase-v2.js';
+import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from '../../../config/supabase.js';
 
-const PROFILE_CACHE_TTL_MS = 5 * 60 * 1000;
-const USER_WAIT_TIMEOUT_MS = 15000;
+const SESSION_KEY = 'nav_session_v2';
+
+function session() {
+  try { return JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch (_) { return null; }
+}
+
+async function getProfile() {
+  const s = session();
+  if (!s?.access_token) return null;
+
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/nav_v2_get_my_profile`, {
+    method: 'POST',
+    headers: {
+      apikey: SUPABASE_PUBLISHABLE_KEY,
+      Authorization: `Bearer ${s.access_token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({})
+  });
+
+  if (!response.ok) return null;
+  const data = await response.json();
+  return data?.profile || null;
+}
 
 function makeLink(active, id, href, title) {
   return `<a class="${active === id ? 'active' : ''}" href="${href}">${title}</a>`;
@@ -9,24 +31,17 @@ function makeLink(active, id, href, title) {
 
 function getActivePage() {
   const path = location.pathname;
+
   if (path.includes('dashboard-v2')) return 'dashboard';
   if (path.includes('spn-v2')) return 'spn';
   if (path.includes('deals-v2') || path.includes('deal-card-v2')) return 'deals';
-  if (path.includes('admin-v2') || path.includes('admin-invite-v2')) return 'admin';
+  if (path.includes('admin-v2')) return 'admin';
+  if (path.includes('admin-invite-v2')) return 'admin';
   if (path.includes('nav-access-audit-v2')) return 'audit';
   if (path.includes('nav-access-v2')) return 'access';
   if (path.includes('nav-system-check-v2')) return 'check';
-  return '';
-}
 
-function safeMenu() {
-  const active = getActivePage();
-  return [
-    makeLink(active, 'dashboard', './dashboard-v2.html', 'Рабочий стол'),
-    makeLink(active, 'deals', './deals-v2.html', 'Сделки'),
-    makeLink(active, 'check', './nav-system-check-v2.html', 'Проверка'),
-    '<button id="navLogout" type="button">Выйти</button>'
-  ].join('');
+  return '';
 }
 
 function buildMenu(role) {
@@ -63,7 +78,9 @@ function buildMenu(role) {
     links.push(makeLink(active, 'audit', './nav-access-audit-v2.html', 'Аудит'));
     links.push(makeLink(active, 'check', './nav-system-check-v2.html', 'Проверка'));
   } else {
-    return safeMenu();
+    links.push(makeLink(active, 'dashboard', './dashboard-v2.html', 'Рабочий стол'));
+    links.push(makeLink(active, 'deals', './deals-v2.html', 'Сделки'));
+    links.push(makeLink(active, 'check', './nav-system-check-v2.html', 'Проверка'));
   }
 
   links.push('<button id="navLogout" type="button">Выйти</button>');
@@ -73,9 +90,9 @@ function buildMenu(role) {
 function bindLogout() {
   const logout = document.getElementById('navLogout');
   if (!logout) return;
-  logout.onclick = async () => {
-    clearCachedProfiles();
-    await signOut();
+
+  logout.onclick = () => {
+    localStorage.removeItem(SESSION_KEY);
     location.href = './nav-v2.html';
   };
 }
@@ -83,82 +100,47 @@ function bindLogout() {
 function setBadge(profile) {
   const badge = document.getElementById('navUserBadge');
   if (!badge || !profile) return;
-  const roleNames = { owner: 'владелец', admin: 'админ', manager: 'менеджер', spn: 'СПН', lawyer: 'юрист', broker: 'брокер', viewer: 'наблюдатель' };
+
+  const roleNames = {
+    owner: 'владелец',
+    admin: 'админ',
+    manager: 'менеджер',
+    spn: 'СПН',
+    lawyer: 'юрист',
+    broker: 'брокер',
+    viewer: 'наблюдатель'
+  };
+
   badge.textContent = `${profile.email || ''} · ${roleNames[profile.role] || profile.role || ''}`;
 }
 
-function profileIsFresh(profile) {
-  return Boolean(
-    profile?.role &&
-    Number(profile.cached_at) > 0 &&
-    Date.now() - Number(profile.cached_at) < PROFILE_CACHE_TTL_MS
-  );
-}
-
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-async function waitForMenu(timeout = 2000) {
-  const started = Date.now();
-  while (Date.now() - started < timeout) {
-    const menu = document.querySelector('.nav-v2-menu');
-    if (menu) return menu;
-    await sleep(50);
-  }
-  return document.querySelector('.nav-v2-menu');
-}
-
-async function waitForUser(timeout = USER_WAIT_TIMEOUT_MS) {
-  const started = Date.now();
-  while (Date.now() - started < timeout) {
-    const user = getCachedUser();
-    if (user?.id) return user;
-    await sleep(100);
-  }
-  return null;
-}
-
-function renderProfileMenu(menu, profile) {
-  if (!profile?.role) return false;
-  menu.innerHTML = buildMenu(profile.role);
-  setBadge(profile);
-  bindLogout();
-  document.body.dataset.navRole = profile.role;
-  return true;
-}
-
-async function refreshRoleMenu(menu) {
-  if (!getCachedUser()?.id) return;
-  try {
-    const profile = await getMyProfile({ refresh: true, timeout: 5000 });
-    renderProfileMenu(menu, profile);
-  } catch (_) {
-    // Без циклических повторов: основной экран продолжает работать с кешем.
-  }
+async function waitForMenu(timeout = 6000) {
+  return new Promise((resolve) => {
+    const started = Date.now();
+    const timer = setInterval(() => {
+      const menu = document.querySelector('.nav-v2-menu');
+      if (menu || Date.now() - started > timeout) {
+        clearInterval(timer);
+        resolve(menu);
+      }
+    }, 100);
+  });
 }
 
 async function init() {
   const menu = await waitForMenu();
   if (!menu) return;
 
-  let cachedProfile = getCachedProfile();
-  if (!renderProfileMenu(menu, cachedProfile)) {
-    menu.innerHTML = safeMenu();
+  const profile = await getProfile();
+  if (!profile?.role) {
     bindLogout();
+    return;
   }
 
-  let user = getCachedUser();
-  if (!user?.id) user = await waitForUser();
-  if (!user?.id) return;
-
-  // Основной модуль страницы после входа обычно сам получает профиль.
-  // Даём ему короткое время заполнить общий кеш и не создаём второй запрос.
-  await sleep(100);
-  cachedProfile = getCachedProfile();
-
-  if (renderProfileMenu(menu, cachedProfile) && profileIsFresh(cachedProfile)) return;
-  await refreshRoleMenu(menu);
+  menu.innerHTML = buildMenu(profile.role);
+  setBadge(profile);
+  bindLogout();
+  document.body.dataset.navRole = profile.role;
 }
 
 init();
