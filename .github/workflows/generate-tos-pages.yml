@@ -32,6 +32,8 @@ jobs:
           node-version: '24'
       - name: Improve weak TOS descriptions
         run: node scripts/upgrade_tos_descriptions.js
+      - name: Generate starter TOS needs and projects
+        run: node scripts/generate_tos_starter_content.js
       - name: Validate JSON data
         run: node scripts/validate_data.js
       - name: Audit TOS data
@@ -54,4 +56,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Generate SEO pages, sitemap and audit'
-          file_pattern: 'data/toses.json tos/*/index.html done/*/index.html needs/*/index.html sitemap.xml data/tos_audit.json data/tos_content_audit.json data/site_audit.json'
+          file_pattern: 'data/toses.json data/needs.json data/projects.json tos/*/index.html done/*/index.html needs/*/index.html sitemap.xml data/tos_audit.json data/tos_content_audit.json data/site_audit.json'
