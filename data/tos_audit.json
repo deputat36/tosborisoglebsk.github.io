@@ -1,15 +1,15 @@
 {
   "summary": {
-    "generated_at": "2026-06-15T15:29:34.632Z",
+    "generated_at": "2026-06-16T11:00:11.981Z",
     "total": 24,
-    "good": 13,
-    "medium": 11,
+    "good": 20,
+    "medium": 4,
     "low": 0,
     "without_phone": 4,
     "without_email": 16,
     "without_social": 4,
     "without_logo": 24,
-    "weak_description": 10,
+    "weak_description": 0,
     "duplicate_slugs": []
   },
   "items": [
@@ -19,14 +19,13 @@
       "location": "п. Ивановка",
       "chairperson": "Меркурьев Андрей Петрович",
       "updated_at": "2026-05-23",
-      "score": 64,
+      "score": 71,
       "level": "medium",
       "issues": [
         "нет телефона",
         "нет email",
         "нет соцсетей",
-        "нет логотипа",
-        "слабое или пустое описание"
+        "нет логотипа"
       ]
     },
     {
@@ -35,29 +34,13 @@
       "location": "п. Подстёпки",
       "chairperson": "Кузнецова Елена Викторовна",
       "updated_at": "2026-05-23",
-      "score": 64,
+      "score": 71,
       "level": "medium",
       "issues": [
         "нет телефона",
         "нет email",
         "нет соцсетей",
-        "нет логотипа",
-        "слабое или пустое описание"
-      ]
-    },
-    {
-      "slug": "kalinka",
-      "name": "Калинка",
-      "location": "п. Калинино",
-      "chairperson": "Кабаргина Татьяна Викторовна",
-      "updated_at": "2026-05-23",
-      "score": 71,
-      "level": "medium",
-      "issues": [
-        "нет email",
-        "нет соцсетей",
-        "нет логотипа",
-        "слабое или пустое описание"
+        "нет логотипа"
       ]
     },
     {
@@ -75,101 +58,17 @@
       ]
     },
     {
-      "slug": "znamenie",
-      "name": "Знамение",
-      "location": "г. Борисоглебск",
-      "chairperson": "Корякин Антон Михайлович",
+      "slug": "kalinka",
+      "name": "Калинка",
+      "location": "п. Калинино",
+      "chairperson": "Кабаргина Татьяна Викторовна",
       "updated_at": "2026-05-23",
       "score": 79,
       "level": "medium",
       "issues": [
         "нет email",
-        "нет логотипа",
-        "слабое или пустое описание"
-      ]
-    },
-    {
-      "slug": "mayak",
-      "name": "Маяк",
-      "location": "с. Чигорак",
-      "chairperson": "Бачурина Ольга Александровна",
-      "updated_at": "2026-05-23",
-      "score": 79,
-      "level": "medium",
-      "issues": [
-        "нет email",
-        "нет логотипа",
-        "слабое или пустое описание"
-      ]
-    },
-    {
-      "slug": "mirolyubie",
-      "name": "Миролюбие",
-      "location": "п. Миролюбие",
-      "chairperson": "Власова Татьяна Владимировна",
-      "updated_at": "2026-05-23",
-      "score": 79,
-      "level": "medium",
-      "issues": [
-        "нет email",
-        "нет логотипа",
-        "слабое или пустое описание"
-      ]
-    },
-    {
-      "slug": "pervomayskiy",
-      "name": "Первомайский",
-      "location": "с. Чигорак",
-      "chairperson": "Бозоров Рустам Сангиматович",
-      "updated_at": "2026-05-23",
-      "score": 79,
-      "level": "medium",
-      "issues": [
-        "нет email",
-        "нет логотипа",
-        "слабое или пустое описание"
-      ]
-    },
-    {
-      "slug": "petrovskoe",
-      "name": "Петровское",
-      "location": "с. Петровское",
-      "chairperson": "Ремизова Любовь Викторовна",
-      "updated_at": "2026-05-23",
-      "score": 79,
-      "level": "medium",
-      "issues": [
-        "нет email",
-        "нет логотипа",
-        "слабое или пустое описание"
-      ]
-    },
-    {
-      "slug": "port-artur",
-      "name": "Порт Артур",
-      "location": "с. Чигорак",
-      "chairperson": "Водяной Сергей Александрович",
-      "updated_at": "2026-05-23",
-      "score": 79,
-      "level": "medium",
-      "issues": [
-        "нет email",
-        "нет логотипа",
-        "слабое или пустое описание"
-      ]
-    },
-    {
-      "slug": "prostornyy",
-      "name": "Просторный",
-      "location": "г. Борисоглебск",
-      "chairperson": "Докучаева Татьяна Сергеевна",
-      "updated_at": "2026-05-23",
-      "score": 79,
-      "level": "medium",
-      "issues": [
-        "нет email",
-        "нет логотипа",
-        "слабое или пустое описание"
+        "нет соцсетей",
+        "нет логотипа"
       ]
     },
     {
@@ -182,6 +81,19 @@
       "level": "good",
       "issues": [
         "нет телефона",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "znamenie",
+      "name": "Знамение",
+      "location": "г. Борисоглебск",
+      "chairperson": "Корякин Антон Михайлович",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
         "нет логотипа"
       ]
     },
@@ -199,10 +111,88 @@
       ]
     },
     {
+      "slug": "mayak",
+      "name": "Маяк",
+      "location": "с. Чигорак",
+      "chairperson": "Бачурина Ольга Александровна",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
       "slug": "mechta",
       "name": "Мечта",
       "location": "с. Чигорак",
       "chairperson": "Яценко Елена Александровна",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "mirolyubie",
+      "name": "Миролюбие",
+      "location": "п. Миролюбие",
+      "chairperson": "Власова Татьяна Владимировна",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "pervomayskiy",
+      "name": "Первомайский",
+      "location": "с. Чигорак",
+      "chairperson": "Бозоров Рустам Сангиматович",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "petrovskoe",
+      "name": "Петровское",
+      "location": "с. Петровское",
+      "chairperson": "Ремизова Любовь Викторовна",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "port-artur",
+      "name": "Порт Артур",
+      "location": "с. Чигорак",
+      "chairperson": "Водяной Сергей Александрович",
+      "updated_at": "2026-05-23",
+      "score": 86,
+      "level": "good",
+      "issues": [
+        "нет email",
+        "нет логотипа"
+      ]
+    },
+    {
+      "slug": "prostornyy",
+      "name": "Просторный",
+      "location": "г. Борисоглебск",
+      "chairperson": "Докучаева Татьяна Сергеевна",
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",

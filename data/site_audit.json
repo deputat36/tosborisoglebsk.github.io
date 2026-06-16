@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-15T15:29:34.687Z",
+  "generated_at": "2026-06-16T11:00:12.033Z",
   "summary": {
-    "generated_at": "2026-06-15T15:29:34.687Z",
+    "generated_at": "2026-06-16T11:00:12.033Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -18,7 +18,7 @@
     "without_done": 16,
     "without_needs": 24,
     "without_projects": 24,
-    "average_score": 66
+    "average_score": 67
   },
   "next_actions": [
     "повторно проверить карточки с устаревшей датой",
