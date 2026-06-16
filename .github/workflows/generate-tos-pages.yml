@@ -63,6 +63,8 @@ jobs:
         run: node scripts/generate_need_pages.js
       - name: Generate project pages
         run: node scripts/generate_project_pages.js
+      - name: Generate public index
+        run: node scripts/generate_page_index.js
       - name: Generate extended sitemap
         run: node scripts/generate_sitemap.js
       - name: Audit internal links
@@ -73,4 +75,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Generate SEO pages, sitemap and audit'
-          file_pattern: '.'
+          file_pattern: 'data/*.json *.xml tos/*/index.html news/*/index.html done/*/index.html needs/*/index.html projects/*/index.html places/*/index.html places/*/*/index.html'
