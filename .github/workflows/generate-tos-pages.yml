@@ -51,6 +51,8 @@ jobs:
         run: node scripts/audit_tos_data.js
       - name: Generate content audit
         run: node scripts/generate_content_audit.js
+      - name: Refine site audit next actions
+        run: node scripts/refine_site_audit_actions.js
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
       - name: Generate news pages
