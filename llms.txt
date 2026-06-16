@@ -1,0 +1,30 @@
+# ТОС Борисоглебского городского округа
+
+Сайт: https://tosborisoglebsk.ru/
+
+Портал содержит открытый каталог территориальных общественных самоуправлений Борисоглебского городского округа, новости, проекты, потребности, правовые материалы, инструкции для председателей и справочные страницы.
+
+## Основные разделы
+
+- Каталог ТОС: https://tosborisoglebsk.ru/tos/
+- Новости: https://tosborisoglebsk.ru/news/
+- Проекты: https://tosborisoglebsk.ru/projects/
+- Сделано: https://tosborisoglebsk.ru/done/
+- Потребности: https://tosborisoglebsk.ru/needs/
+- Материалы: https://tosborisoglebsk.ru/materials/
+- Документы: https://tosborisoglebsk.ru/documents/
+- Правовая основа: https://tosborisoglebsk.ru/legal/
+- Как создать ТОС: https://tosborisoglebsk.ru/create-tos/
+- Председателю: https://tosborisoglebsk.ru/chairperson/
+- Источники данных: https://tosborisoglebsk.ru/sources/
+- Населённые пункты и территории: https://tosborisoglebsk.ru/places/
+- Актуализация данных: https://tosborisoglebsk.ru/data-update/
+- Контакты: https://tosborisoglebsk.ru/contacts/
+
+## Использование данных
+
+Сведения о ТОСах могут требовать подтверждения у председателей и актива. Телефоны, email, личные ссылки, фотографии людей и персональные данные нужно использовать осторожно и только как открыто опубликованные сведения.
+
+## Контакт
+
+Рабочее сообщество ВКонтакте: https://vk.ru/tosbgo
