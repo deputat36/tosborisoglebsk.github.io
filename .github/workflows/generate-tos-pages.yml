@@ -46,6 +46,8 @@ jobs:
         run: node scripts/generate_done_pages.js
       - name: Generate need pages
         run: node scripts/generate_need_pages.js
+      - name: Generate project pages
+        run: node scripts/generate_project_pages.js
       - name: Generate extended sitemap
         run: node scripts/generate_sitemap.js
       - name: Audit internal links
@@ -56,4 +58,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Generate SEO pages, sitemap and audit'
-          file_pattern: 'data/toses.json data/needs.json data/projects.json tos/*/index.html done/*/index.html needs/*/index.html sitemap.xml data/tos_audit.json data/tos_content_audit.json data/site_audit.json'
+          file_pattern: 'data/toses.json data/needs.json data/projects.json tos/*/index.html done/*/index.html needs/*/index.html projects/*/index.html sitemap.xml data/tos_audit.json data/tos_content_audit.json data/site_audit.json'
