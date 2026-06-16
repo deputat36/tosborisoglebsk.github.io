@@ -5,3 +5,5 @@ Disallow: /audit/
 Disallow: /_private/
 Sitemap: https://tosborisoglebsk.ru/sitemap.xml
 # RSS: https://tosborisoglebsk.ru/rss.xml
+# Humans: https://tosborisoglebsk.ru/humans.txt
+# LLMs: https://tosborisoglebsk.ru/llms.txt
