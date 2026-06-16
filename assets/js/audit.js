@@ -98,10 +98,30 @@ function verificationBadge(item) {
   return `<span class="verification-badge" data-status="${auditEsc(verification.status)}">${auditEsc(label)}</span>`;
 }
 
+function missingChecklist(item) {
+  const missing = item.missing || [];
+  const lines = [];
+  if (missing.includes('телефон') || missing.includes('нет телефона')) lines.push('телефон для связи с председателем или ответственным представителем');
+  if (missing.includes('email') || missing.includes('нет email')) lines.push('рабочий email, если его можно публиковать');
+  if (missing.includes('соцсети') || missing.includes('нет соцсетей')) lines.push('ссылку на группу, страницу или чат ТОС');
+  if (missing.includes('логотип') || missing.includes('нет логотипа')) lines.push('логотип ТОС в PNG, JPG или SVG');
+  if (missing.includes('описание') || missing.includes('слабое или пустое описание')) lines.push('2–4 предложения о территории, задачах и активности ТОС');
+  if (!lines.length) lines.push('подтверждение, что председатель, контакты, границы и описание указаны верно');
+  return [...new Set(lines)];
+}
+
 function requestText(item) {
-  const missing = (item.missing || []).join(', ').toLowerCase();
+  const checklist = missingChecklist(item).map((value) => `— ${value}`).join('\n');
   const requested = (item.recommendations || []).map((value) => `— ${value}`).join('\n');
-  return `Здравствуйте! Проверяем карточку ТОС «${item.name || item.slug}» на портале tosborisoglebsk.ru.\n\nПросим подтвердить или уточнить данные${missing ? `: ${missing}` : ''}.\n${requested ? `\nЧто желательно прислать:\n${requested}\n` : ''}\nКарточка: https://tosborisoglebsk.ru/tos/${item.slug}/\nФорма обновления: https://tosborisoglebsk.ru${updateUrl(item, 'card')}\n\nДля новости: https://tosborisoglebsk.ru${updateUrl(item, 'news')}\nДля проекта: https://tosborisoglebsk.ru${updateUrl(item, 'project')}\nДля потребности: https://tosborisoglebsk.ru${updateUrl(item, 'need')}\n\nПожалуйста, не направляйте персональные данные, которые не должны публиковаться открыто.`;
+  return `Здравствуйте! Обновляем карточку ТОС «${item.name || item.slug}» на портале tosborisoglebsk.ru.\n\nПожалуйста, проверьте данные карточки и пришлите недостающую информацию.\n\nКарточка ТОС:\nhttps://tosborisoglebsk.ru/tos/${item.slug}/\n\nЧто сейчас нужно уточнить:\n${checklist}\n${requested ? `\nДополнительно по аудиту:\n${requested}\n` : ''}\nМожно прислать прямо ответным сообщением:\n1. председатель;\n2. телефон для публикации;\n3. email для публикации;\n4. ссылка на группу или страницу ТОС;\n5. границы ТОС;\n6. краткое описание;\n7. реализованные проекты;\n8. логотип и 3–5 фотографий.\n\nФорма обновления:\nhttps://tosborisoglebsk.ru${updateUrl(item, 'card')}\n\nПожалуйста, присылайте только те персональные данные, которые можно размещать открыто.`;
+}
+
+function logoPhotoText(item) {
+  return `Здравствуйте! Для карточки ТОС «${item.name || item.slug}» на сайте tosborisoglebsk.ru хотим добавить визуальные материалы.\n\nНужно, если есть:\n1. логотип ТОС в PNG, JPG или SVG;\n2. 3–5 хороших фотографий территории, мероприятий, проектов или результата работы;\n3. короткая подпись к фото: где снято, что происходит, какой год.\n\nКарточка ТОС:\nhttps://tosborisoglebsk.ru/tos/${item.slug}/\n\nЛучше присылать оригинальные файлы, не скриншоты. Фото с детьми крупным планом лучше не отправлять без согласия родителей.`;
+}
+
+function shortRequestText(item) {
+  return `Здравствуйте! Проверьте, пожалуйста, карточку ТОС «${item.name || item.slug}»: https://tosborisoglebsk.ru/tos/${item.slug}/\n\nЕсли что-то нужно исправить, пришлите ответом актуальные данные: председатель, телефон, email, группа/страница, границы, описание, проекты, логотип и фото.\n\nФорма: https://tosborisoglebsk.ru${updateUrl(item, 'card')}`;
 }
 
 function workflowSelect(item) {
@@ -129,7 +149,7 @@ function renderItem(item) {
       <section class="audit-card-section"><h4>Связанные материалы</h4><div class="audit-related"><span><b>${auditEsc(related.news || 0)}</b>Новости</span><span><b>${auditEsc(related.done || 0)}</b>Сделано</span><span><b>${auditEsc(related.needs || 0)}</b>Потребности</span><span><b>${auditEsc(related.projects || 0)}</b>Проекты</span><span><b>${auditEsc(related.events || 0)}</b>События</span></div></section>
     </div>
     <div class="audit-workflow">${workflowSelect(item)}<div class="audit-workflow-note">Рабочий статус сохраняется только на текущем устройстве.</div></div>
-    <div class="card-actions"><a class="btn primary" href="/tos/${auditEsc(item.slug)}/">Карточка ТОС</a><a class="btn" href="${auditEsc(updateUrl(item, 'card'))}">Уточнить данные</a><a class="btn" href="${auditEsc(updateUrl(item, 'news'))}">Новость</a><a class="btn" href="${auditEsc(updateUrl(item, 'project'))}">Проект</a><button class="btn audit-copy-request" type="button" data-slug="${auditEsc(item.slug)}">Скопировать запрос</button></div>
+    <div class="card-actions"><a class="btn primary" href="/tos/${auditEsc(item.slug)}/">Карточка ТОС</a><a class="btn" href="${auditEsc(updateUrl(item, 'card'))}">Уточнить данные</a><a class="btn" href="${auditEsc(updateUrl(item, 'news'))}">Новость</a><a class="btn" href="${auditEsc(updateUrl(item, 'project'))}">Проект</a><button class="btn audit-copy-request" type="button" data-kind="full" data-slug="${auditEsc(item.slug)}">Полный запрос</button><button class="btn audit-copy-request" type="button" data-kind="short" data-slug="${auditEsc(item.slug)}">Коротко</button><button class="btn audit-copy-request" type="button" data-kind="media" data-slug="${auditEsc(item.slug)}">Логотип/фото</button></div>
     <div class="audit-copy-status" data-copy-status="${auditEsc(item.slug)}"></div>
   </article>`;
 }
@@ -251,9 +271,11 @@ function bindControls() {
     const item = auditItems.find((entry) => entry.slug === button.dataset.slug);
     if (!item) return;
     const status = document.querySelector(`[data-copy-status="${CSS.escape(item.slug)}"]`);
+    const kind = button.dataset.kind || 'full';
+    const text = kind === 'media' ? logoPhotoText(item) : kind === 'short' ? shortRequestText(item) : requestText(item);
     try {
-      await copyText(requestText(item));
-      if (status) status.textContent = 'Запрос скопирован.';
+      await copyText(text);
+      if (status) status.textContent = kind === 'media' ? 'Запрос логотипа и фото скопирован.' : kind === 'short' ? 'Короткий запрос скопирован.' : 'Полный запрос скопирован.';
     } catch {
       if (status) status.textContent = 'Не удалось скопировать. Откройте карточку и подготовьте запрос вручную.';
     }
