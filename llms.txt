@@ -18,8 +18,28 @@
 - Председателю: https://tosborisoglebsk.ru/chairperson/
 - Источники данных: https://tosborisoglebsk.ru/sources/
 - Населённые пункты и территории: https://tosborisoglebsk.ru/places/
+- Качество данных: https://tosborisoglebsk.ru/data-quality/
+- Открытые данные: https://tosborisoglebsk.ru/open-data/
+- План развития: https://tosborisoglebsk.ru/roadmap/
+- Проверить карточку ТОС: https://tosborisoglebsk.ru/check-tos/
+- Прислать материал: https://tosborisoglebsk.ru/submit-materials/
+- Индекс страниц: https://tosborisoglebsk.ru/site-index/
+- Словарь ТОС: https://tosborisoglebsk.ru/glossary/
 - Актуализация данных: https://tosborisoglebsk.ru/data-update/
 - Контакты: https://tosborisoglebsk.ru/contacts/
+
+## Открытые данные
+
+- Каталог ТОС: https://tosborisoglebsk.ru/data/toses.json
+- Новости: https://tosborisoglebsk.ru/data/news.json
+- Проекты: https://tosborisoglebsk.ru/data/projects.json
+- Потребности: https://tosborisoglebsk.ru/data/needs.json
+- Сделано: https://tosborisoglebsk.ru/data/done.json
+- Аудит качества: https://tosborisoglebsk.ru/data/site_audit.json
+- Подробный аудит: https://tosborisoglebsk.ru/data/tos_content_audit.json
+- Индекс страниц: https://tosborisoglebsk.ru/data/page_index.json
+- RSS: https://tosborisoglebsk.ru/rss.xml
+- Sitemap: https://tosborisoglebsk.ru/sitemap.xml
 
 ## Использование данных
 
