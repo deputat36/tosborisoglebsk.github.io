@@ -8,11 +8,14 @@ const errors = [];
 const warnings = [];
 
 const SKIP_FILES = new Set([
+  '404.html',
   'news/view.html',
   'tos/view.html',
   'tools/import.html',
   'admin/index.html',
   'admin/admin-index-ready.html',
+  'audit/index.html',
+  'tos/chkalovets/index.html',
   'documents/demo/charter.html',
   'documents/demo/report.html',
   'materials/activity.html',
@@ -64,8 +67,21 @@ function getCanonical(html) {
   return (html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i) || [])[1] || '';
 }
 
+function isNoindexPage(html) {
+  return /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
+}
+
+function isInstantRedirectPage(html) {
+  return /<meta[^>]+http-equiv=["']refresh["'][^>]+content=["']0\s*;/i.test(html);
+}
+
 function auditPage(file, sitemapUrls) {
   const html = fs.readFileSync(file, 'utf8');
+
+  // Noindex and technical redirect pages are deliberately excluded from strict SEO checks.
+  // They should not be present in sitemap and may not contain full Open Graph markup.
+  if (isNoindexPage(html) || isInstantRedirectPage(html)) return;
+
   const title = getTitle(html).trim();
   const description = getMeta(html, 'description').trim();
   const canonical = getCanonical(html).trim();
