@@ -1,23 +1,23 @@
 {
   "summary": {
-    "generated_at": "2026-06-16T13:10:46.081Z",
+    "generated_at": "2026-06-16T13:11:11.740Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
-    "medium_priority": 14,
-    "low_priority": 6,
+    "medium_priority": 0,
+    "low_priority": 20,
     "verified_count": 0,
-    "partial_count": 11,
-    "needs_review_count": 13,
+    "partial_count": 20,
+    "needs_review_count": 4,
     "unknown_count": 0,
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
-    "without_news": 17,
+    "without_news": 0,
     "without_done": 16,
     "without_needs": 0,
     "without_projects": 0,
-    "average_score": 79
+    "average_score": 83
   },
   "items": [
     {
@@ -27,18 +27,17 @@
       "location": "п. Ивановка",
       "chairperson": "Меркурьев Андрей Петрович",
       "updated_at": "2026-05-23",
-      "score": 63,
+      "score": 69,
       "priority": "Высокий",
       "missing": [
         "Телефон",
         "Email",
         "Соцсети",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
@@ -60,7 +59,6 @@
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -71,18 +69,17 @@
       "location": "п. Подстёпки",
       "chairperson": "Кузнецова Елена Викторовна",
       "updated_at": "2026-05-23",
-      "score": 63,
+      "score": 69,
       "priority": "Высокий",
       "missing": [
         "Телефон",
         "Email",
         "Соцсети",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
@@ -104,7 +101,6 @@
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -187,17 +183,16 @@
       "location": "г. Борисоглебск",
       "chairperson": "Калашникова Светлана Александровна",
       "updated_at": "2026-05-23",
-      "score": 69,
-      "priority": "Средний",
+      "score": 75,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Соцсети",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
@@ -218,7 +213,6 @@
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -229,17 +223,16 @@
       "location": "п. Калинино",
       "chairperson": "Кабаргина Татьяна Викторовна",
       "updated_at": "2026-05-23",
-      "score": 69,
-      "priority": "Средний",
+      "score": 75,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Соцсети",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
@@ -260,7 +253,6 @@
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -271,36 +263,34 @@
       "location": "г. Борисоглебск",
       "chairperson": "Корякин Антон Михайлович",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -311,36 +301,34 @@
       "location": "с. Чигорак",
       "chairperson": "Павленко Игорь Фёдорович",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -351,36 +339,34 @@
       "location": "с. Чигорак",
       "chairperson": "Яценко Елена Александровна",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -391,36 +377,34 @@
       "location": "п. Миролюбие",
       "chairperson": "Власова Татьяна Владимировна",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -431,36 +415,34 @@
       "location": "с. Чигорак",
       "chairperson": "Бозоров Рустам Сангиматович",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -471,36 +453,34 @@
       "location": "с. Петровское",
       "chairperson": "Ремизова Любовь Викторовна",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -511,36 +491,34 @@
       "location": "с. Чигорак",
       "chairperson": "Водяной Сергей Александрович",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -551,36 +529,34 @@
       "location": "г. Борисоглебск",
       "chairperson": "Докучаева Татьяна Сергеевна",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -591,36 +567,34 @@
       "location": "г. Борисоглебск",
       "chairperson": "Ковтун Алексей Вадимович",
       "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Средний",
+      "score": 81,
+      "priority": "Низкий",
       "missing": [
         "Email",
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
         "events": 0
       },
       "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
+        "status": "partial",
+        "label": "Проверено частично",
         "date": "2026-05-23",
         "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Запросить данные",
+      "registry_group": "Добавить материалы",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -631,15 +605,14 @@
       "location": "с. Богана",
       "chairperson": "Лопатина Мария Владимировна",
       "updated_at": "2026-05-24",
-      "score": 81,
-      "priority": "Средний",
+      "score": 88,
+      "priority": "Низкий",
       "missing": [
         "Логотип",
-        "Новости",
         "Истории результата"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 0,
         "needs": 1,
         "projects": 1,
@@ -658,83 +631,6 @@
       "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
-        "собрать минимум одну историю результата"
-      ]
-    },
-    {
-      "slug": "pobeda",
-      "name": "Победа",
-      "type": "Городской",
-      "location": "г. Борисоглебск",
-      "chairperson": "Писклова Татьяна Петровна",
-      "updated_at": "2026-05-23",
-      "score": 81,
-      "priority": "Средний",
-      "missing": [
-        "Логотип",
-        "Новости",
-        "Истории результата"
-      ],
-      "linked": {
-        "news": 0,
-        "done": 0,
-        "needs": 1,
-        "projects": 1,
-        "events": 0
-      },
-      "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 24,
-        "stale": false,
-        "source": "",
-        "note": ""
-      },
-      "registry_group": "Добавить материалы",
-      "contact_ready": true,
-      "recommendations": [
-        "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
-        "собрать минимум одну историю результата"
-      ]
-    },
-    {
-      "slug": "ulyanovka",
-      "name": "Ульяновка",
-      "type": "Сельский",
-      "location": "с. Ульяновка",
-      "chairperson": "Габрусенко Олеся Степановна",
-      "updated_at": "2026-05-23",
-      "score": 81,
-      "priority": "Средний",
-      "missing": [
-        "Логотип",
-        "Новости",
-        "Истории результата"
-      ],
-      "linked": {
-        "news": 0,
-        "done": 0,
-        "needs": 1,
-        "projects": 1,
-        "events": 0
-      },
-      "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 24,
-        "stale": false,
-        "source": "",
-        "note": ""
-      },
-      "registry_group": "Добавить материалы",
-      "contact_ready": true,
-      "recommendations": [
-        "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление",
         "собрать минимум одну историю результата"
       ]
     },
@@ -745,15 +641,14 @@
       "location": "с. Чигорак",
       "chairperson": "Бачурина Ольга Александровна",
       "updated_at": "2026-05-23",
-      "score": 81,
+      "score": 88,
       "priority": "Низкий",
       "missing": [
         "Email",
-        "Логотип",
-        "Новости"
+        "Логотип"
       ],
       "linked": {
-        "news": 0,
+        "news": 1,
         "done": 1,
         "needs": 1,
         "projects": 1,
@@ -768,12 +663,47 @@
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Проверить частично",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
+        "подготовить логотип или временный знак ТОС"
+      ]
+    },
+    {
+      "slug": "pobeda",
+      "name": "Победа",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "chairperson": "Писклова Татьяна Петровна",
+      "updated_at": "2026-05-23",
+      "score": 88,
+      "priority": "Низкий",
+      "missing": [
+        "Логотип",
+        "Истории результата"
+      ],
+      "linked": {
+        "news": 1,
+        "done": 0,
+        "needs": 1,
+        "projects": 1,
+        "events": 0
+      },
+      "verification": {
+        "status": "partial",
+        "label": "Проверено частично",
+        "date": "2026-05-23",
+        "age_days": 24,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Добавить материалы",
+      "contact_ready": true,
+      "recommendations": [
         "подготовить логотип или временный знак ТОС",
-        "добавить хотя бы одну новость или объявление"
+        "собрать минимум одну историю результата"
       ]
     },
     {
@@ -810,6 +740,42 @@
       "recommendations": [
         "добавить email для связи",
         "подготовить логотип или временный знак ТОС"
+      ]
+    },
+    {
+      "slug": "ulyanovka",
+      "name": "Ульяновка",
+      "type": "Сельский",
+      "location": "с. Ульяновка",
+      "chairperson": "Габрусенко Олеся Степановна",
+      "updated_at": "2026-05-23",
+      "score": 88,
+      "priority": "Низкий",
+      "missing": [
+        "Логотип",
+        "Истории результата"
+      ],
+      "linked": {
+        "news": 1,
+        "done": 0,
+        "needs": 1,
+        "projects": 1,
+        "events": 0
+      },
+      "verification": {
+        "status": "partial",
+        "label": "Проверено частично",
+        "date": "2026-05-23",
+        "age_days": 24,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Добавить материалы",
+      "contact_ready": true,
+      "recommendations": [
+        "подготовить логотип или временный знак ТОС",
+        "собрать минимум одну историю результата"
       ]
     },
     {
