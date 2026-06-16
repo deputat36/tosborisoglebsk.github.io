@@ -11,6 +11,7 @@ on:
       - 'scripts/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
+      - 'assets/img/tos-logos/*'
       - '.github/workflows/generate-tos-pages.yml'
 
 permissions:
@@ -32,6 +33,8 @@ jobs:
           node-version: '24'
       - name: Improve weak TOS descriptions
         run: node scripts/upgrade_tos_descriptions.js
+      - name: Sync uploaded TOS logos
+        run: node scripts/sync_tos_logos.js
       - name: Generate starter TOS needs and projects
         run: node scripts/generate_tos_starter_content.js
       - name: Generate starter TOS news
