@@ -4,3 +4,4 @@ Disallow: /admin/
 Disallow: /audit/
 Disallow: /_private/
 Sitemap: https://tosborisoglebsk.ru/sitemap.xml
+# RSS: https://tosborisoglebsk.ru/rss.xml
