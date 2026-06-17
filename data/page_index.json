@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-17T10:53:03.986Z",
-  "total": 290,
+  "generated_at": "2026-06-17T10:58:43.659Z",
+  "total": 291,
   "pages": [
     {
       "path": "data-update/index.html",
@@ -1954,6 +1954,13 @@
       "title": "с. Чигорак | Территории ТОС БГО",
       "description": "с. Чигорак: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
       "section": "Территории"
+    },
+    {
+      "path": "communication-kit/index.html",
+      "url": "https://tosborisoglebsk.ru/communication-kit/",
+      "title": "Коммуникационный набор ТОС БГО",
+      "description": "Готовые тексты для ВКонтакте, сообщений председателям и сбора данных ТОС БГО: проверить карточку, прислать логотип, фото, новость, потребность или проект.",
+      "section": "communication-kit"
     },
     {
       "path": "create-tos/index.html",
