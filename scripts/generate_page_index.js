@@ -31,13 +31,13 @@ function sectionFor(relative) {
     chairperson: 'Председателю', residents: 'Жителям', partners: 'Партнёрам', grants: 'Конкурсы',
     calendar: 'Календарь', contacts: 'Контакты', search: 'Поиск', sources: 'Источники данных',
     privacy: 'Публикация сведений', glossary: 'Словарь', methodology: 'О портале', workbench: 'Рабочая панель',
-    'partner-proposal': 'Партнёрское предложение', 'editorial-workflow': 'Редакционный порядок',
-    'content-standards': 'Стандарты материалов', 'verification-levels': 'Статусы проверки данных',
-    'data-dictionary': 'Справочник полей данных', 'data-quality': 'Качество данных', 'data-update': 'Актуализация данных',
-    'data-requests': 'Запросы данных', 'collection-board': 'Доска сбора данных', 'communication-kit': 'Коммуникационный набор',
-    campaign: 'Кампания актуализации', 'field-checklist': 'Чек-лист проверки', 'media-guide': 'Фото и логотипы',
-    'open-data': 'Открытые данные', roadmap: 'План развития', 'site-index': 'Индекс страниц', 'check-tos': 'Проверка ТОС',
-    'submit-materials': 'Прислать материал'
+    'partner-proposal': 'Партнёрское предложение', 'partner-thanks': 'Благодарности партнёрам',
+    'editorial-workflow': 'Редакционный порядок', 'content-standards': 'Стандарты материалов',
+    'verification-levels': 'Статусы проверки данных', 'data-dictionary': 'Справочник полей данных',
+    'data-quality': 'Качество данных', 'data-update': 'Актуализация данных', 'data-requests': 'Запросы данных',
+    'collection-board': 'Доска сбора данных', 'communication-kit': 'Коммуникационный набор', campaign: 'Кампания актуализации',
+    'field-checklist': 'Чек-лист проверки', 'media-guide': 'Фото и логотипы', 'open-data': 'Открытые данные',
+    roadmap: 'План развития', 'site-index': 'Индекс страниц', 'check-tos': 'Проверка ТОС', 'submit-materials': 'Прислать материал'
   };
   return labels[first] || first;
 }
