@@ -69,6 +69,8 @@ jobs:
         run: node scripts/generate_need_pages.js
       - name: Generate project pages
         run: node scripts/generate_project_pages.js
+      - name: Patch site navigation and discovery links
+        run: node scripts/patch_site_navigation.js
       - name: Generate public index
         run: node scripts/generate_page_index.js
       - name: Generate extended sitemap
