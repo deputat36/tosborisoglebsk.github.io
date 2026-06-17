@@ -24,6 +24,7 @@
 - Редакционный порядок: https://tosborisoglebsk.ru/editorial-workflow/
 - Стандарты материалов: https://tosborisoglebsk.ru/content-standards/
 - Статусы проверки данных: https://tosborisoglebsk.ru/verification-levels/
+- Справочник полей данных: https://tosborisoglebsk.ru/data-dictionary/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
 - Запросы на уточнение данных: https://tosborisoglebsk.ru/data-requests/
 - Коммуникационный набор: https://tosborisoglebsk.ru/communication-kit/
@@ -47,6 +48,7 @@
 - Проекты: https://tosborisoglebsk.ru/data/projects.json
 - Потребности: https://tosborisoglebsk.ru/data/needs.json
 - Сделано: https://tosborisoglebsk.ru/data/done.json
+- Задачи сбора данных: https://tosborisoglebsk.ru/data/collection_tasks.csv
 - Аудит качества: https://tosborisoglebsk.ru/data/site_audit.json
 - Подробный аудит: https://tosborisoglebsk.ru/data/tos_content_audit.json
 - Индекс страниц: https://tosborisoglebsk.ru/data/page_index.json
