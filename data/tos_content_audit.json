@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-06-16T16:17:38.455Z",
+    "generated_at": "2026-06-17T08:21:13.693Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -46,7 +46,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -86,7 +86,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -124,7 +124,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -160,7 +160,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -197,7 +197,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -235,7 +235,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -272,7 +272,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -308,7 +308,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -344,7 +344,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -380,7 +380,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -416,7 +416,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -452,7 +452,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -488,7 +488,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -524,7 +524,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -560,7 +560,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -596,7 +596,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -632,7 +632,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -668,7 +668,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -703,7 +703,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-24",
-        "age_days": 23,
+        "age_days": 24,
         "stale": false,
         "source": "",
         "note": ""
@@ -737,7 +737,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -771,7 +771,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -805,7 +805,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -839,7 +839,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""
@@ -873,7 +873,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 24,
+        "age_days": 25,
         "stale": false,
         "source": "",
         "note": ""

@@ -1,0 +1,2029 @@
+{
+  "generated_at": "2026-06-17T08:21:15.260Z",
+  "total": 289,
+  "pages": [
+    {
+      "path": "data-update/index.html",
+      "url": "https://tosborisoglebsk.ru/data-update/",
+      "title": "Актуализация данных ТОС БГО — 2026",
+      "description": "Проверка заполненности карточек ТОС Борисоглебского городского округа: контакты, председатель, границы, соцсети, описание, проекты и дата обновления.",
+      "section": "Актуализация данных"
+    },
+    {
+      "path": "index.html",
+      "url": "https://tosborisoglebsk.ru/",
+      "title": "ТОС Борисоглебского городского округа — портал для жителей и председателей",
+      "description": "Единый портал ТОС Борисоглебского городского округа: каталог ТОС, новости, проекты, потребности, документы, помощь территориям и истории результата.",
+      "section": "Главная"
+    },
+    {
+      "path": "documents/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/",
+      "title": "Документы и шаблоны для ТОС БГО — библиотека председателя",
+      "description": "Библиотека документов и заполняемых шаблонов для ТОС: создание, собрания, проекты, отчёты, обращения и правовая база.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-final-report/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-final-report/",
+      "title": "Итоговый отчёт проекта ТОС",
+      "description": "Заполняемый итоговый отчёт проекта ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-schedule/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-schedule/",
+      "title": "Календарный план проекта ТОС",
+      "description": "Заполняемый календарный план проекта ТОС: этапы, сроки, ответственные и результат.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/create-initiative-card/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/create-initiative-card/",
+      "title": "Карточка инициативы создания ТОС",
+      "description": "Заполняемая карточка инициативы создания ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-problem/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-problem/",
+      "title": "Карточка проблемы территории ТОС",
+      "description": "Заполняемая карточка проблемы территории для подготовки проекта ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/tos-creation-kit/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-creation-kit/",
+      "title": "Комплект документов для создания ТОС",
+      "description": "Рабочий комплект документов для инициативной группы по созданию ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-support/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-support/",
+      "title": "Лист поддержки проекта ТОС",
+      "description": "Заполняемый лист поддержки проекта ТОС и добровольного участия жителей.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/meeting-registration/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-registration/",
+      "title": "Лист регистрации участников собрания ТОС",
+      "description": "Печатный шаблон листа регистрации участников собрания или делегатов конференции ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/tos-founding-announcement/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-founding-announcement/",
+      "title": "Объявление о собрании по созданию ТОС",
+      "description": "Заполняемый шаблон объявления для жителей о собрании или конференции граждан по вопросам создания территориального общественного самоуправления.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/create-territory/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/create-territory/",
+      "title": "Описание территории будущего ТОС",
+      "description": "Заполняемый шаблон описания территории и границ будущего ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-kit/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-kit/",
+      "title": "Пакет документов проекта ТОС",
+      "description": "Комплект заполняемых документов проекта ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-passport/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-passport/",
+      "title": "Паспорт проекта ТОС",
+      "description": "Заполняемый паспорт проекта ТОС: проблема, цель, результат, этапы, команда, бюджет и отчётность.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-partner-letter/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-partner-letter/",
+      "title": "Письмо партнёру проекта ТОС",
+      "description": "Заполняемый шаблон письма потенциальному партнёру или спонсору проекта ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/meeting-agenda/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-agenda/",
+      "title": "Повестка собрания ТОС — шаблон",
+      "description": "Печатный шаблон повестки собрания или конференции жителей ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/tos-founding-protocol/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-founding-protocol/",
+      "title": "Протокол собрания или конференции по созданию ТОС",
+      "description": "Заполняемый протокол собрания или конференции граждан по вопросам создания ТОС, принятия устава и избрания органов ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/meeting-protocol/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-protocol/",
+      "title": "Протокол собрания ТОС — шаблон",
+      "description": "Печатный шаблон протокола собрания или конференции жителей ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/tos-founding-decisions/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-founding-decisions/",
+      "title": "Решения собрания или конференции по созданию ТОС",
+      "description": "Заполняемый пакет решений собрания или конференции граждан о создании ТОС, принятии устава, избрании органов и передаче документов.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-budget/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-budget/",
+      "title": "Смета проекта ТОС",
+      "description": "Заполняемая смета проекта ТОС: материалы, оборудование, работы, доставка и вклад жителей.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/tos-start-list/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-start-list/",
+      "title": "Список участников собрания по созданию ТОС",
+      "description": "Печатный список участников собрания или конференции граждан по вопросам создания территориального общественного самоуправления.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/tos-charter-draft/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-charter-draft/",
+      "title": "Структура проекта устава территориального общественного самоуправления",
+      "description": "Рабочая структура проекта устава ТОС с разделами о территории, целях, органах, решениях, имуществе, финансах и прекращении деятельности.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-photo-report/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-photo-report/",
+      "title": "Фотоотчёт проекта ТОС",
+      "description": "Заполняемый фотоотчёт проекта или мероприятия ТОС: до, процесс, после и результат.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/tos-creation-checklist/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-creation-checklist/",
+      "title": "Чек-лист готовности документов для создания ТОС",
+      "description": "Печатный чек-лист проверки территории, инициативной группы, устава, информирования жителей, собрания, протокола и регистрации устава ТОС.",
+      "section": "Документы"
+    },
+    {
+      "path": "documents/templates/project-checklist/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-checklist/",
+      "title": "Чек-лист готовности проекта ТОС",
+      "description": "Печатный чек-лист проверки проекта ТОС перед подачей на конкурс или партнёру.",
+      "section": "Документы"
+    },
+    {
+      "path": "residents/index.html",
+      "url": "https://tosborisoglebsk.ru/residents/",
+      "title": "Жителям — как пользоваться ТОС и участвовать в жизни территории",
+      "description": "Простая инструкция для жителей Борисоглебского городского округа: что такое ТОС, как найти свой ТОС, связаться с председателем, предложить идею, сообщить о проблеме и помочь территории.",
+      "section": "Жителям"
+    },
+    {
+      "path": "sources/index.html",
+      "url": "https://tosborisoglebsk.ru/sources/",
+      "title": "Источники данных портала ТОС БГО",
+      "description": "Как формируются карточки ТОС, новости, проекты, потребности и справочные страницы портала ТОС Борисоглебского городского округа.",
+      "section": "Источники данных"
+    },
+    {
+      "path": "calendar/index.html",
+      "url": "https://tosborisoglebsk.ru/calendar/",
+      "title": "Календарь ТОС БГО — события, дедлайны и рабочий план председателя",
+      "description": "Календарь ТОС Борисоглебского городского округа: события, дедлайны конкурсов, подготовка проектов, отчётность, субботники, собрания, обучение и ежемесячный рабочий план председателя.",
+      "section": "Календарь"
+    },
+    {
+      "path": "tos/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/",
+      "title": "Каталог ТОС Борисоглебского городского округа",
+      "description": "Каталог ТОС Борисоглебского городского округа: поиск по названию, населённому пункту, председателю, улицам, контактам, новостям, проектам, потребностям и историям результата.",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/bogana/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/bogana/",
+      "title": "ТОС «Богана» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Богана»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Все село с. Богана",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/vostochnyy/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/vostochnyy/",
+      "title": "ТОС «Восточный» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Восточный»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы: Абрикосовая, Бориса и Глеба, Тенистая, Вишнёвая, Сиреневая, Бирюзовая, Светлая, Весенняя, проезд Бирюзовый, проезд Преображенский. г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/gubari/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/gubari/",
+      "title": "ТОС «Губари» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Губари»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Все село Губари с. Губари",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/dzerzhinskogo/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/dzerzhinskogo/",
+      "title": "ТОС «Дзержинского» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Дзержинского»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улица Дзержинского, дом 1, земельный участок г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/znamenie/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/znamenie/",
+      "title": "ТОС «Знамение» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Знамение»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улица 40 лет Октября, дома № 74 и 74А г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/ivanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/ivanovka/",
+      "title": "ТОС «Ивановка» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Ивановка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. В границах п. Ивановка п. Ивановка",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/ipas/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/ipas/",
+      "title": "ТОС «Ипас» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Ипас»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы Вишнёвая, Теннисная, Рябиновая, Цветочная села Чигорак с. Чигорак",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/kalinka/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/kalinka/",
+      "title": "ТОС «Калинка» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Калинка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы Центральная и Лесная п. Калинино",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/mahrovka/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/mahrovka/",
+      "title": "ТОС «Махровка» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Махровка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы Парижской Коммуны, Октябрьская, Советская, Ленинская, Свободы, Карла Маркса, Мира с. Махровка",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/mayak/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/mayak/",
+      "title": "ТОС «Маяк» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Маяк»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы Проезжая, Свободы, Красная Заря, Пионерская и переулок Свободы села Чигорак с. Чигорак",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/mechta/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/mechta/",
+      "title": "ТОС «Мечта» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Мечта»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы 40 лет Октября, Красная, Свердлова, Красная Звезда, Колхозная, Калинина, Степана Разина, Московская 1, 1-й и 2-й Октябрьские переулки, Полевой с. Чигорак",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/mirolyubie/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/mirolyubie/",
+      "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Миролюбие»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Весь поселок п. Миролюбие",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/pervomayskiy/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/pervomayskiy/",
+      "title": "ТОС «Первомайский» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Первомайский»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Дома № 2–32 по ул. Центральная, дома № 1–37 и № 2–14 по ул. Пушкина, улицы Первомайская, Ленинская, переулок Первомайский села Чигорак с. Чигорак",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/petrovskoe/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/petrovskoe/",
+      "title": "ТОС «Петровское» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Петровское»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. с. Петровское с. Петровское",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/pobeda/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/pobeda/",
+      "title": "ТОС «Победа» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Победа»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улица Победы, в границах домов 41, 41А, 41Б г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/podstepki/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/podstepki/",
+      "title": "ТОС «Подстёпки» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Подстёпки»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. В границах п. Подстёпки п. Подстёпки",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/port-artur/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/port-artur/",
+      "title": "ТОС «Порт Артур» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Порт Артур»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Дома № 1–63 по улице Центральная, дома № 16–34 по улице Пушкина, улицы Московская, Набережная, Фрунзе, проспект Ленинский, переулки Косой и Садовый, территория СНТ «Дорожник» села Чигорак с. Чигорак",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/prostornyy/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/prostornyy/",
+      "title": "ТОС «Просторный» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Просторный»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Дом 2, дом 4 г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/severnyy-39/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/severnyy-39/",
+      "title": "ТОС «Северный 39» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Северный 39»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Северный микрорайон, дом 39 и прилегающая территория г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/tancyrey/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/tancyrey/",
+      "title": "ТОС «Танцырей» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Танцырей»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы Колхозоградская, Первомайская, Красная Заря, Кавказская, Свободы, Набережная, Проезжая, Народная, В. Кильдюшкина, Ст. Разина, Делегатская, Октябрьская, Юбилейная, Ленинская с. Танцырей",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/tretyaki/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/tretyaki/",
+      "title": "ТОС «Третьяки» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Третьяки»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Село Третьяки с. Третьяки",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/ulyanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/ulyanovka/",
+      "title": "ТОС «Ульяновка» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Ульяновка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. В границах с. Ульяновка и п. Чуриловка с. Ульяновка",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/uyutnyy/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/uyutnyy/",
+      "title": "ТОС «Уютный» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Уютный»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Уютная 1, Уютная 3, Уютная 5, Дорожная 52с1, Дорожная 52с2, Дорожная 52с3, Дорожная 52с4 г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "tos/chkalovec/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/chkalovec/",
+      "title": "ТОС «Чкаловец» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Чкаловец»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улица Аэродромная, дом 22, земельный участок 4,5 кв. м г. Борисоглебск",
+      "section": "Каталог ТОС"
+    },
+    {
+      "path": "data-quality/index.html",
+      "url": "https://tosborisoglebsk.ru/data-quality/",
+      "title": "Качество данных каталога ТОС БГО",
+      "description": "Публичная сводка качества данных каталога ТОС БГО: заполненность карточек, контакты, новости, проекты, потребности, логотипы и сведения для проверки.",
+      "section": "Качество данных"
+    },
+    {
+      "path": "grants/index.html",
+      "url": "https://tosborisoglebsk.ru/grants/",
+      "title": "Поддержка проектов ТОС БГО — региональные организации, конкурсы и гранты",
+      "description": "Навигатор поддержки ТОС Борисоглебского городского округа: конкурс проектов ТОС Воронежской области, ассоциации муниципальных образований и ТОС, региональные партнёры, инициативные проекты, СО НКО и федеральные возможности.",
+      "section": "Конкурсы"
+    },
+    {
+      "path": "contacts/index.html",
+      "url": "https://tosborisoglebsk.ru/contacts/",
+      "title": "Контакты портала ТОС БГО — отправить новость, проект или исправление",
+      "description": "Контакты портала ТОС БГО: отправить новость, фотоотчёт, проект, потребность, исправление карточки ТОС или вопрос по созданию ТОС через ВК-сообщество и ответственный контакт.",
+      "section": "Контакты"
+    },
+    {
+      "path": "materials/project-bank/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/project-bank/",
+      "title": "Банк идей для проектов ТОС | Материалы ТОС БГО",
+      "description": "Подборка направлений, которые понятны жителям и хорошо показывают результат.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-data-standard/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-data-standard/",
+      "title": "Единый стандарт карточки ТОС | Материалы ТОС БГО",
+      "description": "Какие сведения нужны, чтобы карточка ТОС была полной и полезной.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-social-networks/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-social-networks/",
+      "title": "Как вести группу ТОС во ВКонтакте или Одноклассниках | Материалы ТОС БГО",
+      "description": "Группа ТОС — это архив, объявление, отчёт и инструмент вовлечения одновременно.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/how-to-involve-residents/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/how-to-involve-residents/",
+      "title": "Как вовлекать жителей, если «никому ничего не надо» | Материалы ТОС БГО",
+      "description": "Жители чаще включаются, когда задача маленькая, понятная и даёт быстрый результат.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/choose-tos-project/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/choose-tos-project/",
+      "title": "Как выбрать проект для ТОС: от проблемы жителей до заявки | Материалы ТОС БГО",
+      "description": "Сильный проект начинается не со сметы, а с понятной проблемы, которую жители действительно хотят решить.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-photo-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-photo-guide/",
+      "title": "Как делать фотоотчёты для проектов ТОС | Материалы ТОС БГО",
+      "description": "Хорошие фотографии помогают в заявках, отчётах и публикациях.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-volunteers/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-volunteers/",
+      "title": "Как организовать добровольцев в ТОС | Материалы ТОС БГО",
+      "description": "Добровольческая помощь должна быть простой, безопасной и понятной.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/project-reporting-after-grant/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/project-reporting-after-grant/",
+      "title": "Как отчитаться по проекту ТОС: фото, публикации, документы | Материалы ТОС БГО",
+      "description": "Отчётность начинается не после проекта, а с первого фото проблемной территории до начала работ.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-boundaries-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-boundaries-guide/",
+      "title": "Как подготовить границы ТОС для карты | Материалы ТОС БГО",
+      "description": "Даже если точных координат пока нет, можно начать с текстового описания и точки на карте.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/meeting-notice/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/meeting-notice/",
+      "title": "Как подготовить объявление о собрании жителей | Материалы ТОС БГО",
+      "description": "Чем понятнее объявление, тем выше шанс, что люди придут или заранее зададут вопросы.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/project-passport-template/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/project-passport-template/",
+      "title": "Как подготовить паспорт проекта ТОС | Материалы ТОС БГО",
+      "description": "Паспорт проекта — это короткая рабочая карточка, которая помогает объяснить идею жителям, администрации, партнёрам и конкурсной комиссии.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/prepare-tos-project-for-voronezh-contest/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/prepare-tos-project-for-voronezh-contest/",
+      "title": "Как подготовить проект к конкурсу ТОС Воронежской области | Материалы ТОС БГО",
+      "description": "К региональному конкурсу лучше готовиться заранее: идея, фото, поддержка жителей и смета должны быть готовы до объявления дедлайна.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/grant-application-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/grant-application-guide/",
+      "title": "Как подготовить сильную заявку на конкурс ТОС | Материалы ТОС БГО",
+      "description": "Проект должен быть понятным решением конкретной проблемы жителей.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/prepare-for-tos-contest-early/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/prepare-for-tos-contest-early/",
+      "title": "Как подготовиться к конкурсу ТОС заранее | Материалы ТОС БГО",
+      "description": "К конкурсу нельзя готовиться в последний день: сильная заявка собирается из фотографий, поддержки жителей, сметы и понятного плана.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/photo-report/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/photo-report/",
+      "title": "Как правильно делать фото для проекта ТОС | Материалы ТОС БГО",
+      "description": "Фото — доказательство проблемы и результата. Оно помогает в заявках, отчётах и публикациях.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-conflict-dialogue/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-conflict-dialogue/",
+      "title": "Как реагировать на конфликты и критику жителей | Материалы ТОС БГО",
+      "description": "Критика не всегда враг. Часто это источник задач для развития территории.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/public-report/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/public-report/",
+      "title": "Как сделать простой публичный отчёт ТОС | Материалы ТОС БГО",
+      "description": "Отчёт не должен быть сложным: главное — показать, что изменилось и кто участвовал.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-data-request-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-data-request-guide/",
+      "title": "Как собрать данные, логотипы и фото для карточек ТОС",
+      "description": "Практическая памятка для обновления карточек ТОС: какие данные запросить у председателей, как прислать логотипы, фотографии, новости, проекты и потребности.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/resident-support-for-project/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/resident-support-for-project/",
+      "title": "Как собрать поддержку жителей для проекта ТОС | Материалы ТОС БГО",
+      "description": "Поддержка жителей — один из главных признаков, что проект нужен территории, а не только одному активисту.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/how-to-create-tos-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/how-to-create-tos-2026/",
+      "title": "Как создать ТОС в 2026 году: актуальный порядок | ТОС БГО",
+      "description": "Путь создания ТОС в 2026 году: предложение о границах, решение представительного органа, собрание или конференция граждан, устав и его регистрация.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/simple-project-budget/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/simple-project-budget/",
+      "title": "Как составить простую смету проекта ТОС | Материалы ТОС БГО",
+      "description": "Смета должна быть понятной, проверяемой и связанной с реальными работами, а не набором примерных сумм.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/find-nko-partner-for-grant/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/find-nko-partner-for-grant/",
+      "title": "Как ТОСу найти партнёра-НКО для гранта | Материалы ТОС БГО",
+      "description": "Не каждый конкурс доступен ТОСу напрямую, но многие социальные проекты можно готовить вместе с НКО.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/conflict-management/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/conflict-management/",
+      "title": "Как ТОСу работать с конфликтами между жителями | Материалы ТОС БГО",
+      "description": "Конфликты неизбежны, но их можно переводить в понятные правила и решения.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/partnerships/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/partnerships/",
+      "title": "Как ТОСу работать с партнёрами | Материалы ТОС БГО",
+      "description": "Партнёры помогают ресурсами, экспертизой, техникой, материалами и информационной поддержкой.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-yandex-disk/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-yandex-disk/",
+      "title": "Как хранить файлы ТОС на Яндекс.Диске и не перегружать сайт | Материалы ТОС БГО",
+      "description": "GitHub Pages лучше использовать для сайта, а тяжёлые документы и фото — хранить во внешнем облаке.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/documents-for-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/documents-for-tos/",
+      "title": "Какие документы нужны активному ТОС | Материалы ТОС БГО",
+      "description": "Даже небольшой ТОС должен хранить основные документы в порядке.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/",
+      "title": "Полезные материалы для ТОС",
+      "description": "Инструкции и чек-листы для создания и развития ТОС в 2026 году.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/chairperson-daily-work/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/chairperson-daily-work/",
+      "title": "Рабочий минимум председателя ТОС | Материалы ТОС БГО",
+      "description": "Что держать в порядке, чтобы ТОС был не формальностью, а живой командой.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-event-scenario/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-event-scenario/",
+      "title": "Сценарий дворового или сельского мероприятия ТОС | Материалы ТОС БГО",
+      "description": "Как провести встречу, праздник или тематическую акцию без лишней бюрократии.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/regional-tos-practices-voronezh/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/regional-tos-practices-voronezh/",
+      "title": "Что делают сильные ТОСы Воронежской области: идеи для БГО | Материалы ТОС БГО",
+      "description": "Опыт других территорий помогает председателям быстрее выбирать сильные и понятные проекты.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-public-report-template/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-public-report-template/",
+      "title": "Шаблон публичного отчёта ТОС | Материалы ТОС БГО",
+      "description": "Отчёт должен быть коротким, понятным и регулярным.",
+      "section": "Материалы"
+    },
+    {
+      "path": "news/tos-grants-2026-voronezh/index.html",
+      "url": "https://tosborisoglebsk.ru/news/tos-grants-2026-voronezh/",
+      "title": "В Воронежской области стартовал конкурс проектов ТОС 2026 | ТОС БГО",
+      "description": "Для ТОСов региона заявлен конкурс общественно полезных проектов: до 1,5 млн рублей на проект, 14 направлений, общий объём поддержки — 90 млн рублей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/nko-grants-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/nko-grants-2026/",
+      "title": "В регионе открыт конкурс социальных проектов СО НКО | ТОС БГО",
+      "description": "Для зарегистрированных НКО Воронежской области заявлялся конкурс с поддержкой до 3 млн рублей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/tos-catalog-data-updated-2026-05-23/index.html",
+      "url": "https://tosborisoglebsk.ru/news/tos-catalog-data-updated-2026-05-23/",
+      "title": "Данные каталога ТОСов приведены к единому формату | ТОС БГО",
+      "description": "В карточках ТОСов унифицированы населённые пункты, типы территорий, описания и дата актуализации.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/vk-community-channel-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/vk-community-channel-2026/",
+      "title": "Для ТОСов БГО появился единый онлайн-канал связи | ТОС БГО",
+      "description": "Материалы для сайта, новости, фотоотчёты и исправления карточек ТОС можно направлять через сообщество ВКонтакте.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/project-archive-needed/index.html",
+      "url": "https://tosborisoglebsk.ru/news/project-archive-needed/",
+      "title": "Зачем ТОСу архив реализованных проектов | ТОС БГО",
+      "description": "Архив проектов помогает показывать результат, защищать заявки и сохранять опыт для новых активистов.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/tos-project-passport/index.html",
+      "url": "https://tosborisoglebsk.ru/news/tos-project-passport/",
+      "title": "Зачем ТОСу паспорт проекта | ТОС БГО",
+      "description": "Паспорт проекта помогает быстро объяснить инициативу жителям, администрации и партнёрам.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/data-update-rules/index.html",
+      "url": "https://tosborisoglebsk.ru/news/data-update-rules/",
+      "title": "Как председателям обновлять карточки своих ТОСов | ТОС БГО",
+      "description": "Для каждой карточки можно уточнить границы, контакты, описание, ссылки на группы и логотип.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/how-to-send-tos-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/how-to-send-tos-news-2026/",
+      "title": "Как председателям присылать новости для портала ТОС БГО | ТОС БГО",
+      "description": "Чтобы новость быстро попала на сайт, достаточно указать ТОС, дату, место, что произошло, результат и приложить фото.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/resident-survey-template/index.html",
+      "url": "https://tosborisoglebsk.ru/news/resident-survey-template/",
+      "title": "Как провести короткий опрос жителей перед проектом | ТОС БГО",
+      "description": "Опрос помогает выбрать проблему, получить поддержку и подготовить аргументы для заявки.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/local-project-preparation/index.html",
+      "url": "https://tosborisoglebsk.ru/news/local-project-preparation/",
+      "title": "Как ТОСу подготовиться к следующему грантовому сезону | ТОС БГО",
+      "description": "Лучшее время готовить проект — за несколько месяцев до открытия конкурса.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/partnership-local-business/index.html",
+      "url": "https://tosborisoglebsk.ru/news/partnership-local-business/",
+      "title": "Как ТОСу работать с местным бизнесом | ТОС БГО",
+      "description": "Предприниматели охотнее помогают, когда видят понятную задачу, смету и публичную благодарность.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/catalog-unified-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/catalog-unified-2026/",
+      "title": "Каталог ТОСов БГО переведён в единый формат | ТОС БГО",
+      "description": "В карточках ТОСов сохранены описания, границы, председатели, контакты, ссылки на группы и численность жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/may-cleanup-checklist/index.html",
+      "url": "https://tosborisoglebsk.ru/news/may-cleanup-checklist/",
+      "title": "Майский чек-лист благоустройства для ТОС | ТОС БГО",
+      "description": "Что проверить в начале сезона: мусор, освещение, лавочки, зелёные зоны, безопасность и коммуникация с жителями.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/obraz-buduschego-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/obraz-buduschego-2026/",
+      "title": "На конкурс СО НКО Воронежской области подано 87 проектов | ТОС БГО",
+      "description": "Сайт конкурса сообщает, что приём заявок 2026 года завершён, а на конкурс представлено 87 проектов.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/index.html",
+      "url": "https://tosborisoglebsk.ru/news/",
+      "title": "Новости ТОС БГО — лента, фотоотчёты, объявления и полезные материалы",
+      "description": "Новости ТОС Борисоглебского городского округа: публикации ТОСов, фотоотчёты, объявления, конкурсы, благодарности, полезные материалы для председателей и жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/spring-cleanup-plan/index.html",
+      "url": "https://tosborisoglebsk.ru/news/spring-cleanup-plan/",
+      "title": "План весеннего субботника для ТОС | ТОС БГО",
+      "description": "Готовый сценарий: определить территорию, собрать инвентарь, назначить ответственных и зафиксировать результат.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/community-archive/index.html",
+      "url": "https://tosborisoglebsk.ru/news/community-archive/",
+      "title": "Почему ТОСам нужен архив проектов | ТОС БГО",
+      "description": "Архив показывает историю развития территории и помогает готовить новые заявки.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/social-media-for-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/news/social-media-for-tos/",
+      "title": "Почему ТОСу нужна публичная страница | ТОС БГО",
+      "description": "Группа в соцсетях помогает показывать результаты, собирать предложения и быстро связываться с жителями.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-bogana-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-bogana-2026/",
+      "title": "ТОС «Богана» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Богана» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/vostochnyy-cleanups-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/vostochnyy-cleanups-news-2026/",
+      "title": "ТОС «Восточный» делает ставку на соседское участие, субботники и праздники | ТОС БГО",
+      "description": "В карточке ТОС указано, что жители объединяются для благоустройства, проводят субботники и праздники, создавая более дружелюбную среду на территории.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/gubari-projects-archive-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/gubari-projects-archive-news-2026/",
+      "title": "ТОС «Губари» показывает опыт разных проектов: от площадки до водоснабжения | ТОС БГО",
+      "description": "В карточке ТОС «Губари» собран перечень реализованных инициатив: детская площадка, памятные объекты, водонапорная башня, ремонт системы водоснабжения и проект «Шаг к здоровью».",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-dzerzhinskogo-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-dzerzhinskogo-2026/",
+      "title": "ТОС «Дзержинского» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Дзержинского» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-znamenie-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-znamenie-2026/",
+      "title": "ТОС «Знамение» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Знамение» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-ivanovka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-ivanovka-2026/",
+      "title": "ТОС «Ивановка» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Ивановка» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-ipas-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-ipas-2026/",
+      "title": "ТОС «Ипас» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Ипас» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-kalinka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-kalinka-2026/",
+      "title": "ТОС «Калинка» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Калинка» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/mahrovka-project-experience-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/mahrovka-project-experience-news-2026/",
+      "title": "ТОС «Махровка» формирует активную команду и проектный опыт села | ТОС БГО",
+      "description": "В карточке ТОС указано, что жители Махровки активно участвуют в жизни села, уже выигрывали несколько проектов и планируют дальнейшее развитие территории.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-mayak-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-mayak-2026/",
+      "title": "ТОС «Маяк» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Маяк» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-mechta-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-mechta-2026/",
+      "title": "ТОС «Мечта» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Мечта» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-mirolyubie-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-mirolyubie-2026/",
+      "title": "ТОС «Миролюбие» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Миролюбие» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-pervomayskiy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-pervomayskiy-2026/",
+      "title": "ТОС «Первомайский» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Первомайский» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-petrovskoe-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-petrovskoe-2026/",
+      "title": "ТОС «Петровское» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Петровское» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-pobeda-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-pobeda-2026/",
+      "title": "ТОС «Победа» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Победа» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-podstepki-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-podstepki-2026/",
+      "title": "ТОС «Подстёпки» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Подстёпки» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-port-artur-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-port-artur-2026/",
+      "title": "ТОС «Порт Артур» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Порт Артур» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-prostornyy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-prostornyy-2026/",
+      "title": "ТОС «Просторный» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Просторный» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/severnyy-39-playground-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/severnyy-39-playground-news-2026/",
+      "title": "ТОС «Северный 39» благоустроил детскую площадку и получил опыт грантов | ТОС БГО",
+      "description": "По данным карточки ТОС, жители территории объединились для благоустройства придомовой территории, выиграли два гранта и благоустроили детскую площадку.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/tancyrey-improvement-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/tancyrey-improvement-news-2026/",
+      "title": "ТОС «Танцырей» развивает благоустройство, озеленение и места отдыха | ТОС БГО",
+      "description": "По данным карточки ТОС, актив территории занимается благоустройством, озеленением, установкой детских площадок и созданием мест отдыха.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/tretyaki-seven-projects-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/tretyaki-seven-projects-news-2026/",
+      "title": "ТОС «Третьяки» реализовал 7 проектов и ведёт социальную работу | ТОС БГО",
+      "description": "В карточке ТОС указано, что «Третьяки» реализовал 7 проектов по линии Ассоциации муниципальных образований Воронежской области и помогает семьям участников СВО.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-ulyanovka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-ulyanovka-2026/",
+      "title": "ТОС «Ульяновка» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Ульяновка» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/send-news-uyutnyy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-uyutnyy-2026/",
+      "title": "ТОС «Уютный» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Уютный» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/chkalovec-projects-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/chkalovec-projects-news-2026/",
+      "title": "ТОС «Чкаловец» — пример комплексной проектной работы территории | ТОС БГО",
+      "description": "В карточке ТОС «Чкаловец» указаны детская и спортивная площадки, экоплощадка, центр притяжения «Связь поколений» и опыт участия в областных грантах.",
+      "section": "Новости"
+    },
+    {
+      "path": "news/fz33-tos-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/fz33-tos-2026/",
+      "title": "Что говорит ФЗ №33-ФЗ о территориальном общественном самоуправлении | ТОС БГО",
+      "description": "Статья 50 ФЗ №33-ФЗ определяет ТОС как самоорганизацию граждан по месту жительства на части территории муниципального образования.",
+      "section": "Новости"
+    },
+    {
+      "path": "methodology/index.html",
+      "url": "https://tosborisoglebsk.ru/methodology/",
+      "title": "Как развивается портал ТОС БГО",
+      "description": "Методика развития портала ТОС БГО: как собираются данные, как появляются карточки, новости, проекты, потребности, справочники и публичные отчёты качества.",
+      "section": "О портале"
+    },
+    {
+      "path": "partners/index.html",
+      "url": "https://tosborisoglebsk.ru/partners/",
+      "title": "Партнёрам ТОС БГО — как помочь территориям и проектам",
+      "description": "Страница для партнёров ТОС Борисоглебского городского округа: бизнес, депутаты, учреждения, НКО, волонтёры и активные жители могут помочь материалами, техникой, транспортом, волонтёрами, информацией и организацией.",
+      "section": "Партнёрам"
+    },
+    {
+      "path": "search/index.html",
+      "url": "https://tosborisoglebsk.ru/search/",
+      "title": "Поиск по сайту ТОС БГО",
+      "description": "Поиск по каталогу ТОС, новостям, материалам, документам, конкурсам и проектам.",
+      "section": "Поиск"
+    },
+    {
+      "path": "needs/photo-and-media-help/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/photo-and-media-help/",
+      "title": "Нужна помощь с фотоотчётами и публикациями | Нужна помощь ТОСам БГО",
+      "description": "Для заявок на конкурсы и публичной отчётности ТОСам нужны качественные фото до/после, короткие описания мероприятий, публикации в соцсетях и новости для сайта.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/",
+      "title": "Нужна помощь ТОСам БГО — витрина потребностей и партнёрской поддержки",
+      "description": "Витрина потребностей ТОСов Борисоглебского городского округа: материалы, волонтёры, саженцы, транспорт, фотоотчёты, инструменты, партнёры и закрытые потребности с результатами.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-tos-cards-contacts-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-tos-cards-contacts-2026/",
+      "title": "Нужно проверить и обновить карточки ТОСов | Нужна помощь ТОСам БГО",
+      "description": "Председателям и активистам нужно проверить данные своих ТОСов: председатель, телефон, email, ссылки на группы, границы, численность жителей, описание и год создания. Исправления можно прислать через ВК-сообщество ТОС БГО.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-bogana-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-bogana-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Богана» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Богана» нужно собрать или подтвердить сведения: логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-vostochnyy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-vostochnyy-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Восточный» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Восточный» нужно собрать или подтвердить сведения: логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-gubari-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-gubari-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Губари» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Губари» нужно собрать или подтвердить сведения: телефон для публикации, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-dzerzhinskogo-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-dzerzhinskogo-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Дзержинского» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Дзержинского» нужно собрать или подтвердить сведения: email для связи, ссылка на группу или страницу ТОС, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-znamenie-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-znamenie-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Знамение» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Знамение» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-ivanovka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-ivanovka-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Ивановка» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Ивановка» нужно собрать или подтвердить сведения: телефон для публикации, email для связи, ссылка на группу или страницу ТОС, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-ipas-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-ipas-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Ипас» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Ипас» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-kalinka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-kalinka-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Калинка» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Калинка» нужно собрать или подтвердить сведения: email для связи, ссылка на группу или страницу ТОС, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-mahrovka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-mahrovka-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Махровка» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Махровка» нужно собрать или подтвердить сведения: логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-mayak-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-mayak-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Маяк» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Маяк» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-mechta-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-mechta-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Мечта» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Мечта» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-mirolyubie-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-mirolyubie-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Миролюбие» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Миролюбие» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-pervomayskiy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-pervomayskiy-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Первомайский» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Первомайский» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-petrovskoe-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-petrovskoe-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Петровское» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Петровское» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-pobeda-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-pobeda-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Победа» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Победа» нужно собрать или подтвердить сведения: логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-podstepki-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-podstepki-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Подстёпки» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Подстёпки» нужно собрать или подтвердить сведения: телефон для публикации, email для связи, ссылка на группу или страницу ТОС, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-port-artur-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-port-artur-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Порт Артур» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Порт Артур» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-prostornyy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-prostornyy-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Просторный» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Просторный» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-severnyy-39-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-severnyy-39-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Северный 39» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Северный 39» нужно собрать или подтвердить сведения: логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-tancyrey-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-tancyrey-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Танцырей» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Танцырей» нужно собрать или подтвердить сведения: телефон для публикации, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-tretyaki-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-tretyaki-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Третьяки» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Третьяки» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-ulyanovka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-ulyanovka-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Ульяновка» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Ульяновка» нужно собрать или подтвердить сведения: логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-uyutnyy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-uyutnyy-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Уютный» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Уютный» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/update-data-chkalovec-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-chkalovec-2026/",
+      "title": "Нужно уточнить данные и материалы ТОС «Чкаловец» | Нужна помощь ТОСам БГО",
+      "description": "Для карточки ТОС «Чкаловец» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о работе ТОС, сведения о реализованных проектах и актуальных потребностях жителей.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/need-tos-community-links-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/need-tos-community-links-2026/",
+      "title": "Нужны актуальные ссылки на сообщества ТОСов | Нужна помощь ТОСам БГО",
+      "description": "Для карточек ТОС нужны рабочие ссылки на группы ВКонтакте, Одноклассники, Telegram-чаты или другие публичные страницы. Если у ТОС пока нет сообщества, можно сообщить об этом отдельно.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/volunteers-for-cleanup/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/volunteers-for-cleanup/",
+      "title": "Нужны волонтёры для субботников и благоустройства | Нужна помощь ТОСам БГО",
+      "description": "Актуальная потребность для дворов, улиц, сельских территорий и общественных пространств: уборка мусора, покраска малых форм, подготовка клумб, помощь пожилым жителям.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/materials-for-small-repairs/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/materials-for-small-repairs/",
+      "title": "Нужны материалы для мелкого ремонта и благоустройства | Нужна помощь ТОСам БГО",
+      "description": "Для локальных инициатив могут быть полезны краска, кисти, перчатки, мешки для мусора, доски, крепёж, грунт, песок, щебень и другие расходные материалы.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/collect-tos-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/collect-tos-news-2026/",
+      "title": "Нужны новости и фотоотчёты от ТОСов БГО | Нужна помощь ТОСам БГО",
+      "description": "Для наполнения портала нужны реальные новости: субботники, собрания, праздники, итоги проектов, благоустройство, помощь жителям, участие в конкурсах и другие события территорий. Желательно присылать короткий текст и 3–10 фото.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/seedlings-for-greening/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/seedlings-for-greening/",
+      "title": "Нужны саженцы и помощь с озеленением территорий ТОС | Нужна помощь ТОСам БГО",
+      "description": "ТОСам часто требуется помощь с саженцами, грунтом, инвентарём и участием жителей в посадке деревьев, кустарников и цветов. Можно предложить помощь для конкретной территории или для общего распределения между ТОСами.",
+      "section": "Потребности"
+    },
+    {
+      "path": "needs/collect-project-archive-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/collect-project-archive-2026/",
+      "title": "Нужны сведения о реализованных проектах ТОСов | Нужна помощь ТОСам БГО",
+      "description": "Для раздела проектов нужен архив: название проекта, год, что было сделано, где находится объект, кто участвовал, какие были партнёры, фото до и после. Это поможет показать опыт ТОСов и готовить новые заявки.",
+      "section": "Потребности"
+    },
+    {
+      "path": "legal/index.html",
+      "url": "https://tosborisoglebsk.ru/legal/",
+      "title": "Правовая основа ТОС простыми словами — ТОС БГО",
+      "description": "Правовой навигатор по территориальному общественному самоуправлению: федеральный закон, устав БГО, границы, собрания, устав ТОС и статус документов.",
+      "section": "Правовая основа"
+    },
+    {
+      "path": "legal/federal-law-33/index.html",
+      "url": "https://tosborisoglebsk.ru/legal/federal-law-33/",
+      "title": "ФЗ №33-ФЗ и ТОС простыми словами — ТОС БГО",
+      "description": "Понятная справка для председателей и актива ТОС БГО: что меняет ФЗ №33-ФЗ о местном самоуправлении, какие нормы важны для ТОС и что нужно проверять.",
+      "section": "Правовая основа"
+    },
+    {
+      "path": "chairperson/documents/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/documents/",
+      "title": "Архив документов ТОС — что хранить председателю",
+      "description": "Памятка председателю ТОС: какие документы, протоколы, фото, сметы, обращения, ответы и материалы нужно хранить в архиве ТОС.",
+      "section": "Председателю"
+    },
+    {
+      "path": "chairperson/conflicts/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/conflicts/",
+      "title": "Конфликты в ТОС — как председателю вести диалог спокойно",
+      "description": "Памятка председателю ТОС по работе с конфликтами: как фиксировать факты, разговаривать с жителями, не обещать лишнего и переводить спор в решение.",
+      "section": "Председателю"
+    },
+    {
+      "path": "chairperson/news/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/news/",
+      "title": "Новость ТОС — как оформить публикацию и фотоотчёт",
+      "description": "Памятка председателю ТОС: как написать новость, фотоотчёт или итог события, какие сведения указать и какие фото приложить.",
+      "section": "Председателю"
+    },
+    {
+      "path": "chairperson/first-30-days/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/first-30-days/",
+      "title": "Первые 30 дней председателя ТОС — чек-лист и порядок работы",
+      "description": "Практический чек-лист для председателя ТОС на первые 30 дней: контакты, архив, проблемы территории, проекты, новости и рабочий ритм актива.",
+      "section": "Председателю"
+    },
+    {
+      "path": "chairperson/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/",
+      "title": "Председателю ТОС — практический кабинет, чек-листы и документы",
+      "description": "Практический раздел для председателя ТОС: первые 30 дней, собрания, документы, проекты, новости, фотоотчёты, архив, конфликты и работа с жителями.",
+      "section": "Председателю"
+    },
+    {
+      "path": "chairperson/project/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/project/",
+      "title": "Проект ТОС — от проблемы до итогового отчёта",
+      "description": "Полный рабочий маршрут проекта ТОС: проблема, поддержка жителей, паспорт, смета, календарный план, партнёры, проверка и отчёт.",
+      "section": "Председателю"
+    },
+    {
+      "path": "chairperson/meeting/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/meeting/",
+      "title": "Собрание ТОС — чек-лист и документы председателя",
+      "description": "Как подготовить собрание или конференцию ТОС: чек-лист, повестка, лист регистрации, протокол и краткий итог для жителей.",
+      "section": "Председателю"
+    },
+    {
+      "path": "check-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/check-tos/",
+      "title": "Проверить карточку своего ТОС",
+      "description": "Чек-лист для председателя и актива: как проверить карточку ТОС на портале БГО, какие данные уточнить и что прислать для обновления.",
+      "section": "Проверка ТОС"
+    },
+    {
+      "path": "projects/photo-project-archive/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/photo-project-archive/",
+      "title": "Архив реализованных проектов ТОС | Проекты ТОС БГО",
+      "description": "Сбор и оформление истории проектов ТОС: что было сделано, в каком году, кто участвовал, какие фото до и после, какой результат получили жители.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/",
+      "title": "Банк проектов ТОС — идеи, гранты, партнёры и помощь",
+      "description": "Банк проектов ТОС Борисоглебского городского округа: идеи благоустройства, социальные, экологические, патриотические и дворовые проекты, подготовка к грантам и шаблон добавления проекта.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/safe-path/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/safe-path/",
+      "title": "Безопасная дорожка или тротуар | Проекты ТОС БГО",
+      "description": "Проект для мест, где жители регулярно ходят по грязи, обочине или опасному участку.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/safe-path-or-sidewalk/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/safe-path-or-sidewalk/",
+      "title": "Безопасная дорожка или тротуар | Проекты ТОС БГО",
+      "description": "Проект для мест, где жители регулярно ходят по грязи, обочине или опасному участку: проход к остановке, магазину, школе, ФАПу, ДК, площадке.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/entrance-sign-territory/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/entrance-sign-territory/",
+      "title": "Въездной знак территории или села | Проекты ТОС БГО",
+      "description": "Проект для села, микрорайона или значимой территории: аккуратный въездной знак, благоустройство вокруг него, озеленение и информационная составляющая.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/volunteer-day/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/volunteer-day/",
+      "title": "День добрых дел ТОС | Проекты ТОС БГО",
+      "description": "Формат, который помогает собрать жителей вокруг конкретных небольших задач.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/child-sport-playground/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/child-sport-playground/",
+      "title": "Детская или спортивная площадка | Проекты ТОС БГО",
+      "description": "Один из самых понятных для жителей проектов: безопасное место для детей, подростков и семейного отдыха. Подходит для дворов, сельских территорий и общественных пространств.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/playground/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/playground/",
+      "title": "Детская или спортивная площадка | Проекты ТОС БГО",
+      "description": "Понятный жителям проект: место для детей, подростков и семейного отдыха.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/green-route/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/green-route/",
+      "title": "Зелёный маршрут ТОС | Проекты ТОС БГО",
+      "description": "Маршрут ухода за деревьями, клумбами, газонами и общественными зелёными зонами.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-bogana/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-bogana/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Богана» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Богана»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-vostochnyy/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-vostochnyy/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Восточный» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Восточный»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-gubari/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-gubari/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Губари» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Губари»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-dzerzhinskogo/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-dzerzhinskogo/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Дзержинского» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Дзержинского»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-znamenie/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-znamenie/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Знамение» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Знамение»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-ivanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-ivanovka/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Ивановка» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Ивановка»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-ipas/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-ipas/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Ипас» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Ипас»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-kalinka/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-kalinka/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Калинка» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Калинка»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-mahrovka/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-mahrovka/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Махровка» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Махровка»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-mayak/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-mayak/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Маяк» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Маяк»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-mechta/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-mechta/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Мечта» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Мечта»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-mirolyubie/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-mirolyubie/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Миролюбие» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Миролюбие»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-pervomayskiy/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-pervomayskiy/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Первомайский» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Первомайский»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-petrovskoe/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-petrovskoe/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Петровское» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Петровское»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-pobeda/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-pobeda/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Победа» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Победа»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-podstepki/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-podstepki/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Подстёпки» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Подстёпки»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-port-artur/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-port-artur/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Порт Артур» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Порт Артур»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-prostornyy/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-prostornyy/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Просторный» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Просторный»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-severnyy-39/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-severnyy-39/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Северный 39» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Северный 39»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-tancyrey/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-tancyrey/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Танцырей» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Танцырей»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-tretyaki/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-tretyaki/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Третьяки» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Третьяки»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-ulyanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-ulyanovka/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Ульяновка» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Ульяновка»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-uyutnyy/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-uyutnyy/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Уютный» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Уютный»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-stand-and-ideas-chkalovec/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-stand-and-ideas-chkalovec/",
+      "title": "Информационный стенд и сбор инициатив ТОС «Чкаловец» | Проекты ТОС БГО",
+      "description": "Стартовая проектная идея для ТОС «Чкаловец»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/information-stand-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/information-stand-tos/",
+      "title": "Информационный стенд ТОС | Проекты ТОС БГО",
+      "description": "Недорогой, но полезный проект: стенд с контактами председателя, границами ТОС, объявлениями, планами работ, QR-кодом на сайт или группу.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/notice-board/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/notice-board/",
+      "title": "Информационный стенд ТОС | Проекты ТОС БГО",
+      "description": "Стенд помогает жителям без соцсетей узнавать новости, контакты и планы работ.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/yard-navigation/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/yard-navigation/",
+      "title": "Информационный стенд ТОС | Проекты ТОС БГО",
+      "description": "Недорогой проект, который помогает жителям знать контакты, правила и планы ТОС.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/history-route/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/history-route/",
+      "title": "Исторический маршрут территории | Проекты ТОС БГО",
+      "description": "Подходит для сёл и старых районов: таблички, рассказы, фотоархив, экскурсия.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/history-route-memory/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/history-route-memory/",
+      "title": "Исторический маршрут территории | Проекты ТОС БГО",
+      "description": "Проект для сёл, старых улиц и территорий с историей: таблички, фотоархив, рассказы старожилов, маршрут по памятным местам, онлайн-публикации.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/healthy-route-sport-zone/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/healthy-route-sport-zone/",
+      "title": "Маршрут здоровья или небольшая спортивная зона | Проекты ТОС БГО",
+      "description": "Проект для прогулок, зарядки, занятий на свежем воздухе и вовлечения жителей разного возраста в активность.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/yard-small-repair/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/yard-small-repair/",
+      "title": "Мелкий ремонт дворовой или сельской инфраструктуры | Проекты ТОС БГО",
+      "description": "Практичный проект для небольших, но заметных улучшений: лавочки, урны, ограждения, покраска, ремонт малых форм, приведение в порядок общественных зон.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/memorial-to-countrymen-frontline/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/memorial-to-countrymen-frontline/",
+      "title": "Мемориал землякам-фронтовикам | Проекты ТОС БГО",
+      "description": "Проект для восстановления, обновления или создания памятного места, посвящённого землякам — участникам Великой Отечественной войны или другим значимым страницам истории территории.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/public-space/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/public-space/",
+      "title": "Место отдыха или встреч жителей | Проекты ТОС БГО",
+      "description": "Лавочки, навес, сцена, зона общения или небольшое пространство для мероприятий.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/green-yard/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/green-yard/",
+      "title": "Озеленение и клумбы | Проекты ТОС БГО",
+      "description": "Быстрый видимый результат, который хорошо подходит для первого проекта.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/green-yard-flowerbeds/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/green-yard-flowerbeds/",
+      "title": "Озеленение, клумбы и уход за зелёными зонами | Проекты ТОС БГО",
+      "description": "Быстрый видимый проект для первого результата: клумбы, деревья, кустарники, газоны, уход за общественными зелёными зонами.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/lighting-safe-way/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/lighting-safe-way/",
+      "title": "Освещение и безопасный маршрут | Проекты ТОС БГО",
+      "description": "Проект для мест, где жителям небезопасно ходить вечером: двор, проход к остановке, дороге, школе, магазину, общественному месту.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/archive-memory/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/archive-memory/",
+      "title": "Память территории | Проекты ТОС БГО",
+      "description": "Сбор фотографий, историй жителей, материалов о памятных местах и ветеранах.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/neighbor-festival/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/neighbor-festival/",
+      "title": "Праздник двора, улицы или села | Проекты ТОС БГО",
+      "description": "Не только досуг, но и способ познакомить соседей, собрать предложения жителей, найти активистов и показать работу ТОС.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/tos-cultural-life-program/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/tos-cultural-life-program/",
+      "title": "Программа культурной жизни ТОС | Проекты ТОС БГО",
+      "description": "Не строительный, а организационный проект: календарь встреч, праздников, мастер-классов, выставок, памятных дат, соседских мероприятий и клубов по интересам.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/local-road-or-driveway-repair/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/local-road-or-driveway-repair/",
+      "title": "Ремонт дороги или проезда местного значения | Проекты ТОС БГО",
+      "description": "Проект для проблемного проезда, участка дороги, подъезда к общественному месту или маршрута, которым ежедневно пользуются жители.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/water-supply-improvement/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/water-supply-improvement/",
+      "title": "Ремонт или улучшение системы водоснабжения | Проекты ТОС БГО",
+      "description": "Проект для сельских территорий, где проблема воды напрямую влияет на качество жизни жителей. Может включать ремонт участка сети, замену элементов, подготовку площадки, благоустройство возле объекта.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/memorial/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/memorial/",
+      "title": "Ремонт памятника или памятного места | Проекты ТОС БГО",
+      "description": "Подходит для сельских территорий и микрорайонов, где есть общественно значимые памятные объекты.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/memorial-renovation/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/memorial-renovation/",
+      "title": "Ремонт памятника или памятного места | Проекты ТОС БГО",
+      "description": "Проект для территорий, где есть памятник, воинское захоронение, мемориальная зона или другое общественно значимое памятное место.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/rural-cultural-space/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/rural-cultural-space/",
+      "title": "Сельский клуб или место культурной жизни | Проекты ТОС БГО",
+      "description": "Проект для оживления культурной жизни территории: помещение, площадка, сцена, место встреч, кружков, праздников, выставок и собраний жителей.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/victory-square-or-memory-park/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/victory-square-or-memory-park/",
+      "title": "Сквер Победы или территория памяти | Проекты ТОС БГО",
+      "description": "Проект для создания или обновления небольшого сквера, памятной зоны, места проведения патриотических мероприятий и встреч поколений.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/support-elderly-neighbors/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/support-elderly-neighbors/",
+      "title": "Соседская помощь пожилым жителям | Проекты ТОС БГО",
+      "description": "Проект для организации взаимопомощи: помощь с уборкой территории, мелкими бытовыми задачами, информированием, сопровождением на мероприятия, поздравлениями и вниманием к одиноким жителям.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/village-stage/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/village-stage/",
+      "title": "Сцена или место для сельских мероприятий | Проекты ТОС БГО",
+      "description": "Создаёт точку притяжения для праздников, концертов и встреч жителей.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/lighting/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/lighting/",
+      "title": "Уличное освещение и безопасность | Проекты ТОС БГО",
+      "description": "Проект с понятным эффектом: безопаснее возвращаться домой и пользоваться территорией.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/street-lighting-upgrade/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/street-lighting-upgrade/",
+      "title": "Уличное освещение на проблемном участке | Проекты ТОС БГО",
+      "description": "Проект для улицы, прохода, двора или сельского маршрута, где отсутствие света создаёт неудобство и риски для жителей.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/center-of-attraction/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/center-of-attraction/",
+      "title": "Центр притяжения жителей | Проекты ТОС БГО",
+      "description": "Комплексный проект для двора, улицы или сельского центра: место встреч, досуга, общения, мероприятий и соседской взаимопомощи.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/project-school-for-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/project-school-for-tos/",
+      "title": "Школа подготовки проектов ТОС | Проекты ТОС БГО",
+      "description": "Серия встреч или онлайн-материалов для председателей и активистов: как выбрать проблему, оформить проект, собрать смету, подготовить фото и вовлечь жителей.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/eco-place/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/eco-place/",
+      "title": "Экоплощадка или раздельный сбор | Проекты ТОС БГО",
+      "description": "Помогает объединить экологию, просвещение и реальное улучшение территории.",
+      "section": "Проекты"
+    },
+    {
+      "path": "projects/eco-platform/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/eco-platform/",
+      "title": "Экоплощадка или экологическая точка ТОС | Проекты ТОС БГО",
+      "description": "Площадка или точка для экологического просвещения, раздельного сбора, обмена полезными привычками и вовлечения жителей в заботу о территории.",
+      "section": "Проекты"
+    },
+    {
+      "path": "privacy/index.html",
+      "url": "https://tosborisoglebsk.ru/privacy/",
+      "title": "Персональные данные и публикация сведений ТОС БГО",
+      "description": "Правила осторожной публикации телефонов, email, ссылок, фотографий и других сведений на портале ТОС Борисоглебского городского округа.",
+      "section": "Публикация сведений"
+    },
+    {
+      "path": "done/index.html",
+      "url": "https://tosborisoglebsk.ru/done/",
+      "title": "Сделано ТОСами БГО — истории результата, проекты и благоустройство",
+      "description": "Истории результата ТОСов Борисоглебского городского округа: что было, что сделали, кто участвовал, какой результат получили жители, какие детали и фото нужно уточнить.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-bogana/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-bogana/",
+      "title": "ТОС «Богана»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Богана» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/vostochnyy-cleanups-holidays/index.html",
+      "url": "https://tosborisoglebsk.ru/done/vostochnyy-cleanups-holidays/",
+      "title": "ТОС «Восточный»: субботники, праздники и объединение соседей | Сделано ТОСами БГО",
+      "description": "В карточке ТОС указано, что жители объединяются для благоустройства, организуют субботники и праздники, чтобы создать комфортную и дружелюбную среду на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/gubari-projects-archive/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gubari-projects-archive/",
+      "title": "ТОС «Губари»: детская площадка, памятники, водоснабжение и проект «Шаг к здоровью» | Сделано ТОСами БГО",
+      "description": "В карточке ТОС указано, что активистами ТОС «Губари» реализованы проекты по установке детской площадки, благоустройству памятника «За власть Советов», ремонту памятника воинам, погибшим в Великой Отечественной войне, установке водонапорной башни Рожновского, ремонту системы водоснабжения и проекту «Шаг к здоровью».",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-dzerzhinskogo/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-dzerzhinskogo/",
+      "title": "ТОС «Дзержинского»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Дзержинского» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-znamenie/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-znamenie/",
+      "title": "ТОС «Знамение»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Знамение» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-ivanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-ivanovka/",
+      "title": "ТОС «Ивановка»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Ивановка» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-ipas/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-ipas/",
+      "title": "ТОС «Ипас»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Ипас» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-kalinka/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-kalinka/",
+      "title": "ТОС «Калинка»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Калинка» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/mahrovka-project-experience/index.html",
+      "url": "https://tosborisoglebsk.ru/done/mahrovka-project-experience/",
+      "title": "ТОС «Махровка»: опыт побед в проектах и активное развитие села | Сделано ТОСами БГО",
+      "description": "В карточке ТОС указано, что «Махровка» — дружный и активный ТОС, жители активно участвуют в жизни села, уже выиграли несколько проектов и планируют дальнейшее развитие.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-mechta/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-mechta/",
+      "title": "ТОС «Мечта»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Мечта» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-mirolyubie/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-mirolyubie/",
+      "title": "ТОС «Миролюбие»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Миролюбие» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-pervomayskiy/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-pervomayskiy/",
+      "title": "ТОС «Первомайский»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Первомайский» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-petrovskoe/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-petrovskoe/",
+      "title": "ТОС «Петровское»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Петровское» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-pobeda/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-pobeda/",
+      "title": "ТОС «Победа»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Победа» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-podstepki/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-podstepki/",
+      "title": "ТОС «Подстёпки»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Подстёпки» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-port-artur/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-port-artur/",
+      "title": "ТОС «Порт Артур»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Порт Артур» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-prostornyy/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-prostornyy/",
+      "title": "ТОС «Просторный»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Просторный» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/severnyy-39-playground/index.html",
+      "url": "https://tosborisoglebsk.ru/done/severnyy-39-playground/",
+      "title": "ТОС «Северный 39»: два гранта и благоустройство детской площадки | Сделано ТОСами БГО",
+      "description": "По данным карточки ТОС, жители объединились для благоустройства придомовой территории. За время существования ТОС выиграл два гранта и благоустроил детскую площадку, которой активно пользуются дети и подростки.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/tancyrey-playgrounds-rest-places/index.html",
+      "url": "https://tosborisoglebsk.ru/done/tancyrey-playgrounds-rest-places/",
+      "title": "ТОС «Танцырей»: благоустройство, озеленение, детские площадки и места отдыха | Сделано ТОСами БГО",
+      "description": "В карточке ТОС указано, что «Танцырей» занимается благоустройством территории, созданием комфортных условий для проживания, озеленением, установкой детских площадок и мест отдыха.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/tretyaki-seven-projects/index.html",
+      "url": "https://tosborisoglebsk.ru/done/tretyaki-seven-projects/",
+      "title": "ТОС «Третьяки»: 7 проектов и помощь семьям участников СВО | Сделано ТОСами БГО",
+      "description": "По данным карточки ТОС, «Третьяки» оказывает помощь семьям участников СВО, участники активно занимаются художественной самодеятельностью, а за период существования ТОС реализовал 7 проектов по линии Ассоциации муниципальных образований Воронежской области.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-ulyanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-ulyanovka/",
+      "title": "ТОС «Ульяновка»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Ульяновка» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/result-archive-needed-uyutnyy/index.html",
+      "url": "https://tosborisoglebsk.ru/done/result-archive-needed-uyutnyy/",
+      "title": "ТОС «Уютный»: собираем истории сделанного | Сделано ТОСами БГО",
+      "description": "Для ТОС «Уютный» открыт рабочий материал для сбора историй результата: реализованных проектов, субботников, благоустройства, праздников, помощи жителям и других полезных дел на территории.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/chkalovec-many-projects/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chkalovec-many-projects/",
+      "title": "ТОС «Чкаловец»: площадки, экоплощадка и центр притяжения «Связь поколений» | Сделано ТОСами БГО",
+      "description": "В карточке ТОС указано, что «Чкаловец» — один из самых известных и успешных ТОСов, многократный победитель областных грантов. Среди реализованных направлений: детская и спортивная площадки, первая в городе экоплощадка, центр притяжения «Связь поколений», патриотическое воспитание и поддержка социальной сферы.",
+      "section": "Сделано"
+    },
+    {
+      "path": "done/chigorak-tos-cultural-work/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chigorak-tos-cultural-work/",
+      "title": "ТОСы села Чигорак: благоустройство, культура и досуговые мероприятия | Сделано ТОСами БГО",
+      "description": "В каталоге есть несколько ТОСов села Чигорак: «Ипас», «Маяк», «Мечта», «Первомайский», «Порт Артур». В их карточках повторяются направления: благоустройство села, повышение культурного уровня жителей и организация досуговых мероприятий.",
+      "section": "Сделано"
+    },
+    {
+      "path": "glossary/index.html",
+      "url": "https://tosborisoglebsk.ru/glossary/",
+      "title": "Словарь ТОС БГО простыми словами",
+      "description": "Краткий словарь терминов для жителей, председателей и актива ТОС БГО: собрание, конференция, устав, границы, проект, потребность, отчёт и инициативная группа.",
+      "section": "Словарь"
+    },
+    {
+      "path": "places/borisoglebsk/index.html",
+      "url": "https://tosborisoglebsk.ru/places/borisoglebsk/",
+      "title": "г. Борисоглебск | Территории ТОС БГО",
+      "description": "г. Борисоглебск: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/index.html",
+      "url": "https://tosborisoglebsk.ru/places/",
+      "title": "Населённые пункты и территории ТОС БГО",
+      "description": "Справочник населённых пунктов и территорий Борисоглебского городского округа, связанных с карточками ТОС.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/ivanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/places/ivanovka/",
+      "title": "п. Ивановка | Территории ТОС БГО",
+      "description": "п. Ивановка: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/kalinino/index.html",
+      "url": "https://tosborisoglebsk.ru/places/kalinino/",
+      "title": "п. Калинино | Территории ТОС БГО",
+      "description": "п. Калинино: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/mirolyubie/index.html",
+      "url": "https://tosborisoglebsk.ru/places/mirolyubie/",
+      "title": "п. Миролюбие | Территории ТОС БГО",
+      "description": "п. Миролюбие: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/podstepki/index.html",
+      "url": "https://tosborisoglebsk.ru/places/podstepki/",
+      "title": "п. Подстёпки | Территории ТОС БГО",
+      "description": "п. Подстёпки: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/bogana/index.html",
+      "url": "https://tosborisoglebsk.ru/places/bogana/",
+      "title": "с. Богана | Территории ТОС БГО",
+      "description": "с. Богана: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/gubari/index.html",
+      "url": "https://tosborisoglebsk.ru/places/gubari/",
+      "title": "с. Губари | Территории ТОС БГО",
+      "description": "с. Губари: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/mahrovka/index.html",
+      "url": "https://tosborisoglebsk.ru/places/mahrovka/",
+      "title": "с. Махровка | Территории ТОС БГО",
+      "description": "с. Махровка: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/petrovskoe/index.html",
+      "url": "https://tosborisoglebsk.ru/places/petrovskoe/",
+      "title": "с. Петровское | Территории ТОС БГО",
+      "description": "с. Петровское: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/tancyrey/index.html",
+      "url": "https://tosborisoglebsk.ru/places/tancyrey/",
+      "title": "с. Танцырей | Территории ТОС БГО",
+      "description": "с. Танцырей: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/tretyaki/index.html",
+      "url": "https://tosborisoglebsk.ru/places/tretyaki/",
+      "title": "с. Третьяки | Территории ТОС БГО",
+      "description": "с. Третьяки: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/ulyanovka/index.html",
+      "url": "https://tosborisoglebsk.ru/places/ulyanovka/",
+      "title": "с. Ульяновка | Территории ТОС БГО",
+      "description": "с. Ульяновка: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "places/chigorak/index.html",
+      "url": "https://tosborisoglebsk.ru/places/chigorak/",
+      "title": "с. Чигорак | Территории ТОС БГО",
+      "description": "с. Чигорак: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.",
+      "section": "Территории"
+    },
+    {
+      "path": "create-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/create-tos/",
+      "title": "Как создать ТОС в Борисоглебском городском округе",
+      "description": "Пошаговый маршрут создания ТОС: инициативная группа, предложение о территории, консультация, собрание или конференция, устав, органы ТОС и регистрация устава.",
+      "section": "create-tos"
+    },
+    {
+      "path": "editorial-policy/index.html",
+      "url": "https://tosborisoglebsk.ru/editorial-policy/",
+      "title": "О портале и редакционная политика — ТОС БГО",
+      "description": "Статус портала ТОС Борисоглебского городского округа: кто ведёт сайт, как проверяются материалы, как исправить ошибку и почему портал не является официальным сайтом администрации.",
+      "section": "editorial-policy"
+    },
+    {
+      "path": "faq/index.html",
+      "url": "https://tosborisoglebsk.ru/faq/",
+      "title": "Частые вопросы о ТОС — жители, председатели, проекты и портал",
+      "description": "Частые вопросы о территориальном общественном самоуправлении: что такое ТОС, как найти свой ТОС, как создать ТОС, прислать новость, предложить проект, получить помощь и пользоваться порталом ТОС БГО.",
+      "section": "faq"
+    },
+    {
+      "path": "map/index.html",
+      "url": "https://tosborisoglebsk.ru/map/",
+      "title": "Карта ТОС Борисоглебского городского округа",
+      "description": "Карта территорий ТОС БГО и инструкция по добавлению границ.",
+      "section": "map"
+    },
+    {
+      "path": "open-data/index.html",
+      "url": "https://tosborisoglebsk.ru/open-data/",
+      "title": "Открытые данные портала ТОС БГО",
+      "description": "Открытые JSON-файлы и служебные данные портала ТОС БГО: каталог ТОС, новости, проекты, потребности, истории результата, аудит, RSS и sitemap.",
+      "section": "open-data"
+    },
+    {
+      "path": "roadmap/index.html",
+      "url": "https://tosborisoglebsk.ru/roadmap/",
+      "title": "План развития портала ТОС БГО",
+      "description": "Открытый план развития портала ТОС Борисоглебского городского округа: что уже сделано, какие данные нужно уточнить и какие разделы будут развиваться дальше.",
+      "section": "roadmap"
+    },
+    {
+      "path": "sections/index.html",
+      "url": "https://tosborisoglebsk.ru/sections/",
+      "title": "Все разделы сайта ТОС БГО",
+      "description": "Все разделы портала ТОС Борисоглебского городского округа: для жителей, председателей, партнёров, проектов, документов, новостей и контактов.",
+      "section": "sections"
+    },
+    {
+      "path": "site-index/index.html",
+      "url": "https://tosborisoglebsk.ru/site-index/",
+      "title": "Индекс страниц портала ТОС БГО",
+      "description": "Публичный индекс страниц портала ТОС БГО: разделы, карточки ТОС, новости, проекты, документы, территории и справочные материалы.",
+      "section": "site-index"
+    },
+    {
+      "path": "submit-materials/index.html",
+      "url": "https://tosborisoglebsk.ru/submit-materials/",
+      "title": "Как прислать материал на портал ТОС БГО",
+      "description": "Инструкция для жителей, председателей и активистов: как прислать новость, фотоотчёт, проект, потребность, логотип или исправление карточки ТОС.",
+      "section": "submit-materials"
+    },
+    {
+      "path": "update-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/update-tos/",
+      "title": "Обновить данные ТОС или прислать материал — ТОС БГО",
+      "description": "Удобный конструктор сообщения для обновления карточки ТОС, новости, фотоотчёта, события, проекта или потребности.",
+      "section": "update-tos"
+    }
+  ]
+}
