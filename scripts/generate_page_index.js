@@ -31,7 +31,10 @@ function sectionFor(relative) {
     chairperson: 'Председателю', residents: 'Жителям', partners: 'Партнёрам', grants: 'Конкурсы',
     calendar: 'Календарь', contacts: 'Контакты', search: 'Поиск', sources: 'Источники данных',
     privacy: 'Публикация сведений', glossary: 'Словарь', methodology: 'О портале',
-    'data-quality': 'Качество данных', 'data-update': 'Актуализация данных', 'check-tos': 'Проверка ТОС'
+    'data-quality': 'Качество данных', 'data-update': 'Актуализация данных', 'data-requests': 'Запросы данных',
+    'communication-kit': 'Коммуникационный набор', campaign: 'Кампания актуализации', 'field-checklist': 'Чек-лист проверки',
+    'open-data': 'Открытые данные', roadmap: 'План развития', 'site-index': 'Индекс страниц',
+    'check-tos': 'Проверка ТОС', 'submit-materials': 'Прислать материал'
   };
   return labels[first] || first;
 }
