@@ -23,6 +23,7 @@
 - Запросы на уточнение данных: https://tosborisoglebsk.ru/data-requests/
 - Коммуникационный набор: https://tosborisoglebsk.ru/communication-kit/
 - Кампания актуализации данных: https://tosborisoglebsk.ru/campaign/
+- Чек-лист проверки карточки: https://tosborisoglebsk.ru/field-checklist/
 - Методика развития портала: https://tosborisoglebsk.ru/methodology/
 - Открытые данные: https://tosborisoglebsk.ru/open-data/
 - План развития: https://tosborisoglebsk.ru/roadmap/
