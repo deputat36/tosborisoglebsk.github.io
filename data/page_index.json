@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-17T12:11:29.091Z",
-  "total": 293,
+  "generated_at": "2026-06-17T12:40:51.601Z",
+  "total": 294,
   "pages": [
     {
       "path": "data-update/index.html",
@@ -2038,6 +2038,13 @@
       "title": "Карта ТОС Борисоглебского городского округа",
       "description": "Карта территорий ТОС БГО и инструкция по добавлению границ.",
       "section": "map"
+    },
+    {
+      "path": "media-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/media-guide/",
+      "title": "Фото и логотипы для карточек ТОС БГО",
+      "description": "Памятка по подготовке логотипов, фотографий территорий, мероприятий и результатов для публикации на портале ТОС БГО.",
+      "section": "media-guide"
     },
     {
       "path": "sections/index.html",
