@@ -29,7 +29,9 @@ function sectionFor(relative) {
     tos: 'Каталог ТОС', news: 'Новости', projects: 'Проекты', done: 'Сделано', needs: 'Потребности',
     materials: 'Материалы', documents: 'Документы', legal: 'Правовая основа', places: 'Территории',
     chairperson: 'Председателю', residents: 'Жителям', partners: 'Партнёрам', grants: 'Конкурсы',
-    calendar: 'Календарь', contacts: 'Контакты', search: 'Поиск'
+    calendar: 'Календарь', contacts: 'Контакты', search: 'Поиск', sources: 'Источники данных',
+    privacy: 'Публикация сведений', glossary: 'Словарь', methodology: 'О портале',
+    'data-quality': 'Качество данных', 'data-update': 'Актуализация данных', 'check-tos': 'Проверка ТОС'
   };
   return labels[first] || first;
 }
