@@ -24,6 +24,7 @@
 - Коммуникационный набор: https://tosborisoglebsk.ru/communication-kit/
 - Кампания актуализации данных: https://tosborisoglebsk.ru/campaign/
 - Чек-лист проверки карточки: https://tosborisoglebsk.ru/field-checklist/
+- Фото и логотипы для карточек: https://tosborisoglebsk.ru/media-guide/
 - Методика развития портала: https://tosborisoglebsk.ru/methodology/
 - Открытые данные: https://tosborisoglebsk.ru/open-data/
 - План развития: https://tosborisoglebsk.ru/roadmap/
