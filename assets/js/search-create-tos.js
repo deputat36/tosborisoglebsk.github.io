@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.querySelector('#search-results');
   if (!input || !root) return;
 
-  const items = [
+  const manualItems = [
     {
       type: 'Создание ТОС',
       title: 'Как создать ТОС в Борисоглебском городском округе',
@@ -18,25 +18,48 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
+  let pageIndexItems = [];
   let lastQuery = null;
 
   function esc(value) {
-    return String(value).replace(/[&<>"']/g, (char) => ({
+    return String(value ?? '').replace(/[&<>"']/g, (char) => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
     }[char]));
   }
 
+  function norm(value) {
+    return String(value || '').toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ').trim();
+  }
+
+  function pathFromUrl(url) {
+    try { return new URL(url).pathname; } catch (error) { return url || '/'; }
+  }
+
   function renderExtras() {
-    const query = input.value.toLowerCase().trim().replace(/ё/g, 'е');
+    const query = norm(input.value);
     if (query === lastQuery && root.querySelector('.search-create-extra')) return;
     lastQuery = query;
 
     root.querySelectorAll('.search-create-extra').forEach((node) => node.remove());
 
+    const combined = [
+      ...manualItems,
+      ...pageIndexItems.map((page) => ({
+        type: page.section || 'Страница',
+        title: page.title || 'Без названия',
+        text: [page.description, page.path].filter(Boolean).join(' '),
+        url: pathFromUrl(page.url)
+      }))
+    ];
+
+    const seen = new Set();
     const fragment = document.createDocumentFragment();
-    items.forEach((item) => {
-      const haystack = [item.type, item.title, item.text].join(' ').toLowerCase().replace(/ё/g, 'е');
+    combined.forEach((item) => {
+      if (seen.has(item.url)) return;
+      seen.add(item.url);
+      const haystack = norm([item.type, item.title, item.text, item.url].join(' '));
       if (query && !haystack.includes(query)) return;
+      if (!query && !manualItems.includes(item)) return;
 
       const card = document.createElement('article');
       card.className = 'list-item search-create-extra';
@@ -45,6 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     root.appendChild(fragment);
   }
+
+  fetch('/data/page_index.json', { cache: 'no-store' })
+    .then((response) => response.ok ? response.json() : null)
+    .then((data) => {
+      pageIndexItems = Array.isArray(data?.pages) ? data.pages : [];
+      renderExtras();
+    })
+    .catch(() => { pageIndexItems = []; });
 
   input.addEventListener('input', () => setTimeout(renderExtras, 0));
   setTimeout(renderExtras, 700);
