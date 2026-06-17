@@ -74,6 +74,26 @@ function qualityLabel(score) {
   if (score >= 55) return 'требует уточнений';
   return 'нужно обновить данные';
 }
+function missingFields(tos) {
+  const list = [];
+  if (!arr(tos.phones).length) list.push('телефон для открытой публикации');
+  if (!arr(tos.social_links).length) list.push('ссылка на группу, чат или страницу ТОС');
+  if (!tos.logo) list.push('реальный логотип ТОС');
+  if (!tos.updated_at) list.push('дата последней проверки карточки');
+  if (!tos.description || tos.description === 'Описание пока уточняется.') list.push('краткое описание деятельности');
+  if (!tos.boundaries) list.push('границы территории');
+  if (!tos.founded) list.push('год создания');
+  if (!tos.population) list.push('примерная численность жителей');
+  return list;
+}
+function clarifyBlock(tos, qualityText) {
+  const missing = missingFields(tos);
+  const items = missing.map((item) => `<li>${esc(item)}</li>`).join('');
+  const message = missing.length
+    ? `<p>Карточка уже опубликована, но её можно сделать точнее. Сейчас стоит уточнить:</p><ul>${items}</ul>`
+    : '<p>Основные поля карточки заполнены. Следующий шаг — добавить подтверждённые фото, логотип, новости и истории результата по мере поступления.</p>';
+  return `<section class="section tight"><div class="container grid"><article class="card full"><div class="card-inner"><div class="meta"><span class="tag">Проверка данных</span><span class="tag">${esc(qualityText)}</span></div><h2>Что нужно уточнить</h2>${message}<div class="notice"><b style="color:var(--text)">Как помочь</b><br>Пришлите только те данные, которые можно размещать открыто: публичный телефон, ссылку на группу, логотип, фото территории, описание выполненных дел или актуальную потребность.</div><div class="card-actions"><a class="btn primary" href="/update-tos/?tos=${esc(tos.slug)}">Прислать уточнение</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/sources/">Источники данных</a></div></div></article></div></section>`;
+}
 function newsCard(n) {
   return `<article class="list-item"><div class="meta"><span class="tag">${esc(n.category || 'Новость')}</span><span class="tag">${esc(niceDate(n.date))}</span></div><h3>${esc(n.title || 'Новость')}</h3><p>${esc(n.lead || '')}</p><div class="card-actions"><a class="btn" href="/news/${esc(n.id)}/">Читать</a>${n.source_url ? `<a class="btn" href="${esc(n.source_url)}" target="_blank" rel="noopener">Источник</a>` : ''}</div></article>`;
 }
@@ -118,21 +138,33 @@ function makePage(tos, data) {
 
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: `ТОС «${tos.name}»`,
-    url: canonical,
-    logo: `${SITE_URL}${logo}`,
-    areaServed: tos.location || 'Борисоглебский городской округ',
-    description: desc,
-    sameAs,
-    contactPoint: phones.map(phone => ({ '@type': 'ContactPoint', telephone: phone, contactType: 'председатель' }))
+    '@graph': [
+      {
+        '@type': 'Organization',
+        name: `ТОС «${tos.name}»`,
+        url: canonical,
+        logo: `${SITE_URL}${logo}`,
+        areaServed: tos.location || 'Борисоглебский городской округ',
+        description: desc,
+        sameAs,
+        contactPoint: phones.map(phone => ({ '@type': 'ContactPoint', telephone: phone, contactType: 'председатель' }))
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Главная', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: 'Каталог ТОС', item: `${SITE_URL}/tos/` },
+          { '@type': 'ListItem', position: 3, name: `ТОС «${tos.name}»`, item: canonical }
+        ]
+      }
+    ]
   };
 
   const actions = [
     actionCard('Прислать новость', 'Расскажите о субботнике, собрании, празднике, проекте, помощи или результате работы ТОС.', '/contacts/', true),
     actionCard('Предложить проект', 'Опишите идею: что нужно изменить, кому это поможет, какие фото и ресурсы уже есть.', '/update-tos/#template-project'),
     actionCard('Сообщить о потребности', 'Укажите, что нужно территории: материалы, волонтёры, техника, транспорт, фото или помощь партнёров.', '/update-tos/#template-need'),
-    actionCard('Уточнить данные', 'Исправьте телефон, председателя, ссылку, границы, описание или дату обновления карточки.', '/update-tos/'),
+    actionCard('Уточнить данные', 'Исправьте телефон, председателя, ссылку, границы, описание или дату обновления карточки.', `/update-tos/?tos=${tos.slug}`),
     actionCard('Прислать фотоотчёт', 'Покажите результат: было, сделали, кто участвовал и что получилось.', '/update-tos/#template-photo'),
     actionCard('Посмотреть, что сделано', 'Откройте истории результата и архив реализованных инициатив ТОСов.', '/done/')
   ].join('');
@@ -158,13 +190,15 @@ function makePage(tos, data) {
 </head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержимому</a>
-  <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/residents/">Жителям</a><a href="/partners/">Партнёрам</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/done/">Сделано</a><a href="/calendar/">Календарь</a><a href="/needs/">Нужна помощь</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/legal/">Правовая основа</a><a href="/create-tos/">Как создать ТОС</a><a href="/chairperson/">Председателю</a><a href="/contacts/">Контакты</a><a href="/editorial-policy/">О портале</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+  <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
   <main id="main">
-    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="#help-this-tos">Как помочь</a><a class="btn" href="/contacts/">Предложить новость</a><a class="btn" href="/update-tos/">Сообщить об ошибке</a><button class="btn" onclick="window.print()">Распечатать карточку</button></div></div></section>
+    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="#help-this-tos">Как помочь</a><a class="btn" href="/contacts/">Предложить новость</a><a class="btn" href="/update-tos/?tos=${esc(tos.slug)}">Сообщить об ошибке</a><button class="btn" onclick="window.print()">Распечатать карточку</button></div></div></section>
 
-    <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Мини-паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div><div class="tile"><b>${esc(qualityText)}</b><span>заполненность карточки</span></div></div><hr class="sep"/><div class="grid"><article class="card"><div class="card-inner"><h3>Территория</h3><p><b>Населённый пункт:</b> ${esc(tos.location || 'уточняется')}</p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p></div></article><article class="card"><div class="card-inner"><h3>Контакты</h3><p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p><p><b>Телефон:</b> ${esc(phones.join(', ') || 'уточняется')}</p><p><b>Email:</b> ${esc(emails.join(', ') || 'уточняется')}</p></div></article><article class="card"><div class="card-inner"><h3>Публичность</h3><p><b>Соцсети:</b> ${esc(socialLinks.length ? socialLinks.map(socialName).join(', ') : 'уточняются')}</p><p><b>Обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}</p></div></article></div><div class="notice"><b style="color:var(--text)">Если вы живёте на этой территории</b><br>Вы можете прислать новость, фото, идею проекта, уточнение контактов или потребность для публикации на портале.</div></div></article></div></section>
+    <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div><div class="tile"><b>${esc(qualityText)}</b><span>заполненность карточки</span></div></div><hr class="sep"/><div class="grid"><article class="card"><div class="card-inner"><h3>Территория</h3><p><b>Населённый пункт:</b> ${esc(tos.location || 'уточняется')}</p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p></div></article><article class="card"><div class="card-inner"><h3>Контакты</h3><p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p><p><b>Телефон:</b> ${esc(phones.join(', ') || 'уточняется')}</p><p><b>Email:</b> ${esc(emails.join(', ') || 'уточняется')}</p></div></article><article class="card"><div class="card-inner"><h3>Публичность</h3><p><b>Соцсети:</b> ${esc(socialLinks.length ? socialLinks.map(socialName).join(', ') : 'уточняются')}</p><p><b>Обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}</p><p><b>Источник:</b> ${esc(tos.source_label || tos.source || 'уточняется')}</p></div></article></div><div class="notice"><b style="color:var(--text)">Если вы живёте на этой территории</b><br>Вы можете прислать новость, фото, идею проекта, уточнение контактов или потребность для публикации на портале.</div></div></article></div></section>
 
-    <section class="section"><div class="container grid"><div class="card full"><div class="card-inner"><div class="prose"><h2>Описание</h2><p>${esc(tos.description || 'Описание пока уточняется.')}</p><h2>Председатель</h2><p>${esc(tos.chairperson || 'Информация уточняется')}</p><h2>Контакты председателя</h2><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '')}${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '')}${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Профиль/ссылка — ${esc(u)}</a></li>`, '')}${(!phones.length && !emails.length && !chairLinks.length) ? '<li>Контакты уточняются</li>' : ''}</ul><h2>Сообщества ТОС</h2><ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))} — ${esc(u)}</a></li>`)}</ul><p class="tiny">Исходные контакты из анкеты: ${esc(tos.contacts_raw || '—')}</p><p class="tiny">Источник/обновление: ${esc(tos.updated_at || 'дата уточняется')}</p></div><hr class="sep"/><div class="card-actions"><a class="btn" href="/tos/">← В каталог</a><a class="btn" href="/update-tos/">Сообщить об ошибке</a><a class="btn" href="/contacts/">Предложить новость</a></div></div></div></div></section>
+    ${clarifyBlock(tos, qualityText)}
+
+    <section class="section"><div class="container grid"><div class="card full"><div class="card-inner"><div class="prose"><h2>Описание</h2><p>${esc(tos.description || 'Описание пока уточняется.')}</p><h2>Председатель</h2><p>${esc(tos.chairperson || 'Информация уточняется')}</p><h2>Контакты председателя</h2><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '')}${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '')}${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Профиль/ссылка — ${esc(u)}</a></li>`, '')}${(!phones.length && !emails.length && !chairLinks.length) ? '<li>Контакты уточняются</li>' : ''}</ul><h2>Сообщества ТОС</h2><ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))} — ${esc(u)}</a></li>`)}</ul><p class="tiny">Исходные контакты из анкеты: ${esc(tos.contacts_raw || '—')}</p><p class="tiny">Источник/обновление: ${esc(tos.updated_at || 'дата уточняется')}</p></div><hr class="sep"/><div class="card-actions"><a class="btn" href="/tos/">← В каталог</a><a class="btn" href="/update-tos/?tos=${esc(tos.slug)}">Сообщить об ошибке</a><a class="btn" href="/contacts/">Предложить новость</a></div></div></div></div></section>
 
     <section class="section" id="help-this-tos"><div class="container section-head"><div><h2>Как помочь этому ТОС</h2><p>Карточка ТОС — не только справочник, но и точка действия для жителей, председателя и партнёров</p></div><a class="btn" href="/partners/">Партнёрам</a></div><div class="container grid">${actions}</div></section>
 
@@ -183,7 +217,7 @@ function makePage(tos, data) {
 
 function writeFile(file, content) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content, 'utf8'); }
 function updateSitemap(toses) {
-  const baseUrls = ['/', '/tos/', '/residents/', '/partners/', '/news/', '/grants/', '/projects/', '/done/', '/calendar/', '/needs/', '/materials/', '/documents/', '/legal/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/editorial-policy/', '/search/'].map(u => `${SITE_URL}${u}`);
+  const baseUrls = ['/', '/tos/', '/residents/', '/partners/', '/news/', '/grants/', '/projects/', '/done/', '/calendar/', '/needs/', '/materials/', '/documents/', '/legal/', '/legal/federal-law-33/', '/places/', '/sources/', '/data-quality/', '/methodology/', '/glossary/', '/privacy/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/editorial-policy/', '/search/', '/sections/'].map(u => `${SITE_URL}${u}`);
   const tosUrls = toses.filter(t => t.slug && t.status !== 'draft').map(t => `${SITE_URL}/tos/${t.slug}/`);
   const urls = [...new Set([...baseUrls, ...tosUrls])];
   const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`;
