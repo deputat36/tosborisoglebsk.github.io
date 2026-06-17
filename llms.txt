@@ -23,6 +23,7 @@
 - Доска сбора данных: https://tosborisoglebsk.ru/collection-board/
 - Редакционный порядок: https://tosborisoglebsk.ru/editorial-workflow/
 - Стандарты материалов: https://tosborisoglebsk.ru/content-standards/
+- Статусы проверки данных: https://tosborisoglebsk.ru/verification-levels/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
 - Запросы на уточнение данных: https://tosborisoglebsk.ru/data-requests/
 - Коммуникационный набор: https://tosborisoglebsk.ru/communication-kit/
