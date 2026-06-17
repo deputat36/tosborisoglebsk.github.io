@@ -75,4 +75,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Generate SEO pages, sitemap and audit'
-          file_pattern: 'data/*.json *.xml tos/*/index.html news/*/index.html done/*/index.html needs/*/index.html projects/*/index.html places/*/index.html places/*/*/index.html'
+          file_pattern: '.'
