@@ -30,7 +30,7 @@ function sectionFor(relative) {
     materials: 'Материалы', documents: 'Документы', legal: 'Правовая основа', places: 'Территории',
     chairperson: 'Председателю', residents: 'Жителям', partners: 'Партнёрам', grants: 'Конкурсы',
     calendar: 'Календарь', contacts: 'Контакты', search: 'Поиск', sources: 'Источники данных',
-    privacy: 'Публикация сведений', glossary: 'Словарь', methodology: 'О портале',
+    privacy: 'Публикация сведений', glossary: 'Словарь', methodology: 'О портале', workbench: 'Рабочая панель',
     'data-quality': 'Качество данных', 'data-update': 'Актуализация данных', 'data-requests': 'Запросы данных',
     'communication-kit': 'Коммуникационный набор', campaign: 'Кампания актуализации', 'field-checklist': 'Чек-лист проверки',
     'media-guide': 'Фото и логотипы', 'open-data': 'Открытые данные', roadmap: 'План развития', 'site-index': 'Индекс страниц',
