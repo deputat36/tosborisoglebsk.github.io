@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-17T17:49:51.291Z",
-  "total": 298,
+  "generated_at": "2026-06-17T18:09:07.877Z",
+  "total": 299,
   "pages": [
     {
       "path": "data-update/index.html",
@@ -2087,6 +2087,13 @@
       "title": "Обновить данные ТОС или прислать материал — ТОС БГО",
       "description": "Удобный конструктор сообщения для обновления карточки ТОС, новости, фотоотчёта, события, проекта или потребности.",
       "section": "update-tos"
+    },
+    {
+      "path": "verification-levels/index.html",
+      "url": "https://tosborisoglebsk.ru/verification-levels/",
+      "title": "Статусы проверки данных ТОС БГО",
+      "description": "Понятные статусы проверки сведений в карточках ТОС БГО: подтверждено, частично подтверждено, требует проверки, уточняется, устарело.",
+      "section": "verification-levels"
     }
   ]
 }
