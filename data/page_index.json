@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-17T13:27:14.115Z",
-  "total": 296,
+  "generated_at": "2026-06-17T13:40:03.799Z",
+  "total": 297,
   "pages": [
     {
       "path": "data-update/index.html",
@@ -2031,6 +2031,13 @@
       "title": "Чек-лист проверки карточки ТОС БГО",
       "description": "Печатный чек-лист для проверки карточки ТОС БГО: контакты, соцсети, логотип, фото, границы, новости, проекты, потребности и источник подтверждения.",
       "section": "Чек-лист проверки"
+    },
+    {
+      "path": "content-standards/index.html",
+      "url": "https://tosborisoglebsk.ru/content-standards/",
+      "title": "Стандарты материалов для портала ТОС БГО",
+      "description": "Единые стандарты для новостей, фотоотчётов, проектов, потребностей и историй результата на портале ТОС БГО.",
+      "section": "content-standards"
     },
     {
       "path": "create-tos/index.html",
