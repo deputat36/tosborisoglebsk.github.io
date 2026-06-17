@@ -33,7 +33,7 @@ function sectionFor(relative) {
     privacy: 'Публикация сведений', glossary: 'Словарь', methodology: 'О портале',
     'data-quality': 'Качество данных', 'data-update': 'Актуализация данных', 'data-requests': 'Запросы данных',
     'communication-kit': 'Коммуникационный набор', campaign: 'Кампания актуализации', 'field-checklist': 'Чек-лист проверки',
-    'open-data': 'Открытые данные', roadmap: 'План развития', 'site-index': 'Индекс страниц',
+    'media-guide': 'Фото и логотипы', 'open-data': 'Открытые данные', roadmap: 'План развития', 'site-index': 'Индекс страниц',
     'check-tos': 'Проверка ТОС', 'submit-materials': 'Прислать материал'
   };
   return labels[first] || first;
