@@ -2,6 +2,8 @@ name: Generate TOS pages
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
   push:
     branches:
       - release-2025-12-22
@@ -16,6 +18,10 @@ on:
 
 permissions:
   contents: write
+
+concurrency:
+  group: generate-tos-pages
+  cancel-in-progress: false
 
 jobs:
   generate:
