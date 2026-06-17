@@ -20,6 +20,7 @@
 - Источники данных: https://tosborisoglebsk.ru/sources/
 - Населённые пункты и территории: https://tosborisoglebsk.ru/places/
 - Рабочая панель: https://tosborisoglebsk.ru/workbench/
+- Доска сбора данных: https://tosborisoglebsk.ru/collection-board/
 - Редакционный порядок: https://tosborisoglebsk.ru/editorial-workflow/
 - Стандарты материалов: https://tosborisoglebsk.ru/content-standards/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
