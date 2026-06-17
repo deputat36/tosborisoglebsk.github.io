@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Запросы на уточнение данных ТОС БГО</title>
+  <meta name="description" content="Рабочая страница для сбора недостающих сведений по карточкам ТОС БГО: телефоны для публикации, соцсети, логотипы, источники проверки и фото территорий."/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/data-requests/"/>
+  <meta property="og:title" content="Запросы на уточнение данных ТОС БГО"/>
+  <meta property="og:description" content="Кого нужно попросить уточнить данные и какие сообщения можно отправить председателям и активу ТОС."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/data-requests/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Сбор реальных данных</div><h1>Запросы на уточнение данных ТОС</h1><p class="lead">Страница автоматически показывает, какие карточки требуют уточнения, и готовит аккуратные сообщения для председателей и актива. Данные не выдумываются: мы только просим подтвердить то, что можно публиковать открыто.</p><div class="hero-actions"><a class="btn primary" href="/data-quality/">Качество данных</a><a class="btn" href="/update-tos/">Обновить карточку</a><a class="btn" href="/materials/tos-data-request-guide/">Как прислать данные</a></div></div></section>
+  <section class="section"><div class="container stats" id="data-requests-summary"><article class="stat"><b>...</b><span>загрузка</span></article></div></section>
+  <section class="section tight"><div class="container notice"><b>Важно:</b> в запросах нельзя просить паспортные данные, адреса проживания, внутренние документы, личные фотографии без согласия и любые сведения, которые не должны размещаться в открытом доступе.</div></section>
+  <section class="section"><div class="container section-head"><div><h2>Карточки, где нужно уточнение</h2><p>Сортировка: сначала высокий приоритет и карточки с большим количеством недостающих полей</p></div><div class="hero-actions"><button class="btn" type="button" data-filter="all">Все</button><button class="btn" type="button" data-filter="high">Высокий приоритет</button><button class="btn" type="button" data-filter="contacts">Контакты</button><button class="btn" type="button" data-filter="logo">Логотипы</button></div></div><div class="container list" id="data-requests-list"><div class="empty">Загрузка аудита...</div></div></section>
+  <section class="section"><div class="container prose"><h2>Как пользоваться</h2><ol><li>Откройте карточку с высоким приоритетом.</li><li>Скопируйте готовое сообщение.</li><li>Отправьте председателю, активу или в рабочий чат.</li><li>Полученные сведения внесите через страницу обновления карточки или в JSON-данные сайта.</li></ol><div class="notice">Главный результат этого этапа — получить реальные контакты, ссылки, логотипы и подтверждение источника. Это повысит доверие к каталогу сильнее, чем новые заготовки страниц.</div></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочая страница для сбора недостающих сведений.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+<script src="/assets/js/data-requests.js"></script>
+</body>
+</html>
