@@ -14,11 +14,13 @@
 - Материалы: https://tosborisoglebsk.ru/materials/
 - Документы: https://tosborisoglebsk.ru/documents/
 - Правовая основа: https://tosborisoglebsk.ru/legal/
+- ФЗ №33-ФЗ и ТОС: https://tosborisoglebsk.ru/legal/federal-law-33/
 - Как создать ТОС: https://tosborisoglebsk.ru/create-tos/
 - Председателю: https://tosborisoglebsk.ru/chairperson/
 - Источники данных: https://tosborisoglebsk.ru/sources/
 - Населённые пункты и территории: https://tosborisoglebsk.ru/places/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
+- Методика развития портала: https://tosborisoglebsk.ru/methodology/
 - Открытые данные: https://tosborisoglebsk.ru/open-data/
 - План развития: https://tosborisoglebsk.ru/roadmap/
 - Проверить карточку ТОС: https://tosborisoglebsk.ru/check-tos/
