@@ -19,6 +19,7 @@
 - Председателю: https://tosborisoglebsk.ru/chairperson/
 - Источники данных: https://tosborisoglebsk.ru/sources/
 - Населённые пункты и территории: https://tosborisoglebsk.ru/places/
+- Рабочая панель: https://tosborisoglebsk.ru/workbench/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
 - Запросы на уточнение данных: https://tosborisoglebsk.ru/data-requests/
 - Коммуникационный набор: https://tosborisoglebsk.ru/communication-kit/
