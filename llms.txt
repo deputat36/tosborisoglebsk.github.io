@@ -20,6 +20,7 @@
 - Источники данных: https://tosborisoglebsk.ru/sources/
 - Населённые пункты и территории: https://tosborisoglebsk.ru/places/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
+- Запросы на уточнение данных: https://tosborisoglebsk.ru/data-requests/
 - Методика развития портала: https://tosborisoglebsk.ru/methodology/
 - Открытые данные: https://tosborisoglebsk.ru/open-data/
 - План развития: https://tosborisoglebsk.ru/roadmap/
