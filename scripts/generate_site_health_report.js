@@ -1,0 +1,197 @@
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = process.cwd();
+const SITE_URL = 'https://tosborisoglebsk.ru';
+const OUT = path.join(ROOT, 'data', 'site_health.json');
+const SKIP_DIRS = new Set(['.git', '.github', 'node_modules', 'scripts', '_private', 'admin']);
+const TECHNICAL_PREFIXES = ['audit/'];
+
+function walk(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory() && SKIP_DIRS.has(entry.name)) continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) walk(full, out);
+    else if (entry.isFile()) out.push(full);
+  }
+  return out;
+}
+
+function rel(file) {
+  return path.relative(ROOT, file).replace(/\\/g, '/');
+}
+
+function readJson(relativePath, fallback = null) {
+  const file = path.join(ROOT, relativePath);
+  if (!fs.existsSync(file)) return fallback;
+  try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
+  catch { return fallback; }
+}
+
+function getTitle(html) {
+  return (html.match(/<title>([^<]*)<\/title>/i) || [])[1] || '';
+}
+
+function getMeta(html, name) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const reName = new RegExp(`<meta[^>]+name=["']${escaped}["'][^>]+content=["']([^"']*)["']`, 'i');
+  const reProp = new RegExp(`<meta[^>]+property=["']${escaped}["'][^>]+content=["']([^"']*)["']`, 'i');
+  return (html.match(reName) || html.match(reProp) || [])[1] || '';
+}
+
+function getCanonical(html) {
+  return (html.match(/<link[^>]+rel=["']canonical["'][^>]+href=["']([^"']+)["']/i) || [])[1] || '';
+}
+
+function isNoindex(html) {
+  return /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
+}
+
+function isExternal(url) {
+  return /^(https?:|mailto:|tel:|tg:|whatsapp:|javascript:)/i.test(url);
+}
+
+function cleanHref(href) {
+  return String(href || '').trim().replace(/&amp;/g, '&').split('#')[0].split('?')[0];
+}
+
+function fileExistsForUrl(url) {
+  if (!url || url === '/') return fs.existsSync(path.join(ROOT, 'index.html'));
+  let decoded;
+  try { decoded = decodeURIComponent(url); }
+  catch { return false; }
+  const safe = decoded.replace(/^\/+/, '');
+  if (!safe || safe.includes('..')) return false;
+  const full = path.join(ROOT, safe);
+  if (decoded.endsWith('/')) return fs.existsSync(path.join(full, 'index.html'));
+  return fs.existsSync(full) || fs.existsSync(path.join(full, 'index.html'));
+}
+
+function urlFor(relative) {
+  if (relative === 'index.html') return `${SITE_URL}/`;
+  if (relative.endsWith('/index.html')) return `${SITE_URL}/${relative.replace(/index\.html$/, '')}`;
+  return `${SITE_URL}/${relative}`;
+}
+
+function auditPages() {
+  const htmlFiles = walk(ROOT).filter((file) => file.endsWith('.html'));
+  const pages = [];
+  const seoWarnings = [];
+  const linkErrors = [];
+  let publicPages = 0;
+  let noindexPages = 0;
+
+  for (const file of htmlFiles) {
+    const relative = rel(file);
+    const html = fs.readFileSync(file, 'utf8');
+    const technical = TECHNICAL_PREFIXES.some((prefix) => relative.startsWith(prefix));
+    const noindex = isNoindex(html) || technical;
+    if (noindex) noindexPages += 1;
+    else publicPages += 1;
+
+    const title = getTitle(html).trim();
+    const description = getMeta(html, 'description').trim();
+    const canonical = getCanonical(html).trim();
+    const ogTitle = getMeta(html, 'og:title').trim();
+    const ogDescription = getMeta(html, 'og:description').trim();
+    const ogImage = getMeta(html, 'og:image').trim();
+    const h1Count = (html.match(/<h1[\s>]/gi) || []).length;
+
+    const pageWarnings = [];
+    if (!noindex) {
+      if (!title) pageWarnings.push('нет title');
+      else if (title.length < 18) pageWarnings.push(`короткий title: ${title.length}`);
+      else if (title.length > 90) pageWarnings.push(`длинный title: ${title.length}`);
+      if (!description) pageWarnings.push('нет meta description');
+      else if (description.length < 70) pageWarnings.push(`короткий description: ${description.length}`);
+      else if (description.length > 220) pageWarnings.push(`длинный description: ${description.length}`);
+      if (!canonical) pageWarnings.push('нет canonical');
+      else if (!canonical.startsWith(SITE_URL)) pageWarnings.push('canonical не на основном домене');
+      if (!ogTitle) pageWarnings.push('нет og:title');
+      if (!ogDescription) pageWarnings.push('нет og:description');
+      if (!ogImage) pageWarnings.push('нет og:image');
+      if (h1Count !== 1) pageWarnings.push(`h1: ${h1Count}`);
+    }
+
+    const matches = [...html.matchAll(/\s(?:href|src)=["']([^"']+)["']/gi)];
+    for (const match of matches) {
+      const raw = match[1];
+      const href = cleanHref(raw);
+      if (!href || href.startsWith('#') || href.startsWith('//') || href.startsWith('data:') || isExternal(href)) continue;
+      if (!href.startsWith('/')) continue;
+      if (!fileExistsForUrl(href)) linkErrors.push({ page: relative, link: raw });
+    }
+
+    if (pageWarnings.length) {
+      seoWarnings.push({ page: relative, url: canonical || urlFor(relative), warnings: pageWarnings });
+    }
+
+    pages.push({ path: relative, url: canonical || urlFor(relative), title, noindex, h1_count: h1Count, warnings: pageWarnings });
+  }
+
+  return { totalPages: htmlFiles.length, publicPages, noindexPages, seoWarnings, linkErrors, pages };
+}
+
+function buildActions(siteAudit, pageAudit) {
+  const actions = [];
+  const summary = siteAudit?.summary || {};
+
+  if (summary.high_priority) actions.push(`Закрыть ${summary.high_priority} карточки ТОС с высоким приоритетом: контакты, соцсети, источники, логотипы.`);
+  if (summary.verified_count === 0) actions.push('Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».');
+  if (summary.without_phone) actions.push(`Уточнить телефоны или публичные контакты для ${summary.without_phone} карточек.`);
+  if (summary.without_social) actions.push(`Добавить открытые страницы или сообщества для ${summary.without_social} карточек, если они существуют.`);
+  if (pageAudit.linkErrors.length) actions.push(`Исправить ${pageAudit.linkErrors.length} внутренних ссылок, которые ведут на несуществующие страницы.`);
+  if (pageAudit.seoWarnings.length) actions.push(`Просмотреть ${pageAudit.seoWarnings.length} страниц с SEO-предупреждениями.`);
+  actions.push('Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.');
+  actions.push('Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей.');
+
+  return actions;
+}
+
+function main() {
+  const siteAudit = readJson('data/site_audit.json', {});
+  const contentAudit = readJson('data/tos_content_audit.json', {});
+  const pageAudit = auditPages();
+  const summary = siteAudit.summary || contentAudit.summary || {};
+
+  const healthScore = Math.max(0, Math.min(100,
+    100
+    - (summary.high_priority || 0) * 3
+    - (summary.needs_review_count || 0) * 4
+    - (summary.without_phone || 0) * 2
+    - Math.min(pageAudit.seoWarnings.length, 20)
+    - Math.min(pageAudit.linkErrors.length * 5, 30)
+  ));
+
+  const report = {
+    generated_at: new Date().toISOString(),
+    site_url: SITE_URL,
+    health_score: healthScore,
+    catalog: summary,
+    pages: {
+      total: pageAudit.totalPages,
+      public: pageAudit.publicPages,
+      noindex: pageAudit.noindexPages,
+      seo_warnings_count: pageAudit.seoWarnings.length,
+      broken_internal_links_count: pageAudit.linkErrors.length
+    },
+    priority_tos: (contentAudit.items || []).filter((item) => item.priority === 'Высокий').map((item) => ({
+      slug: item.slug,
+      name: item.name,
+      location: item.location,
+      score: item.score,
+      missing: item.missing,
+      verification: item.verification?.label || item.verification?.status || ''
+    })),
+    seo_warnings: pageAudit.seoWarnings.slice(0, 50),
+    broken_internal_links: pageAudit.linkErrors.slice(0, 50),
+    recommended_actions: buildActions(siteAudit, pageAudit)
+  };
+
+  fs.mkdirSync(path.dirname(OUT), { recursive: true });
+  fs.writeFileSync(OUT, `${JSON.stringify(report, null, 2)}\n`, 'utf8');
+  console.log(`Generated site health report: score ${healthScore}, pages ${pageAudit.totalPages}.`);
+}
+
+main();
