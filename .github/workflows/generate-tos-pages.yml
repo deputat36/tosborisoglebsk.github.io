@@ -59,6 +59,8 @@ jobs:
         run: node scripts/generate_content_audit.js
       - name: Generate collection tasks CSV
         run: node scripts/generate_collection_tasks_csv.js
+      - name: Generate verification tasks CSV
+        run: node scripts/generate_verification_tasks_csv.js
       - name: Refine site audit next actions
         run: node scripts/refine_site_audit_actions.js
       - name: Generate TOS pages
