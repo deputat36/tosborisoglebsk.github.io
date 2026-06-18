@@ -52,20 +52,63 @@ function isExternal(url) {
   return /^(https?:|mailto:|tel:|tg:|whatsapp:|javascript:)/i.test(url);
 }
 
-function cleanHref(href) {
-  return String(href || '').trim().replace(/&amp;/g, '&').split('#')[0].split('?')[0];
+function parseInternalHref(raw) {
+  const href = String(raw || '').trim().replace(/&amp;/g, '&');
+  const hashIndex = href.indexOf('#');
+  const beforeHash = hashIndex >= 0 ? href.slice(0, hashIndex) : href;
+  const anchor = hashIndex >= 0 ? href.slice(hashIndex + 1) : '';
+  return {
+    href,
+    pathPart: beforeHash.split('?')[0],
+    anchor: anchor.split('?')[0]
+  };
 }
 
-function fileExistsForUrl(url) {
-  if (!url || url === '/') return fs.existsSync(path.join(ROOT, 'index.html'));
+function fileForUrl(url, currentFile = null) {
+  if (!url) return currentFile;
+  if (url === '/') {
+    const index = path.join(ROOT, 'index.html');
+    return fs.existsSync(index) ? index : null;
+  }
+
   let decoded;
   try { decoded = decodeURIComponent(url); }
-  catch { return false; }
+  catch { return null; }
+
   const safe = decoded.replace(/^\/+/, '');
-  if (!safe || safe.includes('..')) return false;
+  if (!safe || safe.includes('..')) return null;
+
   const full = path.join(ROOT, safe);
-  if (decoded.endsWith('/')) return fs.existsSync(path.join(full, 'index.html'));
-  return fs.existsSync(full) || fs.existsSync(path.join(full, 'index.html'));
+  if (decoded.endsWith('/')) {
+    const index = path.join(full, 'index.html');
+    return fs.existsSync(index) ? index : null;
+  }
+  if (fs.existsSync(full)) return full;
+  const index = path.join(full, 'index.html');
+  return fs.existsSync(index) ? index : null;
+}
+
+function fileExistsForUrl(url, currentFile = null) {
+  return Boolean(fileForUrl(url, currentFile));
+}
+
+function extractAnchors(html) {
+  const anchors = new Set(['']);
+  for (const match of html.matchAll(/\sid=["']([^"']+)["']/gi)) anchors.add(match[1]);
+  for (const match of html.matchAll(/\sname=["']([^"']+)["']/gi)) anchors.add(match[1]);
+  return anchors;
+}
+
+function targetHasAnchor(url, anchor, currentFile, currentAnchors) {
+  if (!anchor) return true;
+  const targetFile = fileForUrl(url, currentFile);
+  if (!targetFile || !targetFile.endsWith('.html')) return false;
+  if (targetFile === currentFile) return currentAnchors.has(anchor);
+  try {
+    return extractAnchors(fs.readFileSync(targetFile, 'utf8')).has(anchor);
+  } catch {
+    return false;
+  }
 }
 
 function urlFor(relative) {
@@ -85,6 +128,7 @@ function auditPages() {
   for (const file of htmlFiles) {
     const relative = rel(file);
     const html = fs.readFileSync(file, 'utf8');
+    const anchors = extractAnchors(html);
     const technical = TECHNICAL_PREFIXES.some((prefix) => relative.startsWith(prefix));
     const noindex = isNoindex(html) || technical;
     if (noindex) noindexPages += 1;
@@ -117,10 +161,20 @@ function auditPages() {
     const matches = [...html.matchAll(/\s(?:href|src)=["']([^"']+)["']/gi)];
     for (const match of matches) {
       const raw = match[1];
-      const href = cleanHref(raw);
-      if (!href || href.startsWith('#') || href.startsWith('//') || href.startsWith('data:') || isExternal(href)) continue;
-      if (!href.startsWith('/')) continue;
-      if (!fileExistsForUrl(href)) linkErrors.push({ page: relative, link: raw });
+      const parsed = parseInternalHref(raw);
+      if (!parsed.href || parsed.href.startsWith('//') || parsed.href.startsWith('data:') || isExternal(parsed.href)) continue;
+      if (parsed.href.startsWith('#')) {
+        if (!targetHasAnchor('', parsed.anchor, file, anchors)) linkErrors.push({ page: relative, link: raw, reason: 'нет якоря на текущей странице' });
+        continue;
+      }
+      if (!parsed.href.startsWith('/')) continue;
+      if (!fileExistsForUrl(parsed.pathPart, file)) {
+        linkErrors.push({ page: relative, link: raw, reason: 'нет страницы или файла' });
+        continue;
+      }
+      if (!targetHasAnchor(parsed.pathPart, parsed.anchor, file, anchors)) {
+        linkErrors.push({ page: relative, link: raw, reason: 'нет указанного якоря' });
+      }
     }
 
     if (pageWarnings.length) {
@@ -141,7 +195,7 @@ function buildActions(siteAudit, pageAudit) {
   if (summary.verified_count === 0) actions.push('Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».');
   if (summary.without_phone) actions.push(`Уточнить телефоны или публичные контакты для ${summary.without_phone} карточек.`);
   if (summary.without_social) actions.push(`Добавить открытые страницы или сообщества для ${summary.without_social} карточек, если они существуют.`);
-  if (pageAudit.linkErrors.length) actions.push(`Исправить ${pageAudit.linkErrors.length} внутренних ссылок, которые ведут на несуществующие страницы.`);
+  if (pageAudit.linkErrors.length) actions.push(`Исправить ${pageAudit.linkErrors.length} внутренних ссылок, которые ведут на несуществующие страницы или якоря.`);
   if (pageAudit.seoWarnings.length) actions.push(`Просмотреть ${pageAudit.seoWarnings.length} страниц с SEO-предупреждениями.`);
   actions.push('Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.');
   actions.push('Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей.');
