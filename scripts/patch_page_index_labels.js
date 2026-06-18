@@ -5,6 +5,7 @@ const ROOT = process.cwd();
 const FILE = path.join(ROOT, 'scripts', 'generate_page_index.js');
 
 const labels = {
+  'verification-tasks': 'Задачи проверки карточек ТОС',
   'improvement-plan': 'План улучшения портала',
   'site-health': 'Аудит сайта',
   'grant-application-kit': 'Набор для подготовки заявки ТОС',
