@@ -1,19 +1,12 @@
 const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-
-function esc(value) {
-  return String(value ?? '').replace(/[&<>"']/g, (char) => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;'
-  }[char]));
-}
-
-function isPublished(item) {
-  return item && item.status !== 'draft';
-}
+const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  "'": '&#39;',
+  '"': '&quot;'
+}[char]));
+const isPublished = (item) => item && item.status !== 'draft';
 
 async function getJSON(url) {
   const response = await fetch(url, { cache: 'no-store' });
@@ -21,88 +14,109 @@ async function getJSON(url) {
   return response.json();
 }
 
+const SECTION_LABELS = {
+  tos: 'Каталог ТОС',
+  news: 'Новости',
+  projects: 'Проекты',
+  done: 'Сделано',
+  needs: 'Нужна помощь',
+  materials: 'Материалы',
+  documents: 'Документы',
+  legal: 'Правовая основа',
+  places: 'Территории',
+  chairperson: 'Председателю',
+  residents: 'Жителям',
+  partners: 'Партнёрам',
+  grants: 'Конкурсы',
+  calendar: 'Календарь',
+  contacts: 'Контакты',
+  search: 'Поиск',
+  sections: 'Все разделы',
+  sources: 'Источники данных',
+  privacy: 'Публикация сведений',
+  glossary: 'Словарь',
+  methodology: 'Методика портала',
+  workbench: 'Рабочая панель',
+  'data-quality': 'Качество данных',
+  'data-update': 'Актуализация данных',
+  'data-requests': 'Запросы данных',
+  'communication-kit': 'Коммуникационный набор',
+  campaign: 'Кампания актуализации',
+  'field-checklist': 'Чек-лист проверки',
+  'media-guide': 'Фото и логотипы',
+  'open-data': 'Открытые данные',
+  roadmap: 'План развития',
+  'site-index': 'Индекс страниц',
+  'check-tos': 'Проверить ТОС',
+  'submit-materials': 'Прислать материал',
+  faq: 'Вопросы и ответы',
+  'editorial-policy': 'О портале',
+  'create-tos': 'Как создать ТОС',
+  map: 'Карта'
+};
+
 function compactNav() {
   const nav = $('#site-nav');
-  if (!nav || nav.children.length) return;
+  if (!nav) return;
   const links = [
-    ['Каталог ТОС', '/tos/'],
-    ['Жителям', '/residents/'],
-    ['Председателю', '/chairperson/'],
-    ['Партнёрам', '/partners/'],
-    ['Проекты', '/projects/'],
-    ['Сделано', '/done/'],
-    ['Нужна помощь', '/needs/'],
-    ['Документы', '/documents/'],
-    ['Контакты', '/contacts/'],
-    ['Все разделы', '/sections/']
+    ['/tos/', 'Каталог ТОС'],
+    ['/places/', 'Территории'],
+    ['/residents/', 'Жителям'],
+    ['/chairperson/', 'Председателю'],
+    ['/workbench/', 'Рабочая панель'],
+    ['/projects/', 'Проекты'],
+    ['/done/', 'Сделано'],
+    ['/needs/', 'Нужна помощь'],
+    ['/documents/', 'Документы'],
+    ['/legal/', 'Правовая основа'],
+    ['/sections/', 'Все разделы']
   ];
-  nav.innerHTML = links.map(([label, url]) => `<a href="${url}">${label}</a>`).join('');
+  nav.innerHTML = links.map(([href, text]) => `<a href="${href}">${text}</a>`).join('');
 }
 
 function ensureFooterLinks() {
-  const footer = $('.footer .footer-grid');
-  if (!footer || $('#footer-extra-links')) return;
-  const block = document.createElement('div');
-  block.id = 'footer-extra-links';
-  block.className = 'tiny footer-links';
-  block.innerHTML = '<a href="/sections/">Все разделы</a> · <a href="/editorial-policy/">О портале</a> · <a href="/privacy/">Публикация сведений</a> · <a href="/sources/">Источники данных</a> · <a href="/site-health/">Аудит сайта</a>';
-  footer.appendChild(block);
+  const footerGrid = $('.footer .footer-grid') || $('.footer .container');
+  if (!footerGrid || $('#footer-service-links')) return;
+  const box = document.createElement('div');
+  box.className = 'tiny';
+  box.id = 'footer-service-links';
+  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/sections/">Все разделы</a> · <a href="/workbench/">Рабочая панель</a> · <a href="/site-index/">Индекс страниц</a> · <a href="/faq/">Вопросы и ответы</a> · <a href="/sources/">Источники данных</a> · <a href="/data-quality/">Качество данных</a><br><a href="/data-requests/">Запросы данных</a> · <a href="/communication-kit/">Тексты для ВК</a> · <a href="/campaign/">Кампания</a> · <a href="/field-checklist/">Чек-лист</a> · <a href="/media-guide/">Фото и логотипы</a><br><a href="/places/">Территории</a> · <a href="/glossary/">Словарь ТОС</a> · <a href="/legal/federal-law-33/">ФЗ №33-ФЗ</a> · <a href="/privacy/">Публикация сведений</a> · <a href="/open-data/">Открытые данные</a><br><a href="/done/">Сделано ТОСами</a> · <a href="/update-tos/">Обновить данные ТОС</a> · <a href="/roadmap/">План развития</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
+  footerGrid.appendChild(box);
 }
 
 function injectBreadcrumbs() {
-  if ($('#breadcrumbs')) return;
   const main = $('#main');
-  if (!main) return;
-  const parts = location.pathname.split('/').filter(Boolean);
+  if (!main || $('#breadcrumbs')) return;
+  const path = location.pathname.replace(/\/index\.html$/, '/');
+  if (path === '/' || path === '') return;
+  const parts = path.split('/').filter(Boolean);
   if (!parts.length) return;
-  const labels = {
-    tos: 'Каталог ТОС',
-    residents: 'Жителям',
-    partners: 'Партнёрам',
-    news: 'Новости',
-    grants: 'Поддержка',
-    projects: 'Проекты',
-    done: 'Сделано',
-    calendar: 'Календарь',
-    needs: 'Нужна помощь',
-    materials: 'Материалы',
-    documents: 'Документы',
-    legal: 'Правовая основа',
-    places: 'Территории',
-    sources: 'Источники данных',
-    'data-quality': 'Качество данных',
-    methodology: 'Методика',
-    glossary: 'Словарь',
-    privacy: 'Публикация сведений',
-    'create-tos': 'Создать ТОС',
-    chairperson: 'Председателю',
-    'update-tos': 'Обновить данные',
-    map: 'Карта',
-    contacts: 'Контакты',
-    'editorial-policy': 'О портале',
-    search: 'Поиск',
-    sections: 'Все разделы',
-    workbench: 'Рабочая панель',
-    'site-health': 'Аудит сайта',
-    'verification-tasks': 'Задачи проверки',
-    'open-data': 'Открытые данные'
-  };
-  const crumbs = [{ name: 'Главная', url: '/' }];
-  let current = '';
-  for (const part of parts) {
-    current += `/${part}`;
-    crumbs.push({ name: labels[part] || decodeURIComponent(part), url: `${current}/` });
+  const first = parts[0];
+  const links = [{ name: 'Главная', url: '/' }];
+  links.push({ name: SECTION_LABELS[first] || first, url: `/${first}/` });
+  if (parts.length > 1) {
+    const h1 = $('h1')?.textContent?.trim();
+    links.push({ name: h1 || parts[parts.length - 1], url: path });
   }
+
   const nav = document.createElement('nav');
   nav.id = 'breadcrumbs';
-  nav.className = 'breadcrumbs container tiny';
+  nav.className = 'container tiny';
   nav.setAttribute('aria-label', 'Хлебные крошки');
-  nav.innerHTML = crumbs.map((item, index) => index === crumbs.length - 1 ? `<span>${esc(item.name)}</span>` : `<a href="${esc(item.url)}">${esc(item.name)}</a>`).join(' <span aria-hidden="true">/</span> ');
-  main.prepend(nav);
+  nav.style.marginTop = '14px';
+  nav.innerHTML = links.map((item, index) => {
+    const last = index === links.length - 1;
+    return last ? `<span>${esc(item.name)}</span>` : `<a href="${esc(item.url)}">${esc(item.name)}</a><span aria-hidden="true"> → </span>`;
+  }).join('');
+
+  const firstSection = main.querySelector('section');
+  if (firstSection) main.insertBefore(nav, firstSection);
+  else main.prepend(nav);
+
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: crumbs.map((item, index) => ({
+    itemListElement: links.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
