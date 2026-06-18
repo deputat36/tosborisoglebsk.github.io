@@ -5,6 +5,7 @@ const ROOT = process.cwd();
 const FILE = path.join(ROOT, 'scripts', 'generate_page_index.js');
 
 const labels = {
+  'meeting-kit': 'Набор для собрания ТОС',
   'publication-templates': 'Шаблоны публикаций',
   'weekly-digest': 'Еженедельный дайджест',
   'partner-proposal': 'Партнёрское предложение',
