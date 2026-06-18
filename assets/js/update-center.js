@@ -254,7 +254,9 @@
   });
 
   const draft = loadDraft();
-  const queryScenario = new URLSearchParams(location.search).get('type');
+  const params = new URLSearchParams(location.search);
+  const hashScenario = location.hash.replace(/^#template-/, '').replace(/^#/, '');
+  const queryScenario = params.get('type') || params.get('scenario') || (scenarios[hashScenario] ? hashScenario : '');
   if (queryScenario && scenarios[queryScenario]) currentScenario = queryScenario;
   else if (draft.scenario && scenarios[draft.scenario]) currentScenario = draft.scenario;
   updateScenarioButtons();
