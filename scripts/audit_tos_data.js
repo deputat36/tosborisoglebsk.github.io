@@ -53,6 +53,25 @@ function issuesFor(tos) {
   return issues;
 }
 
+function verificationStatus(tos, score) {
+  const explicit = tos.verification_status || tos.verification?.status || '';
+  const date = tos.verified_at || tos.verification?.date || tos.updated_at || '';
+  if (explicit) return explicit;
+  if (date && score >= 80) return 'partial';
+  if (date) return 'needs_review';
+  return 'unknown';
+}
+
+function verificationLabel(status) {
+  return ({
+    verified: 'Сведения подтверждены',
+    partial: 'Проверено частично',
+    needs_review: 'Требует проверки',
+    stale: 'Проверка устарела',
+    unknown: 'Данные уточняются'
+  })[status] || 'Данные уточняются';
+}
+
 function main() {
   const toses = readJson(TOSES_PATH);
   const seen = new Map();
@@ -67,6 +86,7 @@ function main() {
   const items = toses.map((tos) => {
     const score = scoreTos(tos);
     const issues = issuesFor(tos);
+    const verification_status = verificationStatus(tos, score);
     return {
       slug: tos.slug || '',
       name: tos.name || '',
@@ -75,6 +95,8 @@ function main() {
       updated_at: tos.updated_at || '',
       score,
       level: score >= 80 ? 'good' : score >= 55 ? 'medium' : 'low',
+      verification_status,
+      verification_label: verificationLabel(verification_status),
       issues
     };
   }).sort((a, b) => a.score - b.score || String(a.name).localeCompare(String(b.name), 'ru'));
@@ -85,6 +107,10 @@ function main() {
     good: items.filter((item) => item.level === 'good').length,
     medium: items.filter((item) => item.level === 'medium').length,
     low: items.filter((item) => item.level === 'low').length,
+    verified: items.filter((item) => item.verification_status === 'verified').length,
+    partial: items.filter((item) => item.verification_status === 'partial').length,
+    needs_review: items.filter((item) => item.verification_status === 'needs_review').length,
+    unknown: items.filter((item) => item.verification_status === 'unknown').length,
     without_phone: items.filter((item) => item.issues.includes('нет телефона')).length,
     without_email: items.filter((item) => item.issues.includes('нет email')).length,
     without_social: items.filter((item) => item.issues.includes('нет соцсетей')).length,
@@ -98,6 +124,7 @@ function main() {
 
   console.log(`TOS audit: ${summary.total} records`);
   console.log(`Good: ${summary.good}, medium: ${summary.medium}, low: ${summary.low}`);
+  console.log(`Verified: ${summary.verified}, partial: ${summary.partial}, needs review: ${summary.needs_review}, unknown: ${summary.unknown}`);
   if (duplicates.length) {
     console.error(`Duplicate slugs: ${duplicates.join(', ')}`);
     process.exitCode = 1;
