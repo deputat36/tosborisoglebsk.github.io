@@ -1,12 +1,19 @@
 const $ = (selector, root = document) => root.querySelector(selector);
-const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-  "'": '&#39;',
-  '"': '&quot;'
-}[char]));
-const isPublished = (item) => item && item.status !== 'draft';
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+function esc(value) {
+  return String(value ?? '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  }[char]));
+}
+
+function isPublished(item) {
+  return item && item.status !== 'draft';
+}
 
 async function getJSON(url) {
   const response = await fetch(url, { cache: 'no-store' });
@@ -14,109 +21,88 @@ async function getJSON(url) {
   return response.json();
 }
 
-const SECTION_LABELS = {
-  tos: 'Каталог ТОС',
-  news: 'Новости',
-  projects: 'Проекты',
-  done: 'Сделано',
-  needs: 'Нужна помощь',
-  materials: 'Материалы',
-  documents: 'Документы',
-  legal: 'Правовая основа',
-  places: 'Территории',
-  chairperson: 'Председателю',
-  residents: 'Жителям',
-  partners: 'Партнёрам',
-  grants: 'Конкурсы',
-  calendar: 'Календарь',
-  contacts: 'Контакты',
-  search: 'Поиск',
-  sections: 'Все разделы',
-  sources: 'Источники данных',
-  privacy: 'Публикация сведений',
-  glossary: 'Словарь',
-  methodology: 'Методика портала',
-  workbench: 'Рабочая панель',
-  'data-quality': 'Качество данных',
-  'data-update': 'Актуализация данных',
-  'data-requests': 'Запросы данных',
-  'communication-kit': 'Коммуникационный набор',
-  campaign: 'Кампания актуализации',
-  'field-checklist': 'Чек-лист проверки',
-  'media-guide': 'Фото и логотипы',
-  'open-data': 'Открытые данные',
-  roadmap: 'План развития',
-  'site-index': 'Индекс страниц',
-  'check-tos': 'Проверить ТОС',
-  'submit-materials': 'Прислать материал',
-  faq: 'Вопросы и ответы',
-  'editorial-policy': 'О портале',
-  'create-tos': 'Как создать ТОС',
-  map: 'Карта'
-};
-
 function compactNav() {
   const nav = $('#site-nav');
-  if (!nav) return;
+  if (!nav || nav.children.length) return;
   const links = [
-    ['/tos/', 'Каталог ТОС'],
-    ['/places/', 'Территории'],
-    ['/residents/', 'Жителям'],
-    ['/chairperson/', 'Председателю'],
-    ['/workbench/', 'Рабочая панель'],
-    ['/projects/', 'Проекты'],
-    ['/done/', 'Сделано'],
-    ['/needs/', 'Нужна помощь'],
-    ['/documents/', 'Документы'],
-    ['/legal/', 'Правовая основа'],
-    ['/sections/', 'Все разделы']
+    ['Каталог ТОС', '/tos/'],
+    ['Жителям', '/residents/'],
+    ['Председателю', '/chairperson/'],
+    ['Партнёрам', '/partners/'],
+    ['Проекты', '/projects/'],
+    ['Сделано', '/done/'],
+    ['Нужна помощь', '/needs/'],
+    ['Документы', '/documents/'],
+    ['Контакты', '/contacts/'],
+    ['Все разделы', '/sections/']
   ];
-  nav.innerHTML = links.map(([href, text]) => `<a href="${href}">${text}</a>`).join('');
+  nav.innerHTML = links.map(([label, url]) => `<a href="${url}">${label}</a>`).join('');
 }
 
 function ensureFooterLinks() {
-  const footerGrid = $('.footer .footer-grid') || $('.footer .container');
-  if (!footerGrid || $('#footer-service-links')) return;
-  const box = document.createElement('div');
-  box.className = 'tiny';
-  box.id = 'footer-service-links';
-  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/sections/">Все разделы</a> · <a href="/workbench/">Рабочая панель</a> · <a href="/site-index/">Индекс страниц</a> · <a href="/faq/">Вопросы и ответы</a> · <a href="/sources/">Источники данных</a> · <a href="/data-quality/">Качество данных</a><br><a href="/data-requests/">Запросы данных</a> · <a href="/communication-kit/">Тексты для ВК</a> · <a href="/campaign/">Кампания</a> · <a href="/field-checklist/">Чек-лист</a> · <a href="/media-guide/">Фото и логотипы</a><br><a href="/places/">Территории</a> · <a href="/glossary/">Словарь ТОС</a> · <a href="/legal/federal-law-33/">ФЗ №33-ФЗ</a> · <a href="/privacy/">Публикация сведений</a> · <a href="/open-data/">Открытые данные</a><br><a href="/done/">Сделано ТОСами</a> · <a href="/update-tos/">Обновить данные ТОС</a> · <a href="/roadmap/">План развития</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
-  footerGrid.appendChild(box);
+  const footer = $('.footer .footer-grid');
+  if (!footer || $('#footer-extra-links')) return;
+  const block = document.createElement('div');
+  block.id = 'footer-extra-links';
+  block.className = 'tiny footer-links';
+  block.innerHTML = '<a href="/sections/">Все разделы</a> · <a href="/editorial-policy/">О портале</a> · <a href="/privacy/">Публикация сведений</a> · <a href="/sources/">Источники данных</a> · <a href="/site-health/">Аудит сайта</a>';
+  footer.appendChild(block);
 }
 
 function injectBreadcrumbs() {
+  if ($('#breadcrumbs')) return;
   const main = $('#main');
-  if (!main || $('#breadcrumbs')) return;
-  const path = location.pathname.replace(/\/index\.html$/, '/');
-  if (path === '/' || path === '') return;
-  const parts = path.split('/').filter(Boolean);
+  if (!main) return;
+  const parts = location.pathname.split('/').filter(Boolean);
   if (!parts.length) return;
-  const first = parts[0];
-  const links = [{ name: 'Главная', url: '/' }];
-  links.push({ name: SECTION_LABELS[first] || first, url: `/${first}/` });
-  if (parts.length > 1) {
-    const h1 = $('h1')?.textContent?.trim();
-    links.push({ name: h1 || parts[parts.length - 1], url: path });
+  const labels = {
+    tos: 'Каталог ТОС',
+    residents: 'Жителям',
+    partners: 'Партнёрам',
+    news: 'Новости',
+    grants: 'Поддержка',
+    projects: 'Проекты',
+    done: 'Сделано',
+    calendar: 'Календарь',
+    needs: 'Нужна помощь',
+    materials: 'Материалы',
+    documents: 'Документы',
+    legal: 'Правовая основа',
+    places: 'Территории',
+    sources: 'Источники данных',
+    'data-quality': 'Качество данных',
+    methodology: 'Методика',
+    glossary: 'Словарь',
+    privacy: 'Публикация сведений',
+    'create-tos': 'Создать ТОС',
+    chairperson: 'Председателю',
+    'update-tos': 'Обновить данные',
+    map: 'Карта',
+    contacts: 'Контакты',
+    'editorial-policy': 'О портале',
+    search: 'Поиск',
+    sections: 'Все разделы',
+    workbench: 'Рабочая панель',
+    'site-health': 'Аудит сайта',
+    'verification-tasks': 'Задачи проверки',
+    'open-data': 'Открытые данные'
+  };
+  const crumbs = [{ name: 'Главная', url: '/' }];
+  let current = '';
+  for (const part of parts) {
+    current += `/${part}`;
+    crumbs.push({ name: labels[part] || decodeURIComponent(part), url: `${current}/` });
   }
-
   const nav = document.createElement('nav');
   nav.id = 'breadcrumbs';
-  nav.className = 'container tiny';
+  nav.className = 'breadcrumbs container tiny';
   nav.setAttribute('aria-label', 'Хлебные крошки');
-  nav.style.marginTop = '14px';
-  nav.innerHTML = links.map((item, index) => {
-    const last = index === links.length - 1;
-    return last ? `<span>${esc(item.name)}</span>` : `<a href="${esc(item.url)}">${esc(item.name)}</a><span aria-hidden="true"> → </span>`;
-  }).join('');
-
-  const firstSection = main.querySelector('section');
-  if (firstSection) main.insertBefore(nav, firstSection);
-  else main.prepend(nav);
-
+  nav.innerHTML = crumbs.map((item, index) => index === crumbs.length - 1 ? `<span>${esc(item.name)}</span>` : `<a href="${esc(item.url)}">${esc(item.name)}</a>`).join(' <span aria-hidden="true">/</span> ');
+  main.prepend(nav);
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: links.map((item, index) => ({
+    itemListElement: crumbs.map((item, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
@@ -276,7 +262,14 @@ async function renderSearch() {
       ...events.filter(isPublished).map((x) => ({ type: 'Событие', title: x.title, text: [x.type, x.description, x.place, x.tos_slug].join(' '), url: '/calendar/' })),
       ...needs.filter(isPublished).map((x) => ({ type: 'Нужна помощь', title: x.title, text: [x.need_type, x.priority, x.description, x.contact, x.tos_slug].join(' '), url: '/needs/' })),
       { type: 'Жителям', title: 'Жителям: как пользоваться ТОС и участвовать в жизни территории', text: 'что такое ТОС как найти свой ТОС председатель сообщить о проблеме предложить идею помочь территории', url: '/residents/' },
-      { type: 'Председателю', title: 'Председателю ТОС: рабочий кабинет, чек-листы и документы', text: 'председателю ТОС чек-листы первые 30 дней собрание конференция протокол устав документы проект новость фотоотчет', url: '/chairperson/' },
+      { type: 'Председателю', title: 'Председателю ТОС: рабочий кабинет, чек-листы и документы', text: 'председателю ТОС чек-листы практические инструкции первые 30 дней собрание конференция протокол устав документы документы ТОС проект ТОС смета новость фотоотчет фотоотчёт архив конфликт жалоба потребности жители актив Борисоглебск', url: '/chairperson/' },
+      { type: 'Председателю', title: 'Как подтвердить карточку ТОС', text: 'проверить карточку ТОС подтвердить данные сведения открытые контакты председатель телефон соцсети логотип фото границы источник дата проверки статус подтверждено', url: '/chairperson/verify-card/' },
+      { type: 'Председателю', title: 'Первые 30 дней председателя ТОС', text: 'первые 30 дней председателя ТОС контакты архив документы ТОС проблемы территории активисты новости проектные идеи контроль задач', url: '/chairperson/first-30-days/' },
+      { type: 'Председателю', title: 'Собрание или конференция ТОС', text: 'собрание конференция ТОС повестка уведомление жители протокол документы ТОС голосование список участников решения ответственные сроки', url: '/chairperson/meeting/' },
+      { type: 'Председателю', title: 'Проект ТОС: идея, смета, заявка и отчёт', text: 'проект ТОС проблема фото смета поддержка жителей партнеры грант заявка реализация отчет благоустройство паспорт проекта', url: '/chairperson/project/' },
+      { type: 'Председателю', title: 'Новость ТОС и фотоотчёт', text: 'новость ТОС фотоотчет фотоотчёт публикация событие субботник результат участники благодарность фото до после', url: '/chairperson/news/' },
+      { type: 'Председателю', title: 'Архив документов ТОС', text: 'архив документы ТОС устав границы протоколы собрания смета сметы обращения ответы фото проекты публикации', url: '/chairperson/documents/' },
+      { type: 'Председателю', title: 'Конфликты в ТОС и спокойный диалог', text: 'конфликт конфликты спор жалоба жители факты фото обращение диалог председатель ТОС не обещать лишнего персональные данные', url: '/chairperson/conflicts/' },
       { type: 'Рабочая панель', title: 'Рабочая панель портала ТОС БГО', text: 'инструменты развитие портала качество данных запросы председателям кампания актуализации чек-лист фото логотипы', url: '/workbench/' },
       { type: 'Запросы данных', title: 'Запросы на уточнение данных ТОС', text: 'готовые сообщения председателям недостающие телефоны соцсети логотипы источники проверка карточек', url: '/data-requests/' },
       { type: 'Коммуникации', title: 'Коммуникационный набор ТОС БГО', text: 'готовые тексты ВК пост сообщение председателю рабочий чат проверить карточку прислать логотип фото', url: '/communication-kit/' },
