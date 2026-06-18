@@ -77,6 +77,8 @@ jobs:
         run: node scripts/patch_page_index_labels.js
       - name: Patch project passport label
         run: node scripts/patch_project_passport_label.js
+      - name: Generate site health report
+        run: node scripts/generate_site_health_report.js
       - name: Generate public index
         run: node scripts/generate_page_index.js
       - name: Generate extended sitemap
