@@ -60,7 +60,7 @@
               <a class="btn primary" href="/tos/">Найти свой ТОС</a>
               <a class="btn" href="/done/">Что уже сделано</a>
               <a class="btn" href="/needs/">Кому нужна помощь</a>
-              <a class="btn" href="/contacts/">Прислать материал</a>
+              <a class="btn" href="/update-tos/?type=news#message-builder">Прислать материал</a>
             </div>
           </div>
           <div class="hero-proof" aria-label="Краткая сводка портала">
@@ -103,7 +103,7 @@
             <p class="lead" style="margin:0">Самые важные разделы для жителей, председателей, партнёров и активистов.</p>
           </div>
           <div class="portal-links">
-            <a class="portal-link" href="/update-tos/"><b>Обновить ТОС</b><span>исправить контакты или описание</span></a>
+            <a class="portal-link" href="/update-tos/?type=card#message-builder"><b>Обновить ТОС</b><span>исправить контакты или описание</span></a>
             <a class="portal-link" href="/documents/"><b>Документы</b><span>шаблоны и правовая база</span></a>
             <a class="portal-link" href="/projects/"><b>Проекты</b><span>банк идей и заявок</span></a>
             <a class="portal-link" href="/faq/"><b>Вопросы</b><span>короткие ответы о ТОС</span></a>
@@ -136,9 +136,9 @@
       <div class="container section-head"><div><h2>Популярные действия</h2><p>Практические действия, ради которых чаще всего заходят на портал</p></div></div>
       <div class="container grid home-compact">
         <article class="card"><div class="card-inner"><h3>Связаться с председателем</h3><p>Откройте карточку своего ТОС и проверьте телефон, соцсети и другие контакты.</p><a class="btn" href="/tos/">Найти контакты</a></div></article>
-        <article class="card"><div class="card-inner"><h3>Прислать новость</h3><p>Расскажите о субботнике, собрании, проекте, празднике, помощи или результате работы ТОС.</p><a class="btn" href="/news/#send-news">Шаблон новости</a></div></article>
-        <article class="card"><div class="card-inner"><h3>Предложить проект</h3><p>Опишите проблему территории, идею решения, фото, примерную смету и нужную помощь.</p><a class="btn" href="/update-tos/#template-project">Шаблон проекта</a></div></article>
-        <article class="card"><div class="card-inner"><h3>Сообщить об ошибке</h3><p>Если в карточке ТОС устарел телефон, председатель, ссылка или описание — отправьте исправление.</p><a class="btn" href="/update-tos/">Исправить данные</a></div></article>
+        <article class="card"><div class="card-inner"><h3>Прислать новость</h3><p>Расскажите о субботнике, собрании, проекте, празднике, помощи или результате работы ТОС.</p><a class="btn" href="/update-tos/?type=news#message-builder">Составить новость</a></div></article>
+        <article class="card"><div class="card-inner"><h3>Предложить проект</h3><p>Опишите проблему территории, идею решения, фото, примерную смету и нужную помощь.</p><a class="btn" href="/update-tos/?type=project#message-builder">Составить проект</a></div></article>
+        <article class="card"><div class="card-inner"><h3>Сообщить об ошибке</h3><p>Если в карточке ТОС устарел телефон, председатель, ссылка или описание — отправьте исправление.</p><a class="btn" href="/update-tos/?type=card#message-builder">Исправить данные</a></div></article>
       </div>
     </section>
 
@@ -156,10 +156,10 @@
 
     <section class="section"><div class="container section-head"><div><h2>Ближайшие события и дедлайны</h2><p>Контрольные точки для председателей: конкурсы, проекты, отчётность, обучение и мероприятия</p></div><a class="btn" href="/calendar/">Открыть календарь</a></div><div class="container grid" id="home-events"><div class="empty">Загрузка событий...</div></div></section>
 
-    <section class="section"><div class="container grid"><article class="card full highlight-card"><div class="card-inner"><h2>Связь и отправка материалов</h2><p>Передавайте новости, фотоотчёты, проекты, потребности и исправления через ВК-сообщество ТОС БГО или страницу контактов. Желательно указать название ТОС, дату, место, краткое описание, участников, результат и приложить фотографии.</p><div class="card-actions"><a class="btn primary" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Открыть ВК-сообщество</a><a class="btn" href="/contacts/">Контакты</a><a class="btn" href="/update-tos/">Обновить карточку ТОС</a><a class="btn" href="/editorial-policy/">О портале</a></div></div></article></div></section>
+    <section class="section"><div class="container grid"><article class="card full highlight-card"><div class="card-inner"><h2>Связь и отправка материалов</h2><p>Передавайте новости, фотоотчёты, проекты, потребности и исправления через конструктор сообщения, ВК-сообщество ТОС БГО или страницу контактов. Желательно указать название ТОС, дату, место, краткое описание, участников, результат и приложить фотографии.</p><div class="card-actions"><a class="btn primary" href="/update-tos/?type=news#message-builder">Составить сообщение</a><a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Открыть ВК-сообщество</a><a class="btn" href="/contacts/">Контакты</a><a class="btn" href="/update-tos/?type=card#message-builder">Обновить карточку ТОС</a><a class="btn" href="/editorial-policy/">О портале</a></div></div></article></div></section>
   </main>
 
-  <div class="sticky-mobile-cta"><a class="btn primary" href="/tos/">Найти ТОС</a><a class="btn" href="/contacts/">Прислать</a></div>
+  <div class="sticky-mobile-cta"><a class="btn primary" href="/tos/">Найти ТОС</a><a class="btn" href="/update-tos/?type=news#message-builder">Прислать</a></div>
 
   <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru. Информационный проект для жителей, активистов и председателей ТОС.</div></div><div class="tiny">Сайт работает на GitHub Pages. Данные хранятся в JSON-файлах и обновляются через GitHub.</div></div></footer>
   <script src="/assets/js/site.js"></script>
