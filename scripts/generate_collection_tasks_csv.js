@@ -4,6 +4,7 @@ const path = require('path');
 const ROOT = process.cwd();
 const AUDIT_PATH = path.join(ROOT, 'data', 'tos_content_audit.json');
 const OUT_PATH = path.join(ROOT, 'data', 'collection_tasks.csv');
+const SITE_URL = 'https://tosborisoglebsk.ru';
 
 function readJson(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (error) { return null; }
@@ -11,6 +12,15 @@ function readJson(file) {
 
 function cell(value) {
   return `"${String(value ?? '').replace(/"/g, '""')}"`;
+}
+
+function updateUrl(slug) {
+  return `${SITE_URL}/update-tos/?tos=${encodeURIComponent(slug || '')}&type=card#message-builder`;
+}
+
+function shortMessage(item) {
+  const missing = (item.missing || []).join(', ') || 'актуальность сведений';
+  return `Здравствуйте. Для портала ТОС БГО нужно уточнить карточку ТОС «${item.name || ''}»: ${missing}. Просим прислать только сведения, которые можно публиковать открыто.`;
 }
 
 function main() {
@@ -26,7 +36,8 @@ function main() {
     'что уточнить',
     'рекомендации',
     'карточка',
-    'форма обновления'
+    'форма обновления',
+    'короткое сообщение'
   ]];
 
   items
@@ -46,8 +57,9 @@ function main() {
         item.score || '',
         (item.missing || []).join(', '),
         (item.recommendations || []).join('; '),
-        `https://tosborisoglebsk.ru/tos/${item.slug}/`,
-        `https://tosborisoglebsk.ru/update-tos/?tos=${encodeURIComponent(item.slug || '')}`
+        `${SITE_URL}/tos/${item.slug}/`,
+        updateUrl(item.slug),
+        shortMessage(item)
       ]);
     });
 
