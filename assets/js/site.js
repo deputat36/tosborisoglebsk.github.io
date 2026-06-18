@@ -143,11 +143,89 @@ function injectHomePortalStatus() {
   else main.appendChild(section);
 }
 
+function updateTosUrl(slug, type = 'card') {
+  return `/update-tos/?tos=${encodeURIComponent(slug || '')}&type=${encodeURIComponent(type || 'card')}#message-builder`;
+}
+
+function updateTosScenarioFromHref(href) {
+  if (!href) return '';
+  if (href.includes('#template-project')) return 'project';
+  if (href.includes('#template-need')) return 'need';
+  if (href.includes('#template-photo')) return 'photo';
+  if (href.includes('#template-news')) return 'news';
+  if (href.includes('#template-event')) return 'event';
+  if (href.includes('#template-card')) return 'card';
+  try {
+    const url = new URL(href, location.origin);
+    if (!url.pathname.startsWith('/update-tos')) return '';
+    return url.searchParams.get('type') || url.searchParams.get('scenario') || 'card';
+  } catch {
+    return href.startsWith('/update-tos') ? 'card' : '';
+  }
+}
+
+function patchTosDetailLinks(slug) {
+  document.querySelectorAll('a[href*="/update-tos"]').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    const scenario = updateTosScenarioFromHref(href);
+    if (!scenario) return;
+    link.setAttribute('href', updateTosUrl(slug, scenario));
+  });
+}
+
+function verificationLabel(status) {
+  return ({
+    verified: 'Сведения подтверждены',
+    partial: 'Проверено частично',
+    needs_review: 'Требует проверки',
+    stale: 'Проверка устарела',
+    unknown: 'Данные уточняются'
+  })[status] || 'Данные уточняются';
+}
+
+function verificationTagClass(status) {
+  if (status === 'verified') return 'ok';
+  if (status === 'needs_review' || status === 'stale') return 'warn';
+  return '';
+}
+
+async function patchTosDetailStatus(slug) {
+  if ($('#runtime-verification-status') || document.body.textContent.includes('Статус сведений')) return;
+  const passportTitle = [...document.querySelectorAll('h2')].find((title) => title.textContent.trim() === 'Паспорт ТОС');
+  const passportInner = passportTitle?.closest('.card-inner');
+  if (!passportInner) return;
+
+  try {
+    const audit = await getJSON('/data/tos_content_audit.json');
+    const item = (audit.items || []).find((entry) => entry.slug === slug);
+    if (!item) return;
+    const status = item.verification_status || item.data_status || item.verification?.status || 'unknown';
+    const notice = document.createElement('div');
+    notice.id = 'runtime-verification-status';
+    notice.className = 'notice';
+    notice.innerHTML = `<div class="meta"><span class="tag ${verificationTagClass(status)}">Статус сведений: ${esc(verificationLabel(status))}</span><span class="tag">Заполненность: ${esc(item.score ?? 'уточняется')}%</span></div><p class="tiny"><b>Что это значит:</b> карточка может быть заполнена, но отдельные сведения всё равно требуют подтверждения. Если вы председатель или активист этого ТОС, пришлите открытые уточнения через форму.</p><div class="card-actions"><a class="btn primary" href="${updateTosUrl(slug, 'card')}">Уточнить карточку</a><a class="btn" href="/chairperson/verify-card/">Как подтвердить</a></div>`;
+    const firstSep = passportInner.querySelector('.sep');
+    if (firstSep) firstSep.before(notice);
+    else passportInner.appendChild(notice);
+  } catch {
+    // Если аудит не загрузился, карточка остаётся доступной, а ссылки уже исправлены.
+  }
+}
+
+function patchTosDetailRuntime() {
+  const match = location.pathname.match(/^\/tos\/([^/]+)\/?$/);
+  if (!match) return;
+  const slug = decodeURIComponent(match[1]);
+  patchTosDetailLinks(slug);
+  patchTosDetailStatus(slug);
+}
+
 function initCommonUi() {
   compactNav();
   ensureFooterLinks();
   injectBreadcrumbs();
   injectHomePortalStatus();
+  patchTosDetailRuntime();
 
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') document.documentElement.dataset.theme = 'dark';
