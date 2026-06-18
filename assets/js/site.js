@@ -163,11 +163,33 @@ function initCommonUi() {
     }
   });
 
-  $('[data-action=menu]')?.addEventListener('click', (event) => {
-    const nav = $('#site-nav');
+  const nav = $('#site-nav');
+  const menuButton = $('[data-action=menu]');
+  const closeMenu = () => {
+    nav?.classList.remove('open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+    document.body.style.overflow = '';
+  };
+
+  menuButton?.addEventListener('click', (event) => {
     nav?.classList.toggle('open');
-    event.currentTarget.setAttribute('aria-expanded', nav?.classList.contains('open') ? 'true' : 'false');
+    const isOpen = nav?.classList.contains('open');
+    event.currentTarget.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    document.body.classList.toggle('menu-open', Boolean(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!nav?.classList.contains('open')) return;
+    if (!nav.contains(event.target) && !menuButton?.contains(event.target)) closeMenu();
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
 
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
