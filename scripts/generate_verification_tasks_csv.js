@@ -17,9 +17,24 @@ function priorityRank(priority) {
   return 3;
 }
 
+function updateUrl(slug) {
+  return `${SITE_URL}/update-tos/?tos=${encodeURIComponent(slug || '')}&type=card#message-builder`;
+}
+
 function buildTaskText(item) {
   const missing = (item.missing || []).join(', ') || 'критичных пропусков нет';
   return `Проверить карточку ТОС «${item.name}»: ${missing}. Уточнить только сведения, которые можно публиковать открыто.`;
+}
+
+function buildMessageTemplate(item) {
+  return [
+    `Прошу проверить и обновить карточку ТОС «${item.name || ''}».`,
+    'Данные можно публиковать открыто.',
+    `Территория: ${item.location || 'уточнить'}.`,
+    `Председатель: ${item.chairperson || 'уточнить'}.`,
+    `Что нужно уточнить: ${(item.missing || []).join(', ') || 'уточнить актуальность сведений'}.`,
+    `Ссылка на карточку: ${SITE_URL}/tos/${item.slug}/.`
+  ].join(' ');
 }
 
 function main() {
@@ -45,8 +60,9 @@ function main() {
       missing: item.missing || [],
       recommendations: item.recommendations || [],
       card_url: `${SITE_URL}/tos/${item.slug}/`,
-      update_url: `${SITE_URL}/update-tos/`,
-      task: buildTaskText(item)
+      update_url: updateUrl(item.slug),
+      task: buildTaskText(item),
+      message_template: buildMessageTemplate(item)
     }));
 
   const header = [
@@ -61,7 +77,8 @@ function main() {
     'Рекомендации',
     'Карточка',
     'Форма обновления',
-    'Задача'
+    'Задача',
+    'Шаблон сообщения председателю'
   ];
 
   const lines = [header.map(csvCell).join(';')];
@@ -78,7 +95,8 @@ function main() {
       row.recommendations,
       row.card_url,
       row.update_url,
-      row.task
+      row.task,
+      row.message_template
     ].map(csvCell).join(';'));
   }
 
