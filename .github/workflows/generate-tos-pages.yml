@@ -37,6 +37,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Check JavaScript syntax
+        run: |
+          find scripts assets/js -name "*.js" -print0 | xargs -0 -n1 node --check
       - name: Improve weak TOS descriptions
         run: node scripts/upgrade_tos_descriptions.js
       - name: Sync uploaded TOS logos
