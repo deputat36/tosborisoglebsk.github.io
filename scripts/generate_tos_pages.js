@@ -86,13 +86,62 @@ function missingFields(tos) {
   if (!tos.population) list.push('примерная численность жителей');
   return list;
 }
+function updateUrl(tos, type = 'card') {
+  return `/update-tos/?tos=${encodeURIComponent(tos.slug)}&type=${encodeURIComponent(type)}#message-builder`;
+}
+const verificationLabels = {
+  verified: 'Сведения подтверждены',
+  partial: 'Проверено частично',
+  needs_review: 'Требует проверки',
+  unknown: 'Данные уточняются',
+  stale: 'Проверка устарела'
+};
+function verificationInfo(tos, qualityScore) {
+  const explicitStatus = tos.verification_status || tos.verification?.status || '';
+  const date = tos.verified_at || tos.verification?.date || tos.updated_at || '';
+  const source = tos.verification_source || tos.source_label || tos.source || '';
+  const ageDays = date ? Math.floor((Date.now() - new Date(`${date}T00:00:00`).getTime()) / 86400000) : null;
+  let status = explicitStatus || 'unknown';
+
+  if (!explicitStatus) {
+    if (date && qualityScore >= 80) status = 'partial';
+    else if (date) status = 'needs_review';
+  }
+  if (ageDays !== null && ageDays > 180 && status !== 'verified') status = 'stale';
+
+  return {
+    status,
+    label: verificationLabels[status] || verificationLabels.unknown,
+    date,
+    source,
+    note: tos.verification_note || tos.verification?.note || (status === 'stale' ? 'Сведения давно не обновлялись, их желательно подтвердить заново.' : '')
+  };
+}
+function verificationClass(status) {
+  if (status === 'verified') return 'ok';
+  if (status === 'partial') return 'info';
+  if (status === 'needs_review' || status === 'stale') return 'warn';
+  return '';
+}
+function verificationBlock(tos, info) {
+  const details = [
+    info.date ? `Дата: ${niceDate(info.date)}` : 'Дата проверки уточняется',
+    info.source ? `Источник: ${info.source}` : 'Источник подтверждения не указан',
+    info.note || ''
+  ].filter(Boolean).join(' · ');
+  const actionText = info.status === 'verified'
+    ? 'Если сведения изменились, отправьте обновление через конструктор.'
+    : 'Помогите подтвердить карточку: проверьте председателя, телефон, границы, описание и открытые ссылки.';
+
+  return `<div class="notice"><b style="color:var(--text)">Статус сведений: ${esc(info.label)}</b><br>${esc(details)}<br>${esc(actionText)}</div>`;
+}
 function clarifyBlock(tos, qualityText) {
   const missing = missingFields(tos);
   const items = missing.map((item) => `<li>${esc(item)}</li>`).join('');
   const message = missing.length
     ? `<p>Карточка уже опубликована, но её можно сделать точнее. Сейчас стоит уточнить:</p><ul>${items}</ul>`
     : '<p>Основные поля карточки заполнены. Следующий шаг — добавить подтверждённые фото, логотип, новости и истории результата по мере поступления.</p>';
-  return `<section class="section tight"><div class="container grid"><article class="card full"><div class="card-inner"><div class="meta"><span class="tag">Проверка данных</span><span class="tag">${esc(qualityText)}</span></div><h2>Что нужно уточнить</h2>${message}<div class="notice"><b style="color:var(--text)">Как помочь</b><br>Пришлите только те данные, которые можно размещать открыто: публичный телефон, ссылку на группу, логотип, фото территории, описание выполненных дел или актуальную потребность.</div><div class="card-actions"><a class="btn primary" href="/update-tos/?tos=${esc(tos.slug)}">Прислать уточнение</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/sources/">Источники данных</a></div></div></article></div></section>`;
+  return `<section class="section tight"><div class="container grid"><article class="card full"><div class="card-inner"><div class="meta"><span class="tag">Проверка данных</span><span class="tag">${esc(qualityText)}</span></div><h2>Что нужно уточнить</h2>${message}<div class="notice"><b style="color:var(--text)">Как помочь</b><br>Пришлите только те данные, которые можно размещать открыто: публичный телефон, ссылку на группу, логотип, фото территории, описание выполненных дел или актуальную потребность.</div><div class="card-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Прислать уточнение</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/sources/">Источники данных</a></div></div></article></div></section>`;
 }
 function newsCard(n) {
   return `<article class="list-item"><div class="meta"><span class="tag">${esc(n.category || 'Новость')}</span><span class="tag">${esc(niceDate(n.date))}</span></div><h3>${esc(n.title || 'Новость')}</h3><p>${esc(n.lead || '')}</p><div class="card-actions"><a class="btn" href="/news/${esc(n.id)}/">Читать</a>${n.source_url ? `<a class="btn" href="${esc(n.source_url)}" target="_blank" rel="noopener">Источник</a>` : ''}</div></article>`;
@@ -105,7 +154,7 @@ function projectCard(p) {
   return `<article class="card"><div class="card-inner"><div class="tag">${esc(p.type || 'Проект')}</div><h3>${esc(p.title || 'Проект')}</h3><p>${esc(p.description || '')}</p>${steps ? `<hr class="sep"/><ul class="tiny">${steps}</ul>` : ''}<div class="card-actions"><a class="btn" href="/projects/${esc(p.id)}/">Подробнее</a></div></div></article>`;
 }
 function doneCard(d) {
-  return `<article class="list-item"><div class="meta"><span class="tag">${esc(d.type || 'Сделано')}</span><span class="tag">${esc(niceDate(d.date))}</span></div><h3>${esc(d.title || 'История ТОС')}</h3><p>${esc(d.summary || '')}</p><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${esc(d.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${esc(d.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Результат</span><p>${esc(d.result || 'Информация уточняется.')}</p></div></article></div><div class="card-actions"><a class="btn" href="/done/">Все истории</a><a class="btn" href="/contacts/">Прислать фото</a></div></article>`;
+  return `<article class="list-item"><div class="meta"><span class="tag">${esc(d.type || 'Сделано')}</span><span class="tag">${esc(niceDate(d.date))}</span></div><h3>${esc(d.title || 'История ТОС')}</h3><p>${esc(d.summary || '')}</p><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${esc(d.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${esc(d.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Результат</span><p>${esc(d.result || 'Информация уточняется.')}</p></div></article></div><div class="card-actions"><a class="btn" href="/done/">Все истории</a><a class="btn" href="${esc(updateUrl({ slug: d.tos_slug || '' }, 'photo'))}">Прислать фото</a></div></article>`;
 }
 function needCard(n) {
   return `<article class="list-item"><div class="meta"><span class="tag">${esc(n.need_type || 'Помощь')}</span><span class="tag ${n.priority === 'Высокий' ? 'warn' : ''}">${esc(n.priority || 'Приоритет уточняется')}</span></div><h3>${esc(n.title || 'Потребность')}</h3><p>${esc(n.description || '')}</p><p class="tiny"><b>Контакт:</b> ${esc(n.contact || 'Уточняется')}</p><div class="card-actions"><a class="btn" href="/needs/">Все потребности</a><a class="btn" href="/contacts/">Предложить помощь</a></div></article>`;
@@ -135,6 +184,7 @@ function makePage(tos, data) {
   const relNeeds = related(data.needs, tos.slug, 6).map(needCard).join('');
   const qualityScore = calcQuality(tos);
   const qualityText = `${qualityScore}% — ${qualityLabel(qualityScore)}`;
+  const verification = verificationInfo(tos, qualityScore);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -161,11 +211,11 @@ function makePage(tos, data) {
   };
 
   const actions = [
-    actionCard('Прислать новость', 'Расскажите о субботнике, собрании, празднике, проекте, помощи или результате работы ТОС.', '/contacts/', true),
-    actionCard('Предложить проект', 'Опишите идею: что нужно изменить, кому это поможет, какие фото и ресурсы уже есть.', '/update-tos/#template-project'),
-    actionCard('Сообщить о потребности', 'Укажите, что нужно территории: материалы, волонтёры, техника, транспорт, фото или помощь партнёров.', '/update-tos/#template-need'),
-    actionCard('Уточнить данные', 'Исправьте телефон, председателя, ссылку, границы, описание или дату обновления карточки.', `/update-tos/?tos=${tos.slug}`),
-    actionCard('Прислать фотоотчёт', 'Покажите результат: было, сделали, кто участвовал и что получилось.', '/update-tos/#template-photo'),
+    actionCard('Прислать новость', 'Расскажите о субботнике, собрании, празднике, проекте, помощи или результате работы ТОС.', updateUrl(tos, 'news'), true),
+    actionCard('Предложить проект', 'Опишите идею: что нужно изменить, кому это поможет, какие фото и ресурсы уже есть.', updateUrl(tos, 'project')),
+    actionCard('Сообщить о потребности', 'Укажите, что нужно территории: материалы, волонтёры, техника, транспорт, фото или помощь партнёров.', updateUrl(tos, 'need')),
+    actionCard('Уточнить данные', 'Исправьте телефон, председателя, ссылку, границы, описание или дату обновления карточки.', updateUrl(tos, 'card')),
+    actionCard('Прислать фотоотчёт', 'Покажите результат: было, сделали, кто участвовал и что получилось.', updateUrl(tos, 'photo')),
     actionCard('Посмотреть, что сделано', 'Откройте истории результата и архив реализованных инициатив ТОСов.', '/done/')
   ].join('');
 
@@ -192,13 +242,13 @@ function makePage(tos, data) {
   <a class="skip-link" href="#main">Перейти к содержимому</a>
   <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
   <main id="main">
-    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="#help-this-tos">Как помочь</a><a class="btn" href="/contacts/">Предложить новость</a><a class="btn" href="/update-tos/?tos=${esc(tos.slug)}">Сообщить об ошибке</a><button class="btn" onclick="window.print()">Распечатать карточку</button></div></div></section>
+    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="#help-this-tos">Как помочь</a><a class="btn" href="${esc(updateUrl(tos, 'news'))}">Предложить новость</a><a class="btn" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><button class="btn" onclick="window.print()">Распечатать карточку</button></div></div></section>
 
-    <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div><div class="tile"><b>${esc(qualityText)}</b><span>заполненность карточки</span></div></div><hr class="sep"/><div class="grid"><article class="card"><div class="card-inner"><h3>Территория</h3><p><b>Населённый пункт:</b> ${esc(tos.location || 'уточняется')}</p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p></div></article><article class="card"><div class="card-inner"><h3>Контакты</h3><p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p><p><b>Телефон:</b> ${esc(phones.join(', ') || 'уточняется')}</p><p><b>Email:</b> ${esc(emails.join(', ') || 'уточняется')}</p></div></article><article class="card"><div class="card-inner"><h3>Публичность</h3><p><b>Соцсети:</b> ${esc(socialLinks.length ? socialLinks.map(socialName).join(', ') : 'уточняются')}</p><p><b>Обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}</p><p><b>Источник:</b> ${esc(tos.source_label || tos.source || 'уточняется')}</p></div></article></div><div class="notice"><b style="color:var(--text)">Если вы живёте на этой территории</b><br>Вы можете прислать новость, фото, идею проекта, уточнение контактов или потребность для публикации на портале.</div></div></article></div></section>
+    <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div><div class="tile"><b>${esc(qualityText)}</b><span>заполненность карточки</span></div><div class="tile"><b>${esc(verification.label)}</b><span>статус сведений</span></div></div><hr class="sep"/><div class="grid"><article class="card"><div class="card-inner"><h3>Территория</h3><p><b>Населённый пункт:</b> ${esc(tos.location || 'уточняется')}</p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p></div></article><article class="card"><div class="card-inner"><h3>Контакты</h3><p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p><p><b>Телефон:</b> ${esc(phones.join(', ') || 'уточняется')}</p><p><b>Email:</b> ${esc(emails.join(', ') || 'уточняется')}</p></div></article><article class="card"><div class="card-inner"><h3>Публичность</h3><p><b>Соцсети:</b> ${esc(socialLinks.length ? socialLinks.map(socialName).join(', ') : 'уточняются')}</p><p><b>Обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}</p><p><b>Источник:</b> ${esc(tos.source_label || tos.source || verification.source || 'уточняется')}</p><p><span class="tag ${verificationClass(verification.status)}">${esc(verification.label)}</span></p></div></article></div>${verificationBlock(tos, verification)}<div class="notice"><b style="color:var(--text)">Если вы живёте на этой территории</b><br>Вы можете прислать новость, фото, идею проекта, уточнение контактов или потребность для публикации на портале.</div></div></article></div></section>
 
     ${clarifyBlock(tos, qualityText)}
 
-    <section class="section"><div class="container grid"><div class="card full"><div class="card-inner"><div class="prose"><h2>Описание</h2><p>${esc(tos.description || 'Описание пока уточняется.')}</p><h2>Председатель</h2><p>${esc(tos.chairperson || 'Информация уточняется')}</p><h2>Контакты председателя</h2><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '')}${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '')}${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Профиль/ссылка — ${esc(u)}</a></li>`, '')}${(!phones.length && !emails.length && !chairLinks.length) ? '<li>Контакты уточняются</li>' : ''}</ul><h2>Сообщества ТОС</h2><ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))} — ${esc(u)}</a></li>`)}</ul><p class="tiny">Исходные контакты из анкеты: ${esc(tos.contacts_raw || '—')}</p><p class="tiny">Источник/обновление: ${esc(tos.updated_at || 'дата уточняется')}</p></div><hr class="sep"/><div class="card-actions"><a class="btn" href="/tos/">← В каталог</a><a class="btn" href="/update-tos/?tos=${esc(tos.slug)}">Сообщить об ошибке</a><a class="btn" href="/contacts/">Предложить новость</a></div></div></div></div></section>
+    <section class="section"><div class="container grid"><div class="card full"><div class="card-inner"><div class="prose"><h2>Описание</h2><p>${esc(tos.description || 'Описание пока уточняется.')}</p><h2>Председатель</h2><p>${esc(tos.chairperson || 'Информация уточняется')}</p><h2>Контакты председателя</h2><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '')}${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '')}${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Профиль/ссылка — ${esc(u)}</a></li>`, '')}${(!phones.length && !emails.length && !chairLinks.length) ? '<li>Контакты уточняются</li>' : ''}</ul><h2>Сообщества ТОС</h2><ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))} — ${esc(u)}</a></li>`)}</ul><p class="tiny">Исходные контакты из анкеты: ${esc(tos.contacts_raw || '—')}</p><p class="tiny">Источник/обновление: ${esc(tos.updated_at || 'дата уточняется')}</p></div><hr class="sep"/><div class="card-actions"><a class="btn" href="/tos/">← В каталог</a><a class="btn" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><a class="btn" href="${esc(updateUrl(tos, 'news'))}">Предложить новость</a></div></div></div></div></section>
 
     <section class="section" id="help-this-tos"><div class="container section-head"><div><h2>Как помочь этому ТОС</h2><p>Карточка ТОС — не только справочник, но и точка действия для жителей, председателя и партнёров</p></div><a class="btn" href="/partners/">Партнёрам</a></div><div class="container grid">${actions}</div></section>
 
