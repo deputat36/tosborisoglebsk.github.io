@@ -165,6 +165,29 @@ function updateTosScenarioFromHref(href) {
   }
 }
 
+function patchLegacyUpdateLinks() {
+  document.querySelectorAll('a[href*="/update-tos"]').forEach((link) => {
+    const href = link.getAttribute('href') || '';
+    const scenario = updateTosScenarioFromHref(href);
+    if (!scenario) return;
+
+    try {
+      const url = new URL(href, location.origin);
+      if (!url.pathname.startsWith('/update-tos')) return;
+
+      const tos = url.searchParams.get('tos') || '';
+      const type = url.searchParams.get('type') || url.searchParams.get('scenario') || '';
+      const alreadyScenario = type && url.hash === '#message-builder';
+
+      if (tos && alreadyScenario) return;
+      if (!tos && alreadyScenario) return;
+      link.setAttribute('href', tos ? updateTosUrl(tos, scenario) : updateLink(scenario));
+    } catch {
+      link.setAttribute('href', updateLink(scenario));
+    }
+  });
+}
+
 function patchTosDetailLinks(slug) {
   document.querySelectorAll('a[href*="/update-tos"]').forEach((link) => {
     const href = link.getAttribute('href') || '';
@@ -226,6 +249,7 @@ function initCommonUi() {
   ensureFooterLinks();
   injectBreadcrumbs();
   injectHomePortalStatus();
+  patchLegacyUpdateLinks();
   patchTosDetailRuntime();
 
   const savedTheme = localStorage.getItem('theme');
