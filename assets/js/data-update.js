@@ -10,6 +10,9 @@
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
   }[char]));
 
+  const updateUrl = (item) => `/update-tos/?tos=${encodeURIComponent(item.slug || '')}&type=card#message-builder`;
+  const tosUrl = (item) => `/tos/${encodeURIComponent(item.slug || '')}/`;
+
   const checks = [
     ['chairperson', 'председатель', (t) => Boolean(String(t.chairperson || '').trim())],
     ['phones', 'телефон', (t) => Array.isArray(t.phones) && t.phones.length > 0],
@@ -59,7 +62,7 @@
       <h3>ТОС «${escapeHtml(item.name || '')}»</h3>
       <p><b>Территория:</b> ${escapeHtml(item.location || 'уточняется')}<br><b>Председатель:</b> ${escapeHtml(item.chairperson || 'уточняется')}</p>
       <div class="notice"><b style="color:var(--text)">Нужно дополнить</b><br>${missing}</div>
-      <div class="card-actions"><a class="btn" href="/tos/${escapeHtml(item.slug)}/">Открыть карточку</a><a class="btn" href="/update-tos/">Исправить данные</a></div>
+      <div class="card-actions"><a class="btn" href="${tosUrl(item)}">Открыть карточку</a><a class="btn primary" href="${updateUrl(item)}">Исправить данные</a></div>
     </article>`;
   }
 
