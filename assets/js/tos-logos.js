@@ -27,7 +27,7 @@ async function enhanceTosLogos(){
     return {status,label:statusLabels[status]||statusLabels.unknown,date,source:t?.verification_source||'',note:t?.verification_note||'',ageDays};
   }
   function updateUrl(t,type='card'){
-    return `/update-tos/?tos=${encodeURIComponent(t.slug)}&type=${encodeURIComponent(type)}`;
+    return `/update-tos/?tos=${encodeURIComponent(t.slug||'')}&type=${encodeURIComponent(type)}#message-builder`;
   }
   function logoMarkup(t,large=false){
     if(t&&t.logo)return `<img class="tos-logo-img${large?' large':''}" src="${esc(t.logo)}" alt="Логотип ТОС «${esc(t.name)}»" loading="lazy" data-fallback="${esc(initials(t.name))}">`;

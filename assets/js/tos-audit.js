@@ -6,6 +6,8 @@ async function renderTosAudit(){
   const clean=v=>String(v||'').trim();
   const hasGoodDescription=t=>clean(t.description)&&clean(t.description)!=='Описание пока уточняется.';
   const isOld=t=>!t.updated_at||new Date(t.updated_at+'T00:00:00')<new Date('2026-05-23T00:00:00');
+  const updateUrl=t=>`/update-tos/?tos=${encodeURIComponent(t.slug||'')}&type=card#message-builder`;
+  const tosUrl=t=>`/tos/${encodeURIComponent(t.slug||'')}/`;
   const score=t=>{
     const checks=[t.name,t.location,t.boundaries,t.chairperson,(t.phones||[]).length,(t.emails||[]).length,(t.social_links||[]).length,t.logo,hasGoodDescription(t),t.population,t.founded];
     return Math.round(checks.filter(Boolean).length/checks.length*100);
@@ -39,7 +41,7 @@ async function renderTosAudit(){
     const p=problems(t);
     const s=score(t);
     const cls=s>=80?'ok':s>=55?'warn':'bad';
-    return `<article class="list-item audit-row"><div class="meta"><span class="tag ${cls}">${s}%</span><span class="tag">${esc(t.type||'Тип не указан')}</span><span class="tag">${esc(t.location||'Территория не указана')}</span>${p.map(x=>`<span class="tag warn">${esc(x)}</span>`).join('')}</div><h3>ТОС «${esc(t.name||'Без названия')}»</h3><p class="tiny"><b>Председатель:</b> ${esc(t.chairperson||'не указан')}<br><b>Обновлено:</b> ${esc(t.updated_at||'не указано')}<br><b>Контакты:</b> ${esc([...(t.phones||[]),...(t.emails||[])].join(', ')||'нет')}<br><b>Соцсети:</b> ${(t.social_links||[]).length?(t.social_links||[]).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join(', '):'нет'}</p><div class="card-actions"><a class="btn" href="/tos/${esc(t.slug)}/">Открыть карточку</a><a class="btn" href="/update-tos/">Запросить исправление</a></div></article>`;
+    return `<article class="list-item audit-row"><div class="meta"><span class="tag ${cls}">${s}%</span><span class="tag">${esc(t.type||'Тип не указан')}</span><span class="tag">${esc(t.location||'Территория не указана')}</span>${p.map(x=>`<span class="tag warn">${esc(x)}</span>`).join('')}</div><h3>ТОС «${esc(t.name||'Без названия')}»</h3><p class="tiny"><b>Председатель:</b> ${esc(t.chairperson||'не указан')}<br><b>Обновлено:</b> ${esc(t.updated_at||'не указано')}<br><b>Контакты:</b> ${esc([...(t.phones||[]),...(t.emails||[])].join(', ')||'нет')}<br><b>Соцсети:</b> ${(t.social_links||[]).length?(t.social_links||[]).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a>`).join(', '):'нет'}</p><div class="card-actions"><a class="btn" href="${tosUrl(t)}">Открыть карточку</a><a class="btn primary" href="${updateUrl(t)}">Запросить исправление</a></div></article>`;
   }
   function list(title,items,empty){
     return `<section class="section"><div class="container section-head"><div><h2>${esc(title)}</h2><p>Найдено: <b>${items.length}</b></p></div></div><div class="container list">${items.length?items.map(row).join(''):`<div class="empty">${esc(empty||'Проблем не найдено.')}</div>`}</div></section>`;
