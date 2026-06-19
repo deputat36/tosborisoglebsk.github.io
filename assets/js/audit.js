@@ -27,7 +27,11 @@ async function loadAudit() {
 }
 
 function updateUrl(item, type = 'card') {
-  return `/update-tos/?tos=${encodeURIComponent(item.slug)}&type=${encodeURIComponent(type)}`;
+  return `/update-tos/?tos=${encodeURIComponent(item.slug || '')}&type=${encodeURIComponent(type)}#message-builder`;
+}
+
+function tosUrl(item) {
+  return `/tos/${encodeURIComponent(item.slug || '')}/`;
 }
 
 function loadWorkflow() {
@@ -126,7 +130,7 @@ function shortRequestText(item) {
 
 function workflowSelect(item) {
   const current = workflowFor(item.slug);
-  const options = Object.entries(workflowLabels).map(([value, label]) => `<option value="${value}"${value === current ? ' selected' : ''}>${label}</option>`).join('');
+  const options = Object.entries(workflowLabels).map(([value, label]) => `<option value="${auditEsc(value)}"${value === current ? ' selected' : ''}>${auditEsc(label)}</option>`).join('');
   return `<label class="audit-field"><span>Ход работы</span><select class="input audit-workflow-select" data-slug="${auditEsc(item.slug)}">${options}</select></label>`;
 }
 
@@ -149,7 +153,7 @@ function renderItem(item) {
       <section class="audit-card-section"><h4>Связанные материалы</h4><div class="audit-related"><span><b>${auditEsc(related.news || 0)}</b>Новости</span><span><b>${auditEsc(related.done || 0)}</b>Сделано</span><span><b>${auditEsc(related.needs || 0)}</b>Потребности</span><span><b>${auditEsc(related.projects || 0)}</b>Проекты</span><span><b>${auditEsc(related.events || 0)}</b>События</span></div></section>
     </div>
     <div class="audit-workflow">${workflowSelect(item)}<div class="audit-workflow-note">Рабочий статус сохраняется только на текущем устройстве.</div></div>
-    <div class="card-actions"><a class="btn primary" href="/tos/${auditEsc(item.slug)}/">Карточка ТОС</a><a class="btn" href="${auditEsc(updateUrl(item, 'card'))}">Уточнить данные</a><a class="btn" href="${auditEsc(updateUrl(item, 'news'))}">Новость</a><a class="btn" href="${auditEsc(updateUrl(item, 'project'))}">Проект</a><button class="btn audit-copy-request" type="button" data-kind="full" data-slug="${auditEsc(item.slug)}">Полный запрос</button><button class="btn audit-copy-request" type="button" data-kind="short" data-slug="${auditEsc(item.slug)}">Коротко</button><button class="btn audit-copy-request" type="button" data-kind="media" data-slug="${auditEsc(item.slug)}">Логотип/фото</button></div>
+    <div class="card-actions"><a class="btn primary" href="${tosUrl(item)}">Карточка ТОС</a><a class="btn" href="${auditEsc(updateUrl(item, 'card'))}">Уточнить данные</a><a class="btn" href="${auditEsc(updateUrl(item, 'news'))}">Новость</a><a class="btn" href="${auditEsc(updateUrl(item, 'project'))}">Проект</a><button class="btn audit-copy-request" type="button" data-kind="full" data-slug="${auditEsc(item.slug)}">Полный запрос</button><button class="btn audit-copy-request" type="button" data-kind="short" data-slug="${auditEsc(item.slug)}">Коротко</button><button class="btn audit-copy-request" type="button" data-kind="media" data-slug="${auditEsc(item.slug)}">Логотип/фото</button></div>
     <div class="audit-copy-status" data-copy-status="${auditEsc(item.slug)}"></div>
   </article>`;
 }
