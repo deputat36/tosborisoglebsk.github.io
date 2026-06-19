@@ -75,11 +75,14 @@ function renderList() {
   }
 
   root.innerHTML = items.map((item) => {
+    const slug = String(item.slug || '');
+    const urlSlug = encodeURIComponent(slug);
+    const attrSlug = requestEsc(slug);
     const missing = (item.missing || []).map((value) => `<span class="tag warn">${requestEsc(value)}</span>`).join('');
     const recommendations = (item.recommendations || []).map((value) => `<li>${requestEsc(value)}</li>`).join('');
     const text = requestEsc(requestMessage(item));
-    const localUpdateUrl = `/update-tos/?tos=${encodeURIComponent(item.slug || '')}&type=card#message-builder`;
-    return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : 'ok'}">${requestEsc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${requestEsc(item.score || 0)}%</span><span class="tag">${requestEsc(item.location || '')}</span></div><h3>ТОС «${requestEsc(item.name)}»</h3><p><b>Председатель:</b> ${requestEsc(item.chairperson || 'уточняется')}</p><div>${missing}</div>${recommendations ? `<ul class="tiny">${recommendations}</ul>` : ''}<textarea class="copy-source" readonly rows="9">${text}</textarea><div class="card-actions"><button class="btn primary" type="button" data-copy-message="${requestEsc(item.slug)}">Скопировать сообщение</button><a class="btn" href="/tos/${requestEsc(item.slug)}/">Открыть карточку</a><a class="btn" href="${localUpdateUrl}">Обновить данные</a><a class="btn" href="/chairperson/verify-card/">Как подтвердить</a></div></article>`;
+    const localUpdateUrl = `/update-tos/?tos=${urlSlug}&type=card#message-builder`;
+    return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : 'ok'}">${requestEsc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${requestEsc(item.score || 0)}%</span><span class="tag">${requestEsc(item.location || '')}</span></div><h3>ТОС «${requestEsc(item.name)}»</h3><p><b>Председатель:</b> ${requestEsc(item.chairperson || 'уточняется')}</p><div>${missing}</div>${recommendations ? `<ul class="tiny">${recommendations}</ul>` : ''}<textarea class="copy-source" readonly rows="9">${text}</textarea><div class="card-actions"><button class="btn primary" type="button" data-copy-message="${attrSlug}">Скопировать сообщение</button><a class="btn" href="/tos/${urlSlug}/">Открыть карточку</a><a class="btn" href="${localUpdateUrl}">Уточнить</a><a class="btn" href="/chairperson/verify-card/">Как подтвердить</a></div></article>`;
   }).join('');
 }
 
