@@ -1,5 +1,11 @@
 {
-  "requested_at": "2026-06-18",
-  "reason": "Refresh generated TOS pages after template, audit and update-center improvements",
+  "requested_at": "2026-06-19",
+  "reason": "Refresh generated TOS pages because published HTML cards still contain old update-tos links after template improvements",
+  "check_after_merge": [
+    "/tos/ivanovka/",
+    "/tos/podstepki/",
+    "/tos/gubari/",
+    "/tos/tancyrey/"
+  ],
   "safe_to_delete": true
 }
