@@ -12,6 +12,10 @@ const legacyAliases = new Set([
   'tos/tantsyrey'
 ]);
 
+function isNoindex(html) {
+  return /<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
+}
+
 function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
     if (entry.isDirectory() && skipDirectories.has(entry.name)) continue;
@@ -25,6 +29,9 @@ function walk(directory) {
     const relativeDirectory = path.relative(ROOT, path.dirname(fullPath)).split(path.sep).join('/');
     if (relativeDirectory.startsWith('documents/demo')) continue;
     if (legacyAliases.has(relativeDirectory)) continue;
+
+    const html = fs.readFileSync(fullPath, 'utf8');
+    if (isNoindex(html)) continue;
 
     urls.add(relativeDirectory ? `${SITE}/${relativeDirectory}/` : `${SITE}/`);
   }
