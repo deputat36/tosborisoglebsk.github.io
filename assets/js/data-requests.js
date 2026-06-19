@@ -19,10 +19,24 @@ function hasMissing(item, word) {
   return (item.missing || []).some((value) => String(value).toLowerCase().includes(word));
 }
 
+function updateCardUrl(slug) {
+  return `https://tosborisoglebsk.ru/update-tos/?tos=${encodeURIComponent(slug || '')}&type=card#message-builder`;
+}
+
 function requestMessage(item) {
   const missing = (item.missing || []).join(', ') || 'уточнение актуальности карточки';
   const chair = item.chairperson ? `, ${item.chairperson}` : '';
-  return `Здравствуйте${chair}!\n\nОбновляем открытую карточку ТОС «${item.name}» на портале ТОС БГО: https://tosborisoglebsk.ru/tos/${item.slug}/\n\nСейчас нужно уточнить: ${missing}.\n\nПросим прислать только те сведения, которые можно размещать открыто: телефон для публикации, ссылку на группу/страницу ТОС, логотип, фото территории, краткое описание деятельности или источник подтверждения данных.\n\nЕсли какие-то данные публиковать нельзя, просто напишите «не публиковать».`;
+  return `Здравствуйте${chair}!
+
+Обновляем открытую карточку ТОС «${item.name}» на портале ТОС БГО: https://tosborisoglebsk.ru/tos/${item.slug}/
+
+Сейчас нужно уточнить: ${missing}.
+
+Просим прислать только те сведения, которые можно размещать открыто: телефон для публикации, ссылку на группу/страницу ТОС, логотип, фото территории, краткое описание деятельности или источник подтверждения данных.
+
+Форма для уточнения этой карточки: ${updateCardUrl(item.slug)}
+
+Если какие-то данные публиковать нельзя, просто напишите «не публиковать».`;
 }
 
 function renderSummary(summary) {
@@ -64,7 +78,8 @@ function renderList() {
     const missing = (item.missing || []).map((value) => `<span class="tag warn">${requestEsc(value)}</span>`).join('');
     const recommendations = (item.recommendations || []).map((value) => `<li>${requestEsc(value)}</li>`).join('');
     const text = requestEsc(requestMessage(item));
-    return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : 'ok'}">${requestEsc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${requestEsc(item.score || 0)}%</span><span class="tag">${requestEsc(item.location || '')}</span></div><h3>ТОС «${requestEsc(item.name)}»</h3><p><b>Председатель:</b> ${requestEsc(item.chairperson || 'уточняется')}</p><div>${missing}</div>${recommendations ? `<ul class="tiny">${recommendations}</ul>` : ''}<textarea class="copy-source" readonly rows="8">${text}</textarea><div class="card-actions"><button class="btn primary" type="button" data-copy-message="${requestEsc(item.slug)}">Скопировать сообщение</button><a class="btn" href="/tos/${requestEsc(item.slug)}/">Открыть карточку</a><a class="btn" href="/update-tos/?tos=${encodeURIComponent(item.slug || '')}">Обновить данные</a></div></article>`;
+    const localUpdateUrl = `/update-tos/?tos=${encodeURIComponent(item.slug || '')}&type=card#message-builder`;
+    return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : 'ok'}">${requestEsc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${requestEsc(item.score || 0)}%</span><span class="tag">${requestEsc(item.location || '')}</span></div><h3>ТОС «${requestEsc(item.name)}»</h3><p><b>Председатель:</b> ${requestEsc(item.chairperson || 'уточняется')}</p><div>${missing}</div>${recommendations ? `<ul class="tiny">${recommendations}</ul>` : ''}<textarea class="copy-source" readonly rows="9">${text}</textarea><div class="card-actions"><button class="btn primary" type="button" data-copy-message="${requestEsc(item.slug)}">Скопировать сообщение</button><a class="btn" href="/tos/${requestEsc(item.slug)}/">Открыть карточку</a><a class="btn" href="${localUpdateUrl}">Обновить данные</a><a class="btn" href="/chairperson/verify-card/">Как подтвердить</a></div></article>`;
   }).join('');
 }
 
