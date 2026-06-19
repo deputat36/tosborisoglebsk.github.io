@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return response.json();
   }
 
+  function updateUrl(slug) {
+    return `/update-tos/?tos=${encodeURIComponent(slug || '')}&type=card#message-builder`;
+  }
+
   function renderAuditSummary(audit) {
     const root = document.querySelector('#workbench-audit-summary');
     if (!root) return;
@@ -53,8 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     root.innerHTML = items.map((item) => {
+      const slug = String(item.slug || '');
+      const urlSlug = encodeURIComponent(slug);
       const missing = (item.missing || []).slice(0, 5).map((value) => `<span class="tag warn">${esc(value)}</span>`).join(' ');
-      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p>${missing || 'Нужна проверка актуальности сведений.'}</p><div class="card-actions"><a class="btn" href="/tos/${esc(item.slug)}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn" href="/update-tos/?tos=${encodeURIComponent(item.slug || '')}">Обновить</a></div></article>`;
+      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p>${missing || 'Нужна проверка актуальности сведений.'}</p><div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
     }).join('');
   }
 
