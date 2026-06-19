@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return (item.missing || []).length ? (item.missing || []).join(', ') : 'проверка актуальности сведений';
   }
 
+  function updateUrl(slug) {
+    return `/update-tos/?tos=${encodeURIComponent(slug || '')}&type=card#message-builder`;
+  }
+
   function boardItems() {
     return items.filter((item) => {
       const status = getStatus(item.slug);
@@ -94,9 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
     root.innerHTML = list.map((item) => {
       const current = getStatus(item.slug);
       const note = getNote(item.slug);
-      const options = statuses.map(([key, label]) => `<option value="${key}" ${key === current ? 'selected' : ''}>${esc(label)}</option>`).join('');
+      const slug = String(item.slug || '');
+      const urlSlug = encodeURIComponent(slug);
+      const attrSlug = esc(slug);
+      const options = statuses.map(([key, label]) => `<option value="${esc(key)}" ${key === current ? 'selected' : ''}>${esc(label)}</option>`).join('');
       const missing = (item.missing || []).slice(0, 8).map((value) => `<span class="tag warn">${esc(value)}</span>`).join(' ');
-      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p><b>Нужно уточнить:</b> ${esc(missingText(item))}</p><div>${missing}</div><label class="tiny" for="status-${esc(item.slug)}">Статус работы</label><select class="input" id="status-${esc(item.slug)}" data-board-status="${esc(item.slug)}">${options}</select><label class="tiny" for="note-${esc(item.slug)}">Рабочая заметка</label><textarea class="input" id="note-${esc(item.slug)}" data-board-note="${esc(item.slug)}" rows="2" placeholder="Например: написали председателю 18.06, ждём логотип">${esc(note)}</textarea><div class="card-actions"><a class="btn" href="/tos/${esc(item.slug)}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn" href="/update-tos/?tos=${encodeURIComponent(item.slug || '')}">Обновить</a></div></article>`;
+      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p><b>Нужно уточнить:</b> ${esc(missingText(item))}</p><div>${missing}</div><label class="tiny" for="status-${attrSlug}">Статус работы</label><select class="input" id="status-${attrSlug}" data-board-status="${attrSlug}">${options}</select><label class="tiny" for="note-${attrSlug}">Рабочая заметка</label><textarea class="input" id="note-${attrSlug}" data-board-note="${attrSlug}" rows="2" placeholder="Например: написали председателю 18.06, ждём логотип">${esc(note)}</textarea><div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
     }).join('');
   }
 
