@@ -51,7 +51,7 @@
         <div class="eyebrow">Календарь и рабочий план</div>
         <h1>События, дедлайны и контрольные точки ТОС</h1>
         <p class="lead">Календарь помогает председателям и активу не пропускать конкурсы, подготовку проектов, фотоотчёты, собрания, субботники, обучение и важные даты.</p>
-        <div class="hero-actions"><a class="btn primary" href="#events-list">Смотреть события</a><a class="btn" href="/grants/">Конкурсы и гранты</a><a class="btn" href="/projects/">Банк проектов</a><a class="btn" href="/documents/">Шаблоны</a><a class="btn" href="/update-tos/#template-event">Добавить событие</a><a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">ВК ТОС БГО</a></div>
+        <div class="hero-actions"><a class="btn primary" href="#events-list">Смотреть события</a><a class="btn" href="/grants/">Конкурсы и гранты</a><a class="btn" href="/projects/">Банк проектов</a><a class="btn" href="/documents/">Шаблоны</a><a class="btn" href="/update-tos/?type=event#message-builder">Добавить событие</a><a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">ВК ТОС БГО</a></div>
       </div>
     </section>
 
@@ -65,19 +65,17 @@
 
     <section class="section"><div class="container section-head"><div><h2>Сезонный ориентир для ТОС</h2><p>Примерная логика года: идеи собираются заранее, а отчёты — сразу после дел</p></div></div><div class="container grid"><article class="card"><div class="card-inner"><h3>Январь — февраль</h3><p>Следить за конкурсом ТОС, проверить паспорта проектов, сметы, фото и поддержку жителей.</p></div></article><article class="card"><div class="card-inner"><h3>Март — апрель</h3><p>Искать НКО-партнёров, готовить социальные проекты, планировать весенние субботники.</p></div></article><article class="card"><div class="card-inner"><h3>Май — июнь</h3><p>Проводить благоустройство, голосования, акции, собирать фото до / процесс / после.</p></div></article><article class="card"><div class="card-inner"><h3>Июль — август</h3><p>Подводить итоги первой половины года, собирать фотоотчёты, обучаться, готовить идеи на осень.</p></div></article><article class="card"><div class="card-inner"><h3>Сентябрь — октябрь</h3><p>Собирать идеи на следующий сезон, изучать лучшие практики, готовить проекты и партнёрства заранее.</p></div></article><article class="card"><div class="card-inner"><h3>Ноябрь — декабрь</h3><p>Сделать публичный итог года, обновить карточку ТОС, собрать архив фото, документов и реализованных проектов.</p></div></article></div></section>
 
-    <section class="section"><div class="container section-head"><div><h2>Фильтр событий и дедлайнов</h2><p>Список ниже загружается из data/events.json</p></div><a class="btn" href="/update-tos/#template-event">Добавить событие</a></div><div class="container toolbar"><input class="input" id="event-search" placeholder="Поиск: конкурс, субботник, отчёт, обучение, собрание..."/><select class="select" id="event-type-filter"><option value="">Все типы</option></select><select class="select" id="event-tos-filter"><option value="">Все ТОС</option></select></div></section>
+    <section class="section"><div class="container section-head"><div><h2>Фильтр событий и дедлайнов</h2><p>Список ниже загружается из data/events.json</p></div><a class="btn" href="/update-tos/?type=event#message-builder">Добавить событие</a></div><div class="container toolbar"><input class="input" id="event-search" placeholder="Поиск: конкурс, субботник, отчёт, обучение, собрание..."/><select class="select" id="event-type-filter"><option value="">Все типы</option></select><select class="select" id="event-tos-filter"><option value="">Все ТОС</option></select></div></section>
 
     <section class="section">
       <div class="container list" id="events-list"><div class="empty">Загрузка событий...</div></div>
     </section>
 
     <section class="section"><div class="container section-head"><div><h2>Шаблон события для календаря</h2><p>Скопируйте и отправьте через ВК или раздел контактов</p></div><a class="btn" href="https://vk.ru/tosbgo" target="_blank" rel="noopener">Отправить в ВК</a></div><div class="container prose"><div class="notice">Название события:<br>ТОС:<br>Дата:<br>Время:<br>Место:<br>Кто может участвовать:<br>Что нужно взять с собой:<br>Краткое описание:<br>Ответственный:<br>Телефон / ссылка для связи:<br>Нужно ли опубликовать объявление: да / нет</div></div></section>
-
-    <section class="section"><div class="container notice"><b>Добавить событие:</b> пришлите название ТОС, дату, время, место, описание, контакт ответственного и фото или ссылку через <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество ТОС БГО</a> или раздел <a href="/contacts/">Контакты</a>.</div></section>
   </main>
 
-  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Календарь хранится в data/events.json. Материалы проходят ручную проверку перед публикацией.</div></div></footer>
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru. Информационный проект для жителей, активистов и председателей ТОС.</div></div><div class="tiny">События загружаются из data/events.json и обновляются вручную.</div></div></footer>
   <script src="/assets/js/site.js"></script>
-  <script src="/assets/js/calendar.js"></script>
+  <script src="/assets/js/events.js"></script>
 </body>
 </html>
