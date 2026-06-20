@@ -2,31 +2,36 @@
 
 Сайт: https://tosborisoglebsk.ru/
 
-Портал содержит открытый каталог территориальных общественных самоуправлений Борисоглебского городского округа, новости, проекты, потребности, правовые материалы, инструкции для председателей и справочные страницы.
+Портал содержит открытый каталог территориальных общественных самоуправлений Борисоглебского городского округа, новости, проекты, потребности, правовые материалы, инструкции для председателей, справочные страницы и материалы для жителей.
 
-## Основные разделы
+## Основные публичные разделы
 
+- Главная: https://tosborisoglebsk.ru/
 - Каталог ТОС: https://tosborisoglebsk.ru/tos/
+- Населённые пункты и территории: https://tosborisoglebsk.ru/places/
 - Новости: https://tosborisoglebsk.ru/news/
 - Проекты: https://tosborisoglebsk.ru/projects/
 - Сделано: https://tosborisoglebsk.ru/done/
 - Потребности: https://tosborisoglebsk.ru/needs/
+- Календарь: https://tosborisoglebsk.ru/calendar/
 - Материалы: https://tosborisoglebsk.ru/materials/
 - Документы: https://tosborisoglebsk.ru/documents/
 - Правовая основа: https://tosborisoglebsk.ru/legal/
 - ФЗ №33-ФЗ и ТОС: https://tosborisoglebsk.ru/legal/federal-law-33/
 - Как создать ТОС: https://tosborisoglebsk.ru/create-tos/
 - Председателю: https://tosborisoglebsk.ru/chairperson/
-- Партнёрское предложение: https://tosborisoglebsk.ru/partner-proposal/
-- Благодарности партнёрам: https://tosborisoglebsk.ru/partner-thanks/
-- Источники данных: https://tosborisoglebsk.ru/sources/
-- Населённые пункты и территории: https://tosborisoglebsk.ru/places/
-- Рабочая панель: https://tosborisoglebsk.ru/workbench/
-- Доска сбора данных: https://tosborisoglebsk.ru/collection-board/
-- Редакционный порядок: https://tosborisoglebsk.ru/editorial-workflow/
-- Стандарты материалов: https://tosborisoglebsk.ru/content-standards/
+- Жителям: https://tosborisoglebsk.ru/residents/
+- Партнёрам: https://tosborisoglebsk.ru/partners/
+- Карта: https://tosborisoglebsk.ru/map/
+- Контакты: https://tosborisoglebsk.ru/contacts/
+- Вопросы и ответы: https://tosborisoglebsk.ru/faq/
+- Словарь ТОС: https://tosborisoglebsk.ru/glossary/
+
+## Публичные методические разделы
+
+- Проверить карточку ТОС: https://tosborisoglebsk.ru/check-tos/
+- Памятка подтверждения карточки: https://tosborisoglebsk.ru/chairperson/verify-card/
 - Статусы проверки данных: https://tosborisoglebsk.ru/verification-levels/
-- Справочник полей данных: https://tosborisoglebsk.ru/data-dictionary/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
 - Запросы на уточнение данных: https://tosborisoglebsk.ru/data-requests/
 - Коммуникационный набор: https://tosborisoglebsk.ru/communication-kit/
@@ -36,12 +41,11 @@
 - Методика развития портала: https://tosborisoglebsk.ru/methodology/
 - Открытые данные: https://tosborisoglebsk.ru/open-data/
 - План развития: https://tosborisoglebsk.ru/roadmap/
-- Проверить карточку ТОС: https://tosborisoglebsk.ru/check-tos/
 - Прислать материал: https://tosborisoglebsk.ru/submit-materials/
 - Индекс страниц: https://tosborisoglebsk.ru/site-index/
-- Словарь ТОС: https://tosborisoglebsk.ru/glossary/
-- Актуализация данных: https://tosborisoglebsk.ru/data-update/
-- Контакты: https://tosborisoglebsk.ru/contacts/
+- Редакционная политика: https://tosborisoglebsk.ru/editorial-policy/
+- Источники данных: https://tosborisoglebsk.ru/sources/
+- Справочник полей данных: https://tosborisoglebsk.ru/data-dictionary/
 
 ## Открытые данные
 
@@ -50,16 +54,20 @@
 - Проекты: https://tosborisoglebsk.ru/data/projects.json
 - Потребности: https://tosborisoglebsk.ru/data/needs.json
 - Сделано: https://tosborisoglebsk.ru/data/done.json
-- Задачи сбора данных: https://tosborisoglebsk.ru/data/collection_tasks.csv
-- Аудит качества: https://tosborisoglebsk.ru/data/site_audit.json
-- Подробный аудит: https://tosborisoglebsk.ru/data/tos_content_audit.json
+- События: https://tosborisoglebsk.ru/data/events.json
+- Документы: https://tosborisoglebsk.ru/data/documents.json
+- Аудит качества карточек: https://tosborisoglebsk.ru/data/tos_content_audit.json
 - Индекс страниц: https://tosborisoglebsk.ru/data/page_index.json
 - RSS: https://tosborisoglebsk.ru/rss.xml
 - Sitemap: https://tosborisoglebsk.ru/sitemap.xml
 
+## Рабочие страницы
+
+Некоторые технические страницы портала используются редактором и закрыты от индексации через `noindex,nofollow`. Их не нужно считать основными публичными разделами: `/audit/`, `/site-health/`, `/collection-board/`, `/verification-tasks/`, `/workbench/`, `/verification-control/`, старые `/news/view.html`, `/tos/view.html` и локальный инструмент `/tools/import.html`.
+
 ## Использование данных
 
-Сведения о ТОСах могут требовать подтверждения у председателей и актива. Открытые контакты, ссылки, фотографии и другие сведения нужно проверять перед публикацией.
+Сведения о ТОСах могут требовать подтверждения у председателей и актива. Открытые контакты, ссылки, фотографии, границы, председатели и другие сведения нужно проверять перед официальным использованием или публикацией в новых материалах.
 
 ## Контакт
 
