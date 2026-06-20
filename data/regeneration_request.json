@@ -1,6 +1,6 @@
 {
   "requested_at": "2026-06-20",
-  "reason": "Refresh generated TOS pages, places pages, sitemap and page index after update-tos scenario cleanup, noindex cleanup and workflow patch-script updates",
+  "reason": "Refresh generated TOS pages, places pages, project detail pages, sitemap and page index after update-tos scenario cleanup, noindex cleanup and workflow patch-script updates",
   "check_after_merge": [
     "/tos/ivanovka/",
     "/tos/podstepki/",
@@ -10,6 +10,9 @@
     "/places/podstepki/",
     "/places/gubari/",
     "/places/tancyrey/",
+    "/projects/child-sport-playground/",
+    "/projects/memorial-renovation/",
+    "/projects/water-supply-improvement/",
     "/calendar/",
     "/documents/",
     "/sitemap.xml",
@@ -19,6 +22,7 @@
   "expected_after_generation": [
     "generated TOS cards use /update-tos/?tos=<slug>&type=<scenario>#message-builder",
     "generated places pages use /update-tos/?type=card#message-builder",
+    "generated project pages use /update-tos/?type=project#message-builder or /update-tos/?tos=<slug>&type=project#message-builder",
     "sitemap.xml excludes noindex work pages",
     "data/page_index.json excludes noindex work pages",
     "llms.txt keeps public links and does not restore noindex work pages"
