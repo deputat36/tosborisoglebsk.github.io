@@ -84,7 +84,7 @@ function needCard(item, toses) {
       <a class="btn primary" href="/needs/${needsEsc(item.id)}/">Подробнее</a>
       ${item.tos_slug ? `<a class="btn" href="/tos/${needsEsc(item.tos_slug)}/">Открыть ТОС</a>` : ''}
       <a class="btn" href="/contacts/">Предложить помощь</a>
-      <a class="btn" href="/update-tos/#template-need">Уточнить потребность</a>
+      <a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
       ${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${needsEsc(item.source_url)}">Источник</a>` : ''}
     </div>
   </article>`;
