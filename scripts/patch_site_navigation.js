@@ -34,26 +34,9 @@ const labelsBlock = `const SECTION_LABELS = {
   glossary: 'Словарь',
   methodology: 'Методика портала',
   workbench: 'Рабочая панель',
-  'verification-control': 'Контроль подтверждения карточек ТОС',
-  'verification-guide': 'Как подтвердить карточку ТОС',
-  'verification-tasks': 'Задачи проверки карточек ТОС',
-  'improvement-plan': 'План улучшения портала',
-  'site-health': 'Аудит сайта',
-  'grant-application-kit': 'Набор для подготовки заявки ТОС',
-  'project-passport': 'Паспорт проекта ТОС',
-  'meeting-kit': 'Набор для собрания ТОС',
-  'publication-templates': 'Шаблоны публикаций',
-  'weekly-digest': 'Еженедельный дайджест',
-  'partner-proposal': 'Партнёрское предложение',
-  'partner-thanks': 'Благодарности партнёрам',
-  'editorial-workflow': 'Редакционный порядок',
-  'content-standards': 'Стандарты материалов',
-  'verification-levels': 'Статусы проверки данных',
-  'data-dictionary': 'Справочник полей данных',
   'data-quality': 'Качество данных',
   'data-update': 'Актуализация данных',
   'data-requests': 'Запросы данных',
-  'collection-board': 'Доска сбора данных',
   'communication-kit': 'Коммуникационный набор',
   campaign: 'Кампания актуализации',
   'field-checklist': 'Чек-лист проверки',
@@ -85,10 +68,10 @@ const compactNavBlock = `function compactNav() {
     ['/legal/', 'Правовая основа'],
     ['/sections/', 'Все разделы']
   ];
-  nav.innerHTML = links.map(([href, text]) => \`<a href="${href}">${text}</a>\`).join('');
+  nav.innerHTML = links.map(([href, text]) => \`<a href="\${href}">\${text}</a>\`).join('');
 }`;
 
-const footerHtml = `<b>Полезные ссылки</b><br><a href="/sections/">Все разделы</a> · <a href="/workbench/">Рабочая панель</a> · <a href="/site-health/">Аудит сайта</a> · <a href="/improvement-plan/">План улучшения</a> · <a href="/verification-tasks/">Задачи проверки</a><br><a href="/verification-guide/">Как подтвердить карточку</a> · <a href="/verification-control/">Контроль подтверждения</a> · <a href="/collection-board/">Доска сбора</a> · <a href="/weekly-digest/">Дайджест</a><br><a href="/publication-templates/">Шаблоны публикаций</a> · <a href="/meeting-kit/">Набор для собрания</a> · <a href="/project-passport/">Паспорт проекта</a> · <a href="/grant-application-kit/">Набор для заявки</a><br><a href="/data-quality/">Качество данных</a> · <a href="/data-requests/">Запросы данных</a> · <a href="/communication-kit/">Тексты для ВК</a> · <a href="/campaign/">Кампания</a><br><a href="/verification-levels/">Статусы проверки</a> · <a href="/partner-proposal/">Партнёрское предложение</a> · <a href="/partner-thanks/">Благодарности партнёрам</a> · <a href="/editorial-workflow/">Редакционный порядок</a><br><a href="/content-standards/">Стандарты материалов</a> · <a href="/field-checklist/">Чек-лист</a> · <a href="/media-guide/">Фото и логотипы</a> · <a href="/sources/">Источники данных</a> · <a href="/open-data/">Открытые данные</a><br><a href="/data-dictionary/">Справочник данных</a> · <a href="/places/">Территории</a> · <a href="/glossary/">Словарь ТОС</a> · <a href="/legal/federal-law-33/">ФЗ №33-ФЗ</a> · <a href="/privacy/">Публикация сведений</a> · <a href="/done/">Сделано ТОСами</a> · <a href="/update-tos/">Обновить данные ТОС</a> · <a href="/roadmap/">План развития</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
+const footerHtml = `<b>Полезные ссылки</b><br><a href="/sections/">Все разделы</a> · <a href="/workbench/">Рабочая панель</a> · <a href="/site-index/">Индекс страниц</a> · <a href="/faq/">Вопросы и ответы</a> · <a href="/sources/">Источники данных</a> · <a href="/data-quality/">Качество данных</a><br><a href="/data-requests/">Запросы данных</a> · <a href="/communication-kit/">Тексты для ВК</a> · <a href="/campaign/">Кампания</a> · <a href="/field-checklist/">Чек-лист</a> · <a href="/media-guide/">Фото и логотипы</a><br><a href="/places/">Территории</a> · <a href="/glossary/">Словарь ТОС</a> · <a href="/legal/federal-law-33/">ФЗ №33-ФЗ</a> · <a href="/privacy/">Публикация сведений</a> · <a href="/open-data/">Открытые данные</a><br><a href="/done/">Сделано ТОСами</a> · <a href="\${updateLink('card')}">Обновить данные ТОС</a> · <a href="/roadmap/">План развития</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
 
 const homeBlock = `function injectHomePortalStatus() {
   const isHome = location.pathname === '/' || location.pathname === '/index.html';
@@ -98,7 +81,7 @@ const homeBlock = `function injectHomePortalStatus() {
   const section = document.createElement('section');
   section.className = 'section';
   section.id = 'home-portal-status';
-  section.innerHTML = \`<div class="container grid"><article class="card full"><div class="card-inner"><div class="eyebrow">Статус и доверие</div><h2>Как работает портал и кто может прислать материалы</h2><p>tosborisoglebsk.ru — информационный и рабочий портал для ТОСов Борисоглебского городского округа. Здесь можно найти карточки ТОС, новости, проекты, потребности, документы и полезные материалы для председателей и жителей.</p><div class="notice"><b style="color:var(--text)">Важно:</b> сайт не является официальным сайтом администрации. Для официальных действий нужно сверять документы, решения и правовую информацию с актуальными официальными источниками.</div><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Материалы</span><h3>Что можно прислать</h3><p>Новость, фотоотчёт, обновление карточки ТОС, проект, потребность территории или сообщение об ошибке.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Проверка</span><h3>Как оформляется публикация</h3><p>Материал уточняется, приводится к единому формату и привязывается к нужному ТОС или разделу сайта.</p></div></article></div><div class="card-actions"><a class="btn primary" href="/workbench/">Рабочая панель</a><a class="btn" href="/site-health/">Аудит сайта</a><a class="btn" href="/improvement-plan/">План улучшения</a><a class="btn" href="/verification-tasks/">Задачи проверки</a><a class="btn" href="/verification-guide/">Как подтвердить карточку</a><a class="btn" href="/verification-control/">Контроль подтверждения</a><a class="btn" href="/collection-board/">Доска сбора</a><a class="btn" href="/weekly-digest/">Дайджест</a><a class="btn" href="/publication-templates/">Шаблоны публикаций</a><a class="btn" href="/meeting-kit/">Собрание ТОС</a><a class="btn" href="/project-passport/">Паспорт проекта</a><a class="btn" href="/grant-application-kit/">Набор для заявки</a><a class="btn" href="/data-requests/">Запросы данных</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/communication-kit/">Тексты для ВК</a><a class="btn" href="/open-data/">Открытые данные</a><a class="btn" href="/update-tos/">Обновить данные ТОС</a><a class="btn" href="/sections/">Все разделы</a></div></div></article></div>\`;
+  section.innerHTML = \`<div class="container grid"><article class="card full"><div class="card-inner"><div class="eyebrow">Статус и доверие</div><h2>Как работает портал и кто может прислать материалы</h2><p>tosborisoglebsk.ru — информационный и рабочий портал для ТОСов Борисоглебского городского округа. Здесь можно найти карточки ТОС, новости, проекты, потребности, документы и полезные материалы для председателей и жителей.</p><div class="notice"><b style="color:var(--text)">Важно:</b> сайт не является официальным сайтом администрации. Для официальных действий нужно сверять документы, решения и правовую информацию с актуальными официальными источниками.</div><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Материалы</span><h3>Что можно прислать</h3><p>Новость, фотоотчёт, обновление карточки ТОС, проект, потребность территории или сообщение об ошибке.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Проверка</span><h3>Как оформляется публикация</h3><p>Материал уточняется, приводится к единому формату и привязывается к нужному ТОС или разделу сайта.</p></div></article></div><div class="card-actions"><a class="btn primary" href="/workbench/">Рабочая панель</a><a class="btn" href="/data-requests/">Запросы данных</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/communication-kit/">Тексты для ВК</a><a class="btn" href="\${updateLink('card')}">Обновить данные ТОС</a><a class="btn" href="/sections/">Все разделы</a></div></div></article></div>\`;
   const stats = $('#home-stats')?.closest('section');
   if (stats) main.insertBefore(section, stats);
   else main.appendChild(section);
