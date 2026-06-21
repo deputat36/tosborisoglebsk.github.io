@@ -29,6 +29,7 @@
 
 ## Публичные методические разделы
 
+- Практические маршруты ТОС БГО: https://tosborisoglebsk.ru/action-routes/
 - Рабочий маршрут председателя ТОС: https://tosborisoglebsk.ru/chairperson/action-routes/
 - Маршрут жителя через ТОС: https://tosborisoglebsk.ru/residents/action-routes/
 - Маршрут партнёра ТОС: https://tosborisoglebsk.ru/partners/action-routes/
