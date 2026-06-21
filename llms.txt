@@ -36,6 +36,7 @@
 - Маршрут потребности ТОС: https://tosborisoglebsk.ru/needs/action-routes/
 - Маршрут результата ТОС: https://tosborisoglebsk.ru/done/action-routes/
 - Маршрут события ТОС: https://tosborisoglebsk.ru/calendar/action-routes/
+- Маршрут создания ТОС: https://tosborisoglebsk.ru/create-tos/action-routes/
 - Проверить карточку ТОС: https://tosborisoglebsk.ru/check-tos/
 - Памятка подтверждения карточки: https://tosborisoglebsk.ru/chairperson/verify-card/
 - Статусы проверки данных: https://tosborisoglebsk.ru/verification-levels/
