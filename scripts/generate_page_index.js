@@ -31,6 +31,7 @@ function sectionFor(relative) {
     chairperson: 'Председателю', residents: 'Жителям', partners: 'Партнёрам', grants: 'Конкурсы',
     calendar: 'Календарь', contacts: 'Контакты', search: 'Поиск', sources: 'Источники данных',
     privacy: 'Публикация сведений', glossary: 'Словарь', methodology: 'О портале', workbench: 'Рабочая панель',
+    'action-routes': 'Практические маршруты',
     'partner-proposal': 'Партнёрское предложение', 'partner-thanks': 'Благодарности партнёрам',
     'editorial-workflow': 'Редакционный порядок', 'content-standards': 'Стандарты материалов',
     'verification-levels': 'Статусы проверки данных', 'data-dictionary': 'Справочник полей данных',
