@@ -33,6 +33,7 @@ const SECTION_LABELS = {
   contacts: 'Контакты',
   search: 'Поиск',
   sections: 'Все разделы',
+  'action-routes': 'Практические маршруты',
   sources: 'Источники данных',
   privacy: 'Публикация сведений',
   glossary: 'Словарь',
@@ -62,6 +63,7 @@ function compactNav() {
   const links = [
     ['/tos/', 'Каталог ТОС'],
     ['/places/', 'Территории'],
+    ['/action-routes/', 'Маршруты'],
     ['/residents/', 'Жителям'],
     ['/chairperson/', 'Председателю'],
     ['/workbench/', 'Рабочая панель'],
@@ -81,7 +83,7 @@ function ensureFooterLinks() {
   const box = document.createElement('div');
   box.className = 'tiny';
   box.id = 'footer-service-links';
-  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/sections/">Все разделы</a> · <a href="/workbench/">Рабочая панель</a> · <a href="/site-index/">Индекс страниц</a> · <a href="/faq/">Вопросы и ответы</a> · <a href="/sources/">Источники данных</a> · <a href="/data-quality/">Качество данных</a><br><a href="/data-requests/">Запросы данных</a> · <a href="/communication-kit/">Тексты для ВК</a> · <a href="/campaign/">Кампания</a> · <a href="/field-checklist/">Чек-лист</a> · <a href="/media-guide/">Фото и логотипы</a><br><a href="/places/">Территории</a> · <a href="/glossary/">Словарь ТОС</a> · <a href="/legal/federal-law-33/">ФЗ №33-ФЗ</a> · <a href="/privacy/">Публикация сведений</a> · <a href="/open-data/">Открытые данные</a><br><a href="/done/">Сделано ТОСами</a> · <a href="${updateLink('card')}">Обновить данные ТОС</a> · <a href="/roadmap/">План развития</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
+  box.innerHTML = `<b>Полезные ссылки</b><br><a href="/sections/">Все разделы</a> · <a href="/action-routes/">Маршруты действий</a> · <a href="/workbench/">Рабочая панель</a> · <a href="/site-index/">Индекс страниц</a> · <a href="/faq/">Вопросы и ответы</a> · <a href="/sources/">Источники данных</a><br><a href="/data-quality/">Качество данных</a> · <a href="/data-requests/">Запросы данных</a> · <a href="/communication-kit/">Тексты для ВК</a> · <a href="/campaign/">Кампания</a> · <a href="/field-checklist/">Чек-лист</a><br><a href="/media-guide/">Фото и логотипы</a> · <a href="/places/">Территории</a> · <a href="/glossary/">Словарь ТОС</a> · <a href="/legal/federal-law-33/">ФЗ №33-ФЗ</a> · <a href="/privacy/">Публикация сведений</a><br><a href="/open-data/">Открытые данные</a> · <a href="/done/">Сделано ТОСами</a> · <a href="${updateLink('card')}">Обновить данные ТОС</a> · <a href="/roadmap/">План развития</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a>`;
   footerGrid.appendChild(box);
 }
 
@@ -138,7 +140,7 @@ function injectHomePortalStatus() {
   const section = document.createElement('section');
   section.className = 'section';
   section.id = 'home-portal-status';
-  section.innerHTML = `<div class="container grid"><article class="card full"><div class="card-inner"><div class="eyebrow">Статус и доверие</div><h2>Как работает портал и кто может прислать материалы</h2><p>tosborisoglebsk.ru — информационный и рабочий портал для ТОСов Борисоглебского городского округа. Здесь можно найти карточки ТОС, новости, проекты, потребности, документы и полезные материалы для председателей и жителей.</p><div class="notice"><b style="color:var(--text)">Важно:</b> сайт не является официальным сайтом администрации. Для официальных действий нужно сверять документы, решения и правовую информацию с актуальными официальными источниками.</div><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Материалы</span><h3>Что можно прислать</h3><p>Новость, фотоотчёт, обновление карточки ТОС, проект, потребность территории или сообщение об ошибке.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Проверка</span><h3>Как оформляется публикация</h3><p>Материал уточняется, приводится к единому формату и привязывается к нужному ТОС или разделу сайта.</p></div></article></div><div class="card-actions"><a class="btn primary" href="/workbench/">Рабочая панель</a><a class="btn" href="/data-requests/">Запросы данных</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/communication-kit/">Тексты для ВК</a><a class="btn" href="${updateLink('card')}">Обновить данные ТОС</a><a class="btn" href="/sections/">Все разделы</a></div></div></article></div>`;
+  section.innerHTML = `<div class="container grid"><article class="card full"><div class="card-inner"><div class="eyebrow">Статус и доверие</div><h2>Как работает портал и кто может прислать материалы</h2><p>tosborisoglebsk.ru — информационный и рабочий портал для ТОСов Борисоглебского городского округа. Здесь можно найти карточки ТОС, новости, проекты, потребности, документы и практические маршруты для жителей, председателей, партнёров и инициативных групп.</p><div class="notice"><b style="color:var(--text)">Важно:</b> сайт не является официальным сайтом администрации. Для официальных действий нужно сверять документы, решения и правовую информацию с актуальными официальными источниками.</div><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Материалы</span><h3>Что можно прислать</h3><p>Новость, фотоотчёт, обновление карточки ТОС, проект, потребность территории или сообщение об ошибке.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Проверка</span><h3>Как оформляется публикация</h3><p>Материал уточняется, приводится к единому формату и привязывается к нужному ТОС или разделу сайта.</p></div></article></div><div class="card-actions"><a class="btn primary" href="/action-routes/">Маршруты действий</a><a class="btn" href="/workbench/">Рабочая панель</a><a class="btn" href="/data-requests/">Запросы данных</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/communication-kit/">Тексты для ВК</a><a class="btn" href="${updateLink('card')}">Обновить данные ТОС</a><a class="btn" href="/sections/">Все разделы</a></div></div></article></div>`;
   const stats = $('#home-stats')?.closest('section');
   if (stats) main.insertBefore(section, stats);
   else main.appendChild(section);
@@ -400,6 +402,7 @@ async function renderSearch() {
       ...done.filter(isPublished).map((x) => ({ type: 'Сделано', title: x.title, text: [x.type, x.summary, x.before, x.done, x.result, x.participants, x.needs_details].join(' '), url: '/done/' })),
       ...events.filter(isPublished).map((x) => ({ type: 'Событие', title: x.title, text: [x.type, x.description, x.place, x.tos_slug].join(' '), url: '/calendar/' })),
       ...needs.filter(isPublished).map((x) => ({ type: 'Нужна помощь', title: x.title, text: [x.need_type, x.priority, x.description, x.contact, x.tos_slug].join(' '), url: '/needs/' })),
+      { type: 'Маршруты', title: 'Практические маршруты ТОС БГО', text: 'единая карта действий маршруты жителю председателю партнеру инициативной группе проект потребность событие результат создать ТОС с чего начать', url: '/action-routes/' },
       { type: 'Жителям', title: 'Жителям: как пользоваться ТОС и участвовать в жизни территории', text: 'что такое ТОС как найти свой ТОС председатель сообщить о проблеме предложить идею помочь территории', url: '/residents/' },
       { type: 'Председателю', title: 'Председателю ТОС: рабочий кабинет, чек-листы и документы', text: 'председателю ТОС чек-листы практические инструкции первые 30 дней собрание конференция протокол устав документы документы ТОС проект ТОС смета новость фотоотчет фотоотчёт архив конфликт жалоба потребности жители актив Борисоглебск', url: '/chairperson/' },
       { type: 'Председателю', title: 'Как подтвердить карточку ТОС', text: 'проверить карточку ТОС подтвердить данные сведения открытые контакты председатель телефон соцсети логотип фото границы источник дата проверки статус подтверждено', url: '/chairperson/verify-card/' },
@@ -423,7 +426,7 @@ async function renderSearch() {
       { type: 'О портале', title: 'Как развивается портал ТОС БГО', text: 'методика развитие портала открытый справочник аудит заготовки подтверждение данные', url: '/methodology/' },
       { type: 'Партнёрам', title: 'Партнёрам ТОС БГО: как помочь территориям и проектам', text: 'партнеры бизнес учреждения депутаты НКО волонтеры помощь материалами техника транспорт', url: '/partners/' },
       { type: 'Вопросы и ответы', title: 'Частые вопросы о ТОС и портале', text: 'FAQ частые вопросы что такое ТОС как найти свой ТОС как создать ТОС как прислать новость', url: '/faq/' },
-      { type: 'Все разделы', title: 'Все разделы сайта ТОС БГО', text: 'разделы навигатор каталог жители председателю партнеры проекты документы новости контакты поиск карта материалы правовая основа', url: '/sections/' },
+      { type: 'Все разделы', title: 'Все разделы сайта ТОС БГО', text: 'разделы навигатор каталог жители председателю партнеры проекты документы новости контакты поиск карта материалы правовая основа практические маршруты', url: '/sections/' },
       { type: 'Правовая основа', title: 'Правовая основа ТОС простыми словами', text: 'правовой навигатор документы устав БГО местное самоуправление создание ТОС', url: '/legal/' },
       { type: 'О портале', title: 'О портале и редакционная политика', text: 'статус портала редакционная политика кто ведёт сайт проверка материалов не официальный сайт администрации', url: '/editorial-policy/' }
     ];
