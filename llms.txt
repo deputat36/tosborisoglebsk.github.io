@@ -32,6 +32,7 @@
 - Рабочий маршрут председателя ТОС: https://tosborisoglebsk.ru/chairperson/action-routes/
 - Маршрут жителя через ТОС: https://tosborisoglebsk.ru/residents/action-routes/
 - Маршрут партнёра ТОС: https://tosborisoglebsk.ru/partners/action-routes/
+- Маршрут проекта ТОС: https://tosborisoglebsk.ru/projects/action-routes/
 - Проверить карточку ТОС: https://tosborisoglebsk.ru/check-tos/
 - Памятка подтверждения карточки: https://tosborisoglebsk.ru/chairperson/verify-card/
 - Статусы проверки данных: https://tosborisoglebsk.ru/verification-levels/
