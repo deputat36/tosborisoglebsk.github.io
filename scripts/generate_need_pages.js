@@ -15,6 +15,15 @@ function esc(value) {
     .replace(/'/g, '&#039;');
 }
 
+function compactText(value, maxLength) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (text.length <= maxLength) return text;
+  const sliced = text.slice(0, maxLength - 1);
+  const boundary = sliced.lastIndexOf(' ');
+  const base = sliced.slice(0, boundary > 50 ? boundary : sliced.length).replace(/[,:;.!?\s]+$/u, '');
+  return `${base}…`;
+}
+
 function readJson(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
   catch { return []; }
@@ -48,6 +57,8 @@ function infoCard(title, text, tag = '', tagClass = '') {
 function makePage(item, toses) {
   const title = item.title || 'Потребность ТОС БГО';
   const description = item.description || 'Актуальная потребность территориального общественного самоуправления Борисоглебского городского округа.';
+  const seoTitle = compactText(title, 55);
+  const seoDescription = compactText(description, 155);
   const canonical = `${SITE_URL}/needs/${item.id}/`;
   const tos = item.tos_slug ? toses.find((entry) => entry.slug === item.tos_slug) : null;
   const image = item.image || '/assets/img/og-cover.svg';
@@ -55,8 +66,8 @@ function makePage(item, toses) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: title,
-    description,
+    headline: seoTitle,
+    description: seoDescription,
     datePublished: item.date || '',
     image: imageFull,
     mainEntityOfPage: canonical,
@@ -68,12 +79,12 @@ function makePage(item, toses) {
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>${esc(title)} | Нужна помощь ТОСам БГО</title>
-  <meta name="description" content="${esc(description)}"/>
+  <title>${esc(seoTitle)} | Нужна помощь ТОСам БГО</title>
+  <meta name="description" content="${esc(seoDescription)}"/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="${esc(canonical)}"/>
-  <meta property="og:title" content="${esc(title)}"/>
-  <meta property="og:description" content="${esc(description)}"/>
+  <meta property="og:title" content="${esc(seoTitle)}"/>
+  <meta property="og:description" content="${esc(seoDescription)}"/>
   <meta property="og:type" content="article"/>
   <meta property="og:url" content="${esc(canonical)}"/>
   <meta property="og:image" content="${esc(imageFull)}"/>
