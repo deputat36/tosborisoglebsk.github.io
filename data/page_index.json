@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:22:04.239Z",
+  "generated_at": "2026-06-22T12:46:11.037Z",
   "total": 317,
   "pages": [
     {
@@ -62,14 +62,14 @@
       "path": "documents/templates/tos-creation-kit/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/tos-creation-kit/",
       "title": "Комплект документов для создания ТОС",
-      "description": "Рабочий комплект документов для инициативной группы по созданию ТОС.",
+      "description": "Рабочий комплект документов для инициативной группы: территория, объявление, список участников, протокол, решения, устав и чек-лист создания ТОС.",
       "section": "Документы"
     },
     {
       "path": "documents/templates/project-support/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-support/",
       "title": "Лист поддержки проекта ТОС",
-      "description": "Заполняемый лист поддержки проекта ТОС и добровольного участия жителей.",
+      "description": "Заполняемый лист поддержки проекта ТОС для сбора добровольного участия жителей и подтверждения общественной поддержки.",
       "section": "Документы"
     },
     {

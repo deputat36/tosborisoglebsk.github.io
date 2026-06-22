@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T10:22:04.141Z",
+  "generated_at": "2026-06-22T12:46:10.949Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 52,
   "catalog": {
-    "generated_at": "2026-06-22T10:22:03.294Z",
+    "generated_at": "2026-06-22T12:46:10.122Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 51,
+    "seo_warnings_count": 42,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -88,25 +88,6 @@
       ]
     },
     {
-      "page": "documents/templates/project-support/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/project-support/",
-      "warnings": [
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/tos-creation-kit/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/tos-creation-kit/",
-      "warnings": [
-        "короткий description: 68",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
       "page": "done/chigorak-tos-cultural-work/index.html",
       "url": "https://tosborisoglebsk.ru/done/chigorak-tos-cultural-work/",
       "warnings": [
@@ -158,31 +139,10 @@
       ]
     },
     {
-      "page": "materials/activity.html",
-      "url": "https://tosborisoglebsk.ru/materials/activity.html",
-      "warnings": [
-        "нет canonical"
-      ]
-    },
-    {
-      "page": "materials/competitions.html",
-      "url": "https://tosborisoglebsk.ru/materials/competitions.html",
-      "warnings": [
-        "нет canonical"
-      ]
-    },
-    {
       "page": "materials/documents-for-tos/index.html",
       "url": "https://tosborisoglebsk.ru/materials/documents-for-tos/",
       "warnings": [
         "короткий description: 63"
-      ]
-    },
-    {
-      "page": "materials/engage.html",
-      "url": "https://tosborisoglebsk.ru/materials/engage.html",
-      "warnings": [
-        "нет canonical"
       ]
     },
     {
@@ -193,38 +153,10 @@
       ]
     },
     {
-      "page": "materials/how-to-create-tos.html",
-      "url": "https://tosborisoglebsk.ru/materials/how-to-create-tos.html",
-      "warnings": [
-        "нет canonical"
-      ]
-    },
-    {
       "page": "materials/index.html",
       "url": "https://tosborisoglebsk.ru/materials/",
       "warnings": [
         "короткий description: 63"
-      ]
-    },
-    {
-      "page": "materials/partners.html",
-      "url": "https://tosborisoglebsk.ru/materials/partners.html",
-      "warnings": [
-        "нет canonical"
-      ]
-    },
-    {
-      "page": "materials/projects.html",
-      "url": "https://tosborisoglebsk.ru/materials/projects.html",
-      "warnings": [
-        "нет canonical"
-      ]
-    },
-    {
-      "page": "materials/social-media.html",
-      "url": "https://tosborisoglebsk.ru/materials/social-media.html",
-      "warnings": [
-        "нет canonical"
       ]
     },
     {
@@ -436,6 +368,13 @@
       "warnings": [
         "длинный description: 299"
       ]
+    },
+    {
+      "page": "tos/vostochnyy/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/vostochnyy/",
+      "warnings": [
+        "длинный description: 263"
+      ]
     }
   ],
   "broken_internal_links": [],
@@ -444,7 +383,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 51 страниц с SEO-предупреждениями.",
+    "Просмотреть 42 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
