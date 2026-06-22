@@ -1,12 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const DRAFTS_KEY = 'tos-workbench-drafts-v1';
-  const STATUS_LABELS = {
-    new: 'Новые',
-    contacted: 'Ждём ответ',
-    received: 'Получены',
-    ready: 'Готовы',
-    blocked: 'Допроверка'
-  };
 
   const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
