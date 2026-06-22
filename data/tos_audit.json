@@ -1,10 +1,14 @@
 {
   "summary": {
-    "generated_at": "2026-06-17T19:25:34.499Z",
+    "generated_at": "2026-06-22T04:29:21.136Z",
     "total": 24,
     "good": 20,
     "medium": 4,
     "low": 0,
+    "verified": 0,
+    "partial": 20,
+    "needs_review": 4,
+    "unknown": 0,
     "without_phone": 4,
     "without_email": 16,
     "without_social": 4,
@@ -21,6 +25,8 @@
       "updated_at": "2026-05-23",
       "score": 71,
       "level": "medium",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет телефона",
         "нет email",
@@ -36,6 +42,8 @@
       "updated_at": "2026-05-23",
       "score": 71,
       "level": "medium",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет телефона",
         "нет email",
@@ -51,6 +59,8 @@
       "updated_at": "2026-05-23",
       "score": 79,
       "level": "medium",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
         "нет соцсетей",
@@ -65,6 +75,8 @@
       "updated_at": "2026-05-23",
       "score": 79,
       "level": "medium",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
         "нет соцсетей",
@@ -79,6 +91,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет телефона",
         "нет логотипа"
@@ -92,6 +106,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -105,6 +121,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -118,6 +136,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -131,6 +151,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -144,6 +166,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -157,6 +181,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -170,6 +196,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -183,6 +211,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -196,6 +226,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -209,6 +241,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет телефона",
         "нет логотипа"
@@ -222,6 +256,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -235,6 +271,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -248,6 +286,8 @@
       "updated_at": "2026-05-23",
       "score": 86,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет email",
         "нет логотипа"
@@ -261,6 +301,8 @@
       "updated_at": "2026-05-24",
       "score": 93,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет логотипа"
       ]
@@ -273,6 +315,8 @@
       "updated_at": "2026-05-23",
       "score": 93,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет логотипа"
       ]
@@ -285,6 +329,8 @@
       "updated_at": "2026-05-23",
       "score": 93,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет логотипа"
       ]
@@ -297,6 +343,8 @@
       "updated_at": "2026-05-23",
       "score": 93,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет логотипа"
       ]
@@ -309,6 +357,8 @@
       "updated_at": "2026-05-23",
       "score": 93,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет логотипа"
       ]
@@ -321,6 +371,8 @@
       "updated_at": "2026-05-23",
       "score": 93,
       "level": "good",
+      "verification_status": "partial",
+      "verification_label": "Проверено частично",
       "issues": [
         "нет логотипа"
       ]

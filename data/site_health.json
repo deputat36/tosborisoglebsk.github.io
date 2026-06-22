@@ -1,0 +1,512 @@
+{
+  "generated_at": "2026-06-22T04:29:22.213Z",
+  "site_url": "https://tosborisoglebsk.ru",
+  "health_score": 37,
+  "catalog": {
+    "generated_at": "2026-06-22T04:29:21.187Z",
+    "stale_after_days": 180,
+    "total_tos": 24,
+    "high_priority": 4,
+    "medium_priority": 0,
+    "low_priority": 20,
+    "verified_count": 0,
+    "partial_count": 22,
+    "needs_review_count": 2,
+    "unknown_count": 0,
+    "stale_count": 0,
+    "without_phone": 4,
+    "without_social": 4,
+    "without_news": 0,
+    "without_done": 0,
+    "without_needs": 0,
+    "without_projects": 0,
+    "average_score": 88
+  },
+  "pages": {
+    "total": 337,
+    "public": 327,
+    "noindex": 10,
+    "seo_warnings_count": 67,
+    "broken_internal_links_count": 3
+  },
+  "priority_tos": [
+    {
+      "slug": "ivanovka",
+      "name": "Ивановка",
+      "location": "п. Ивановка",
+      "score": 75,
+      "missing": [
+        "Телефон",
+        "Email",
+        "Соцсети",
+        "Логотип"
+      ],
+      "verification": "Требует проверки"
+    },
+    {
+      "slug": "podstepki",
+      "name": "Подстёпки",
+      "location": "п. Подстёпки",
+      "score": 75,
+      "missing": [
+        "Телефон",
+        "Email",
+        "Соцсети",
+        "Логотип"
+      ],
+      "verification": "Требует проверки"
+    },
+    {
+      "slug": "gubari",
+      "name": "Губари",
+      "location": "с. Губари",
+      "score": 88,
+      "missing": [
+        "Телефон",
+        "Логотип"
+      ],
+      "verification": "Проверено частично"
+    },
+    {
+      "slug": "tancyrey",
+      "name": "Танцырей",
+      "location": "с. Танцырей",
+      "score": 88,
+      "missing": [
+        "Телефон",
+        "Логотип"
+      ],
+      "verification": "Проверено частично"
+    }
+  ],
+  "seo_warnings": [
+    {
+      "page": "404.html",
+      "url": "https://tosborisoglebsk.ru/404.html",
+      "warnings": [
+        "короткий description: 20"
+      ]
+    },
+    {
+      "page": "documents/demo/charter.html",
+      "url": "https://tosborisoglebsk.ru/documents/demo/charter.html",
+      "warnings": [
+        "нет meta description",
+        "нет canonical",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/demo/report.html",
+      "url": "https://tosborisoglebsk.ru/documents/demo/report.html",
+      "warnings": [
+        "нет meta description",
+        "нет canonical",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/create-initiative-card/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/create-initiative-card/",
+      "warnings": [
+        "короткий description: 45",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/create-territory/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/create-territory/",
+      "warnings": [
+        "короткий description: 61",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/meeting-agenda/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-agenda/",
+      "warnings": [
+        "короткий description: 62",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/meeting-protocol/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-protocol/",
+      "warnings": [
+        "короткий description: 63",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/meeting-registration/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-registration/",
+      "warnings": [
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-budget/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-budget/",
+      "warnings": [
+        "короткий title: 17",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-checklist/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-checklist/",
+      "warnings": [
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-final-report/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-final-report/",
+      "warnings": [
+        "короткий description: 39",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-kit/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-kit/",
+      "warnings": [
+        "короткий description: 44",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-partner-letter/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-partner-letter/",
+      "warnings": [
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-passport/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-passport/",
+      "warnings": [
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-photo-report/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-photo-report/",
+      "warnings": [
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-problem/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-problem/",
+      "warnings": [
+        "короткий description: 68",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-schedule/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-schedule/",
+      "warnings": [
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/project-support/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/project-support/",
+      "warnings": [
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "documents/templates/tos-creation-kit/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/tos-creation-kit/",
+      "warnings": [
+        "короткий description: 68",
+        "нет og:title",
+        "нет og:description",
+        "нет og:image"
+      ]
+    },
+    {
+      "page": "done/chigorak-tos-cultural-work/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chigorak-tos-cultural-work/",
+      "warnings": [
+        "длинный description: 236"
+      ]
+    },
+    {
+      "page": "done/chkalovec-many-projects/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chkalovec-many-projects/",
+      "warnings": [
+        "длинный title: 95",
+        "длинный description: 310"
+      ]
+    },
+    {
+      "page": "done/gubari-projects-archive/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gubari-projects-archive/",
+      "warnings": [
+        "длинный title: 103",
+        "длинный description: 316"
+      ]
+    },
+    {
+      "page": "done/tancyrey-playgrounds-rest-places/index.html",
+      "url": "https://tosborisoglebsk.ru/done/tancyrey-playgrounds-rest-places/",
+      "warnings": [
+        "длинный title: 97"
+      ]
+    },
+    {
+      "page": "done/tretyaki-seven-projects/index.html",
+      "url": "https://tosborisoglebsk.ru/done/tretyaki-seven-projects/",
+      "warnings": [
+        "длинный description: 256"
+      ]
+    },
+    {
+      "page": "grants/index.html",
+      "url": "https://tosborisoglebsk.ru/grants/",
+      "warnings": [
+        "длинный description: 223"
+      ]
+    },
+    {
+      "page": "map/index.html",
+      "url": "https://tosborisoglebsk.ru/map/",
+      "warnings": [
+        "короткий description: 59"
+      ]
+    },
+    {
+      "page": "materials/activity.html",
+      "url": "https://tosborisoglebsk.ru/materials/activity.html",
+      "warnings": [
+        "нет canonical"
+      ]
+    },
+    {
+      "page": "materials/competitions.html",
+      "url": "https://tosborisoglebsk.ru/materials/competitions.html",
+      "warnings": [
+        "нет canonical"
+      ]
+    },
+    {
+      "page": "materials/documents-for-tos/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/documents-for-tos/",
+      "warnings": [
+        "короткий description: 63"
+      ]
+    },
+    {
+      "page": "materials/engage.html",
+      "url": "https://tosborisoglebsk.ru/materials/engage.html",
+      "warnings": [
+        "нет canonical"
+      ]
+    },
+    {
+      "page": "materials/grant-application-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/grant-application-guide/",
+      "warnings": [
+        "короткий description: 65"
+      ]
+    },
+    {
+      "page": "materials/how-to-create-tos.html",
+      "url": "https://tosborisoglebsk.ru/materials/how-to-create-tos.html",
+      "warnings": [
+        "нет canonical"
+      ]
+    },
+    {
+      "page": "materials/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/",
+      "warnings": [
+        "короткий description: 63"
+      ]
+    },
+    {
+      "page": "materials/partners.html",
+      "url": "https://tosborisoglebsk.ru/materials/partners.html",
+      "warnings": [
+        "нет canonical"
+      ]
+    },
+    {
+      "page": "materials/projects.html",
+      "url": "https://tosborisoglebsk.ru/materials/projects.html",
+      "warnings": [
+        "нет canonical"
+      ]
+    },
+    {
+      "page": "materials/social-media.html",
+      "url": "https://tosborisoglebsk.ru/materials/social-media.html",
+      "warnings": [
+        "нет canonical"
+      ]
+    },
+    {
+      "page": "materials/tos-data-standard/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-data-standard/",
+      "warnings": [
+        "короткий description: 64"
+      ]
+    },
+    {
+      "page": "materials/tos-photo-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-photo-guide/",
+      "warnings": [
+        "короткий description: 61"
+      ]
+    },
+    {
+      "page": "materials/tos-public-report-template/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-public-report-template/",
+      "warnings": [
+        "короткий description: 50"
+      ]
+    },
+    {
+      "page": "materials/tos-volunteers/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-volunteers/",
+      "warnings": [
+        "короткий description: 66"
+      ]
+    },
+    {
+      "page": "needs/collect-tos-news-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/collect-tos-news-2026/",
+      "warnings": [
+        "длинный description: 226"
+      ]
+    },
+    {
+      "page": "needs/update-data-chkalovec-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-chkalovec-2026/",
+      "warnings": [
+        "длинный description: 234"
+      ]
+    },
+    {
+      "page": "needs/update-data-dzerzhinskogo-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-dzerzhinskogo-2026/",
+      "warnings": [
+        "длинный description: 273"
+      ]
+    },
+    {
+      "page": "needs/update-data-gubari-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-gubari-2026/",
+      "warnings": [
+        "длинный description: 239"
+      ]
+    },
+    {
+      "page": "needs/update-data-ipas-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-ipas-2026/",
+      "warnings": [
+        "длинный description: 230"
+      ]
+    },
+    {
+      "page": "needs/update-data-ivanovka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-ivanovka-2026/",
+      "warnings": [
+        "длинный description: 293"
+      ]
+    },
+    {
+      "page": "needs/update-data-kalinka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-kalinka-2026/",
+      "warnings": [
+        "длинный description: 268"
+      ]
+    },
+    {
+      "page": "needs/update-data-mayak-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-mayak-2026/",
+      "warnings": [
+        "длинный description: 230"
+      ]
+    },
+    {
+      "page": "needs/update-data-mechta-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-mechta-2026/",
+      "warnings": [
+        "длинный description: 231"
+      ]
+    },
+    {
+      "page": "needs/update-data-mirolyubie-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-mirolyubie-2026/",
+      "warnings": [
+        "длинный description: 235"
+      ]
+    }
+  ],
+  "broken_internal_links": [
+    {
+      "page": "data-dictionary/index.html",
+      "link": "/data/site_health.json",
+      "reason": "нет страницы или файла"
+    },
+    {
+      "page": "open-data/index.html",
+      "link": "/data/site_health.json",
+      "reason": "нет страницы или файла"
+    },
+    {
+      "page": "open-data/index.html",
+      "link": "/data/site_health.json",
+      "reason": "нет страницы или файла"
+    }
+  ],
+  "recommended_actions": [
+    "Закрыть 4 карточки ТОС с высоким приоритетом: контакты, соцсети, источники, логотипы.",
+    "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
+    "Уточнить телефоны или публичные контакты для 4 карточек.",
+    "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
+    "Исправить 3 внутренних ссылок, которые ведут на несуществующие страницы или якоря.",
+    "Просмотреть 67 страниц с SEO-предупреждениями.",
+    "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
+    "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
+  ]
+}
