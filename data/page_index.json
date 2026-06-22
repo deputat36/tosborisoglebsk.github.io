@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:06:17.723Z",
+  "generated_at": "2026-06-22T08:12:33.199Z",
   "total": 317,
   "pages": [
     {
@@ -48,7 +48,7 @@
       "path": "documents/templates/create-initiative-card/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/create-initiative-card/",
       "title": "Карточка инициативы создания ТОС",
-      "description": "Заполняемая карточка инициативы создания ТОС.",
+      "description": "Заполняемая карточка инициативы создания ТОС: цель жителей, территория, первые задачи, инициативная группа и вопросы для уточнения перед собранием.",
       "section": "Документы"
     },
     {
@@ -90,7 +90,7 @@
       "path": "documents/templates/create-territory/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/create-territory/",
       "title": "Описание территории будущего ТОС",
-      "description": "Заполняемый шаблон описания территории и границ будущего ТОС.",
+      "description": "Заполняемый шаблон описания территории будущего ТОС: улицы, дома, ориентиры, словесные границы, схема территории и проверка пересечений.",
       "section": "Документы"
     },
     {
@@ -118,7 +118,7 @@
       "path": "documents/templates/meeting-agenda/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/meeting-agenda/",
       "title": "Повестка собрания ТОС — шаблон",
-      "description": "Печатный шаблон повестки собрания или конференции жителей ТОС.",
+      "description": "Печатный шаблон повестки собрания или конференции жителей ТОС: дата, место, форма проведения, вопросы, ответственные и материалы к обсуждению.",
       "section": "Документы"
     },
     {

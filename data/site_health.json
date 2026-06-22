@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T08:06:17.633Z",
+  "generated_at": "2026-06-22T08:12:33.108Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 52,
   "catalog": {
-    "generated_at": "2026-06-22T08:06:16.559Z",
+    "generated_at": "2026-06-22T08:12:32.253Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 67,
+    "seo_warnings_count": 62,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -85,58 +85,6 @@
       "url": "https://tosborisoglebsk.ru/404.html",
       "warnings": [
         "короткий description: 20"
-      ]
-    },
-    {
-      "page": "documents/demo/charter.html",
-      "url": "https://tosborisoglebsk.ru/documents/demo/charter.html",
-      "warnings": [
-        "нет meta description",
-        "нет canonical",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/demo/report.html",
-      "url": "https://tosborisoglebsk.ru/documents/demo/report.html",
-      "warnings": [
-        "нет meta description",
-        "нет canonical",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/create-initiative-card/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/create-initiative-card/",
-      "warnings": [
-        "короткий description: 45",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/create-territory/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/create-territory/",
-      "warnings": [
-        "короткий description: 61",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/meeting-agenda/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-agenda/",
-      "warnings": [
-        "короткий description: 62",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
       ]
     },
     {
@@ -480,6 +428,41 @@
       "warnings": [
         "длинный description: 235"
       ]
+    },
+    {
+      "page": "needs/update-data-pervomayskiy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-pervomayskiy-2026/",
+      "warnings": [
+        "длинный description: 238"
+      ]
+    },
+    {
+      "page": "needs/update-data-petrovskoe-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-petrovskoe-2026/",
+      "warnings": [
+        "длинный description: 236"
+      ]
+    },
+    {
+      "page": "needs/update-data-podstepki-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-podstepki-2026/",
+      "warnings": [
+        "длинный description: 294"
+      ]
+    },
+    {
+      "page": "needs/update-data-port-artur-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-port-artur-2026/",
+      "warnings": [
+        "длинный description: 236"
+      ]
+    },
+    {
+      "page": "needs/update-data-prostornyy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-prostornyy-2026/",
+      "warnings": [
+        "длинный description: 236"
+      ]
     }
   ],
   "broken_internal_links": [],
@@ -488,7 +471,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 67 страниц с SEO-предупреждениями.",
+    "Просмотреть 62 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
