@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     blocked: 'Нужна допроверка'
   };
 
+  let tosLookup = new Map();
+
   const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
   }[char]));
@@ -81,11 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
       .sort(([, a], [, b]) => draftTimestamp(b) - draftTimestamp(a))
       .slice(0, 5)
       .map(([slug, draft]) => {
+        const tos = tosLookup.get(String(slug)) || {};
         const status = STATUS_LABELS[draft.status] || 'Черновик';
         const note = String(draft.note || '').trim();
         const preview = note ? `<p>${esc(note.slice(0, 180))}${note.length > 180 ? '...' : ''}</p>` : '<p>Заметка пока пустая.</p>';
         const urlSlug = encodeURIComponent(slug);
-        return `<article class="list-item"><div class="meta"><span class="tag ok">${esc(status)}</span><span class="tag">${esc(formatDate(draft.updated_at))}</span><span class="tag">slug: ${esc(slug)}</span></div><h3>Последний черновик: ${esc(slug)}</h3>${preview}<div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn primary" href="/update-tos/?tos=${urlSlug}&type=card#message-builder">Уточнить</a></div></article>`;
+        const title = tos.name ? `ТОС «${esc(tos.name)}»` : esc(slug);
+        const location = tos.location ? `<span class="tag">${esc(tos.location)}</span>` : '';
+        return `<article class="list-item"><div class="meta"><span class="tag ok">${esc(status)}</span><span class="tag">${esc(formatDate(draft.updated_at))}</span>${location}<span class="tag">slug: ${esc(slug)}</span></div><h3>${title}</h3>${preview}<div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn primary" href="/update-tos/?tos=${urlSlug}&type=card#message-builder">Уточнить</a></div></article>`;
       }).join('');
 
     root.innerHTML = `<div class="tiny">Последние локальные черновики. Показываются 5 последних по времени сохранения.</div>${cards}`;
@@ -111,6 +116,18 @@ document.addEventListener('DOMContentLoaded', () => {
       return `<article class="${className}"><b>${esc(value)}</b><span>${esc(label)}</span></article>`;
     }).join('');
     renderRecentDrafts(entries);
+  }
+
+  function loadTosLookup() {
+    fetch('/data/toses.json', { cache: 'no-store' })
+      .then((response) => response.ok ? response.json() : [])
+      .then((items) => {
+        tosLookup = new Map((Array.isArray(items) ? items : [])
+          .filter((tos) => tos && tos.slug)
+          .map((tos) => [String(tos.slug), tos]));
+        renderDraftSummary();
+      })
+      .catch(() => {});
   }
 
   function setBackupMeta(message) {
@@ -207,6 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   renderDraftSummary();
+  loadTosLookup();
 
   document.addEventListener('click', (event) => {
     if (event.target.closest('#workbench-save-draft, #workbench-clear-draft')) {
