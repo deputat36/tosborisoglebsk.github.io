@@ -50,9 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="btn" id="workbench-export-current" type="button">CSV выборки</button>
       </div>`);
 
-    const toolbar = document.querySelector('#workbench-priority-toolbar');
-    if (toolbar) toolbar.style.gridTemplateColumns = '1fr 190px 230px 150px';
-
     document.querySelector('#workbench-priority-search')?.addEventListener('input', applyPriorityFilters);
     document.querySelector('#workbench-priority-select')?.addEventListener('change', applyPriorityFilters);
     document.querySelector('#workbench-missing-select')?.addEventListener('change', applyPriorityFilters);
@@ -180,12 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function exportPriorityCsv() {
-    const items = filteredPriorityItems.length ? filteredPriorityItems : priorityItems;
-    if (!items.length) return;
+    if (!filteredPriorityItems.length) return;
 
     const rows = [
       ['priority', 'score', 'slug', 'name', 'location', 'missing', 'card_url', 'update_url'],
-      ...items.map((item) => {
+      ...filteredPriorityItems.map((item) => {
         const slug = String(item.slug || '');
         return [
           item.priority || '',
