@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T13:57:06.420Z",
+  "generated_at": "2026-06-22T15:06:17.091Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 52,
   "catalog": {
-    "generated_at": "2026-06-22T13:57:05.304Z",
+    "generated_at": "2026-06-22T15:06:16.252Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 35,
+    "seo_warnings_count": 33,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -115,13 +115,6 @@
       "url": "https://tosborisoglebsk.ru/done/tretyaki-seven-projects/",
       "warnings": [
         "длинный description: 256"
-      ]
-    },
-    {
-      "page": "grants/index.html",
-      "url": "https://tosborisoglebsk.ru/grants/",
-      "warnings": [
-        "длинный description: 223"
       ]
     },
     {
@@ -286,13 +279,6 @@
       ]
     },
     {
-      "page": "partners/index.html",
-      "url": "https://tosborisoglebsk.ru/partners/",
-      "warnings": [
-        "длинный description: 243"
-      ]
-    },
-    {
       "page": "tos/mechta/index.html",
       "url": "https://tosborisoglebsk.ru/tos/mechta/",
       "warnings": [
@@ -334,7 +320,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 35 страниц с SEO-предупреждениями.",
+    "Просмотреть 33 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
