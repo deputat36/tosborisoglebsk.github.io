@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let priorityItems = [];
   let filteredPriorityItems = [];
+  let tosBySlug = new Map();
 
   async function getJson(url) {
     const response = await fetch(url, { cache: 'no-store' });
@@ -22,6 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function csvCell(value) {
     return `"${String(value ?? '').replace(/"/g, '""')}"`;
+  }
+
+  function buildTosLookup(toses) {
+    tosBySlug = new Map((Array.isArray(toses) ? toses : [])
+      .filter((tos) => tos && tos.slug)
+      .map((tos) => [String(tos.slug), tos]));
+  }
+
+  function valueOrEmpty(value) {
+    return value ? esc(value) : 'уточняется';
+  }
+
+  function listOrEmpty(values) {
+    const list = Array.isArray(values) ? values.filter(Boolean) : [];
+    return list.length ? list.map((value) => esc(value)).join(', ') : 'уточняется';
   }
 
   function ensurePriorityControls() {
@@ -48,6 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
           <option value="description">Нужно описание</option>
         </select>
         <button class="btn" id="workbench-export-current" type="button">CSV выборки</button>
+      </div>`);
+
+    root.insertAdjacentHTML('beforebegin', `
+      <div class="container grid" id="workbench-card-preview" hidden>
+        <article class="card full">
+          <div class="card-inner" id="workbench-card-preview-body"></div>
+        </article>
       </div>`);
 
     document.querySelector('#workbench-priority-search')?.addEventListener('input', applyPriorityFilters);
@@ -163,10 +186,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const slug = String(item.slug || '');
       const urlSlug = encodeURIComponent(slug);
       const missing = (item.missing || []).slice(0, 5).map((value) => `<span class="tag warn">${esc(value)}</span>`).join(' ');
-      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p>${missing || 'Нужна проверка актуальности сведений.'}</p><div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
+      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p>${missing || 'Нужна проверка актуальности сведений.'}</p><div class="card-actions"><button class="btn" type="button" data-preview="${esc(slug)}">Предпросмотр</button><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
     }).join('');
 
     root.innerHTML = `${counter}${cards}`;
+    root.querySelectorAll('[data-preview]').forEach((button) => {
+      button.addEventListener('click', () => renderCardPreview(button.getAttribute('data-preview')));
+    });
   }
 
   function renderPriorityItems(contentAudit) {
@@ -174,6 +200,23 @@ document.addEventListener('DOMContentLoaded', () => {
     priorityItems = buildPriorityItems(contentAudit);
     filteredPriorityItems = priorityItems;
     applyPriorityFilters();
+  }
+
+  function renderCardPreview(slug) {
+    const preview = document.querySelector('#workbench-card-preview');
+    const body = document.querySelector('#workbench-card-preview-body');
+    if (!preview || !body || !slug) return;
+
+    const item = priorityItems.find((entry) => String(entry.slug || '') === String(slug)) || {};
+    const tos = tosBySlug.get(String(slug)) || {};
+    const missing = (item.missing || []).map((value) => `<span class="tag warn">${esc(value)}</span>`).join(' ');
+    const description = tos.description && tos.description !== 'Описание пока уточняется.'
+      ? tos.description
+      : 'Описание карточки нужно уточнить.';
+
+    body.innerHTML = `<div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">slug: ${esc(slug)}</span></div><h2>Предпросмотр: ТОС «${esc(tos.name || item.name || slug)}»</h2><div class="kpi"><div class="tile"><b>${valueOrEmpty(tos.type)}</b><span>тип ТОС</span></div><div class="tile"><b>${valueOrEmpty(tos.population)}</b><span>жителей</span></div><div class="tile"><b>${valueOrEmpty(tos.founded)}</b><span>год создания</span></div></div><hr class="sep"/><div class="kpi"><div class="tile"><b>Территория</b><span>Место: ${valueOrEmpty(tos.location || item.location)}<br>Границы: ${valueOrEmpty(tos.boundaries)}</span></div><div class="tile"><b>Контакты</b><span>Председатель: ${valueOrEmpty(tos.chairperson)}<br>Телефон: ${listOrEmpty(tos.phones)}<br>Email: ${listOrEmpty(tos.emails)}</span></div><div class="tile"><b>Публичность</b><span>Соцсети: ${listOrEmpty(tos.social_links)}<br>Логотип: ${tos.logo ? esc(tos.logo) : 'нужно добавить'}<br>Обновлено: ${valueOrEmpty(tos.updated_at)}</span></div></div><hr class="sep"/><p>${esc(description)}</p><div class="meta">${missing || '<span class="tag ok">Критичных пробелов в аудите не указано</span>'}</div><div class="card-actions"><a class="btn" href="/tos/${encodeURIComponent(slug)}/">Открыть карточку</a><a class="btn" href="/data-requests/">Открыть сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить данные</a></div>`;
+    preview.hidden = false;
+    preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function exportPriorityCsv() {
@@ -212,8 +255,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Promise.all([
     getJson('/data/site_audit.json').catch(() => null),
-    getJson('/data/tos_content_audit.json').catch(() => null)
-  ]).then(([siteAudit, contentAudit]) => {
+    getJson('/data/tos_content_audit.json').catch(() => null),
+    getJson('/data/toses.json').catch(() => [])
+  ]).then(([siteAudit, contentAudit, toses]) => {
+    buildTosLookup(toses);
     if (siteAudit) {
       renderAuditSummary(siteAudit);
       renderNextActions(siteAudit);
