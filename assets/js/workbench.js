@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
   }[char]));
+  const DRAFTS_KEY = 'tos-workbench-drafts-v1';
 
   let priorityItems = [];
   let filteredPriorityItems = [];
@@ -38,6 +39,74 @@ document.addEventListener('DOMContentLoaded', () => {
   function listOrEmpty(values) {
     const list = Array.isArray(values) ? values.filter(Boolean) : [];
     return list.length ? list.map((value) => esc(value)).join(', ') : 'уточняется';
+  }
+
+  function readDrafts() {
+    try {
+      return JSON.parse(localStorage.getItem(DRAFTS_KEY) || '{}') || {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function writeDrafts(drafts) {
+    try {
+      localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function getDraft(slug) {
+    return readDrafts()[String(slug || '')] || null;
+  }
+
+  function formatDraftDate(value) {
+    if (!value) return 'ещё не сохранялось';
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleString('ru-RU');
+  }
+
+  function renderDraftPanel(slug) {
+    const draft = getDraft(slug) || {};
+    const status = draft.status || 'new';
+    const note = draft.note || '';
+    const selected = (value) => status === value ? ' selected' : '';
+
+    return `<hr class="sep"/><div class="notice"><b style="color:var(--text)">Локальный черновик редактора</b><br>Сохраняется только в этом браузере и помогает не потерять сведения до внесения в JSON.</div><div class="toolbar"><select class="select" id="workbench-draft-status" aria-label="Статус черновика"><option value="new"${selected('new')}>Новый контакт</option><option value="contacted"${selected('contacted')}>Написали / ждём ответ</option><option value="received"${selected('received')}>Сведения получены</option><option value="ready"${selected('ready')}>Готово к внесению</option><option value="blocked"${selected('blocked')}>Нужна допроверка</option></select><button class="btn primary" id="workbench-save-draft" type="button">Сохранить</button><button class="btn" id="workbench-clear-draft" type="button">Очистить</button></div><textarea class="input" id="workbench-draft-note" rows="5" placeholder="Что получили: телефон, email, ссылку, источник подтверждения, фото, уточнение границ...">${esc(note)}</textarea><p class="tiny" id="workbench-draft-meta">Последнее сохранение: ${esc(formatDraftDate(draft.updated_at))}</p>`;
+  }
+
+  function wireDraftControls(slug) {
+    const status = document.querySelector('#workbench-draft-status');
+    const note = document.querySelector('#workbench-draft-note');
+    const meta = document.querySelector('#workbench-draft-meta');
+    const save = document.querySelector('#workbench-save-draft');
+    const clear = document.querySelector('#workbench-clear-draft');
+    if (!status || !note || !meta || !save || !clear) return;
+
+    save.addEventListener('click', () => {
+      const drafts = readDrafts();
+      const updatedAt = new Date().toISOString();
+      drafts[String(slug)] = {
+        status: status.value,
+        note: note.value.trim(),
+        updated_at: updatedAt
+      };
+      const saved = writeDrafts(drafts);
+      meta.textContent = saved
+        ? `Последнее сохранение: ${formatDraftDate(updatedAt)}`
+        : 'Не удалось сохранить черновик в браузере';
+    });
+
+    clear.addEventListener('click', () => {
+      const drafts = readDrafts();
+      delete drafts[String(slug)];
+      writeDrafts(drafts);
+      status.value = 'new';
+      note.value = '';
+      meta.textContent = 'Последнее сохранение: ещё не сохранялось';
+    });
   }
 
   function ensurePriorityControls() {
@@ -214,8 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
       ? tos.description
       : 'Описание карточки нужно уточнить.';
 
-    body.innerHTML = `<div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">slug: ${esc(slug)}</span></div><h2>Предпросмотр: ТОС «${esc(tos.name || item.name || slug)}»</h2><div class="kpi"><div class="tile"><b>${valueOrEmpty(tos.type)}</b><span>тип ТОС</span></div><div class="tile"><b>${valueOrEmpty(tos.population)}</b><span>жителей</span></div><div class="tile"><b>${valueOrEmpty(tos.founded)}</b><span>год создания</span></div></div><hr class="sep"/><div class="kpi"><div class="tile"><b>Территория</b><span>Место: ${valueOrEmpty(tos.location || item.location)}<br>Границы: ${valueOrEmpty(tos.boundaries)}</span></div><div class="tile"><b>Контакты</b><span>Председатель: ${valueOrEmpty(tos.chairperson)}<br>Телефон: ${listOrEmpty(tos.phones)}<br>Email: ${listOrEmpty(tos.emails)}</span></div><div class="tile"><b>Публичность</b><span>Соцсети: ${listOrEmpty(tos.social_links)}<br>Логотип: ${tos.logo ? esc(tos.logo) : 'нужно добавить'}<br>Обновлено: ${valueOrEmpty(tos.updated_at)}</span></div></div><hr class="sep"/><p>${esc(description)}</p><div class="meta">${missing || '<span class="tag ok">Критичных пробелов в аудите не указано</span>'}</div><div class="card-actions"><a class="btn" href="/tos/${encodeURIComponent(slug)}/">Открыть карточку</a><a class="btn" href="/data-requests/">Открыть сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить данные</a></div>`;
+    body.innerHTML = `<div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">slug: ${esc(slug)}</span></div><h2>Предпросмотр: ТОС «${esc(tos.name || item.name || slug)}»</h2><div class="kpi"><div class="tile"><b>${valueOrEmpty(tos.type)}</b><span>тип ТОС</span></div><div class="tile"><b>${valueOrEmpty(tos.population)}</b><span>жителей</span></div><div class="tile"><b>${valueOrEmpty(tos.founded)}</b><span>год создания</span></div></div><hr class="sep"/><div class="kpi"><div class="tile"><b>Территория</b><span>Место: ${valueOrEmpty(tos.location || item.location)}<br>Границы: ${valueOrEmpty(tos.boundaries)}</span></div><div class="tile"><b>Контакты</b><span>Председатель: ${valueOrEmpty(tos.chairperson)}<br>Телефон: ${listOrEmpty(tos.phones)}<br>Email: ${listOrEmpty(tos.emails)}</span></div><div class="tile"><b>Публичность</b><span>Соцсети: ${listOrEmpty(tos.social_links)}<br>Логотип: ${tos.logo ? esc(tos.logo) : 'нужно добавить'}<br>Обновлено: ${valueOrEmpty(tos.updated_at)}</span></div></div><hr class="sep"/><p>${esc(description)}</p><div class="meta">${missing || '<span class="tag ok">Критичных пробелов в аудите не указано</span>'}</div>${renderDraftPanel(slug)}<div class="card-actions"><a class="btn" href="/tos/${encodeURIComponent(slug)}/">Открыть карточку</a><a class="btn" href="/data-requests/">Открыть сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить данные</a></div>`;
     preview.hidden = false;
+    wireDraftControls(slug);
     preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
