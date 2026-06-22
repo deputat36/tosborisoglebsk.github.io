@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T15:53:48.605Z",
+  "generated_at": "2026-06-22T19:30:05.299Z",
   "site_url": "https://tosborisoglebsk.ru",
-  "health_score": 64,
+  "health_score": 65,
   "catalog": {
-    "generated_at": "2026-06-22T15:53:47.484Z",
+    "generated_at": "2026-06-22T19:30:04.480Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 8,
+    "seo_warnings_count": 7,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -80,13 +80,6 @@
     }
   ],
   "seo_warnings": [
-    {
-      "page": "materials/how-to-create-tos-2026/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/how-to-create-tos-2026/",
-      "warnings": [
-        "короткий description: 68"
-      ]
-    },
     {
       "page": "materials/tos-photo-guide/index.html",
       "url": "https://tosborisoglebsk.ru/materials/tos-photo-guide/",
@@ -143,7 +136,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 8 страниц с SEO-предупреждениями.",
+    "Просмотреть 7 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
