@@ -20,12 +20,27 @@ function write(file, html){
   fs.writeFileSync(file, html, 'utf8');
 }
 function arr(v){ return Array.isArray(v) ? v.filter(Boolean) : []; }
-function desc(article){ return article.lead || arr(article.content).join(' ').slice(0, 180) || 'Полезный материал для председателей и активистов ТОС Борисоглебского городского округа.'; }
+function compactText(value, maxLength){
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (text.length <= maxLength) return text;
+  const sliced = text.slice(0, maxLength - 1);
+  const boundary = sliced.lastIndexOf(' ');
+  const base = sliced.slice(0, boundary > 50 ? boundary : sliced.length).replace(/[,:;.!?\s]+$/u, '');
+  return `${base}…`;
+}
+function lead(article){
+  return article.lead || arr(article.content)[0] || 'Полезный материал для председателей и активистов ТОС Борисоглебского городского округа.';
+}
+function desc(article){
+  const text = [article.lead, ...arr(article.content)].filter(Boolean).join(' ') || lead(article);
+  return compactText(text, 155);
+}
 function makePage(article){
   const id = article.id;
   const title = article.title || 'Материал ТОС БГО';
   const category = article.category || 'Материалы';
   const description = desc(article);
+  const visibleLead = lead(article);
   const canonical = `${SITE_URL}/materials/${id}/`;
   const content = arr(article.content);
   const schema = {
@@ -38,7 +53,7 @@ function makePage(article){
     author:{'@type':'Organization',name:'Портал ТОС БГО'},
     publisher:{'@type':'Organization',name:'Портал ТОС БГО'}
   };
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${esc(title)} | Материалы ТОС БГО</title><meta name="description" content="${esc(description)}"/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="${esc(canonical)}"/><meta property="og:title" content="${esc(title)}"/><meta property="og:description" content="${esc(description)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${esc(canonical)}"/><meta property="og:image" content="${SITE_URL}/assets/img/og-cover.svg"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><script type="application/ld+json">${JSON.stringify(schema)}</script></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/calendar/">Календарь</a><a href="/needs/">Нужна помощь</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/materials/">← Материалы</a><div class="eyebrow">${esc(category)}</div><h1>${esc(title)}</h1><p class="lead">${esc(description)}</p></div></section><section class="section"><div class="container prose">${content.length ? content.map(p => `<p>${esc(p)}</p>`).join('') : '<p>Материал готовится к публикации.</p>'}<hr class="sep"/><div class="card-actions"><a class="btn" href="/materials/">Все материалы</a><a class="btn" href="/documents/">Документы</a><a class="btn" href="/create-tos/">Как создать ТОС</a></div></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Страница материала создана автоматически из data/articles.json.</div></div></footer><script src="/assets/js/site.js"></script></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${esc(title)} | Материалы ТОС БГО</title><meta name="description" content="${esc(description)}"/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="${esc(canonical)}"/><meta property="og:title" content="${esc(title)}"/><meta property="og:description" content="${esc(description)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${esc(canonical)}"/><meta property="og:image" content="${SITE_URL}/assets/img/og-cover.svg"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><script type="application/ld+json">${JSON.stringify(schema)}</script></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/calendar/">Календарь</a><a href="/needs/">Нужна помощь</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/materials/">← Материалы</a><div class="eyebrow">${esc(category)}</div><h1>${esc(title)}</h1><p class="lead">${esc(visibleLead)}</p></div></section><section class="section"><div class="container prose">${content.length ? content.map(p => `<p>${esc(p)}</p>`).join('') : '<p>Материал готовится к публикации.</p>'}<hr class="sep"/><div class="card-actions"><a class="btn" href="/materials/">Все материалы</a><a class="btn" href="/documents/">Документы</a><a class="btn" href="/create-tos/">Как создать ТОС</a></div></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Страница материала создана автоматически из data/articles.json.</div></div></footer><script src="/assets/js/site.js"></script></body></html>`;
 }
 function updateSitemap(articles){
   const staticUrls = ['/', '/tos/', '/news/', '/grants/', '/projects/', '/calendar/', '/needs/', '/materials/', '/documents/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/search/'].map(u => SITE_URL + u);
