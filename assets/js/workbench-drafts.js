@@ -103,19 +103,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const entries = readDrafts();
     const counts = buildCounts(entries);
     const values = [
-      ['Черновики', counts.total],
-      ['Новые', counts.new || 0],
-      ['Ждём ответ', counts.contacted || 0],
-      ['Получены', counts.received || 0],
-      ['Готовы', counts.ready || 0],
-      ['Допроверка', counts.blocked || 0]
+      ['Черновики', counts.total, 'has'],
+      ['Новые', counts.new || 0, 'new'],
+      ['Ждём ответ', counts.contacted || 0, 'contacted'],
+      ['Получены', counts.received || 0, 'received'],
+      ['Готовы', counts.ready || 0, 'ready'],
+      ['Допроверка', counts.blocked || 0, 'blocked']
     ];
 
-    root.innerHTML = values.map(([label, value]) => {
+    root.innerHTML = values.map(([label, value, filter]) => {
       const className = label === 'Допроверка' && value ? 'stat warn' : 'stat';
-      return `<article class="${className}"><b>${esc(value)}</b><span>${esc(label)}</span></article>`;
+      return `<button class="${className}" type="button" data-draft-filter="${esc(filter)}" title="Показать: ${esc(label)}"><b>${esc(value)}</b><span>${esc(label)}</span></button>`;
     }).join('');
     renderRecentDrafts(entries);
+  }
+
+  function applyDraftFilter(value) {
+    const select = document.querySelector('#workbench-draft-select');
+    if (!select) return;
+    select.value = value;
+    select.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   function loadTosLookup() {
@@ -227,6 +234,11 @@ document.addEventListener('DOMContentLoaded', () => {
   loadTosLookup();
 
   document.addEventListener('click', (event) => {
+    const filterButton = event.target.closest('[data-draft-filter]');
+    if (filterButton) {
+      applyDraftFilter(filterButton.getAttribute('data-draft-filter') || '');
+      return;
+    }
     if (event.target.closest('#workbench-save-draft, #workbench-clear-draft')) {
       queueRender();
     }
