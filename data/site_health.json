@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T12:46:10.949Z",
+  "generated_at": "2026-06-22T12:47:55.318Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 52,
   "catalog": {
-    "generated_at": "2026-06-22T12:46:10.122Z",
+    "generated_at": "2026-06-22T12:47:54.493Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 42,
+    "seo_warnings_count": 40,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -81,13 +81,6 @@
   ],
   "seo_warnings": [
     {
-      "page": "404.html",
-      "url": "https://tosborisoglebsk.ru/404.html",
-      "warnings": [
-        "короткий description: 20"
-      ]
-    },
-    {
       "page": "done/chigorak-tos-cultural-work/index.html",
       "url": "https://tosborisoglebsk.ru/done/chigorak-tos-cultural-work/",
       "warnings": [
@@ -129,13 +122,6 @@
       "url": "https://tosborisoglebsk.ru/grants/",
       "warnings": [
         "длинный description: 223"
-      ]
-    },
-    {
-      "page": "map/index.html",
-      "url": "https://tosborisoglebsk.ru/map/",
-      "warnings": [
-        "короткий description: 59"
       ]
     },
     {
@@ -383,7 +369,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 42 страниц с SEO-предупреждениями.",
+    "Просмотреть 40 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
