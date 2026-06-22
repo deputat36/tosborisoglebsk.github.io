@@ -5,12 +5,25 @@ document.addEventListener('DOMContentLoaded', () => {
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
   }[char]));
 
-  function readDrafts() {
+  function readDraftMap() {
     try {
       const drafts = JSON.parse(localStorage.getItem(DRAFTS_KEY) || '{}') || {};
-      return Object.entries(drafts).filter(([slug, draft]) => slug && draft);
+      return drafts && typeof drafts === 'object' && !Array.isArray(drafts) ? drafts : {};
     } catch (error) {
-      return [];
+      return {};
+    }
+  }
+
+  function readDrafts() {
+    return Object.entries(readDraftMap()).filter(([slug, draft]) => slug && draft);
+  }
+
+  function writeDraftMap(drafts) {
+    try {
+      localStorage.setItem(DRAFTS_KEY, JSON.stringify(drafts));
+      return true;
+    } catch (error) {
+      return false;
     }
   }
 
@@ -20,8 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let root = document.querySelector('#workbench-draft-summary');
     if (!root) {
-      priorityList.insertAdjacentHTML('beforebegin', '<div class="container stats" id="workbench-draft-summary" aria-live="polite"></div>');
+      priorityList.insertAdjacentHTML('beforebegin', '<div class="container stats" id="workbench-draft-summary" aria-live="polite"></div><div class="container toolbar" id="workbench-draft-backup-tools"><button class="btn" id="workbench-draft-backup" type="button">JSON черновиков</button><label class="btn" for="workbench-draft-restore">Загрузить JSON</label><input id="workbench-draft-restore" type="file" accept="application/json,.json" hidden/><span class="tiny" id="workbench-draft-backup-meta"></span></div>');
       root = document.querySelector('#workbench-draft-summary');
+      wireBackupControls();
     }
     return root;
   }
@@ -54,6 +68,94 @@ document.addEventListener('DOMContentLoaded', () => {
       const className = label === 'Допроверка' && value ? 'stat warn' : 'stat';
       return `<article class="${className}"><b>${esc(value)}</b><span>${esc(label)}</span></article>`;
     }).join('');
+  }
+
+  function setBackupMeta(message) {
+    const meta = document.querySelector('#workbench-draft-backup-meta');
+    if (meta) meta.textContent = message;
+  }
+
+  function downloadJson(data, filename) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function exportDraftBackup() {
+    const drafts = readDraftMap();
+    const count = Object.keys(drafts).length;
+    if (!count) {
+      setBackupMeta('Сохранённых черновиков пока нет');
+      return;
+    }
+
+    downloadJson({
+      type: DRAFTS_KEY,
+      exported_at: new Date().toISOString(),
+      drafts
+    }, `tos-workbench-drafts-${new Date().toISOString().slice(0, 10)}.json`);
+    setBackupMeta(`Выгружено черновиков: ${count}`);
+  }
+
+  function normalizeImportedDrafts(payload) {
+    const raw = payload && payload.drafts && typeof payload.drafts === 'object'
+      ? payload.drafts
+      : payload;
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return null;
+
+    return Object.fromEntries(Object.entries(raw)
+      .filter(([slug, draft]) => slug && draft && typeof draft === 'object')
+      .map(([slug, draft]) => [String(slug), {
+        status: String(draft.status || 'new'),
+        note: String(draft.note || ''),
+        updated_at: String(draft.updated_at || new Date().toISOString())
+      }]));
+  }
+
+  function refreshWorkbenchFilters() {
+    document.querySelector('#workbench-draft-select')
+      ?.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  function importDraftBackup(file) {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      try {
+        const imported = normalizeImportedDrafts(JSON.parse(String(reader.result || '{}')));
+        if (!imported || !Object.keys(imported).length) {
+          setBackupMeta('В файле нет черновиков для загрузки');
+          return;
+        }
+        const merged = { ...readDraftMap(), ...imported };
+        if (!writeDraftMap(merged)) {
+          setBackupMeta('Не удалось сохранить черновики в браузере');
+          return;
+        }
+        renderDraftSummary();
+        refreshWorkbenchFilters();
+        setBackupMeta(`Загружено черновиков: ${Object.keys(imported).length}`);
+      } catch (error) {
+        setBackupMeta('Не удалось прочитать JSON-файл');
+      }
+    });
+    reader.readAsText(file);
+  }
+
+  function wireBackupControls() {
+    document.querySelector('#workbench-draft-backup')
+      ?.addEventListener('click', exportDraftBackup);
+    document.querySelector('#workbench-draft-restore')
+      ?.addEventListener('change', (event) => {
+        importDraftBackup(event.target.files && event.target.files[0]);
+        event.target.value = '';
+      });
   }
 
   function queueRender() {
