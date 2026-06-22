@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:14:48.143Z",
+  "generated_at": "2026-06-22T10:14:03.994Z",
   "total": 317,
   "pages": [
     {
@@ -34,7 +34,7 @@
       "path": "documents/templates/project-final-report/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-final-report/",
       "title": "Итоговый отчёт проекта ТОС",
-      "description": "Заполняемый итоговый отчёт проекта ТОС.",
+      "description": "Заполняемый итоговый отчёт проекта ТОС: план и факт работ, результат для жителей, бюджет, участники, партнёры, фото, публикации и выводы.",
       "section": "Документы"
     },
     {
@@ -97,7 +97,7 @@
       "path": "documents/templates/project-kit/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-kit/",
       "title": "Пакет документов проекта ТОС",
-      "description": "Комплект заполняемых документов проекта ТОС.",
+      "description": "Комплект заполняемых документов проекта ТОС: проблема, поддержка жителей, паспорт проекта, смета, календарный план, письмо партнёру и отчёты.",
       "section": "Документы"
     },
     {
@@ -111,7 +111,7 @@
       "path": "documents/templates/project-partner-letter/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-partner-letter/",
       "title": "Письмо партнёру проекта ТОС",
-      "description": "Заполняемый шаблон письма потенциальному партнёру или спонсору проекта ТОС.",
+      "description": "Заполняемый шаблон письма потенциальному партнёру проекта ТОС: важность проекта, нужная помощь, вклад жителей, благодарность и контакты.",
       "section": "Документы"
     },
     {
@@ -181,7 +181,7 @@
       "path": "documents/templates/project-checklist/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-checklist/",
       "title": "Чек-лист готовности проекта ТОС",
-      "description": "Печатный чек-лист проверки проекта ТОС перед подачей на конкурс или партнёру.",
+      "description": "Печатный чек-лист проверки проекта ТОС перед подачей на конкурс или партнёру: проблема, фото, поддержка жителей, смета, сроки и отчётность.",
       "section": "Документы"
     },
     {
