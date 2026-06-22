@@ -26,6 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return `"${String(value ?? '').replace(/"/g, '""')}"`;
   }
 
+  function downloadCsv(rows, filename) {
+    const csv = `\uFEFF${rows.map((row) => row.map(csvCell).join(';')).join('\n')}`;
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
   function buildTosLookup(toses) {
     tosBySlug = new Map((Array.isArray(toses) ? toses : [])
       .filter((tos) => tos && tos.slug)
@@ -74,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const note = draft.note || '';
     const selected = (value) => status === value ? ' selected' : '';
 
-    return `<hr class="sep"/><div class="notice"><b style="color:var(--text)">Локальный черновик редактора</b><br>Сохраняется только в этом браузере и помогает не потерять сведения до внесения в JSON.</div><div class="toolbar"><select class="select" id="workbench-draft-status" aria-label="Статус черновика"><option value="new"${selected('new')}>Новый контакт</option><option value="contacted"${selected('contacted')}>Написали / ждём ответ</option><option value="received"${selected('received')}>Сведения получены</option><option value="ready"${selected('ready')}>Готово к внесению</option><option value="blocked"${selected('blocked')}>Нужна допроверка</option></select><button class="btn primary" id="workbench-save-draft" type="button">Сохранить</button><button class="btn" id="workbench-clear-draft" type="button">Очистить</button></div><textarea class="input" id="workbench-draft-note" rows="5" placeholder="Что получили: телефон, email, ссылку, источник подтверждения, фото, уточнение границ...">${esc(note)}</textarea><p class="tiny" id="workbench-draft-meta">Последнее сохранение: ${esc(formatDraftDate(draft.updated_at))}</p>`;
+    return `<hr class="sep"/><div class="notice"><b style="color:var(--text)">Локальный черновик редактора</b><br>Сохраняется только в этом браузере и помогает не потерять сведения до внесения в JSON.</div><div class="toolbar"><select class="select" id="workbench-draft-status" aria-label="Статус черновика"><option value="new"${selected('new')}>Новый контакт</option><option value="contacted"${selected('contacted')}>Написали / ждём ответ</option><option value="received"${selected('received')}>Сведения получены</option><option value="ready"${selected('ready')}>Готово к внесению</option><option value="blocked"${selected('blocked')}>Нужна допроверка</option></select><button class="btn primary" id="workbench-save-draft" type="button">Сохранить</button><button class="btn" id="workbench-clear-draft" type="button">Очистить</button><button class="btn" id="workbench-export-drafts" type="button">CSV черновиков</button></div><textarea class="input" id="workbench-draft-note" rows="5" placeholder="Что получили: телефон, email, ссылку, источник подтверждения, фото, уточнение границ...">${esc(note)}</textarea><p class="tiny" id="workbench-draft-meta">Последнее сохранение: ${esc(formatDraftDate(draft.updated_at))}</p>`;
   }
 
   function wireDraftControls(slug) {
@@ -83,7 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const meta = document.querySelector('#workbench-draft-meta');
     const save = document.querySelector('#workbench-save-draft');
     const clear = document.querySelector('#workbench-clear-draft');
-    if (!status || !note || !meta || !save || !clear) return;
+    const exportDrafts = document.querySelector('#workbench-export-drafts');
+    if (!status || !note || !meta || !save || !clear || !exportDrafts) return;
 
     save.addEventListener('click', () => {
       const drafts = readDrafts();
@@ -107,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
       note.value = '';
       meta.textContent = 'Последнее сохранение: ещё не сохранялось';
     });
+
+    exportDrafts.addEventListener('click', () => exportDraftsCsv(meta));
   }
 
   function ensurePriorityControls() {
@@ -289,6 +305,34 @@ document.addEventListener('DOMContentLoaded', () => {
     preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function exportDraftsCsv(meta) {
+    const drafts = readDrafts();
+    const entries = Object.entries(drafts).filter(([slug, draft]) => slug && draft);
+    if (!entries.length) {
+      if (meta) meta.textContent = 'Сохранённых черновиков пока нет';
+      return;
+    }
+
+    const rows = [
+      ['slug', 'name', 'status', 'note', 'updated_at', 'card_url', 'update_url'],
+      ...entries.map(([slug, draft]) => {
+        const tos = tosBySlug.get(String(slug)) || {};
+        return [
+          slug,
+          tos.name || '',
+          draft.status || '',
+          draft.note || '',
+          draft.updated_at || '',
+          `https://tosborisoglebsk.ru/tos/${slug}/`,
+          `https://tosborisoglebsk.ru${updateUrl(slug)}`
+        ];
+      })
+    ];
+
+    downloadCsv(rows, `tos-workbench-drafts-${new Date().toISOString().slice(0, 10)}.csv`);
+    if (meta) meta.textContent = `Выгружено черновиков: ${entries.length}`;
+  }
+
   function exportPriorityCsv() {
     if (!filteredPriorityItems.length) return;
 
@@ -309,16 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
     ];
 
-    const csv = `\uFEFF${rows.map((row) => row.map(csvCell).join(';')).join('\n')}`;
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `tos-priority-selection-${new Date().toISOString().slice(0, 10)}.csv`;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+    downloadCsv(rows, `tos-priority-selection-${new Date().toISOString().slice(0, 10)}.csv`);
   }
 
   ensurePriorityControls();
