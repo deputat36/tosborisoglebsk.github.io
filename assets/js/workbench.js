@@ -54,6 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return list.length ? list.map((value) => esc(value)).join(', ') : 'уточняется';
   }
 
+  function draftStatusLabel(value) {
+    return {
+      new: 'Новый контакт',
+      contacted: 'Написали / ждём ответ',
+      received: 'Сведения получены',
+      ready: 'Готово к внесению',
+      blocked: 'Нужна допроверка'
+    }[value] || 'Черновик';
+  }
+
   function readDrafts() {
     try {
       return JSON.parse(localStorage.getItem(DRAFTS_KEY) || '{}') || {};
@@ -111,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
       meta.textContent = saved
         ? `Последнее сохранение: ${formatDraftDate(updatedAt)}`
         : 'Не удалось сохранить черновик в браузере';
+      applyPriorityFilters();
     });
 
     clear.addEventListener('click', () => {
@@ -120,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
       status.value = 'new';
       note.value = '';
       meta.textContent = 'Последнее сохранение: ещё не сохранялось';
+      applyPriorityFilters();
     });
 
     exportDrafts.addEventListener('click', () => exportDraftsCsv(meta));
@@ -148,6 +160,15 @@ document.addEventListener('DOMContentLoaded', () => {
           <option value="boundaries">Нужно уточнить границы</option>
           <option value="description">Нужно описание</option>
         </select>
+        <select class="select" id="workbench-draft-select" aria-label="Фильтр по черновикам">
+          <option value="">Любой черновик</option>
+          <option value="has">Есть черновик</option>
+          <option value="new">Новый контакт</option>
+          <option value="contacted">Написали / ждём ответ</option>
+          <option value="received">Сведения получены</option>
+          <option value="ready">Готово к внесению</option>
+          <option value="blocked">Нужна допроверка</option>
+        </select>
         <button class="btn" id="workbench-export-current" type="button">CSV выборки</button>
       </div>`);
 
@@ -161,6 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#workbench-priority-search')?.addEventListener('input', applyPriorityFilters);
     document.querySelector('#workbench-priority-select')?.addEventListener('change', applyPriorityFilters);
     document.querySelector('#workbench-missing-select')?.addEventListener('change', applyPriorityFilters);
+    document.querySelector('#workbench-draft-select')?.addEventListener('change', applyPriorityFilters);
     document.querySelector('#workbench-export-current')?.addEventListener('click', exportPriorityCsv);
 
     document.querySelectorAll('a[href="/update-tos/"]').forEach((link) => {
@@ -205,7 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return {
       query: normalize(document.querySelector('#workbench-priority-search')?.value || ''),
       priority: document.querySelector('#workbench-priority-select')?.value || '',
-      missingType: document.querySelector('#workbench-missing-select')?.value || ''
+      missingType: document.querySelector('#workbench-missing-select')?.value || '',
+      draftStatus: document.querySelector('#workbench-draft-select')?.value || ''
     };
   }
 
@@ -222,6 +245,13 @@ document.addEventListener('DOMContentLoaded', () => {
       description: ['описан']
     };
     return (aliases[type] || [type]).some((part) => text.includes(part));
+  }
+
+  function draftMatches(item, status) {
+    if (!status) return true;
+    const draft = getDraft(item.slug);
+    if (status === 'has') return Boolean(draft);
+    return Boolean(draft && draft.status === status);
   }
 
   function matchesQuery(item, query) {
@@ -251,7 +281,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const filters = readPriorityFilters();
     filteredPriorityItems = priorityItems.filter((item) => {
       const priorityOk = !filters.priority || item.priority === filters.priority;
-      return priorityOk && missingMatches(item, filters.missingType) && matchesQuery(item, filters.query);
+      return priorityOk
+        && missingMatches(item, filters.missingType)
+        && draftMatches(item, filters.draftStatus)
+        && matchesQuery(item, filters.query);
     });
     renderPriorityList(filteredPriorityItems);
   }
@@ -270,8 +303,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = shown.map((item) => {
       const slug = String(item.slug || '');
       const urlSlug = encodeURIComponent(slug);
+      const draft = getDraft(slug);
+      const draftTag = draft ? `<span class="tag ok">Черновик: ${esc(draftStatusLabel(draft.status))}</span>` : '';
       const missing = (item.missing || []).slice(0, 5).map((value) => `<span class="tag warn">${esc(value)}</span>`).join(' ');
-      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p>${missing || 'Нужна проверка актуальности сведений.'}</p><div class="card-actions"><button class="btn" type="button" data-preview="${esc(slug)}">Предпросмотр</button><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
+      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span>${draftTag}</div><h3>ТОС «${esc(item.name)}»</h3><p>${missing || 'Нужна проверка актуальности сведений.'}</p><div class="card-actions"><button class="btn" type="button" data-preview="${esc(slug)}">Предпросмотр</button><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
     }).join('');
 
     root.innerHTML = `${counter}${cards}`;
