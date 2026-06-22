@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:14:03.994Z",
+  "generated_at": "2026-06-22T10:16:44.464Z",
   "total": 317,
   "pages": [
     {
@@ -41,7 +41,7 @@
       "path": "documents/templates/project-schedule/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-schedule/",
       "title": "Календарный план проекта ТОС",
-      "description": "Заполняемый календарный план проекта ТОС: этапы, сроки, ответственные и результат.",
+      "description": "Заполняемый календарный план проекта ТОС: этапы, сроки начала и завершения, ответственные, ожидаемый результат, риски и контрольные даты.",
       "section": "Документы"
     },
     {
@@ -55,7 +55,7 @@
       "path": "documents/templates/project-problem/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-problem/",
       "title": "Карточка проблемы территории ТОС",
-      "description": "Заполняемая карточка проблемы территории для подготовки проекта ТОС.",
+      "description": "Заполняемая карточка проблемы территории ТОС: место, описание ситуации, кого затрагивает, подтверждения, нужный результат и возможное решение.",
       "section": "Документы"
     },
     {
@@ -104,7 +104,7 @@
       "path": "documents/templates/project-passport/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-passport/",
       "title": "Паспорт проекта ТОС",
-      "description": "Заполняемый паспорт проекта ТОС: проблема, цель, результат, этапы, команда, бюджет и отчётность.",
+      "description": "Заполняемый паспорт проекта ТОС: проблема, цель, ожидаемый результат, работы, пользователи, сроки, команда, партнёры, бюджет и отчётность.",
       "section": "Документы"
     },
     {
@@ -167,7 +167,7 @@
       "path": "documents/templates/project-photo-report/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-photo-report/",
       "title": "Фотоотчёт проекта ТОС",
-      "description": "Заполняемый фотоотчёт проекта или мероприятия ТОС: до, процесс, после и результат.",
+      "description": "Заполняемый фотоотчёт проекта или мероприятия ТОС: что планировали, что сделали, участники, фото до, фото процесса, фото после и результат.",
       "section": "Документы"
     },
     {

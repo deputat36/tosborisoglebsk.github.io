@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T10:14:03.909Z",
+  "generated_at": "2026-06-22T10:16:44.373Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 52,
   "catalog": {
-    "generated_at": "2026-06-22T10:14:03.102Z",
+    "generated_at": "2026-06-22T10:16:43.317Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 55,
+    "seo_warnings_count": 51,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -85,43 +85,6 @@
       "url": "https://tosborisoglebsk.ru/404.html",
       "warnings": [
         "короткий description: 20"
-      ]
-    },
-    {
-      "page": "documents/templates/project-passport/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/project-passport/",
-      "warnings": [
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/project-photo-report/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/project-photo-report/",
-      "warnings": [
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/project-problem/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/project-problem/",
-      "warnings": [
-        "короткий description: 68",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/project-schedule/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/project-schedule/",
-      "warnings": [
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
       ]
     },
     {
@@ -445,6 +408,34 @@
       "warnings": [
         "короткий description: 68"
       ]
+    },
+    {
+      "page": "tos/mechta/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/mechta/",
+      "warnings": [
+        "длинный description: 265"
+      ]
+    },
+    {
+      "page": "tos/pervomayskiy/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/pervomayskiy/",
+      "warnings": [
+        "длинный description: 258"
+      ]
+    },
+    {
+      "page": "tos/port-artur/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/port-artur/",
+      "warnings": [
+        "длинный description: 309"
+      ]
+    },
+    {
+      "page": "tos/tancyrey/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/tancyrey/",
+      "warnings": [
+        "длинный description: 299"
+      ]
     }
   ],
   "broken_internal_links": [],
@@ -453,7 +444,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 55 страниц с SEO-предупреждениями.",
+    "Просмотреть 51 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
