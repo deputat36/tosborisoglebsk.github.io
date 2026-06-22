@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   const DRAFTS_KEY = 'tos-workbench-drafts-v1';
+  const STATUS_LABELS = {
+    new: 'Новый контакт',
+    contacted: 'Ждём ответ',
+    received: 'Сведения получены',
+    ready: 'Готово к внесению',
+    blocked: 'Нужна допроверка'
+  };
 
   const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
@@ -33,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let root = document.querySelector('#workbench-draft-summary');
     if (!root) {
-      priorityList.insertAdjacentHTML('beforebegin', '<div class="container stats" id="workbench-draft-summary" aria-live="polite"></div><div class="container toolbar" id="workbench-draft-backup-tools"><button class="btn" id="workbench-draft-backup" type="button">JSON черновиков</button><label class="btn" for="workbench-draft-restore">Загрузить JSON</label><input id="workbench-draft-restore" type="file" accept="application/json,.json" hidden/><span class="tiny" id="workbench-draft-backup-meta"></span></div>');
+      priorityList.insertAdjacentHTML('beforebegin', '<div class="container stats" id="workbench-draft-summary" aria-live="polite"></div><div class="container toolbar" id="workbench-draft-backup-tools"><button class="btn" id="workbench-draft-backup" type="button">JSON черновиков</button><label class="btn" for="workbench-draft-restore">Загрузить JSON</label><input id="workbench-draft-restore" type="file" accept="application/json,.json" hidden/><span class="tiny" id="workbench-draft-backup-meta"></span></div><div class="container list" id="workbench-recent-drafts"></div>');
       root = document.querySelector('#workbench-draft-summary');
       wireBackupControls();
     }
@@ -47,6 +54,41 @@ document.addEventListener('DOMContentLoaded', () => {
       acc[status] = (acc[status] || 0) + 1;
       return acc;
     }, { total: 0 });
+  }
+
+  function formatDate(value) {
+    if (!value) return 'без даты';
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleString('ru-RU');
+  }
+
+  function draftTimestamp(draft) {
+    const date = new Date(draft && draft.updated_at ? draft.updated_at : 0);
+    return Number.isNaN(date.getTime()) ? 0 : date.getTime();
+  }
+
+  function renderRecentDrafts(entries) {
+    const root = document.querySelector('#workbench-recent-drafts');
+    if (!root) return;
+
+    if (!entries.length) {
+      root.innerHTML = '';
+      return;
+    }
+
+    const cards = entries
+      .slice()
+      .sort(([, a], [, b]) => draftTimestamp(b) - draftTimestamp(a))
+      .slice(0, 5)
+      .map(([slug, draft]) => {
+        const status = STATUS_LABELS[draft.status] || 'Черновик';
+        const note = String(draft.note || '').trim();
+        const preview = note ? `<p>${esc(note.slice(0, 180))}${note.length > 180 ? '...' : ''}</p>` : '<p>Заметка пока пустая.</p>';
+        const urlSlug = encodeURIComponent(slug);
+        return `<article class="list-item"><div class="meta"><span class="tag ok">${esc(status)}</span><span class="tag">${esc(formatDate(draft.updated_at))}</span><span class="tag">slug: ${esc(slug)}</span></div><h3>Последний черновик: ${esc(slug)}</h3>${preview}<div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn primary" href="/update-tos/?tos=${urlSlug}&type=card#message-builder">Уточнить</a></div></article>`;
+      }).join('');
+
+    root.innerHTML = `<div class="tiny">Последние локальные черновики. Показываются 5 последних по времени сохранения.</div>${cards}`;
   }
 
   function renderDraftSummary() {
@@ -68,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const className = label === 'Допроверка' && value ? 'stat warn' : 'stat';
       return `<article class="${className}"><b>${esc(value)}</b><span>${esc(label)}</span></article>`;
     }).join('');
+    renderRecentDrafts(entries);
   }
 
   function setBackupMeta(message) {
