@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T15:39:31.056Z",
+  "generated_at": "2026-06-22T15:51:47.323Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 52,
   "catalog": {
-    "generated_at": "2026-06-22T15:39:29.882Z",
+    "generated_at": "2026-06-22T15:51:46.199Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 33,
+    "seo_warnings_count": 28,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -80,43 +80,6 @@
     }
   ],
   "seo_warnings": [
-    {
-      "page": "done/chigorak-tos-cultural-work/index.html",
-      "url": "https://tosborisoglebsk.ru/done/chigorak-tos-cultural-work/",
-      "warnings": [
-        "длинный description: 236"
-      ]
-    },
-    {
-      "page": "done/chkalovec-many-projects/index.html",
-      "url": "https://tosborisoglebsk.ru/done/chkalovec-many-projects/",
-      "warnings": [
-        "длинный title: 95",
-        "длинный description: 310"
-      ]
-    },
-    {
-      "page": "done/gubari-projects-archive/index.html",
-      "url": "https://tosborisoglebsk.ru/done/gubari-projects-archive/",
-      "warnings": [
-        "длинный title: 103",
-        "длинный description: 316"
-      ]
-    },
-    {
-      "page": "done/tancyrey-playgrounds-rest-places/index.html",
-      "url": "https://tosborisoglebsk.ru/done/tancyrey-playgrounds-rest-places/",
-      "warnings": [
-        "длинный title: 97"
-      ]
-    },
-    {
-      "page": "done/tretyaki-seven-projects/index.html",
-      "url": "https://tosborisoglebsk.ru/done/tretyaki-seven-projects/",
-      "warnings": [
-        "длинный description: 256"
-      ]
-    },
     {
       "page": "materials/how-to-create-tos-2026/index.html",
       "url": "https://tosborisoglebsk.ru/materials/how-to-create-tos-2026/",
@@ -320,7 +283,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 33 страниц с SEO-предупреждениями.",
+    "Просмотреть 28 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
