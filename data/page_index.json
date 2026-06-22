@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:12:33.199Z",
+  "generated_at": "2026-06-22T08:14:48.143Z",
   "total": 317,
   "pages": [
     {
@@ -76,7 +76,7 @@
       "path": "documents/templates/meeting-registration/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/meeting-registration/",
       "title": "Лист регистрации участников собрания ТОС",
-      "description": "Печатный шаблон листа регистрации участников собрания или делегатов конференции ТОС.",
+      "description": "Печатный шаблон листа регистрации участников собрания или делегатов конференции ТОС: ФИО, территория представительства, статус и подпись.",
       "section": "Документы"
     },
     {
@@ -132,7 +132,7 @@
       "path": "documents/templates/meeting-protocol/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/meeting-protocol/",
       "title": "Протокол собрания ТОС — шаблон",
-      "description": "Печатный шаблон протокола собрания или конференции жителей ТОС.",
+      "description": "Печатный шаблон протокола собрания или конференции жителей ТОС: общие сведения, повестка, решения, голосование, ответственные и приложения.",
       "section": "Документы"
     },
     {
@@ -145,8 +145,8 @@
     {
       "path": "documents/templates/project-budget/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-budget/",
-      "title": "Смета проекта ТОС",
-      "description": "Заполняемая смета проекта ТОС: материалы, оборудование, работы, доставка и вклад жителей.",
+      "title": "Смета проекта ТОС — шаблон расходов и вклада жителей",
+      "description": "Заполняемая смета проекта ТОС: материалы, оборудование, работы, доставка, расходники, источники цен, вклад жителей и партнёров.",
       "section": "Документы"
     },
     {

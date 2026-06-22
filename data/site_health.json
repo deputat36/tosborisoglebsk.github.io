@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-22T08:12:33.108Z",
+  "generated_at": "2026-06-22T08:14:48.051Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 52,
   "catalog": {
-    "generated_at": "2026-06-22T08:12:32.253Z",
+    "generated_at": "2026-06-22T08:14:47.242Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 337,
     "public": 327,
     "noindex": 10,
-    "seo_warnings_count": 62,
+    "seo_warnings_count": 59,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -85,35 +85,6 @@
       "url": "https://tosborisoglebsk.ru/404.html",
       "warnings": [
         "короткий description: 20"
-      ]
-    },
-    {
-      "page": "documents/templates/meeting-protocol/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-protocol/",
-      "warnings": [
-        "короткий description: 63",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/meeting-registration/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/meeting-registration/",
-      "warnings": [
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
-      ]
-    },
-    {
-      "page": "documents/templates/project-budget/index.html",
-      "url": "https://tosborisoglebsk.ru/documents/templates/project-budget/",
-      "warnings": [
-        "короткий title: 17",
-        "нет og:title",
-        "нет og:description",
-        "нет og:image"
       ]
     },
     {
@@ -463,6 +434,27 @@
       "warnings": [
         "длинный description: 236"
       ]
+    },
+    {
+      "page": "needs/update-data-tancyrey-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-tancyrey-2026/",
+      "warnings": [
+        "длинный description: 241"
+      ]
+    },
+    {
+      "page": "needs/update-data-tretyaki-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-tretyaki-2026/",
+      "warnings": [
+        "длинный description: 234"
+      ]
+    },
+    {
+      "page": "needs/update-data-uyutnyy-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/needs/update-data-uyutnyy-2026/",
+      "warnings": [
+        "длинный description: 232"
+      ]
     }
   ],
   "broken_internal_links": [],
@@ -471,7 +463,7 @@
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 62 страниц с SEO-предупреждениями.",
+    "Просмотреть 59 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
