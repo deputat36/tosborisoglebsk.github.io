@@ -20,7 +20,7 @@ function compactText(value, maxLength) {
   if (text.length <= maxLength) return text;
   const sliced = text.slice(0, maxLength - 1);
   const boundary = sliced.lastIndexOf(' ');
-  const base = sliced.slice(0, boundary > 60 ? boundary : sliced.length).replace(/[,:;.!?\s]+$/u, '');
+  const base = sliced.slice(0, boundary > 50 ? boundary : sliced.length).replace(/[,:;.!?\s]+$/u, '');
   return `${base}…`;
 }
 
@@ -57,7 +57,7 @@ function stepCard(title, text) {
 function makePage(item, toses) {
   const title = item.title || 'История результата ТОС';
   const summary = item.summary || 'История результата территориального общественного самоуправления Борисоглебского городского округа.';
-  const seoTitle = compactText(title, 66);
+  const seoTitle = compactText(title, 56);
   const seoSummary = compactText(summary, 155);
   const canonical = `${SITE_URL}/done/${item.id}/`;
   const tos = item.tos_slug ? toses.find((entry) => entry.slug === item.tos_slug) : null;
