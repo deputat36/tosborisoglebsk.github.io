@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const entries = readDrafts();
     const counts = buildCounts(entries);
+    const activeFilter = document.querySelector('#workbench-draft-select')?.value || '';
     const values = [
       ['Черновики', counts.total, 'has'],
       ['Новые', counts.new || 0, 'new'],
@@ -112,8 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     root.innerHTML = values.map(([label, value, filter]) => {
-      const className = label === 'Допроверка' && value ? 'stat warn' : 'stat';
-      return `<button class="${className}" type="button" data-draft-filter="${esc(filter)}" title="Показать: ${esc(label)}"><b>${esc(value)}</b><span>${esc(label)}</span></button>`;
+      const isActive = activeFilter === filter;
+      const className = [label === 'Допроверка' && value ? 'stat warn' : 'stat', isActive ? 'active' : ''].filter(Boolean).join(' ');
+      return `<button class="${className}" type="button" data-draft-filter="${esc(filter)}" aria-pressed="${isActive ? 'true' : 'false'}" title="Показать: ${esc(label)}"><b>${esc(value)}</b><span>${esc(label)}</span></button>`;
     }).join('');
     renderRecentDrafts(entries);
   }
