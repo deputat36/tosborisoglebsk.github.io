@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Квартальный отчёт портала ТОС БГО</title>
+  <meta name="description" content="Рабочий шаблон квартального публичного отчёта портала ТОС БГО по каталогу, верификации, реестру, содержанию, медиа и качеству публикаций."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/quarterly-report/"/>
+  <meta property="og:title" content="Квартальный отчёт портала ТОС БГО"/>
+  <meta property="og:description" content="Какие подтверждённые показатели включать в регулярный отчёт портала."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/quarterly-report/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Публичная отчётность</div><h1>Квартальный отчёт портала</h1><p class="lead">Шаблон собирает проверяемую сводку за квартал: полнота каталога, верификация карточек, сверка реестра, опубликованные материалы, разрешённые медиа и результаты контроля качества.</p><div class="hero-actions"><a class="btn primary" href="/data/quarterly_report_template.csv">Скачать CSV</a><a class="btn" href="/publication-queue/">Очередь публикаций</a><a class="btn" href="/freshness-check/">Свежесть</a><a class="btn" href="/post-publish-check/">QA</a></div></div></section>
+  <section class="section"><div class="container prose"><h2>Правило отчёта</h2><p>Каждая цифра должна иметь дату расчёта и проверяемый источник: JSON сайта, официальный документ, журнал доказательств, очередь публикаций или закрытый QA-чек-лист.</p><div class="notice">Пустое значение лучше неподтверждённой цифры. Планы, заявки и рабочие заготовки нельзя показывать как завершённый результат.</div></div></section>
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>Каталог</h2><p>Количество опубликованных и подтверждённых карточек, официальный размер реестра и разрыв каталога.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Содержание</h2><p>Только прошедшие очередь и QA новости, проекты, актуальные потребности и истории результата.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Медиа</h2><p>Только файлы с установленным автором или правообладателем и разрешением на публикацию.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Качество</h2><p>Закрытые проверки, известные пробелы, устаревающие разделы и конкретные действия следующего квартала.</p></div></article>
+  </div></section>
+  <section class="section"><div class="container prose"><h2>Порядок подготовки</h2><ol><li>Указать отчётный период.</li><li>Рассчитать показатели на одну дату и приложить источники.</li><li>Исключить строки без подтверждения или явно отметить их как ожидающие проверки.</li><li>Проверить разрешения для персональных данных, фото и проектных сведений.</li><li>Подготовить публичный текст только из строк со статусом <code>ready</code>.</li><li>После публикации пройти QA и зафиксировать ссылку на отчёт.</li></ol><p>Связанные инструменты: <a href="/data/quarterly_report_template.csv">CSV-шаблон</a>, <a href="/editorial-calendar/">редакционный календарь</a>, <a href="/verification-readiness/">готовность карточек</a>, <a href="/registry-diff/">сверка реестра</a> и <a href="/open-data/">открытые данные</a>.</p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочий шаблон квартального отчёта.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
