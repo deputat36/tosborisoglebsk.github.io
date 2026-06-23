@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Проверка доступности домена</title>
+  <meta name="description" content="Рабочая проверка доступности домена tosborisoglebsk.ru: публичная веб-проверка, терминальные ограничения окружения, www-вариант, GitHub Pages и дальнейшие действия."/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/domain-check/"/>
+  <meta property="og:title" content="Проверка доступности домена"/>
+  <meta property="og:description" content="Контроль домена, редиректов и публикационного контура портала ТОС БГО."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/domain-check/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Публикационный контур</div><h1>Проверка доступности домена</h1><p class="lead">Основной домен `tosborisoglebsk.ru` открывается в веб-проверке и отдаёт главную страницу портала. Терминальные запросы из текущего окружения получают 403 с текстом ограничения вызовов, поэтому их нельзя считать доказательством недоступности сайта.</p><div class="hero-actions"><a class="btn primary" href="/data/domain_access_check.csv">CSV проверки</a><a class="btn" href="/site-health/">Аудит сайта</a><a class="btn" href="/workbench/">Рабочая панель</a><a class="btn" href="/open-data/">Открытые данные</a><a class="btn" href="/">Главная</a></div></div></section>
+
+  <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Текущий вывод</h2><div class="stats"><div class="stat"><b>OK</b><span>основной домен в web-проверке</span></div><div class="stat"><b>403</b><span>терминал ограничен окружением</span></div><div class="stat"><b>?</b><span>www требует внешней проверки</span></div><div class="stat"><b>CSV</b><span>результаты зафиксированы</span></div></div><div class="notice"><b style="color:var(--text)">Практический статус:</b> публичную доступность основного домена считаем подтверждённой для веб-контекста, но оставляем задачу внешней ручной проверки `www`, HTTP→HTTPS и GitHub Pages settings.</div></div></article></div></section>
+
+  <section class="section"><div class="container section-head"><div><h2>Результаты проверки</h2><p>Состояние на 23 июня 2026 года</p></div><a class="btn" href="/data/domain_access_check.csv">Скачать CSV</a></div><div class="container table-wrap"><table><thead><tr><th>Цель</th><th>Метод</th><th>Результат</th><th>Вывод</th></tr></thead><tbody><tr><td>https://tosborisoglebsk.ru/</td><td>web open</td><td>загружена главная страница портала</td><td>основной домен доступен в веб-контексте</td></tr><tr><td>https://tosborisoglebsk.ru/</td><td>terminal curl</td><td>403 с текстом ограничения вызовов</td><td>ограничение окружения, не диагноз сайта</td></tr><tr><td>http://tosborisoglebsk.ru/</td><td>terminal curl HEAD</td><td>403</td><td>нужно проверить внешний HTTP→HTTPS редирект</td></tr><tr><td>https://www.tosborisoglebsk.ru/</td><td>terminal curl HEAD</td><td>403</td><td>нужно проверить DNS/CNAME и браузерный доступ</td></tr><tr><td>GitHub Pages URL</td><td>terminal curl</td><td>403 с тем же текстом ограничения</td><td>поддерживает гипотезу ограничения терминального окружения</td></tr></tbody></table></div></section>
+
+  <section class="section"><div class="container grid"><article class="card"><div class="card-inner"><h2>Что проверить вручную</h2><ol><li>Открыть `https://tosborisoglebsk.ru/` в обычном браузере без VPN и с мобильной сети.</li><li>Проверить, открывается ли `https://www.tosborisoglebsk.ru/`.</li><li>Проверить, перенаправляет ли `http://tosborisoglebsk.ru/` на HTTPS.</li><li>Проверить настройки GitHub Pages: custom domain, DNS check, enforce HTTPS.</li><li>После изменения DNS подождать распространения и повторить проверку.</li></ol></div></article><article class="card"><div class="card-inner"><h2>Что не считать ошибкой сайта</h2><ul><li>403 только из текущего терминального окружения;</li><li>разницу между web-проверкой и terminal curl;</li><li>отсутствие DNS-ответа в `getent`, если веб-проверка успешно открывает сайт;</li><li>индексацию отдельных страниц без проверки основного домена.</li></ul><div class="card-actions"><a class="btn" href="/data/domain_access_check.csv">CSV</a><a class="btn" href="/site-health/">Аудит</a></div></div></article></div></section>
+
+  <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Критерии готовности домена</h2><ul><li>основной HTTPS-домен открывает главную страницу;</li><li>HTTP-вариант перенаправляет на HTTPS;</li><li>`www` либо корректно открывается, либо предсказуемо перенаправляет на основной домен;</li><li>GitHub Pages показывает custom domain без DNS-ошибок;</li><li>после деплоя sitemap и ключевые страницы открываются по основному домену.</li></ul><div class="card-actions"><a class="btn primary" href="/">Проверить главную</a><a class="btn" href="/sitemap.xml">Sitemap</a><a class="btn" href="/site-health/">Отчёт сайта</a></div></div></article></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочая проверка доступности домена и публикационного контура.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
