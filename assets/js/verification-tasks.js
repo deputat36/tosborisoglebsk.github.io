@@ -33,6 +33,8 @@ function renderTaskCard(item) {
         <div class="notice tiny">${taskEsc(taskText(item))}</div>
         <div class="card-actions">
           <a class="btn" href="/tos/${slug}/">Карточка</a>
+          <a class="btn" href="/collection-board/">Доска</a>
+          <a class="btn" href="/workbench/">Черновик</a>
           <a class="btn primary" href="${taskUpdateUrl(item.slug)}">Уточнить</a>
         </div>
       </div>
