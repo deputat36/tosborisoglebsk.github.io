@@ -1,0 +1,13 @@
+report_period,section,metric,value,unit,source_document_or_link,source_date,checked_by,publication_permission,status,note
+,coverage,published_tos_cards,,карточек,,,,не применимо,draft,"считать по data/toses.json на дату отчёта"
+,coverage,verified_tos_cards,,карточек,,,,не применимо,draft,"учитывать только карточки с закрытой матрицей готовности"
+,registry,official_registry_total,,ТОС,,,,не применимо,draft,"указывать только по актуальному официальному документу"
+,registry,catalog_gap,,карточек,,,,не применимо,draft,"рассчитать после сверки официального реестра и каталога"
+,content,published_news,,публикаций,,,,подтвердить,draft,"включать только опубликованные и прошедшие QA материалы"
+,content,published_projects,,проектов,,,,подтвердить,draft,"не смешивать заявки планы и завершённые проекты"
+,content,published_needs,,потребностей,,,,подтвердить,draft,"учитывать только актуальные на конец периода потребности"
+,content,published_results,,историй,,,,подтвердить,draft,"каждый результат должен иметь дату источник и доказательство"
+,media,approved_media,,файлов,,,,подтвердить,draft,"учитывать фото и логотипы с разрешением правообладателя"
+,engagement,received_submissions,,материалов,,,,подтвердить,draft,"считать по журналу входящих материалов"
+,quality,post_publish_qa_completed,,проверок,,,,не применимо,draft,"считать только полностью закрытые QA-чек-листы"
+,next_period,priority_actions,,действий,,,,не применимо,draft,"перечислить конкретные действия и ответственных"
