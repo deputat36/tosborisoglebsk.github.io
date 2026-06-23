@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-06-23",
+  "title": "Проверка полноты каталога ТОС БГО",
+  "summary": {
+    "target_total_from_open_source": 46,
+    "current_catalog_total": 24,
+    "minimum_gap_to_check": 22,
+    "known_missing_candidates": 4,
+    "unknown_missing_slots": 18,
+    "city_total_from_open_source": 25,
+    "rural_total_from_open_source": 21
+  },
+  "rules": [
+    "Не создавать полноценную карточку ТОС без подтверждения названия, территории, председателя и публичности контактов.",
+    "Названия из новостных публикаций использовать как кандидатов на проверку, а не как окончательный реестр.",
+    "Телефоны, email и личные страницы председателей публиковать только при наличии открытого источника или согласия.",
+    "Если название отличается в источниках, сохранять оба варианта как alias до сверки."
+  ],
+  "sources": [
+    {
+      "id": "mybsk-2024-tos-force",
+      "title": "ТОС – сила, объединяющая город",
+      "publisher": "Мой Борисоглебск",
+      "date": "2024-06-03",
+      "url": "https://mybsk.ru/tos-sila-obedinyayushhaya-gorod/",
+      "what_confirms": "В БГО действует 46 ТОС: 25 городских и 21 сельский. С 2015 года реализовано более 80 проектов, привлечено около 50 млн рублей.",
+      "verification_level": "open_publication"
+    },
+    {
+      "id": "bloknot-2023-contest-16",
+      "title": "16 ТОС Борисоглебского округа примут участие во втором этапе областного конкурса общественно полезных проектов",
+      "publisher": "Блокнот Борисоглебск",
+      "date": "2023-03-30",
+      "url": "https://bloknotborisoglebsk.ru/news/16-tos-borisoglebskogo-okruga-primut-uchastie-vo-v-1586570",
+      "what_confirms": "Публикация перечисляет 16 ТОСов, допущенных к публичной защите проектов в 2023 году. Среди них есть названия, которых пока нет в каталоге портала.",
+      "verification_level": "open_publication"
+    },
+    {
+      "id": "bgo-report-2022-search-snippet",
+      "title": "Отчёт главы за 2022 год, PDF",
+      "publisher": "Официальный сайт Борисоглебского городского округа / Госуслуги",
+      "date": "2022",
+      "url": "https://borisoglebsk.gosuslugi.ru/netcat_files/324/2269/glava_otchet_2022.PDF",
+      "what_confirms": "По поисковой выдаче: зарегистрировано 44 ТОС, в 2022 году зарегистрированы ТОС «Уютный» и ТОС «Ручей». PDF нужно проверить вручную, так как автоматический доступ вернул 403.",
+      "verification_level": "needs_manual_pdf_check"
+    }
+  ],
+  "current_catalog": [
+    { "name": "Богана", "slug": "bogana", "type": "Сельский", "location": "с. Богана", "status": "in_catalog" },
+    { "name": "Восточный", "slug": "vostochnyy", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
+    { "name": "Губари", "slug": "gubari", "type": "Сельский", "location": "с. Губари", "status": "in_catalog" },
+    { "name": "Дзержинского", "slug": "dzerzhinskogo", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
+    { "name": "Знамение", "slug": "znamenie", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
+    { "name": "Ивановка", "slug": "ivanovka", "type": "Сельский", "location": "п. Ивановка", "status": "in_catalog" },
+    { "name": "Ипас", "slug": "ipas", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
+    { "name": "Калинка", "slug": "kalinka", "type": "Сельский", "location": "п. Калинино", "status": "in_catalog", "aliases_to_check": ["Калинки"] },
+    { "name": "Махровка", "slug": "mahrovka", "type": "Сельский", "location": "с. Махровка", "status": "in_catalog" },
+    { "name": "Маяк", "slug": "mayak", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
+    { "name": "Мечта", "slug": "mechta", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
+    { "name": "Миролюбие", "slug": "mirolyubie", "type": "Сельский", "location": "п. Миролюбие", "status": "in_catalog" },
+    { "name": "Первомайский", "slug": "pervomayskiy", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
+    { "name": "Петровское", "slug": "petrovskoe", "type": "Сельский", "location": "с. Петровское", "status": "in_catalog" },
+    { "name": "Победа", "slug": "pobeda", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
+    { "name": "Подстёпки", "slug": "podstepki", "type": "Сельский", "location": "п. Подстёпки", "status": "in_catalog" },
+    { "name": "Порт Артур", "slug": "port-artur", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
+    { "name": "Просторный", "slug": "prostornyy", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
+    { "name": "Северный 39", "slug": "severnyy-39", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
+    { "name": "Танцырей", "slug": "tancyrey", "type": "Сельский", "location": "с. Танцырей", "status": "in_catalog" },
+    { "name": "Третьяки", "slug": "tretyaki", "type": "Сельский", "location": "с. Третьяки", "status": "in_catalog" },
+    { "name": "Ульяновка", "slug": "ulyanovka", "type": "Сельский", "location": "с. Ульяновка", "status": "in_catalog" },
+    { "name": "Уютный", "slug": "uyutnyy", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
+    { "name": "Чкаловец", "slug": "chkalovec", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" }
+  ],
+  "missing_candidates": [
+    {
+      "name": "Горелка",
+      "slug_draft": "gorelka",
+      "source_ids": ["bloknot-2023-contest-16"],
+      "evidence": "Перечислен среди 16 ТОСов Борисоглебского округа, допущенных к публичной защите проектов в 2023 году.",
+      "status": "needs_registry_confirmation",
+      "next_step": "Уточнить территорию, председателя, статус регистрации и наличие открытых контактов."
+    },
+    {
+      "name": "Хоперский берег",
+      "slug_draft": "hoperskiy-bereg",
+      "source_ids": ["bloknot-2023-contest-16"],
+      "evidence": "Перечислен среди 16 ТОСов Борисоглебского округа, допущенных к публичной защите проектов в 2023 году.",
+      "status": "needs_registry_confirmation",
+      "next_step": "Уточнить территорию, председателя, статус регистрации и наличие открытых контактов."
+    },
+    {
+      "name": "Тюковка",
+      "slug_draft": "tyukovka",
+      "source_ids": ["bloknot-2023-contest-16"],
+      "evidence": "Перечислен среди 16 ТОСов Борисоглебского округа, допущенных к публичной защите проектов в 2023 году.",
+      "status": "needs_registry_confirmation",
+      "next_step": "Уточнить территорию, председателя, статус регистрации и наличие открытых контактов."
+    },
+    {
+      "name": "Ручей",
+      "slug_draft": "ruchey",
+      "source_ids": ["bgo-report-2022-search-snippet"],
+      "evidence": "В поисковой выдаче по отчёту главы за 2022 год указано, что в 2022 году зарегистрированы ТОС «Уютный» и ТОС «Ручей». Требуется ручная проверка PDF или официального реестра.",
+      "status": "needs_manual_source_check",
+      "next_step": "Открыть официальный PDF вручную или запросить подтверждение в администрации/у координатора ТОС."
+    }
+  ],
+  "checklist_for_each_missing_tos": [
+    "Официальное название ТОС",
+    "Тип: городской или сельский",
+    "Населённый пункт или адресная территория",
+    "Границы ТОС",
+    "Год создания или регистрации устава",
+    "Председатель или ответственное лицо",
+    "Публичные контакты с разрешением на публикацию",
+    "Сообщество ВК/ОК или иной открытый канал",
+    "Краткое описание деятельности",
+    "Фото территории и логотип/знак при наличии",
+    "Источники подтверждения"
+  ],
+  "next_actions": [
+    "Запросить официальный актуальный реестр 46 ТОС БГО.",
+    "Сверить городские и сельские ТОС отдельно: 25 городских и 21 сельский.",
+    "Проверить четыре найденных кандидата: Горелка, Хоперский берег, Тюковка, Ручей.",
+    "После подтверждения создавать новые карточки не сразу пачкой, а по одной: сначала минимальная карточка, затем контакты и материалы.",
+    "Для уже опубликованных 24 карточек параллельно повышать статус верификации."
+  ]
+}
