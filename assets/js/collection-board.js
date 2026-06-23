@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const statusMap = Object.fromEntries(statuses);
 
   let items = [];
+  let priorityRequests = new Map();
   let filter = 'all';
   let state = loadState();
 
@@ -54,17 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return `/update-tos/?tos=${encodeURIComponent(slug || '')}&type=card#message-builder`;
   }
 
+  function priorityInfo(slug) {
+    return priorityRequests.get(String(slug || '')) || null;
+  }
+
   function boardItems() {
     return items.filter((item) => {
       const status = getStatus(item.slug);
       if (filter === 'all') return true;
+      if (filter === 'priority') return priorityRequests.has(String(item.slug || ''));
       if (filter === 'waiting') return ['contacted', 'waiting'].includes(status);
       if (filter === 'done') return ['received', 'done'].includes(status);
       return status === filter;
     }).sort((a, b) => {
+      const aPriorityRequest = priorityRequests.has(String(a.slug || '')) ? 0 : 1;
+      const bPriorityRequest = priorityRequests.has(String(b.slug || '')) ? 0 : 1;
       const ap = a.priority === 'Высокий' ? 0 : 1;
       const bp = b.priority === 'Высокий' ? 0 : 1;
-      return ap - bp || (b.missing || []).length - (a.missing || []).length || String(a.name).localeCompare(String(b.name), 'ru');
+      return aPriorityRequest - bPriorityRequest || ap - bp || (b.missing || []).length - (a.missing || []).length || String(a.name).localeCompare(String(b.name), 'ru');
     });
   }
 
@@ -74,8 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const counts = statuses.reduce((acc, [key]) => ({ ...acc, [key]: 0 }), {});
     items.forEach((item) => { counts[getStatus(item.slug)] = (counts[getStatus(item.slug)] || 0) + 1; });
     const withNotes = items.filter((item) => getNote(item.slug)).length;
+    const priorityTotal = items.filter((item) => priorityRequests.has(String(item.slug || ''))).length;
+    const priorityDone = items.filter((item) => priorityRequests.has(String(item.slug || '')) && ['received', 'done'].includes(getStatus(item.slug))).length;
     const values = [
       ['Всего в работе', items.length],
+      ['Приоритетные', `${priorityDone}/${priorityTotal}`],
       ['Не начинали', counts['not-started']],
       ['Написали', counts.contacted],
       ['Ждём ответ', counts.waiting],
@@ -83,7 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
       ['Обновлено', counts.done],
       ['С заметками', withNotes]
     ];
-    root.innerHTML = values.map(([label, value]) => `<article class="stat"><b>${esc(value || 0)}</b><span>${esc(label)}</span></article>`).join('');
+    root.innerHTML = values.map(([label, value]) => `<article class="stat"><b>${esc(value ?? 0)}</b><span>${esc(label)}</span></article>`).join('');
+  }
+
+  function requestBox(request) {
+    if (!request) return '';
+    const known = request.known_contact ? `<span class="tag">контакт: ${esc(request.known_contact)}</span>` : '<span class="tag warn">контакт не найден</span>';
+    return `<div class="notice"><div class="meta"><span class="tag warn">Персональный запрос готов</span>${known}</div><p class="tiny"><b>Куда отправлять:</b> ${esc(request.contact_channel || 'канал уточняется')}</p><p class="tiny"><b>Следующий шаг:</b> ${esc(request.next_step || 'отправить запрос и отметить статус')}</p></div>`;
   }
 
   function render() {
@@ -99,11 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const current = getStatus(item.slug);
       const note = getNote(item.slug);
       const slug = String(item.slug || '');
+      const request = priorityInfo(slug);
       const urlSlug = encodeURIComponent(slug);
       const attrSlug = esc(slug);
       const options = statuses.map(([key, label]) => `<option value="${esc(key)}" ${key === current ? 'selected' : ''}>${esc(label)}</option>`).join('');
       const missing = (item.missing || []).slice(0, 8).map((value) => `<span class="tag warn">${esc(value)}</span>`).join(' ');
-      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span><span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p><b>Нужно уточнить:</b> ${esc(missingText(item))}</p><div>${missing}</div><label class="tiny" for="status-${attrSlug}">Статус работы</label><select class="input" id="status-${attrSlug}" data-board-status="${attrSlug}">${options}</select><label class="tiny" for="note-${attrSlug}">Рабочая заметка</label><textarea class="input" id="note-${attrSlug}" data-board-note="${attrSlug}" rows="2" placeholder="Например: написали председателю 18.06, ждём логотип">${esc(note)}</textarea><div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a><a class="btn" href="/data-requests/">Сообщение</a><a class="btn" href="/workbench/">Черновик</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
+      const requestLink = request ? '<a class="btn" href="/data-requests/priority-tos/">Персональный текст</a>' : '<a class="btn" href="/data-requests/">Сообщение</a>';
+      return `<article class="list-item"><div class="meta"><span class="tag ${item.priority === 'Высокий' ? 'warn' : ''}">${esc(item.priority || 'Приоритет уточняется')}</span>${request ? '<span class="tag warn">приоритетный запрос</span>' : ''}<span class="tag">${esc(item.score || 0)}%</span><span class="tag">${esc(item.location || '')}</span></div><h3>ТОС «${esc(item.name)}»</h3><p><b>Нужно уточнить:</b> ${esc(missingText(item))}</p><div>${missing}</div>${requestBox(request)}<label class="tiny" for="status-${attrSlug}">Статус работы</label><select class="input" id="status-${attrSlug}" data-board-status="${attrSlug}">${options}</select><label class="tiny" for="note-${attrSlug}">Рабочая заметка</label><textarea class="input" id="note-${attrSlug}" data-board-note="${attrSlug}" rows="2" placeholder="Например: написали председателю 18.06, ждём логотип">${esc(note)}</textarea><div class="card-actions"><a class="btn" href="/tos/${urlSlug}/">Карточка</a>${requestLink}<a class="btn" href="/workbench/">Черновик</a><a class="btn primary" href="${updateUrl(slug)}">Уточнить</a></div></article>`;
     }).join('');
   }
 
@@ -112,8 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function exportCsv() {
-    const rows = [['ТОС', 'slug', 'населённый пункт', 'приоритет', 'заполненность', 'статус', 'нужно уточнить', 'заметка', 'обновлено']];
+    const rows = [['ТОС', 'slug', 'населённый пункт', 'приоритет', 'заполненность', 'статус', 'нужно уточнить', 'персональный запрос', 'канал отправки', 'известный контакт', 'следующий шаг', 'заметка', 'обновлено']];
     items.forEach((item) => {
+      const request = priorityInfo(item.slug);
       rows.push([
         item.name || '',
         item.slug || '',
@@ -122,6 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
         item.score || '',
         statusMap[getStatus(item.slug)] || getStatus(item.slug),
         missingText(item),
+        request ? 'да' : 'нет',
+        request?.contact_channel || '',
+        request?.known_contact || '',
+        request?.next_step || '',
         getNote(item.slug),
         state[item.slug]?.updatedAt || ''
       ]);
@@ -164,10 +188,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('[data-board-export]')?.addEventListener('click', exportCsv);
   document.querySelector('[data-board-reset]')?.addEventListener('click', resetBoard);
 
-  fetch('/data/tos_content_audit.json', { cache: 'no-store' })
-    .then((response) => response.ok ? response.json() : null)
-    .then((data) => {
-      items = (data?.items || []).filter((item) => item.priority === 'Высокий' || (item.missing || []).length);
+  Promise.all([
+    fetch('/data/tos_content_audit.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : null),
+    fetch('/data/priority_tos_requests.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : null).catch(() => null)
+  ])
+    .then(([audit, requests]) => {
+      priorityRequests = new Map((requests?.items || []).map((item) => [String(item.slug || ''), item]));
+      items = (audit?.items || []).filter((item) => item.priority === 'Высокий' || (item.missing || []).length);
       render();
     })
     .catch(() => {
