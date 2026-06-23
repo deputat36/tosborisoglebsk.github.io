@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('input', (event) => {
     const textarea = event.target.closest('[data-board-note]');
     if (!textarea) return;
-    setNote(textarea.datasetBoardNote, textarea.value);
+    setNote(textarea.dataset.boardNote, textarea.value);
   });
 
   document.querySelectorAll('[data-board-filter]').forEach((button) => {
