@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Контроль свежести контента</title>
+  <meta name="description" content="Рабочая проверка актуальности разделов портала ТОС БГО: каталог, новости, проекты, потребности, медиа, реестр и открытые данные."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/freshness-check/"/>
+  <meta property="og:title" content="Контроль свежести контента"/>
+  <meta property="og:description" content="Какие разделы требуют регулярной проверки, источника и обновления."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/freshness-check/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Актуальность</div><h1>Контроль свежести контента</h1><p class="lead">Эта проверка показывает, какие разделы сайта требуют регулярного обновления, где нужен официальный источник, а где публикация заблокирована до подтверждения.</p><div class="hero-actions"><a class="btn primary" href="/data/content_freshness_check.csv">Скачать CSV</a><a class="btn" href="/editorial-calendar/">Редакционный календарь</a><a class="btn" href="/open-data/">Открытые данные</a><a class="btn" href="/post-publish-check/">QA публикации</a></div></div></section>
+  <section class="section"><div class="container prose"><h2>Зачем это нужно</h2><p>Даже технически исправная страница теряет доверие, если данные устарели или не имеют источника. Контроль свежести отделяет разделы, которые можно обновлять сейчас, от разделов, где нужен реестр, ответ председателя или разрешение на публикацию.</p><div class="notice">Если источник не указан или дата актуальности неизвестна, материал нельзя подавать как подтверждённый факт.</div></div></section>
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>Высокий риск</h2><p>Каталог, статус `verified`, потребности, медиа и официальный реестр. Эти разделы нельзя обновлять предположениями.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Средний риск</h2><p>Новости, проекты, истории сделанного, домен и открытые данные. Нужны источник, дата и QA после публикации.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Частота</h2><p>Новости проверяются еженедельно, карточки и медиа ежемесячно, реестр после получения официального файла.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Результат</h2><p>Статусы `pending`, `needs_review`, `needs_update`, `blocked` и `missing` помогают быстро увидеть следующий шаг.</p></div></article>
+  </div></section>
+  <section class="section"><div class="container prose"><h2>Связанные инструменты</h2><p>CSV-проверка используется вместе с <a href="/editorial-calendar/">редакционным календарём</a>, <a href="/registry-intake/">приёмом реестра</a>, <a href="/media-intake/">медиа-реестром</a>, <a href="/verification-readiness/">матрицей готовности</a> и <a href="/post-publish-check/">QA после публикации</a>.</p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочая проверка свежести контента.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
