@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Приём материалов для сайта ТОС БГО</title>
+  <meta name="description" content="Рабочий шаблон приёма новостей, проектов, потребностей, историй результата, обновлений карточек и медиа для портала ТОС БГО."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/content-intake/"/>
+  <meta property="og:title" content="Приём материалов для сайта ТОС БГО"/>
+  <meta property="og:description" content="Какие поля нужны перед публикацией новости, проекта, потребности, результата, обновления карточки или медиа."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/content-intake/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Входящие материалы</div><h1>Приём материалов для сайта ТОС БГО</h1><p class="lead">Шаблон помогает принимать новости, проекты, потребности, истории результата, обновления карточек и медиа в единой структуре. Материал не переносится на сайт, пока не указаны источник, дата и разрешение на публикацию.</p><div class="hero-actions"><a class="btn primary" href="/data/content_intake_template.csv">Скачать CSV</a><a class="btn" href="/reply-review/">Разбор ответа</a><a class="btn" href="/publication-consent/">Разрешения</a><a class="btn" href="/post-publish-check/">QA публикации</a></div></div></section>
+  <section class="section"><div class="container prose"><h2>Минимум для публикации</h2><p>Для любого материала нужны тип, ТОС, заголовок, краткое описание, дата события или факта, источник, контакт для уточнения, разрешение на открытую публикацию и отметка о персональных данных.</p><div class="notice">Если в материале есть фото людей, телефоны, адреса, имена ответственных лиц или другие персональные данные, сначала используется `/publication-consent/`.</div></div></section>
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>Новости</h2><p>Публиковать только событие с датой, источником и понятным правом на открытую публикацию.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Проекты</h2><p>Фиксировать статус, сроки, территорию, подтверждение ТОС и связь с карточкой или реестром.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Потребности</h2><p>Указывать срок актуальности. Устаревшая потребность должна закрываться, а не висеть как новая.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Сделано</h2><p>История результата требует факта, даты, подтверждения и разрешённых фото или иных доказательств.</p></div></article>
+  </div></section>
+  <section class="section"><div class="container prose"><h2>Порядок обработки</h2><ul><li>Заполнить строку в CSV-шаблоне.</li><li>Проверить источник и дату актуальности.</li><li>Разобрать персональные данные и разрешения.</li><li>Перенести материал в нужный JSON только после проверки.</li><li>После публикации пройти QA и контроль свежести.</li></ul><p>Связанные инструменты: <a href="/data/content_intake_template.csv">CSV-шаблон</a>, <a href="/freshness-check/">свежесть контента</a>, <a href="/editorial-calendar/">редакционный календарь</a>, <a href="/media-intake/">медиа-реестр</a> и <a href="/open-data/">открытые данные</a>.</p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочий приём материалов.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
