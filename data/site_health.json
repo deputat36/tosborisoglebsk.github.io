@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-23T19:20:59.662Z",
+  "generated_at": "2026-06-23T19:22:06.829Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 71,
   "catalog": {
-    "generated_at": "2026-06-23T19:20:58.809Z",
+    "generated_at": "2026-06-23T19:22:06.134Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -84,7 +84,7 @@
       "page": "open-data/index.html",
       "url": "https://tosborisoglebsk.ru/open-data/",
       "warnings": [
-        "длинный description: 252"
+        "длинный description: 270"
       ]
     }
   ],
