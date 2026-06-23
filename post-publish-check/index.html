@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Проверка после публикации</title>
+  <meta name="description" content="Чек-лист контроля после публикации новых страниц, карточек ТОС и открытых данных на портале ТОС БГО."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/post-publish-check/"/>
+  <meta property="og:title" content="Проверка после публикации"/>
+  <meta property="og:description" content="Единый QA-чек-лист для страниц, ссылок, открытых данных, персональных данных и деплоя."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/post-publish-check/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">QA после публикации</div><h1>Проверка после публикации</h1><p class="lead">Чек-лист нужен после каждого изменения карточек, реестра, CSV/JSON-файлов или рабочих страниц. Он отделяет факт публикации от факта готовности страницы к использованию.</p><div class="hero-actions"><a class="btn primary" href="/data/post_publish_qa_checklist.csv">Скачать CSV</a><a class="btn" href="/open-data/">Открытые данные</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/publication-consent/">Разрешения</a></div></div></section>
+  <section class="section"><div class="container prose"><h2>Что проверять</h2><p>Минимальный контроль: страница открывается, внутренние ссылки работают, CSV или JSON читается, служебные страницы не индексируются, метаданные соответствуют содержанию, а персональные данные не опубликованы без разрешения.</p><div class="notice">Статус `verified` нельзя ставить по факту публикации. Его можно ставить только после закрытия условий в матрице готовности и журнале доказательств.</div></div></section>
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>1. URL и ссылки</h2><p>Открыть новую страницу, проверить кнопки, ссылки на CSV/JSON и обратные переходы в рабочие разделы.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>2. Данные</h2><p>Проверить структуру CSV/JSON: заголовки, кодировку, пустые строки, статус проверки и отсутствие неподтверждённых фактов.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>3. Публикация</h2><p>Сверить контакты, фото, имена и проекты с разрешениями на открытую публикацию.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>4. Домен</h2><p>После деплоя открыть основной домен и убедиться, что опубликована новая версия, а не старая кэшированная страница.</p></div></article>
+  </div></section>
+  <section class="section"><div class="container prose"><h2>Результат проверки</h2><p>CSV можно вести как короткий журнал: статус `pending`, `passed`, `failed` или `blocked`. Если пункт не пройден, публиковать ссылку на страницу в основных разделах сайта рано.</p><p>Связанные инструменты: <a href="/verification-readiness/">матрица готовности</a>, <a href="/verification-evidence/">журнал доказательств</a>, <a href="/publication-consent/">разрешения на публикацию</a> и <a href="/domain-check/">проверка домена</a>.</p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">QA-чек-лист публикации.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
