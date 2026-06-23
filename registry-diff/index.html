@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Матрица сверки реестра ТОС</title>
+  <meta name="description" content="Рабочая матрица для сверки официального реестра 46 ТОС БГО с текущим каталогом портала."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/registry-diff/"/>
+  <meta property="og:title" content="Матрица сверки реестра ТОС"/>
+  <meta property="og:description" content="Как построчно сравнить официальный реестр ТОС с текущими 24 карточками и безопасно подготовить новые карточки."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/registry-diff/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Сверка реестра</div><h1>Матрица сверки официального реестра ТОС</h1><p class="lead">Эта страница нужна после получения официального перечня 46 ТОС. Матрица помогает построчно сравнить реестр с текущими 24 карточками и не создать дубль или неподтверждённую карточку.</p><div class="hero-actions"><a class="btn primary" href="/data/registry_diff_matrix_template.csv">Скачать CSV</a><a class="btn" href="/registry-intake/">Приём реестра</a><a class="btn" href="/registry-check/">Полнота каталога</a><a class="btn" href="/new-tos-card/">Новая карточка</a></div></div></section>
+  <section class="section"><div class="container prose"><h2>Когда использовать</h2><p>Матрица применяется только после того, как источник реестра зафиксирован: кто прислал данные, на какую дату они актуальны и можно ли использовать их для публикации. Кандидаты из открытых материалов остаются кандидатами до официального подтверждения.</p><div class="notice">Если строка есть только в открытой публикации, но отсутствует в официальном реестре или прямом ответе председателя, карточку не создавать.</div></div></section>
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>1. Нормализовать название</h2><p>Убрать кавычки, лишние пробелы и разные варианты написания, но сохранить официальное название отдельным полем.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>2. Найти совпадение</h2><p>Сравнить строку реестра с текущим каталогом: точное совпадение, вероятный дубль, новая строка или спорный кандидат.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>3. Проверить тип</h2><p>Отметить городской или сельский ТОС и сверить итог с целевым распределением 25 городских и 21 сельский.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>4. Решить действие</h2><p>Обновить существующую карточку, создать новую через `/new-tos-card/` или отправить строку на ручную проверку.</p></div></article>
+  </div></section>
+  <section class="section"><div class="container prose"><h2>Статусы строк</h2><ul><li><b>exact_match</b> — строка совпадает с существующей карточкой.</li><li><b>probable_duplicate</b> — название похоже на существующую карточку, нужен ручной просмотр.</li><li><b>new_confirmed</b> — строка подтверждена официальным реестром и может идти в шаблон новой карточки.</li><li><b>needs_official_confirmation</b> — кандидат найден, но официального подтверждения нет.</li><li><b>low_evidence_candidate</b> — слабое основание, публикация карточки запрещена до подтверждения.</li></ul><p>Для первых найденных кандидатов в CSV заранее оставлены строки Горелка, Хоперский берег, Тюковка и Ручей. Это не публикация карточек, а очередь на проверку.</p></div></section>
+  <section class="section"><div class="container prose"><h2>Связанные инструменты</h2><p><a href="/data/registry_diff_matrix_template.csv">CSV-матрица</a> используется вместе с <a href="/registry-intake/">приёмом реестра</a>, <a href="/registry-type-check/">сверкой городских и сельских ТОС</a>, <a href="/candidate-check/">проверкой кандидатов</a> и <a href="/new-tos-card/">шаблоном новой карточки</a>.</p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочая матрица сверки реестра.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
