@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-06-23T14:20:52.292Z",
-  "total": 317,
+  "generated_at": "2026-06-23T14:22:08.597Z",
+  "total": 318,
   "pages": [
     {
       "path": "data-update/index.html",
@@ -651,6 +651,13 @@
       "url": "https://tosborisoglebsk.ru/materials/tos-event-scenario/",
       "title": "Сценарий дворового или сельского мероприятия ТОС | Материалы ТОС БГО",
       "description": "Как провести встречу, праздник или тематическую акцию без лишней бюрократии.",
+      "section": "Материалы"
+    },
+    {
+      "path": "materials/tos-bgo-in-numbers/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-bgo-in-numbers/",
+      "title": "ТОС БГО в цифрах и фактах — справочный материал",
+      "description": "Краткая справка о территориальном общественном самоуправлении Борисоглебского городского округа: количество ТОСов, проекты, финансирование, примеры лучших практик и что нужно уточнить для портала.",
       "section": "Материалы"
     },
     {
