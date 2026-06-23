@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Разрешения на публикацию данных ТОС БГО</title>
+  <meta name="description" content="Рабочий чек-лист перед публикацией контактов, фото, логотипов и сведений карточек ТОС БГО. Что можно публиковать, что нужно уточнить и когда оставить статус требует проверки."/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/publication-consent/"/>
+  <meta property="og:title" content="Разрешения на публикацию данных ТОС БГО"/>
+  <meta property="og:description" content="Чек-лист публикации открытых контактов, фото, логотипов и подтверждённых фактов по карточкам ТОС."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/publication-consent/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Публикация данных</div><h1>Разрешения на публикацию данных</h1><p class="lead">Перед публикацией телефона, email, имени ответственного лица, фото, логотипа или результата проекта нужно понимать источник и разрешение на открытую публикацию. Эта страница — редакционный чек-лист, а не юридическое заключение.</p><div class="hero-actions"><a class="btn primary" href="/data/publication_consent_checklist.csv">Скачать CSV</a><a class="btn" href="/verification-pilot/">Пилот верификации</a><a class="btn" href="/reply-review/">Разбор ответа</a><a class="btn" href="/verification-guide/">Инструкция</a><a class="btn" href="/update-tos/?type=card#message-builder">Обновить карточку</a></div></div></section>
+
+  <section class="section"><div class="container stats"><div class="stat"><b>10</b><span>проверяемых полей</span></div><div class="stat"><b>0</b><span>публикаций без источника</span></div><div class="stat"><b>1</b><span>правило: сомневаешься — уточняй</span></div></div></section>
+
+  <section class="section"><div class="container prose"><h2>Базовое правило</h2><div class="notice"><p>Если поле относится к человеку, личному контакту или авторскому медиа, оно не публикуется по умолчанию. Нужен источник и понятное подтверждение, что эти сведения можно размещать открыто на сайте.</p></div></div></section>
+
+  <section class="section"><div class="container section-head"><div><h2>Что проверять</h2><p>Минимальный контроль перед обновлением карточки</p></div><a class="btn" href="/data/publication_consent_checklist.csv">CSV</a></div><div class="container table-wrap"><table><thead><tr><th>Поле</th><th>Тип</th><th>Можно публиковать, если</th><th>Не публиковать, если</th></tr></thead><tbody><tr><td>Название ТОС</td><td>Факт</td><td>Есть подтверждение председателя, актива, администрации или документа.</td><td>Есть разные варианты названия без понятного источника.</td></tr><tr><td>Территория</td><td>Факт</td><td>Границы или зона работы подтверждены источником.</td><td>Описание приблизительное и может ввести в заблуждение.</td></tr><tr><td>Председатель или ответственное лицо</td><td>Персональные данные</td><td>Имя, роль и открытая публикация подтверждены.</td><td>Подтверждена роль, но не подтверждена публичность имени.</td></tr><tr><td>Телефон или email</td><td>Контакт</td><td>Есть прямое разрешение разместить конкретный канал на сайте.</td><td>Контакт найден в старом документе, переписке или неофициальном источнике.</td></tr><tr><td>Соцсеть или группа</td><td>Публичный канал</td><td>Страница актуальна и связана с ТОС.</td><td>Страница личная, неактивная или связь с ТОС неочевидна.</td></tr><tr><td>Фото и логотип</td><td>Медиа</td><td>Файл передан представителем ТОС или есть понятное разрешение на использование.</td><td>Неясно, кто автор, где сделано фото или можно ли его публиковать.</td></tr><tr><td>Проекты и результаты</td><td>Факт</td><td>Есть дата, место, результат и источник подтверждения.</td><td>Есть только неподтверждённая сумма, слух или пересказ.</td></tr><tr><td>Дата проверки</td><td>Метаданные</td><td>Указана дата ответа, документа, формы или ручной проверки.</td><td>Дата не указана — статус остаётся `requires_verification`.</td></tr></tbody></table></div></section>
+
+  <section class="section"><div class="container grid"><article class="card"><div class="card-inner"><h2>Безопасная публикация</h2><ul><li>Публиковать только поля с понятным источником.</li><li>Отделять публичные контакты от личных контактов для внутренней связи.</li><li>Сохранять дату подтверждения в карточке или рабочей таблице.</li><li>Фото и логотипы принимать от представителя ТОС или из разрешённого источника.</li></ul></div></article><article class="card"><div class="card-inner"><h2>Оставить на уточнение</h2><ul><li>Нет подтверждения, что телефон можно разместить на сайте.</li><li>Ответ пришёл от человека, чья роль неясна.</li><li>Есть фото без автора и места съёмки.</li><li>Источник старый или противоречит текущей карточке.</li></ul></div></article></div></section>
+
+  <section class="section"><div class="container prose"><h2>Короткий запрос разрешения</h2><div class="notice">Здравствуйте! Уточняем карточку ТОС «_____» на портале tosborisoglebsk.ru. Подтвердите, пожалуйста, какие сведения можно разместить открыто: имя ответственного лица, телефон, email, ссылка на страницу, фото территории, логотип и краткое описание. Если какие-то данные нужны только для внутренней связи и не должны публиковаться, отметьте это отдельно.</div><p><a class="btn primary" href="/reply-review/">Разобрать полученный ответ</a> <a class="btn" href="/verification-pilot/">Вернуться к пилоту</a> <a class="btn" href="/data/publication_consent_checklist.csv">Скачать CSV</a></p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочий чек-лист разрешений на публикацию.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
