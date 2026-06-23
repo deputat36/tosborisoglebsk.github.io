@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Приём официального реестра ТОС БГО</title>
+  <meta name="description" content="Рабочий порядок приёма официального реестра 46 ТОС БГО: источник, нормализация, дедупликация, сверка с текущими карточками, тип территории и создание новых карточек."/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/registry-intake/"/>
+  <meta property="og:title" content="Приём официального реестра ТОС БГО"/>
+  <meta property="og:description" content="Чек-лист обработки официального перечня ТОС до обновления каталога и создания новых карточек."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/registry-intake/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Полный реестр</div><h1>Приём официального реестра ТОС</h1><p class="lead">Когда будет получен актуальный перечень 46 ТОС БГО, его нельзя сразу превращать в карточки. Сначала нужно зафиксировать источник, нормализовать названия, убрать дубли, сверить с текущими 24 карточками и отделить новые ТОС от переименований.</p><div class="hero-actions"><a class="btn primary" href="/data/registry_intake_checklist.csv">Скачать CSV</a><a class="btn" href="/data-requests/tos-registry-request/">Запрос реестра</a><a class="btn" href="/registry-check/">Сверка каталога</a><a class="btn" href="/registry-type-check/">Город/село</a><a class="btn" href="/new-tos-card/">Новая карточка</a></div></div></section>
+
+  <section class="section"><div class="container stats"><div class="stat"><b>46</b><span>ожидаемый полный реестр</span></div><div class="stat"><b>24</b><span>карточки сейчас</span></div><div class="stat"><b>22+</b><span>минимум строк на сверку</span></div></div></section>
+
+  <section class="section"><div class="container prose"><h2>Основное правило</h2><div class="notice"><p>Новая карточка создаётся только после того, как строка реестра прошла сверку: это не дубль, не переименование существующей карточки, есть официальное название, территория и понятный источник. Контакты и медиа добавляются отдельно после проверки разрешений.</p></div></div></section>
+
+  <section class="section"><div class="container section-head"><div><h2>Этапы приёма</h2><p>Что сделать до обновления каталога</p></div><a class="btn" href="/data/registry_intake_checklist.csv">CSV</a></div><div class="container table-wrap"><table><thead><tr><th>Этап</th><th>Что нужно</th><th>Что получается</th><th>Если не хватает</th></tr></thead><tbody><tr><td>1. Получение</td><td>Официальный файл или ответ с перечнем 46 ТОС.</td><td>Исходный файл сохранён без ручных правок.</td><td>Запросить через страницу запроса реестра.</td></tr><tr><td>2. Источник</td><td>Дата ответа, отправитель, должность или ссылка.</td><td>Запись для аудита и последующей проверки.</td><td>Не обрабатывать как официальный реестр.</td></tr><tr><td>3. Нормализация</td><td>Исходные названия и варианты написания.</td><td>Единое написание для сверки без потери оригинала.</td><td>Сохранить варианты и проверить вручную.</td></tr><tr><td>4. Дедупликация</td><td>Все строки полного перечня.</td><td>Уникальный список ТОС.</td><td>Не импортировать дубли.</td></tr><tr><td>5. Сверка</td><td>Текущие 24 карточки и полный реестр.</td><td>Статус строки: existing, missing, renamed или needs_review.</td><td>Сверить через `/registry-check/`.</td></tr><tr><td>6. Тип территории</td><td>Городской или сельский статус.</td><td>Обновление сверки 25/21.</td><td>Оставить `unknown` до подтверждения.</td></tr><tr><td>7. Контакты</td><td>Председатель, телефон, email, страница.</td><td>Поля для карточки или пометка private.</td><td>Проверить через разрешения на публикацию.</td></tr><tr><td>8. Новые карточки</td><td>Подтверждённые missing-строки.</td><td>Черновики новых карточек.</td><td>Не создавать без названия и территории.</td></tr></tbody></table></div></section>
+
+  <section class="section"><div class="container grid"><article class="card"><div class="card-inner"><h2>Можно делать автоматически</h2><ul><li>Сверить названия с текущими slug карточек.</li><li>Отметить очевидные совпадения и потенциальные дубли.</li><li>Подготовить CSV missing-кандидатов.</li><li>Собрать список строк с неизвестным типом территории.</li><li>Подготовить черновики новых карточек со статусом `requires_verification`.</li></ul></div></article><article class="card"><div class="card-inner"><h2>Нельзя делать автоматически</h2><ul><li>Публиковать телефоны без разрешения.</li><li>Считать похожее название новой карточкой без ручной проверки.</li><li>Повышать статус до `verified` по одному факту наличия в реестре.</li><li>Добавлять фото и логотипы из сети без источника.</li><li>Удалять существующие карточки без подтверждения переименования или закрытия ТОС.</li></ul></div></article></div></section>
+
+  <section class="section"><div class="container prose"><h2>Следующий шаг после получения файла</h2><ol><li>Сохранить исходный файл и источник без правок.</li><li>Заполнить `data/registry_intake_checklist.csv` по этапам.</li><li>Сверить полный список с `/registry-check/` и `/registry-type-check/`.</li><li>Для новых строк заполнить `/new-tos-card/`.</li><li>Для контактов и медиа пройти `/publication-consent/`.</li><li>Для первых карточек использовать `/verification-evidence/` и `/verification-readiness/`.</li></ol><p><a class="btn primary" href="/data/registry_intake_checklist.csv">Скачать чек-лист</a> <a class="btn" href="/data-requests/tos-registry-request/">Запросить реестр</a> <a class="btn" href="/new-tos-card/">Новая карточка</a></p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочий порядок приёма официального реестра ТОС.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
