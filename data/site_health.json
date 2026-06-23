@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-23T19:34:30.398Z",
+  "generated_at": "2026-06-23T19:35:37.467Z",
   "site_url": "https://tosborisoglebsk.ru",
-  "health_score": 71,
+  "health_score": 72,
   "catalog": {
-    "generated_at": "2026-06-23T19:34:29.144Z",
+    "generated_at": "2026-06-23T19:35:36.579Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -26,7 +26,7 @@
     "total": 359,
     "public": 331,
     "noindex": 28,
-    "seo_warnings_count": 1,
+    "seo_warnings_count": 0,
     "broken_internal_links_count": 0
   },
   "priority_tos": [
@@ -79,22 +79,13 @@
       "verification": "Проверено частично"
     }
   ],
-  "seo_warnings": [
-    {
-      "page": "open-data/index.html",
-      "url": "https://tosborisoglebsk.ru/open-data/",
-      "warnings": [
-        "длинный description: 290"
-      ]
-    }
-  ],
+  "seo_warnings": [],
   "broken_internal_links": [],
   "recommended_actions": [
     "Закрыть 4 карточки ТОС с высоким приоритетом: контакты, соцсети, источники, логотипы.",
     "Повысить доверие к каталогу: выбрать 3-5 карточек и довести их до статуса «подтверждено».",
     "Уточнить телефоны или публичные контакты для 4 карточек.",
     "Добавить открытые страницы или сообщества для 4 карточек, если они существуют.",
-    "Просмотреть 1 страниц с SEO-предупреждениями.",
     "Продолжить превращать рабочие заготовки в подтверждённые новости, проекты и фотоотчёты.",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей."
   ]
