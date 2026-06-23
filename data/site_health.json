@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-23T15:04:37.952Z",
+  "generated_at": "2026-06-23T15:06:40.295Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 72,
   "catalog": {
-    "generated_at": "2026-06-23T15:04:37.128Z",
+    "generated_at": "2026-06-23T15:06:39.481Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -23,8 +23,8 @@
     "average_score": 88
   },
   "pages": {
-    "total": 340,
-    "public": 330,
+    "total": 341,
+    "public": 331,
     "noindex": 10,
     "seo_warnings_count": 0,
     "broken_internal_links_count": 0
