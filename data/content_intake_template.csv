@@ -1,0 +1,7 @@
+submission_type,tos_name,title,short_summary,event_or_fact_date,source_person,source_contact,source_document_or_link,publication_permission,media_attached,personal_data_present,target_section,status,next_step
+news,,,,,,,,не подтверждено,нет,не проверено,/news/ и data/news.json,draft,"указать дату события источник и разрешение на публикацию"
+project,,,,,,,,не подтверждено,нет,не проверено,/projects/ и data/projects.json,draft,"приложить описание проекта статус сроки и подтверждение ТОС"
+need,,,,,,,,не подтверждено,нет,не проверено,/needs/ и data/needs.json,draft,"указать актуальную потребность срок действия и контакт для уточнения"
+done,,,,,,,,не подтверждено,нет,не проверено,/done/ и data/done.json,draft,"подтвердить факт дату результат фото и разрешение на публикацию"
+card_update,,,,,,,,не подтверждено,нет,не проверено,/tos/ и data/toses.json,draft,"указать какое поле карточки меняется и источник подтверждения"
+media,,,,,,,,не подтверждено,да,не проверено,/media-intake/ и data/media_intake_register.csv,draft,"проверить автора правообладателя людей на фото и объём разрешения"
