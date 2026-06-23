@@ -31,6 +31,14 @@ function niceDate(value) {
   const d = new Date(String(value) + 'T00:00:00');
   return Number.isNaN(d.getTime()) ? value : d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 }
+function compactText(value, maxLength) {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (text.length <= maxLength) return text;
+  const sliced = text.slice(0, maxLength - 1);
+  const boundary = sliced.lastIndexOf(' ');
+  const base = sliced.slice(0, boundary > 50 ? boundary : sliced.length).replace(/[,:;.!?\s]+$/u, '');
+  return `${base}…`;
+}
 function description(tos) {
   const base = [tos.boundaries, tos.location].filter(Boolean).join(' ');
   return `ТОС «${tos.name}»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. ${base}`.trim();
@@ -170,6 +178,7 @@ function actionCard(title, text, url, primary = false) {
 function makePage(tos, data) {
   const title = `ТОС «${tos.name}» — контакты, границы, председатель | ТОС БГО`;
   const desc = description(tos);
+  const seoDesc = compactText(desc, 155);
   const canonical = `${SITE_URL}/tos/${tos.slug}/`;
   const logo = logoPath(tos);
   const phones = arr(tos.phones);
@@ -195,7 +204,7 @@ function makePage(tos, data) {
         url: canonical,
         logo: `${SITE_URL}${logo}`,
         areaServed: tos.location || 'Борисоглебский городской округ',
-        description: desc,
+        description: seoDesc,
         sameAs,
         contactPoint: phones.map(phone => ({ '@type': 'ContactPoint', telephone: phone, contactType: 'председатель' }))
       },
@@ -225,11 +234,11 @@ function makePage(tos, data) {
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>${esc(title)}</title>
-  <meta name="description" content="${esc(desc)}"/>
+  <meta name="description" content="${esc(seoDesc)}"/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="${esc(canonical)}"/>
   <meta property="og:title" content="${esc(title)}"/>
-  <meta property="og:description" content="${esc(desc)}"/>
+  <meta property="og:description" content="${esc(seoDesc)}"/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="${esc(canonical)}"/>
   <meta property="og:image" content="${esc(`${SITE_URL}${logo}`)}"/>
