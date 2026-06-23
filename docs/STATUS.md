@@ -19,6 +19,7 @@
 - публичные практические маршруты: `/chairperson/action-routes/`, `/residents/action-routes/`, `/partners/action-routes/`, `/projects/action-routes/`, `/needs/action-routes/`, `/done/action-routes/`, `/calendar/action-routes/`, `/create-tos/action-routes/`;
 - рабочая панель `/workbench/` для контроля качества, сбора сведений, локальных черновиков и редакционного конвейера «ответ → черновик → проверка → JSON/PR → публикация»;
 - доска `/collection-board/` связывает карточки аудита с готовыми сообщениями, рабочими заметками, черновиками в `/workbench/` и финальной проверкой после публикации;
+- страницы подтверждения `/verification-guide/`, `/verification-tasks/` и `/verification-control/` ведут карточку через запрос, доску сбора, разбор ответа, обновление и проверку статуса;
 - страницы контроля данных: `/audit/`, `/site-health/`, `/data-quality/`, `/data-requests/`, `/verification-tasks/`, `/collection-board/`;
 - коммуникационный набор `/communication-kit/` для запуска и обращений к председателям;
 - памятка `/chairperson/verify-card/` для подтверждения карточек ТОС;
