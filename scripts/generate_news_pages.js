@@ -37,9 +37,13 @@ function dateRu(value){
   const d = new Date(String(value) + 'T00:00:00');
   return Number.isNaN(d.getTime()) ? value : d.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'});
 }
+function absoluteUrl(url){
+  if(!url) return '';
+  return /^https?:\/\//i.test(url) ? url : `${SITE_URL}${url.startsWith('/') ? url : `/${url}`}`;
+}
 function addUrl(map, loc, lastmod = ''){
   if(!loc) return;
-  const normalized = loc.startsWith('http') ? loc : `${SITE_URL}${loc}`;
+  const normalized = absoluteUrl(loc);
   map.set(normalized, lastmod || map.get(normalized) || '');
 }
 function sourceLink(url){
@@ -55,7 +59,7 @@ function makePage(item, toses){
   const canonical = `${SITE_URL}/news/${id}/`;
   const articleImage = item.image || '';
   const socialImage = articleImage || '/assets/img/og-cover.svg';
-  const socialImageFull = socialImage.startsWith('http') ? socialImage : `${SITE_URL}${socialImage}`;
+  const socialImageFull = absoluteUrl(socialImage);
   const text = paragraphs(item.text, lead);
   const tos = item.tos_slug ? toses.find(t => t.slug === item.tos_slug) : null;
   const schema = {
@@ -70,7 +74,7 @@ function makePage(item, toses){
     author:{'@type':'Organization',name:'Портал ТОС БГО',url:SITE_URL},
     publisher:{'@type':'Organization',name:'Портал ТОС БГО',url:SITE_URL}
   };
-  if(item.source_url) schema.citation = item.source_url;
+  if(item.source_url) schema.citation = absoluteUrl(item.source_url);
   return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${esc(title)} | ТОС БГО</title><meta name="description" content="${esc(lead)}"/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="${esc(canonical)}"/><meta property="og:title" content="${esc(title)}"/><meta property="og:description" content="${esc(lead)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${esc(canonical)}"/><meta property="og:image" content="${esc(socialImageFull)}"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><script type="application/ld+json">${JSON.stringify(schema)}</script></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/residents/">Жителям</a><a href="/partners/">Партнёрам</a><a href="/projects/">Проекты</a><a href="/done/">Сделано</a><a href="/needs/">Нужна помощь</a><a href="/documents/">Документы</a><a href="/contacts/">Контакты</a><a href="/sections/">Все разделы</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/news/">← Новости</a><div class="eyebrow">${esc(item.category || 'Новости')} · ${esc(dateRu(item.date))}</div><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></div></section><section class="section"><div class="container prose">${articleImage ? `<img src="${esc(articleImage)}" alt="${esc(item.image_alt || title)}" loading="lazy" style="width:100%;border-radius:24px;margin:18px 0;border:1px solid var(--line);">` : ''}${text.map(p => `<p>${esc(p)}</p>`).join('')}${tos ? `<p><a class="btn" href="/tos/${esc(tos.slug)}/">Открыть связанный ТОС «${esc(tos.name)}»</a></p>` : ''}<hr class="sep"/><p class="source"><b>Источник:</b> ${esc(item.source || 'Редакция портала')}${sourceLink(item.source_url)}</p></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Страница новости создана автоматически из data/news.json.</div></div></footer><script src="/assets/js/site.js"></script></body></html>`;
 }
 function updateSitemap(news){
