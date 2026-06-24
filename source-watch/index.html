@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Мониторинг источников ТОС БГО</title>
+  <meta name="description" content="Рабочий реестр официальных, прямых и редакционных источников для актуализации портала ТОС БГО."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/source-watch/"/>
+  <meta property="og:title" content="Мониторинг источников ТОС БГО"/>
+  <meta property="og:description" content="Какие источники проверять и что допустимо публиковать на их основании."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/source-watch/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Актуальное содержание</div><h1>Мониторинг источников</h1><p class="lead">Реестр задаёт постоянный набор каналов для поиска новостей, документов и уточнений. У каждого источника указаны уровень доверия, частота проверки и ограничения использования.</p><div class="hero-actions"><a class="btn primary" href="/data/source_watchlist.csv">Открыть CSV</a><a class="btn" href="/sources/">Принципы источников</a><a class="btn" href="/content-intake/">Приём материалов</a><a class="btn" href="/publication-queue/">Очередь</a></div></div></section>
+  <section class="section"><div class="container prose"><h2>Уровни источников</h2><ul><li><b>Primary:</b> официальный документ, официальный портал или прямое подтверждение уполномоченного представителя ТОС.</li><li><b>Secondary:</b> редакционная публикация, которая может подтвердить событие или подсказать первоисточник.</li><li><b>Discovery:</b> поисковая выдача и социальные сети, пригодные только для обнаружения материала.</li></ul><div class="notice">Упоминание названия ТОС в новости не подтверждает актуального председателя, границы, контакты или официальный статус.</div></div></section>
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>Еженедельно</h2><p>Проверять официальные порталы, конкурсные материалы, региональные и местные новости с прямым упоминанием ТОС БГО.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>По поступлению</h2><p>Разбирать ответы председателей и входящие материалы: источник, дата, разрешение и перечень подтверждённых полей.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Перед публикацией</h2><p>Переносить находку в очередь и не публиковать, пока не закрыты источник, разрешения, персональные данные и медиа.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>После публикации</h2><p>Фиксировать URL, дату проверки и срок актуальности материала, затем проходить QA.</p></div></article>
+  </div></section>
+  <section class="section"><div class="container prose"><h2>Рабочий цикл</h2><ol><li>Проверить источники согласно частоте в CSV.</li><li>Сохранить ссылку и дату публикации или ответа.</li><li>Найти первоисточник, если материал обнаружен через СМИ или поиск.</li><li>Передать подтверждённый материал в `/content-intake/`.</li><li>Провести его через `/publication-queue/`.</li><li>После публикации обновить дату последней проверки источника.</li></ol></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочий мониторинг источников.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
