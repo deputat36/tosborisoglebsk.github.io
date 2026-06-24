@@ -6,6 +6,24 @@ const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
 const NEWS_PATH = path.join(ROOT, 'data', 'news.json');
 const DATE = '2026-06-16';
 
+const VERIFIED_NEWS = {
+  id: 'mirolyubie-project-winner-2026',
+  status: 'published',
+  date: '2026-06-24',
+  category: 'Конкурсы',
+  tos_slug: 'mirolyubie',
+  title: 'Проект ТОС «Миролюбие» победил в конкурсе ТОС 2026 года',
+  lead: 'Официальный протокол подтверждает победу проекта «Играй и побеждай» и грант 1 489 360 рублей.',
+  text: [
+    'Официальный перечень победителей опубликован 22 мая 2026 года. В строке Борисоглебского городского округа указаны ТОС «Миролюбие», проект «Играй и побеждай» и сумма 1 489 360 рублей.',
+    'Ранее проект был представлен на очной защите инициатив ТОС. По опубликованному описанию он связан с созданием безопасных условий для катания на роликах, самокатах и скейтбордах.',
+    'Дата начала работ, календарный план, текущий статус реализации и фотографии проекта пока не подтверждены. Эти сведения будут добавлены после прямого подтверждения ТОС и проверки разрешений на публикацию.',
+    'До получения подтверждения портал не утверждает, что работы уже начались или завершены.'
+  ],
+  source: 'Официальный протокол победителей конкурса общественно полезных проектов ТОС 2026 года',
+  source_url: 'https://obraz36.ru/site_data/s273/2026/2026/%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D0%B8%20%D0%A2%D0%9E%D0%A1%202026.pdf'
+};
+
 function readJson(file, fallback = []) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
   catch { return fallback; }
@@ -51,6 +69,8 @@ function main() {
   const news = readJson(NEWS_PATH);
   let created = 0;
 
+  upsertById(news, VERIFIED_NEWS);
+
   for (const tos of toses) {
     const hasLinkedNews = news.some((item) => item && item.status !== 'draft' && item.tos_slug === tos.slug);
     if (hasLinkedNews) continue;
@@ -59,6 +79,7 @@ function main() {
   }
 
   writeJson(NEWS_PATH, news);
+  console.log(`Verified news synchronized: ${VERIFIED_NEWS.id}`);
   console.log(`Starter TOS news generated or updated: ${created}`);
 }
 
