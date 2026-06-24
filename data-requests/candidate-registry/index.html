@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Запрос статуса кандидатов ТОС БГО</title>
+  <meta name="description" content="Адресные запросы официального статуса пяти кандидатов на добавление в каталог ТОС БГО."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/data-requests/candidate-registry/"/>
+  <meta property="og:title" content="Запрос статуса кандидатов ТОС БГО"/>
+  <meta property="og:description" content="Какие сведения запросить по Горелке, Хоперскому берегу, Тюковке, Ручью и Просторному."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/data-requests/candidate-registry/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Сверка реестра</div><h1>Запрос статуса кандидатов ТОС</h1><p class="lead">Пять адресных строк помогают получить официальный ответ по каждому названию отдельно. Карточка создаётся только после подтверждения реестра, территории, типа, статуса и допустимых к публикации сведений.</p><div class="hero-actions"><a class="btn primary" href="/data/candidate_registry_requests.csv">Открыть CSV</a><a class="btn" href="/candidate-check/">Проверка кандидатов</a><a class="btn" href="/data-requests/tos-registry-request/">Полный запрос реестра</a><a class="btn" href="/reply-review/">Разбор ответа</a></div></div></section>
+  <section class="section"><div class="container prose"><h2>Обязательные поля ответа</h2><ul><li>официальное название и наличие в актуальном реестре;</li><li>городской или сельский тип;</li><li>территория и границы;</li><li>действующий статус и дата актуальности;</li><li>председатель или ответственное лицо;</li><li>контакты, которые разрешено публиковать открыто;</li><li>ссылка или реквизиты подтверждающего документа.</li></ul><div class="notice">Отсутствие ответа не означает отсутствие ТОС. Статус строки остаётся <code>draft</code> или переводится в <code>waiting</code> только после реальной отправки.</div></div></section>
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>Горелка</h2><p>Средний уровень упоминаний. Нужны официальный статус, тип, территория и открытые контакты.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Хоперский берег</h2><p>Средний уровень упоминаний. Особо проверить точное название и принадлежность к городским или сельским ТОС.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Тюковка</h2><p>Средний уровень упоминаний. Проверить связь с территорией села и актуальность статуса.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Ручей</h2><p>Низкий уровень доказательности. Нужны полный официальный документ или прямой ответ по реестру.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>Просторный</h2><p>Низкий уровень доказательности. Проверить дату образования, официальную запись и действующий статус на 2026 год.</p></div></article>
+  </div></section>
+  <section class="section"><div class="container prose"><h2>После получения ответа</h2><ol><li>Записать дату, адресата, канал и источник ответа в CSV.</li><li>Провести каждое поле через `/reply-review/`.</li><li>Обновить `data/tos_candidate_verification.csv` и матрицу сверки реестра.</li><li>При официальном подтверждении заполнить `/new-tos-card/`.</li><li>Проверить разрешения на персональные данные и контакты.</li><li>Только затем передать карточку в очередь публикаций.</li></ol><p>Все пять стартовых строк имеют статус <code>draft</code>. Отправка и получение ответа не отмечаются заранее.</p></div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочие запросы статуса кандидатов ТОС.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
