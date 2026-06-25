@@ -1,5 +1,5 @@
 stage,priority,area,task,mode,deliverable,status
-0,high,work-rules,"Зафиксировать правила автономной работы",assistant,"/autonomous-plan/ и docs/AUTONOMOUS-WORK-PLAN.md",planned
+0,high,work-rules,"Зафиксировать правила автономной работы",assistant,"docs/AUTONOMOUS-WORK-PLAN.md и docs/STATUS.md",done
 1,high,trust,"Довести 4 приоритетные карточки до готовности к проверке",mixed,"evidence/readiness CSV и затем data/toses.json",waiting_for_confirmed_data
 2,high,outreach,"Сопровождать 15 подготовленных запросов",mixed,"актуальный outreach_register.csv",waiting_for_send_confirmation
 3,high,registry,"Подготовить импорт официального реестра 46 ТОС",assistant,"registry-intake, registry-diff, новые карточки после сверки",waiting_for_source
