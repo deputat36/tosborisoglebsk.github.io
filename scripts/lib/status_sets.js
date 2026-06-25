@@ -12,11 +12,19 @@ const planStatuses = new Set([
   'waiting_for_files',
   'needs_review'
 ]);
+const manualTaskGroups = new Set([
+  'data-verification',
+  'technical-ops',
+  'frontend',
+  'outreach',
+  'project-control'
+]);
 
 module.exports = {
   decisionStatuses,
   manualTaskStatuses,
   priorities,
   workModes,
-  planStatuses
+  planStatuses,
+  manualTaskGroups
 };
