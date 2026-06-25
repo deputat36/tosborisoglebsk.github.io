@@ -2,7 +2,8 @@ const { spawnSync } = require('child_process');
 
 const checks = [
   ['Autonomous improvement plan', 'scripts/audit_autonomous_improvement_plan.js'],
-  ['User decision queue', 'scripts/audit_user_decision_queue.js']
+  ['User decision queue', 'scripts/audit_user_decision_queue.js'],
+  ['Manual tasks', 'scripts/audit_github_manual_tasks.js']
 ];
 
 let failed = false;
