@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "audit:decisions": "node scripts/audit_user_decision_queue.js"
+    "audit:decisions": "node scripts/audit_user_decision_queue.js",
+    "audit:project-mode": "node scripts/audit_project_mode.js",
+    "audit:project-mode-full": "node scripts/audit_project_mode_full.js"
   }
 }
