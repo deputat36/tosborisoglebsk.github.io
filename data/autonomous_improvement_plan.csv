@@ -1,0 +1,13 @@
+stage,priority,area,task,mode,deliverable,status
+0,high,work-rules,"Зафиксировать правила автономной работы",assistant,"/autonomous-plan/ и docs/AUTONOMOUS-WORK-PLAN.md",planned
+1,high,trust,"Довести 4 приоритетные карточки до готовности к проверке",mixed,"evidence/readiness CSV и затем data/toses.json",waiting_for_confirmed_data
+2,high,outreach,"Сопровождать 15 подготовленных запросов",mixed,"актуальный outreach_register.csv",waiting_for_send_confirmation
+3,high,registry,"Подготовить импорт официального реестра 46 ТОС",assistant,"registry-intake, registry-diff, новые карточки после сверки",waiting_for_source
+4,high,project-content,"Собрать подтверждение реализации проекта Миролюбия",mixed,"проверенная новость, проект или история результата",waiting_for_confirmed_data
+5,medium,technical,"Проверить Actions и Pages",mixed,"updated actions_diagnostics.csv",waiting_for_manual_check
+6,medium,frontend,"Упростить CSS без визуальных изменений",assistant,"комментированный или разделённый CSS с регрессией",planned
+7,medium,ux,"Упростить рабочие маршруты редактора",assistant,"короткие панели, ссылки, инструкции",planned
+8,medium,seo-content,"Усилить публичные страницы без выдумывания фактов",assistant,"лучшие тексты, FAQ, навигация, internal links",planned
+9,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent, проверенные публикации",waiting_for_files
+10,low,reporting,"Сделать регулярную сводку состояния проекта",assistant,"docs/STATUS.md и github-tasks",planned
+11,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"список кандидатов на объединение",needs_review
