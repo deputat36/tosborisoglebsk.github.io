@@ -16,6 +16,26 @@ const allowedStatuses = new Set([
   'needs_review'
 ]);
 
+function extractPathTokens(value) {
+  if (!value) return [];
+
+  return value
+    .split(/\s+и\s+|,|;/)
+    .map((part) => part.trim())
+    .filter((part) => /^(data|docs|scripts|assets|tos|news|projects|needs|done|registry|audit|site-health|github-tasks|css-maintenance|actions-check)[/\w.-]*/.test(part));
+}
+
+function pathTokenExists(value) {
+  if (!value) return false;
+
+  if (value.startsWith('/')) {
+    const clean = value.replace(/^\/+/, '');
+    return fs.existsSync(path.join(process.cwd(), clean)) || fs.existsSync(path.join(process.cwd(), clean, 'index.html'));
+  }
+
+  return fs.existsSync(path.join(process.cwd(), value));
+}
+
 function main() {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file: ${filePath}`);
@@ -46,6 +66,10 @@ function main() {
     if (!allowedModes.has(mode)) errors.push(`line ${line}: unsupported mode ${mode}`);
     if (!deliverable) errors.push(`line ${line}: missing deliverable`);
     if (!allowedStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
+
+    extractPathTokens(deliverable).forEach((token) => {
+      if (!pathTokenExists(token)) errors.push(`line ${line}: missing deliverable target ${token}`);
+    });
   });
 
   if (errors.length) {
