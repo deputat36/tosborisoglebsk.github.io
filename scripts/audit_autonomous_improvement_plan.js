@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { validateHeaders } = require('./lib/csv_schema');
 const { extractRepoPathTokens, repoPathExists } = require('./lib/path_checks');
 const { priorities, workModes, planStatuses } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'autonomous_improvement_plan.csv');
+const expectedHeaders = ['stage', 'priority', 'area', 'task', 'mode', 'deliverable', 'status'];
 
 function main() {
   if (!fs.existsSync(filePath)) {
@@ -13,14 +15,8 @@ function main() {
 
   const rows = parseCsv(fs.readFileSync(filePath, 'utf8'));
   const [headers, ...items] = rows;
-  const expectedHeaders = ['stage', 'priority', 'area', 'task', 'mode', 'deliverable', 'status'];
-
-  if (!headers || expectedHeaders.some((header, index) => headers[index] !== header)) {
-    throw new Error('Unexpected autonomous_improvement_plan.csv header');
-  }
-
+  const errors = validateHeaders(headers, expectedHeaders, 'autonomous_improvement_plan.csv');
   const seenStages = new Set();
-  const errors = [];
 
   items.forEach((item, index) => {
     const line = index + 2;
