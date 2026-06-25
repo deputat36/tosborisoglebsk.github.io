@@ -5,6 +5,24 @@ const { parseCsv } = require('./lib/csv');
 const filePath = path.join(process.cwd(), 'data', 'github_manual_tasks.csv');
 const allowedStatuses = new Set(['open', 'closed', 'paused']);
 
+function siteToolExists(value) {
+  if (!value) return false;
+
+  if (value.startsWith('/')) {
+    const clean = value.replace(/^\/+/, '');
+    const directPath = path.join(process.cwd(), clean);
+    const indexPath = path.join(process.cwd(), clean, 'index.html');
+    return fs.existsSync(directPath) || fs.existsSync(indexPath);
+  }
+
+  return fs.existsSync(path.join(process.cwd(), value));
+}
+
+function sourceFileExists(value) {
+  if (!value) return false;
+  return fs.existsSync(path.join(process.cwd(), value));
+}
+
 function main() {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file: ${filePath}`);
@@ -43,7 +61,9 @@ function main() {
     if (!group) errors.push(`line ${line}: missing group`);
     if (!allowedStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
     if (!siteTool) errors.push(`line ${line}: missing site_tool`);
+    if (siteTool && !siteToolExists(siteTool)) errors.push(`line ${line}: missing site_tool target ${siteTool}`);
     if (!sourceFile) errors.push(`line ${line}: missing source_file`);
+    if (sourceFile && !sourceFileExists(sourceFile)) errors.push(`line ${line}: missing source_file target ${sourceFile}`);
     if (!successCriteria) errors.push(`line ${line}: missing success_criteria`);
     if (!nextAction) errors.push(`line ${line}: missing next_action`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) errors.push(`line ${line}: invalid created_or_updated ${date}`);
