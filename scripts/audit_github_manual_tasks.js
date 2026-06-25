@@ -1,10 +1,22 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { validateHeaders } = require('./lib/csv_schema');
 const { repoPathExists } = require('./lib/path_checks');
 const { manualTaskStatuses, manualTaskGroups } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'github_manual_tasks.csv');
+const expectedHeaders = [
+  'issue_number',
+  'title',
+  'group',
+  'status',
+  'site_tool',
+  'source_file',
+  'success_criteria',
+  'next_action',
+  'created_or_updated'
+];
 
 function main() {
   if (!fs.existsSync(filePath)) {
@@ -13,24 +25,8 @@ function main() {
 
   const rows = parseCsv(fs.readFileSync(filePath, 'utf8'));
   const [headers, ...items] = rows;
-  const expectedHeaders = [
-    'issue_number',
-    'title',
-    'group',
-    'status',
-    'site_tool',
-    'source_file',
-    'success_criteria',
-    'next_action',
-    'created_or_updated'
-  ];
-
-  if (!headers || expectedHeaders.some((header, index) => headers[index] !== header)) {
-    throw new Error('Unexpected github_manual_tasks.csv header');
-  }
-
+  const errors = validateHeaders(headers, expectedHeaders, 'github_manual_tasks.csv');
   const seen = new Set();
-  const errors = [];
 
   items.forEach((item, index) => {
     const line = index + 2;
