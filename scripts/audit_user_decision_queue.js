@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { validateHeaders } = require('./lib/csv_schema');
 const { decisionStatuses, priorities } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'user_decision_queue.csv');
 const manualTasksPath = path.join(process.cwd(), 'data', 'github_manual_tasks.csv');
+const requiredHeaders = ['decision_id', 'priority', 'area', 'topic', 'default_mode', 'status', 'linked_task'];
 
 function readManualTaskIds() {
   if (!fs.existsSync(manualTasksPath)) return new Set();
@@ -26,14 +28,8 @@ function main() {
   const manualTaskIds = readManualTaskIds();
   const rows = parseCsv(fs.readFileSync(filePath, 'utf8'));
   const [headers, ...items] = rows;
-  const requiredHeaders = ['decision_id', 'priority', 'area', 'topic', 'default_mode', 'status', 'linked_task'];
-
-  if (!headers || requiredHeaders.some((header, index) => headers[index] !== header)) {
-    throw new Error('Unexpected user_decision_queue.csv header');
-  }
-
+  const errors = validateHeaders(headers, requiredHeaders, 'user_decision_queue.csv');
   const seen = new Set();
-  const errors = [];
 
   items.forEach((item, index) => {
     const line = index + 2;
