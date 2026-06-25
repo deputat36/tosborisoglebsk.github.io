@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { decisionStatuses } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'user_decision_queue.csv');
 const manualTasksPath = path.join(process.cwd(), 'data', 'github_manual_tasks.csv');
-const allowedStatuses = new Set(['assumed_default', 'waiting', 'not_needed_now', 'done']);
 
 function readManualTaskIds() {
   if (!fs.existsSync(manualTasksPath)) return new Set();
@@ -47,7 +47,7 @@ function main() {
     if (!area) errors.push(`line ${line}: missing area`);
     if (!topic) errors.push(`line ${line}: missing topic`);
     if (!defaultMode) errors.push(`line ${line}: missing default_mode`);
-    if (!allowedStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
+    if (!decisionStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
 
     if (linkedTask && !manualTaskIds.has(linkedTask)) {
       errors.push(`line ${line}: linked_task ${linkedTask} is absent in github_manual_tasks.csv`);
