@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
 const { repoPathExists } = require('./lib/path_checks');
-const { manualTaskStatuses } = require('./lib/status_sets');
+const { manualTaskStatuses, manualTaskGroups } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'github_manual_tasks.csv');
 
@@ -41,7 +41,7 @@ function main() {
     seen.add(issueNumber);
 
     if (!title) errors.push(`line ${line}: missing title`);
-    if (!group) errors.push(`line ${line}: missing group`);
+    if (!manualTaskGroups.has(group)) errors.push(`line ${line}: unsupported group ${group}`);
     if (!manualTaskStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
     if (!siteTool) errors.push(`line ${line}: missing site_tool`);
     if (siteTool && !repoPathExists(siteTool)) errors.push(`line ${line}: missing site_tool target ${siteTool}`);
