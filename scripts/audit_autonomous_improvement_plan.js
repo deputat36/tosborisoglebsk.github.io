@@ -1,20 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { priorities, workModes, planStatuses } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'autonomous_improvement_plan.csv');
-const allowedPriorities = new Set(['high', 'medium', 'low']);
-const allowedModes = new Set(['assistant', 'mixed']);
-const allowedStatuses = new Set([
-  'done',
-  'planned',
-  'waiting_for_confirmed_data',
-  'waiting_for_send_confirmation',
-  'waiting_for_source',
-  'waiting_for_manual_check',
-  'waiting_for_files',
-  'needs_review'
-]);
 
 function extractPathTokens(value) {
   if (!value) return [];
@@ -60,12 +49,12 @@ function main() {
     if (seenStages.has(stage)) errors.push(`line ${line}: duplicate stage ${stage}`);
     seenStages.add(stage);
 
-    if (!allowedPriorities.has(priority)) errors.push(`line ${line}: unsupported priority ${priority}`);
+    if (!priorities.has(priority)) errors.push(`line ${line}: unsupported priority ${priority}`);
     if (!area) errors.push(`line ${line}: missing area`);
     if (!task) errors.push(`line ${line}: missing task`);
-    if (!allowedModes.has(mode)) errors.push(`line ${line}: unsupported mode ${mode}`);
+    if (!workModes.has(mode)) errors.push(`line ${line}: unsupported mode ${mode}`);
     if (!deliverable) errors.push(`line ${line}: missing deliverable`);
-    if (!allowedStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
+    if (!planStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
 
     extractPathTokens(deliverable).forEach((token) => {
       if (!pathTokenExists(token)) errors.push(`line ${line}: missing deliverable target ${token}`);
