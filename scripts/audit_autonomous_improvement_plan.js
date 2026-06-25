@@ -1,29 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { extractRepoPathTokens, repoPathExists } = require('./lib/path_checks');
 const { priorities, workModes, planStatuses } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'autonomous_improvement_plan.csv');
-
-function extractPathTokens(value) {
-  if (!value) return [];
-
-  return value
-    .split(/\s+и\s+|,|;/)
-    .map((part) => part.trim())
-    .filter((part) => /^(data|docs|scripts|assets|tos|news|projects|needs|done|registry|audit|site-health|github-tasks|css-maintenance|actions-check)[/\w.-]*/.test(part));
-}
-
-function pathTokenExists(value) {
-  if (!value) return false;
-
-  if (value.startsWith('/')) {
-    const clean = value.replace(/^\/+/, '');
-    return fs.existsSync(path.join(process.cwd(), clean)) || fs.existsSync(path.join(process.cwd(), clean, 'index.html'));
-  }
-
-  return fs.existsSync(path.join(process.cwd(), value));
-}
 
 function main() {
   if (!fs.existsSync(filePath)) {
@@ -56,8 +37,8 @@ function main() {
     if (!deliverable) errors.push(`line ${line}: missing deliverable`);
     if (!planStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
 
-    extractPathTokens(deliverable).forEach((token) => {
-      if (!pathTokenExists(token)) errors.push(`line ${line}: missing deliverable target ${token}`);
+    extractRepoPathTokens(deliverable).forEach((token) => {
+      if (!repoPathExists(token)) errors.push(`line ${line}: missing deliverable target ${token}`);
     });
   });
 
