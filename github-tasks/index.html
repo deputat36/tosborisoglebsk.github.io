@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>GitHub-задачи проекта — портал ТОС БГО</title>
+  <meta name="description" content="Служебная сводка открытых GitHub-задач проекта ТОС БГО: подтверждение данных, Actions, CSS и исходящие запросы."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/github-tasks/"/>
+  <meta property="og:title" content="GitHub-задачи проекта ТОС БГО"/>
+  <meta property="og:description" content="Сводка ручных задач, которые нельзя закрыть автоматической генерацией."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/github-tasks/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Проектное управление</div><h1>GitHub-задачи проекта</h1><p class="lead">Здесь зафиксированы ручные задачи, которые нельзя закрыть генератором: подтверждение данных, проверка деплоя, CSS-регрессия и отправка запросов.</p><div class="hero-actions"><a class="btn primary" href="/data/github_manual_tasks.csv">Скачать CSV</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/outreach-register/">Журнал запросов</a><a class="btn" href="/actions-check/">Actions</a><a class="btn" href="/css-maintenance/">CSS</a></div></div></section>
+
+  <section class="section"><div class="container prose">
+    <h2>Текущий набор открытых задач</h2>
+    <p>Сводка составлена 25 июня 2026 года. Она не заменяет GitHub Issues, а помогает видеть ручные блоки прямо из служебных страниц портала.</p>
+  </div></section>
+
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>#34 — проверка 4 карточек</h2><p>Ивановка, Подстёпки, Губари, Танцырей. Нужны подтверждённые контакты, источники, разрешения на публикацию и медиа.</p><div class="card-actions"><a class="btn" href="/verification-readiness/">Матрица</a><a class="btn" href="/verification-evidence/">Доказательства</a></div></div></article>
+    <article class="card"><div class="card-inner"><h2>#164 — Actions и Pages</h2><p>Нужно вручную проверить вкладку GitHub Actions и GitHub Pages deployment, потому что commit endpoint не показал workflow-runs.</p><div class="card-actions"><a class="btn" href="/actions-check/">Проверка</a><a class="btn" href="/data/actions_diagnostics.csv">CSV</a></div></div></article>
+    <article class="card"><div class="card-inner"><h2>#165 — CSS-регрессия</h2><p>Рефакторинг CSS допустим только после проверки главной, каталога, карточки ТОС, новости, таблиц, мобильного меню и печати.</p><div class="card-actions"><a class="btn" href="/css-maintenance/">Карта CSS</a><a class="btn" href="/data/css_maintenance_inventory.csv">CSV</a></div></div></article>
+    <article class="card"><div class="card-inner"><h2>#166 — 15 запросов</h2><p>Нужно отправить подготовленные запросы по реестру, приоритетным карточкам, кандидатам и проектам 2026 года.</p><div class="card-actions"><a class="btn" href="/outreach-register/">Журнал</a><a class="btn" href="/data/outreach_register.csv">CSV</a></div></div></article>
+  </div></section>
+
+  <section class="section"><div class="container prose">
+    <h2>Правило закрытия</h2>
+    <p>Задачу нельзя закрывать только потому, что создана страница или CSV. Закрытие возможно после фактической проверки, отправки, ответа, визуальной регрессии или обновления источника данных.</p>
+  </div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Служебная сводка ручных задач проекта.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
