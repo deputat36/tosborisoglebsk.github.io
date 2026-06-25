@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
-const { decisionStatuses } = require('./lib/status_sets');
+const { decisionStatuses, priorities } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'user_decision_queue.csv');
 const manualTasksPath = path.join(process.cwd(), 'data', 'github_manual_tasks.csv');
@@ -43,7 +43,7 @@ function main() {
     if (seen.has(decisionId)) errors.push(`line ${line}: duplicate decision_id ${decisionId}`);
     seen.add(decisionId);
 
-    if (!priority) errors.push(`line ${line}: missing priority`);
+    if (!priorities.has(priority)) errors.push(`line ${line}: unsupported priority ${priority}`);
     if (!area) errors.push(`line ${line}: missing area`);
     if (!topic) errors.push(`line ${line}: missing topic`);
     if (!defaultMode) errors.push(`line ${line}: missing default_mode`);
