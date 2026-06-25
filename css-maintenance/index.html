@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Сопровождение CSS — портал ТОС БГО</title>
+  <meta name="description" content="Рабочая карта безопасного сопровождения CSS портала ТОС БГО: группы стилей, риски, порядок рефакторинга и контрольные страницы."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/css-maintenance/"/>
+  <meta property="og:title" content="Сопровождение CSS портала ТОС БГО"/>
+  <meta property="og:description" content="Карта безопасного рефакторинга единого файла styles.css."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/css-maintenance/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Техническое сопровождение</div><h1>Сопровождение CSS</h1><p class="lead">Единый файл <code>assets/css/styles.css</code> обеспечивает весь сайт. Перед рефакторингом нужно понимать группы стилей, риски и контрольные страницы, чтобы не изменить внешний вид случайно.</p><div class="hero-actions"><a class="btn primary" href="/data/css_maintenance_inventory.csv">Скачать CSV</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/post-publish-check/">QA после публикации</a></div></div></section>
+
+  <section class="section"><div class="container prose">
+    <h2>Текущий вывод</h2>
+    <p>Файл CSS компактный и загружается одним запросом, но почти не разделён на логические секции. Это повышает риск случайных изменений: один класс может использоваться на главной, карточках ТОС, новостях и служебных страницах одновременно.</p>
+    <div class="notice">Безопасная стратегия: сначала вести карту групп и контрольных страниц, затем добавлять комментарии или исходные модульные CSS-файлы, а итоговый <code>styles.css</code> оставлять совместимым для сайта.</div>
+  </div></section>
+
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>Что нельзя делать резко</h2><ul class="check-list"><li>переименовывать существующие классы;</li><li>менять сетку карточек без проверки мобильной версии;</li><li>удалять якобы неиспользуемые классы без поиска по страницам и JS;</li><li>менять CSS-переменные без просмотра светлой и тёмной темы.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Контрольные страницы</h2><ul class="check-list"><li>главная страница;</li><li>каталог ТОС и карточка ТОС;</li><li>раздел новостей и отдельная новость;</li><li>табличные рабочие страницы;</li><li>мобильное меню на 360–620px;</li><li>печать чек-листов.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Первый безопасный шаг</h2><p>Не менять визуальные значения, а добавить карту разделов и порядок проверки. После этого можно разделять исходники на компоненты и собирать итоговый <code>styles.css</code>.</p><a class="btn" href="/data/css_maintenance_inventory.csv">Открыть инвентарь</a></div></article>
+  </div></section>
+
+  <section class="section"><div class="container prose">
+    <h2>Рекомендуемый порядок рефакторинга</h2>
+    <ol>
+      <li>Зафиксировать текущие контрольные страницы и размеры экрана.</li>
+      <li>Добавить комментарии-разделители в CSS без изменения правил.</li>
+      <li>Отделить токены, базу, кнопки, карточки, таблицы, главную, адаптивность и печать.</li>
+      <li>Проверить отсутствие изменений в `data/site_health.json`, внутренних ссылках и SEO.</li>
+      <li>После визуальной проверки обновить этот CSV и статус проекта.</li>
+    </ol>
+  </div></section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Рабочая карта CSS-сопровождения.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
