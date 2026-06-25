@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { manualTaskStatuses } = require('./lib/status_sets');
 
 const filePath = path.join(process.cwd(), 'data', 'github_manual_tasks.csv');
-const allowedStatuses = new Set(['open', 'closed', 'paused']);
 
 function siteToolExists(value) {
   if (!value) return false;
@@ -59,7 +59,7 @@ function main() {
 
     if (!title) errors.push(`line ${line}: missing title`);
     if (!group) errors.push(`line ${line}: missing group`);
-    if (!allowedStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
+    if (!manualTaskStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
     if (!siteTool) errors.push(`line ${line}: missing site_tool`);
     if (siteTool && !siteToolExists(siteTool)) errors.push(`line ${line}: missing site_tool target ${siteTool}`);
     if (!sourceFile) errors.push(`line ${line}: missing source_file`);
