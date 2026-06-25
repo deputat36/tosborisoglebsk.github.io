@@ -14,6 +14,8 @@
 
 Добавлен автономный план: `docs/AUTONOMOUS-WORK-PLAN.md` и `data/autonomous_improvement_plan.csv`.
 
+Добавлена очередь решений: `data/user_decision_queue.csv`. В неё заносятся только темы, где участие пользователя действительно влияет на следующий шаг.
+
 Правило по умолчанию: ассистент самостоятельно выполняет безопасные технические, редакционные и организационные улучшения. Пользователь подключается только к реальным развилкам, внешним действиям и спорным публикациям.
 
 ## Реализовано
@@ -41,7 +43,7 @@
 - добавлены `/actions-check/` и `data/actions_diagnostics.csv` для контроля GitHub Actions и ручной проверки деплоя;
 - добавлены `/css-maintenance/` и `data/css_maintenance_inventory.csv` для безопасного сопровождения CSS;
 - добавлены `/github-tasks/` и `data/github_manual_tasks.csv` для сводки ручных GitHub-задач;
-- добавлены `docs/AUTONOMOUS-WORK-PLAN.md` и `data/autonomous_improvement_plan.csv` для автономного режима улучшений;
+- добавлены `docs/AUTONOMOUS-WORK-PLAN.md`, `data/autonomous_improvement_plan.csv` и `data/user_decision_queue.csv` для автономного режима улучшений;
 - GitHub-задача #34 ведёт подтверждение четырёх карточек высокого приоритета;
 - добавлены GitHub-задачи #164, #165 и #166 для ручной проверки Actions, CSS-регрессии и отправки 15 запросов;
 - добавлены основной и продолжающий журналы аудита за июнь 2026 года.
