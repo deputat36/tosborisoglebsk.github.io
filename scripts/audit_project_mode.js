@@ -17,6 +17,7 @@ const checks = [
   ['Outreach register', 'scripts/audit_outreach_register.js'],
   ['Outreach source index', 'scripts/test_outreach_source_index.js'],
   ['Site health', 'scripts/audit_site_health.js'],
+  ['Page index', 'scripts/audit_page_index.js'],
   ['Run checks helper', 'scripts/test_run_checks.js']
 ];
 
