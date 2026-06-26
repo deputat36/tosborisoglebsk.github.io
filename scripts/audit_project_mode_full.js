@@ -19,6 +19,7 @@ const checks = [
   ['Content freshness check audit', 'scripts/audit_content_freshness_check.js'],
   ['Post-publish QA checklist audit', 'scripts/audit_post_publish_qa_checklist.js'],
   ['Quarterly report template audit', 'scripts/audit_quarterly_report_template.js'],
+  ['Priority TOS tracking audit', 'scripts/audit_priority_tos_tracking.js'],
   ['Technical diagnostics audit', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links audit', 'scripts/audit_open_data_links.js'],
   ['Autonomous improvement plan audit', 'scripts/audit_autonomous_improvement_plan.js'],
