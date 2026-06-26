@@ -18,6 +18,7 @@ const checks = [
   ['Outreach source index self-test', 'scripts/test_outreach_source_index.js'],
   ['Site health audit', 'scripts/audit_site_health.js'],
   ['Page index audit', 'scripts/audit_page_index.js'],
+  ['Sitemap audit', 'scripts/audit_sitemap.js'],
   ['Run checks helper self-test', 'scripts/test_run_checks.js']
 ];
 
