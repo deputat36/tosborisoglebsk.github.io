@@ -15,7 +15,8 @@ const checks = [
   ['Request source status values', 'scripts/test_request_source_status_values.js'],
   ['Verification source tables', 'scripts/audit_verification_sources.js'],
   ['Outreach register', 'scripts/audit_outreach_register.js'],
-  ['Outreach source index', 'scripts/test_outreach_source_index.js']
+  ['Outreach source index', 'scripts/test_outreach_source_index.js'],
+  ['Run checks helper', 'scripts/test_run_checks.js']
 ];
 
 runChecks(checks, {
