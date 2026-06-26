@@ -202,4 +202,14 @@ function main() {
   console.log('Request source tables OK');
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  readCsv,
+  ensureUnique,
+  validatePriorityRequests,
+  validateCandidateRequests,
+  validateProjectResultRequests
+};
