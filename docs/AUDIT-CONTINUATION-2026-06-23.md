@@ -151,6 +151,14 @@
 - для опубликованных записей проверяется наличие страницы `/done/{id}/`;
 - проверка подключена к `scripts/audit_project_mode.js` и `scripts/audit_project_mode_full.js`.
 
+## 49. Машинная проверка журнала найденных материалов
+
+- добавлен аудит `data/content_discovery_log.csv`: проверяются заголовки, формат и уникальность `discovery_id`, даты, название и URL источника, тип находки, уровень источника, статус, блокер и следующий шаг;
+- допустимые типы находок зафиксированы как `registry_source`, `registry_candidate`, `news_candidate`, `archive_candidate` и `official_result`;
+- для `verified_source` требуется первичный источник и дата источника, а для `official_result` требуется уровень `primary`;
+- для находок, которые требуют официального подтверждения или заблокированы, обязателен `blocker`, чтобы не смешивать рабочую находку с готовым фактом;
+- проверка подключена к `scripts/audit_project_mode.js` и `scripts/audit_project_mode_full.js`.
+
 ## Актуальный редакционный маршрут
 
 1. Проверить `/source-watch/` и зафиксировать находку в `/content-discovery/`.
