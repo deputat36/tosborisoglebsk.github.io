@@ -8,6 +8,7 @@
     "audit:outreach": "node scripts/audit_outreach_register.js",
     "audit:outreach-sources": "node scripts/test_outreach_source_index.js",
     "audit:request-sources": "node scripts/audit_request_sources.js",
+    "audit:request-sources-import": "node scripts/test_request_sources_import.js",
     "audit:runner": "node scripts/test_run_checks.js",
     "audit:statuses": "node scripts/test_status_sets.js",
     "audit:project-mode": "node scripts/audit_project_mode.js",
