@@ -8,6 +8,7 @@ const checks = [
   ['Path checks', 'scripts/test_path_checks.js'],
   ['Status sets', 'scripts/test_status_sets.js'],
   ['TOS integrity', 'scripts/audit_tos_integrity.js'],
+  ['Projects integrity', 'scripts/audit_projects_integrity.js'],
   ['Autonomous improvement plan', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue', 'scripts/audit_user_decision_queue.js'],
   ['Manual tasks', 'scripts/audit_github_manual_tasks.js'],
