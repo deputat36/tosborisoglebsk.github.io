@@ -21,6 +21,7 @@ const checks = [
   ['Content freshness check audit', 'scripts/audit_content_freshness_check.js'],
   ['Post-publish QA checklist audit', 'scripts/audit_post_publish_qa_checklist.js'],
   ['Quarterly report template audit', 'scripts/audit_quarterly_report_template.js'],
+  ['Collection tasks audit', 'scripts/audit_collection_tasks.js'],
   ['Priority TOS tracking audit', 'scripts/audit_priority_tos_tracking.js'],
   ['Registry workflow audit', 'scripts/audit_registry_workflow.js'],
   ['Technical diagnostics audit', 'scripts/audit_technical_diagnostics.js'],
