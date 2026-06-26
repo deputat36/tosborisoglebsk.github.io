@@ -10,6 +10,7 @@ const checks = [
   ['Autonomous improvement plan audit', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue audit', 'scripts/audit_user_decision_queue.js'],
   ['Manual tasks audit', 'scripts/audit_github_manual_tasks.js'],
+  ['Outreach register audit', 'scripts/audit_outreach_register.js'],
   ['Run checks helper self-test', 'scripts/test_run_checks.js']
 ];
 
