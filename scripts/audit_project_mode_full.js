@@ -10,6 +10,7 @@ const checks = [
   ['TOS integrity audit', 'scripts/audit_tos_integrity.js'],
   ['Projects integrity audit', 'scripts/audit_projects_integrity.js'],
   ['Needs integrity audit', 'scripts/audit_needs_integrity.js'],
+  ['Done integrity audit', 'scripts/audit_done_integrity.js'],
   ['Publication queue audit', 'scripts/audit_publication_queue.js'],
   ['Media intake register audit', 'scripts/audit_media_intake_register.js'],
   ['Autonomous improvement plan audit', 'scripts/audit_autonomous_improvement_plan.js'],
