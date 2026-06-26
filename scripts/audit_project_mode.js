@@ -11,6 +11,7 @@ const checks = [
   ['Projects integrity', 'scripts/audit_projects_integrity.js'],
   ['Needs integrity', 'scripts/audit_needs_integrity.js'],
   ['Done integrity', 'scripts/audit_done_integrity.js'],
+  ['Content intake template', 'scripts/audit_content_intake_template.js'],
   ['Publication queue', 'scripts/audit_publication_queue.js'],
   ['Media intake register', 'scripts/audit_media_intake_register.js'],
   ['Source watchlist', 'scripts/audit_source_watchlist.js'],
