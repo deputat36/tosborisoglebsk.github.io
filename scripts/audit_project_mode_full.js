@@ -11,6 +11,9 @@ const checks = [
   ['User decision queue audit', 'scripts/audit_user_decision_queue.js'],
   ['Manual tasks audit', 'scripts/audit_github_manual_tasks.js'],
   ['Request source tables audit', 'scripts/audit_request_sources.js'],
+  ['Request source imports self-test', 'scripts/test_request_sources_import.js'],
+  ['Request source status values self-test', 'scripts/test_request_source_status_values.js'],
+  ['Verification source tables audit', 'scripts/audit_verification_sources.js'],
   ['Outreach register audit', 'scripts/audit_outreach_register.js'],
   ['Outreach source index self-test', 'scripts/test_outreach_source_index.js'],
   ['Run checks helper self-test', 'scripts/test_run_checks.js']
