@@ -16,6 +16,7 @@ const checks = [
   ['Verification source tables audit', 'scripts/audit_verification_sources.js'],
   ['Outreach register audit', 'scripts/audit_outreach_register.js'],
   ['Outreach source index self-test', 'scripts/test_outreach_source_index.js'],
+  ['Site health audit', 'scripts/audit_site_health.js'],
   ['Run checks helper self-test', 'scripts/test_run_checks.js']
 ];
 
