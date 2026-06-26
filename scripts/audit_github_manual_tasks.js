@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
 const { validateHeaders } = require('./lib/csv_schema');
+const { isIsoDate } = require('./lib/date_checks');
 const { repoPathExists } = require('./lib/path_checks');
 const { manualTaskStatuses, manualTaskGroups } = require('./lib/status_sets');
 
@@ -45,7 +46,7 @@ function main() {
     if (sourceFile && !repoPathExists(sourceFile)) errors.push(`line ${line}: missing source_file target ${sourceFile}`);
     if (!successCriteria) errors.push(`line ${line}: missing success_criteria`);
     if (!nextAction) errors.push(`line ${line}: missing next_action`);
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) errors.push(`line ${line}: invalid created_or_updated ${date}`);
+    if (!isIsoDate(date)) errors.push(`line ${line}: invalid created_or_updated ${date}`);
   });
 
   if (errors.length) {
