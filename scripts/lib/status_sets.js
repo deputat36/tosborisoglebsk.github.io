@@ -19,6 +19,21 @@ const manualTaskGroups = new Set([
   'outreach',
   'project-control'
 ]);
+const outreachStatuses = new Set([
+  'draft',
+  'sent',
+  'waiting',
+  'follow_up',
+  'received',
+  'closed',
+  'resolved'
+]);
+const outreachGroups = new Set([
+  'registry',
+  'priority_card',
+  'candidate_registry',
+  'project_result'
+]);
 
 module.exports = {
   decisionStatuses,
@@ -26,5 +41,7 @@ module.exports = {
   priorities,
   workModes,
   planStatuses,
-  manualTaskGroups
+  manualTaskGroups,
+  outreachStatuses,
+  outreachGroups
 };
