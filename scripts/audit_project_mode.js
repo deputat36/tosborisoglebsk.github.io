@@ -32,6 +32,7 @@ const checks = [
   ['Request source tables', 'scripts/audit_request_sources.js'],
   ['Request source imports', 'scripts/test_request_sources_import.js'],
   ['Request source status values', 'scripts/test_request_source_status_values.js'],
+  ['Verification tasks', 'scripts/audit_verification_tasks.js'],
   ['Verification source tables', 'scripts/audit_verification_sources.js'],
   ['Outreach register', 'scripts/audit_outreach_register.js'],
   ['Outreach source index', 'scripts/test_outreach_source_index.js'],
