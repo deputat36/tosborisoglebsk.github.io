@@ -7,6 +7,7 @@ const checks = [
   ['ID checks self-test', 'scripts/test_id_checks.js'],
   ['Path checks self-test', 'scripts/test_path_checks.js'],
   ['Status sets self-test', 'scripts/test_status_sets.js'],
+  ['TOS integrity audit', 'scripts/audit_tos_integrity.js'],
   ['Autonomous improvement plan audit', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue audit', 'scripts/audit_user_decision_queue.js'],
   ['Manual tasks audit', 'scripts/audit_github_manual_tasks.js'],
