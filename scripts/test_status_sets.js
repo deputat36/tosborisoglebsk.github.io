@@ -2,6 +2,7 @@ const {
   decisionStatuses,
   manualTaskStatuses,
   priorities,
+  evidenceLevels,
   workModes,
   planStatuses,
   manualTaskGroups,
@@ -26,6 +27,11 @@ assert(priorities.has('high'), 'priority high is required');
 assert(priorities.has('medium'), 'priority medium is required');
 assert(priorities.has('low'), 'priority low is required');
 assert(!priorities.has('urgent'), 'priority urgent must not be allowed');
+
+assert(evidenceLevels.has('high'), 'evidence level high is required');
+assert(evidenceLevels.has('medium'), 'evidence level medium is required');
+assert(evidenceLevels.has('low'), 'evidence level low is required');
+assert(!evidenceLevels.has('unknown'), 'evidence level unknown must not be allowed');
 
 assert(workModes.has('assistant'), 'work mode assistant is required');
 assert(workModes.has('mixed'), 'work mode mixed is required');
