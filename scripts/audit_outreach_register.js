@@ -30,11 +30,33 @@ function compareDates(a, b) {
   return a.localeCompare(b);
 }
 
+function readCsvIds(relativePath, fieldName) {
+  const sourcePath = path.join(process.cwd(), relativePath);
+  if (!fs.existsSync(sourcePath)) return new Set();
+
+  const rows = parseCsv(fs.readFileSync(sourcePath, 'utf8'));
+  const [headers, ...items] = rows;
+  const fieldIndex = headers ? headers.indexOf(fieldName) : -1;
+  if (fieldIndex === -1) return new Set();
+
+  return new Set(items.map((item) => item[fieldIndex]).filter(Boolean));
+}
+
+function buildSourceIndex() {
+  return {
+    registry: new Set(['registry-full']),
+    priority_card: readCsvIds('data/priority_tos_requests.csv', 'slug'),
+    candidate_registry: readCsvIds('data/candidate_registry_requests.csv', 'request_id'),
+    project_result: readCsvIds('data/projects_2026_result_requests.csv', 'request_id')
+  };
+}
+
 function main() {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file: ${filePath}`);
   }
 
+  const sourceIndex = buildSourceIndex();
   const rows = parseCsv(fs.readFileSync(filePath, 'utf8'));
   const [headers, ...items] = rows;
   const errors = validateHeaders(headers, expectedHeaders, 'outreach_register.csv');
@@ -66,6 +88,9 @@ function main() {
 
     if (!outreachGroups.has(requestGroup)) errors.push(`line ${line}: unsupported request_group ${requestGroup}`);
     if (!sourceRequestId) errors.push(`line ${line}: missing source_request_id`);
+    if (sourceRequestId && sourceIndex[requestGroup] && !sourceIndex[requestGroup].has(sourceRequestId)) {
+      errors.push(`line ${line}: source_request_id ${sourceRequestId} is absent for ${requestGroup}`);
+    }
     if (!subject) errors.push(`line ${line}: missing subject`);
     if (!recipientType) errors.push(`line ${line}: missing recipient_type`);
     if (!outreachStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
