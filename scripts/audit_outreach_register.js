@@ -134,4 +134,8 @@ function main() {
   console.log(`Outreach register OK: ${items.length} rows`);
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = { buildSourceIndex, readCsvIds };
