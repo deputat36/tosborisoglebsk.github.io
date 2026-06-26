@@ -15,6 +15,7 @@ const checks = [
   ['Media intake register', 'scripts/audit_media_intake_register.js'],
   ['Source watchlist', 'scripts/audit_source_watchlist.js'],
   ['Content discovery log', 'scripts/audit_content_discovery_log.js'],
+  ['Editorial calendar', 'scripts/audit_editorial_calendar.js'],
   ['Content freshness check', 'scripts/audit_content_freshness_check.js'],
   ['Post-publish QA checklist', 'scripts/audit_post_publish_qa_checklist.js'],
   ['Quarterly report template', 'scripts/audit_quarterly_report_template.js'],
