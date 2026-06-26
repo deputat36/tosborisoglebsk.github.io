@@ -13,6 +13,7 @@
     "audit:request-source-statuses": "node scripts/test_request_source_status_values.js",
     "audit:runner": "node scripts/test_run_checks.js",
     "audit:statuses": "node scripts/test_status_sets.js",
+    "audit:verification-sources": "node scripts/audit_verification_sources.js",
     "audit:project-mode": "node scripts/audit_project_mode.js",
     "audit:project-mode-full": "node scripts/audit_project_mode_full.js"
   }
