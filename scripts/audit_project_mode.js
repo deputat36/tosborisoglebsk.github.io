@@ -9,7 +9,8 @@ const checks = [
   ['Status sets', 'scripts/test_status_sets.js'],
   ['Autonomous improvement plan', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue', 'scripts/audit_user_decision_queue.js'],
-  ['Manual tasks', 'scripts/audit_github_manual_tasks.js']
+  ['Manual tasks', 'scripts/audit_github_manual_tasks.js'],
+  ['Outreach register', 'scripts/audit_outreach_register.js']
 ];
 
 runChecks(checks, {
