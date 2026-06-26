@@ -1,4 +1,4 @@
-const { spawnSync } = require('child_process');
+const { runChecks } = require('./lib/run_checks');
 
 const checks = [
   ['CSV parser self-test', 'scripts/test_csv_parser.js'],
@@ -11,24 +11,7 @@ const checks = [
   ['Manual tasks audit', 'scripts/audit_github_manual_tasks.js']
 ];
 
-let failed = false;
-
-checks.forEach(([label, script]) => {
-  console.log(`\n--- ${label} ---`);
-
-  const result = spawnSync(process.execPath, [script], {
-    stdio: 'inherit',
-    shell: false
-  });
-
-  if (result.status !== 0) {
-    console.error(`${label} failed`);
-    failed = true;
-  }
+runChecks(checks, {
+  verbose: true,
+  successMessage: 'Project mode full audit OK'
 });
-
-if (failed) {
-  process.exit(1);
-}
-
-console.log('\nProject mode full audit OK');
