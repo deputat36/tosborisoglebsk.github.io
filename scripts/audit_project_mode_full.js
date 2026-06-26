@@ -16,6 +16,7 @@ const checks = [
   ['Source watchlist audit', 'scripts/audit_source_watchlist.js'],
   ['Content discovery log audit', 'scripts/audit_content_discovery_log.js'],
   ['Content freshness check audit', 'scripts/audit_content_freshness_check.js'],
+  ['Post-publish QA checklist audit', 'scripts/audit_post_publish_qa_checklist.js'],
   ['Autonomous improvement plan audit', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue audit', 'scripts/audit_user_decision_queue.js'],
   ['Manual tasks audit', 'scripts/audit_github_manual_tasks.js'],
