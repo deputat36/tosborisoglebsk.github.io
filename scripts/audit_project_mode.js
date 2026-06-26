@@ -15,6 +15,7 @@ const checks = [
   ['Media intake register', 'scripts/audit_media_intake_register.js'],
   ['Source watchlist', 'scripts/audit_source_watchlist.js'],
   ['Content discovery log', 'scripts/audit_content_discovery_log.js'],
+  ['Content freshness check', 'scripts/audit_content_freshness_check.js'],
   ['Autonomous improvement plan', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue', 'scripts/audit_user_decision_queue.js'],
   ['Manual tasks', 'scripts/audit_github_manual_tasks.js'],
