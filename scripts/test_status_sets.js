@@ -6,7 +6,8 @@ const {
   planStatuses,
   manualTaskGroups,
   outreachStatuses,
-  outreachGroups
+  outreachGroups,
+  requestSourceStatuses
 } = require('./lib/status_sets');
 
 function assert(condition, message) {
@@ -46,5 +47,9 @@ assert(!outreachStatuses.has('published'), 'outreach status published must not b
 assert(outreachGroups.has('registry'), 'outreach group registry is required');
 assert(outreachGroups.has('project_result'), 'outreach group project_result is required');
 assert(!outreachGroups.has('random'), 'random outreach group must not be allowed');
+
+assert(requestSourceStatuses.has('draft'), 'request source status draft is required');
+assert(requestSourceStatuses.has('resolved_without_outreach'), 'request source status resolved_without_outreach is required');
+assert(!requestSourceStatuses.has('resolved'), 'request source status resolved must not be allowed');
 
 console.log('Status sets tests OK');
