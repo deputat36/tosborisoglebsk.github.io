@@ -4,7 +4,9 @@ const {
   priorities,
   workModes,
   planStatuses,
-  manualTaskGroups
+  manualTaskGroups,
+  outreachStatuses,
+  outreachGroups
 } = require('./lib/status_sets');
 
 function assert(condition, message) {
@@ -36,5 +38,13 @@ assert(!planStatuses.has('published'), 'plan status published must not be allowe
 assert(manualTaskGroups.has('data-verification'), 'manual task group data-verification is required');
 assert(manualTaskGroups.has('project-control'), 'manual task group project-control is required');
 assert(!manualTaskGroups.has('random'), 'random manual task group must not be allowed');
+
+assert(outreachStatuses.has('draft'), 'outreach status draft is required');
+assert(outreachStatuses.has('resolved'), 'outreach status resolved is required');
+assert(!outreachStatuses.has('published'), 'outreach status published must not be allowed');
+
+assert(outreachGroups.has('registry'), 'outreach group registry is required');
+assert(outreachGroups.has('project_result'), 'outreach group project_result is required');
+assert(!outreachGroups.has('random'), 'random outreach group must not be allowed');
 
 console.log('Status sets tests OK');
