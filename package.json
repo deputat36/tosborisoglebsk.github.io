@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "audit:decisions": "node scripts/audit_user_decision_queue.js",
+    "audit:ids": "node scripts/test_id_checks.js",
     "audit:runner": "node scripts/test_run_checks.js",
     "audit:statuses": "node scripts/test_status_sets.js",
     "audit:project-mode": "node scripts/audit_project_mode.js",
