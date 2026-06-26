@@ -3,6 +3,7 @@ const { spawnSync } = require('child_process');
 const checks = [
   ['CSV parser', 'scripts/test_csv_parser.js'],
   ['CSV schema', 'scripts/test_csv_schema.js'],
+  ['Date checks', 'scripts/test_date_checks.js'],
   ['Path checks', 'scripts/test_path_checks.js'],
   ['Status sets', 'scripts/test_status_sets.js'],
   ['Autonomous improvement plan', 'scripts/audit_autonomous_improvement_plan.js'],
