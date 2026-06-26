@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const { isIsoDate } = require('./lib/date_checks');
+const { repoPathExists } = require('./lib/path_checks');
 
 const newsPath = path.join(process.cwd(), 'data', 'news.json');
+const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 const siteUrl = 'https://tosborisoglebsk.ru';
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -14,18 +16,28 @@ function isHttpUrl(value) {
   return /^https?:\/\//.test(value || '');
 }
 
+function isInternalPath(value) {
+  return /^\/[a-z0-9][\w./-]*\/?$/.test(value || '');
+}
+
 function main() {
   if (!fs.existsSync(newsPath)) {
     throw new Error(`Missing file: ${newsPath}`);
   }
 
+  if (!fs.existsSync(tosesPath)) {
+    throw new Error(`Missing file: ${tosesPath}`);
+  }
+
   const news = JSON.parse(fs.readFileSync(newsPath, 'utf8'));
+  const toses = JSON.parse(fs.readFileSync(tosesPath, 'utf8'));
   const errors = [];
 
   if (!Array.isArray(news)) {
     throw new Error('News data audit failed:\ndata/news.json must be an array');
   }
 
+  const tosSlugs = new Set(Array.isArray(toses) ? toses.map((tos) => tos.slug).filter(Boolean) : []);
   const seenIds = new Set();
   const seenUrls = new Set();
 
@@ -40,6 +52,7 @@ function main() {
     const id = item.id || '';
     const date = item.date || '';
     const category = item.category || '';
+    const tosSlug = item.tos_slug || '';
     const title = item.title || '';
     const lead = item.lead || '';
     const text = item.text;
@@ -54,6 +67,8 @@ function main() {
 
     if (!isIsoDate(date)) errors.push(`${line}: invalid date ${date}`);
     if (!category) errors.push(`${line}: missing category`);
+    if (tosSlug && !tosSlugs.has(tosSlug)) errors.push(`${line}: unknown tos_slug ${tosSlug}`);
+    if (tosSlug && !repoPathExists(`/tos/${tosSlug}/`)) errors.push(`${line}: missing TOS page /tos/${tosSlug}/`);
     if (!title) errors.push(`${line}: missing title`);
     if (title && title.length < 10) errors.push(`${line}: title is too short`);
     if (!lead) errors.push(`${line}: missing lead`);
@@ -70,7 +85,16 @@ function main() {
     }
 
     if (!source) errors.push(`${line}: missing source`);
-    if (sourceUrl && !isHttpUrl(sourceUrl)) errors.push(`${line}: invalid source_url ${sourceUrl}`);
+    if (sourceUrl && !isHttpUrl(sourceUrl) && !isInternalPath(sourceUrl)) {
+      errors.push(`${line}: invalid source_url ${sourceUrl}`);
+    }
+    if (sourceUrl && isInternalPath(sourceUrl) && !repoPathExists(sourceUrl)) {
+      errors.push(`${line}: missing internal source_url target ${sourceUrl}`);
+    }
+
+    if (id && !repoPathExists(`/news/${id}/`)) {
+      errors.push(`${line}: missing generated page /news/${id}/`);
+    }
 
     if (seenUrls.has(publicUrl)) errors.push(`${line}: duplicate public url ${publicUrl}`);
     seenUrls.add(publicUrl);
