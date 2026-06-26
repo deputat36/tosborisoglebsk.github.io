@@ -3,8 +3,7 @@ const path = require('path');
 const { parseCsv } = require('./lib/csv');
 const { validateHeaders } = require('./lib/csv_schema');
 const { isIsoDate } = require('./lib/date_checks');
-
-const requestStatuses = new Set(['draft', 'sent', 'waiting', 'follow_up', 'received', 'closed', 'resolved_without_outreach']);
+const { requestSourceStatuses } = require('./lib/status_sets');
 
 function readCsv(relativePath) {
   const filePath = path.join(process.cwd(), relativePath);
@@ -114,7 +113,7 @@ function validateCandidateRequests(errors) {
     if (!officialStatus) errors.push(`${label}: line ${line}: missing official_status`);
     if (!territoryType) errors.push(`${label}: line ${line}: missing territory_type`);
     if (!publicationPermission) errors.push(`${label}: line ${line}: missing publication_permission`);
-    if (!requestStatuses.has(status)) errors.push(`${label}: line ${line}: unsupported status ${status}`);
+    if (!requestSourceStatuses.has(status)) errors.push(`${label}: line ${line}: unsupported status ${status}`);
     if (!blocker) errors.push(`${label}: line ${line}: missing blocker`);
     if (!nextStep) errors.push(`${label}: line ${line}: missing next_step`);
 
@@ -180,7 +179,7 @@ function validateProjectResultRequests(errors) {
     if (responseDate && !isIsoDate(responseDate)) errors.push(`${label}: line ${line}: invalid response_date ${responseDate}`);
     if (responseDate && !responseSource) errors.push(`${label}: line ${line}: response_date requires response_source`);
     if (!publicationPermission) errors.push(`${label}: line ${line}: missing publication_permission`);
-    if (!requestStatuses.has(status)) errors.push(`${label}: line ${line}: unsupported status ${status}`);
+    if (!requestSourceStatuses.has(status)) errors.push(`${label}: line ${line}: unsupported status ${status}`);
     if (status === 'draft' && !blocker) errors.push(`${label}: line ${line}: draft requires blocker`);
     if (!nextStep) errors.push(`${label}: line ${line}: missing next_step`);
 
