@@ -1,6 +1,7 @@
 const decisionStatuses = new Set(['assumed_default', 'waiting', 'not_needed_now', 'done']);
 const manualTaskStatuses = new Set(['open', 'closed', 'paused']);
 const priorities = new Set(['high', 'medium', 'low']);
+const evidenceLevels = new Set(['low', 'medium', 'high']);
 const workModes = new Set(['assistant', 'mixed']);
 const planStatuses = new Set([
   'done',
@@ -48,6 +49,7 @@ module.exports = {
   decisionStatuses,
   manualTaskStatuses,
   priorities,
+  evidenceLevels,
   workModes,
   planStatuses,
   manualTaskGroups,
