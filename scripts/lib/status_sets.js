@@ -34,6 +34,15 @@ const outreachGroups = new Set([
   'candidate_registry',
   'project_result'
 ]);
+const requestSourceStatuses = new Set([
+  'draft',
+  'sent',
+  'waiting',
+  'follow_up',
+  'received',
+  'closed',
+  'resolved_without_outreach'
+]);
 
 module.exports = {
   decisionStatuses,
@@ -43,5 +52,6 @@ module.exports = {
   planStatuses,
   manualTaskGroups,
   outreachStatuses,
-  outreachGroups
+  outreachGroups,
+  requestSourceStatuses
 };
