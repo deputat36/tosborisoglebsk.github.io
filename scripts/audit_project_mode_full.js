@@ -19,6 +19,8 @@ const checks = [
   ['Site health audit', 'scripts/audit_site_health.js'],
   ['Page index audit', 'scripts/audit_page_index.js'],
   ['Sitemap audit', 'scripts/audit_sitemap.js'],
+  ['News data audit', 'scripts/audit_news_data.js'],
+  ['RSS feed audit', 'scripts/audit_rss.js'],
   ['Run checks helper self-test', 'scripts/test_run_checks.js']
 ];
 
