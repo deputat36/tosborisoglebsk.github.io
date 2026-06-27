@@ -41,6 +41,7 @@ const checks = [
   ['Outreach source index', 'scripts/test_outreach_source_index.js'],
   ['Site health', 'scripts/audit_site_health.js'],
   ['Homepage content', 'scripts/audit_homepage_content.js'],
+  ['Update center content', 'scripts/audit_update_center_content.js'],
   ['Page index', 'scripts/audit_page_index.js'],
   ['Sitemap', 'scripts/audit_sitemap.js'],
   ['News data', 'scripts/audit_news_data.js'],
