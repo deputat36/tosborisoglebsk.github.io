@@ -98,7 +98,7 @@ function main() {
     errors.push('search script must normalize ё to е');
   }
 
-  if (!script.includes('replace(/[&<>"\']/g')) {
+  if (!script.includes("replace(/[&<>\"']/g")) {
     errors.push('search script must escape HTML-sensitive characters');
   }
 
