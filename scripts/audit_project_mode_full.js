@@ -42,6 +42,7 @@ const checks = [
   ['Site health audit', 'scripts/audit_site_health.js'],
   ['Homepage content audit', 'scripts/audit_homepage_content.js'],
   ['Update center content audit', 'scripts/audit_update_center_content.js'],
+  ['Search content audit', 'scripts/audit_search_content.js'],
   ['Page index audit', 'scripts/audit_page_index.js'],
   ['Sitemap audit', 'scripts/audit_sitemap.js'],
   ['News data audit', 'scripts/audit_news_data.js'],
