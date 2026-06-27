@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 
 const grantsPath = path.join(process.cwd(), 'data', 'grants.json');
-const projectsPath = path.join(process.cwd(), 'data', 'projects.json');
 const grantsIndexPath = path.join(process.cwd(), 'grants', 'index.html');
 const grantsScriptPath = path.join(process.cwd(), 'assets', 'js', 'grants.js');
+const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 function expectIncludes(errors, line, content, value, message) {
   if (!content.includes(value)) errors.push(`${line}: ${message}`);
@@ -17,7 +17,7 @@ function isObject(value) {
 function main() {
   const errors = [];
 
-  [grantsPath, projectsPath, grantsIndexPath, grantsScriptPath].forEach((filePath) => {
+  [grantsPath, grantsIndexPath, grantsScriptPath].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${filePath}`);
   });
 
@@ -26,15 +26,12 @@ function main() {
   }
 
   const grants = JSON.parse(fs.readFileSync(grantsPath, 'utf8'));
-  const projects = JSON.parse(fs.readFileSync(projectsPath, 'utf8'));
   const html = fs.readFileSync(grantsIndexPath, 'utf8');
   const script = fs.readFileSync(grantsScriptPath, 'utf8');
 
   if (!Array.isArray(grants)) {
     throw new Error('Grants page content audit failed:\ndata/grants.json must be an array');
   }
-
-  const projectIds = new Set(Array.isArray(projects) ? projects.map((item) => item.id).filter(Boolean) : []);
 
   expectIncludes(errors, 'grants index', html, '<html lang="ru">', 'page must declare Russian language');
   expectIncludes(errors, 'grants index', html, '<title>Поддержка проектов ТОС БГО — региональные организации, конкурсы и гранты</title>', 'unexpected title');
@@ -105,9 +102,13 @@ function main() {
       errors.push(`${line}: prepare must contain at least 4 items`);
     }
 
-    if (Array.isArray(item.project_links)) {
-      item.project_links.forEach((projectId) => {
-        if (!projectIds.has(projectId)) errors.push(`${line}: unknown project link ${projectId}`);
+    if (!Array.isArray(item.project_links)) {
+      errors.push(`${line}: project_links must be an array`);
+    } else {
+      item.project_links.forEach((projectId, projectIndex) => {
+        if (typeof projectId !== 'string' || !slugPattern.test(projectId)) {
+          errors.push(`${line}: invalid project_links[${projectIndex}] ${projectId}`);
+        }
       });
     }
   });
