@@ -25,6 +25,7 @@ const checks = [
   ['Collection tasks audit', 'scripts/audit_collection_tasks.js'],
   ['Priority TOS tracking audit', 'scripts/audit_priority_tos_tracking.js'],
   ['Registry workflow audit', 'scripts/audit_registry_workflow.js'],
+  ['CSS maintenance inventory audit', 'scripts/audit_css_maintenance_inventory.js'],
   ['Technical diagnostics audit', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links audit', 'scripts/audit_open_data_links.js'],
   ['Autonomous improvement plan audit', 'scripts/audit_autonomous_improvement_plan.js'],
