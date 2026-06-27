@@ -22,6 +22,7 @@ const checks = [
   ['Partners page content audit', 'scripts/audit_partners_page_content.js'],
   ['Partners action routes content audit', 'scripts/audit_partners_action_routes_content.js'],
   ['Calendar page content audit', 'scripts/audit_calendar_page_content.js'],
+  ['Calendar action routes content audit', 'scripts/audit_calendar_action_routes_content.js'],
   ['Projects 2026 workflow audit', 'scripts/audit_projects_2026_workflow.js'],
   ['Needs integrity audit', 'scripts/audit_needs_integrity.js'],
   ['Needs pages content audit', 'scripts/audit_needs_pages_content.js'],
