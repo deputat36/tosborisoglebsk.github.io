@@ -9,6 +9,7 @@ const checks = [
   ['Status sets self-test', 'scripts/test_status_sets.js'],
   ['TOS integrity audit', 'scripts/audit_tos_integrity.js'],
   ['TOS catalog content audit', 'scripts/audit_tos_catalog_content.js'],
+  ['TOS detail pages content audit', 'scripts/audit_tos_detail_pages_content.js'],
   ['Projects integrity audit', 'scripts/audit_projects_integrity.js'],
   ['Projects 2026 workflow audit', 'scripts/audit_projects_2026_workflow.js'],
   ['Needs integrity audit', 'scripts/audit_needs_integrity.js'],
