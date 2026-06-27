@@ -14,6 +14,7 @@ const checks = [
   ['Project pages content', 'scripts/audit_project_pages_content.js'],
   ['Grants page content', 'scripts/audit_grants_page_content.js'],
   ['Materials page content', 'scripts/audit_materials_page_content.js'],
+  ['Documents page content', 'scripts/audit_documents_page_content.js'],
   ['Projects 2026 workflow', 'scripts/audit_projects_2026_workflow.js'],
   ['Needs integrity', 'scripts/audit_needs_integrity.js'],
   ['Needs pages content', 'scripts/audit_needs_pages_content.js'],
