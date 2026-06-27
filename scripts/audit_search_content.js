@@ -94,7 +94,7 @@ function main() {
     if (!script.includes(titleText)) errors.push(`manual search title is missing: ${titleText}`);
   });
 
-  if (!script.includes('replace(/ё/g, \'е\')')) {
+  if (!script.includes("replace(/ё/g, 'е')")) {
     errors.push('search script must normalize ё to е');
   }
 
@@ -110,7 +110,7 @@ function main() {
     errors.push('search script must deduplicate results');
   }
 
-  if (!script.includes('input.addEventListener(\'input\'')) {
+  if (!script.includes("input.addEventListener('input'")) {
     errors.push('search script must react to input changes');
   }
 
