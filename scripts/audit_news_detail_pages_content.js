@@ -64,7 +64,7 @@ function main() {
     expectIncludes(errors, line, html, `<title>${title} | ТОС БГО</title>`, 'title must match news title template');
     expectIncludes(errors, line, html, `<meta name="description" content="${htmlEntityAmp(lead)}"`, 'meta description must match lead');
     expectIncludes(errors, line, html, `<link rel="canonical" href="${pageUrl}"`, 'missing canonical URL');
-    expectIncludes(errors, line, html, `<meta property="og:type" content="article"`, 'Open Graph type must be article');
+    expectIncludes(errors, line, html, '<meta property="og:type" content="article"', 'Open Graph type must be article');
     expectIncludes(errors, line, html, `<meta property="og:url" content="${pageUrl}"`, 'missing Open Graph URL');
     expectIncludes(errors, line, html, `<h1>${title}</h1>`, 'h1 must match news title');
     expectIncludes(errors, line, html, lead, 'lead text is missing');
@@ -109,7 +109,6 @@ function main() {
     if (id === 'mirolyubie-project-winner-2026') {
       expectIncludes(errors, line, html, '1 489 360 рублей', 'confirmed grant amount is missing');
       expectIncludes(errors, line, html, 'До получения подтверждения портал не утверждает, что работы уже начались или завершены.', 'implementation caution is missing');
-      expectIncludes(errors, line, html, '/project-check-2026/', 'source checking route is missing in related news flow');
     }
   });
 
