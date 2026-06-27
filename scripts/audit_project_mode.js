@@ -12,6 +12,7 @@ const checks = [
   ['TOS detail pages content', 'scripts/audit_tos_detail_pages_content.js'],
   ['Projects integrity', 'scripts/audit_projects_integrity.js'],
   ['Project pages content', 'scripts/audit_project_pages_content.js'],
+  ['Projects action routes content', 'scripts/audit_projects_action_routes_content.js'],
   ['Grants page content', 'scripts/audit_grants_page_content.js'],
   ['Materials page content', 'scripts/audit_materials_page_content.js'],
   ['Documents page content', 'scripts/audit_documents_page_content.js'],
