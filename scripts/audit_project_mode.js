@@ -23,6 +23,7 @@ const checks = [
   ['Chairperson verify card content', 'scripts/audit_chairperson_verify_card_content.js'],
   ['Chairperson meeting content', 'scripts/audit_chairperson_meeting_content.js'],
   ['Chairperson project content', 'scripts/audit_chairperson_project_content.js'],
+  ['Chairperson documents content', 'scripts/audit_chairperson_documents_content.js'],
   ['Chairperson action routes content', 'scripts/audit_chairperson_action_routes_content.js'],
   ['Residents page content', 'scripts/audit_residents_page_content.js'],
   ['Residents action routes content', 'scripts/audit_residents_action_routes_content.js'],
