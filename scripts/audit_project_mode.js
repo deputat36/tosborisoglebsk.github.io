@@ -26,6 +26,7 @@ const checks = [
   ['Source watch content', 'scripts/audit_source_watch_content.js'],
   ['Content discovery content', 'scripts/audit_content_discovery_content.js'],
   ['Project check 2026 content', 'scripts/audit_project_check_2026_content.js'],
+  ['Projects 2026 result requests content', 'scripts/audit_projects_2026_result_requests_content.js'],
   ['Chairperson page content', 'scripts/audit_chairperson_page_content.js'],
   ['Chairperson first 30 days content', 'scripts/audit_chairperson_first_30_days_content.js'],
   ['Chairperson verify card content', 'scripts/audit_chairperson_verify_card_content.js'],
