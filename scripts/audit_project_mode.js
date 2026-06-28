@@ -24,6 +24,7 @@ const checks = [
   ['Privacy content', 'scripts/audit_privacy_content.js'],
   ['Sources content', 'scripts/audit_sources_content.js'],
   ['Source watch content', 'scripts/audit_source_watch_content.js'],
+  ['Content discovery content', 'scripts/audit_content_discovery_content.js'],
   ['Chairperson page content', 'scripts/audit_chairperson_page_content.js'],
   ['Chairperson first 30 days content', 'scripts/audit_chairperson_first_30_days_content.js'],
   ['Chairperson verify card content', 'scripts/audit_chairperson_verify_card_content.js'],
