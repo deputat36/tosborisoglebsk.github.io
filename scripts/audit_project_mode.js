@@ -75,6 +75,7 @@ const checks = [
   ['Verification pilot', 'scripts/audit_verification_pilot.js'],
   ['Verification source tables', 'scripts/audit_verification_sources.js'],
   ['Outreach register', 'scripts/audit_outreach_register.js'],
+  ['Outreach register content', 'scripts/audit_outreach_register_content.js'],
   ['Outreach source index', 'scripts/test_outreach_source_index.js'],
   ['Site health', 'scripts/audit_site_health.js'],
   ['Homepage content', 'scripts/audit_homepage_content.js'],
