@@ -3,6 +3,18 @@ const path = require('path');
 
 const filePath = path.join(process.cwd(), 'data', 'page_index.json');
 const siteUrl = 'https://tosborisoglebsk.ru';
+const requiredPaths = [
+  'index.html',
+  'tos/index.html',
+  'news/index.html',
+  'projects/index.html',
+  'needs/index.html',
+  'done/index.html',
+  'open-data/index.html',
+  'data-quality/index.html',
+  'places/index.html',
+  'map/index.html'
+];
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -81,6 +93,10 @@ function main() {
       if (section && section.length < 2) errors.push(`${line}: section is too short`);
     });
   }
+
+  requiredPaths.forEach((requiredPath) => {
+    if (!paths.has(requiredPath)) errors.push(`missing required page index path ${requiredPath}`);
+  });
 
   if (errors.length) {
     throw new Error(`Page index audit failed:\n${errors.join('\n')}`);
