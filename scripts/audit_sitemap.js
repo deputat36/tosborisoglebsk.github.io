@@ -4,6 +4,18 @@ const path = require('path');
 const sitemapPath = path.join(process.cwd(), 'sitemap.xml');
 const pageIndexPath = path.join(process.cwd(), 'data', 'page_index.json');
 const siteUrl = 'https://tosborisoglebsk.ru';
+const requiredUrls = [
+  `${siteUrl}/`,
+  `${siteUrl}/tos/`,
+  `${siteUrl}/news/`,
+  `${siteUrl}/projects/`,
+  `${siteUrl}/needs/`,
+  `${siteUrl}/done/`,
+  `${siteUrl}/open-data/`,
+  `${siteUrl}/data-quality/`,
+  `${siteUrl}/places/`,
+  `${siteUrl}/map/`
+];
 
 function extractTagValues(xml, tagName) {
   const pattern = new RegExp(`<${tagName}>([^<]+)</${tagName}>`, 'g');
@@ -82,11 +94,15 @@ function main() {
     if (!pageIndexUrlSet.has(url)) errors.push(`sitemap url is absent in page_index: ${url}`);
   });
 
+  requiredUrls.forEach((url) => {
+    if (!urlSet.has(url)) errors.push(`missing required sitemap url ${url}`);
+  });
+
   if (errors.length) {
     throw new Error(`Sitemap audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Sitemap OK: ${urls.length} urls`);
+  console.log(`Sitemap OK: ${urls.length} urls, ${requiredUrls.length} required URLs`);
 }
 
 main();
