@@ -7,6 +7,9 @@ const newsPath = path.join(process.cwd(), 'data', 'news.json');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 const siteUrl = 'https://tosborisoglebsk.ru';
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const requiredNewsIds = [
+  'mirolyubie-project-winner-2026'
+];
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -100,11 +103,16 @@ function main() {
     seenUrls.add(publicUrl);
   });
 
+  requiredNewsIds.forEach((id) => {
+    if (!seenIds.has(id)) errors.push(`missing required news id ${id}`);
+    if (!repoPathExists(`/news/${id}/`)) errors.push(`missing required news page /news/${id}/`);
+  });
+
   if (errors.length) {
     throw new Error(`News data audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`News data OK: ${news.length} items`);
+  console.log(`News data OK: ${news.length} items, ${requiredNewsIds.length} required IDs`);
 }
 
 main();
