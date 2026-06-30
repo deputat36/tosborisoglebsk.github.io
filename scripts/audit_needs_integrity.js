@@ -67,6 +67,7 @@ function main() {
     if (!isIsoDate(date)) errors.push(`${line}: invalid date ${date}`);
 
     if (tosSlug && !tosSlugs.has(tosSlug)) errors.push(`${line}: unknown tos_slug ${tosSlug}`);
+    if (tosSlug && !repoPathExists(`/tos/${tosSlug}/`)) errors.push(`${line}: missing TOS page /tos/${tosSlug}/`);
 
     if (!title) errors.push(`${line}: missing title`);
     if (title && title.length < 10) errors.push(`${line}: title is too short`);
