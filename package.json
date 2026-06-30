@@ -6,6 +6,7 @@
     "audit:dates": "node scripts/test_date_checks.js",
     "audit:decisions": "node scripts/audit_user_decision_queue.js",
     "audit:ids": "node scripts/test_id_checks.js",
+    "audit:manual": "node scripts/audit_manual_extensions.js",
     "audit:outreach": "node scripts/audit_outreach_register.js",
     "audit:outreach-sources": "node scripts/test_outreach_source_index.js",
     "audit:request-sources": "node scripts/audit_request_sources.js",
