@@ -25,6 +25,16 @@ const expectedHeaders = [
   'next_step',
   'notes'
 ];
+const expectedRequestHeaders = [
+  'tos',
+  'slug',
+  'location',
+  'chairperson',
+  'known_contact',
+  'missing',
+  'send_via',
+  'next_step'
+];
 const requiredSlugs = new Set(['ivanovka', 'podstepki', 'gubari', 'tancyrey']);
 const allowedStatuses = new Set(['Не начинали', 'Готово к отправке', 'Отправлено', 'Ожидаем ответ', 'Получено', 'Заблокировано']);
 const allowedBooleanValues = new Set(['', 'да', 'нет']);
@@ -59,6 +69,7 @@ function main() {
   }
 
   const rows = parseCsv(fs.readFileSync(trackingPath, 'utf8'));
+  const requestRows = parseCsv(fs.readFileSync(requestsPath, 'utf8'));
   const requestCsv = fs.readFileSync(requestsPath, 'utf8');
   const toses = JSON.parse(fs.readFileSync(tosesPath, 'utf8'));
   const knownSlugs = new Set(Array.isArray(toses) ? toses.map((tos) => tos.slug).filter(Boolean) : []);
@@ -68,9 +79,18 @@ function main() {
     throw new Error('Priority TOS tracking audit failed:\ndata/priority_tos_tracking_template.csv must contain a header and at least one row');
   }
 
+  if (requestRows.length < 2) {
+    errors.push('data/priority_tos_requests.csv must contain a header and at least one row');
+  }
+
   const headers = rows[0].map(normalizeHeader);
   if (headers.join('|') !== expectedHeaders.join('|')) {
     errors.push(`unexpected headers: ${headers.join(', ')}`);
+  }
+
+  const requestHeaders = (requestRows[0] || []).map(normalizeHeader);
+  if (requestHeaders.join('|') !== expectedRequestHeaders.join('|')) {
+    errors.push(`unexpected request headers: ${requestHeaders.join(', ')}`);
   }
 
   const seenSlugs = new Set();
@@ -129,6 +149,26 @@ function main() {
 
     if (!nextStep) errors.push(`${line}: missing next_step`);
   });
+
+  const requestSlugs = new Set();
+  requestRows.slice(1).forEach((row, index) => {
+    const line = `request row ${index + 2}`;
+    const [tos, slug, location, chairperson, knownContact, missing, sendVia, nextStep] = row.map((cell) => (cell || '').trim());
+
+    if (!tos) errors.push(`${line}: missing tos`);
+    if (!slug) errors.push(`${line}: missing slug`);
+    if (slug && requestSlugs.has(slug)) errors.push(`${line}: duplicate slug ${slug}`);
+    if (slug) requestSlugs.add(slug);
+    if (!location) errors.push(`${line}: missing location`);
+    if (!chairperson) errors.push(`${line}: missing chairperson`);
+    if (!missing) errors.push(`${line}: missing requested fields`);
+    if (!sendVia) errors.push(`${line}: missing send_via`);
+    if (!nextStep) errors.push(`${line}: missing next_step`);
+  });
+
+  if (requestRows.length && requestRows.length - 1 !== requiredSlugs.size) {
+    errors.push(`data/priority_tos_requests.csv must contain ${requiredSlugs.size} rows`);
+  }
 
   requiredSlugs.forEach((slug) => {
     if (!seenSlugs.has(slug)) {
