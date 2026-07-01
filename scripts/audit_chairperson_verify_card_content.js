@@ -34,6 +34,14 @@ const requiredPhrases = [
   'Что изменится на сайте'
 ];
 
+const requiredStatusGuidance = [
+  'проверено частично',
+  'сведения подтверждены',
+  'Редакция сверит источник',
+  'открытость сведений',
+  'статус «Сведения подтверждены»'
+];
+
 const requiredChecklistItems = [
   'точное название ТОС;',
   'тип: городской или сельский;',
@@ -98,6 +106,10 @@ function main() {
   checkContains(errors, html, 'chairperson/verify-card/index.html', '/assets/js/site.js');
 
   requiredPhrases.forEach((phrase) => {
+    checkContains(errors, html, 'chairperson/verify-card/index.html', phrase);
+  });
+
+  requiredStatusGuidance.forEach((phrase) => {
     checkContains(errors, html, 'chairperson/verify-card/index.html', phrase);
   });
 
