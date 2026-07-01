@@ -30,6 +30,13 @@ const requiredPhrases = [
   'Фотоотчёт результата'
 ];
 
+const requiredPartnerSteps = [
+  'Выбрать потребность',
+  'Уточнить детали',
+  'Передать помощь',
+  'Показать результат'
+];
+
 const requiredTemplateFields = [
   'Организация / человек:',
   'Чем готовы помочь:',
@@ -70,6 +77,10 @@ function main() {
 
   requiredPhrases.forEach((phrase) => {
     checkContains(errors, html, 'partners/index.html', phrase);
+  });
+
+  requiredPartnerSteps.forEach((step) => {
+    checkContains(errors, html, 'partners/index.html', step);
   });
 
   requiredTemplateFields.forEach((field) => {
