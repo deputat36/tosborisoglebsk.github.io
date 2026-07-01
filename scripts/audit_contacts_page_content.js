@@ -32,6 +32,31 @@ const requiredPhrases = [
   'Какие сведения можно публиковать открыто'
 ];
 
+const requiredMaterialTypes = [
+  'Новость',
+  'Исправление карточки',
+  'Фотоотчёт',
+  'Потребность',
+  'Проект',
+  'Вопрос'
+];
+
+const requiredPublicationSteps = [
+  '1. Отправка',
+  '2. Проверка',
+  '3. Оформление',
+  '4. Публикация'
+];
+
+const requiredMiniTemplateFields = [
+  'ТОС:',
+  'Что произошло:',
+  'Что исправить:',
+  'Что нужно:',
+  'Название проекта:',
+  'Контакт для уточнения:'
+];
+
 function read(filePath) {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file: ${filePath}`);
@@ -61,6 +86,18 @@ function main() {
 
   requiredPhrases.forEach((phrase) => {
     checkContains(errors, html, 'contacts/index.html', phrase);
+  });
+
+  requiredMaterialTypes.forEach((type) => {
+    checkContains(errors, html, 'contacts/index.html', type);
+  });
+
+  requiredPublicationSteps.forEach((step) => {
+    checkContains(errors, html, 'contacts/index.html', step);
+  });
+
+  requiredMiniTemplateFields.forEach((field) => {
+    checkContains(errors, html, 'contacts/index.html', field);
   });
 
   requiredInternalLinks.forEach((link) => {
