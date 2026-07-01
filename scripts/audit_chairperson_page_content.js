@@ -3,6 +3,7 @@ const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
 
 const htmlPath = path.join(process.cwd(), 'chairperson', 'index.html');
+const quickStartPatchPath = path.join(process.cwd(), 'scripts', 'patch_residents_quick_start.js');
 
 const requiredInternalLinks = [
   '/chairperson/action-routes/',
@@ -59,6 +60,17 @@ const requiredPhrases = [
   'Связь и отправка материалов'
 ];
 
+const requiredQuickStartPhrases = [
+  'chairperson-quick-start',
+  'Председателю достаточно начать с трёх действий',
+  'Проверьте карточку ТОС',
+  'Соберите вопросы жителей',
+  'Выберите рабочий маршрут',
+  '/chairperson/verify-card/',
+  '/chairperson/action-routes/',
+  '/update-tos/?type=need#message-builder'
+];
+
 function read(filePath) {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file: ${filePath}`);
@@ -75,6 +87,7 @@ function checkContains(errors, content, label, needle) {
 
 function main() {
   const html = read(htmlPath);
+  const quickStartPatch = read(quickStartPatchPath);
   const errors = [];
 
   checkContains(errors, html, 'chairperson/index.html', '<html lang="ru"');
@@ -86,6 +99,10 @@ function main() {
 
   requiredPhrases.forEach((phrase) => {
     checkContains(errors, html, 'chairperson/index.html', phrase);
+  });
+
+  requiredQuickStartPhrases.forEach((phrase) => {
+    checkContains(errors, quickStartPatch, 'patch_residents_quick_start.js', phrase);
   });
 
   requiredInternalLinks.forEach((link) => {
