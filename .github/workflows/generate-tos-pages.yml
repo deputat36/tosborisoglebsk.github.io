@@ -78,6 +78,8 @@ jobs:
         run: node scripts/generate_project_pages.js
       - name: Patch site navigation and discovery links
         run: node scripts/patch_site_navigation.js
+      - name: Patch residents quick start
+        run: node scripts/patch_residents_quick_start.js
       - name: Patch page index labels
         run: node scripts/patch_page_index_labels.js
       - name: Patch project passport label
