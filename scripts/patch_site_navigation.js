@@ -62,12 +62,11 @@ const compactNavBlock = `function compactNav() {
     ['/action-routes/', 'Маршруты'],
     ['/residents/', 'Жителям'],
     ['/chairperson/', 'Председателю'],
-    ['/workbench/', 'Рабочая панель'],
     ['/projects/', 'Проекты'],
     ['/done/', 'Сделано'],
     ['/needs/', 'Нужна помощь'],
     ['/documents/', 'Документы'],
-    ['/legal/', 'Правовая основа'],
+    ['/contacts/', 'Контакты'],
     ['/sections/', 'Все разделы']
   ];
   nav.innerHTML = links.map(([href, text]) => \`<a href="\${href}">\${text}</a>\`).join('');
@@ -83,7 +82,7 @@ const homeBlock = `function injectHomePortalStatus() {
   const section = document.createElement('section');
   section.className = 'section';
   section.id = 'home-portal-status';
-  section.innerHTML = \`<div class="container grid"><article class="card full"><div class="card-inner"><div class="eyebrow">Статус и доверие</div><h2>Как работает портал и кто может прислать материалы</h2><p>tosborisoglebsk.ru — информационный и рабочий портал для ТОСов Борисоглебского городского округа. Здесь можно найти карточки ТОС, новости, проекты, потребности, документы и практические маршруты для жителей, председателей, партнёров и инициативных групп.</p><div class="notice"><b style="color:var(--text)">Важно:</b> сайт не является официальным сайтом администрации. Для официальных действий нужно сверять документы, решения и правовую информацию с актуальными официальными источниками.</div><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Материалы</span><h3>Что можно прислать</h3><p>Новость, фотоотчёт, обновление карточки ТОС, проект, потребность территории или сообщение об ошибке.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Проверка</span><h3>Как оформляется публикация</h3><p>Материал уточняется, приводится к единому формату и привязывается к нужному ТОС или разделу сайта.</p></div></article></div><div class="card-actions"><a class="btn primary" href="/action-routes/">Маршруты действий</a><a class="btn" href="/workbench/">Рабочая панель</a><a class="btn" href="/data-requests/">Запросы данных</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/communication-kit/">Тексты для ВК</a><a class="btn" href="\${updateLink('card')}">Обновить данные ТОС</a><a class="btn" href="/sections/">Все разделы</a></div></div></article></div>\`;
+  section.innerHTML = \`<div class="container grid"><article class="card full"><div class="card-inner"><div class="eyebrow">Статус и доверие</div><h2>Как работает портал и кто может прислать материалы</h2><p>tosborisoglebsk.ru — информационный и рабочий портал для ТОСов Борисоглебского городского округа. Здесь можно найти карточки ТОС, новости, проекты, потребности, документы и практические маршруты для жителей, председателей, партнёров и инициативных групп.</p><div class="notice"><b style="color:var(--text)">Важно:</b> сайт не является официальным сайтом администрации. Для официальных действий нужно сверять документы, решения и правовую информацию с актуальными официальными источниками.</div><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Жителю</span><h3>Найти свой ТОС</h3><p>Откройте каталог, выберите территорию и проверьте председателя, контакты, новости, потребности и сделанные дела.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Председателю</span><h3>Прислать уточнение</h3><p>Можно отправить обновление карточки, новость, фотоотчёт, проект, потребность территории или сообщение об ошибке.</p></div></article></div><div class="card-actions"><a class="btn primary" href="/tos/">Найти свой ТОС</a><a class="btn" href="\${updateLink('card')}">Обновить данные</a><a class="btn" href="/action-routes/">Маршруты действий</a><a class="btn" href="/data-quality/">Качество данных</a><a class="btn" href="/sections/">Все разделы</a></div></div></article></div>\`;
   const stats = $('#home-stats')?.closest('section');
   if (stats) main.insertBefore(section, stats);
   else main.appendChild(section);
