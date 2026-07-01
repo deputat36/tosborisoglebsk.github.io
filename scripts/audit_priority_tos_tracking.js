@@ -5,6 +5,7 @@ const { isIsoDate } = require('./lib/date_checks');
 const { repoPathExists } = require('./lib/path_checks');
 
 const trackingPath = path.join(process.cwd(), 'data', 'priority_tos_tracking_template.csv');
+const requestsPath = path.join(process.cwd(), 'data', 'priority_tos_requests.csv');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 const expectedHeaders = [
   'tos',
@@ -49,11 +50,16 @@ function main() {
     throw new Error(`Missing file: ${trackingPath}`);
   }
 
+  if (!fs.existsSync(requestsPath)) {
+    throw new Error(`Missing file: ${requestsPath}`);
+  }
+
   if (!fs.existsSync(tosesPath)) {
     throw new Error(`Missing file: ${tosesPath}`);
   }
 
   const rows = parseCsv(fs.readFileSync(trackingPath, 'utf8'));
+  const requestCsv = fs.readFileSync(requestsPath, 'utf8');
   const toses = JSON.parse(fs.readFileSync(tosesPath, 'utf8'));
   const knownSlugs = new Set(Array.isArray(toses) ? toses.map((tos) => tos.slug).filter(Boolean) : []);
   const errors = [];
@@ -127,6 +133,10 @@ function main() {
   requiredSlugs.forEach((slug) => {
     if (!seenSlugs.has(slug)) {
       errors.push(`missing required priority slug ${slug}`);
+    }
+
+    if (!requestCsv.includes(`"${slug}"`)) {
+      errors.push(`priority request CSV missing required slug ${slug}`);
     }
   });
 
