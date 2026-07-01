@@ -3,6 +3,7 @@ const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
 
 const htmlPath = path.join(process.cwd(), 'reply-review', 'index.html');
+const csvPath = path.join(process.cwd(), 'data', 'reply_review_checklist.csv');
 
 const requiredInternalLinks = [
   '/data/reply_review_checklist.csv',
@@ -58,6 +59,28 @@ const requiredPhrases = [
   'Подтверждено'
 ];
 
+const requiredCsvColumns = [
+  'field',
+  'value_received',
+  'can_publish',
+  'needs_followup',
+  'source_confirmed',
+  'action',
+  'notes'
+];
+
+const requiredCsvRows = [
+  'Название ТОС',
+  'Территория и границы',
+  'Председатель',
+  'Публичный телефон',
+  'Email',
+  'Сообщество ВК/ОК',
+  'Фото территории',
+  'Проекты и результаты',
+  'Источник подтверждения'
+];
+
 function read(filePath) {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file: ${filePath}`);
@@ -78,6 +101,7 @@ function localPathFor(link) {
 
 function main() {
   const html = read(htmlPath);
+  const csv = read(csvPath);
   const errors = [];
 
   checkContains(errors, html, 'reply-review/index.html', '<html lang="ru"');
@@ -99,6 +123,14 @@ function main() {
     if (!repoPathExists(localPath)) {
       errors.push(`reply-review/index.html: missing linked local page ${localPath}`);
     }
+  });
+
+  requiredCsvColumns.forEach((column) => {
+    checkContains(errors, csv, 'data/reply_review_checklist.csv', column);
+  });
+
+  requiredCsvRows.forEach((row) => {
+    checkContains(errors, csv, 'data/reply_review_checklist.csv', row);
   });
 
   ['Телефон', 'Email', 'ФИО председателя', 'Фото', 'Проекты и суммы'].forEach((field) => {
