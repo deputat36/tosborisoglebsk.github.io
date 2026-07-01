@@ -4,6 +4,7 @@ const { repoPathExists } = require('./lib/path_checks');
 
 const homePath = path.join(process.cwd(), 'index.html');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
+const navigationPatchPath = path.join(process.cwd(), 'scripts', 'patch_site_navigation.js');
 
 const requiredRoutes = [
   '/',
@@ -22,6 +23,27 @@ const requiredRoutes = [
   '/materials/',
   '/calendar/',
   '/editorial-policy/'
+];
+
+const requiredPublicNavRoutes = [
+  '/tos/',
+  '/places/',
+  '/action-routes/',
+  '/residents/',
+  '/chairperson/',
+  '/projects/',
+  '/done/',
+  '/needs/',
+  '/documents/',
+  '/contacts/',
+  '/sections/'
+];
+
+const serviceRoutesOutsidePublicNav = [
+  '/workbench/',
+  '/data-requests/',
+  '/source-watch/',
+  '/content-discovery/'
 ];
 
 const requiredDynamicBlocks = [
@@ -65,13 +87,19 @@ function main() {
     throw new Error(`Missing file: ${tosesPath}`);
   }
 
+  if (!fs.existsSync(navigationPatchPath)) {
+    throw new Error(`Missing file: ${navigationPatchPath}`);
+  }
+
   const html = fs.readFileSync(homePath, 'utf8');
   const toses = JSON.parse(fs.readFileSync(tosesPath, 'utf8'));
+  const navigationPatch = fs.readFileSync(navigationPatchPath, 'utf8');
   const errors = [];
 
   const title = textMatch(html, /<title>([^<]+)<\/title>/i);
   const description = textMatch(html, /<meta\s+name="description"\s+content="([^"]+)"\s*\/>/i);
   const h1 = textMatch(html, /<h1>([^<]+)<\/h1>/i);
+  const compactNavBlock = textMatch(navigationPatch, /const compactNavBlock = `([\s\S]*?)`;\n\nconst footerHtml/);
 
   if (!title.includes('ТОС') || !title.includes('Борисоглеб')) {
     errors.push('title must identify the TOS BGO portal');
@@ -100,6 +128,22 @@ function main() {
       errors.push(`homepage is missing copy block: ${copy}`);
     }
   });
+
+  requiredPublicNavRoutes.forEach((route) => {
+    if (!compactNavBlock.includes(route)) {
+      errors.push(`public navigation is missing route: ${route}`);
+    }
+  });
+
+  serviceRoutesOutsidePublicNav.forEach((route) => {
+    if (compactNavBlock.includes(route)) {
+      errors.push(`service route must not be in public navigation: ${route}`);
+    }
+  });
+
+  if (!navigationPatch.includes('/workbench/')) {
+    errors.push('workbench route must remain available outside public navigation');
+  }
 
   requiredDynamicBlocks.forEach(([blockId, scriptPath]) => {
     if (!html.includes(`id="${blockId}"`)) {
