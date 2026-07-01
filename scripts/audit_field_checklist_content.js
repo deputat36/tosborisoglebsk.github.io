@@ -69,6 +69,17 @@ const requiredPhrases = [
   'лучше написать «требует проверки», чем публиковать сомнительную информацию'
 ];
 
+const requiredVerificationFlow = [
+  'Кто проверил',
+  'Дата проверки',
+  'Источник сведений',
+  'Зафиксируйте отправку',
+  'ответ и оставшиеся вопросы',
+  'сначала разберите его',
+  'только подтверждённые сведения',
+  'требует проверки'
+];
+
 function read(filePath) {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file: ${filePath}`);
@@ -101,6 +112,10 @@ function main() {
   checkContains(errors, html, 'field-checklist/index.html', 'onclick="window.print()"');
 
   requiredPhrases.forEach((phrase) => {
+    checkContains(errors, html, 'field-checklist/index.html', phrase);
+  });
+
+  requiredVerificationFlow.forEach((phrase) => {
     checkContains(errors, html, 'field-checklist/index.html', phrase);
   });
 
