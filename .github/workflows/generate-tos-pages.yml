@@ -90,6 +90,8 @@ jobs:
         run: node scripts/generate_page_index.js
       - name: Generate extended sitemap
         run: node scripts/generate_sitemap.js
+      - name: Run manual audit extensions
+        run: node scripts/audit_manual_extensions.js
       - name: Audit internal links
         run: node scripts/audit_site_links.js
       - name: Audit SEO basics
