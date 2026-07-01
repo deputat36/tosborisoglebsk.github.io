@@ -24,8 +24,8 @@ function main() {
     if (!csv.includes(slug)) errors.push(`csv missing ${slug}`);
   });
 
-  ['Slug', 'Status', 'Card', 'Task'].forEach((word) => {
-    if (!csv.toLowerCase().includes(word.toLowerCase())) errors.push(`csv missing marker ${word}`);
+  ['Slug', 'https://tosborisoglebsk.ru/tos/', 'https://tosborisoglebsk.ru/update-tos/'].forEach((word) => {
+    if (!csv.includes(word)) errors.push(`csv missing marker ${word}`);
   });
 
   if (errors.length) {
