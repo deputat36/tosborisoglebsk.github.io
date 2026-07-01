@@ -16,7 +16,8 @@ function main() {
   if (errors.length) throw new Error(`Map content audit failed:\n${errors.join('\n')}`);
 
   const html = fs.readFileSync(pagePath, 'utf8');
-  const geojson = fs.readFileSync(geojsonPath, 'utf8');
+  const geojsonText = fs.readFileSync(geojsonPath, 'utf8');
+  const geojson = JSON.parse(geojsonText);
 
   check(errors, html, '<html lang="ru">', 'language');
   check(errors, html, '<title>Карта ТОС Борисоглебского городского округа</title>', 'title');
@@ -34,8 +35,13 @@ function main() {
   check(errors, html, '/create-tos/', 'create TOS link');
   check(errors, html, '/contacts/', 'contacts link');
 
-  check(errors, geojson, '"type": "FeatureCollection"', 'GeoJSON collection type');
-  check(errors, geojson, '"features": []', 'empty features marker');
+  if (!geojson || geojson.type !== 'FeatureCollection') {
+    errors.push('data/toses.geojson must be a FeatureCollection');
+  }
+
+  if (!Array.isArray(geojson.features)) {
+    errors.push('data/toses.geojson features must be an array');
+  }
 
   if (errors.length) throw new Error(`Map content audit failed:\n${errors.join('\n')}`);
   console.log('Map content OK');
