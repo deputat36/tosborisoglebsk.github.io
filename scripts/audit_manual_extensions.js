@@ -10,7 +10,8 @@ runChecks([
   ['required done ids', 'scripts/audit_done_required_ids.js'],
   ['required catalog slugs', 'scripts/audit_required_slugs.js'],
   ['submit materials page', 'scripts/audit_submit_materials_content.js'],
-  ['verification levels page', 'scripts/audit_verification_levels_content.js']
+  ['verification levels page', 'scripts/audit_verification_levels_content.js'],
+  ['actions check page', 'scripts/audit_actions_check_content.js']
 ], {
   verbose: true,
   successMessage: 'Manual audit extensions OK'
