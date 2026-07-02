@@ -6,7 +6,9 @@ const root = process.cwd();
 const allowedFiles = new Set([
   'assets/js/nav-v2/role-menu-v2.js',
   'assets/js/nav-v2/admin-guard-v2.js',
-  'tools/patch_vktg_nav_roles.py'
+  'tools/patch_vktg_nav_roles.py',
+  'scripts/audit_supabase_scope.js',
+  'scripts/audit_project_mode.js'
 ]);
 
 const ignoredDirs = new Set([
