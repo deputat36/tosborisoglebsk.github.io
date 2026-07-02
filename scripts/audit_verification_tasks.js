@@ -21,6 +21,7 @@ const expectedHeaders = [
 ];
 const allowedPriorities = new Set(['Высокий', 'Средний', 'Низкий']);
 const allowedStatuses = new Set(['Требует проверки', 'Проверено частично', 'Проверено', 'Не начинали']);
+const requiredHighPrioritySlugs = new Set(['ivanovka', 'podstepki', 'gubari', 'tancyrey']);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 function parseSemicolonCsv(text) {
@@ -114,6 +115,7 @@ function main() {
 
   const knownSlugs = new Set(toses.map((tos) => tos.slug).filter(Boolean));
   const seenSlugs = new Set();
+  const highPrioritySlugs = new Set();
 
   rows.slice(1).forEach((row, index) => {
     const line = `verification task row ${index + 2}`;
@@ -126,6 +128,9 @@ function main() {
     if (slug && !knownSlugs.has(slug)) errors.push(`${line}: unknown Slug ${slug}`);
     if (slug && seenSlugs.has(slug)) errors.push(`${line}: duplicate Slug ${slug}`);
     if (slug) seenSlugs.add(slug);
+    if (slug && priority === 'Высокий') highPrioritySlugs.add(slug);
+    if (slug && !repoPathExists(`/tos/${slug}/`)) errors.push(`${line}: missing TOS page /tos/${slug}/`);
+
     if (!territory) errors.push(`${line}: missing Территория`);
     if (!chairperson) errors.push(`${line}: missing Председатель / контактное лицо`);
     if (!/^\d+$/.test(completeness) || Number(completeness) < 0 || Number(completeness) > 100) {
@@ -161,6 +166,12 @@ function main() {
   knownSlugs.forEach((slug) => {
     if (!seenSlugs.has(slug)) {
       errors.push(`missing verification task for slug ${slug}`);
+    }
+  });
+
+  requiredHighPrioritySlugs.forEach((slug) => {
+    if (!highPrioritySlugs.has(slug)) {
+      errors.push(`required high priority verification task is missing or not high priority: ${slug}`);
     }
   });
 
