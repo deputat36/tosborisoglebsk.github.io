@@ -24,16 +24,16 @@
   <section class="hero"><div class="container hero-card"><div class="eyebrow">Технический контроль</div><h1>Проверка GitHub Actions</h1><p class="lead">Этот раздел фиксирует состояние автоматической генерации сайта: workflow, триггеры, доступность статусов через API, сгенерированные отчёты и ручные действия после публикации.</p><div class="hero-actions"><a class="btn primary" href="/data/actions_diagnostics.csv">Скачать CSV</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/open-data/">Открытые данные</a></div></div></section>
 
   <section class="section"><div class="container prose">
-    <h2>Итог проверки на 25 июня 2026 года</h2>
+    <h2>Итог проверки на 2 июля 2026 года</h2>
     <p>Рабочий репозиторий проекта подтверждён: <code>deputat36/tosborisoglebsk.github.io</code>. Рабочая ветка совпадает с default branch: <code>release-2025-12-22</code>.</p>
     <p>Workflow <code>Generate TOS pages</code> найден в <code>.github/workflows/generate-tos-pages.yml</code>. Он запускается вручную, по расписанию и при push в рабочую ветку по файлам страниц, данных, скриптов, стилей, логотипов и самого workflow.</p>
-    <div class="notice">Через доступный commit endpoint не удалось получить связанные workflow-runs по последнему проверенному коммиту. Это не доказывает ошибку деплоя. Поэтому результат генерации дополнительно контролируется по файлам <code>data/site_health.json</code>, <code>rss.xml</code>, <code>sitemap.xml</code> и <code>data/page_index.json</code>.</div>
+    <div class="notice">Через доступный commit endpoint по последним автономным коммитам получен пустой список <code>workflow_runs</code>. Это не доказывает ошибку деплоя. Поэтому результат генерации дополнительно контролируется по файлам <code>data/site_health.json</code>, <code>rss.xml</code>, <code>sitemap.xml</code> и <code>data/page_index.json</code>, а GitHub Actions UI нужно проверить вручную.</div>
   </div></section>
 
   <section class="section"><div class="container grid">
-    <article class="card"><div class="card-inner"><h2>Что проверено</h2><ul class="check-list"><li>репозиторий и ветка проекта;</li><li>наличие workflow генерации;</li><li>триггеры workflow;</li><li>состояние последнего проверенного commit status;</li><li>наличие обновлённого <code>site_health.json</code>.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Что требует ручного контроля</h2><ul class="check-list"><li>открыть вкладку GitHub Actions;</li><li>проверить последний запуск <code>Generate TOS pages</code>;</li><li>при ошибке скачать логи job;</li><li>сверить GitHub Pages deployment;</li><li>после ручной проверки обновить CSV.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Текущее состояние генерации</h2><p>По последнему <code>data/site_health.json</code>: 366 HTML-страниц, 332 публичные, 34 <code>noindex</code>, 0 SEO-предупреждений и 0 битых внутренних ссылок.</p><a class="btn" href="/data/site_health.json">Открыть JSON</a></div></article>
+    <article class="card"><div class="card-inner"><h2>Что проверено</h2><ul class="check-list"><li>репозиторий и ветка проекта;</li><li>наличие workflow генерации;</li><li>триггеры workflow;</li><li>commit endpoint по автономным коммитам;</li><li>наличие обновлённого <code>site_health.json</code>.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Что требует ручного контроля</h2><ul class="check-list"><li>открыть вкладку GitHub Actions;</li><li>проверить последний запуск <code>Generate TOS pages</code>;</li><li>при ошибке скачать логи job;</li><li>сверить GitHub Pages deployment;</li><li>после ручной проверки обновить CSV и задачу #164.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Текущее состояние генерации</h2><p>По последнему <code>data/site_health.json</code>: 369 HTML-страниц, 332 публичные, 37 <code>noindex</code>, 0 SEO-предупреждений и 0 битых внутренних ссылок.</p><a class="btn" href="/data/site_health.json">Открыть JSON</a></div></article>
   </div></section>
 
   <section class="section"><div class="container prose">
