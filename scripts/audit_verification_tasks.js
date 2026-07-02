@@ -2,8 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
 
+const pagePath = path.join(process.cwd(), 'verification-tasks', 'index.html');
 const tasksPath = path.join(process.cwd(), 'data', 'verification_tasks.csv');
+const tosesAuditPath = path.join(process.cwd(), 'data', 'tos_content_audit.json');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
+const viewScriptPath = path.join(process.cwd(), 'assets', 'js', 'verification-tasks.js');
 const expectedHeaders = [
   'Приоритет',
   'ТОС',
@@ -87,26 +90,41 @@ function getUrlPath(value) {
   }
 }
 
+function readRequired(filePath) {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Missing file: ${filePath}`);
+  }
+
+  return fs.readFileSync(filePath, 'utf8');
+}
+
 function main() {
-  if (!fs.existsSync(tasksPath)) {
-    throw new Error(`Missing file: ${tasksPath}`);
-  }
-
-  if (!fs.existsSync(tosesPath)) {
-    throw new Error(`Missing file: ${tosesPath}`);
-  }
-
-  const rows = parseSemicolonCsv(fs.readFileSync(tasksPath, 'utf8'));
-  const toses = JSON.parse(fs.readFileSync(tosesPath, 'utf8'));
+  const pageHtml = readRequired(pagePath);
+  const viewScript = readRequired(viewScriptPath);
+  const rows = parseSemicolonCsv(readRequired(tasksPath));
+  const tosesAudit = JSON.parse(readRequired(tosesAuditPath));
+  const toses = JSON.parse(readRequired(tosesPath));
   const errors = [];
 
   if (!Array.isArray(toses)) {
     throw new Error('Verification tasks audit failed:\ndata/toses.json must be an array');
   }
 
+  if (!tosesAudit || !Array.isArray(tosesAudit.items)) {
+    errors.push('data/tos_content_audit.json must contain items array');
+  }
+
   if (rows.length < 2) {
     throw new Error('Verification tasks audit failed:\ndata/verification_tasks.csv must contain a header and at least one row');
   }
+
+  ['<meta name="robots" content="noindex,nofollow"', '<main id="main">', 'verification-tasks-summary', 'verification-tasks-high', 'verification-tasks-partial', '/data/verification_tasks.csv', '/assets/js/verification-tasks.js'].forEach((marker) => {
+    if (!pageHtml.includes(marker)) errors.push(`verification-tasks/index.html: missing ${marker}`);
+  });
+
+  ['loadVerificationTasks', 'renderTaskCard', '/data/tos_content_audit.json', 'taskUpdateUrl', 'type=card#message-builder'].forEach((marker) => {
+    if (!viewScript.includes(marker)) errors.push(`assets/js/verification-tasks.js: missing ${marker}`);
+  });
 
   const headers = rows[0].map(normalizeHeader);
   if (headers.join('|') !== expectedHeaders.join('|')) {
