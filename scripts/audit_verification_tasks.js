@@ -98,6 +98,11 @@ function readRequired(filePath) {
   return fs.readFileSync(filePath, 'utf8');
 }
 
+function setEquals(first, second) {
+  if (first.size !== second.size) return false;
+  return Array.from(first).every((item) => second.has(item));
+}
+
 function main() {
   const pageHtml = readRequired(pagePath);
   const viewScript = readRequired(viewScriptPath);
@@ -114,6 +119,10 @@ function main() {
     errors.push('data/tos_content_audit.json must contain items array');
   }
 
+  if (tosesAudit && tosesAudit.summary && tosesAudit.summary.high_priority !== requiredHighPrioritySlugs.size) {
+    errors.push(`data/tos_content_audit.json summary.high_priority must be ${requiredHighPrioritySlugs.size}`);
+  }
+
   if (rows.length < 2) {
     throw new Error('Verification tasks audit failed:\ndata/verification_tasks.csv must contain a header and at least one row');
   }
@@ -125,6 +134,16 @@ function main() {
   ['loadVerificationTasks', 'renderTaskCard', '/data/tos_content_audit.json', 'taskUpdateUrl', 'type=card#message-builder'].forEach((marker) => {
     if (!viewScript.includes(marker)) errors.push(`assets/js/verification-tasks.js: missing ${marker}`);
   });
+
+  const auditHighPrioritySlugs = new Set(
+    Array.isArray(tosesAudit.items)
+      ? tosesAudit.items.filter((item) => item.priority === 'Высокий').map((item) => item.slug).filter(Boolean)
+      : []
+  );
+
+  if (!setEquals(auditHighPrioritySlugs, requiredHighPrioritySlugs)) {
+    errors.push(`data/tos_content_audit.json high priority slugs mismatch: ${Array.from(auditHighPrioritySlugs).join(', ')}`);
+  }
 
   const headers = rows[0].map(normalizeHeader);
   if (headers.join('|') !== expectedHeaders.join('|')) {
