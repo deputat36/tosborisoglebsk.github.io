@@ -48,7 +48,13 @@ function fallbackReportFromTosAudit(audit) {
     })),
     seo_warnings: [],
     broken_internal_links: [],
-    recommended_actions: recommended
+    recommended_actions: recommended,
+    findings: [
+      { level: 'risk', area: 'Доверие к данным', finding: `Подтверждённых карточек ТОС: ${summary.verified_count || 0}.` },
+      { level: 'next', area: 'Следующий шаг', finding: 'Основной отчёт не найден, поэтому нужно пересобрать сайт через workflow.' }
+    ],
+    self_work_plan: [],
+    blocked_actions: ['Не публиковать неподтверждённые контакты, ФИО, фото и логотипы без источника или разрешения.']
   };
 }
 
@@ -61,9 +67,29 @@ async function loadReport() {
   }
 }
 
+function penaltyList(breakdown) {
+  const penalties = breakdown?.penalties || {};
+  const labels = {
+    high_priority_tos: 'Приоритетные карточки ТОС',
+    needs_review_tos: 'Карточки требуют проверки',
+    missing_public_phone: 'Нет публичного телефона',
+    seo_warnings: 'SEO-предупреждения',
+    broken_internal_links: 'Битые внутренние ссылки'
+  };
+  return Object.entries(penalties).map(([key, value]) => `<li>${healthEsc(labels[key] || key)}: −${healthEsc(value)}</li>`).join('');
+}
+
+function renderFindings(report) {
+  const findings = report.findings || [];
+  if (!findings.length) return '';
+  return `<div class="section-head" style="margin:22px 0 12px"><div><h3>Ключевые выводы аудита</h3><p>Что уже хорошо и где главный риск</p></div></div><div class="grid">${findings.map((item) => `<article class="card"><div class="card-inner"><span class="tag ${item.level === 'risk' ? 'warn' : item.level === 'good' ? 'ok' : ''}">${healthEsc(item.area)}</span><p>${healthEsc(item.finding)}</p></div></article>`).join('')}</div>`;
+}
+
 function renderSummary(report, summaryBox) {
   const catalog = report.catalog || {};
   const pages = report.pages || {};
+  const scope = report.audit_scope || [];
+  const penalties = penaltyList(report.score_breakdown);
   summaryBox.innerHTML = `
     <div class="grid">
       <article class="card"><div class="card-inner"><span class="tag">Оценка</span><h3>${healthEsc(report.health_score ?? '—')} / 100</h3><p>Сводная техническая и редакционная оценка состояния портала.</p></div></article>
@@ -71,16 +97,32 @@ function renderSummary(report, summaryBox) {
       <article class="card"><div class="card-inner"><span class="tag">Доверие</span><h3>${healthEsc(catalog.verified_count ?? 0)}</h3><p>Карточек со статусом «подтверждено». Частично проверено: ${healthEsc(catalog.partial_count ?? 0)}.</p></div></article>
       <article class="card"><div class="card-inner"><span class="tag">Страницы</span><h3>${healthEsc(pages.public ?? '—')}</h3><p>Публичных страниц. SEO-предупреждений: ${healthEsc(pages.seo_warnings_count ?? '—')}.</p></div></article>
     </div>
+    ${penalties ? `<div class="notice"><b>Расчёт оценки:</b><ul>${penalties}</ul><p class="tiny">${healthEsc(report.score_breakdown?.note || '')}</p></div>` : ''}
+    ${scope.length ? `<div class="notice"><b>Что проверяется:</b> ${scope.map(healthEsc).join('; ')}.</div>` : ''}
+    ${renderFindings(report)}
     ${report.fallback ? '<div class="notice"><b>Временный режим:</b> основной отчёт <code>/data/site_health.json</code> не найден, поэтому показана сводка на основе аудита карточек ТОС. После ручного запуска <code>Generate TOS pages</code> здесь появится полный технический отчёт.</div>' : ''}
     <p class="tiny">Отчёт сформирован: ${report.generated_at ? new Date(report.generated_at).toLocaleString('ru-RU') : '—'}.</p>
   `;
 }
 
+function renderWorkPlan(report) {
+  const plan = report.self_work_plan || [];
+  if (!plan.length) return '';
+  return `<h3>Что можно делать самостоятельно</h3><div class="grid">${plan.map((stage) => `<article class="card"><div class="card-inner"><span class="tag">${healthEsc(stage.owner || 'assistant')}</span><h3>${healthEsc(stage.stage)}</h3><p class="tiny">Статус: ${healthEsc(stage.status || 'active')}</p><ul>${(stage.actions || []).map((item) => `<li>${healthEsc(item)}</li>`).join('')}</ul></div></article>`).join('')}</div>`;
+}
+
+function renderBlocked(report) {
+  const blocked = report.blocked_actions || [];
+  if (!blocked.length) return '';
+  return `<h3>Что заблокировано без подтверждения</h3><div class="notice"><ul>${blocked.map((item) => `<li>${healthEsc(item)}</li>`).join('')}</ul></div>`;
+}
+
 function renderActions(report, actionsBox) {
   const actions = report.recommended_actions || [];
-  actionsBox.innerHTML = actions.length
-    ? `<ol>${actions.map((item) => `<li>${healthEsc(item)}</li>`).join('')}</ol>`
+  const actionHtml = actions.length
+    ? `<h3>Приоритетные действия</h3><ol>${actions.map((item) => `<li>${healthEsc(item)}</li>`).join('')}</ol>`
     : '<p>Срочных действий в отчёте нет.</p>';
+  actionsBox.innerHTML = `${actionHtml}${renderWorkPlan(report)}${renderBlocked(report)}`;
 }
 
 function renderPriority(report, priorityBox) {

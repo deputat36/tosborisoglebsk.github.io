@@ -4,10 +4,13 @@ stage,priority,area,task,mode,deliverable,status
 2,high,outreach,"Сопровождать 15 подготовленных запросов",mixed,"актуальный outreach_register.csv",waiting_for_send_confirmation
 3,high,registry,"Подготовить импорт официального реестра 46 ТОС",assistant,"registry-intake, registry-diff, новые карточки после сверки",waiting_for_source
 4,high,project-content,"Собрать подтверждение реализации проекта Миролюбия",mixed,"проверенная новость, проект или история результата",waiting_for_confirmed_data
-5,medium,technical,"Проверить Actions и Pages",mixed,"updated actions_diagnostics.csv",waiting_for_manual_check
-6,medium,frontend,"Упростить CSS без визуальных изменений",assistant,"комментированный или разделённый CSS с регрессией",planned
-7,medium,ux,"Упростить рабочие маршруты редактора",assistant,"короткие панели, ссылки, инструкции",planned
-8,medium,seo-content,"Усилить публичные страницы без выдумывания фактов",assistant,"лучшие тексты, FAQ, навигация, internal links",planned
-9,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent, проверенные публикации",waiting_for_files
-10,low,reporting,"Сделать регулярную сводку состояния проекта",assistant,"docs/STATUS.md и github-tasks",planned
-11,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"список кандидатов на объединение",needs_review
+5,high,audit,"Провести расширенный аудит сайта и зафиксировать план улучшений",assistant,"docs/AUDIT-2026-07-03.md, расширенный site_health",done
+6,high,health-report,"Расширить /site-health/ до понятного управленческого отчёта",assistant,"scripts/generate_site_health_report.js и assets/js/site-health.js",done
+7,medium,technical,"Сделать явные npm-команды проверки",assistant,"package.json: check:js, validate:data, audit:links, audit:seo, audit:health, audit:all",done
+8,medium,technical,"Проверить Actions и Pages",mixed,"updated actions_diagnostics.csv",waiting_for_manual_check
+9,medium,frontend,"Упростить CSS без визуальных изменений",assistant,"комментированный или разделённый CSS с регрессией",planned
+10,medium,ux,"Упростить рабочие маршруты редактора",assistant,"короткие панели, ссылки, инструкции",planned
+11,medium,seo-content,"Усилить публичные страницы без выдумывания фактов",assistant,"лучшие тексты, FAQ, навигация, internal links",planned
+12,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent, проверенные публикации",waiting_for_files
+13,low,reporting,"Сделать регулярную сводку состояния проекта",assistant,"docs/STATUS.md и github-tasks",active
+14,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"список кандидатов на объединение",needs_review

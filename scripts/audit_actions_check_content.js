@@ -9,6 +9,12 @@ function read(filePath) {
   return fs.readFileSync(filePath, 'utf8');
 }
 
+function stripWarningQuotes(text) {
+  return String(text || '')
+    .replace(/нельзя писать «CI проверен»/g, '')
+    .replace(/нельзя писать "CI проверен"/g, '');
+}
+
 function main() {
   const html = read(htmlPath);
   const csv = read(csvPath);
@@ -22,7 +28,7 @@ function main() {
     if (!csv.includes(item)) errors.push(`csv missing ${item}`);
   });
 
-  if (html.includes('CI проверен')) {
+  if (stripWarningQuotes(html).includes('CI проверен')) {
     errors.push('page must not claim CI is checked');
   }
 

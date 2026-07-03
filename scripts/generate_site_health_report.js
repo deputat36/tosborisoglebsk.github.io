@@ -187,6 +187,37 @@ function auditPages() {
   return { totalPages: htmlFiles.length, publicPages, noindexPages, seoWarnings, linkErrors, pages };
 }
 
+function buildScoreBreakdown(summary, pageAudit) {
+  const highPriorityPenalty = (summary.high_priority || 0) * 3;
+  const reviewPenalty = (summary.needs_review_count || 0) * 4;
+  const phonePenalty = (summary.without_phone || 0) * 2;
+  const seoPenalty = Math.min(pageAudit.seoWarnings.length, 20);
+  const linkPenalty = Math.min(pageAudit.linkErrors.length * 5, 30);
+
+  return {
+    base: 100,
+    penalties: {
+      high_priority_tos: highPriorityPenalty,
+      needs_review_tos: reviewPenalty,
+      missing_public_phone: phonePenalty,
+      seo_warnings: seoPenalty,
+      broken_internal_links: linkPenalty
+    },
+    note: 'Оценка отражает не красоту сайта, а управляемость: доверие к данным, наличие контактов, SEO и внутренние ссылки.'
+  };
+}
+
+function buildFindings(summary, pageAudit) {
+  const findings = [];
+  findings.push({ level: 'good', area: 'Техническая база', finding: `Собрано ${pageAudit.totalPages} HTML-страниц, из них ${pageAudit.publicPages} публичных и ${pageAudit.noindexPages} служебных.` });
+  findings.push({ level: pageAudit.linkErrors.length ? 'risk' : 'good', area: 'Внутренние ссылки', finding: pageAudit.linkErrors.length ? `Найдено внутренних проблем со ссылками: ${pageAudit.linkErrors.length}.` : 'Битых внутренних ссылок в текущем отчёте не найдено.' });
+  findings.push({ level: pageAudit.seoWarnings.length ? 'risk' : 'good', area: 'SEO-основа', finding: pageAudit.seoWarnings.length ? `Найдено SEO-предупреждений: ${pageAudit.seoWarnings.length}.` : 'Базовые SEO-предупреждения в публичных HTML-страницах не найдены.' });
+  findings.push({ level: 'risk', area: 'Доверие к данным', finding: `Подтверждённых карточек ТОС: ${summary.verified_count || 0}. Высокий приоритет проверки: ${summary.high_priority || 0}.` });
+  findings.push({ level: (summary.without_phone || 0) ? 'risk' : 'good', area: 'Контакты', finding: (summary.without_phone || 0) ? `Карточек без публичного телефона: ${summary.without_phone}.` : 'Все карточки имеют публичный телефон или контактный сценарий.' });
+  findings.push({ level: 'next', area: 'Контент', finding: 'Следующий рост сайта — не в количестве страниц, а в замене стартовых заготовок на подтверждённые новости, проекты, результаты, фото и источники.' });
+  return findings;
+}
+
 function buildActions(siteAudit, pageAudit) {
   const actions = [];
   const summary = siteAudit?.summary || {};
@@ -203,25 +234,82 @@ function buildActions(siteAudit, pageAudit) {
   return actions;
 }
 
+function buildSelfWorkPlan(summary, pageAudit) {
+  return [
+    {
+      stage: 'Технический контроль',
+      owner: 'assistant',
+      status: pageAudit.linkErrors.length || pageAudit.seoWarnings.length ? 'active' : 'stable',
+      actions: [
+        'поддерживать нулевой уровень битых внутренних ссылок',
+        'держать SEO-аудит без ошибок title, description, canonical, og и h1',
+        'расширять отчёт site_health.json после каждого крупного изменения'
+      ]
+    },
+    {
+      stage: 'Пользовательские маршруты',
+      owner: 'assistant',
+      status: 'active',
+      actions: [
+        'упрощать входы для жителей, председателей, партнёров и редактора',
+        'связывать рабочие страницы между собой короткими понятными ссылками',
+        'выносить повторяющиеся ручные действия в чек-листы и CSV'
+      ]
+    },
+    {
+      stage: 'Контент без выдумывания фактов',
+      owner: 'assistant',
+      status: 'active',
+      actions: [
+        'усиливать тексты на основе уже имеющихся подтверждённых данных',
+        'делать черновики запросов, новостей, карточек и проектных паспортов',
+        'помечать неподтверждённые сведения как требующие проверки'
+      ]
+    },
+    {
+      stage: 'Доверие к каталогу',
+      owner: 'mixed',
+      status: (summary.verified_count || 0) === 0 ? 'blocked_by_confirmation' : 'active',
+      actions: [
+        'не публиковать новые контакты без источника или разрешения',
+        'готовить карточки к подтверждению через evidence/readiness-процедуру',
+        'переводить карточки в verified только после реального подтверждения'
+      ]
+    }
+  ];
+}
+
+function buildBlockedActions(summary) {
+  const blocked = [];
+  if (summary.verified_count === 0) blocked.push('Нельзя переводить карточки ТОС в verified без подтверждённых источников и разрешения на публикацию.');
+  if (summary.high_priority) blocked.push('Нельзя заполнять телефоны, email, соцсети и логотипы приоритетных ТОСов предположениями.');
+  blocked.push('Нельзя утверждать реализацию проектов, если подтверждён только конкурсный результат или проектная заявка.');
+  blocked.push('Нельзя использовать реальные фото и логотипы без понятного права на публикацию.');
+  return blocked;
+}
+
 function main() {
   const siteAudit = readJson('data/site_audit.json', {});
   const contentAudit = readJson('data/tos_content_audit.json', {});
   const pageAudit = auditPages();
   const summary = siteAudit.summary || contentAudit.summary || {};
-
-  const healthScore = Math.max(0, Math.min(100,
-    100
-    - (summary.high_priority || 0) * 3
-    - (summary.needs_review_count || 0) * 4
-    - (summary.without_phone || 0) * 2
-    - Math.min(pageAudit.seoWarnings.length, 20)
-    - Math.min(pageAudit.linkErrors.length * 5, 30)
-  ));
+  const scoreBreakdown = buildScoreBreakdown(summary, pageAudit);
+  const totalPenalty = Object.values(scoreBreakdown.penalties).reduce((sum, value) => sum + value, 0);
+  const healthScore = Math.max(0, Math.min(100, scoreBreakdown.base - totalPenalty));
 
   const report = {
     generated_at: new Date().toISOString(),
     site_url: SITE_URL,
     health_score: healthScore,
+    score_breakdown: scoreBreakdown,
+    audit_scope: [
+      'структура HTML-страниц',
+      'meta title, description, canonical, Open Graph и h1',
+      'внутренние ссылки и якоря',
+      'состояние каталога ТОС',
+      'заполненность контактов, соцсетей, логотипов и статусов проверки',
+      'приоритеты автономной работы и блокировки по неподтверждённым данным'
+    ],
     catalog: summary,
     pages: {
       total: pageAudit.totalPages,
@@ -238,9 +326,12 @@ function main() {
       missing: item.missing,
       verification: item.verification?.label || item.verification?.status || ''
     })),
+    findings: buildFindings(summary, pageAudit),
     seo_warnings: pageAudit.seoWarnings.slice(0, 50),
     broken_internal_links: pageAudit.linkErrors.slice(0, 50),
-    recommended_actions: buildActions(siteAudit, pageAudit)
+    recommended_actions: buildActions(siteAudit, pageAudit),
+    self_work_plan: buildSelfWorkPlan(summary, pageAudit),
+    blocked_actions: buildBlockedActions(summary)
   };
 
   fs.mkdirSync(path.dirname(OUT), { recursive: true });

@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "audit:all": "npm run audit:project-mode && npm run audit:manual",
+    "check:js": "find scripts assets/js -name \"*.js\" -print0 | xargs -0 -n1 node --check",
+    "validate:data": "node scripts/validate_data.js",
+    "audit:links": "node scripts/audit_site_links.js",
+    "audit:seo": "node scripts/audit_seo.js",
+    "audit:health": "node scripts/generate_site_health_report.js",
+    "audit:all": "npm run check:js && npm run validate:data && npm run audit:project-mode && npm run audit:manual && npm run audit:links && npm run audit:seo && npm run audit:health",
     "audit:dates": "node scripts/test_date_checks.js",
     "audit:decisions": "node scripts/audit_user_decision_queue.js",
     "audit:ids": "node scripts/test_id_checks.js",

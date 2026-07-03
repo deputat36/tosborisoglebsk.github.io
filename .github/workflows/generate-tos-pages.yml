@@ -4,6 +4,17 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '*/30 * * * *'
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - '**/index.html'
+      - 'data/*.json'
+      - 'scripts/*.js'
+      - 'assets/js/*.js'
+      - 'assets/css/*.css'
+      - 'assets/img/tos-logos/*'
+      - '.github/workflows/generate-tos-pages.yml'
   push:
     branches:
       - release-2025-12-22
@@ -99,6 +110,7 @@ jobs:
       - name: Audit SEO basics
         run: node scripts/audit_seo.js
       - name: Commit generated pages, sitemap and audit
+        if: github.event_name != 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Generate SEO pages, sitemap and audit'

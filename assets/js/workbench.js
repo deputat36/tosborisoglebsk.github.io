@@ -91,6 +91,75 @@ document.addEventListener('DOMContentLoaded', () => {
     return Number.isNaN(date.getTime()) ? value : date.toLocaleString('ru-RU');
   }
 
+  function ensureTodayFocusSection() {
+    if (document.querySelector('#workbench-today-focus')) return;
+    const main = document.querySelector('#main');
+    const hero = main?.querySelector('.hero');
+    if (!main || !hero) return;
+
+    hero.insertAdjacentHTML('afterend', `
+      <section class="section tight" id="workbench-today-focus">
+        <div class="container section-head">
+          <div>
+            <h2>Что делать сегодня</h2>
+            <p>Короткий рабочий фокус из расширенного аудита сайта</p>
+          </div>
+          <div class="card-actions">
+            <a class="btn" href="/site-health/">Аудит сайта</a>
+            <a class="btn" href="/github-tasks/">GitHub-задачи</a>
+            <a class="btn" href="/outreach-register/">Запросы</a>
+          </div>
+        </div>
+        <div class="container grid" id="workbench-today-grid">
+          <article class="card full"><div class="card-inner"><div class="empty">Загрузка фокуса...</div></div></article>
+        </div>
+      </section>`);
+  }
+
+  function renderTodayFocus(report) {
+    ensureTodayFocusSection();
+    const root = document.querySelector('#workbench-today-grid');
+    if (!root || !report) return;
+
+    const catalog = report.catalog || {};
+    const pages = report.pages || {};
+    const actions = (report.recommended_actions || []).slice(0, 5);
+    const blocked = (report.blocked_actions || []).slice(0, 4);
+    const priority = (report.priority_tos || []).slice(0, 4);
+    const workPlan = (report.self_work_plan || []).filter((stage) => stage.owner === 'assistant').slice(0, 3);
+
+    const actionHtml = actions.length
+      ? `<ol>${actions.map((item) => `<li>${esc(item)}</li>`).join('')}</ol>`
+      : '<p>В отчёте нет срочных действий.</p>';
+
+    const priorityHtml = priority.length
+      ? priority.map((item) => `<a class="tag ${item.verification === 'Требует проверки' ? 'warn' : ''}" href="/tos/${encodeURIComponent(item.slug || '')}/">${esc(item.name)} · ${esc(item.score ?? '—')}%</a>`).join(' ')
+      : '<span class="tag ok">Критичных карточек нет</span>';
+
+    const blockedHtml = blocked.length
+      ? `<ul>${blocked.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>`
+      : '<p>Жёстких блокировок в отчёте нет.</p>';
+
+    const workPlanHtml = workPlan.length
+      ? workPlan.map((stage) => `<article class="card"><div class="card-inner"><span class="tag">самостоятельно</span><h3>${esc(stage.stage)}</h3><ul>${(stage.actions || []).slice(0, 3).map((item) => `<li>${esc(item)}</li>`).join('')}</ul></div></article>`).join('')
+      : '<article class="card"><div class="card-inner"><h3>Самостоятельный план</h3><p>После обновления аудита здесь появятся безопасные действия ассистента.</p></div></article>';
+
+    root.innerHTML = `
+      <article class="card full highlight-card">
+        <div class="card-inner">
+          <div class="meta"><span class="tag">оценка: ${esc(report.health_score ?? '—')} / 100</span><span class="tag">публичных страниц: ${esc(pages.public ?? '—')}</span><span class="tag">ТОС: ${esc(catalog.total_tos ?? '—')}</span><span class="tag warn">verified: ${esc(catalog.verified_count ?? 0)}</span></div>
+          <h3>Главный фокус: доверие к данным, а не рост количества страниц</h3>
+          <p>Техническая база держится стабильно, поэтому ближайшая работа — подтверждать карточки, собирать открытые контакты, источники, фото и реальные материалы без публикации неподтверждённых фактов.</p>
+          <div class="card-actions"><a class="btn primary" href="/verification-tasks/">Открыть задачи проверки</a><a class="btn" href="/data-requests/">Готовые запросы</a><a class="btn" href="/reply-review/">Разобрать ответ</a><a class="btn" href="/site-health/">Полный аудит</a></div>
+        </div>
+      </article>
+      <article class="card"><div class="card-inner"><h3>Приоритетные действия</h3>${actionHtml}</div></article>
+      <article class="card"><div class="card-inner"><h3>Карточки в фокусе</h3><p>${priorityHtml}</p><div class="card-actions"><a class="btn" href="/verification-tasks/">Все задачи</a><a class="btn" href="/data/verification_tasks.csv">CSV</a></div></div></article>
+      <article class="card"><div class="card-inner"><h3>Нельзя делать без подтверждения</h3>${blockedHtml}</div></article>
+      ${workPlanHtml}
+    `;
+  }
+
   function renderDraftPanel(slug) {
     const draft = getDraft(slug) || {};
     const status = draft.status || 'new';
@@ -391,14 +460,17 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadCsv(rows, `tos-priority-selection-${new Date().toISOString().slice(0, 10)}.csv`);
   }
 
+  ensureTodayFocusSection();
   ensurePriorityControls();
 
   Promise.all([
     getJson('/data/site_audit.json').catch(() => null),
     getJson('/data/tos_content_audit.json').catch(() => null),
-    getJson('/data/toses.json').catch(() => [])
-  ]).then(([siteAudit, contentAudit, toses]) => {
+    getJson('/data/toses.json').catch(() => []),
+    getJson('/data/site_health.json').catch(() => null)
+  ]).then(([siteAudit, contentAudit, toses, siteHealth]) => {
     buildTosLookup(toses);
+    if (siteHealth) renderTodayFocus(siteHealth);
     if (siteAudit) {
       renderAuditSummary(siteAudit);
       renderNextActions(siteAudit);
