@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const { parseCsv } = require('./lib/csv');
 const { repoPathExists } = require('./lib/path_checks');
 
 const htmlPath = path.join(process.cwd(), 'sources', 'index.html');
+const consentPath = path.join(process.cwd(), 'data', 'publication_consent_checklist.csv');
 
 const requiredInternalLinks = [
   '/update-tos/?type=card#message-builder',
@@ -16,6 +18,16 @@ const requiredInternalLinks = [
   '/publication-consent/',
   '/data-quality/'
 ];
+
+const requiredConsentFields = new Set([
+  'contact_person',
+  'phone',
+  'email',
+  'social',
+  'photo',
+  'logo',
+  'verified_at'
+]);
 
 const requiredPhrases = [
   'Источники данных портала ТОС БГО',
@@ -82,6 +94,7 @@ function localPathFor(link) {
 
 function main() {
   const html = read(htmlPath);
+  const consentRows = parseCsv(read(consentPath));
   const errors = [];
 
   checkContains(errors, html, 'sources/index.html', '<html lang="ru"');
@@ -113,6 +126,17 @@ function main() {
   ['Записать источник', 'Разделить публичное и непубличное', 'Собрать черновик', 'Проверить перед публикацией', 'Провести через очередь', 'Обновить статус карточки'].forEach((step) => {
     if (!html.includes(`<strong>${step}.</strong>`)) {
       errors.push(`sources/index.html: missing source handling step ${step}`);
+    }
+  });
+
+  if (consentRows.length < 2) {
+    errors.push('data/publication_consent_checklist.csv must contain a header and at least one row');
+  }
+
+  const consentFields = new Set(consentRows.slice(1).map((row) => (row[1] || '').trim()).filter(Boolean));
+  requiredConsentFields.forEach((field) => {
+    if (!consentFields.has(field)) {
+      errors.push(`data/publication_consent_checklist.csv: missing source-sensitive field ${field}`);
     }
   });
 
