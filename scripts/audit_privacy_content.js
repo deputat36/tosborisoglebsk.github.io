@@ -1,8 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const { parseCsv } = require('./lib/csv');
 const { repoPathExists } = require('./lib/path_checks');
 
 const htmlPath = path.join(process.cwd(), 'privacy', 'index.html');
+const consentPath = path.join(process.cwd(), 'data', 'publication_consent_checklist.csv');
 
 const requiredInternalLinks = [
   '/update-tos/?type=card#message-builder',
@@ -12,6 +14,15 @@ const requiredInternalLinks = [
   '/collection-board/',
   '/workbench/'
 ];
+
+const requiredConsentFields = new Set([
+  'contact_person',
+  'phone',
+  'email',
+  'social',
+  'photo',
+  'logo'
+]);
 
 const requiredPhrases = [
   'Персональные данные и публикация сведений ТОС БГО',
@@ -74,6 +85,7 @@ function localPathFor(link) {
 
 function main() {
   const html = read(htmlPath);
+  const consentRows = parseCsv(read(consentPath));
   const errors = [];
 
   checkContains(errors, html, 'privacy/index.html', '<html lang="ru"');
@@ -105,6 +117,17 @@ function main() {
   ['личные телефоны и email', 'фотографии детей', 'паспортные данные', 'банковские реквизиты', 'внутренние документы'].forEach((sensitiveItem) => {
     if (!html.includes(sensitiveItem)) {
       errors.push(`privacy/index.html: missing sensitive item ${sensitiveItem}`);
+    }
+  });
+
+  if (consentRows.length < 2) {
+    errors.push('data/publication_consent_checklist.csv must contain a header and at least one row');
+  }
+
+  const consentFields = new Set(consentRows.slice(1).map((row) => (row[1] || '').trim()).filter(Boolean));
+  requiredConsentFields.forEach((field) => {
+    if (!consentFields.has(field)) {
+      errors.push(`data/publication_consent_checklist.csv: missing privacy-sensitive field ${field}`);
     }
   });
 
