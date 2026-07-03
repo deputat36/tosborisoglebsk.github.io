@@ -24,6 +24,14 @@ const requiredFields = new Set([
   'projects_done',
   'verified_at'
 ]);
+const sensitiveRequiredFields = new Set([
+  'contact_person',
+  'phone',
+  'email',
+  'social',
+  'photo',
+  'logo'
+]);
 const allowedTypes = new Set([
   'fact',
   'personal_data',
@@ -75,6 +83,10 @@ function main() {
 
     if (requiredBeforePublish === 'да' && !doNotPublishIf) {
       errors.push(`${line}: required field must describe when not to publish`);
+    }
+
+    if (sensitiveRequiredFields.has(field) && requiredBeforePublish !== 'да') {
+      errors.push(`${line}: sensitive field ${field} must require confirmation before publication`);
     }
 
     if (sensitiveTypes.has(type) && !/не публиковать|неясно|нет подтверждения|без разрешения|оставить без ссылки|использовать временную заглушку/.test(doNotPublishIf + ' ' + nextStep)) {
