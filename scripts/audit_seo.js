@@ -6,6 +6,7 @@ const SITE_URL = 'https://tosborisoglebsk.ru';
 const SKIP_DIRS = new Set(['.git', 'node_modules']);
 const errors = [];
 const warnings = [];
+const pageSnapshots = [];
 
 const SKIP_FILES = new Set([
   '404.html',
@@ -75,6 +76,13 @@ function isInstantRedirectPage(html) {
   return /<meta[^>]+http-equiv=["']refresh["'][^>]+content=["']0\s*;/i.test(html);
 }
 
+function normalizeForDuplicateCheck(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function auditPage(file, sitemapUrls) {
   const html = fs.readFileSync(file, 'utf8');
 
@@ -89,25 +97,49 @@ function auditPage(file, sitemapUrls) {
   const ogDescription = getMeta(html, 'og:description').trim();
   const ogImage = getMeta(html, 'og:image').trim();
   const h1Count = (html.match(/<h1[\s>]/gi) || []).length;
+  const relative = rel(file);
 
-  if (!title) errors.push(`${rel(file)}: нет title`);
-  else if (title.length < 18) warnings.push(`${rel(file)}: title слишком короткий (${title.length})`);
-  else if (title.length > 90) warnings.push(`${rel(file)}: title слишком длинный (${title.length})`);
+  pageSnapshots.push({
+    file: relative,
+    title,
+    description,
+    canonical: canonical || urlForFile(file)
+  });
 
-  if (!description) errors.push(`${rel(file)}: нет meta description`);
-  else if (description.length < 70) warnings.push(`${rel(file)}: description короткий (${description.length})`);
-  else if (description.length > 220) warnings.push(`${rel(file)}: description длинный (${description.length})`);
+  if (!title) errors.push(`${relative}: нет title`);
+  else if (title.length < 18) warnings.push(`${relative}: title слишком короткий (${title.length})`);
+  else if (title.length > 90) warnings.push(`${relative}: title слишком длинный (${title.length})`);
 
-  if (!canonical) errors.push(`${rel(file)}: нет canonical`);
-  else if (!canonical.startsWith(SITE_URL)) errors.push(`${rel(file)}: canonical не на основном домене — ${canonical}`);
+  if (!description) errors.push(`${relative}: нет meta description`);
+  else if (description.length < 70) warnings.push(`${relative}: description короткий (${description.length})`);
+  else if (description.length > 220) warnings.push(`${relative}: description длинный (${description.length})`);
 
-  if (!ogTitle) warnings.push(`${rel(file)}: нет og:title`);
-  if (!ogDescription) warnings.push(`${rel(file)}: нет og:description`);
-  if (!ogImage) warnings.push(`${rel(file)}: нет og:image`);
-  if (h1Count !== 1) warnings.push(`${rel(file)}: количество h1 = ${h1Count}`);
+  if (!canonical) errors.push(`${relative}: нет canonical`);
+  else if (!canonical.startsWith(SITE_URL)) errors.push(`${relative}: canonical не на основном домене — ${canonical}`);
+
+  if (!ogTitle) warnings.push(`${relative}: нет og:title`);
+  if (!ogDescription) warnings.push(`${relative}: нет og:description`);
+  if (!ogImage) warnings.push(`${relative}: нет og:image`);
+  if (h1Count !== 1) warnings.push(`${relative}: количество h1 = ${h1Count}`);
 
   if (sitemapUrls.size && canonical && canonical.startsWith(SITE_URL) && !sitemapUrls.has(canonical)) {
-    warnings.push(`${rel(file)}: canonical не найден в sitemap — ${canonical}`);
+    warnings.push(`${relative}: canonical не найден в sitemap — ${canonical}`);
+  }
+}
+
+function warnDuplicates(field, label) {
+  const map = new Map();
+  for (const page of pageSnapshots) {
+    const value = normalizeForDuplicateCheck(page[field]);
+    if (!value) continue;
+    if (!map.has(value)) map.set(value, []);
+    map.get(value).push(page.file);
+  }
+
+  for (const [value, files] of map.entries()) {
+    if (files.length < 2) continue;
+    const sample = files.slice(0, 5).join(', ');
+    warnings.push(`дублируется ${label} (${files.length} стр.): ${sample}${files.length > 5 ? '...' : ''} — «${value}»`);
   }
 }
 
@@ -125,6 +157,8 @@ function main() {
     .filter((file) => !shouldSkipFile(file));
 
   files.forEach((file) => auditPage(file, sitemapUrls));
+  warnDuplicates('title', 'title');
+  warnDuplicates('description', 'description');
 
   if (warnings.length) {
     console.warn('Предупреждения SEO-аудита:');
@@ -137,7 +171,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(`SEO-аудит пройден. Проверено страниц: ${files.length}`);
+  console.log(`SEO-аудит пройден. Проверено страниц: ${pageSnapshots.length}`);
 }
 
 main();
