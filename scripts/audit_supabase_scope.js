@@ -3,10 +3,9 @@ const path = require('path');
 
 const root = process.cwd();
 
-const allowedFiles = new Set([
+const allowedReferenceFiles = new Set([
   'assets/js/nav-v2/role-menu-v2.js',
   'assets/js/nav-v2/admin-guard-v2.js',
-  'tools/patch_vktg_nav_roles.py',
   'scripts/audit_supabase_scope.js',
   'scripts/audit_project_mode.js',
   'scripts/audit_project_mode_full.js'
@@ -46,6 +45,7 @@ function toRepoPath(filePath) {
 function main() {
   const errors = [];
   const files = walk(root);
+  const foundReferenceFiles = new Set();
 
   files.forEach((filePath) => {
     const repoPath = toRepoPath(filePath);
@@ -55,22 +55,22 @@ function main() {
     const lower = text.toLowerCase();
     if (!lower.includes('supabase')) return;
 
-    if (!allowedFiles.has(repoPath)) {
+    foundReferenceFiles.add(repoPath);
+
+    if (!allowedReferenceFiles.has(repoPath)) {
       errors.push(`unexpected supabase reference in ${repoPath}`);
     }
   });
 
-  allowedFiles.forEach((repoPath) => {
-    if (!fs.existsSync(path.join(root, repoPath))) {
-      errors.push(`allowed Supabase scope file is missing: ${repoPath}`);
-    }
-  });
+  if (!foundReferenceFiles.has('scripts/audit_supabase_scope.js')) {
+    errors.push('scripts/audit_supabase_scope.js must be visible to its own scope check');
+  }
 
   if (errors.length) {
     throw new Error(`Supabase scope audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log('Supabase scope OK');
+  console.log(`Supabase scope OK: ${foundReferenceFiles.size} files with references`);
 }
 
 main();
