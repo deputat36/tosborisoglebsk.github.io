@@ -13,4 +13,4 @@ stage,priority,area,task,mode,deliverable,status
 11,medium,seo-content,"Усилить публичные страницы без выдумывания фактов",assistant,"лучшие тексты, FAQ, навигация, internal links",planned
 12,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent, проверенные публикации",waiting_for_files
 13,low,reporting,"Сделать регулярную сводку состояния проекта",assistant,"docs/STATUS.md и github-tasks",active
-14,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"список кандидатов на объединение",needs_review
+14,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"data/route_cleanup_candidates.csv и docs/ROUTE-CLEANUP.md",active
