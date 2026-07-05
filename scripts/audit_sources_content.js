@@ -29,6 +29,15 @@ const requiredConsentFields = new Set([
   'verified_at'
 ]);
 
+const requiredTrustBoundaryPhrases = [
+  'СМИ и социальные сети помогают найти событие или первоисточник',
+  'не подтверждают актуального председателя',
+  'границы, контакты или официальный статус ТОС',
+  'Рабочая запись не означает, что сведения подтверждены или готовы к публикации',
+  'Переводить карточку в',
+  'только по полной матрице готовности'
+];
+
 const requiredPhrases = [
   'Источники данных портала ТОС БГО',
   'Как формируются карточки ТОС, новости, проекты, потребности и справочные страницы портала ТОС Борисоглебского городского округа',
@@ -106,6 +115,10 @@ function main() {
   checkContains(errors, html, 'sources/index.html', '/assets/js/site.js');
 
   requiredPhrases.forEach((phrase) => {
+    checkContains(errors, html, 'sources/index.html', phrase);
+  });
+
+  requiredTrustBoundaryPhrases.forEach((phrase) => {
     checkContains(errors, html, 'sources/index.html', phrase);
   });
 
