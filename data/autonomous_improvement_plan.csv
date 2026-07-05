@@ -8,7 +8,7 @@ stage,priority,area,task,mode,deliverable,status
 6,high,health-report,"Расширить /site-health/ до понятного управленческого отчёта",assistant,"scripts/generate_site_health_report.js и assets/js/site-health.js",done
 7,medium,technical,"Сделать явные npm-команды проверки",assistant,"package.json: check:js, validate:data, audit:links, audit:seo, audit:health, audit:all",done
 8,medium,technical,"Проверить Actions и Pages",mixed,"updated actions_diagnostics.csv",waiting_for_manual_check
-9,medium,frontend,"Упростить CSS без визуальных изменений",assistant,"комментированный или разделённый CSS с регрессией",planned
+9,medium,frontend,"Упростить CSS без визуальных изменений",assistant,"docs/CSS-MAINTENANCE.md, затем комментарии-разделители в styles.css после проверки",active
 10,medium,ux,"Упростить рабочие маршруты редактора",assistant,"/workbench-routes/ с короткими маршрутами и ссылками на рабочие инструменты",done
 11,medium,seo-content,"Усилить публичные страницы без выдумывания фактов",assistant,"лучшие тексты, FAQ, навигация, internal links",planned
 12,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent, проверенные публикации",waiting_for_files
