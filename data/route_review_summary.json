@@ -1,0 +1,37 @@
+{
+  "updated_at": "2026-07-05",
+  "purpose": "Краткая служебная сводка ролей рабочих страниц портала ТОС БГО.",
+  "source_csv": "/data/route_cleanup_candidates.csv",
+  "source_doc": "/docs/ROUTE-CLEANUP.md",
+  "principle": "Сначала фиксируется роль страницы, затем улучшаются ссылки и пояснения.",
+  "groups": [
+    {
+      "id": "editor",
+      "title": "Редактор",
+      "main": "/workbench/",
+      "related": ["/workbench-routes/", "/collection-board/", "/editorial-workflow/"],
+      "status": "review"
+    },
+    {
+      "id": "data-update",
+      "title": "Актуализация сведений",
+      "main": "/update-tos/",
+      "related": ["/data-update/", "/data-requests/", "/reply-review/"],
+      "status": "review"
+    },
+    {
+      "id": "verification",
+      "title": "Проверка данных",
+      "main": "/verification-guide/",
+      "related": ["/verification-tasks/", "/verification-control/", "/chairperson/verify-card/", "/verification-levels/"],
+      "status": "review"
+    },
+    {
+      "id": "technical-control",
+      "title": "Технический контроль",
+      "main": "/site-health/",
+      "related": ["/audit/", "/data-quality/", "/open-data/", "/github-tasks/", "/actions-check/"],
+      "status": "review"
+    }
+  ]
+}
