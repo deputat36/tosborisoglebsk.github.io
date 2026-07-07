@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T03:30:25.242Z",
+  "generated_at": "2026-07-07T05:35:43.181Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 72,
   "score_breakdown": {
@@ -22,7 +22,7 @@
     "приоритеты автономной работы и блокировки по неподтверждённым данным"
   ],
   "catalog": {
-    "generated_at": "2026-07-07T03:30:24.528Z",
+    "generated_at": "2026-07-07T05:35:42.241Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
