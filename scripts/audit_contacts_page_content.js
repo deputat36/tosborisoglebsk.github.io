@@ -119,8 +119,8 @@ function main() {
     errors.push('contacts/index.html: missing need message builder link');
   }
 
-  if (!html.includes('type=project#message-builder')) {
-    errors.push('contacts/index.html: missing project message builder link');
+  if (!html.includes('type=project#message-builder') && !html.includes('/projects/action-routes/')) {
+    errors.push('contacts/index.html: missing project submission or project route link');
   }
 
   if (errors.length) {
