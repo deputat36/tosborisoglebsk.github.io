@@ -1,0 +1,1179 @@
+{
+  "generated_at": "2026-07-10T16:04:26.306Z",
+  "budgets": {
+    "css_file_bytes": 256000,
+    "js_file_bytes": 256000,
+    "raster_image_bytes": 716800,
+    "svg_image_bytes": 307200,
+    "total_css_bytes": 716800,
+    "total_js_bytes": 1536000
+  },
+  "summary": {
+    "html_pages": 372,
+    "public_pages": 332,
+    "pages_with_issues": 62,
+    "issue_counts": {
+      "buttons_without_type": 44,
+      "form_controls_without_label": 47,
+      "missing_main_landmark": 3,
+      "missing_skip_link": 23
+    },
+    "issue_severity": {
+      "high": 0,
+      "medium": 94,
+      "low": 23
+    },
+    "asset_files": 232,
+    "over_budget_assets": 0,
+    "total_css_bytes": 32380,
+    "total_js_bytes": 1139216,
+    "total_image_bytes": 2464,
+    "total_css_over_budget": false,
+    "total_js_over_budget": false
+  },
+  "page_findings": [
+    {
+      "path": "admin/admin-index-ready.html",
+      "public": false,
+      "size_bytes": 4976,
+      "images": 0,
+      "buttons": 17,
+      "form_controls": 3,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 10
+        },
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "path": "admin/index.html",
+      "public": false,
+      "size_bytes": 5676,
+      "images": 0,
+      "buttons": 16,
+      "form_controls": 3,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 9
+        },
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "path": "audit/index.html",
+      "public": false,
+      "size_bytes": 6247,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 7,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "path": "calendar/index.html",
+      "public": true,
+      "size_bytes": 17290,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 3,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "path": "data-update/index.html",
+      "public": true,
+      "size_bytes": 6167,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 3,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "path": "documents/demo/charter.html",
+      "public": true,
+      "size_bytes": 2949,
+      "images": 0,
+      "buttons": 0,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_main_landmark",
+          "severity": "medium"
+        },
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/demo/report.html",
+      "public": true,
+      "size_bytes": 2762,
+      "images": 0,
+      "buttons": 0,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_main_landmark",
+          "severity": "medium"
+        },
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/create-initiative-card/index.html",
+      "public": true,
+      "size_bytes": 5038,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/create-territory/index.html",
+      "public": true,
+      "size_bytes": 5204,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/meeting-agenda/index.html",
+      "public": true,
+      "size_bytes": 4336,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/meeting-protocol/index.html",
+      "public": true,
+      "size_bytes": 6410,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/meeting-registration/index.html",
+      "public": true,
+      "size_bytes": 5472,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-budget/index.html",
+      "public": true,
+      "size_bytes": 6309,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-checklist/index.html",
+      "public": true,
+      "size_bytes": 5471,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-kit/index.html",
+      "public": true,
+      "size_bytes": 4751,
+      "images": 1,
+      "buttons": 1,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-partner-letter/index.html",
+      "public": true,
+      "size_bytes": 5434,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-passport/index.html",
+      "public": true,
+      "size_bytes": 5776,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-photo-report/index.html",
+      "public": true,
+      "size_bytes": 10907,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-problem/index.html",
+      "public": true,
+      "size_bytes": 4691,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-schedule/index.html",
+      "public": true,
+      "size_bytes": 5518,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/project-support/index.html",
+      "public": true,
+      "size_bytes": 4556,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/tos-charter-draft/index.html",
+      "public": true,
+      "size_bytes": 5538,
+      "images": 0,
+      "buttons": 2,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/tos-creation-checklist/index.html",
+      "public": true,
+      "size_bytes": 3860,
+      "images": 0,
+      "buttons": 2,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/tos-creation-kit/index.html",
+      "public": true,
+      "size_bytes": 6122,
+      "images": 1,
+      "buttons": 1,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/tos-founding-announcement/index.html",
+      "public": true,
+      "size_bytes": 3110,
+      "images": 0,
+      "buttons": 2,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/tos-founding-decisions/index.html",
+      "public": true,
+      "size_bytes": 3402,
+      "images": 0,
+      "buttons": 2,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/tos-founding-protocol/index.html",
+      "public": true,
+      "size_bytes": 4482,
+      "images": 0,
+      "buttons": 2,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "documents/templates/tos-start-list/index.html",
+      "public": true,
+      "size_bytes": 2544,
+      "images": 0,
+      "buttons": 1,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_skip_link",
+          "severity": "low"
+        }
+      ]
+    },
+    {
+      "path": "done/index.html",
+      "public": true,
+      "size_bytes": 12326,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 5,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "path": "field-checklist/index.html",
+      "public": true,
+      "size_bytes": 7838,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "needs/index.html",
+      "public": true,
+      "size_bytes": 18048,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 5,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "path": "news/index.html",
+      "public": true,
+      "size_bytes": 9720,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 3,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "path": "search/index.html",
+      "public": true,
+      "size_bytes": 2784,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 1,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "site-index/index.html",
+      "public": true,
+      "size_bytes": 3449,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 1,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tools/import.html",
+      "public": false,
+      "size_bytes": 8046,
+      "images": 1,
+      "buttons": 4,
+      "form_controls": 2,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "path": "tos/bogana/index.html",
+      "public": true,
+      "size_bytes": 19677,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/chkalovec/index.html",
+      "public": true,
+      "size_bytes": 20250,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/chkalovets/index.html",
+      "public": false,
+      "size_bytes": 599,
+      "images": 0,
+      "buttons": 0,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "missing_main_landmark",
+          "severity": "medium"
+        }
+      ]
+    },
+    {
+      "path": "tos/dzerzhinskogo/index.html",
+      "public": true,
+      "size_bytes": 20029,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/gubari/index.html",
+      "public": true,
+      "size_bytes": 19955,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/index.html",
+      "public": true,
+      "size_bytes": 14761,
+      "images": 1,
+      "buttons": 2,
+      "form_controls": 7,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "path": "tos/ipas/index.html",
+      "public": true,
+      "size_bytes": 19544,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/ivanovka/index.html",
+      "public": true,
+      "size_bytes": 19859,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/kalinka/index.html",
+      "public": true,
+      "size_bytes": 19903,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/mahrovka/index.html",
+      "public": true,
+      "size_bytes": 19688,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/mayak/index.html",
+      "public": true,
+      "size_bytes": 19503,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/mechta/index.html",
+      "public": true,
+      "size_bytes": 19920,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/mirolyubie/index.html",
+      "public": true,
+      "size_bytes": 21037,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/pervomayskiy/index.html",
+      "public": true,
+      "size_bytes": 20472,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/petrovskoe/index.html",
+      "public": true,
+      "size_bytes": 19950,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/pobeda/index.html",
+      "public": true,
+      "size_bytes": 19816,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/podstepki/index.html",
+      "public": true,
+      "size_bytes": 19887,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/port-artur/index.html",
+      "public": true,
+      "size_bytes": 20571,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/prostornyy/index.html",
+      "public": true,
+      "size_bytes": 20047,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/severnyy-39/index.html",
+      "public": true,
+      "size_bytes": 19694,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/tancyrey/index.html",
+      "public": true,
+      "size_bytes": 19575,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/tretyaki/index.html",
+      "public": true,
+      "size_bytes": 19667,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/ulyanovka/index.html",
+      "public": true,
+      "size_bytes": 20240,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/uyutnyy/index.html",
+      "public": true,
+      "size_bytes": 20267,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/vostochnyy/index.html",
+      "public": true,
+      "size_bytes": 19890,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "tos/znamenie/index.html",
+      "public": true,
+      "size_bytes": 19976,
+      "images": 1,
+      "buttons": 3,
+      "form_controls": 0,
+      "issues": [
+        {
+          "type": "buttons_without_type",
+          "severity": "medium",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "path": "update-tos/index.html",
+      "public": true,
+      "size_bytes": 11237,
+      "images": 1,
+      "buttons": 12,
+      "form_controls": 5,
+      "issues": [
+        {
+          "type": "form_controls_without_label",
+          "severity": "medium",
+          "count": 4
+        }
+      ]
+    }
+  ],
+  "largest_assets": [
+    {
+      "path": "data/tos.data.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 38581,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/site.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 35587,
+      "over_budget": false
+    },
+    {
+      "path": "admin/admin.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 27602,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_tos_pages.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 26439,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/workbench.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 25417,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/audit.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 19451,
+      "over_budget": false
+    },
+    {
+      "path": "admin/admin2.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 18681,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_site_health_report.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 17354,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/site-health.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 14659,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/import_vk_news.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 13499,
+      "over_budget": false
+    },
+    {
+      "path": "assets/css/styles.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 11078,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/tos-catalog.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10985,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/update-center.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10685,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/audit_projects_2026_workflow.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10306,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/collection-board.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10200,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/workbench-drafts.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10020,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_content_audit.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9883,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/audit_done_pages_content.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9571,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/audit_needs_pages_content.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9289,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_accessibility_performance_report.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9287,
+      "over_budget": false
+    },
+    {
+      "path": "admin/admin-dashboard.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9258,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_places_pages.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9167,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/needs.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9082,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/audit_verification_tasks.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8683,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_news_pages.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8470,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_project_pages.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8364,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/tos-logos.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8293,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/audit_project_pages_content.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8231,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/outreach-register.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8157,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_need_pages.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8102,
+      "over_budget": false
+    }
+  ],
+  "over_budget_assets": [],
+  "notes": [
+    "Отчёт является измерительным baseline и не заменяет ручную проверку клавиатурной навигации, контраста и экранного диктора.",
+    "Пустой alt может быть корректным для декоративного изображения; ошибкой считается отсутствие атрибута alt.",
+    "Lazy-loading не требуется для логотипов и иконок, но рекомендуется для контентных изображений ниже первого экрана.",
+    "Пороговые значения используются как раннее предупреждение и могут быть уточнены после анализа текущего baseline."
+  ]
+}
