@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
@@ -44,12 +45,6 @@ function dateRu(value) {
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
-function paragraphs(value, fallback) {
-  if (Array.isArray(value) && value.length) return value.filter(Boolean);
-  if (typeof value === 'string' && value.trim()) return [value.trim()];
-  return [fallback || 'Информация уточняется.'];
-}
-
 function stepCard(title, text) {
   return `<article class="card"><div class="card-inner"><span class="tag">${esc(title)}</span><p>${esc(text || 'Информация уточняется.')}</p></div></article>`;
 }
@@ -64,6 +59,10 @@ function makePage(item, toses) {
   const image = item.image || '/assets/img/og-cover.svg';
   const imageFull = image.startsWith('http') ? image : `${SITE_URL}${image}`;
   const gallery = Array.isArray(item.gallery) ? item.gallery : [];
+  const origin = inferContentOrigin(item, 'done');
+  const originLabel = contentOriginLabel(origin);
+  const originClass = contentOriginClass(origin);
+  const originNotice = contentOriginNotice(origin, 'done');
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -97,7 +96,8 @@ function makePage(item, toses) {
   <a class="skip-link" href="#main">Перейти к содержимому</a>
   <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/residents/">Жителям</a><a href="/partners/">Партнёрам</a><a href="/projects/">Проекты</a><a href="/done/">Сделано</a><a href="/needs/">Нужна помощь</a><a href="/documents/">Документы</a><a href="/contacts/">Контакты</a><a href="/sections/">Все разделы</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
   <main id="main">
-    <section class="hero"><div class="container hero-card"><a class="chip" href="/done/">← Сделано ТОСами</a><div class="eyebrow">${esc(item.type || 'История результата')} · ${esc(dateRu(item.date))}</div><h1>${esc(title)}</h1><p class="lead">${esc(summary)}</p><div class="hero-actions">${tos ? `<a class="btn primary" href="/tos/${esc(tos.slug)}/">ТОС «${esc(tos.name)}»</a>` : ''}<a class="btn" href="/done/">Все истории</a><a class="btn" href="/contacts/">Прислать детали</a></div></div></section>
+    <section class="hero"><div class="container hero-card"><a class="chip" href="/done/">← Сделано ТОСами</a><div class="eyebrow">${esc(item.type || 'История результата')} · ${esc(dateRu(item.date))}</div><div class="meta"><span class="tag ${esc(originClass)}">${esc(originLabel)}</span></div><h1>${esc(title)}</h1><p class="lead">${esc(summary)}</p><div class="hero-actions">${tos ? `<a class="btn primary" href="/tos/${esc(tos.slug)}/">ТОС «${esc(tos.name)}»</a>` : ''}<a class="btn" href="/done/">Все истории</a><a class="btn" href="/contacts/">Прислать детали</a></div></div></section>
+    <section class="section tight"><div class="container notice"><b>Статус материала:</b> ${esc(originNotice)}</div></section>
     <section class="section"><div class="container grid">${stepCard('Было', item.before)}${stepCard('Сделали', item.done)}${stepCard('Стало', item.result)}</div></section>
     <section class="section"><div class="container prose"><p><b>Кто участвовал:</b> ${esc(item.participants || 'Информация уточняется.')}</p>${item.needs_details ? `<div class="notice"><b>Что нужно уточнить для полной истории</b><br>${esc(item.needs_details)}</div>` : ''}${gallery.length ? `<div class="grid">${gallery.map((src) => `<img src="${esc(src)}" alt="${esc(title)}" loading="lazy" style="width:100%;border-radius:20px;border:1px solid var(--line);">`).join('')}</div>` : ''}<hr class="sep"/><p class="source"><b>Источник:</b> ${esc(item.source_label || 'Редакция портала')}${item.source_url ? `<br><a href="${esc(item.source_url)}"${item.source_url.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(item.source_url)}</a>` : ''}</p><div class="card-actions"><a class="btn primary" href="/contacts/">Прислать фото или уточнение</a><a class="btn" href="/needs/">Потребности ТОСов</a><a class="btn" href="/projects/">Банк проектов</a></div></div></section>
   </main>
