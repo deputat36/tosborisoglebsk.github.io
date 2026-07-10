@@ -27,7 +27,7 @@ function main() {
     items.forEach((item, index) => {
       const label = `${collection} row ${index + 1} ${item?.id || 'unknown'}`;
       const explicit = String(item?.content_origin || '').trim().toLowerCase();
-      const inferred = inferContentOrigin(item, collection);
+      const inferred = inferContentOrigin(item, collection, { ignoreExplicit: true });
 
       if (!CONTENT_ORIGINS.has(explicit)) {
         errors.push(`${label}: invalid or missing content_origin ${explicit || '(empty)'}`);
