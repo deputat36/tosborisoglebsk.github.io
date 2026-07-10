@@ -9,7 +9,7 @@ function routeEsc(value) {
 }
 
 function statusClass(status) {
-  if (status === 'keep' || status === 'keep_separate') return 'ok';
+  if (status === 'keep' || status === 'keep_separate' || status === 'link_cleanup_done') return 'ok';
   if (status === 'review' || status === 'ready_for_link_cleanup') return 'warn';
   return '';
 }
@@ -26,9 +26,14 @@ function renderPreconditions(items) {
   return `<ul>${preconditions.map((item) => `<li>${routeEsc(item)}</li>`).join('')}</ul>`;
 }
 
+function renderCompletion(proposal) {
+  if (proposal?.status !== 'link_cleanup_done') return '';
+  return `<div class="notice"><b>Выполнено:</b> ${routeEsc(proposal.completed_at || 'дата не указана')}. ${routeEsc(proposal.evidence || 'Доказательство не указано')}</div>`;
+}
+
 function renderConsolidation(group) {
   const proposal = group?.consolidation || {};
-  return `<article class="card full"><div class="card-inner"><div class="meta"><span class="tag ${statusClass(proposal.status)}">${routeEsc(proposal.status || 'status not set')}</span><span class="tag">предложение по консолидации</span></div><h3>${routeEsc(proposal.recommendation || 'Рекомендация не заполнена')}</h3><p><b>Изменение навигации:</b> ${routeEsc(proposal.navigation_change || 'Не определено')}</p><p><b>Не делать:</b> ${routeEsc(proposal.do_not_do || 'Не определено')}</p><div class="notice"><b>До изменения:</b>${renderPreconditions(proposal.preconditions)}</div></div></article>`;
+  return `<article class="card full"><div class="card-inner"><div class="meta"><span class="tag ${statusClass(proposal.status)}">${routeEsc(proposal.status || 'status not set')}</span><span class="tag">предложение по консолидации</span></div><h3>${routeEsc(proposal.recommendation || 'Рекомендация не заполнена')}</h3><p><b>Изменение навигации:</b> ${routeEsc(proposal.navigation_change || 'Не определено')}</p><p><b>Не делать:</b> ${routeEsc(proposal.do_not_do || 'Не определено')}</p><div class="notice"><b>До изменения:</b>${renderPreconditions(proposal.preconditions)}</div>${renderCompletion(proposal)}</div></article>`;
 }
 
 function renderGroup(group) {
@@ -47,7 +52,7 @@ async function loadRouteGovernance() {
     const groups = Array.isArray(data.groups) ? data.groups : [];
 
     root.innerHTML = groups.length
-      ? `<div class="notice"><b>Групп в реестре:</b> ${groups.length}. Обновлено: ${routeEsc(data.updated_at || 'дата не указана')}. Для каждой группы зафиксированы роли и безопасное предложение по консолидации.</div>${groups.map(renderGroup).join('')}`
+      ? `<div class="notice"><b>Групп в реестре:</b> ${groups.length}. Обновлено: ${routeEsc(data.updated_at || 'дата не указана')}. Для каждой группы зафиксированы роли, безопасное предложение и состояние выполнения.</div>${groups.map(renderGroup).join('')}`
       : '<div class="notice">Группы маршрутов пока не добавлены.</div>';
   } catch (error) {
     root.innerHTML = '<div class="notice">Карта маршрутов не загрузилась. Проверьте файл <code>/data/route_review_summary.json</code>.</div>';

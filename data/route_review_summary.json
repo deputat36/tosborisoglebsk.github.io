@@ -5,7 +5,7 @@
   "source_doc": "/docs/ROUTE-CLEANUP.md",
   "principle": "Ничего не удалять и не объединять автоматически. Сначала фиксируется роль страницы, затем улучшаются пояснения и перекрёстные ссылки.",
   "allowed_statuses": ["keep", "review", "merge_candidate", "archive_candidate"],
-  "allowed_consolidation_statuses": ["ready_for_link_cleanup", "keep_separate", "blocked_by_manual_review"],
+  "allowed_consolidation_statuses": ["ready_for_link_cleanup", "link_cleanup_done", "keep_separate", "blocked_by_manual_review"],
   "groups": [
     {
       "id": "editor-workflow",
@@ -22,11 +22,13 @@
       "status": "review",
       "decision": "Сохранить отдельные уровни и улучшать взаимные ссылки.",
       "consolidation": {
-        "status": "ready_for_link_cleanup",
+        "status": "link_cleanup_done",
         "recommendation": "Оставить /workbench/ единственным главным входом, а три связанные страницы обозначить как сценарии, статусы и подробную методику.",
-        "navigation_change": "На связанных страницах добавить заметную ссылку «Вернуться в рабочую панель» и убрать конкурирующие формулировки «главная рабочая страница».",
+        "navigation_change": "На связанных страницах добавлена заметная ссылка «Вернуться в рабочую панель» и убраны конкурирующие формулировки главного рабочего входа.",
         "do_not_do": "Не объединять локальную доску статусов с инструкцией и не переносить статусы из браузера в публичную страницу.",
-        "preconditions": ["Проверить входящие ссылки", "Сохранить noindex служебных страниц", "Не менять локальное хранение статусов"]
+        "preconditions": ["Проверить входящие ссылки", "Сохранить noindex служебных страниц", "Не менять локальное хранение статусов"],
+        "completed_at": "2026-07-10",
+        "evidence": "Возврат к /workbench/ и отдельные роли защищены audit_route_governance.js."
       }
     },
     {
@@ -44,11 +46,13 @@
       "status": "review",
       "decision": "Не объединять публичный путь и внутреннюю редакционную обработку.",
       "consolidation": {
-        "status": "ready_for_link_cleanup",
+        "status": "link_cleanup_done",
         "recommendation": "Сохранить /update-tos/ публичным входом, а /data-requests/ и /reply-review/ явно обозначить внутренними этапами редакции.",
-        "navigation_change": "Добавить на внутренних страницах метку «для редактора» и последовательность: подготовить запрос → получить ответ → проверить → обновить карточку.",
+        "navigation_change": "На внутренних страницах добавлены метка «для редактора», возврат в workbench и последовательность: подготовить запрос → получить ответ → проверить → обновить карточку.",
         "do_not_do": "Не выводить внутренние журналы, черновики и непубличные контакты в пользовательскую навигацию /update-tos/.",
-        "preconditions": ["Проверить robots/noindex", "Сохранить разделение аудиторий", "Проверить ссылки на конструктор сообщения"]
+        "preconditions": ["Проверить robots/noindex", "Сохранить разделение аудиторий", "Проверить ссылки на конструктор сообщения"],
+        "completed_at": "2026-07-10",
+        "evidence": "Роли /data-update/, /data-requests/ и /reply-review/ проверяются audit_route_governance.js."
       }
     },
     {

@@ -4,7 +4,7 @@ const path = require('path');
 const ROOT = process.cwd();
 const REGISTRY_PATH = path.join(ROOT, 'data', 'route_review_summary.json');
 const ALLOWED_STATUSES = new Set(['keep', 'review', 'merge_candidate', 'archive_candidate']);
-const ALLOWED_CONSOLIDATION_STATUSES = new Set(['ready_for_link_cleanup', 'keep_separate', 'blocked_by_manual_review']);
+const ALLOWED_CONSOLIDATION_STATUSES = new Set(['ready_for_link_cleanup', 'link_cleanup_done', 'keep_separate', 'blocked_by_manual_review']);
 
 function routeToFile(route) {
   if (typeof route !== 'string' || !route.startsWith('/')) return null;
@@ -71,41 +71,90 @@ function validateConsolidation(errors, label, group) {
   if (group?.status === 'keep' && status !== 'keep_separate') {
     errors.push(`${label}: keep group must use keep_separate consolidation status`);
   }
-  if (status === 'ready_for_link_cleanup' && group?.status !== 'review') {
-    errors.push(`${label}: ready_for_link_cleanup requires group status review`);
+  if ((status === 'ready_for_link_cleanup' || status === 'link_cleanup_done') && group?.status !== 'review') {
+    errors.push(`${label}: ${status} requires group status review`);
+  }
+
+  if (status === 'link_cleanup_done') {
+    const completedAt = String(proposal.completed_at || '').trim();
+    const evidence = String(proposal.evidence || '').trim();
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(completedAt)) errors.push(`${label}: completed_at must be YYYY-MM-DD for completed cleanup`);
+    if (evidence.length < 30) errors.push(`${label}: evidence is required for completed cleanup`);
+  } else {
+    if (proposal.completed_at) errors.push(`${label}: completed_at is allowed only for link_cleanup_done`);
+    if (proposal.evidence) errors.push(`${label}: evidence is allowed only for link_cleanup_done`);
   }
 }
 
-function validateEditorWorkflowCleanup(errors) {
-  const pages = [
-    {
-      route: '/workbench-routes/',
-      required: ['href="/workbench/"', 'Роль страницы:', 'короткие сценарии']
-    },
-    {
-      route: '/collection-board/',
-      required: ['href="/workbench/"', 'Роль страницы:', 'локальная доска', 'data/outreach_register.csv']
-    },
-    {
-      route: '/editorial-workflow/',
-      required: ['href="/workbench/"', 'Роль страницы:', 'подробная инструкция', '/collection-board/']
-    }
-  ];
+function assertPageMarkers(errors, prefix, route, required, forbidden = []) {
+  const filePath = routeToFile(route);
+  if (!filePath || !fs.existsSync(filePath)) {
+    errors.push(`${prefix}: missing route ${route}`);
+    return;
+  }
 
-  pages.forEach(({ route, required }) => {
-    const filePath = routeToFile(route);
-    if (!filePath || !fs.existsSync(filePath)) {
-      errors.push(`editor-workflow cleanup: missing route ${route}`);
-      return;
-    }
-
-    const html = fs.readFileSync(filePath, 'utf8');
-    required.forEach((marker) => {
-      if (!html.includes(marker)) {
-        errors.push(`editor-workflow cleanup: ${route} missing marker ${marker}`);
-      }
-    });
+  const html = fs.readFileSync(filePath, 'utf8');
+  required.forEach((marker) => {
+    if (!html.includes(marker)) errors.push(`${prefix}: ${route} missing marker ${marker}`);
   });
+  forbidden.forEach((marker) => {
+    if (html.includes(marker)) errors.push(`${prefix}: ${route} must not contain marker ${marker}`);
+  });
+}
+
+function validateEditorWorkflowCleanup(errors) {
+  assertPageMarkers(errors, 'editor-workflow cleanup', '/workbench-routes/', [
+    'href="/workbench/"',
+    'Роль страницы:',
+    'короткие сценарии'
+  ]);
+  assertPageMarkers(errors, 'editor-workflow cleanup', '/collection-board/', [
+    'href="/workbench/"',
+    'Роль страницы:',
+    'локальная доска',
+    'data/outreach_register.csv'
+  ]);
+  assertPageMarkers(errors, 'editor-workflow cleanup', '/editorial-workflow/', [
+    'href="/workbench/"',
+    'Роль страницы:',
+    'подробная инструкция',
+    '/collection-board/'
+  ]);
+}
+
+function validateDataUpdateCleanup(errors) {
+  assertPageMarkers(errors, 'data-update cleanup', '/data-update/', [
+    'Публичная сводка актуализации',
+    'не принимает сведения',
+    'href="/update-tos/?type=card#message-builder"',
+    'Публичная передача и редакционная проверка — разные этапы'
+  ]);
+
+  assertPageMarkers(errors, 'data-update cleanup', '/data-requests/', [
+    'name="robots" content="noindex,nofollow"',
+    'Для редактора — этап 1 из 3',
+    'href="/workbench/"',
+    'href="/reply-review/"',
+    'href="/update-tos/?type=card#message-builder"',
+    'Подготовленный текст сам по себе не означает, что запрос отправлен'
+  ]);
+
+  assertPageMarkers(errors, 'data-update cleanup', '/reply-review/', [
+    'name="robots" content="noindex,nofollow"',
+    'Для редактора — этап 2 из 3',
+    'href="/workbench/"',
+    'href="/data-requests/"',
+    'href="/update-tos/?type=card#message-builder"',
+    'Эта страница не является публичной формой передачи сведений'
+  ]);
+
+  assertPageMarkers(errors, 'data-update cleanup', '/update-tos/', [
+    'Передача материалов',
+    'id="message-builder"'
+  ], [
+    'href="/data-requests/"',
+    'href="/reply-review/"'
+  ]);
 }
 
 function main() {
@@ -149,6 +198,7 @@ function main() {
   });
 
   validateEditorWorkflowCleanup(errors);
+  validateDataUpdateCleanup(errors);
 
   const pagePath = path.join(ROOT, 'route-cleanup', 'index.html');
   const scriptPath = path.join(ROOT, 'assets', 'js', 'route-cleanup.js');
@@ -170,6 +220,8 @@ function main() {
     if (!script.includes('consolidation')) errors.push('route cleanup renderer must display consolidation proposals');
     if (!script.includes('navigation_change')) errors.push('route cleanup renderer must display navigation_change');
     if (!script.includes('do_not_do')) errors.push('route cleanup renderer must display do_not_do');
+    if (!script.includes('completed_at')) errors.push('route cleanup renderer must display completed_at');
+    if (!script.includes('evidence')) errors.push('route cleanup renderer must display completion evidence');
   }
 
   if (errors.length) throw new Error(`Route governance audit failed:\n${errors.join('\n')}`);
@@ -180,7 +232,7 @@ function main() {
     return acc;
   }, {});
 
-  console.log(`Route governance OK: ${groups.length} groups, ${seenRoutes.size} unique routes, proposals ${JSON.stringify(proposalCounts)}, editor workflow return links protected`);
+  console.log(`Route governance OK: ${groups.length} groups, ${seenRoutes.size} unique routes, proposals ${JSON.stringify(proposalCounts)}, completed cleanup evidence protected`);
 }
 
 main();
