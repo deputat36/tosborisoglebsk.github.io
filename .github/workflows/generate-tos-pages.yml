@@ -105,6 +105,8 @@ jobs:
         run: node scripts/patch_project_passport_label.js
       - name: Patch llms links
         run: node scripts/patch_llms_links.js
+      - name: Patch accessibility basics
+        run: node scripts/patch_accessibility_basics.js
       - name: Generate accessibility and performance baseline
         run: node scripts/generate_accessibility_performance_report.js
       - name: Generate site health report
