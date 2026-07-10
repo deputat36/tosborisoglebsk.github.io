@@ -51,6 +51,7 @@ function makeNeed(tos) {
   return {
     id: needId(tos),
     status: 'published',
+    content_origin: 'request',
     date: DATE,
     tos_slug: tos.slug,
     title: `Нужно уточнить данные и материалы ТОС «${tos.name}»`,
@@ -69,6 +70,7 @@ function makeProject(tos) {
     title: `Информационный стенд и сбор инициатив ТОС «${tos.name}»`,
     type: 'Коммуникации и публичность',
     status: 'published',
+    content_origin: 'starter',
     tos_slug: tos.slug,
     description: `Стартовая проектная идея для ТОС «${tos.name}»: оформить понятную точку информирования жителей о границах ТОС, контактах председателя, новостях, планах, QR-коде на карточку территории и способах предложить инициативу.`,
     grant_logic: 'Проект повышает открытость ТОС, помогает вовлекать жителей, собирать предложения, информировать людей без постоянного доступа к соцсетям и фиксировать работу территории.',
@@ -99,11 +101,14 @@ function main() {
   let projectCount = 0;
 
   for (const tos of toses) {
-    if (!needs.some((need) => need && need.tos_slug === tos.slug)) {
+    const existingNeed = needs.find((need) => need && need.id === needId(tos));
+    if (existingNeed || !needs.some((need) => need && need.tos_slug === tos.slug)) {
       upsertById(needs, makeNeed(tos));
       needCount += 1;
     }
-    if (!projects.some((project) => project && project.tos_slug === tos.slug)) {
+
+    const existingProject = projects.find((project) => project && project.id === projectId(tos));
+    if (existingProject || !projects.some((project) => project && project.tos_slug === tos.slug)) {
       upsertById(projects, makeProject(tos));
       projectCount += 1;
     }
