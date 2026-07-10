@@ -8,6 +8,24 @@ const projectEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => 
 
 const projectPublished = (item) => item && item.status !== 'draft';
 
+function projectOrigin(item) {
+  if (['verified', 'editorial', 'starter', 'request'].includes(item.content_origin)) return item.content_origin;
+  if (String(item.id || '').startsWith('public-stand-and-ideas-')) return 'starter';
+  return 'editorial';
+}
+
+function projectOriginTag(item) {
+  const origin = projectOrigin(item);
+  const labels = {
+    verified: 'Подтверждено источником',
+    editorial: 'Редакционный материал',
+    starter: 'Стартовая идея',
+    request: 'Запрос материалов'
+  };
+  const className = origin === 'verified' ? 'ok' : origin === 'request' ? 'warn' : '';
+  return `<span class="tag ${className}">${projectEsc(labels[origin])}</span>`;
+}
+
 async function loadProjectsData() {
   const [projects, toses] = await Promise.all([
     fetch('/data/projects.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
@@ -28,6 +46,7 @@ function projectCard(item, toses) {
   const steps = Array.isArray(item.steps) ? item.steps.slice(0, 3) : [];
   return `<article class="list-item project-card">
     <div class="meta">
+      ${projectOriginTag(item)}
       <span class="tag">${projectEsc(item.type || 'Проект')}</span>
       <span class="tag ${item.status === 'published' ? 'ok' : ''}">${projectEsc(item.status === 'published' ? 'Опубликовано' : item.status || 'Статус уточняется')}</span>
       ${tosName ? `<span class="tag">${projectEsc(tosName)}</span>` : ''}

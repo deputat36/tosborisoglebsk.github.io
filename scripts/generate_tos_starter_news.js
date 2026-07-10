@@ -9,6 +9,7 @@ const DATE = '2026-06-16';
 const VERIFIED_NEWS = {
   id: 'mirolyubie-project-winner-2026',
   status: 'published',
+  content_origin: 'verified',
   date: '2026-06-24',
   category: 'Конкурсы',
   tos_slug: 'mirolyubie',
@@ -42,6 +43,7 @@ function makeNews(tos) {
   return {
     id: newsId(tos),
     status: 'published',
+    content_origin: 'request',
     date: DATE,
     category: 'Сбор материалов',
     tos_slug: tos.slug,
@@ -67,20 +69,24 @@ function upsertById(items, item) {
 function main() {
   const toses = readJson(TOSES_PATH).filter((tos) => tos && tos.slug && tos.status !== 'draft');
   const news = readJson(NEWS_PATH);
-  let created = 0;
+  let synchronized = 0;
 
   upsertById(news, VERIFIED_NEWS);
 
   for (const tos of toses) {
-    const hasLinkedNews = news.some((item) => item && item.status !== 'draft' && item.tos_slug === tos.slug);
-    if (hasLinkedNews) continue;
-    upsertById(news, makeNews(tos));
-    created += 1;
+    const starterId = newsId(tos);
+    const existingStarter = news.find((item) => item && item.id === starterId);
+    const hasFactualNews = news.some((item) => item && item.status !== 'draft' && item.tos_slug === tos.slug && item.id !== starterId && item.content_origin !== 'request');
+
+    if (existingStarter || !hasFactualNews) {
+      upsertById(news, makeNews(tos));
+      synchronized += 1;
+    }
   }
 
   writeJson(NEWS_PATH, news);
   console.log(`Verified news synchronized: ${VERIFIED_NEWS.id}`);
-  console.log(`Starter TOS news generated or updated: ${created}`);
+  console.log(`Starter TOS news synchronized: ${synchronized}`);
 }
 
 main();

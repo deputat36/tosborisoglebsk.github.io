@@ -61,12 +61,18 @@ jobs:
         run: node scripts/generate_tos_starter_news.js
       - name: Generate starter TOS result stories
         run: node scripts/generate_tos_starter_done.js
+      - name: Synchronize content origins
+        run: node scripts/migrate_content_origins.js
+      - name: Generate content origin metrics
+        run: node scripts/generate_content_origin_report.js
       - name: Generate place pages
         run: node scripts/generate_places_pages.js
       - name: Generate RSS feed
         run: node scripts/generate_rss.js
       - name: Validate JSON data
         run: node scripts/validate_data.js
+      - name: Audit content origins
+        run: node scripts/audit_content_origins.js
       - name: Audit TOS data
         run: node scripts/audit_tos_data.js
       - name: Generate content audit
@@ -121,6 +127,9 @@ jobs:
           path: project-audit.log
           if-no-files-found: warn
           retention-days: 7
+      - name: Remove temporary audit log
+        if: always()
+        run: rm -f project-audit.log
       - name: Commit generated pages, sitemap and audit
         if: github.event_name != 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -25,6 +25,7 @@ function makeDone(tos) {
   return {
     id: doneId(tos),
     status: 'published',
+    content_origin: 'request',
     date: DATE,
     tos_slug: tos.slug,
     type: 'Архив результата уточняется',
@@ -49,17 +50,21 @@ function upsertById(items, item) {
 function main() {
   const toses = readJson(TOSES_PATH).filter((tos) => tos && tos.slug && tos.status !== 'draft');
   const done = readJson(DONE_PATH);
-  let created = 0;
+  let synchronized = 0;
 
   for (const tos of toses) {
-    const hasLinkedDone = done.some((item) => item && item.status !== 'draft' && item.tos_slug === tos.slug);
-    if (hasLinkedDone) continue;
-    upsertById(done, makeDone(tos));
-    created += 1;
+    const starterId = doneId(tos);
+    const existingStarter = done.find((item) => item && item.id === starterId);
+    const hasFactualResult = done.some((item) => item && item.status !== 'draft' && item.tos_slug === tos.slug && item.id !== starterId && item.content_origin !== 'request');
+
+    if (existingStarter || !hasFactualResult) {
+      upsertById(done, makeDone(tos));
+      synchronized += 1;
+    }
   }
 
   writeJson(DONE_PATH, done);
-  console.log(`Starter TOS result stories generated or updated: ${created}`);
+  console.log(`Starter TOS result requests synchronized: ${synchronized}`);
 }
 
 main();
