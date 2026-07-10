@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T16:06:47.696Z",
+  "generated_at": "2026-07-10T16:10:30.735Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -11,22 +11,20 @@
   "summary": {
     "html_pages": 372,
     "public_pages": 332,
-    "pages_with_issues": 62,
+    "pages_with_issues": 38,
     "issue_counts": {
       "buttons_without_type": 44,
-      "form_controls_without_label": 47,
-      "missing_main_landmark": 3,
-      "missing_skip_link": 23
+      "form_controls_without_label": 47
     },
     "issue_severity": {
       "high": 0,
-      "medium": 94,
-      "low": 23
+      "medium": 91,
+      "low": 0
     },
-    "asset_files": 233,
+    "asset_files": 234,
     "over_budget_assets": 0,
     "total_css_bytes": 32380,
-    "total_js_bytes": 1141831,
+    "total_js_bytes": 1144021,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -35,7 +33,7 @@
     {
       "path": "admin/admin-index-ready.html",
       "public": false,
-      "size_bytes": 4976,
+      "size_bytes": 5064,
       "images": 0,
       "buttons": 17,
       "form_controls": 3,
@@ -55,7 +53,7 @@
     {
       "path": "admin/index.html",
       "public": false,
-      "size_bytes": 5676,
+      "size_bytes": 5764,
       "images": 0,
       "buttons": 16,
       "form_controls": 3,
@@ -114,336 +112,6 @@
           "type": "form_controls_without_label",
           "severity": "medium",
           "count": 3
-        }
-      ]
-    },
-    {
-      "path": "documents/demo/charter.html",
-      "public": true,
-      "size_bytes": 2949,
-      "images": 0,
-      "buttons": 0,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_main_landmark",
-          "severity": "medium"
-        },
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/demo/report.html",
-      "public": true,
-      "size_bytes": 2762,
-      "images": 0,
-      "buttons": 0,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_main_landmark",
-          "severity": "medium"
-        },
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/create-initiative-card/index.html",
-      "public": true,
-      "size_bytes": 5038,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/create-territory/index.html",
-      "public": true,
-      "size_bytes": 5204,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/meeting-agenda/index.html",
-      "public": true,
-      "size_bytes": 4336,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/meeting-protocol/index.html",
-      "public": true,
-      "size_bytes": 6410,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/meeting-registration/index.html",
-      "public": true,
-      "size_bytes": 5472,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-budget/index.html",
-      "public": true,
-      "size_bytes": 6309,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-checklist/index.html",
-      "public": true,
-      "size_bytes": 5471,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-kit/index.html",
-      "public": true,
-      "size_bytes": 4751,
-      "images": 1,
-      "buttons": 1,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-partner-letter/index.html",
-      "public": true,
-      "size_bytes": 5434,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-passport/index.html",
-      "public": true,
-      "size_bytes": 5776,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-photo-report/index.html",
-      "public": true,
-      "size_bytes": 10907,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-problem/index.html",
-      "public": true,
-      "size_bytes": 4691,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-schedule/index.html",
-      "public": true,
-      "size_bytes": 5518,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/project-support/index.html",
-      "public": true,
-      "size_bytes": 4556,
-      "images": 1,
-      "buttons": 3,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/tos-charter-draft/index.html",
-      "public": true,
-      "size_bytes": 5538,
-      "images": 0,
-      "buttons": 2,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/tos-creation-checklist/index.html",
-      "public": true,
-      "size_bytes": 3860,
-      "images": 0,
-      "buttons": 2,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/tos-creation-kit/index.html",
-      "public": true,
-      "size_bytes": 6122,
-      "images": 1,
-      "buttons": 1,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/tos-founding-announcement/index.html",
-      "public": true,
-      "size_bytes": 3110,
-      "images": 0,
-      "buttons": 2,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/tos-founding-decisions/index.html",
-      "public": true,
-      "size_bytes": 3402,
-      "images": 0,
-      "buttons": 2,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/tos-founding-protocol/index.html",
-      "public": true,
-      "size_bytes": 4482,
-      "images": 0,
-      "buttons": 2,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
-        }
-      ]
-    },
-    {
-      "path": "documents/templates/tos-start-list/index.html",
-      "public": true,
-      "size_bytes": 2544,
-      "images": 0,
-      "buttons": 1,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_skip_link",
-          "severity": "low"
         }
       ]
     },
@@ -579,20 +247,6 @@
           "type": "buttons_without_type",
           "severity": "medium",
           "count": 1
-        }
-      ]
-    },
-    {
-      "path": "tos/chkalovets/index.html",
-      "public": false,
-      "size_bytes": 599,
-      "images": 0,
-      "buttons": 0,
-      "form_controls": 0,
-      "issues": [
-        {
-          "type": "missing_main_landmark",
-          "severity": "medium"
         }
       ]
     },
