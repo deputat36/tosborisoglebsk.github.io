@@ -105,6 +105,8 @@ jobs:
         run: node scripts/patch_project_passport_label.js
       - name: Patch llms links
         run: node scripts/patch_llms_links.js
+      - name: Generate accessibility and performance baseline
+        run: node scripts/generate_accessibility_performance_report.js
       - name: Generate site health report
         run: node scripts/generate_site_health_report.js
       - name: Generate public index
@@ -117,6 +119,8 @@ jobs:
         run: node scripts/audit_site_links.js
       - name: Audit SEO basics
         run: node scripts/audit_seo.js
+      - name: Audit accessibility and performance baseline
+        run: node scripts/audit_accessibility_performance_report.js
       - name: Run full project mode audits
         run: |
           set -o pipefail
