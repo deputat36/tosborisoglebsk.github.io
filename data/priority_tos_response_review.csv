@@ -1,0 +1,5 @@
+tos,slug,review_status,response_received_at,response_source_type,public_source_url,private_source_recorded,chairperson_confirmed,boundaries_confirmed,public_phone_confirmed,email_confirmed,social_confirmed,logo_rights_confirmed,photo_rights_confirmed,publication_consent_confirmed,verification_decision,next_step,notes
+"ТОС «Ивановка»","ivanovka","Нет ответа","","","","","","","","","","","","","","Не заполнять до получения ответа и фиксации источника",""
+"ТОС «Подстёпки»","podstepki","Нет ответа","","","","","","","","","","","","","","Не заполнять до получения ответа и фиксации источника",""
+"ТОС «Губари»","gubari","Нет ответа","","","","","","","","","","","","","","Не заполнять до получения ответа и фиксации источника",""
+"ТОС «Танцырей»","tancyrey","Нет ответа","","","","","","","","","","","","","","Не заполнять до получения ответа и фиксации источника",""
