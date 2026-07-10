@@ -1,19 +1,14 @@
-name: Generate material pages
+name: Generate material pages manually
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - release-2025-12-22
-    paths:
-      - "data/articles.json"
-      - "data/toses.json"
-      - "data/news.json"
-      - "data/projects.json"
-      - "scripts/generate_material_pages.js"
 
 permissions:
   contents: write
+
+concurrency:
+  group: manual-generate-materials-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   generate:
@@ -23,17 +18,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-
+          node-version: '24'
       - name: Generate material pages
         run: node scripts/generate_material_pages.js
-
+      - name: Generate accurate sitemap
+        run: node scripts/generate_sitemap.js
       - name: Commit generated files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Generate SEO material pages
-          file_pattern: materials/*/index.html sitemap.xml
+          commit_message: 'Generate SEO material pages manually'
+          file_pattern: 'materials/*/index.html sitemap.xml'

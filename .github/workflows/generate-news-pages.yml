@@ -1,17 +1,14 @@
-name: Generate news pages
+name: Generate news pages manually
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - release-2025-12-22
-    paths:
-      - 'data/news.json'
-      - 'data/toses.json'
-      - 'scripts/generate_news_pages.js'
 
 permissions:
   contents: write
+
+concurrency:
+  group: manual-generate-news-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   generate:
@@ -24,11 +21,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
       - name: Generate news pages
         run: node scripts/generate_news_pages.js
+      - name: Generate accurate sitemap
+        run: node scripts/generate_sitemap.js
       - name: Commit generated pages
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Generate SEO news pages'
+          commit_message: 'Generate SEO news pages manually'
           file_pattern: 'news/*/index.html sitemap.xml'

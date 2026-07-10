@@ -13,7 +13,7 @@ on:
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
-      - '.github/workflows/generate-tos-pages.yml'
+      - '.github/workflows/*.yml'
   push:
     branches:
       - release-2025-12-22
@@ -25,7 +25,7 @@ on:
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
-      - '.github/workflows/generate-tos-pages.yml'
+      - '.github/workflows/*.yml'
 
 permissions:
   contents: write
@@ -87,6 +87,8 @@ jobs:
         run: node scripts/generate_tos_pages.js
       - name: Generate news pages
         run: node scripts/generate_news_pages.js
+      - name: Generate material pages
+        run: node scripts/generate_material_pages.js
       - name: Generate done pages
         run: node scripts/generate_done_pages.js
       - name: Generate need pages
