@@ -67,6 +67,14 @@ async function loadReport() {
   }
 }
 
+async function loadContentOriginReport() {
+  try {
+    return await fetchJson('/data/content_origin_report.json');
+  } catch {
+    return null;
+  }
+}
+
 function penaltyList(breakdown) {
   const penalties = breakdown?.penalties || {};
   const labels = {
@@ -101,6 +109,40 @@ function renderSummary(report, summaryBox) {
     ${scope.length ? `<div class="notice"><b>Что проверяется:</b> ${scope.map(healthEsc).join('; ')}.</div>` : ''}
     ${renderFindings(report)}
     ${report.fallback ? '<div class="notice"><b>Временный режим:</b> основной отчёт <code>/data/site_health.json</code> не найден, поэтому показана сводка на основе аудита карточек ТОС. После ручного запуска <code>Generate TOS pages</code> здесь появится полный технический отчёт.</div>' : ''}
+    <p class="tiny">Отчёт сформирован: ${report.generated_at ? new Date(report.generated_at).toLocaleString('ru-RU') : '—'}.</p>
+  `;
+}
+
+function originCollectionRows(report) {
+  const labels = {
+    news: 'Новости',
+    projects: 'Проекты',
+    needs: 'Потребности',
+    done: 'Истории результата'
+  };
+  return Object.entries(report.collections || {}).map(([key, item]) => `<tr><td>${healthEsc(labels[key] || key)}</td><td>${healthEsc(item.total || 0)}</td><td>${healthEsc(item.verified || 0)}</td><td>${healthEsc(item.editorial || 0)}</td><td>${healthEsc(item.starter || 0)}</td><td>${healthEsc(item.request || 0)}</td></tr>`).join('');
+}
+
+function renderContentOrigins(report, root) {
+  if (!root) return;
+  if (!report) {
+    root.innerHTML = '<div class="notice">Отчёт происхождения контента ещё не сформирован. Запустите workflow <code>Generate TOS pages</code>.</div>';
+    return;
+  }
+
+  const totals = report.totals || {};
+  const coverage = report.tos_coverage || {};
+  const definitions = report.definitions || {};
+  root.innerHTML = `
+    <div class="grid">
+      <article class="card"><div class="card-inner"><span class="tag ok">Подтверждено</span><h3>${healthEsc(totals.verified || 0)}</h3><p>Материалы с явным проверяемым источником.</p></div></article>
+      <article class="card"><div class="card-inner"><span class="tag">Редакционные</span><h3>${healthEsc(totals.editorial || 0)}</h3><p>Материалы редакции, которые не считаются автоматически подтверждёнными.</p></div></article>
+      <article class="card"><div class="card-inner"><span class="tag">Стартовые идеи</span><h3>${healthEsc(totals.starter || 0)}</h3><p>Идеи для обсуждения, а не утверждённые проекты.</p></div></article>
+      <article class="card"><div class="card-inner"><span class="tag warn">Запросы</span><h3>${healthEsc(totals.request || 0)}</h3><p>Запросы сведений и заготовки, а не подтверждение события или результата.</p></div></article>
+    </div>
+    <div class="notice"><b>Охват ТОСов:</b> с подтверждённым контентом — ${healthEsc(coverage.with_verified_content || 0)}; с редакционным — ${healthEsc(coverage.with_editorial_content || 0)}; только со стартовыми идеями или запросами — ${healthEsc(coverage.with_only_starter_or_request || 0)}; без контента — ${healthEsc(coverage.without_any_content || 0)}.</div>
+    <div class="table"><table><thead><tr><th>Раздел</th><th>Всего</th><th>Подтверждено</th><th>Редакционные</th><th>Стартовые</th><th>Запросы</th></tr></thead><tbody>${originCollectionRows(report)}</tbody></table></div>
+    <div class="notice"><b>Определения:</b><ul>${Object.entries(definitions).map(([key, value]) => `<li><code>${healthEsc(key)}</code> — ${healthEsc(value)}</li>`).join('')}</ul></div>
     <p class="tiny">Отчёт сформирован: ${report.generated_at ? new Date(report.generated_at).toLocaleString('ru-RU') : '—'}.</p>
   `;
 }
@@ -152,18 +194,21 @@ function renderTechnical(report, technicalBox) {
 
 async function loadSiteHealth() {
   const summaryBox = document.getElementById('site-health-summary');
+  const contentOriginBox = document.getElementById('site-health-content-origin');
   const actionsBox = document.getElementById('site-health-actions');
   const priorityBox = document.getElementById('site-health-priority');
   const technicalBox = document.getElementById('site-health-technical');
 
   try {
-    const report = await loadReport();
+    const [report, contentOriginReport] = await Promise.all([loadReport(), loadContentOriginReport()]);
     if (summaryBox) renderSummary(report, summaryBox);
+    renderContentOrigins(contentOriginReport, contentOriginBox);
     if (actionsBox) renderActions(report, actionsBox);
     if (priorityBox) renderPriority(report, priorityBox);
     if (technicalBox) renderTechnical(report, technicalBox);
   } catch (error) {
     if (summaryBox) summaryBox.innerHTML = '<div class="notice">Отчёты ещё не сформированы. Запустите workflow <code>Generate TOS pages</code> на ветке <code>release-2025-12-22</code>.</div>';
+    if (contentOriginBox) contentOriginBox.innerHTML = '<div class="notice">Отчёт происхождения контента ещё не сформирован.</div>';
   }
 }
 
