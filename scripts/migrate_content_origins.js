@@ -27,7 +27,7 @@ function main() {
 
     const nextItems = items.map((item) => {
       if (!item || typeof item !== 'object') return item;
-      const origin = inferContentOrigin(item, collection);
+      const origin = inferContentOrigin(item, collection, { ignoreExplicit: true });
       if (item.content_origin !== origin) updated += 1;
       return { ...item, content_origin: origin };
     });
