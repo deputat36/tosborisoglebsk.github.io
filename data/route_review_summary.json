@@ -1,37 +1,138 @@
 {
-  "updated_at": "2026-07-05",
-  "purpose": "Краткая служебная сводка ролей рабочих страниц портала ТОС БГО.",
+  "updated_at": "2026-07-10",
+  "purpose": "Служебная карта ролей близких рабочих страниц портала ТОС БГО.",
   "source_csv": "/data/route_cleanup_candidates.csv",
   "source_doc": "/docs/ROUTE-CLEANUP.md",
-  "principle": "Сначала фиксируется роль страницы, затем улучшаются ссылки и пояснения.",
+  "principle": "Ничего не удалять и не объединять автоматически. Сначала фиксируется роль страницы, затем улучшаются пояснения и перекрёстные ссылки.",
+  "allowed_statuses": ["keep", "review", "merge_candidate", "archive_candidate"],
   "groups": [
     {
-      "id": "editor",
-      "title": "Редактор",
-      "main": "/workbench/",
-      "related": ["/workbench-routes/", "/collection-board/", "/editorial-workflow/"],
-      "status": "review"
+      "id": "editor-workflow",
+      "title": "Рабочий процесс редактора",
+      "main": {
+        "route": "/workbench/",
+        "role": "Главный вход в рабочую панель"
+      },
+      "related": [
+        {"route": "/workbench-routes/", "role": "Короткие сценарии действий"},
+        {"route": "/collection-board/", "role": "Локальные статусы сбора материалов"},
+        {"route": "/editorial-workflow/", "role": "Подробная инструкция редакционного процесса"}
+      ],
+      "status": "review",
+      "decision": "Сохранить отдельные уровни и улучшать взаимные ссылки."
     },
     {
       "id": "data-update",
       "title": "Актуализация сведений",
-      "main": "/update-tos/",
-      "related": ["/data-update/", "/data-requests/", "/reply-review/"],
-      "status": "review"
+      "main": {
+        "route": "/update-tos/",
+        "role": "Публичная передача сведений и материалов"
+      },
+      "related": [
+        {"route": "/data-update/", "role": "Объяснение состояния актуализации"},
+        {"route": "/data-requests/", "role": "Подготовка исходящих запросов"},
+        {"route": "/reply-review/", "role": "Разбор полученного ответа"}
+      ],
+      "status": "review",
+      "decision": "Не объединять публичный путь и внутреннюю редакционную обработку."
     },
     {
       "id": "verification",
-      "title": "Проверка данных",
-      "main": "/verification-guide/",
-      "related": ["/verification-tasks/", "/verification-control/", "/chairperson/verify-card/", "/verification-levels/"],
-      "status": "review"
+      "title": "Проверка достоверности",
+      "main": {
+        "route": "/verification-guide/",
+        "role": "Главная методика проверки данных"
+      },
+      "related": [
+        {"route": "/verification-tasks/", "role": "Рабочий список задач"},
+        {"route": "/verification-control/", "role": "Контроль процесса проверки"},
+        {"route": "/chairperson/verify-card/", "role": "Памятка для председателя"},
+        {"route": "/verification-levels/", "role": "Объяснение уровней достоверности"}
+      ],
+      "status": "review",
+      "decision": "Сохранить разделение методики, задач, контроля и памятки."
     },
     {
       "id": "technical-control",
-      "title": "Технический контроль",
-      "main": "/site-health/",
-      "related": ["/audit/", "/data-quality/", "/open-data/", "/github-tasks/", "/actions-check/"],
-      "status": "review"
+      "title": "Аудит и технический контроль",
+      "main": {
+        "route": "/site-health/",
+        "role": "Главная управленческая сводка"
+      },
+      "related": [
+        {"route": "/audit/", "role": "Расширенный служебный аудит"},
+        {"route": "/data-quality/", "role": "Качество карточек и данных"},
+        {"route": "/open-data/", "role": "Доступ к JSON и CSV"},
+        {"route": "/github-tasks/", "role": "Ручные GitHub-задачи"},
+        {"route": "/actions-check/", "role": "Проверка GitHub Actions и деплоя"}
+      ],
+      "status": "review",
+      "decision": "Оставить site-health главным входом и не смешивать данные, задачи и деплой."
+    },
+    {
+      "id": "css-maintenance",
+      "title": "Сопровождение CSS",
+      "main": {
+        "route": "/css-maintenance/",
+        "role": "HTML-карта сопровождения CSS"
+      },
+      "related": [
+        {"route": "/docs/CSS-MAINTENANCE.md", "role": "Инструкция внутри репозитория"},
+        {"route": "/data/css_maintenance_inventory.csv", "role": "Структурированный инвентарь"}
+      ],
+      "status": "keep",
+      "decision": "Сохранить HTML, Markdown и CSV как разные представления одной системы."
+    },
+    {
+      "id": "action-routes",
+      "title": "Практические маршруты действий",
+      "main": {
+        "route": "/action-routes/",
+        "role": "Общая карта маршрутов"
+      },
+      "related": [
+        {"route": "/residents/action-routes/", "role": "Маршруты жителей"},
+        {"route": "/chairperson/action-routes/", "role": "Маршруты председателя"},
+        {"route": "/partners/action-routes/", "role": "Маршруты партнёров"},
+        {"route": "/projects/action-routes/", "role": "Маршруты проекта"},
+        {"route": "/needs/action-routes/", "role": "Маршруты потребности"},
+        {"route": "/done/action-routes/", "role": "Маршруты результата"},
+        {"route": "/calendar/action-routes/", "role": "Маршруты события"},
+        {"route": "/create-tos/action-routes/", "role": "Маршруты создания ТОС"}
+      ],
+      "status": "review",
+      "decision": "Не объединять аудитории; общая страница должна оставаться картой входов."
+    },
+    {
+      "id": "project-kits",
+      "title": "Проекты, заявки и шаблоны",
+      "main": {
+        "route": "/project-passport/",
+        "role": "Рабочая страница подготовки паспорта проекта"
+      },
+      "related": [
+        {"route": "/grant-application-kit/", "role": "Комплект конкурсной заявки"},
+        {"route": "/meeting-kit/", "role": "Комплект для собрания жителей"},
+        {"route": "/documents/templates/project-passport/", "role": "Шаблон паспорта проекта"},
+        {"route": "/documents/templates/project-kit/", "role": "Набор документов проекта"}
+      ],
+      "status": "review",
+      "decision": "Сохранить рабочие инструкции отдельно от документов для заполнения."
+    },
+    {
+      "id": "media-publication",
+      "title": "Фото, публикации и конфиденциальность",
+      "main": {
+        "route": "/media-guide/",
+        "role": "Главная инструкция по фото и материалам"
+      },
+      "related": [
+        {"route": "/privacy/", "role": "Правила персональных данных и публикации"},
+        {"route": "/content-standards/", "role": "Редакционные стандарты"},
+        {"route": "/publication-templates/", "role": "Готовые форматы публикаций"}
+      ],
+      "status": "keep",
+      "decision": "Не объединять правила, стандарты и шаблоны; поддерживать взаимные ссылки."
     }
   ]
 }
