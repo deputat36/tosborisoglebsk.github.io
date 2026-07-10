@@ -131,6 +131,8 @@ jobs:
         run: node scripts/audit_accessibility_performance_report.js
       - name: Audit service route governance
         run: node scripts/audit_route_governance.js
+      - name: Audit CSS visual regression matrix
+        run: node scripts/audit_css_regression_matrix.js
       - name: Run full project mode audits
         run: |
           set -o pipefail

@@ -21,28 +21,32 @@
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
 <main id="main">
-  <section class="hero"><div class="container hero-card"><div class="eyebrow">Техническое сопровождение</div><h1>Сопровождение CSS</h1><p class="lead">Единый файл <code>assets/css/styles.css</code> обеспечивает весь сайт. Перед рефакторингом нужно понимать группы стилей, риски и контрольные страницы, чтобы не изменить внешний вид случайно.</p><div class="hero-actions"><a class="btn primary" href="/data/css_maintenance_inventory.csv">Скачать CSV</a><a class="btn" href="/docs/CSS-MAINTENANCE.md">Инструкция CSS</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/post-publish-check/">QA после публикации</a></div></div></section>
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Техническое сопровождение</div><h1>Сопровождение CSS</h1><p class="lead">Единый файл <code>assets/css/styles.css</code> обеспечивает весь сайт. Перед рефакторингом нужно понимать группы стилей, риски и контрольные страницы, чтобы не изменить внешний вид случайно.</p><div class="notice"><b style="color:var(--text)">Текущее состояние:</b> визуальные значения CSS не меняются. Сначала фиксируется контрольный baseline, затем выполняются только проверяемые структурные изменения.</div><div class="hero-actions"><a class="btn primary" href="/data/css_regression_matrix.csv">Матрица регрессии</a><a class="btn" href="/data/css_maintenance_inventory.csv">Инвентарь CSS</a><a class="btn" href="/docs/CSS-MAINTENANCE.md">Инструкция CSS</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/post-publish-check/">QA после публикации</a></div></div></section>
 
   <section class="section"><div class="container prose">
     <h2>Текущий вывод</h2>
     <p>Файл CSS компактный и загружается одним запросом, но почти не разделён на логические секции. Это повышает риск случайных изменений: один класс может использоваться на главной, карточках ТОС, новостях и служебных страницах одновременно.</p>
-    <div class="notice">Безопасная стратегия: сначала вести карту групп и контрольных страниц, затем добавлять комментарии или исходные модульные CSS-файлы, а итоговый <code>styles.css</code> оставлять совместимым для сайта.</div>
+    <div class="notice">Безопасная стратегия: сначала зафиксировать 14 контрольных случаев на существующих маршрутах и размерах экрана, затем добавлять комментарии или исходные модульные CSS-файлы. Итоговый <code>styles.css</code> должен оставаться совместимым с текущими страницами.</div>
   </div></section>
 
   <section class="section"><div class="container grid">
-    <article class="card"><div class="card-inner"><h2>Что нельзя делать резко</h2><ul class="check-list"><li>переименовывать существующие классы;</li><li>менять сетку карточек без проверки мобильной версии;</li><li>удалять якобы неиспользуемые классы без поиска по страницам и JS;</li><li>менять CSS-переменные без просмотра светлой и тёмной темы.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Контрольные страницы</h2><ul class="check-list"><li>главная страница;</li><li>каталог ТОС и карточка ТОС;</li><li>раздел новостей и отдельная новость;</li><li>табличные рабочие страницы;</li><li>мобильное меню на 360–620px;</li><li>печать чек-листов.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Первый безопасный шаг</h2><p>Не менять визуальные значения, а добавить карту разделов и порядок проверки. После этого можно разделять исходники на компоненты и собирать итоговый <code>styles.css</code>.</p><div class="card-actions"><a class="btn" href="/data/css_maintenance_inventory.csv">Открыть инвентарь</a><a class="btn" href="/docs/CSS-MAINTENANCE.md">Открыть инструкцию</a></div></div></article>
+    <article class="card"><div class="card-inner"><h2>Что нельзя делать резко</h2><ul class="check-list"><li>переименовывать существующие классы;</li><li>менять сетку карточек без проверки мобильной версии;</li><li>удалять якобы неиспользуемые классы без поиска по страницам и JavaScript;</li><li>менять CSS-переменные без просмотра светлой и тёмной темы;</li><li>отмечать проверку как пройденную без ссылки на доказательство.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Контрольный набор</h2><ul class="check-list"><li>главная страница;</li><li>каталог и карточка ТОС;</li><li>раздел новостей и отдельная новость;</li><li>рабочая панель и табличная страница;</li><li>ширины 360, 620, 900 и 1180px;</li><li>светлая и тёмная тема;</li><li>мобильное меню;</li><li>предпросмотр печати чек-листа.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Первый безопасный шаг</h2><p>Открыть каждый случай из CSV, сохранить исходный снимок и заполнить <code>evidence_ref</code>. Только после этого добавлять комментарии-разделители в <code>styles.css</code>.</p><div class="card-actions"><a class="btn primary" href="/data/css_regression_matrix.csv">Открыть матрицу</a><a class="btn" href="/docs/CSS-MAINTENANCE.md">Открыть инструкцию</a></div></div></article>
   </div></section>
+
+  <section class="section"><div class="container section-head"><div><h2>Статусы контрольных случаев</h2><p>Статус описывает не намерение, а фактически выполненный этап проверки</p></div></div><div class="container grid"><article class="card"><div class="card-inner"><span class="tag warn">baseline_required</span><h3>Нужен исходный снимок</h3><p>Случай описан, но внешний вид ещё не зафиксирован.</p></div></article><article class="card"><div class="card-inner"><span class="tag info">baseline_captured</span><h3>Baseline сохранён</h3><p>Есть ссылка на исходный снимок или иной результат проверки.</p></div></article><article class="card"><div class="card-inner"><span class="tag ok">passed</span><h3>Сравнение пройдено</h3><p>После CSS-изменения контрольный случай сравнили с baseline, отличий нет.</p></div></article><article class="card"><div class="card-inner"><span class="tag warn">failed / blocked</span><h3>Нужна работа</h3><p>Обнаружено отличие либо проверка временно невозможна. Причина фиксируется в notes.</p></div></article></div></section>
 
   <section class="section"><div class="container prose">
     <h2>Рекомендуемый порядок рефакторинга</h2>
     <ol>
-      <li>Зафиксировать текущие контрольные страницы и размеры экрана.</li>
-      <li>Добавить комментарии-разделители в CSS без изменения правил.</li>
-      <li>Отделить токены, базу, кнопки, карточки, таблицы, главную, адаптивность и печать.</li>
-      <li>Проверить отсутствие изменений в `data/site_health.json`, внутренних ссылках и SEO.</li>
-      <li>После визуальной проверки обновить этот CSV и статус проекта.</li>
+      <li>Зафиксировать исходные снимки для всех случаев со статусом <code>baseline_required</code>.</li>
+      <li>Указать доказательства в <code>evidence_ref</code> и статус <code>baseline_captured</code>.</li>
+      <li>Добавить комментарии-разделители в CSS без изменения правил и значений.</li>
+      <li>Повторить те же контрольные случаи.</li>
+      <li>При отсутствии отличий поставить <code>passed</code>.</li>
+      <li>Проверить нулевой accessibility baseline, внутренние ссылки, SEO и бюджеты ресурсов.</li>
+      <li>После фактической проверки обновить инвентарь и issue #165.</li>
     </ol>
   </div></section>
 </main>
