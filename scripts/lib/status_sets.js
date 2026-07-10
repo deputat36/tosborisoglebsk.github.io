@@ -4,6 +4,7 @@ const priorities = new Set(['high', 'medium', 'low']);
 const evidenceLevels = new Set(['low', 'medium', 'high']);
 const workModes = new Set(['assistant', 'mixed']);
 const planStatuses = new Set([
+  'active',
   'done',
   'planned',
   'waiting_for_confirmed_data',
