@@ -1,0 +1,89 @@
+OK CSV parser self-test completed in 32 ms
+OK CSV schema self-test completed in 29 ms
+OK Date checks self-test completed in 28 ms
+OK ID checks self-test completed in 30 ms
+OK Path checks self-test completed in 30 ms
+OK Status sets self-test completed in 33 ms
+OK Supabase scope audit completed in 91 ms
+OK TOS integrity audit completed in 31 ms
+OK TOS catalog content audit completed in 32 ms
+OK TOS detail pages content audit completed in 47 ms
+OK Projects integrity audit completed in 34 ms
+OK Project pages content audit completed in 37 ms
+OK Projects action routes content audit completed in 29 ms
+OK Grants page content audit completed in 29 ms
+OK Materials page content audit completed in 31 ms
+OK Documents page content audit completed in 31 ms
+OK Legal page content audit completed in 31 ms
+OK Contacts page content audit completed in 31 ms
+OK Communication kit content audit completed in 32 ms
+OK Field checklist content audit completed in 32 ms
+OK Reply review content audit completed in 31 ms
+OK Privacy content audit completed in 31 ms
+OK Sources content audit completed in 33 ms
+OK Source watch content audit completed in 32 ms
+OK Content discovery content audit completed in 32 ms
+OK Project check 2026 content audit completed in 31 ms
+OK Projects 2026 result requests content audit completed in 31 ms
+OK Chairperson page content audit completed in 31 ms
+OK Chairperson first 30 days content audit completed in 29 ms
+OK Chairperson verify card content audit completed in 34 ms
+OK Chairperson meeting content audit completed in 32 ms
+OK Chairperson project content audit completed in 32 ms
+OK Chairperson documents content audit completed in 32 ms
+OK Chairperson news content audit completed in 30 ms
+OK Chairperson conflicts content audit completed in 31 ms
+OK Chairperson action routes content audit completed in 30 ms
+OK Residents page content audit completed in 35 ms
+OK Residents action routes content audit completed in 31 ms
+OK Partners page content audit completed in 30 ms
+OK Partners action routes content audit completed in 32 ms
+OK Calendar page content audit completed in 29 ms
+OK Calendar action routes content audit completed in 31 ms
+OK Projects 2026 workflow audit completed in 35 ms
+OK Needs integrity audit completed in 32 ms
+OK Needs pages content audit completed in 35 ms
+OK Needs action routes content audit completed in 29 ms
+OK Done integrity audit completed in 35 ms
+OK Done pages content audit completed in 38 ms
+OK Done action routes content audit completed in 32 ms
+OK Content intake template audit completed in 32 ms
+OK Publication consent checklist audit completed in 32 ms
+OK Publication queue audit completed in 35 ms
+OK Media intake register audit completed in 32 ms
+OK Source watchlist audit completed in 32 ms
+OK Content discovery log audit completed in 39 ms
+OK Editorial calendar audit completed in 32 ms
+OK Content freshness check audit completed in 35 ms
+OK Post-publish QA checklist audit completed in 39 ms
+OK Quarterly report template audit completed in 40 ms
+OK Collection tasks audit completed in 38 ms
+OK Priority TOS tracking audit completed in 45 ms
+OK Registry workflow audit completed in 46 ms
+OK CSS maintenance inventory audit completed in 41 ms
+OK Technical diagnostics audit completed in 45 ms
+OK Open data links audit completed in 36 ms
+OK Autonomous improvement plan audit completed in 39 ms
+OK User decision queue audit completed in 32 ms
+OK Manual tasks audit completed in 32 ms
+OK Request source tables audit completed in 35 ms
+OK Request source imports self-test completed in 38 ms
+OK Request source status values self-test completed in 36 ms
+OK Verification tasks audit completed in 39 ms
+OK Verification pilot audit completed in 52 ms
+OK Verification source tables audit completed in 45 ms
+OK Outreach register audit completed in 37 ms
+OK Outreach register content audit completed in 30 ms
+OK Outreach source index self-test completed in 36 ms
+OK Site health audit completed in 29 ms
+OK Homepage content audit completed in 30 ms
+OK Update center content audit completed in 31 ms
+OK Search content audit completed in 32 ms
+OK News page content audit completed in 30 ms
+OK News detail pages content audit completed in 36 ms
+OK Page index audit completed in 32 ms
+OK Sitemap audit completed in 31 ms
+OK News data audit completed in 31 ms
+OK RSS feed audit completed in 29 ms
+OK Run checks helper self-test completed in 123 ms
+Project mode full audit OK
