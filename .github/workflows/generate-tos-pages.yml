@@ -127,6 +127,9 @@ jobs:
           path: project-audit.log
           if-no-files-found: warn
           retention-days: 7
+      - name: Remove temporary audit log
+        if: always()
+        run: rm -f project-audit.log
       - name: Commit generated pages, sitemap and audit
         if: github.event_name != 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v5
