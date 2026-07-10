@@ -274,6 +274,65 @@ function validateTechnicalControlCleanup(errors) {
   ]);
 }
 
+function validateProjectKitsCleanup(errors) {
+  assertPageMarkers(errors, 'project-kits cleanup', '/project-passport/', [
+    'Онлайн-инструкция по проекту',
+    'Роль страницы:',
+    'пошаговая онлайн-инструкция',
+    'href="/documents/templates/project-passport/"',
+    'href="/documents/templates/project-kit/"',
+    'id="guide"'
+  ]);
+
+  assertPageMarkers(errors, 'project-kits cleanup', '/grant-application-kit/', [
+    'Онлайн-инструкция по заявке',
+    'Роль страницы:',
+    'пошаговая онлайн-инструкция по подготовке конкурсной заявки',
+    'href="/project-passport/"',
+    'href="/documents/templates/project-passport/"',
+    'href="/documents/templates/project-kit/"',
+    'id="contest-check"'
+  ]);
+
+  assertPageMarkers(errors, 'project-kits cleanup', '/meeting-kit/', [
+    'Онлайн-инструкция для собрания',
+    'Роль страницы:',
+    'пошаговая онлайн-инструкция для подготовки и фиксации собрания',
+    'href="/project-passport/"',
+    'href="/documents/templates/project-kit/"',
+    'id="meeting-guide"'
+  ]);
+
+  assertPageMarkers(errors, 'project-kits cleanup', '/documents/templates/project-passport/', [
+    'Роль страницы:',
+    'заполняемая и печатная форма паспорта проекта',
+    'href="/project-passport/"',
+    'href="/documents/templates/project-kit/"',
+    'data-print-template',
+    'data-copy-template="#template-content"',
+    'id="template-content"',
+    '/assets/js/template-tools.js'
+  ]);
+
+  assertPageMarkers(errors, 'project-kits cleanup', '/documents/templates/project-kit/', [
+    'Заполняемые формы',
+    'Роль страницы:',
+    'библиотека заполняемых и печатных форм',
+    'href="/project-passport/"',
+    'href="/grant-application-kit/"',
+    'href="/meeting-kit/"',
+    'href="/documents/templates/project-problem/"',
+    'href="/documents/templates/project-support/"',
+    'href="/documents/templates/project-passport/"',
+    'href="/documents/templates/project-budget/"',
+    'href="/documents/templates/project-schedule/"',
+    'href="/documents/templates/project-partner-letter/"',
+    'href="/documents/templates/project-checklist/"',
+    'href="/documents/templates/project-photo-report/"',
+    'href="/documents/templates/project-final-report/"'
+  ]);
+}
+
 function main() {
   if (!fs.existsSync(REGISTRY_PATH)) throw new Error(`Missing route registry: ${REGISTRY_PATH}`);
 
@@ -318,6 +377,7 @@ function main() {
   validateDataUpdateCleanup(errors);
   validateVerificationCleanup(errors);
   validateTechnicalControlCleanup(errors);
+  validateProjectKitsCleanup(errors);
 
   const pagePath = path.join(ROOT, 'route-cleanup', 'index.html');
   const scriptPath = path.join(ROOT, 'assets', 'js', 'route-cleanup.js');
