@@ -4,6 +4,7 @@ const path = require('path');
 const ROOT = process.cwd();
 const REGISTRY_PATH = path.join(ROOT, 'data', 'route_review_summary.json');
 const ALLOWED_STATUSES = new Set(['keep', 'review', 'merge_candidate', 'archive_candidate']);
+const ALLOWED_CONSOLIDATION_STATUSES = new Set(['ready_for_link_cleanup', 'keep_separate', 'blocked_by_manual_review']);
 
 function routeToFile(route) {
   if (typeof route !== 'string' || !route.startsWith('/')) return null;
@@ -38,6 +39,43 @@ function validateRoute(errors, groupId, item, kind, seenRoutes) {
   }
 }
 
+function validateConsolidation(errors, label, group) {
+  const proposal = group?.consolidation;
+  if (!proposal || typeof proposal !== 'object') {
+    errors.push(`${label}: consolidation proposal is required`);
+    return;
+  }
+
+  const status = String(proposal.status || '').trim();
+  const recommendation = String(proposal.recommendation || '').trim();
+  const navigationChange = String(proposal.navigation_change || '').trim();
+  const doNotDo = String(proposal.do_not_do || '').trim();
+  const preconditions = Array.isArray(proposal.preconditions) ? proposal.preconditions : [];
+
+  if (!ALLOWED_CONSOLIDATION_STATUSES.has(status)) {
+    errors.push(`${label}: invalid consolidation status ${status || '(empty)'}`);
+  }
+  if (recommendation.length < 40) errors.push(`${label}: consolidation recommendation is too short`);
+  if (navigationChange.length < 40) errors.push(`${label}: navigation_change is too short`);
+  if (doNotDo.length < 40) errors.push(`${label}: do_not_do is too short`);
+  if (preconditions.length < 2) errors.push(`${label}: at least two consolidation preconditions are required`);
+
+  const seenPreconditions = new Set();
+  preconditions.forEach((item, index) => {
+    const text = String(item || '').trim();
+    if (text.length < 10) errors.push(`${label}: precondition ${index + 1} is too short`);
+    if (seenPreconditions.has(text)) errors.push(`${label}: duplicate consolidation precondition: ${text}`);
+    seenPreconditions.add(text);
+  });
+
+  if (group?.status === 'keep' && status !== 'keep_separate') {
+    errors.push(`${label}: keep group must use keep_separate consolidation status`);
+  }
+  if (status === 'ready_for_link_cleanup' && group?.status !== 'review') {
+    errors.push(`${label}: ready_for_link_cleanup requires group status review`);
+  }
+}
+
 function main() {
   if (!fs.existsSync(REGISTRY_PATH)) throw new Error(`Missing route registry: ${REGISTRY_PATH}`);
 
@@ -46,11 +84,19 @@ function main() {
   const groups = Array.isArray(data.groups) ? data.groups : [];
   const seenIds = new Set();
   const seenRoutes = new Set();
+  const declaredConsolidationStatuses = new Set(Array.isArray(data.allowed_consolidation_statuses) ? data.allowed_consolidation_statuses : []);
 
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(data.updated_at || ''))) errors.push('updated_at must be YYYY-MM-DD');
   if (!String(data.purpose || '').trim()) errors.push('purpose is required');
   if (!String(data.principle || '').trim()) errors.push('principle is required');
   if (groups.length < 1) errors.push('groups must contain at least one route group');
+
+  ALLOWED_CONSOLIDATION_STATUSES.forEach((status) => {
+    if (!declaredConsolidationStatuses.has(status)) errors.push(`allowed_consolidation_statuses missing ${status}`);
+  });
+  declaredConsolidationStatuses.forEach((status) => {
+    if (!ALLOWED_CONSOLIDATION_STATUSES.has(status)) errors.push(`unsupported declared consolidation status ${status}`);
+  });
 
   groups.forEach((group, index) => {
     const id = String(group?.id || '').trim();
@@ -67,6 +113,7 @@ function main() {
     const related = Array.isArray(group?.related) ? group.related : [];
     if (!related.length) errors.push(`${label}: related routes are required`);
     related.forEach((item, relatedIndex) => validateRoute(errors, label, item, `related[${relatedIndex}]`, seenRoutes));
+    validateConsolidation(errors, label, group);
   });
 
   const pagePath = path.join(ROOT, 'route-cleanup', 'index.html');
@@ -79,11 +126,27 @@ function main() {
     if (!/name=["']robots["'][^>]+noindex/i.test(html)) errors.push('/route-cleanup/ must stay noindex');
     if (!html.includes('/data/route_review_summary.json')) errors.push('/route-cleanup/ must link to its JSON registry');
     if (!html.includes('/assets/js/route-cleanup.js')) errors.push('/route-cleanup/ must load its renderer');
+    ALLOWED_CONSOLIDATION_STATUSES.forEach((status) => {
+      if (!html.includes(status)) errors.push(`/route-cleanup/ must explain consolidation status ${status}`);
+    });
+  }
+
+  if (fs.existsSync(scriptPath)) {
+    const script = fs.readFileSync(scriptPath, 'utf8');
+    if (!script.includes('consolidation')) errors.push('route cleanup renderer must display consolidation proposals');
+    if (!script.includes('navigation_change')) errors.push('route cleanup renderer must display navigation_change');
+    if (!script.includes('do_not_do')) errors.push('route cleanup renderer must display do_not_do');
   }
 
   if (errors.length) throw new Error(`Route governance audit failed:\n${errors.join('\n')}`);
 
-  console.log(`Route governance OK: ${groups.length} groups, ${seenRoutes.size} unique routes`);
+  const proposalCounts = groups.reduce((acc, group) => {
+    const status = group?.consolidation?.status || 'unknown';
+    acc[status] = (acc[status] || 0) + 1;
+    return acc;
+  }, {});
+
+  console.log(`Route governance OK: ${groups.length} groups, ${seenRoutes.size} unique routes, proposals ${JSON.stringify(proposalCounts)}`);
 }
 
 main();

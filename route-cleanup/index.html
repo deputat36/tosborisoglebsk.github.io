@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Карта служебных маршрутов ТОС БГО</title>
-  <meta name="description" content="Внутренняя карта ролей близких служебных и редакционных страниц портала ТОС БГО без удаления и автоматического объединения маршрутов."/>
+  <meta name="description" content="Внутренняя карта ролей и безопасных предложений по консолидации служебных и редакционных страниц портала ТОС БГО."/>
   <meta name="robots" content="noindex,nofollow"/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="https://tosborisoglebsk.ru/route-cleanup/"/>
@@ -21,11 +21,17 @@
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
 <main id="main">
-  <section class="hero"><div class="container hero-card"><div class="eyebrow">Внутренняя архитектура</div><h1>Карта служебных маршрутов</h1><p class="lead">Страница фиксирует назначение похожих рабочих разделов. Она не удаляет URL и не объединяет разные аудитории, а показывает главный вход, вспомогательные страницы и безопасное решение по каждой группе.</p><div class="hero-actions"><a class="btn primary" href="/workbench/">Рабочая панель</a><a class="btn" href="/workbench-routes/">Быстрые маршруты</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/data/route_cleanup_candidates.csv">CSV-кандидаты</a></div></div></section>
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Внутренняя архитектура</div><h1>Карта служебных маршрутов</h1><p class="lead">Страница фиксирует назначение похожих рабочих разделов и безопасные предложения по консолидации. Она не удаляет URL и не объединяет разные аудитории, а показывает главный вход, вспомогательные страницы, допустимое изменение навигации и обязательные условия.</p><div class="hero-actions"><a class="btn primary" href="/workbench/">Рабочая панель</a><a class="btn" href="/workbench-routes/">Быстрые маршруты</a><a class="btn" href="/site-health/">Здоровье сайта</a><a class="btn" href="/data/route_cleanup_candidates.csv">CSV-кандидаты</a><a class="btn" href="/data/route_review_summary.json">JSON-план</a></div></div></section>
 
-  <section class="section tight"><div class="container"><div class="notice"><b>Правило:</b> ничего не удалять, не перенаправлять и не объединять автоматически. Сначала определяется роль каждой страницы, затем улучшаются пояснения и взаимные ссылки.</div></div></section>
+  <section class="section tight"><div class="container"><div class="notice"><b>Правило:</b> ничего не удалять, не перенаправлять и не объединять автоматически. Сначала определяется роль каждой страницы, затем фиксируется безопасное изменение ссылок и только после проверки входящих маршрутов принимается отдельное решение.</div></div></section>
 
-  <section class="section"><div class="container section-head"><div><h2>Группы маршрутов</h2><p>Главный вход и роль каждой связанной страницы</p></div><a class="btn" href="/data/route_review_summary.json">Открыть JSON</a></div><div class="container" id="route-governance-groups"><div class="notice">Загрузка карты маршрутов...</div></div></section>
+  <section class="section"><div class="container section-head"><div><h2>Группы маршрутов</h2><p>Главный вход, роль каждой страницы и предложение по консолидации</p></div><a class="btn" href="/docs/ROUTE-CLEANUP.md">Открыть инструкцию</a></div><div class="container" id="route-governance-groups"><div class="notice">Загрузка карты маршрутов...</div></div></section>
+
+  <section class="section"><div class="container section-head"><div><h2>Статусы предложений</h2><p>Статус описывает следующий безопасный шаг, а не разрешение на удаление</p></div></div><div class="container grid">
+    <article class="card"><div class="card-inner"><span class="tag warn">ready_for_link_cleanup</span><h3>Можно уточнять ссылки</h3><p>Роли определены. Допустимы пояснения, возврат к главной странице группы и сокращение конкурирующих формулировок.</p></div></article>
+    <article class="card"><div class="card-inner"><span class="tag ok">keep_separate</span><h3>Оставить раздельно</h3><p>Страницы закрывают разные аудитории, форматы или обязательные правила. Консолидация ограничивается взаимными ссылками.</p></div></article>
+    <article class="card"><div class="card-inner"><span class="tag">blocked_by_manual_review</span><h3>Нужна ручная проверка</h3><p>До изменения нужно проверить входящие ссылки, внешний сценарий, владельца данных или фактическое использование страницы.</p></div></article>
+  </div></section>
 
   <section class="section"><div class="container grid">
     <article class="card"><div class="card-inner"><span class="tag ok">keep</span><h3>Сохранить структуру</h3><p>Страницы закрывают разные форматы или задачи и не требуют объединения.</p></div></article>
@@ -34,7 +40,7 @@
     <article class="card"><div class="card-inner"><span class="tag">archive_candidate</span><h3>Кандидат в архив</h3><p>Не означает удаление: сначала требуется решение владельца и безопасный план переноса.</p></div></article>
   </div></section>
 
-  <section class="section"><div class="container prose"><h2>Что делать при появлении новой служебной страницы</h2><ol><li>Проверить, не решает ли существующая страница ту же задачу.</li><li>Определить аудиторию: житель, председатель, партнёр или редактор.</li><li>Добавить страницу в реестр и назначить ей одну понятную роль.</li><li>Добавить ссылки с главного входа группы.</li><li>Не удалять старый маршрут без анализа входящих ссылок и отдельного решения.</li></ol><p><a class="btn" href="/docs/ROUTE-CLEANUP.md">Инструкция в репозитории</a> <a class="btn" href="/github-tasks/">GitHub-задачи</a></p></div></section>
+  <section class="section"><div class="container prose"><h2>Что делать при появлении новой служебной страницы</h2><ol><li>Проверить, не решает ли существующая страница ту же задачу.</li><li>Определить аудиторию: житель, председатель, партнёр или редактор.</li><li>Добавить страницу в реестр и назначить ей одну понятную роль.</li><li>Зафиксировать допустимое изменение навигации и то, что нельзя объединять.</li><li>Добавить ссылки с главного входа группы.</li><li>Не удалять старый маршрут без анализа входящих ссылок и отдельного решения.</li></ol><p><a class="btn" href="/docs/ROUTE-CLEANUP.md">Инструкция в репозитории</a> <a class="btn" href="/github-tasks/">GitHub-задачи</a></p></div></section>
 </main>
 <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Служебная карта архитектуры маршрутов.</div></div></footer>
 <script src="/assets/js/site.js"></script>
