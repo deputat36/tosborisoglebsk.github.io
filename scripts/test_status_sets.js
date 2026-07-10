@@ -37,6 +37,7 @@ assert(workModes.has('assistant'), 'work mode assistant is required');
 assert(workModes.has('mixed'), 'work mode mixed is required');
 assert(!workModes.has('external'), 'work mode external must not be allowed');
 
+assert(planStatuses.has('active'), 'plan status active is required');
 assert(planStatuses.has('planned'), 'plan status planned is required');
 assert(planStatuses.has('done'), 'plan status done is required');
 assert(planStatuses.has('needs_review'), 'plan status needs_review is required');
