@@ -9,6 +9,8 @@ const allowedReferenceFiles = new Set([
   'scripts/audit_supabase_scope.js',
   'scripts/audit_project_mode.js',
   'scripts/audit_project_mode_full.js',
+  'data/foreign_module_inventory.json',
+  'docs/NAV-V2-ISOLATION.md',
   'docs/AUDIT-2026-07-10.md',
   'docs/STATUS.md'
 ]);

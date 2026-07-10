@@ -1,0 +1,53 @@
+{
+  "reviewed_at": "2026-07-10",
+  "repository": "deputat36/tosborisoglebsk.github.io",
+  "modules": [
+    {
+      "id": "navigator-deals-v2",
+      "name": "Навигатор сделок v2",
+      "classification": "foreign_or_orphaned",
+      "status": "quarantined_in_place",
+      "belongs_to_tos_portal": false,
+      "public_html_references_expected": 0,
+      "files": [
+        {
+          "path": "assets/js/nav-v2/admin-guard-v2.js",
+          "role": "Проверка owner/admin роли через Supabase RPC",
+          "keep_until_decision": true
+        },
+        {
+          "path": "assets/js/nav-v2/role-menu-v2.js",
+          "role": "Ролевое меню приложения Навигатор сделок",
+          "keep_until_decision": true
+        },
+        {
+          "path": "tools/patch_vktg_nav_roles.py",
+          "role": "Патчер подключения nav-v2 к страницам другого приложения",
+          "keep_until_decision": true
+        }
+      ],
+      "missing_dependency": {
+        "path": "config/supabase.js",
+        "expected_absent_while_quarantined": true
+      },
+      "target_pages": [
+        "dashboard-v2.html",
+        "spn-v2.html",
+        "deals-v2.html",
+        "deal-card-v2.html",
+        "nav-system-check-v2.html",
+        "admin-v2.html",
+        "admin-invite-v2.html",
+        "nav-access-v2.html",
+        "nav-access-audit-v2.html"
+      ],
+      "risks": [
+        "Смешение портала ТОС с отдельным приложением по сопровождению сделок",
+        "Случайное подключение к внешнему Supabase-проекту",
+        "Появление неработающих ссылок на отсутствующие страницы",
+        "Путаница при аудите безопасности, ролей и публикационного контура"
+      ],
+      "decision_required": "После подтверждения владельца перенести модуль в отдельный репозиторий или архивную директорию. До решения не удалять и не подключать к HTML портала ТОС."
+    }
+  ]
+}

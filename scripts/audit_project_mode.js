@@ -9,6 +9,7 @@ const checks = [
   ['Status sets', 'scripts/test_status_sets.js'],
   ['Content origins', 'scripts/audit_content_origins.js'],
   ['Supabase scope', 'scripts/audit_supabase_scope.js'],
+  ['Foreign module quarantine', 'scripts/audit_foreign_module_inventory.js'],
   ['TOS integrity', 'scripts/audit_tos_integrity.js'],
   ['TOS catalog content', 'scripts/audit_tos_catalog_content.js'],
   ['TOS detail pages content', 'scripts/audit_tos_detail_pages_content.js'],
