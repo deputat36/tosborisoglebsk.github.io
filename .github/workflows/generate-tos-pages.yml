@@ -110,7 +110,7 @@ jobs:
       - name: Audit SEO basics
         run: node scripts/audit_seo.js
       - name: Run full project mode audits
-        run: node scripts/audit_project_mode.js
+        run: node scripts/audit_project_mode_full.js
       - name: Commit generated pages, sitemap and audit
         if: github.event_name != 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v5
