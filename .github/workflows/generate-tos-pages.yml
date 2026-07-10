@@ -109,6 +109,8 @@ jobs:
         run: node scripts/patch_accessibility_basics.js
       - name: Patch accessibility landmarks
         run: node scripts/patch_accessibility_landmarks.js
+      - name: Patch public controls accessibility
+        run: node scripts/patch_accessibility_public_controls.js
       - name: Generate accessibility and performance baseline
         run: node scripts/generate_accessibility_performance_report.js
       - name: Generate site health report
