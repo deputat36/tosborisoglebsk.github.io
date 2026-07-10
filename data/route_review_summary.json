@@ -10,10 +10,7 @@
     {
       "id": "editor-workflow",
       "title": "Рабочий процесс редактора",
-      "main": {
-        "route": "/workbench/",
-        "role": "Главный вход в рабочую панель"
-      },
+      "main": {"route": "/workbench/", "role": "Главный вход в рабочую панель"},
       "related": [
         {"route": "/workbench-routes/", "role": "Короткие сценарии действий"},
         {"route": "/collection-board/", "role": "Локальные статусы сбора материалов"},
@@ -34,10 +31,7 @@
     {
       "id": "data-update",
       "title": "Актуализация сведений",
-      "main": {
-        "route": "/update-tos/",
-        "role": "Публичная передача сведений и материалов"
-      },
+      "main": {"route": "/update-tos/", "role": "Публичная передача сведений и материалов"},
       "related": [
         {"route": "/data-update/", "role": "Объяснение состояния актуализации"},
         {"route": "/data-requests/", "role": "Подготовка исходящих запросов"},
@@ -58,10 +52,7 @@
     {
       "id": "verification",
       "title": "Проверка достоверности",
-      "main": {
-        "route": "/verification-guide/",
-        "role": "Главная методика проверки данных"
-      },
+      "main": {"route": "/verification-guide/", "role": "Главная методика проверки данных"},
       "related": [
         {"route": "/verification-tasks/", "role": "Рабочий список задач"},
         {"route": "/verification-control/", "role": "Контроль процесса проверки"},
@@ -83,34 +74,30 @@
     {
       "id": "technical-control",
       "title": "Аудит и технический контроль",
-      "main": {
-        "route": "/site-health/",
-        "role": "Главная управленческая сводка"
-      },
+      "main": {"route": "/site-health/", "role": "Главная управленческая сводка"},
       "related": [
-        {"route": "/audit/", "role": "Расширенный служебный аудит"},
-        {"route": "/data-quality/", "role": "Качество карточек и данных"},
-        {"route": "/open-data/", "role": "Доступ к JSON и CSV"},
-        {"route": "/github-tasks/", "role": "Ручные GitHub-задачи"},
-        {"route": "/actions-check/", "role": "Проверка GitHub Actions и деплоя"}
+        {"route": "/audit/", "role": "Детальный реестр карточек и локальных статусов"},
+        {"route": "/data-quality/", "role": "Публичное качество карточек и данных"},
+        {"route": "/open-data/", "role": "Каталог JSON, CSV, RSS и sitemap"},
+        {"route": "/github-tasks/", "role": "Ручные GitHub-задачи и блокировки"},
+        {"route": "/actions-check/", "role": "Диагностика GitHub Actions и деплоя"}
       ],
       "status": "review",
       "decision": "Оставить site-health главным входом и не смешивать данные, задачи и деплой.",
       "consolidation": {
-        "status": "ready_for_link_cleanup",
+        "status": "link_cleanup_done",
         "recommendation": "Использовать /site-health/ как единственный обзор состояния, а остальные страницы — как подробные инструменты по конкретной причине отклонения.",
-        "navigation_change": "Сгруппировать ссылки на /site-health/ по четырём блокам: данные, технический аудит, GitHub/деплой и открытые файлы.",
+        "navigation_change": "На /site-health/ добавлены четыре блока: данные, технический аудит, GitHub и деплой, открытые файлы. Связанные страницы получили явную роль и возврат к общей сводке.",
         "do_not_do": "Не переносить все таблицы и журналы на одну страницу и не делать /audit/ вторым конкурирующим дашбордом.",
-        "preconditions": ["Сохранить нулевой accessibility baseline", "Проверить noindex служебных страниц", "Не менять генерацию site_health"]
+        "preconditions": ["Сохранить нулевой accessibility baseline", "Проверить noindex служебных страниц", "Не менять генерацию site_health"],
+        "completed_at": "2026-07-10",
+        "evidence": "Единственная роль /site-health/ и возвратные ссылки пяти подробных инструментов защищены audit_route_governance.js."
       }
     },
     {
       "id": "css-maintenance",
       "title": "Сопровождение CSS",
-      "main": {
-        "route": "/css-maintenance/",
-        "role": "HTML-карта сопровождения CSS"
-      },
+      "main": {"route": "/css-maintenance/", "role": "HTML-карта сопровождения CSS"},
       "related": [
         {"route": "/docs/CSS-MAINTENANCE.md", "role": "Инструкция внутри репозитория"},
         {"route": "/data/css_maintenance_inventory.csv", "role": "Структурированный инвентарь"}
@@ -128,10 +115,7 @@
     {
       "id": "action-routes",
       "title": "Практические маршруты действий",
-      "main": {
-        "route": "/action-routes/",
-        "role": "Общая карта маршрутов"
-      },
+      "main": {"route": "/action-routes/", "role": "Общая карта маршрутов"},
       "related": [
         {"route": "/residents/action-routes/", "role": "Маршруты жителей"},
         {"route": "/chairperson/action-routes/", "role": "Маршруты председателя"},
@@ -155,10 +139,7 @@
     {
       "id": "project-kits",
       "title": "Проекты, заявки и шаблоны",
-      "main": {
-        "route": "/project-passport/",
-        "role": "Рабочая страница подготовки паспорта проекта"
-      },
+      "main": {"route": "/project-passport/", "role": "Рабочая страница подготовки паспорта проекта"},
       "related": [
         {"route": "/grant-application-kit/", "role": "Комплект конкурсной заявки"},
         {"route": "/meeting-kit/", "role": "Комплект для собрания жителей"},
@@ -178,10 +159,7 @@
     {
       "id": "media-publication",
       "title": "Фото, публикации и конфиденциальность",
-      "main": {
-        "route": "/media-guide/",
-        "role": "Главная инструкция по фото и материалам"
-      },
+      "main": {"route": "/media-guide/", "role": "Главная инструкция по фото и материалам"},
       "related": [
         {"route": "/privacy/", "role": "Правила персональных данных и публикации"},
         {"route": "/content-standards/", "role": "Редакционные стандарты"},
