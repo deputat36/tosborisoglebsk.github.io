@@ -51,6 +51,13 @@ function hasLabelFor(html, id) {
   return new RegExp(`<label\\b[^>]*\\bfor=["']${escaped}["'][^>]*>`, 'i').test(html);
 }
 
+function hasWrappingLabel(html, controlTag) {
+  for (const match of html.matchAll(/<label\b[^>]*>[\s\S]*?<\/label>/gi)) {
+    if (match[0].includes(controlTag)) return true;
+  }
+  return false;
+}
+
 function isPublicHtml(relativePath, html) {
   if (relativePath.startsWith('.github/') || relativePath.startsWith('scripts/')) return false;
   return !/<meta[^>]+name=["']robots["'][^>]+content=["'][^"']*noindex/i.test(html);
@@ -93,7 +100,7 @@ function inspectHtml(filePath) {
     const attrs = attributes(tag);
     const type = String(attrs.type || '').toLowerCase();
     if (['hidden', 'submit', 'button', 'reset', 'image'].includes(type)) return;
-    if (hasAccessibleName(attrs) || hasLabelFor(html, attrs.id)) return;
+    if (hasAccessibleName(attrs) || hasLabelFor(html, attrs.id) || hasWrappingLabel(html, tag)) return;
     controlsWithoutLabel += 1;
   });
   if (controlsWithoutLabel) issues.push({ type: 'form_controls_without_label', severity: 'medium', count: controlsWithoutLabel });
@@ -209,6 +216,7 @@ function main() {
     over_budget_assets: assets.filter((asset) => asset.over_budget).sort((a, b) => b.size_bytes - a.size_bytes),
     notes: [
       'Отчёт является измерительным baseline и не заменяет ручную проверку клавиатурной навигации, контраста и экранного диктора.',
+      'Доступное имя поля распознаётся через aria-label, aria-labelledby, title, label[for] и оборачивающий label.',
       'Пустой alt может быть корректным для декоративного изображения; ошибкой считается отсутствие атрибута alt.',
       'Lazy-loading не требуется для логотипов и иконок, но рекомендуется для контентных изображений ниже первого экрана.',
       'Пороговые значения используются как раннее предупреждение и могут быть уточнены после анализа текущего baseline.'
