@@ -11,6 +11,7 @@
     "patch:accessibility-basics": "node scripts/patch_accessibility_basics.js",
     "patch:accessibility-landmarks": "node scripts/patch_accessibility_landmarks.js",
     "patch:accessibility-public-controls": "node scripts/patch_accessibility_public_controls.js",
+    "patch:accessibility-internal-tools": "node scripts/patch_accessibility_internal_tools.js",
     "report:technical-quality": "node scripts/generate_accessibility_performance_report.js",
     "audit:technical-quality": "node scripts/audit_accessibility_performance_report.js",
     "audit:links": "node scripts/audit_site_links.js",
