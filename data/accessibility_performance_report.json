@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T16:42:14.185Z",
+  "generated_at": "2026-07-10T17:18:48.231Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 239,
+    "asset_files": 240,
     "over_budget_assets": 0,
     "total_css_bytes": 32380,
-    "total_js_bytes": 1162417,
+    "total_js_bytes": 1171767,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -176,6 +176,13 @@
       "over_budget": false
     },
     {
+      "path": "scripts/audit_priority_tos_response_review.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9174,
+      "over_budget": false
+    },
+    {
       "path": "scripts/generate_places_pages.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8157,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/generate_need_pages.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8102,
       "over_budget": false
     }
   ],
