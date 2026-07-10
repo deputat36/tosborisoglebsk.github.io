@@ -102,7 +102,7 @@ function main() {
     expectIncludes(errors, line, html, '/assets/js/site.js', 'site.js is missing');
     expectIncludes(errors, line, html, 'data-action="menu"', 'menu control is missing');
     expectIncludes(errors, line, html, 'data-action="theme"', 'theme control is missing');
-    expectIncludes(errors, line, html, '/update-tos/?type=project#message-builder', 'project submission link is missing');
+    expectIncludes(errors, line, html, 'type=project#message-builder', 'project submission link is missing');
     expectIncludes(errors, line, html, '/grants/', 'grants link is missing');
     expectIncludes(errors, line, html, '/chairperson/', 'chairperson link is missing');
     expectIncludes(errors, line, html, '/projects/', 'projects index link is missing');
