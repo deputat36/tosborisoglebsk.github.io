@@ -76,6 +76,38 @@ function validateConsolidation(errors, label, group) {
   }
 }
 
+function validateEditorWorkflowCleanup(errors) {
+  const pages = [
+    {
+      route: '/workbench-routes/',
+      required: ['href="/workbench/"', 'Роль страницы:', 'короткие сценарии']
+    },
+    {
+      route: '/collection-board/',
+      required: ['href="/workbench/"', 'Роль страницы:', 'локальная доска', 'data/outreach_register.csv']
+    },
+    {
+      route: '/editorial-workflow/',
+      required: ['href="/workbench/"', 'Роль страницы:', 'подробная инструкция', '/collection-board/']
+    }
+  ];
+
+  pages.forEach(({ route, required }) => {
+    const filePath = routeToFile(route);
+    if (!filePath || !fs.existsSync(filePath)) {
+      errors.push(`editor-workflow cleanup: missing route ${route}`);
+      return;
+    }
+
+    const html = fs.readFileSync(filePath, 'utf8');
+    required.forEach((marker) => {
+      if (!html.includes(marker)) {
+        errors.push(`editor-workflow cleanup: ${route} missing marker ${marker}`);
+      }
+    });
+  });
+}
+
 function main() {
   if (!fs.existsSync(REGISTRY_PATH)) throw new Error(`Missing route registry: ${REGISTRY_PATH}`);
 
@@ -116,6 +148,8 @@ function main() {
     validateConsolidation(errors, label, group);
   });
 
+  validateEditorWorkflowCleanup(errors);
+
   const pagePath = path.join(ROOT, 'route-cleanup', 'index.html');
   const scriptPath = path.join(ROOT, 'assets', 'js', 'route-cleanup.js');
   if (!fs.existsSync(pagePath)) errors.push('route-cleanup/index.html is missing');
@@ -146,7 +180,7 @@ function main() {
     return acc;
   }, {});
 
-  console.log(`Route governance OK: ${groups.length} groups, ${seenRoutes.size} unique routes, proposals ${JSON.stringify(proposalCounts)}`);
+  console.log(`Route governance OK: ${groups.length} groups, ${seenRoutes.size} unique routes, proposals ${JSON.stringify(proposalCounts)}, editor workflow return links protected`);
 }
 
 main();
