@@ -1,0 +1,52 @@
+name: Patch accessibility basics
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'scripts/patch_accessibility_basics.js'
+      - '.github/workflows/patch-accessibility-basics.yml'
+  push:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'scripts/patch_accessibility_basics.js'
+      - '.github/workflows/patch-accessibility-basics.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: patch-accessibility-basics-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Patch safe accessibility basics
+        run: node scripts/patch_accessibility_basics.js
+      - name: Regenerate technical baseline
+        run: node scripts/generate_accessibility_performance_report.js
+      - name: Audit technical baseline
+        run: node scripts/audit_accessibility_performance_report.js
+      - name: Audit internal links
+        run: node scripts/audit_site_links.js
+      - name: Audit SEO basics
+        run: node scripts/audit_seo.js
+      - name: Commit patched HTML and report
+        if: github.event_name != 'pull_request'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Patch accessibility basics'
+          file_pattern: '**/*.html data/accessibility_performance_report.json'
