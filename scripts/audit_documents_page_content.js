@@ -36,6 +36,10 @@ function normalizeLocalUrl(url) {
   return url.startsWith('/') ? url : `/${url}`;
 }
 
+function localPathFor(url) {
+  return String(url || '').split('?')[0].split('#')[0];
+}
+
 function checkContains(errors, content, label, needle) {
   if (!content.includes(needle)) {
     errors.push(`${label}: missing ${needle}`);
@@ -67,6 +71,7 @@ function validateData(errors, documents) {
     const attention = item.attention || '';
     const url = item.url || '';
     const date = item.date || '';
+    const unavailableArchive = /архив/i.test(status) && /файл.*(?:не включ|не добав)/i.test(`${status} ${attention}`);
 
     if (!title) errors.push(`${line}: missing title`);
     if (title && title.length < 8) errors.push(`${line}: title is too short`);
@@ -83,7 +88,7 @@ function validateData(errors, documents) {
     if (!date) errors.push(`${line}: missing date`);
 
     if (!url) {
-      errors.push(`${line}: missing url`);
+      if (!unavailableArchive) errors.push(`${line}: missing url`);
     } else {
       if (seenUrls.has(url)) errors.push(`${line}: duplicate url ${url}`);
       seenUrls.add(url);
@@ -93,7 +98,8 @@ function validateData(errors, documents) {
         errors.push(`${line}: invalid url ${url}`);
       }
 
-      if (normalizedUrl.startsWith('/') && !repoPathExists(normalizedUrl)) {
+      const localPath = localPathFor(normalizedUrl);
+      if (normalizedUrl.startsWith('/') && !repoPathExists(localPath)) {
         errors.push(`${line}: missing local document or page ${normalizedUrl}`);
       }
     }
@@ -130,6 +136,7 @@ function main() {
   checkContains(errors, script, 'assets/js/documents.js', 'target="_blank" rel="noopener"');
   checkContains(errors, script, 'assets/js/documents.js', 'item.attention');
   checkContains(errors, script, 'assets/js/documents.js', 'item.use_for');
+  checkContains(errors, script, 'assets/js/documents.js', 'Файл не добавлен');
   checkContains(errors, script, 'assets/js/documents.js', 'Список документов не загрузился. Проверьте файл data/documents.json.');
 
   validateData(errors, documents);

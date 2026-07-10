@@ -18,7 +18,10 @@ function extractRepoPathTokens(value) {
   return value
     .split(/\s+и\s+|,|;/)
     .map((part) => part.trim())
-    .filter((part) => /^(data|docs|scripts|assets|tos|news|projects|needs|done|registry|audit|site-health|github-tasks|css-maintenance|actions-check)[/\w.-]*/.test(part));
+    .filter((part) => {
+      if (/^(data|docs|scripts|assets|tos|news|projects|needs|done)\/[\w./-]+$/.test(part)) return true;
+      return /^(registry|audit|site-health|github-tasks|css-maintenance|actions-check)(?:\/[\w./-]+)?$/.test(part);
+    });
 }
 
 module.exports = {

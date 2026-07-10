@@ -22,6 +22,12 @@ function normalizePhone(value) {
   return String(value || '').replace(/[^+\d]/g, '');
 }
 
+function escapeAttribute(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;');
+}
+
 function pagePathForSlug(slug) {
   return path.join(process.cwd(), 'tos', slug, 'index.html');
 }
@@ -117,7 +123,8 @@ function main() {
     });
 
     [...(tos.chairperson_links || []), ...(tos.social_links || [])].forEach((url, urlIndex) => {
-      if (url && !html.includes(`href="${url}"`)) {
+      const escapedUrl = escapeAttribute(url);
+      if (url && !html.includes(`href="${escapedUrl}"`)) {
         errors.push(`${line}: public link ${urlIndex + 1} is missing ${url}`);
       }
     });

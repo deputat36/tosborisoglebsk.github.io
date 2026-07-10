@@ -12,7 +12,7 @@
   }[char]));
 
   const normalizeUrl = (url) => {
-    if (!url) return '#';
+    if (!url) return '';
     if (/^https?:\/\//.test(url)) return url;
     if (url.startsWith('/')) return url;
     return `/${url}`;
@@ -24,8 +24,11 @@
     const url = normalizeUrl(item.url);
     const target = isExternal(url) ? ' target="_blank" rel="noopener"' : '';
     const attention = item.attention ? `<div class="notice"><b>Внимание:</b> ${documentsEsc(item.attention)}</div>` : '';
+    const action = url
+      ? `<a class="btn primary" href="${documentsEsc(url)}"${target}>Открыть</a>`
+      : '<span class="tag warn">Файл не добавлен</span>';
 
-    return `<article class="card"><div class="card-inner"><span class="tag">${documentsEsc(item.type)}</span><h3>${documentsEsc(item.title)}</h3><p>${documentsEsc(item.description)}</p><div class="tiny">Статус: ${documentsEsc(item.status)}</div><div class="tiny">Для чего: ${documentsEsc(item.use_for)}</div>${attention}<div class="card-actions"><a class="btn primary" href="${documentsEsc(url)}"${target}>Открыть</a><span class="tag">${documentsEsc(item.date)}</span></div></div></article>`;
+    return `<article class="card"><div class="card-inner"><span class="tag">${documentsEsc(item.type)}</span><h3>${documentsEsc(item.title)}</h3><p>${documentsEsc(item.description)}</p><div class="tiny">Статус: ${documentsEsc(item.status)}</div><div class="tiny">Для чего: ${documentsEsc(item.use_for)}</div>${attention}<div class="card-actions">${action}<span class="tag">${documentsEsc(item.date)}</span></div></div></article>`;
   };
 
   fetch('/data/documents.json')

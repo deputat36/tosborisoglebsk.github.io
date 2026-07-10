@@ -8,7 +8,9 @@ const allowedReferenceFiles = new Set([
   'assets/js/nav-v2/admin-guard-v2.js',
   'scripts/audit_supabase_scope.js',
   'scripts/audit_project_mode.js',
-  'scripts/audit_project_mode_full.js'
+  'scripts/audit_project_mode_full.js',
+  'docs/AUDIT-2026-07-10.md',
+  'docs/STATUS.md'
 ]);
 
 const ignoredDirs = new Set([

@@ -95,9 +95,16 @@ function main() {
     }
 
     if (item.source_url) {
-      expectIncludes(errors, line, html, `href="${htmlEntityAmp(item.source_url)}"`, 'source URL is missing');
-      expectIncludes(errors, line, html, 'target="_blank" rel="noopener noreferrer"', 'source URL must open safely');
-      expectIncludes(errors, line, html, `"citation":"${item.source_url}`, 'JSON-LD citation is missing');
+      const sourceUrl = String(item.source_url);
+      const escapedSourceUrl = htmlEntityAmp(sourceUrl);
+      const absoluteCitation = sourceUrl.startsWith('/') ? `${siteUrl}${sourceUrl}` : sourceUrl;
+      const externalSource = /^https?:\/\//.test(sourceUrl);
+
+      expectIncludes(errors, line, html, `href="${escapedSourceUrl}"`, 'source URL is missing');
+      if (externalSource) {
+        expectIncludes(errors, line, html, 'target="_blank" rel="noopener noreferrer"', 'external source URL must open safely');
+      }
+      expectIncludes(errors, line, html, `"citation":"${absoluteCitation}`, 'JSON-LD citation is missing');
     }
 
     if (item.tos_slug) {

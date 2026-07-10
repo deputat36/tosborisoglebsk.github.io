@@ -31,16 +31,17 @@ function validateDomainAccess(errors) {
   const label = 'domain_access_check.csv';
   const { headers, items } = readCsv(domainPath, label);
   errors.push(...validateHeaders(headers, domainHeaders, label));
-  const seenTargets = new Set();
+  const seenChecks = new Set();
 
   items.forEach((item, index) => {
     const line = index + 2;
     const [checkedAt, target, method, result, status, notes, nextStep] = item;
+    const checkKey = `${target}|${method}`;
 
     if (!isIsoDate(checkedAt)) errors.push(`${label}: line ${line}: invalid checked_at ${checkedAt}`);
     if (!isHttpUrl(target)) errors.push(`${label}: line ${line}: invalid target ${target}`);
-    if (target && seenTargets.has(target)) errors.push(`${label}: line ${line}: duplicate target ${target}`);
-    if (target) seenTargets.add(target);
+    if (target && method && seenChecks.has(checkKey)) errors.push(`${label}: line ${line}: duplicate target and method ${checkKey}`);
+    if (target && method) seenChecks.add(checkKey);
     if (!method) errors.push(`${label}: line ${line}: missing method`);
     if (!result) errors.push(`${label}: line ${line}: missing result`);
     if (!domainStatuses.has(status)) errors.push(`${label}: line ${line}: unsupported status ${status}`);
