@@ -7,11 +7,10 @@ function runChecks(checks, options = {}) {
   let failed = false;
 
   checks.forEach(([label, script]) => {
-    if (verbose) console.log(`\n--- ${label} ---`);
-
     const startedAt = Date.now();
     const result = spawnSync(process.execPath, [script], {
-      stdio: 'inherit',
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
       shell: false,
       timeout: timeoutMs,
       killSignal: 'SIGTERM'
@@ -20,27 +19,31 @@ function runChecks(checks, options = {}) {
 
     if (result.error) {
       const timeoutNote = result.error.code === 'ETIMEDOUT'
-        ? ` timed out after ${timeoutMs} ms`
-        : ` failed to start: ${result.error.message}`;
-      console.error(`${label}${timeoutNote}`);
+        ? `timed out after ${timeoutMs} ms`
+        : `failed to start: ${result.error.message}`;
+      console.error(`FAIL ${label}: ${timeoutNote}`);
+      if (result.stdout) console.error(result.stdout.trim());
+      if (result.stderr) console.error(result.stderr.trim());
       failed = true;
       return;
     }
 
     if (result.status !== 0) {
-      console.error(`${label} failed with status ${result.status}${result.signal ? `, signal ${result.signal}` : ''}`);
+      console.error(`FAIL ${label}: status ${result.status}${result.signal ? `, signal ${result.signal}` : ''}`);
+      if (result.stdout) console.error(result.stdout.trim());
+      if (result.stderr) console.error(result.stderr.trim());
       failed = true;
       return;
     }
 
-    if (verbose) console.log(`${label} completed in ${durationMs} ms`);
+    if (verbose) console.log(`OK ${label} completed in ${durationMs} ms`);
   });
 
   if (failed) {
     process.exit(1);
   }
 
-  console.log(verbose ? `\n${successMessage}` : successMessage);
+  console.log(successMessage);
 }
 
 module.exports = { runChecks };
