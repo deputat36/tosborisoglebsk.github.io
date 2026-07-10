@@ -5,11 +5,18 @@ const { repoPathExists } = require('./lib/path_checks');
 const htmlPath = path.join(process.cwd(), 'verification-levels', 'index.html');
 
 const requiredLinks = [
+  '/verification-guide/',
+  '/chairperson/verify-card/',
   '/data-quality/',
   '/sources/',
-  '/workbench/',
   '/update-tos/?type=card#message-builder',
   '/field-checklist/'
+];
+
+const forbiddenInternalLinks = [
+  '/workbench/',
+  '/verification-tasks/',
+  '/verification-control/'
 ];
 
 const requiredPhrases = [
@@ -19,7 +26,10 @@ const requiredPhrases = [
   'Зачем нужны статусы',
   'Открытый справочник должен быть честным',
   'Что нужно для повышения статуса',
-  'Безопасная позиция портала'
+  'Безопасная позиция портала',
+  'Роль страницы:',
+  'публичное объяснение уровней достоверности',
+  'не является рабочим журналом'
 ];
 
 const requiredStatuses = [
@@ -77,6 +87,10 @@ function main() {
     checkContains(errors, html, `href="${link}`);
     const localPath = localPathFor(link);
     if (!repoPathExists(localPath)) errors.push(`missing linked page ${localPath}`);
+  });
+
+  forbiddenInternalLinks.forEach((link) => {
+    if (html.includes(`href="${link}`)) errors.push(`public verification levels page must not link to internal route ${link}`);
   });
 
   if (!html.includes('нельзя использовать как окончательно подтверждённые')) {
