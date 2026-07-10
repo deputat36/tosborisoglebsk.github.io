@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T18:17:41.605Z",
+  "generated_at": "2026-07-10T18:36:23.611Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 241,
     "over_budget_assets": 0,
     "total_css_bytes": 32380,
-    "total_js_bytes": 1187294,
+    "total_js_bytes": 1190031,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -99,16 +99,16 @@
       "over_budget": false
     },
     {
-      "path": "assets/css/styles.css",
-      "group": "css",
-      "extension": ".css",
-      "size_bytes": 11078,
-      "over_budget": false
-    },
-    {
       "path": "scripts/audit_route_governance.js",
       "group": "js",
       "extension": ".js",
+      "size_bytes": 13310,
+      "over_budget": false
+    },
+    {
+      "path": "assets/css/styles.css",
+      "group": "css",
+      "extension": ".css",
       "size_bytes": 11078,
       "over_budget": false
     },
