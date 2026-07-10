@@ -24,16 +24,16 @@
 
   <main id="main" class="layout">
     <aside class="sidebar">
-      <button class="tab active" data-section="toses">Каталог ТОС</button>
-      <button class="tab" data-section="news">Новости</button>
-      <button class="tab" data-section="articles">Материалы</button>
-      <button class="tab" data-section="documents">Документы</button>
-      <button class="tab" data-section="grants">Конкурсы</button>
-      <button class="tab" data-section="projects">Проекты</button>
-      <button class="tab" data-section="events">Календарь</button>
-      <button class="tab" data-section="needs">Нужна помощь</button>
+      <button class="tab active" data-section="toses" type="button">Каталог ТОС</button>
+      <button class="tab" data-section="news" type="button">Новости</button>
+      <button class="tab" data-section="articles" type="button">Материалы</button>
+      <button class="tab" data-section="documents" type="button">Документы</button>
+      <button class="tab" data-section="grants" type="button">Конкурсы</button>
+      <button class="tab" data-section="projects" type="button">Проекты</button>
+      <button class="tab" data-section="events" type="button">Календарь</button>
+      <button class="tab" data-section="needs" type="button">Нужна помощь</button>
       <hr/>
-      <button class="tab" data-section="help">Инструкция</button>
+      <button class="tab" data-section="help" type="button">Инструкция</button>
     </aside>
 
     <section class="workspace">
@@ -50,14 +50,14 @@
           <div class="toolbar-actions">
             <button class="btn" id="addItem" type="button">Добавить запись</button>
             <button class="btn" id="importJson" type="button">Загрузить JSON</button>
-            <input class="hidden" id="importJsonFile" type="file" accept="application/json,.json"/>
+            <input class="hidden" id="importJsonFile" type="file" accept="application/json,.json" aria-label="Загрузить JSON-файл"/>
             <button class="btn primary" id="downloadJson" type="button">Скачать JSON</button>
           </div>
         </div>
 
         <div class="tools-row">
-          <input id="searchInput" class="input" type="search" placeholder="Поиск по записям..."/>
-          <select id="quickFilter" class="input small-input"><option value="">Все записи</option></select>
+          <input id="searchInput" class="input" type="search" placeholder="Поиск по записям..." aria-label="Поиск по записям"/>
+          <select id="quickFilter" class="input small-input" aria-label="Быстрый фильтр записей"><option value="">Все записи</option></select>
           <button class="btn" id="validateBtn" type="button">Проверить ошибки</button>
           <button class="btn" id="qualityBtn" type="button">Аудит качества</button>
         </div>

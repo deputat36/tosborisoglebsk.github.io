@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T16:20:37.821Z",
+  "generated_at": "2026-07-10T16:24:17.348Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -11,81 +11,22 @@
   "summary": {
     "html_pages": 372,
     "public_pages": 332,
-    "pages_with_issues": 3,
-    "issue_counts": {
-      "buttons_without_type": 19,
-      "form_controls_without_label": 8
-    },
+    "pages_with_issues": 0,
+    "issue_counts": {},
     "issue_severity": {
       "high": 0,
-      "medium": 27,
+      "medium": 0,
       "low": 0
     },
-    "asset_files": 235,
+    "asset_files": 236,
     "over_budget_assets": 0,
     "total_css_bytes": 32380,
-    "total_js_bytes": 1148815,
+    "total_js_bytes": 1151386,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
-  "page_findings": [
-    {
-      "path": "admin/admin-index-ready.html",
-      "public": false,
-      "size_bytes": 5064,
-      "images": 0,
-      "buttons": 17,
-      "form_controls": 3,
-      "issues": [
-        {
-          "type": "buttons_without_type",
-          "severity": "medium",
-          "count": 10
-        },
-        {
-          "type": "form_controls_without_label",
-          "severity": "medium",
-          "count": 3
-        }
-      ]
-    },
-    {
-      "path": "admin/index.html",
-      "public": false,
-      "size_bytes": 5764,
-      "images": 0,
-      "buttons": 16,
-      "form_controls": 3,
-      "issues": [
-        {
-          "type": "buttons_without_type",
-          "severity": "medium",
-          "count": 9
-        },
-        {
-          "type": "form_controls_without_label",
-          "severity": "medium",
-          "count": 3
-        }
-      ]
-    },
-    {
-      "path": "tools/import.html",
-      "public": false,
-      "size_bytes": 8046,
-      "images": 1,
-      "buttons": 4,
-      "form_controls": 2,
-      "issues": [
-        {
-          "type": "form_controls_without_label",
-          "severity": "medium",
-          "count": 2
-        }
-      ]
-    }
-  ],
+  "page_findings": [],
   "largest_assets": [
     {
       "path": "data/tos.data.js",

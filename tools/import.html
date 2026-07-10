@@ -35,7 +35,7 @@
     <section class="grid">
       <div class="card"><div class="card-inner prose">
         <h2>1) Выберите файл</h2>
-        <input class="input" id="file" type="file" accept=".xlsx,.xls,.csv"/>
+        <input class="input" id="file" type="file" accept=".xlsx,.xls,.csv" aria-label="Выберите Excel или CSV-файл"/>
         <p><small>Если вы офлайн и CDN не открывается — импорт не сработает. В таком случае можно экспортировать CSV и править руками.</small></p>
 
         <h2>2) Получите результат</h2>
@@ -46,7 +46,7 @@
 
       <div class="card"><div class="card-inner prose">
         <h2>Готовый код</h2>
-        <textarea class="input" id="out" style="min-height:520px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;"></textarea>
+        <textarea class="input" id="out" style="min-height:520px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;" aria-label="Сгенерированный код tos.data.js"></textarea>
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
           <button class="btn" id="copy" type="button">Скопировать</button>
           <a class="btn" href="/data/tos.data.js" target="_blank" rel="noopener">Открыть текущий tos.data.js</a>
