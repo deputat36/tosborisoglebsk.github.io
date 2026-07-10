@@ -8,6 +8,25 @@ const newsEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
 
 const newsPublished = (item) => item.status !== 'draft';
 
+function newsOrigin(item) {
+  if (['verified', 'editorial', 'starter', 'request'].includes(item.content_origin)) return item.content_origin;
+  if (item.id === 'mirolyubie-project-winner-2026') return 'verified';
+  if (String(item.id || '').startsWith('send-news-')) return 'request';
+  return 'editorial';
+}
+
+function newsOriginTag(item) {
+  const origin = newsOrigin(item);
+  const labels = {
+    verified: 'Подтверждено источником',
+    editorial: 'Редакционный материал',
+    starter: 'Стартовый материал',
+    request: 'Запрос материалов'
+  };
+  const className = origin === 'verified' ? 'ok' : origin === 'request' ? 'warn' : '';
+  return `<span class="tag ${className}">${newsEsc(labels[origin])}</span>`;
+}
+
 function newsDate(value) {
   if (!value) return 'Дата уточняется';
   const date = new Date(value + 'T00:00:00');
@@ -33,6 +52,7 @@ function newsCard(item, toses) {
   const tosName = newsTosName(item.tos_slug, toses);
   return `<article class="list-item">
     <div class="meta">
+      ${newsOriginTag(item)}
       <span class="tag">${newsEsc(item.category || 'Новость')}</span>
       <span class="tag">${newsEsc(newsDate(item.date))}</span>
       ${tosName ? `<span class="tag">${newsEsc(tosName)}</span>` : ''}
@@ -72,7 +92,7 @@ async function renderNewsPage() {
         .filter((item) => !selectedTos || item.tos_slug === selectedTos)
         .filter((item) => {
           const tosName = newsTosName(item.tos_slug, toses);
-          const hay = [item.title, item.lead, item.category, item.source, item.tos_slug, tosName, ...(item.text || [])].join(' ').toLowerCase().replace(/ё/g, 'е');
+          const hay = [item.title, item.lead, item.category, item.source, item.tos_slug, tosName, newsOrigin(item), ...(item.text || [])].join(' ').toLowerCase().replace(/ё/g, 'е');
           return !query || hay.includes(query);
         })
         .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
