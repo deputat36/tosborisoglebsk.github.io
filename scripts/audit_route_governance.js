@@ -215,6 +215,65 @@ function validateVerificationCleanup(errors) {
   ]);
 }
 
+function validateTechnicalControlCleanup(errors) {
+  assertPageMarkers(errors, 'technical-control cleanup', '/site-health/', [
+    'name="robots" content="noindex,nofollow"',
+    'Главная управленческая сводка',
+    'Роль страницы:',
+    'единственная управленческая сводка',
+    'id="control-sections"',
+    'href="/data-quality/"',
+    'href="/audit/"',
+    'href="/github-tasks/"',
+    'href="/actions-check/"',
+    'href="/open-data/"',
+    'id="site-health-summary"',
+    'id="site-health-technical"',
+    'id="site-health-technical-quality"'
+  ]);
+
+  assertPageMarkers(errors, 'technical-control cleanup', '/audit/', [
+    'name="robots" content="noindex,nofollow"',
+    'Роль страницы:',
+    'детальный рабочий реестр карточек',
+    'href="/site-health/"',
+    'id="audit-summary"',
+    'id="audit-list"'
+  ]);
+
+  assertPageMarkers(errors, 'technical-control cleanup', '/data-quality/', [
+    'Роль страницы:',
+    'публичная сводка заполненности',
+    'href="/site-health/"',
+    'id="quality-summary"',
+    'id="quality-list"'
+  ], [
+    'name="robots" content="noindex'
+  ]);
+
+  assertPageMarkers(errors, 'technical-control cleanup', '/open-data/', [
+    'Роль страницы:',
+    'каталог JSON, CSV, RSS и sitemap',
+    'href="/site-health/"'
+  ], [
+    'name="robots" content="noindex'
+  ]);
+
+  assertPageMarkers(errors, 'technical-control cleanup', '/github-tasks/', [
+    'name="robots" content="noindex',
+    'Роль страницы:',
+    'служебный реестр ручных блокировок',
+    'href="/site-health/"'
+  ]);
+
+  assertPageMarkers(errors, 'technical-control cleanup', '/actions-check/', [
+    'name="robots" content="noindex',
+    'Роль страницы:',
+    'служебная диагностика GitHub Actions',
+    'href="/site-health/"'
+  ]);
+}
+
 function main() {
   if (!fs.existsSync(REGISTRY_PATH)) throw new Error(`Missing route registry: ${REGISTRY_PATH}`);
 
@@ -258,6 +317,7 @@ function main() {
   validateEditorWorkflowCleanup(errors);
   validateDataUpdateCleanup(errors);
   validateVerificationCleanup(errors);
+  validateTechnicalControlCleanup(errors);
 
   const pagePath = path.join(ROOT, 'route-cleanup', 'index.html');
   const scriptPath = path.join(ROOT, 'assets', 'js', 'route-cleanup.js');
