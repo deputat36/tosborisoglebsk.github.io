@@ -14,18 +14,20 @@ const ORIGIN_CLASSES = {
   request: 'warn'
 };
 
-function inferContentOrigin(item, collection = '') {
-  const explicit = String(item?.content_origin || '').trim().toLowerCase();
-  if (CONTENT_ORIGINS.has(explicit)) return explicit;
-
+function classifyContentOrigin(item, collection = '') {
   const id = String(item?.id || '');
   if (collection === 'news' && id === 'mirolyubie-project-winner-2026') return 'verified';
   if (collection === 'news' && id.startsWith('send-news-')) return 'request';
   if (collection === 'needs' && id.startsWith('update-data-')) return 'request';
   if (collection === 'projects' && id.startsWith('public-stand-and-ideas-')) return 'starter';
   if (collection === 'done' && id.startsWith('result-archive-needed-')) return 'request';
-
   return 'editorial';
+}
+
+function inferContentOrigin(item, collection = '', options = {}) {
+  const explicit = String(item?.content_origin || '').trim().toLowerCase();
+  if (!options.ignoreExplicit && CONTENT_ORIGINS.has(explicit)) return explicit;
+  return classifyContentOrigin(item, collection);
 }
 
 function contentOriginLabel(origin) {
@@ -62,6 +64,7 @@ function contentOriginNotice(origin, collection = '') {
 
 module.exports = {
   CONTENT_ORIGINS,
+  classifyContentOrigin,
   inferContentOrigin,
   contentOriginLabel,
   contentOriginClass,
