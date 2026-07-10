@@ -10,7 +10,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "collect-tos-news-2026",
@@ -23,7 +24,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "collect-project-archive-2026",
@@ -36,7 +38,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "need-tos-community-links-2026",
@@ -49,7 +52,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "seedlings-for-greening",
@@ -62,7 +66,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "volunteers-for-cleanup",
@@ -75,7 +80,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "materials-for-small-repairs",
@@ -88,7 +94,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "photo-and-media-help",
@@ -101,7 +108,8 @@
     "priority": "Низкий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "update-data-bogana-2026",
@@ -114,7 +122,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-vostochnyy-2026",
@@ -127,7 +136,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-gubari-2026",
@@ -140,7 +150,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-dzerzhinskogo-2026",
@@ -153,7 +164,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-znamenie-2026",
@@ -166,7 +178,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-ivanovka-2026",
@@ -179,7 +192,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-ipas-2026",
@@ -192,7 +206,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-kalinka-2026",
@@ -205,7 +220,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-mahrovka-2026",
@@ -218,7 +234,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-mayak-2026",
@@ -231,7 +248,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-mechta-2026",
@@ -244,7 +262,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-mirolyubie-2026",
@@ -257,7 +276,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-pervomayskiy-2026",
@@ -270,7 +290,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-petrovskoe-2026",
@@ -283,7 +304,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-pobeda-2026",
@@ -296,7 +318,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-podstepki-2026",
@@ -309,7 +332,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-port-artur-2026",
@@ -322,7 +346,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-prostornyy-2026",
@@ -335,7 +360,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-severnyy-39-2026",
@@ -348,7 +374,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-tancyrey-2026",
@@ -361,7 +388,8 @@
     "priority": "Высокий",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-tretyaki-2026",
@@ -374,7 +402,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-ulyanovka-2026",
@@ -387,7 +416,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-uyutnyy-2026",
@@ -400,7 +430,8 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "update-data-chkalovec-2026",
@@ -413,6 +444,7 @@
     "priority": "Средний",
     "contact": "Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo",
     "source": "Автоматический аудит каталога ТОС",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   }
 ]

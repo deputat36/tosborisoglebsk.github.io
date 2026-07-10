@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-07-10T14:13:14.552Z",
+  "definitions": {
+    "verified": "Материал имеет явный проверяемый источник; дополнительные детали всё равно могут требовать подтверждения.",
+    "editorial": "Материал подготовлен редакцией и не считается автоматически подтверждённым.",
+    "starter": "Стартовая идея для обсуждения, а не утверждённый или реализуемый проект.",
+    "request": "Запрос сведений или заготовка для сбора материала, а не подтверждение события, потребности или результата."
+  },
+  "collections": {
+    "news": {
+      "total": 43,
+      "verified": 1,
+      "editorial": 25,
+      "starter": 0,
+      "request": 17
+    },
+    "projects": {
+      "total": 47,
+      "verified": 0,
+      "editorial": 23,
+      "starter": 24,
+      "request": 0
+    },
+    "needs": {
+      "total": 32,
+      "verified": 0,
+      "editorial": 8,
+      "starter": 0,
+      "request": 24
+    },
+    "done": {
+      "total": 24,
+      "verified": 0,
+      "editorial": 8,
+      "starter": 0,
+      "request": 16
+    }
+  },
+  "totals": {
+    "total": 146,
+    "verified": 1,
+    "editorial": 64,
+    "starter": 24,
+    "request": 57
+  },
+  "tos_coverage": {
+    "total_tos": 24,
+    "with_verified_content": 1,
+    "with_editorial_content": 8,
+    "with_only_starter_or_request": 15,
+    "without_any_content": 0
+  }
+}

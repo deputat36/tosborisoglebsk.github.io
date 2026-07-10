@@ -11,7 +11,8 @@
       "Ответственный контакт для уточнения информации: Ирина Алексеевна Сотниченко, +7 (910) 249-82-84. Рабочая почта пока не используется."
     ],
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "tos-catalog-data-updated-2026-05-23",
@@ -25,7 +26,8 @@
       "Если председатель или актив ТОС заметит ошибку в карточке, можно отправить исправление через раздел «Контакты» или через сообщество ВКонтакте."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "how-to-send-tos-news-2026",
@@ -39,7 +41,8 @@
       "Материалы можно направлять через сообщество ВКонтакте vk.ru/tosbgo. Если нужно уточнить детали, можно связаться с Ириной Алексеевной Сотниченко по телефону +7 (910) 249-82-84."
     ],
     "source": "Редакция портала",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "editorial"
   },
   {
     "id": "tos-grants-2026-voronezh",
@@ -53,7 +56,8 @@
       "Даже если приём заявок завершён, условия конкурса полезны как чек-лист подготовки к следующему грантовому сезону."
     ],
     "source": "Вести Воронеж",
-    "source_url": "https://vestivrn.ru/news/2026/01/19/v-voronezhskoi-oblasti-startoval-konkurs-proektov-tos/"
+    "source_url": "https://vestivrn.ru/news/2026/01/19/v-voronezhskoi-oblasti-startoval-konkurs-proektov-tos/",
+    "content_origin": "editorial"
   },
   {
     "id": "nko-grants-2026",
@@ -66,7 +70,8 @@
       "Если ТОС планирует большой социальный проект, заранее ищите партнёра-НКО, распределяйте роли и продумывайте вклад жителей."
     ],
     "source": "Агентство социальной информации",
-    "source_url": "https://asi.org.ru/news/2026/03/12/v-voronezhskoj-oblasti-nachali-prinimat-zayavki-na-konkurs-proektov-so-nko/"
+    "source_url": "https://asi.org.ru/news/2026/03/12/v-voronezhskoj-oblasti-nachali-prinimat-zayavki-na-konkurs-proektov-so-nko/",
+    "content_origin": "editorial"
   },
   {
     "id": "obraz-buduschego-2026",
@@ -79,7 +84,8 @@
       "Чем раньше подготовлены проблема, команда, смета, календарь и партнёрства, тем выше шанс собрать сильную заявку."
     ],
     "source": "Конкурс проектов СО НКО Воронежской области",
-    "source_url": "https://xn--b1agd0aean.xn--80af5akm8c.xn--p1ai/"
+    "source_url": "https://xn--b1agd0aean.xn--80af5akm8c.xn--p1ai/",
+    "content_origin": "editorial"
   },
   {
     "id": "fz33-tos-2026",
@@ -92,7 +98,8 @@
       "ТОС считается учреждённым после регистрации устава. Для жителей это означает, что инициатива должна быть оформлена документально: территория, собрание, устав, избранные органы и регистрация."
     ],
     "source": "КонсультантПлюс / Гарант",
-    "source_url": "https://www.consultant.ru/document/cons_doc_LAW_501319/50787bcb81a98ab5f7a399d8f6f24d887ce06fb1/"
+    "source_url": "https://www.consultant.ru/document/cons_doc_LAW_501319/50787bcb81a98ab5f7a399d8f6f24d887ce06fb1/",
+    "content_origin": "editorial"
   },
   {
     "id": "local-project-preparation",
@@ -105,7 +112,8 @@
       "Для каждого проекта заранее сформулируйте: проблему, цель, аудиторию, результат, вклад жителей, этапы реализации, риски и дальнейшее содержание объекта."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "social-media-for-tos",
@@ -118,7 +126,8 @@
       "Публикуйте не только объявления, но и результаты: до/после, благодарности активистам, фотографии субботников, опросы, приглашения на собрания."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "catalog-unified-2026",
@@ -131,7 +140,8 @@
       "Если в карточке есть ошибка, можно отправить исправление через раздел «Обновить данные ТОС»."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "may-cleanup-checklist",
@@ -144,7 +154,8 @@
       "Быстрые задачи можно решить силами жителей; средние — с партнёрами; проектные — готовить для конкурса или обращения в администрацию."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "project-archive-needed",
@@ -157,7 +168,8 @@
       "Такой архив повышает доверие жителей и помогает быстрее готовить новые заявки."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "resident-survey-template",
@@ -170,7 +182,8 @@
       "Результаты можно использовать в протоколе, публикации и обосновании проекта."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "data-update-rules",
@@ -183,7 +196,8 @@
       "Если у ТОС есть логотип, его можно добавить в папку assets/img/tos-logos и прописать путь в data/toses.json."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "spring-cleanup-plan",
@@ -196,7 +210,8 @@
       "После мероприятия опубликуйте пост: кто участвовал, что сделали, что ещё осталось. Такой отчёт помогает вовлекать новых жителей."
     ],
     "source": "Методический материал",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "tos-project-passport",
@@ -209,7 +224,8 @@
       "Такой документ удобно использовать перед собранием, при поиске партнёров и при подготовке конкурсной заявки."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "community-archive",
@@ -222,7 +238,8 @@
       "Архив можно вести в облаке, а на сайте публиковать краткую витрину проектов."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "partnership-local-business",
@@ -235,7 +252,8 @@
       "После помощи обязательно сделайте публичную благодарность и покажите результат."
     ],
     "source": "Редакция портала",
-    "source_url": ""
+    "source_url": "",
+    "content_origin": "editorial"
   },
   {
     "id": "gubari-projects-archive-news-2026",
@@ -250,7 +268,8 @@
       "Для полноценного фотоотчёта по этим проектам нужно уточнить годы реализации, партнёров, фотографии до и после, а также комментарий председателя или актива ТОС."
     ],
     "source": "Карточка ТОС «Губари» на портале",
-    "source_url": "/tos/gubari/"
+    "source_url": "/tos/gubari/",
+    "content_origin": "editorial"
   },
   {
     "id": "severnyy-39-playground-news-2026",
@@ -265,7 +284,8 @@
       "Следующий шаг для портала — собрать фотографии, годы реализации, названия грантов и краткое описание работ, чтобы оформить полноценную историю в формате «было — сделали — стало»."
     ],
     "source": "Карточка ТОС «Северный 39» на портале",
-    "source_url": "/tos/severnyy-39/"
+    "source_url": "/tos/severnyy-39/",
+    "content_origin": "editorial"
   },
   {
     "id": "chkalovec-projects-news-2026",
@@ -280,7 +300,8 @@
       "Для сайта важно постепенно собрать подробный архив: какие проекты реализованы, в какие годы, кто участвовал, какие партнёры помогали и какие результаты получили жители."
     ],
     "source": "Карточка ТОС «Чкаловец» на портале",
-    "source_url": "/tos/chkalovec/"
+    "source_url": "/tos/chkalovec/",
+    "content_origin": "editorial"
   },
   {
     "id": "tretyaki-seven-projects-news-2026",
@@ -295,7 +316,8 @@
       "Для полного материала нужно уточнить названия проектов, годы реализации, фотографии, партнёров и краткие итоги по каждому направлению."
     ],
     "source": "Карточка ТОС «Третьяки» на портале",
-    "source_url": "/tos/tretyaki/"
+    "source_url": "/tos/tretyaki/",
+    "content_origin": "editorial"
   },
   {
     "id": "tancyrey-improvement-news-2026",
@@ -310,7 +332,8 @@
       "Для развития новости в полноценный фотоотчёт нужно собрать конкретные объекты, даты работ, фотографии и участников, которые помогали территории."
     ],
     "source": "Карточка ТОС «Танцырей» на портале",
-    "source_url": "/tos/tancyrey/"
+    "source_url": "/tos/tancyrey/",
+    "content_origin": "editorial"
   },
   {
     "id": "mahrovka-project-experience-news-2026",
@@ -325,7 +348,8 @@
       "Для портала нужно уточнить названия проектов, годы, фотографии и короткие итоги, чтобы сохранить этот опыт в архиве ТОСов БГО."
     ],
     "source": "Карточка ТОС «Махровка» на портале",
-    "source_url": "/tos/mahrovka/"
+    "source_url": "/tos/mahrovka/",
+    "content_origin": "editorial"
   },
   {
     "id": "vostochnyy-cleanups-news-2026",
@@ -340,7 +364,8 @@
       "Такие материалы хорошо подходят для будущих фотоотчётов: важно фиксировать даты, участников, фотографии и конкретный результат каждого мероприятия."
     ],
     "source": "Карточка ТОС «Восточный» на портале",
-    "source_url": "/tos/vostochnyy/"
+    "source_url": "/tos/vostochnyy/",
+    "content_origin": "editorial"
   },
   {
     "id": "send-news-bogana-2026",
@@ -357,7 +382,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-dzerzhinskogo-2026",
@@ -374,7 +400,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-znamenie-2026",
@@ -391,7 +418,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-ivanovka-2026",
@@ -408,7 +436,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-ipas-2026",
@@ -425,7 +454,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-kalinka-2026",
@@ -442,7 +472,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-mayak-2026",
@@ -459,7 +490,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-mechta-2026",
@@ -476,7 +508,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-mirolyubie-2026",
@@ -493,7 +526,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-pervomayskiy-2026",
@@ -510,7 +544,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-petrovskoe-2026",
@@ -527,7 +562,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-pobeda-2026",
@@ -544,7 +580,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-podstepki-2026",
@@ -561,7 +598,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-port-artur-2026",
@@ -578,7 +616,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-prostornyy-2026",
@@ -595,7 +634,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-ulyanovka-2026",
@@ -612,7 +652,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "send-news-uyutnyy-2026",
@@ -629,7 +670,8 @@
       "Материалы можно направить через сообщество ВКонтакте ТОС БГО или через форму обновления карточки на сайте."
     ],
     "source": "Редакция портала ТОС БГО",
-    "source_url": "https://vk.ru/tosbgo"
+    "source_url": "https://vk.ru/tosbgo",
+    "content_origin": "request"
   },
   {
     "id": "mirolyubie-project-winner-2026",
@@ -646,6 +688,7 @@
       "До получения подтверждения портал не утверждает, что работы уже начались или завершены."
     ],
     "source": "Официальный протокол победителей конкурса общественно полезных проектов ТОС 2026 года",
-    "source_url": "https://obraz36.ru/site_data/s273/2026/2026/%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D0%B8%20%D0%A2%D0%9E%D0%A1%202026.pdf"
+    "source_url": "https://obraz36.ru/site_data/s273/2026/2026/%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D0%B8%20%D0%A2%D0%9E%D0%A1%202026.pdf",
+    "content_origin": "verified"
   }
 ]
