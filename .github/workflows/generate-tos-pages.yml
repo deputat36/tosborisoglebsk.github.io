@@ -2,18 +2,18 @@ name: Generate TOS pages
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/30 * * * *'
   pull_request:
     branches:
       - release-2025-12-22
     paths:
       - '**/index.html'
       - 'data/*.json'
+      - 'data/*.csv'
       - 'scripts/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
+      - 'docs/*.md'
       - '.github/workflows/generate-tos-pages.yml'
   push:
     branches:
@@ -21,18 +21,20 @@ on:
     paths:
       - '**/index.html'
       - 'data/*.json'
+      - 'data/*.csv'
       - 'scripts/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
+      - 'docs/*.md'
       - '.github/workflows/generate-tos-pages.yml'
 
 permissions:
   contents: write
 
 concurrency:
-  group: generate-tos-pages
-  cancel-in-progress: false
+  group: generate-tos-pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   generate:
@@ -109,6 +111,8 @@ jobs:
         run: node scripts/audit_site_links.js
       - name: Audit SEO basics
         run: node scripts/audit_seo.js
+      - name: Run full project mode audits
+        run: node scripts/audit_project_mode.js
       - name: Commit generated pages, sitemap and audit
         if: github.event_name != 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v5
