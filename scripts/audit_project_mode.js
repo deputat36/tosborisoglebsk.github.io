@@ -64,6 +64,7 @@ const checks = [
   ['Quarterly report template', 'scripts/audit_quarterly_report_template.js'],
   ['Collection tasks', 'scripts/audit_collection_tasks.js'],
   ['Priority TOS tracking', 'scripts/audit_priority_tos_tracking.js'],
+  ['Priority TOS response review', 'scripts/audit_priority_tos_response_review.js'],
   ['Registry workflow', 'scripts/audit_registry_workflow.js'],
   ['CSS maintenance inventory', 'scripts/audit_css_maintenance_inventory.js'],
   ['Technical diagnostics', 'scripts/audit_technical_diagnostics.js'],
