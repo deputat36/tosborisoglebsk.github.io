@@ -99,7 +99,7 @@ function main() {
       }
     }
 
-    if (status === 'blocked' && !/подтверд/i.test(nextStep || '')) {
+    if (status === 'blocked' && !/(?:подтверд|подтверж)/i.test(nextStep || '')) {
       errors.push(`line ${line}: blocked status should explain required confirmation in next_step`);
     }
   });
