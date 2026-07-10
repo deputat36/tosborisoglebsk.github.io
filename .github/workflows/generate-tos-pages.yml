@@ -129,6 +129,8 @@ jobs:
         run: node scripts/audit_seo.js
       - name: Audit accessibility and performance baseline
         run: node scripts/audit_accessibility_performance_report.js
+      - name: Audit service route governance
+        run: node scripts/audit_route_governance.js
       - name: Run full project mode audits
         run: |
           set -o pipefail
