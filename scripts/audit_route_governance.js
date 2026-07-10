@@ -157,6 +157,64 @@ function validateDataUpdateCleanup(errors) {
   ]);
 }
 
+function validateVerificationCleanup(errors) {
+  assertPageMarkers(errors, 'verification cleanup', '/verification-guide/', [
+    'Главная методика проверки',
+    'Роль страницы:',
+    'главная методика и карта процесса',
+    'href="/verification-levels/"',
+    'href="/verification-tasks/"',
+    'href="/verification-control/"',
+    'href="/chairperson/verify-card/"',
+    'href="/reply-review/"'
+  ], [
+    'name="robots" content="noindex,nofollow"'
+  ]);
+
+  assertPageMarkers(errors, 'verification cleanup', '/verification-tasks/', [
+    'name="robots" content="noindex,nofollow"',
+    'Для редактора — рабочие задачи',
+    'Роль страницы:',
+    'рабочий список задач редактора',
+    'href="/verification-guide/"',
+    'href="/reply-review/"'
+  ]);
+
+  assertPageMarkers(errors, 'verification cleanup', '/verification-control/', [
+    'name="robots" content="noindex,nofollow"',
+    'Для редактора — контроль качества',
+    'Роль страницы:',
+    'внутренний контроль перехода статуса',
+    'href="/verification-guide/"',
+    'href="/reply-review/"'
+  ]);
+
+  assertPageMarkers(errors, 'verification cleanup', '/verification-levels/', [
+    'Роль страницы:',
+    'публичное объяснение уровней достоверности',
+    'href="/verification-guide/"',
+    'href="/chairperson/verify-card/"'
+  ], [
+    'name="robots" content="noindex,nofollow"',
+    'href="/workbench/"',
+    'href="/verification-tasks/"',
+    'href="/verification-control/"'
+  ]);
+
+  assertPageMarkers(errors, 'verification cleanup', '/chairperson/verify-card/', [
+    'Публичная памятка председателю',
+    'Роль страницы:',
+    'публичная памятка председателю и активу',
+    'href="/verification-guide/"',
+    'href="/verification-levels/"'
+  ], [
+    'name="robots" content="noindex,nofollow"',
+    'href="/workbench/"',
+    'href="/verification-tasks/"',
+    'href="/verification-control/"'
+  ]);
+}
+
 function main() {
   if (!fs.existsSync(REGISTRY_PATH)) throw new Error(`Missing route registry: ${REGISTRY_PATH}`);
 
@@ -199,6 +257,7 @@ function main() {
 
   validateEditorWorkflowCleanup(errors);
   validateDataUpdateCleanup(errors);
+  validateVerificationCleanup(errors);
 
   const pagePath = path.join(ROOT, 'route-cleanup', 'index.html');
   const scriptPath = path.join(ROOT, 'assets', 'js', 'route-cleanup.js');
