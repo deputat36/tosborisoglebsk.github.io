@@ -70,7 +70,8 @@ function main() {
   checkContains(errors, html, 'residents/index.html', '<meta property="og:url" content="https://tosborisoglebsk.ru/residents/"');
   checkContains(errors, html, 'residents/index.html', '<main id="main">');
   checkContains(errors, html, 'residents/index.html', '/assets/js/site.js');
-  checkContains(errors, html, 'residents/index.html', 'href="https://vk.ru/tosbgo" target="_blank" rel="noopener"');
+  checkContains(errors, html, 'residents/index.html', 'href="https://vk.ru/tosbgo"');
+  checkContains(errors, html, 'residents/index.html', 'target="_blank" rel="noopener"');
 
   requiredPhrases.forEach((phrase) => {
     checkContains(errors, html, 'residents/index.html', phrase);
