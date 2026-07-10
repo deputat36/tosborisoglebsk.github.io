@@ -17,6 +17,24 @@ const needsPublished = (item) => item.status !== 'draft';
 const isClosedNeed = (item) => ['closed', 'done', 'archived'].includes(String(item.status || '').toLowerCase());
 const isPartnerNeed = (item) => [item.need_type, item.description, item.how_to_help, item.help].join(' ').toLowerCase().includes('партн');
 
+function needsOrigin(item) {
+  if (['verified', 'editorial', 'starter', 'request'].includes(item.content_origin)) return item.content_origin;
+  if (String(item.id || '').startsWith('update-data-')) return 'request';
+  return 'editorial';
+}
+
+function needsOriginTag(item) {
+  const origin = needsOrigin(item);
+  const labels = {
+    verified: 'Подтверждено источником',
+    editorial: 'Редакционный материал',
+    starter: 'Стартовый материал',
+    request: 'Запрос данных'
+  };
+  const className = origin === 'verified' ? 'ok' : origin === 'request' ? 'warn' : '';
+  return `<span class="tag ${className}">${needsEsc(labels[origin])}</span>`;
+}
+
 async function loadNeedsData() {
   const [needs, toses] = await Promise.all([
     fetch('/data/needs.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
@@ -58,8 +76,8 @@ function renderNeedsSummary(items) {
   const closed = items.filter(isClosedNeed).length;
   const high = items.filter((item) => String(item.priority || '').toLowerCase().includes('выс')).length;
   const partner = items.filter(isPartnerNeed).length;
-  const withTos = items.filter((item) => item.tos_slug).length;
-  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>потребностей найдено</span></div><div class="summary-tile"><b>${active}</b><span>актуальные</span></div><div class="summary-tile"><b>${high}</b><span>высокий приоритет</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div><div class="summary-tile"><b>${withTos}</b><span>привязаны к ТОС</span></div></div>`;
+  const requests = items.filter((item) => needsOrigin(item) === 'request').length;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>записей найдено</span></div><div class="summary-tile"><b>${active}</b><span>актуальные</span></div><div class="summary-tile"><b>${high}</b><span>высокий приоритет</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div><div class="summary-tile"><b>${requests}</b><span>запросы данных</span></div></div>`;
 }
 
 function needCard(item, toses) {
@@ -68,6 +86,7 @@ function needCard(item, toses) {
   const resultText = item.result || item.closed_result || '';
   return `<article class="list-item need-card">
     <div class="meta">
+      ${needsOriginTag(item)}
       <span class="tag ${statusClass(item.status)}">${needsEsc(statusLabel(item.status))}</span>
       <span class="tag">${needsEsc(item.need_type || 'Потребность')}</span>
       <span class="tag ${priorityClass(item.priority)}">${needsEsc(item.priority || 'Приоритет уточняется')}</span>
@@ -124,7 +143,7 @@ async function renderNeeds() {
         .filter((item) => selectedStatus !== 'partner' || isPartnerNeed(item))
         .filter((item) => {
           const tosName = needsTosName(item.tos_slug, toses);
-          const hay = [item.title, item.description, item.need_type, item.priority, item.contact, item.source, item.how_to_help, item.result, tosName].join(' ').toLowerCase().replace(/ё/g, 'е');
+          const hay = [item.title, item.description, item.need_type, item.priority, item.contact, item.source, item.how_to_help, item.result, tosName, needsOrigin(item)].join(' ').toLowerCase().replace(/ё/g, 'е');
           return !query || hay.includes(query);
         })
         .sort((a, b) => {
