@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { repoPathExists } = require('./lib/path_checks');
 
 const grantsPath = path.join(process.cwd(), 'data', 'grants.json');
 const grantsIndexPath = path.join(process.cwd(), 'grants', 'index.html');
@@ -12,6 +13,10 @@ function expectIncludes(errors, line, content, value, message) {
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+function expectRoute(errors, route) {
+  if (!repoPathExists(route)) errors.push(`grants index: missing linked route ${route}`);
 }
 
 function main() {
@@ -43,12 +48,25 @@ function main() {
   expectIncludes(errors, 'grants index', html, 'Конкурс проектов ТОС Воронежской области', 'regional TOS contest block is missing');
   expectIncludes(errors, 'grants index', html, 'Ассоциация муниципальных образований', 'municipal association block is missing');
   expectIncludes(errors, 'grants index', html, 'Ассоциации и объединения ТОС', 'TOS association block is missing');
+  expectIncludes(errors, 'grants index', html, 'id="opportunity-check"', 'opportunity verification block is missing');
+  expectIncludes(errors, 'grants index', html, 'Как проверить конкретную возможность', 'opportunity verification heading is missing');
+  expectIncludes(errors, 'grants index', html, 'официальное положение, объявление организатора и актуальную форму подачи', 'official-source limitation is missing');
+  expectIncludes(errors, 'grants index', html, 'пока официальный источник, условия участия и даты не проверены', 'unverified opportunity warning is missing');
+  expectIncludes(errors, 'grants index', html, 'возможность нельзя считать открытой для приёма заявок', 'open-call warning is missing');
+  expectIncludes(errors, 'grants index', html, 'Мини-карточка проверки', 'verification mini-card is missing');
+  expectIncludes(errors, 'grants index', html, 'Дата проверки источника:', 'source verification date field is missing');
+  expectIncludes(errors, 'grants index', html, 'Допустимые расходы и ограничения:', 'eligible expenses field is missing');
   expectIncludes(errors, 'grants index', html, 'id="grants-list"', 'grants list container is missing');
   expectIncludes(errors, 'grants index', html, '/assets/js/grants.js', 'grants.js is missing');
   expectIncludes(errors, 'grants index', html, '/projects/', 'projects link is missing');
   expectIncludes(errors, 'grants index', html, '/documents/', 'documents link is missing');
+  expectIncludes(errors, 'grants index', html, '/sources/', 'sources link is missing');
+  expectIncludes(errors, 'grants index', html, '/legal/', 'legal link is missing');
+  expectIncludes(errors, 'grants index', html, '/calendar/', 'calendar link is missing');
   expectIncludes(errors, 'grants index', html, '/update-tos/?type=project#message-builder', 'project submission link is missing');
   expectIncludes(errors, 'grants index', html, 'конкретные сроки нужно сверять по официальным каналам', 'source verification notice is missing');
+
+  ['/projects/', '/documents/', '/sources/', '/legal/', '/calendar/', '/project-passport/', '/grant-application-kit/'].forEach((route) => expectRoute(errors, route));
 
   expectIncludes(errors, 'grants script', script, "fetch('/data/grants.json'", 'grants data fetch is missing');
   expectIncludes(errors, 'grants script', script, 'grantsEsc', 'HTML escaping helper is missing');
@@ -121,7 +139,7 @@ function main() {
     throw new Error(`Grants page content audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Grants page content OK: ${grants.length} opportunities checked`);
+  console.log(`Grants page content OK: ${grants.length} opportunities checked, verification workflow protected`);
 }
 
 main();
