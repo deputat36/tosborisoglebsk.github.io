@@ -27,6 +27,17 @@ function doneOriginTag(item) {
   return `<span class="tag ${className}">${doneEsc(labels[origin])}</span>`;
 }
 
+function doneReviewTag(item) {
+  const origin = doneOrigin(item);
+  if (origin === 'verified' && item.source_url && !item.needs_details) {
+    return '<span class="tag ok">подтверждённый результат</span>';
+  }
+  if (origin === 'request') return '<span class="tag warn">нужны материалы</span>';
+  if (origin === 'starter') return '<span class="tag">стартовая заготовка</span>';
+  if (item.needs_details) return '<span class="tag warn">нужно уточнить</span>';
+  return '<span class="tag">редакционная история</span>';
+}
+
 async function loadDoneData() {
   const [done, toses] = await Promise.all([
     fetch('/data/done.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
@@ -44,18 +55,20 @@ function doneTosName(slug, toses) {
 function renderDoneSummary(items) {
   const root = document.querySelector('#done-summary');
   if (!root) return;
-  const withTos = items.filter((item) => item.tos_slug).length;
+  const verified = items.filter((item) => doneOrigin(item) === 'verified').length;
+  const editorial = items.filter((item) => doneOrigin(item) === 'editorial').length;
   const requests = items.filter((item) => doneOrigin(item) === 'request').length;
-  const factual = items.filter((item) => !['request', 'starter'].includes(doneOrigin(item))).length;
-  const years = new Set(items.map((item) => doneYear(item.date)).filter((value) => value !== 'Год уточняется')).size;
-  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>записей найдено</span></div><div class="summary-tile"><b>${factual}</b><span>истории и материалы</span></div><div class="summary-tile"><b>${requests}</b><span>запросы историй</span></div><div class="summary-tile"><b>${withTos}</b><span>привязаны к ТОС</span></div><div class="summary-tile"><b>${years}</b><span>лет в подборке</span></div></div>`;
+  const withTos = items.filter((item) => item.tos_slug).length;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>записей найдено</span></div><div class="summary-tile"><b>${verified}</b><span>подтверждённые результаты</span></div><div class="summary-tile"><b>${editorial}</b><span>редакционные истории</span></div><div class="summary-tile"><b>${requests}</b><span>запросы историй</span></div><div class="summary-tile"><b>${withTos}</b><span>привязаны к ТОС</span></div></div>`;
 }
 
 function doneCard(item, toses) {
   const tosName = doneTosName(item.tos_slug, toses);
   const year = doneYear(item.date);
-  const statusTag = item.needs_details ? '<span class="tag warn">нужно уточнить</span>' : '<span class="tag ok">готово для архива</span>';
-  return `<article class="list-item done-story"><div class="meta">${doneOriginTag(item)}<span class="tag warn">${doneEsc(item.type || 'История')}</span>${tosName ? `<span class="tag">${doneEsc(tosName)}</span>` : ''}<span class="tag">${doneEsc(year)}</span>${statusTag}</div><h3>${doneEsc(item.title || 'История ТОС')}</h3><p>${doneEsc(item.summary || '')}</p><div class="done-steps"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${doneEsc(item.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${doneEsc(item.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag ok">Стало</span><p>${doneEsc(item.result || 'Информация уточняется.')}</p></div></article></div>${item.participants ? `<p class="tiny"><b>Кто участвовал:</b> ${doneEsc(item.participants)}</p>` : ''}${item.needs_details ? `<div class="notice"><b style="color:var(--text)">Что нужно уточнить для полной истории</b><br>${doneEsc(item.needs_details)}</div>` : ''}<div class="card-actions"><a class="btn primary" href="/done/${doneEsc(item.id)}/">Подробнее</a>${item.source_url ? `<a class="btn" href="${doneEsc(item.source_url)}">${doneEsc(item.source_label || 'Источник')}</a>` : ''}${item.tos_slug ? `<a class="btn" href="/tos/${doneEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}<a class="btn" href="/partners/">Партнёрам</a><a class="btn" href="/contacts/">Прислать фото или детали</a></div></article>`;
+  const sourceLink = item.source_url
+    ? `<a class="btn"${/^https?:\/\//i.test(item.source_url) ? ' target="_blank" rel="noopener"' : ''} href="${doneEsc(item.source_url)}">${doneEsc(item.source_label || 'Источник')}</a>`
+    : '';
+  return `<article class="list-item done-story"><div class="meta">${doneOriginTag(item)}<span class="tag">${doneEsc(item.type || 'История')}</span>${tosName ? `<span class="tag">${doneEsc(tosName)}</span>` : ''}<span class="tag">${doneEsc(year)}</span>${doneReviewTag(item)}</div><h3>${doneEsc(item.title || 'История ТОС')}</h3><p>${doneEsc(item.summary || '')}</p><div class="done-steps"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${doneEsc(item.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${doneEsc(item.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Стало</span><p>${doneEsc(item.result || 'Информация уточняется.')}</p></div></article></div>${item.participants ? `<p class="tiny"><b>Кто участвовал:</b> ${doneEsc(item.participants)}</p>` : ''}${item.needs_details ? `<div class="notice"><b style="color:var(--text)">Что нужно уточнить для полной истории</b><br>${doneEsc(item.needs_details)}</div>` : ''}<div class="card-actions"><a class="btn primary" href="/done/${doneEsc(item.id)}/">Подробнее</a>${sourceLink}${item.tos_slug ? `<a class="btn" href="/tos/${doneEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}<a class="btn" href="/partners/">Партнёрам</a><a class="btn" href="/contacts/">Прислать фото или детали</a></div></article>`;
 }
 
 async function renderDone() {
