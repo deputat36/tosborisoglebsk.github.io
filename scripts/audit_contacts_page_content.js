@@ -7,9 +7,10 @@ const htmlPath = path.join(process.cwd(), 'contacts', 'index.html');
 const requiredInternalLinks = [
   '/submit-materials/',
   '/update-tos/',
-  '/data-requests/',
+  '/data-update/',
   '/sources/',
   '/privacy/',
+  '/faq/',
   '/collection-board/',
   '/workbench/',
   '/documents/',
@@ -25,6 +26,16 @@ const requiredPhrases = [
   '+7 (910) 249-82-84',
   'vk.ru/tosbgo',
   'Рабочая почта будет добавлена позже',
+  'Какой канал использовать',
+  'Контакты портала предназначены для материалов и уточнений',
+  'Официальное обращение',
+  'Сообщение порталу не заменяет такое обращение',
+  'Срочная ситуация',
+  'не используйте портал как экстренную службу',
+  'Рабочий, а не гарантированный канал',
+  'Получение сообщения, срок ответа и публикация не гарантируются автоматически',
+  'портал является информационным и редакционным проектом',
+  'не является органом власти, диспетчерской, экстренной службой или системой официальной регистрации обращений',
   'Что можно отправить',
   'Мини-шаблоны сообщений',
   'Порядок публикации',
@@ -83,6 +94,7 @@ function main() {
   checkContains(errors, html, 'contacts/index.html', '/assets/js/site.js');
   checkContains(errors, html, 'contacts/index.html', 'href="tel:+79102498284"');
   checkContains(errors, html, 'contacts/index.html', 'href="https://vk.ru/tosbgo" target="_blank" rel="noopener"');
+  checkContains(errors, html, 'contacts/index.html', 'id="contact-boundaries"');
 
   requiredPhrases.forEach((phrase) => {
     checkContains(errors, html, 'contacts/index.html', phrase);
@@ -107,6 +119,10 @@ function main() {
     }
   });
 
+  if (html.includes('href="/data-requests/"')) {
+    errors.push('contacts/index.html: public page must not link to internal data request workspace');
+  }
+
   if (!html.includes('type=card#message-builder')) {
     errors.push('contacts/index.html: missing card update message builder link');
   }
@@ -121,6 +137,10 @@ function main() {
 
   if (!html.includes('type=project#message-builder') && !html.includes('/projects/action-routes/')) {
     errors.push('contacts/index.html: missing project submission or project route link');
+  }
+
+  if (!html.includes('Не передавайте через публичные сообщения пароли, платёжные реквизиты, паспортные данные')) {
+    errors.push('contacts/index.html: missing sensitive data warning');
   }
 
   if (errors.length) {
