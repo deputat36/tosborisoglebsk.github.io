@@ -13,27 +13,19 @@ const requiredControls = [
   'search',
   'location-filter',
   'type-filter',
-  'contact-filter',
-  'activity-filter',
-  'fill-filter',
-  'sort-filter',
+  'trust-filter',
   'tos-summary',
   'tos-list'
 ];
-const requiredDataFetches = [
-  '/data/toses.json',
-  '/data/news.json',
-  '/data/projects.json',
-  '/data/done.json',
-  '/data/needs.json'
-];
-const requiredRoutes = ['/map/', '/update-tos/', '/contacts/', '/sections/'];
+const removedControls = ['contact-filter', 'activity-filter', 'fill-filter', 'sort-filter'];
+const requiredRoutes = ['/update-tos/', '/contacts/', '/sections/'];
 const requiredCopy = [
   'Каталог ТОС',
   'Найдите свой ТОС',
   'Каталог пополняется и уточняется',
   'Не знаете, к какому ТОСу относитесь?',
-  'Используйте фильтры'
+  'Поиск использует только опубликованные сведения',
+  'Статус проверки'
 ];
 const requiredFallbackSlugs = ['bogana', 'vostochnyy', 'gubari', 'ivanovka', 'podstepki', 'uyutnyy'];
 
@@ -82,6 +74,10 @@ function main() {
     if (!html.includes(`id="${id}"`)) errors.push(`missing catalog control #${id}`);
   });
 
+  removedControls.forEach((id) => {
+    if (html.includes(`id="${id}"`)) errors.push(`obsolete catalog control must be removed: #${id}`);
+  });
+
   if (!html.includes('/assets/css/tos-catalog.css')) {
     errors.push('catalog page must include tos-catalog.css');
   }
@@ -99,6 +95,16 @@ function main() {
     if (!html.includes(`href="${route}`)) errors.push(`catalog page does not link to ${route}`);
   });
 
+  if (html.includes('href="/map/"')) {
+    errors.push('catalog page must not promote an empty geodata map');
+  }
+
+  const heroMatch = html.match(/<div class="hero-actions">([\s\S]*?)<\/div>/);
+  const heroLinks = heroMatch ? Array.from(heroMatch[1].matchAll(/href="([^"]+)"/g), (match) => match[1]) : [];
+  if (heroLinks.length !== 2 || heroLinks[0] !== '#catalog' || heroLinks[1] !== '/contacts/') {
+    errors.push(`catalog hero must contain only #catalog and /contacts/, found: ${heroLinks.join(', ')}`);
+  }
+
   const staticCount = Number(textMatch(html, /<b id="tos-count">(\d+)<\/b>/));
   if (!Number.isInteger(staticCount) || staticCount !== publishedToses.length) {
     errors.push(`catalog static count must match data/toses.json: ${staticCount} !== ${publishedToses.length}`);
@@ -109,9 +115,12 @@ function main() {
     if (!html.includes(`/tos/${slug}/`)) errors.push(`noscript fallback is missing slug ${slug}`);
   });
 
-  requiredDataFetches.forEach((dataPath) => {
-    if (!repoPathExists(dataPath)) errors.push(`catalog data file is missing: ${dataPath}`);
-    if (!script.includes(`fetch('${dataPath}'`)) errors.push(`catalog script does not fetch ${dataPath}`);
+  if (!script.includes("fetch('/data/toses.json'")) {
+    errors.push('catalog script must fetch data/toses.json');
+  }
+
+  ['/data/news.json', '/data/projects.json', '/data/done.json', '/data/needs.json'].forEach((dataPath) => {
+    if (script.includes(`fetch('${dataPath}'`)) errors.push(`catalog script must not fetch unrelated collection ${dataPath}`);
   });
 
   if (!script.includes('replace(/ё/g')) {
@@ -126,39 +135,29 @@ function main() {
     errors.push('catalog script must have a filter apply function');
   }
 
-  ['phone', 'no-phone', 'email', 'social', 'no-social'].forEach((filterValue) => {
-    if (!html.includes(`value="${filterValue}"`) && !script.includes(`'${filterValue}'`)) {
-      errors.push(`catalog contact filter is missing: ${filterValue}`);
+  ['verified', 'partial', 'needs_review', 'stale'].forEach((status) => {
+    if (!html.includes(`value="${status}"`) || !script.includes(`'${status}'`)) {
+      errors.push(`catalog trust filter is missing status: ${status}`);
     }
   });
 
-  ['news', 'projects', 'done', 'needs', 'any', 'none'].forEach((filterValue) => {
-    if (!html.includes(`value="${filterValue}"`) && !script.includes(`'${filterValue}'`)) {
-      errors.push(`catalog activity filter is missing: ${filterValue}`);
-    }
+  ['verificationStatus', 'verificationInfo', 'verificationNote'].forEach((helper) => {
+    if (!script.includes(helper)) errors.push(`catalog trust helper is missing: ${helper}`);
   });
 
-  ['good', 'medium', 'low', 'no-logo'].forEach((filterValue) => {
-    if (!html.includes(`value="${filterValue}"`) && !script.includes(`'${filterValue}'`)) {
-      errors.push(`catalog fill filter is missing: ${filterValue}`);
-    }
-  });
-
-  ['name', 'location', 'updated-desc', 'activity-desc', 'score-desc', 'score-asc'].forEach((sortValue) => {
-    if (!html.includes(`value="${sortValue}"`) && !script.includes(`'${sortValue}'`)) {
-      errors.push(`catalog sort option is missing: ${sortValue}`);
-    }
-  });
-
-  if (!script.includes('/update-tos/') || !script.includes('/contacts/')) {
-    errors.push('catalog cards must link to update and contact routes');
+  if (!script.includes('Источник, дата и объём проверки не зафиксированы.')) {
+    errors.push('catalog cards must disclose missing verification evidence');
   }
 
-  if (!script.includes('Заполнено') || !script.includes('activityFor')) {
-    errors.push('catalog script must show completeness and related activity');
+  if (!script.includes('Открыть карточку') || !script.includes('/update-tos/?type=card#message-builder')) {
+    errors.push('catalog cards must keep one primary open action and an inline correction route');
   }
 
-  ['tos-toolbar', 'improved-tos-card', 'tos-quality', 'activity-row', 'summary-grid'].forEach((selector) => {
+  if (script.includes('Заполнено') || script.includes('activityFor') || script.includes('activityBadges')) {
+    errors.push('catalog cards must not use completeness or unverified activity as the primary signal');
+  }
+
+  ['tos-toolbar', 'improved-tos-card', 'feature-row', 'summary-grid'].forEach((selector) => {
     if (!css.includes(selector)) errors.push(`catalog CSS is missing selector ${selector}`);
   });
 
@@ -170,7 +169,7 @@ function main() {
     throw new Error(`TOS catalog content audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`TOS catalog content OK: ${publishedToses.length} published cards`);
+  console.log(`TOS catalog content OK: ${publishedToses.length} published cards with focused search and trust status`);
 }
 
 main();
