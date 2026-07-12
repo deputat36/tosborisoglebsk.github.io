@@ -7,6 +7,7 @@ const checks = [
   ['ID checks', 'scripts/test_id_checks.js'],
   ['Path checks', 'scripts/test_path_checks.js'],
   ['Status sets', 'scripts/test_status_sets.js'],
+  ['P0 trust guardrails', 'scripts/audit_p0_trust_guardrails.js'],
   ['Content origins', 'scripts/audit_content_origins.js'],
   ['Supabase scope', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine', 'scripts/audit_foreign_module_inventory.js'],
