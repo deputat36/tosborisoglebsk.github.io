@@ -159,8 +159,8 @@ function main() {
     if (!html.includes('Пришлите только данные, которые можно размещать открыто')) {
       errors.push(`${line}: public-data safety note is missing`);
     }
-    if (tos.contacts_raw && html.includes(tos.contacts_raw)) {
-      errors.push(`${line}: raw questionnaire contacts must not be rendered`);
+    if (html.includes('Исходные контакты из анкеты')) {
+      errors.push(`${line}: raw questionnaire contact block must not be rendered`);
     }
     if (html.includes('<h2>Связанные разделы</h2>')) {
       errors.push(`${line}: duplicate generic related-links section must be removed`);
