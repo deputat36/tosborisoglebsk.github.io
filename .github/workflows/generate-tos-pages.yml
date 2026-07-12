@@ -55,8 +55,6 @@ jobs:
         run: node scripts/upgrade_tos_descriptions.js
       - name: Sync uploaded TOS logos
         run: node scripts/sync_tos_logos.js
-      - name: Patch P0 public trust guardrails
-        run: node scripts/patch_p0_public_trust.js
       - name: Synchronize content origins
         run: node scripts/migrate_content_origins.js
       - name: Generate content origin metrics
@@ -67,8 +65,6 @@ jobs:
         run: node scripts/generate_rss.js
       - name: Validate JSON data
         run: node scripts/validate_data.js
-      - name: Audit P0 trust guardrails
-        run: node scripts/audit_p0_trust_guardrails.js
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data
@@ -93,6 +89,10 @@ jobs:
         run: node scripts/generate_need_pages.js
       - name: Generate project pages
         run: node scripts/generate_project_pages.js
+      - name: Patch P0 public trust guardrails
+        run: node scripts/patch_p0_public_trust.js
+      - name: Audit P0 trust guardrails
+        run: node scripts/audit_p0_trust_guardrails.js
       - name: Patch site navigation and discovery links
         run: node scripts/patch_site_navigation.js
       - name: Patch residents quick start
