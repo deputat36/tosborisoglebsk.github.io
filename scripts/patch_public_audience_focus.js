@@ -80,6 +80,11 @@ function patchResidents() {
     html = replaceSectionByHeading(html, 'Что можно сделать на сайте', 'Что ТОС может делать', '');
   }
 
+  html = html.replace(
+    'Начните с <a href="/tos/">каталога</a> и <a href="/map/">карты</a>.',
+    'Начните с <a href="/tos/">каталога ТОС</a>.'
+  );
+
   writeIfChanged(filePath, original, html, 'Residents');
 }
 
