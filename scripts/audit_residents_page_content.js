@@ -9,7 +9,6 @@ const requiredInternalLinks = [
   '/residents/action-routes/',
   '/tos/',
   '/needs/',
-  '/done/',
   '/update-tos/',
   '/contacts/'
 ];
