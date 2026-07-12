@@ -88,8 +88,8 @@ function main() {
   checkContains(errors, html, 'partners/index.html', '<meta property="og:url" content="https://tosborisoglebsk.ru/partners/"');
   checkContains(errors, html, 'partners/index.html', '<main id="main">');
   checkContains(errors, html, 'partners/index.html', '/assets/js/site.js');
-  checkContains(errors, html, 'partners/index.html', 'href="https://vk.ru/tosbgo" target="_blank" rel="noopener"');
   checkContains(errors, html, 'partners/index.html', 'id="partner-check"');
+  checkContains(errors, html, 'partners/index.html', 'id="partner-main-route"');
 
   requiredPhrases.forEach((phrase) => {
     checkContains(errors, html, 'partners/index.html', phrase);
