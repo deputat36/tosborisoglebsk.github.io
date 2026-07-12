@@ -74,7 +74,20 @@ jobs:
       - name: Audit document legal statuses
         run: node scripts/audit_document_legal_statuses.js
       - name: Audit public repository sensitive data
-        run: node scripts/audit_public_repo_sensitive_data.js
+        run: |
+          set -o pipefail
+          node scripts/audit_public_repo_sensitive_data.js 2>&1 | tee sensitive-data-audit.log
+      - name: Upload sensitive data audit diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sensitive-data-audit-log
+          path: sensitive-data-audit.log
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Remove sensitive data audit log
+        if: always()
+        run: rm -f sensitive-data-audit.log
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data
