@@ -40,10 +40,11 @@ function main() {
 
   let changed = 0;
   for (const tos of toses) {
-    const before = JSON.stringify(tos.trust || emptyTrust());
+    const hadTrust = Object.prototype.hasOwnProperty.call(tos, 'trust');
+    const before = JSON.stringify(hadTrust ? tos.trust : emptyTrust());
     tos.trust = normalizeTrust(tos.trust);
     const after = JSON.stringify(tos.trust);
-    if (before !== after || !Object.prototype.hasOwnProperty.call(tos, 'trust')) changed += 1;
+    if (!hadTrust || before !== after) changed += 1;
   }
 
   fs.writeFileSync(filePath, `${JSON.stringify(toses, null, 2)}\n`, 'utf8');
