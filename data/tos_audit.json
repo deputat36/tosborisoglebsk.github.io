@@ -1,14 +1,15 @@
 {
   "summary": {
-    "generated_at": "2026-07-12T16:15:03.819Z",
+    "generated_at": "2026-07-12T16:27:36.080Z",
     "total": 24,
     "good": 20,
     "medium": 4,
     "low": 0,
     "verified": 0,
-    "partial": 20,
-    "needs_review": 4,
+    "partial": 0,
+    "needs_review": 24,
     "unknown": 0,
+    "checked_with_evidence": 0,
     "without_phone": 4,
     "without_email": 16,
     "without_social": 4,
@@ -23,6 +24,9 @@
       "location": "п. Ивановка",
       "chairperson": "Меркурьев Андрей Петрович",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 71,
       "level": "medium",
       "verification_status": "needs_review",
@@ -31,7 +35,8 @@
         "нет телефона",
         "нет email",
         "нет соцсетей",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -40,6 +45,9 @@
       "location": "п. Подстёпки",
       "chairperson": "Кузнецова Елена Викторовна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 71,
       "level": "medium",
       "verification_status": "needs_review",
@@ -48,7 +56,8 @@
         "нет телефона",
         "нет email",
         "нет соцсетей",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -57,6 +66,9 @@
       "location": "г. Борисоглебск",
       "chairperson": "Калашникова Светлана Александровна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 79,
       "level": "medium",
       "verification_status": "needs_review",
@@ -64,7 +76,8 @@
       "issues": [
         "нет email",
         "нет соцсетей",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -73,6 +86,9 @@
       "location": "п. Калинино",
       "chairperson": "Кабаргина Татьяна Викторовна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 79,
       "level": "medium",
       "verification_status": "needs_review",
@@ -80,7 +96,8 @@
       "issues": [
         "нет email",
         "нет соцсетей",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -89,13 +106,17 @@
       "location": "с. Губари",
       "chairperson": "Зюзина Татьяна Владимировна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет телефона",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -104,13 +125,17 @@
       "location": "г. Борисоглебск",
       "chairperson": "Корякин Антон Михайлович",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -119,13 +144,17 @@
       "location": "с. Чигорак",
       "chairperson": "Павленко Игорь Фёдорович",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -134,13 +163,17 @@
       "location": "с. Чигорак",
       "chairperson": "Бачурина Ольга Александровна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -149,13 +182,17 @@
       "location": "с. Чигорак",
       "chairperson": "Яценко Елена Александровна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -164,13 +201,17 @@
       "location": "п. Миролюбие",
       "chairperson": "Власова Татьяна Владимировна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -179,13 +220,17 @@
       "location": "с. Чигорак",
       "chairperson": "Бозоров Рустам Сангиматович",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -194,13 +239,17 @@
       "location": "с. Петровское",
       "chairperson": "Ремизова Любовь Викторовна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -209,13 +258,17 @@
       "location": "с. Чигорак",
       "chairperson": "Водяной Сергей Александрович",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -224,13 +277,17 @@
       "location": "г. Борисоглебск",
       "chairperson": "Докучаева Татьяна Сергеевна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -239,13 +296,17 @@
       "location": "с. Танцырей",
       "chairperson": "Чернышова О. Г.",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет телефона",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -254,13 +315,17 @@
       "location": "с. Третьяки",
       "chairperson": "Хмаров Сергей Александрович",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -269,13 +334,17 @@
       "location": "г. Борисоглебск",
       "chairperson": "Ковтун Алексей Вадимович",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -284,13 +353,17 @@
       "location": "г. Борисоглебск",
       "chairperson": "Сотниченко Ирина Алексеевна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 86,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
         "нет email",
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -299,12 +372,16 @@
       "location": "с. Богана",
       "chairperson": "Лопатина Мария Владимировна",
       "updated_at": "2026-05-24",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 93,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -313,12 +390,16 @@
       "location": "г. Борисоглебск",
       "chairperson": "Рогова Ольга Анатольевна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 93,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -327,12 +408,16 @@
       "location": "с. Махровка",
       "chairperson": "Пущина Ирина Валерьевна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 93,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -341,12 +426,16 @@
       "location": "г. Борисоглебск",
       "chairperson": "Писклова Татьяна Петровна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 93,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -355,12 +444,16 @@
       "location": "г. Борисоглебск",
       "chairperson": "Никулина Юлия Александровна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 93,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     },
     {
@@ -369,12 +462,16 @@
       "location": "с. Ульяновка",
       "chairperson": "Габрусенко Олеся Степановна",
       "updated_at": "2026-05-23",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "score": 93,
       "level": "good",
-      "verification_status": "partial",
-      "verification_label": "Проверено частично",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
       "issues": [
-        "нет логотипа"
+        "нет логотипа",
+        "нет даты фактической проверки"
       ]
     }
   ]
