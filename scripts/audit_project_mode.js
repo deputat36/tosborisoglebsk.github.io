@@ -11,6 +11,7 @@ const checks = [
   ['Public surface changes', 'scripts/audit_public_surface_changes.js'],
   ['TOS trust metadata', 'scripts/audit_tos_trust_metadata.js'],
   ['Document legal statuses', 'scripts/audit_document_legal_statuses.js'],
+  ['Public repository sensitive data', 'scripts/audit_public_repo_sensitive_data.js'],
   ['Content origins', 'scripts/audit_content_origins.js'],
   ['Supabase scope', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine', 'scripts/audit_foreign_module_inventory.js'],
