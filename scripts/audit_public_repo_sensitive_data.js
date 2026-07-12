@@ -102,11 +102,14 @@ function main() {
     if (!fs.existsSync(absolute)) continue;
 
     if (extension === '.json') {
+      const raw = fs.readFileSync(absolute, 'utf8');
+      if (!raw.trim()) continue;
+
       let data;
       try {
-        data = JSON.parse(fs.readFileSync(absolute, 'utf8'));
+        data = JSON.parse(raw);
       } catch (error) {
-        errors.push(`${file}: JSON cannot be parsed for sensitive field audit`);
+        errors.push(`${file}: non-empty JSON cannot be parsed for sensitive field audit`);
         continue;
       }
 
