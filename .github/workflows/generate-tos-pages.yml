@@ -107,7 +107,20 @@ jobs:
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
       - name: Audit generated TOS detail trust pages
-        run: node scripts/audit_tos_detail_pages_content.js
+        run: |
+          set -o pipefail
+          node scripts/audit_tos_detail_pages_content.js 2>&1 | tee tos-detail-audit.log
+      - name: Upload TOS detail audit diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tos-detail-audit-log
+          path: tos-detail-audit.log
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Remove TOS detail audit log
+        if: always()
+        run: rm -f tos-detail-audit.log
       - name: Generate news pages
         run: node scripts/generate_news_pages.js
       - name: Generate material pages
