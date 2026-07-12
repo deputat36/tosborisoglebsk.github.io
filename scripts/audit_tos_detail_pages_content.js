@@ -79,8 +79,12 @@ function main() {
   if (generator.includes('Исходные контакты из анкеты')) {
     errors.push('generator: contacts_raw must not be rendered publicly');
   }
-  ['data-verification-block="territory"', 'data-verification-block="contacts"', 'data-verification-block="public-links"'].forEach((marker) => {
-    if (!generator.includes(marker)) errors.push(`generator: missing field verification marker ${marker}`);
+  [
+    "scopeBlock('territory', territoryScope)",
+    "scopeBlock('contacts', contactsScope)",
+    "scopeBlock('public-links', publicScope)"
+  ].forEach((marker) => {
+    if (!generator.includes(marker)) errors.push(`generator: missing field verification scope call ${marker}`);
   });
   ['Новости и материалы этого ТОС', 'Проекты и идеи этого ТОС', 'Результаты и запросы этого ТОС', 'Потребности и запросы этого ТОС'].forEach((heading) => {
     if (!generator.includes(heading)) errors.push(`generator: missing neutral related-content heading ${heading}`);
@@ -155,8 +159,8 @@ function main() {
     if (!html.includes('Пришлите только данные, которые можно размещать открыто')) {
       errors.push(`${line}: public-data safety note is missing`);
     }
-    if (html.includes('Исходные контакты из анкеты') || html.includes(tos.contacts_raw || '__never__')) {
-      if (tos.contacts_raw) errors.push(`${line}: raw questionnaire contacts must not be rendered`);
+    if (tos.contacts_raw && html.includes(tos.contacts_raw)) {
+      errors.push(`${line}: raw questionnaire contacts must not be rendered`);
     }
     if (html.includes('<h2>Связанные разделы</h2>')) {
       errors.push(`${line}: duplicate generic related-links section must be removed`);
