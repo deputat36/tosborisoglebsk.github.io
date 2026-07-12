@@ -48,6 +48,15 @@ function main() {
   expectIncludes(errors, 'done index', indexHtml, '<meta property="og:url" content="https://tosborisoglebsk.ru/done/"', 'missing Open Graph URL');
   expectIncludes(errors, 'done index', indexHtml, '<h1>Сделано ТОСами: было, сделали, стало</h1>', 'missing h1');
   expectIncludes(errors, 'done index', indexHtml, 'первые истории собраны по данным карточек ТОСов на портале', 'source limitation notice is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'id="done-statuses"', 'result trust legend is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'Подтверждено источником', 'verified origin explanation is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'Редакционный материал', 'editorial origin explanation is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'Стартовый материал', 'starter origin explanation is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'Запрос истории', 'request origin explanation is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'Наличие карточки в разделе ещё не доказывает', 'catalog caution is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'отсутствие списка уточнений не означает автоматическую готовность материала для отчёта', 'archive readiness caution is missing');
+  expectIncludes(errors, 'done index', indexHtml, '/content-standards/', 'content standards link is missing');
+  expectIncludes(errors, 'done index', indexHtml, '/documents/templates/project-photo-report/', 'photo report template link is missing');
   expectIncludes(errors, 'done index', indexHtml, 'id="done-list"', 'done list container is missing');
   expectIncludes(errors, 'done index', indexHtml, 'id="done-summary"', 'done summary container is missing');
   expectIncludes(errors, 'done index', indexHtml, 'id="done-search"', 'done search input is missing');
@@ -65,12 +74,27 @@ function main() {
   expectIncludes(errors, 'done script', script, "item.status !== 'draft'", 'draft filtering is missing');
   expectIncludes(errors, 'done script', script, 'doneEsc', 'HTML escaping helper is missing');
   expectIncludes(errors, 'done script', script, 'doneYear', 'year helper is missing');
+  expectIncludes(errors, 'done script', script, 'doneReviewTag', 'verified review-state helper is missing');
+  expectIncludes(errors, 'done script', script, "origin === 'verified' && item.source_url && !item.needs_details", 'verified result must require source and no pending details');
+  expectIncludes(errors, 'done script', script, 'подтверждённый результат', 'verified result label is missing');
+  expectIncludes(errors, 'done script', script, 'редакционная история', 'editorial result label is missing');
+  expectIncludes(errors, 'done script', script, 'нужны материалы', 'request result label is missing');
+  expectIncludes(errors, 'done script', script, 'подтверждённые результаты', 'verified summary metric is missing');
+  expectIncludes(errors, 'done script', script, 'редакционные истории', 'editorial summary metric is missing');
   expectIncludes(errors, 'done script', script, 'renderDoneSummary', 'summary rendering is missing');
   expectIncludes(errors, 'done script', script, "replace(/ё/g, 'е')", 'yo normalization is missing');
   expectIncludes(errors, 'done script', script, '/done/${doneEsc(item.id)}/', 'detail route rendering is missing');
   expectIncludes(errors, 'done script', script, 'needs_details', 'details-needed flag rendering is missing');
   expectIncludes(errors, 'done script', script, '/contacts/', 'contacts link is missing');
   expectIncludes(errors, 'done script', script, '/partners/', 'partners link is missing');
+  expectIncludes(errors, 'done script', script, 'target="_blank" rel="noopener"', 'external source links must open safely');
+
+  if (script.includes('готово для архива')) {
+    errors.push('done script: editorial or incomplete stories must not be marked ready for archive automatically');
+  }
+  if (script.includes('<span class="tag ok">Стало</span>')) {
+    errors.push('done script: the result step must not use success styling without verified origin');
+  }
 
   doneItems.filter((item) => item && item.status !== 'draft').forEach((item, index) => {
     const line = `done page ${index + 1} ${item.id || 'unknown'}`;
