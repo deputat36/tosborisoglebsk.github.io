@@ -73,6 +73,8 @@ jobs:
         run: node scripts/audit_tos_trust_metadata.js
       - name: Audit document legal statuses
         run: node scripts/audit_document_legal_statuses.js
+      - name: Audit public repository sensitive data
+        run: node scripts/audit_public_repo_sensitive_data.js
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data
