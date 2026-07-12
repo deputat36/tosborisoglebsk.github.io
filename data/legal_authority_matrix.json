@@ -1,0 +1,98 @@
+{
+  "generated_for": "portal_methodical_control",
+  "updated_at": "2026-07-12",
+  "notice": "Матрица не является юридическим заключением. Пустой официальный источник означает, что практическое применение заблокировано до сверки.",
+  "items": [
+    {
+      "id": "tos_definition_and_forms",
+      "question": "Определение ТОС и формы его осуществления",
+      "level": "federal",
+      "status": "requires_official_source",
+      "basis_hint": "Федеральный закон №33-ФЗ, статья о территориальном общественном самоуправлении",
+      "effective_from": "",
+      "transition_note": "Проверить сроки действия переходных положений и связь с прежним регулированием.",
+      "official_source_url": "",
+      "checked_at": "",
+      "checked_by": "",
+      "notes": "До заполнения использовать только как направление поиска официальной нормы."
+    },
+    {
+      "id": "tos_boundaries_bgo",
+      "question": "Порядок предложения и установления границ ТОС в БГО",
+      "level": "municipal",
+      "status": "requires_official_source",
+      "basis_hint": "Федеральная норма и действующий муниципальный акт БГО",
+      "effective_from": "",
+      "transition_note": "Нужно подтвердить представительный орган, процедуру и комплект материалов.",
+      "official_source_url": "",
+      "checked_at": "",
+      "checked_by": "",
+      "notes": "Без официального акта нельзя выдавать описание территории за установленную границу."
+    },
+    {
+      "id": "meeting_and_conference_bgo",
+      "question": "Уведомление, правомочность собрания и конференции граждан",
+      "level": "federal_and_municipal",
+      "status": "requires_official_source",
+      "basis_hint": "Федеральная норма, Устав БГО и муниципальный порядок",
+      "effective_from": "",
+      "transition_note": "Отдельно проверить возраст участников, кворум, делегирование и сроки уведомления.",
+      "official_source_url": "",
+      "checked_at": "",
+      "checked_by": "",
+      "notes": "Печатные формы портала остаются методическими заготовками."
+    },
+    {
+      "id": "charter_registration_bgo",
+      "question": "Регистрация устава ТОС и уполномоченный орган БГО",
+      "level": "municipal",
+      "status": "requires_official_source",
+      "basis_hint": "Действующий порядок БГО и официальные контакты уполномоченного органа",
+      "effective_from": "",
+      "transition_note": "Подтвердить перечень документов, количество экземпляров и способ подачи.",
+      "official_source_url": "",
+      "checked_at": "",
+      "checked_by": "",
+      "notes": "До сверки маршрут создания ТОС является предварительной дорожной картой."
+    },
+    {
+      "id": "tos_legal_entity",
+      "question": "Приобретение ТОС статуса юридического лица",
+      "level": "federal",
+      "status": "requires_specialist_review",
+      "basis_hint": "Нормы о ТОС, некоммерческих организациях и государственной регистрации",
+      "effective_from": "",
+      "transition_note": "Не смешивать регистрацию устава ТОС и государственную регистрацию юридического лица.",
+      "official_source_url": "",
+      "checked_at": "",
+      "checked_by": "",
+      "notes": "Нужна отдельная юридическая проверка конкретной модели."
+    },
+    {
+      "id": "bgo_charter_current_edition",
+      "question": "Текущая официально опубликованная редакция Устава БГО",
+      "level": "municipal",
+      "status": "requires_official_source",
+      "basis_hint": "Официальный источник опубликования муниципальных правовых актов",
+      "effective_from": "",
+      "transition_note": "Локальная копия с отметкой редакции 2024 года не подтверждает актуальность в 2026 году.",
+      "official_source_url": "",
+      "checked_at": "",
+      "checked_by": "",
+      "notes": "Статус локального файла: требует официальной сверки."
+    },
+    {
+      "id": "personal_data_publication",
+      "question": "Обработка и распространение персональных данных на портале",
+      "level": "federal_and_operator_policy",
+      "status": "requires_specialist_review",
+      "basis_hint": "Законодательство о персональных данных и документы оператора",
+      "effective_from": "",
+      "transition_note": "Нужно определить оператора, цели, основания, сроки хранения, отзыв и закрытое хранение доказательств.",
+      "official_source_url": "",
+      "checked_at": "",
+      "checked_by": "",
+      "notes": "Редакционный чек-лист не заменяет политику оператора и формы согласий."
+    }
+  ]
+}
