@@ -50,16 +50,20 @@ function issuesFor(tos) {
   if (!tos.logo) issues.push('нет логотипа');
   if (!hasGoodDescription(tos)) issues.push('слабое или пустое описание');
   if (!tos.updated_at) issues.push('нет даты обновления');
+  if (!tos.trust?.checked_at) issues.push('нет даты фактической проверки');
   return issues;
 }
 
 function verificationStatus(tos, score) {
   const explicit = tos.verification_status || tos.verification?.status || '';
-  const date = tos.verified_at || tos.verification?.date || tos.updated_at || '';
+  const trust = tos.trust || {};
+  const checkedAt = trust.checked_at || tos.verified_at || tos.verification?.date || '';
+  const sourceRef = trust.source_ref || tos.verification_source || tos.verification?.source || '';
+  const scope = Array.isArray(trust.verification_scope) ? trust.verification_scope : [];
+
   if (explicit) return explicit;
-  if (date && score >= 80) return 'partial';
-  if (date) return 'needs_review';
-  return 'unknown';
+  if (checkedAt && sourceRef && scope.length) return score >= 80 ? 'partial' : 'needs_review';
+  return 'needs_review';
 }
 
 function verificationLabel(status) {
@@ -93,6 +97,9 @@ function main() {
       location: tos.location || '',
       chairperson: tos.chairperson || '',
       updated_at: tos.updated_at || '',
+      checked_at: tos.trust?.checked_at || '',
+      recheck_after: tos.trust?.recheck_after || '',
+      verification_scope: Array.isArray(tos.trust?.verification_scope) ? tos.trust.verification_scope : [],
       score,
       level: score >= 80 ? 'good' : score >= 55 ? 'medium' : 'low',
       verification_status,
@@ -111,6 +118,7 @@ function main() {
     partial: items.filter((item) => item.verification_status === 'partial').length,
     needs_review: items.filter((item) => item.verification_status === 'needs_review').length,
     unknown: items.filter((item) => item.verification_status === 'unknown').length,
+    checked_with_evidence: items.filter((item) => item.checked_at && item.verification_scope.length).length,
     without_phone: items.filter((item) => item.issues.includes('нет телефона')).length,
     without_email: items.filter((item) => item.issues.includes('нет email')).length,
     without_social: items.filter((item) => item.issues.includes('нет соцсетей')).length,
@@ -125,6 +133,7 @@ function main() {
   console.log(`TOS audit: ${summary.total} records`);
   console.log(`Good: ${summary.good}, medium: ${summary.medium}, low: ${summary.low}`);
   console.log(`Verified: ${summary.verified}, partial: ${summary.partial}, needs review: ${summary.needs_review}, unknown: ${summary.unknown}`);
+  console.log(`Evidence-backed checks: ${summary.checked_with_evidence}`);
   if (duplicates.length) {
     console.error(`Duplicate slugs: ${duplicates.join(', ')}`);
     process.exitCode = 1;
