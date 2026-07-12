@@ -79,6 +79,7 @@ function checkContains(errors, content, label, needle) {
 
 function main() {
   const html = read(htmlPath);
+  const htmlLower = html.toLowerCase();
   const errors = [];
 
   checkContains(errors, html, 'partners/index.html', '<html lang="ru"');
@@ -121,7 +122,7 @@ function main() {
     errors.push('partners/index.html: partner must be warned that a need card may require verification');
   }
 
-  if (!html.includes('название, логотип, ссылка, фотографии и текст благодарности публикуются только после явного согласования')) {
+  if (!htmlLower.includes('название, логотип, ссылка, фотографии и текст благодарности публикуются только после явного согласования')) {
     errors.push('partners/index.html: publicity consent must be explicit');
   }
 
