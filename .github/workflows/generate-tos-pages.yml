@@ -55,6 +55,8 @@ jobs:
         run: node scripts/upgrade_tos_descriptions.js
       - name: Sync uploaded TOS logos
         run: node scripts/sync_tos_logos.js
+      - name: Migrate TOS trust metadata
+        run: node scripts/migrate_tos_trust_metadata.js
       - name: Synchronize content origins
         run: node scripts/migrate_content_origins.js
       - name: Generate content origin metrics
@@ -65,6 +67,8 @@ jobs:
         run: node scripts/generate_rss.js
       - name: Validate JSON data
         run: node scripts/validate_data.js
+      - name: Audit TOS trust metadata
+        run: node scripts/audit_tos_trust_metadata.js
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data

@@ -90,6 +90,9 @@ function main() {
       if (String(charter.status || '').startsWith('Действующий')) {
         errors.push('local BGO charter copy must not be presented as verified current law');
       }
+      if (/действующая редакция/i.test(String(charter.description || ''))) {
+        errors.push('BGO charter description must not claim a current verified edition');
+      }
       if (charter.official_source_url && !charter.legal_checked_at) {
         errors.push('official_source_url requires legal_checked_at');
       }
