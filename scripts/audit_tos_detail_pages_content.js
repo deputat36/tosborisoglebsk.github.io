@@ -202,10 +202,16 @@ function main() {
       }
     });
 
-    if (!(tos.phones || []).length && !html.includes('Контакты уточняются')) {
-      errors.push(`${line}: missing contact placeholder`);
+    if (!(tos.phones || []).length && !html.includes('Телефон уточняется')) {
+      errors.push(`${line}: missing phone placeholder`);
     }
-    if (!(tos.social_links || []).length && !html.includes('Информация уточняется')) {
+    if (!(tos.emails || []).length && !html.includes('Email уточняется')) {
+      errors.push(`${line}: missing email placeholder`);
+    }
+    if (!(tos.chairperson_links || []).length && !html.includes('Ссылка уточняется')) {
+      errors.push(`${line}: missing chairperson link placeholder`);
+    }
+    if (!(tos.social_links || []).length && !html.includes('Соцсети уточняются')) {
       errors.push(`${line}: missing social placeholder`);
     }
 
