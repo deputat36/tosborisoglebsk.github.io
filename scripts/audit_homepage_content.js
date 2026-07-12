@@ -10,30 +10,30 @@ const requiredRoutes = [
   '/',
   '/tos/',
   '/residents/',
+  '/residents/action-routes/',
+  '/chairperson/',
   '/partners/',
   '/projects/',
   '/done/',
   '/needs/',
   '/documents/',
+  '/legal/',
   '/contacts/',
   '/sections/',
   '/search/',
-  '/action-routes/',
   '/update-tos/',
-  '/materials/',
   '/calendar/',
+  '/data-quality/',
+  '/data-update/',
+  '/sources/',
   '/editorial-policy/'
 ];
 
 const requiredPublicNavRoutes = [
   '/tos/',
-  '/places/',
-  '/action-routes/',
   '/residents/',
   '/chairperson/',
   '/projects/',
-  '/done/',
-  '/needs/',
   '/documents/',
   '/contacts/',
   '/sections/'
@@ -43,12 +43,17 @@ const serviceRoutesOutsidePublicNav = [
   '/workbench/',
   '/data-requests/',
   '/source-watch/',
-  '/content-discovery/'
+  '/content-discovery/',
+  '/campaign/',
+  '/field-checklist/'
 ];
 
 const requiredDynamicBlocks = [
+  ['home-stats', '/assets/js/home-stats.js']
+];
+
+const forbiddenDynamicBlocks = [
   ['home-featured-tos', '/assets/js/home-featured-tos.js'],
-  ['home-stats', '/assets/js/home-stats.js'],
   ['home-done', '/assets/js/home-done.js'],
   ['home-news', '/assets/js/home-news.js'],
   ['home-projects', '/assets/js/home-projects.js'],
@@ -58,24 +63,28 @@ const requiredDynamicBlocks = [
 ];
 
 const requiredCopy = [
-  'Кому полезен портал',
-  'Как работает портал',
-  'Куда перейти в первую очередь',
+  'Что можно сделать на портале',
+  'Состояние каталога',
+  'Для жителей, председателей и партнёров',
+  'Документы, проекты и помощь',
+  'Связь и исправления'
+];
+
+const forbiddenShowcaseCopy = [
   'Активная территория',
-  'ТОС БГО в цифрах',
-  'Популярные действия',
   'Сделано ТОСами',
-  'Последние новости',
-  'Проекты и поддержка территорий',
+  'Новые идеи проектов',
   'ТОСам нужна помощь',
-  'Полезные материалы и документы',
-  'Ближайшие события и дедлайны',
-  'Связь и отправка материалов'
+  'Ближайшие события и дедлайны'
 ];
 
 function textMatch(content, pattern) {
   const match = content.match(pattern);
   return match ? match[1].trim() : '';
+}
+
+function countMatches(content, pattern) {
+  return (content.match(pattern) || []).length;
 }
 
 function main() {
@@ -100,8 +109,9 @@ function main() {
   const description = textMatch(html, /<meta\s+name="description"\s+content="([^"]+)"\s*\/>/i);
   const h1 = textMatch(html, /<h1>([^<]+)<\/h1>/i);
   const compactNavBlock = textMatch(navigationPatch, /const compactNavBlock = `([\s\S]*?)`;\n\nconst footerHtml/);
+  const footerBlock = textMatch(navigationPatch, /const footerHtml = `([\s\S]*?)`;\n\nconst homeBlock/);
 
-  if (!title.includes('ТОС') || !title.includes('Борисоглеб')) {
+  if (!title.includes('ТОС') || !title.includes('БГО')) {
     errors.push('title must identify the TOS BGO portal');
   }
 
@@ -125,7 +135,13 @@ function main() {
 
   requiredCopy.forEach((copy) => {
     if (!html.includes(copy)) {
-      errors.push(`homepage is missing copy block: ${copy}`);
+      errors.push(`homepage is missing primary copy block: ${copy}`);
+    }
+  });
+
+  forbiddenShowcaseCopy.forEach((copy) => {
+    if (html.includes(copy)) {
+      errors.push(`homepage must not foreground unverified showcase block: ${copy}`);
     }
   });
 
@@ -135,29 +151,61 @@ function main() {
     }
   });
 
+  const compactNavLinkCount = countMatches(compactNavBlock, /^\s*\['\//gm);
+  if (compactNavLinkCount !== 7) {
+    errors.push(`public navigation must contain exactly 7 links, found ${compactNavLinkCount}`);
+  }
+
   serviceRoutesOutsidePublicNav.forEach((route) => {
     if (compactNavBlock.includes(route)) {
       errors.push(`service route must not be in public navigation: ${route}`);
     }
   });
 
-  if (!navigationPatch.includes('/workbench/')) {
-    errors.push('workbench route must remain available outside public navigation');
+  if (!footerBlock.includes('/workbench/')) {
+    errors.push('workbench route must remain available only as the editorial panel link');
   }
+
+  ['/data-requests/', '/source-watch/', '/content-discovery/', '/campaign/', '/field-checklist/'].forEach((route) => {
+    if (footerBlock.includes(route)) {
+      errors.push(`individual editorial tool must not be exposed in public footer: ${route}`);
+    }
+  });
 
   requiredDynamicBlocks.forEach(([blockId, scriptPath]) => {
     if (!html.includes(`id="${blockId}"`)) {
-      errors.push(`missing dynamic block #${blockId}`);
+      errors.push(`missing factual dynamic block #${blockId}`);
     }
-
     if (!html.includes(`src="${scriptPath}"`)) {
-      errors.push(`missing dynamic block script ${scriptPath}`);
+      errors.push(`missing factual dynamic block script ${scriptPath}`);
     }
-
     if (!repoPathExists(scriptPath)) {
       errors.push(`dynamic block script file is missing: ${scriptPath}`);
     }
   });
+
+  forbiddenDynamicBlocks.forEach(([blockId, scriptPath]) => {
+    if (html.includes(`id="${blockId}"`) || html.includes(`src="${scriptPath}"`)) {
+      errors.push(`homepage must not contain unverified showcase dynamic block: ${blockId}`);
+    }
+  });
+
+  const primaryActions = countMatches(html, /data-home-primary-action/g);
+  if (primaryActions !== 5) {
+    errors.push(`homepage must contain exactly 5 primary user actions, found ${primaryActions}`);
+  }
+
+  if (!html.includes('data-portal-working-status')) {
+    errors.push('homepage must retain the working-version status');
+  }
+
+  if (html.includes('href="/map/"')) {
+    errors.push('empty map must not be a primary homepage route');
+  }
+
+  if (!navigationPatch.includes('Дополнительный программный блок не вставляется')) {
+    errors.push('navigation patch must keep the extra homepage status injection disabled');
+  }
 
   if (!html.includes('data-action="menu"') || !html.includes('aria-controls="site-nav"')) {
     errors.push('mobile menu control must target site navigation');
@@ -172,12 +220,12 @@ function main() {
     errors.push(`homepage TOS count must match data/toses.json: ${heroCount} !== ${toses.length}`);
   }
 
-  if (!html.includes('следующий этап работы') || !html.includes('довести каталог до полного состава')) {
-    errors.push('homepage must disclose that the TOS catalog is not complete yet');
+  if (!html.includes('довести каталог до полного состава') || !html.includes('Дата изменения файла не считается датой фактической проверки')) {
+    errors.push('homepage must explain catalog incompleteness and evidence-based verification');
   }
 
   if (!html.includes('/update-tos/?type=news#message-builder')) {
-    errors.push('homepage must provide a news submission CTA');
+    errors.push('homepage must provide a material submission CTA');
   }
 
   if (!html.includes('https://vk.ru/tosbgo')) {
@@ -188,7 +236,7 @@ function main() {
     throw new Error(`Homepage content audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log('Homepage content OK');
+  console.log('Simplified homepage content OK');
 }
 
 main();
