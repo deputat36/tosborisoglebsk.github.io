@@ -1,0 +1,24 @@
+{
+  "policy_started_at": "2026-07-12",
+  "allowed_statuses": {
+    "draft_methodical": "Методическая заготовка. Требует адаптации и проверки перед применением.",
+    "source_requires_official_check": "Правовой или справочный источник, который нельзя считать актуальным без официальной сверки.",
+    "reviewed_for_current_federal_law": "Проверено по действующей федеральной норме, но не обязательно по порядку БГО.",
+    "reviewed_for_bgo_procedure": "Проверено по актуальному официальному порядку БГО.",
+    "approved_sample": "Официальный или отдельно согласованный образец.",
+    "archival": "Архивный или исторический материал, не применяемый как действующая норма."
+  },
+  "strict_statuses": [
+    "reviewed_for_current_federal_law",
+    "reviewed_for_bgo_procedure",
+    "approved_sample"
+  ],
+  "required_for_strict_status": [
+    "official_source_url",
+    "legal_checked_at",
+    "legal_checked_by"
+  ],
+  "approved_sample_requires": [
+    "legal_decision_ref"
+  ]
+}
