@@ -1,0 +1,43 @@
+{
+  "policy_started_at": "2026-07-12",
+  "repository_visibility": "public",
+  "storage_rule": "private_evidence_outside_repository",
+  "allowed_public_references": {
+    "source_ref_prefix": "source:",
+    "consent_ref_prefix": "consent:",
+    "decision_ref_prefix": "decision:",
+    "evidence_ref_prefix": "evidence:"
+  },
+  "forbidden_directories": [
+    ".private/",
+    "private-evidence/",
+    "consent-scans/",
+    "incoming-private/",
+    "personal-data-private/"
+  ],
+  "forbidden_structured_fields": [
+    "passport",
+    "passport_number",
+    "passport_series",
+    "snils",
+    "bank_card",
+    "card_number",
+    "bank_account",
+    "signature",
+    "signature_image",
+    "home_address",
+    "private_phone",
+    "consent_scan",
+    "raw_consent",
+    "consent_text",
+    "personal_document"
+  ],
+  "private_storage_requirements": [
+    "access_control",
+    "retention_period",
+    "deletion_process",
+    "audit_log",
+    "backup_policy",
+    "operator_assignment"
+  ]
+}

@@ -1,0 +1,9 @@
+# Private evidence must stay outside the public repository
+.private/
+private-evidence/
+consent-scans/
+incoming-private/
+personal-data-private/
+*.private.*
+*.consent-scan.*
+*.signature-scan.*
