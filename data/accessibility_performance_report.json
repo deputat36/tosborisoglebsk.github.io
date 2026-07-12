@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-11T08:28:53.316Z",
+  "generated_at": "2026-07-12T07:00:15.073Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 241,
     "over_budget_assets": 0,
     "total_css_bytes": 32380,
-    "total_js_bytes": 1196638,
+    "total_js_bytes": 1198791,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -134,6 +134,13 @@
       "over_budget": false
     },
     {
+      "path": "scripts/audit_project_pages_content.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10265,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/collection-board.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8364,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/tos-logos.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8293,
       "over_budget": false
     }
   ],
