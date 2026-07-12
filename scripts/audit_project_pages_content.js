@@ -48,6 +48,16 @@ function main() {
   expectIncludes(errors, 'projects index', indexHtml, '<meta property="og:url" content="https://tosborisoglebsk.ru/projects/"', 'missing Open Graph URL');
   expectIncludes(errors, 'projects index', indexHtml, '<h1>Банк идей для проектов ТОС</h1>', 'missing h1');
   expectIncludes(errors, 'projects index', indexHtml, 'Банк проектов — рабочая база идей, а не гарантия финансирования.', 'financing caution is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'id="project-statuses"', 'project status guide is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'Как читать статусы и метки', 'project status heading is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'Подтверждено источником', 'verified origin explanation is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'Редакционный материал', 'editorial origin explanation is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'Стартовая идея', 'starter origin explanation is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'Запрос материалов', 'request origin explanation is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'Техническая метка «В каталоге»', 'catalog status explanation is missing');
+  expectIncludes(errors, 'projects index', indexHtml, 'Она не подтверждает одобрение проекта, получение финансирования, начало работ или завершение.', 'catalog status caution is missing');
+  expectIncludes(errors, 'projects index', indexHtml, '/content-standards/', 'content standards link is missing');
+  expectIncludes(errors, 'projects index', indexHtml, '/done/', 'results link is missing');
   expectIncludes(errors, 'projects index', indexHtml, 'id="projects-list"', 'projects list container is missing');
   expectIncludes(errors, 'projects index', indexHtml, '/assets/js/projects.js', 'projects.js is missing');
   expectIncludes(errors, 'projects index', indexHtml, '/projects/action-routes/', 'project action route is missing');
@@ -57,11 +67,20 @@ function main() {
   expectIncludes(errors, 'projects script', script, "fetch('/data/toses.json'", 'TOS data fetch is missing');
   expectIncludes(errors, 'projects script', script, "item.status !== 'draft'", 'draft filtering is missing');
   expectIncludes(errors, 'projects script', script, 'projectEsc', 'HTML escaping helper is missing');
+  expectIncludes(errors, 'projects script', script, 'projectCatalogStatus', 'catalog status helper is missing');
+  expectIncludes(errors, 'projects script', script, "return 'В каталоге'", 'neutral catalog status label is missing');
   expectIncludes(errors, 'projects script', script, 'localeCompare', 'Russian title sorting is missing');
   expectIncludes(errors, 'projects script', script, '`/projects/${projectEsc(item.id)}/`', 'detail route rendering is missing');
   expectIncludes(errors, 'projects script', script, '/projects/action-routes/', 'action route link is missing');
   expectIncludes(errors, 'projects script', script, '/update-tos/?type=project#message-builder', 'submission link is missing');
   expectIncludes(errors, 'projects script', script, 'target="_blank" rel="noopener"', 'external source links must open safely');
+
+  if (script.includes("item.status === 'published' ? 'Опубликовано'")) {
+    errors.push('projects script: published technical status must not be presented as project completion');
+  }
+  if (script.includes("item.status === 'published' ? 'ok'")) {
+    errors.push('projects script: catalog presence must not receive success styling');
+  }
 
   projects.filter((item) => item && item.status !== 'draft').forEach((item, index) => {
     const line = `project page ${index + 1} ${item.id || 'unknown'}`;
