@@ -60,29 +60,34 @@ function statusLabel(status) {
   if (status === 'closed' || status === 'done') return 'Закрыто';
   if (status === 'archived') return 'Архив';
   if (status === 'in_progress') return 'В работе';
-  return 'Актуально';
+  if (status === 'published') return 'В каталоге';
+  return status ? `Технический статус: ${status}` : 'Технический статус уточняется';
 }
 
 function statusClass(status) {
   if (status === 'closed' || status === 'done') return 'ok';
-  if (status === 'archived') return '';
-  return 'warn';
+  if (status === 'in_progress') return 'warn';
+  return '';
 }
 
 function renderNeedsSummary(items) {
   const root = document.querySelector('#needs-summary');
   if (!root) return;
-  const active = items.filter((item) => !isClosedNeed(item)).length;
+  const open = items.filter((item) => !isClosedNeed(item)).length;
   const closed = items.filter(isClosedNeed).length;
   const high = items.filter((item) => String(item.priority || '').toLowerCase().includes('выс')).length;
   const partner = items.filter(isPartnerNeed).length;
   const requests = items.filter((item) => needsOrigin(item) === 'request').length;
-  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>записей найдено</span></div><div class="summary-tile"><b>${active}</b><span>актуальные</span></div><div class="summary-tile"><b>${high}</b><span>высокий приоритет</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div><div class="summary-tile"><b>${requests}</b><span>запросы данных</span></div></div>`;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>записей найдено</span></div><div class="summary-tile"><b>${open}</b><span>незакрытые записи</span></div><div class="summary-tile"><b>${high}</b><span>высокий приоритет</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div><div class="summary-tile"><b>${requests}</b><span>запросы данных</span></div></div>`;
 }
 
 function needCard(item, toses) {
   const tosName = needsTosName(item.tos_slug, toses);
-  const helpText = item.how_to_help || item.help || 'Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.';
+  const origin = needsOrigin(item);
+  const defaultHelp = origin === 'request'
+    ? 'Передайте подтверждённые сведения, официальный источник, актуальные контакты или фотографии с разрешением на публикацию. Материальная помощь для такой записи не требуется.'
+    : 'Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.';
+  const helpText = item.how_to_help || item.help || defaultHelp;
   const resultText = item.result || item.closed_result || '';
   return `<article class="list-item need-card">
     <div class="meta">
