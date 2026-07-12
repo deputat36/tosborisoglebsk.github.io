@@ -48,6 +48,16 @@ function main() {
   expectIncludes(errors, 'needs index', indexHtml, '<meta property="og:url" content="https://tosborisoglebsk.ru/needs/"', 'missing Open Graph URL');
   expectIncludes(errors, 'needs index', indexHtml, '<h1>Витрина конкретных задач для ТОСов БГО</h1>', 'missing h1');
   expectIncludes(errors, 'needs index', indexHtml, 'потребность должна быть конкретной', 'specific-need principle is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'id="need-statuses"', 'need status guide is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'Как читать статусы и метки потребностей', 'need status heading is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'Подтверждено источником', 'verified origin explanation is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'Редакционный материал', 'editorial origin explanation is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'Стартовый материал', 'starter origin explanation is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'Запрос данных', 'request origin explanation is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'Техническая метка «В каталоге»', 'catalog status explanation is missing');
+  expectIncludes(errors, 'needs index', indexHtml, 'Портал не собирает деньги, банковские карты и платёжные реквизиты.', 'payment safety warning is missing');
+  expectIncludes(errors, 'needs index', indexHtml, '<h2>Потребности и запросы</h2>', 'neutral needs list heading is missing');
+  expectIncludes(errors, 'needs index', indexHtml, '<option value="active">Незакрытые</option>', 'neutral open-status filter label is missing');
   expectIncludes(errors, 'needs index', indexHtml, 'id="needs-list"', 'needs list container is missing');
   expectIncludes(errors, 'needs index', indexHtml, 'id="needs-summary"', 'needs summary container is missing');
   expectIncludes(errors, 'needs index', indexHtml, 'id="needs-search"', 'needs search input is missing');
@@ -66,10 +76,20 @@ function main() {
   expectIncludes(errors, 'needs script', script, 'needsEsc', 'HTML escaping helper is missing');
   expectIncludes(errors, 'needs script', script, 'needsFmtDate', 'date formatting helper is missing');
   expectIncludes(errors, 'needs script', script, 'renderNeedsSummary', 'summary rendering is missing');
-  expectIncludes(errors, 'needs script', script, 'replace(/ё/g, \'е\')', 'yo normalization is missing');
+  expectIncludes(errors, 'needs script', script, "if (status === 'published') return 'В каталоге';", 'neutral catalog status label is missing');
+  expectIncludes(errors, 'needs script', script, 'незакрытые записи', 'neutral summary label is missing');
+  expectIncludes(errors, 'needs script', script, 'Материальная помощь для такой записи не требуется.', 'request-specific help text is missing');
+  expectIncludes(errors, 'needs script', script, "replace(/ё/g, 'е')", 'yo normalization is missing');
   expectIncludes(errors, 'needs script', script, '/needs/${needsEsc(item.id)}/', 'detail route rendering is missing');
   expectIncludes(errors, 'needs script', script, '/update-tos/?type=need#message-builder', 'submission link is missing');
   expectIncludes(errors, 'needs script', script, 'target="_blank" rel="noopener"', 'external source links must open safely');
+
+  if (script.includes("return 'Актуально';")) {
+    errors.push('needs script: published or unknown technical status must not be presented as confirmed current need');
+  }
+  if (script.includes("status === 'published' ? 'warn'")) {
+    errors.push('needs script: catalog presence must not receive urgency styling');
+  }
 
   needs.filter((item) => item && item.status !== 'draft').forEach((item, index) => {
     const line = `need page ${index + 1} ${item.id || 'unknown'}`;
