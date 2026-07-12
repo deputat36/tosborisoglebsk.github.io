@@ -89,6 +89,7 @@ const checks = [
   ['Outreach source index', 'scripts/test_outreach_source_index.js'],
   ['Site health', 'scripts/audit_site_health.js'],
   ['Homepage content', 'scripts/audit_homepage_content.js'],
+  ['Sections page content', 'scripts/audit_sections_page_content.js'],
   ['Update center content', 'scripts/audit_update_center_content.js'],
   ['Search content', 'scripts/audit_search_content.js'],
   ['News page content', 'scripts/audit_news_page_content.js'],
