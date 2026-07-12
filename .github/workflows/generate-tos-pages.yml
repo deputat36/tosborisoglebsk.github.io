@@ -99,6 +99,8 @@ jobs:
         run: node scripts/patch_site_navigation.js
       - name: Patch residents quick start
         run: node scripts/patch_residents_quick_start.js
+      - name: Patch contacts channel boundaries
+        run: node scripts/patch_contacts_channel_boundaries.js
       - name: Patch page index labels
         run: node scripts/patch_page_index_labels.js
       - name: Patch project passport label
