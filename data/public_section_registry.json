@@ -1,0 +1,12 @@
+{
+  "policy_started_at": "2026-07-12",
+  "mode": "freeze_new_root_public_sections",
+  "baseline_public_pages": 331,
+  "rules": {
+    "existing_public_routes_remain_allowed": true,
+    "new_detail_pages_inside_existing_sections_allowed": true,
+    "new_noindex_service_routes_allowed": true,
+    "new_root_public_section_requires_approval": true
+  },
+  "approved_new_sections": []
+}
