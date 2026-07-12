@@ -8,9 +8,7 @@ const patchPath = path.join(process.cwd(), 'scripts', 'patch_residents_quick_sta
 const requiredInternalLinks = [
   '/residents/action-routes/',
   '/tos/',
-  '/map/',
   '/needs/',
-  '/done/',
   '/update-tos/',
   '/contacts/'
 ];
@@ -19,12 +17,11 @@ const requiredPhrases = [
   'Жителям — как пользоваться ТОС и участвовать в жизни территории',
   'Как участвовать в жизни своей территории через ТОС',
   'ТОС помогает жителям объединяться вокруг конкретных дел',
-  'Что можно сделать на сайте',
-  'Как жителю включиться в работу ТОС',
-  'Найти председателя',
-  'Предложить идею',
-  'Сообщить о проблеме',
-  'Помочь территории',
+  'Жителю достаточно начать с трёх шагов',
+  'Главный маршрут',
+  'Найдите свой ТОС',
+  'Проверьте контакты',
+  'Выберите действие',
   'Что ТОС может делать',
   'Что ТОС не заменяет',
   'Куда обращаться в разных случаях',
@@ -106,6 +103,14 @@ function main() {
 
   if (!html.includes('Ваш контакт для уточнения:')) {
     errors.push('residents/index.html: missing idea template field Ваш контакт для уточнения');
+  }
+
+  if (html.includes('href="/map/"')) {
+    errors.push('residents/index.html: empty geodata map must not be promoted as a resident action');
+  }
+
+  if (html.includes('<h2>Что можно сделать на сайте</h2>')) {
+    errors.push('residents/index.html: duplicate action section must be removed after focused quick start');
   }
 
   if (errors.length) {

@@ -122,6 +122,10 @@ jobs:
         run: node scripts/patch_site_navigation.js
       - name: Patch residents quick start
         run: node scripts/patch_residents_quick_start.js
+      - name: Focus public audience pages
+        run: node scripts/patch_public_audience_focus.js
+      - name: Audit public audience focus
+        run: node scripts/audit_public_audience_focus.js
       - name: Patch contacts channel boundaries
         run: node scripts/patch_contacts_channel_boundaries.js
       - name: Patch page index labels
