@@ -27,6 +27,18 @@ function newsOriginTag(item) {
   return `<span class="tag ${className}">${newsEsc(labels[origin])}</span>`;
 }
 
+function newsOriginNotice(item) {
+  const origin = newsOrigin(item);
+  if (origin === 'verified') return '';
+  if (origin === 'request') {
+    return '<div class="notice"><b style="color:var(--text)">Это запрос материалов</b><br>Запись приглашает прислать сведения, фото или уточнение и не подтверждает, что событие уже произошло.</div>';
+  }
+  if (origin === 'starter') {
+    return '<div class="notice"><b style="color:var(--text)">Стартовая заготовка</b><br>До получения даты события, участников, результата и источника материал нельзя считать фактической новостью территории.</div>';
+  }
+  return '<div class="notice"><b style="color:var(--text)">Редакционный материал</b><br>Текст подготовлен порталом. Для утверждений о событии, результате или сроках проверьте первичный источник.</div>';
+}
+
 function newsDate(value) {
   if (!value) return 'Дата уточняется';
   const date = new Date(value + 'T00:00:00');
@@ -50,6 +62,7 @@ function newsTosName(slug, toses) {
 
 function newsCard(item, toses) {
   const tosName = newsTosName(item.tos_slug, toses);
+  const originNotice = newsOriginNotice(item);
   return `<article class="list-item">
     <div class="meta">
       ${newsOriginTag(item)}
@@ -60,6 +73,7 @@ function newsCard(item, toses) {
     <h3>${newsEsc(item.title || 'Новость')}</h3>
     <p>${newsEsc(item.lead || '')}</p>
     ${item.text && Array.isArray(item.text) && item.text[0] ? `<p class="tiny">${newsEsc(item.text[0]).slice(0, 260)}${newsEsc(item.text[0]).length > 260 ? '...' : ''}</p>` : ''}
+    ${originNotice}
     <div class="card-actions">
       <a class="btn primary" href="/news/${newsEsc(item.id)}/">Читать</a>
       ${item.tos_slug ? `<a class="btn" href="/tos/${newsEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}

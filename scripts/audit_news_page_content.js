@@ -7,17 +7,23 @@ const scriptPath = path.join(process.cwd(), 'assets', 'js', 'news.js');
 const newsPath = path.join(process.cwd(), 'data', 'news.json');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 
-const requiredControls = ['verified-news', 'news-feed', 'send-news', 'news-search', 'news-category-filter', 'news-tos-filter'];
+const requiredControls = ['verified-news', 'news-statuses', 'news-feed', 'send-news', 'news-search', 'news-category-filter', 'news-tos-filter'];
 const requiredCopy = [
   'Живая лента ТОСов Борисоглебского округа',
   'Редакционный принцип',
+  'Как читать статусы и типы публикаций',
+  'Подтверждено источником',
+  'Редакционный материал',
+  'Стартовый материал',
+  'Запрос материалов',
+  'Дата карточки',
   'Типы публикаций',
-  'Все новости',
+  'Все новости и материалы',
   'Какой должна быть хорошая новость ТОС',
   'Прислать новость ТОС',
   'Можно ли публиковать имена и контакты'
 ];
-const requiredRoutes = ['/news/', '/project-check-2026/', '/tos/mirolyubie/', '/content-intake/', '/contacts/', '/done/'];
+const requiredRoutes = ['/news/', '/project-check-2026/', '/tos/mirolyubie/', '/content-intake/', '/contacts/', '/done/', '/content-standards/', '/publication-templates/', '/update-tos/'];
 const requiredDataFetches = ['/data/news.json', '/data/toses.json'];
 const requiredCategories = ['Портал', 'Инструкция', 'Конкурсы', 'Гранты', 'Правовая база'];
 
@@ -97,6 +103,14 @@ function main() {
     errors.push('verified news block must not imply project implementation without confirmation');
   }
 
+  if (!html.includes('Не каждая запись в ленте является подтверждённой новостью')) {
+    errors.push('news origin legend must distinguish confirmed news from other materials');
+  }
+
+  if (!html.includes('сама по себе не подтверждает дату события')) {
+    errors.push('news page must explain that card date is not proof of event date');
+  }
+
   if (!Array.isArray(news) || publishedNews.length < 10) {
     errors.push('data/news.json must contain at least 10 published news items');
   }
@@ -140,6 +154,22 @@ function main() {
 
   if (!script.includes('/tos/${newsEsc(item.tos_slug)}/')) {
     errors.push('news cards must link to related TOS cards');
+  }
+
+  if (!script.includes('newsOriginNotice')) {
+    errors.push('news cards must render origin-specific notices');
+  }
+
+  if (!script.includes('Это запрос материалов') || !script.includes('не подтверждает, что событие уже произошло')) {
+    errors.push('request items must be clearly distinguished from factual news');
+  }
+
+  if (!script.includes('Стартовая заготовка') || !script.includes('нельзя считать фактической новостью территории')) {
+    errors.push('starter items must be clearly distinguished from factual news');
+  }
+
+  if (!script.includes('Для утверждений о событии, результате или сроках проверьте первичный источник')) {
+    errors.push('editorial items must require primary-source verification');
   }
 
   if (!script.includes('target="_blank" rel="noopener"')) {
