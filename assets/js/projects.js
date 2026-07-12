@@ -26,6 +26,11 @@ function projectOriginTag(item) {
   return `<span class="tag ${className}">${projectEsc(labels[origin])}</span>`;
 }
 
+function projectCatalogStatus(item) {
+  if (item.status === 'published') return 'В каталоге';
+  return item.status ? `Технический статус: ${item.status}` : 'Технический статус уточняется';
+}
+
 async function loadProjectsData() {
   const [projects, toses] = await Promise.all([
     fetch('/data/projects.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
@@ -48,7 +53,7 @@ function projectCard(item, toses) {
     <div class="meta">
       ${projectOriginTag(item)}
       <span class="tag">${projectEsc(item.type || 'Проект')}</span>
-      <span class="tag ${item.status === 'published' ? 'ok' : ''}">${projectEsc(item.status === 'published' ? 'Опубликовано' : item.status || 'Статус уточняется')}</span>
+      <span class="tag">${projectEsc(projectCatalogStatus(item))}</span>
       ${tosName ? `<span class="tag">${projectEsc(tosName)}</span>` : ''}
     </div>
     <h3>${projectEsc(item.title || 'Проект без названия')}</h3>
