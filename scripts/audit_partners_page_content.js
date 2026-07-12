@@ -9,7 +9,9 @@ const requiredInternalLinks = [
   '/needs/',
   '/projects/',
   '/done/',
-  '/contacts/'
+  '/contacts/',
+  '/partner-thanks/',
+  '/faq/'
 ];
 
 const requiredPhrases = [
@@ -17,6 +19,14 @@ const requiredPhrases = [
   'Помочь ТОСам можно конкретным делом',
   'ТОСам часто нужна не только финансовая помощь',
   'Смысл партнёрства',
+  'Что подтвердить до передачи помощи',
+  'Предложение ресурса ещё не означает заключённое партнёрство',
+  'Проверить, что задача ещё нужна',
+  'Определить, кто принимает ресурс',
+  'Согласовать границы помощи',
+  'Отдельно согласовать упоминание',
+  'не означает официального партнёрства',
+  'Портал не собирает деньги, номера карт и платёжные реквизиты',
   'Как начать',
   'Как партнёру помочь ТОСам',
   'Кто может стать партнёром',
@@ -25,6 +35,7 @@ const requiredPhrases = [
   'Как выглядит помощь',
   'Примеры простой помощи',
   'Куда смотреть перед предложением помощи',
+  'Потребности и запросы ТОСов',
   'Шаблон предложения помощи',
   'Публичная благодарность',
   'Фотоотчёт результата'
@@ -42,10 +53,13 @@ const requiredTemplateFields = [
   'Чем готовы помочь:',
   'Количество / объём:',
   'Для какого ТОСа или любой территории:',
+  'Какую потребность подтверждает ответственный:',
+  'Кто и где принимает помощь:',
   'Сроки:',
+  'Нужна ли доставка или подготовка места:',
   'Нужна ли публичная благодарность: да / нет',
   'Как можно указать партнёра в публикации:',
-  'Контакт:',
+  'Контакт для согласования:',
   'Комментарий:'
 ];
 
@@ -65,6 +79,7 @@ function checkContains(errors, content, label, needle) {
 
 function main() {
   const html = read(htmlPath);
+  const htmlLower = html.toLowerCase();
   const errors = [];
 
   checkContains(errors, html, 'partners/index.html', '<html lang="ru"');
@@ -74,6 +89,7 @@ function main() {
   checkContains(errors, html, 'partners/index.html', '<main id="main">');
   checkContains(errors, html, 'partners/index.html', '/assets/js/site.js');
   checkContains(errors, html, 'partners/index.html', 'href="https://vk.ru/tosbgo" target="_blank" rel="noopener"');
+  checkContains(errors, html, 'partners/index.html', 'id="partner-check"');
 
   requiredPhrases.forEach((phrase) => {
     checkContains(errors, html, 'partners/index.html', phrase);
@@ -96,6 +112,22 @@ function main() {
 
   if (!html.includes('материалы') || !html.includes('транспорт') || !html.includes('волонтёры')) {
     errors.push('partners/index.html: missing core help formats');
+  }
+
+  if (html.includes('Актуальные потребности ТОСов')) {
+    errors.push('partners/index.html: must not present all need records as automatically current');
+  }
+
+  if (!html.includes('Карточка в разделе потребностей может быть редакционной заготовкой или запросом сведений')) {
+    errors.push('partners/index.html: partner must be warned that a need card may require verification');
+  }
+
+  if (!htmlLower.includes('название, логотип, ссылка, фотографии и текст благодарности публикуются только после явного согласования')) {
+    errors.push('partners/index.html: publicity consent must be explicit');
+  }
+
+  if (!html.includes('не означает официального партнёрства, одобрения порталом, договора или обязательства оказать помощь')) {
+    errors.push('partners/index.html: mentions must not imply endorsement or obligation');
   }
 
   if (errors.length) {
