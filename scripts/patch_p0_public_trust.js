@@ -40,10 +40,7 @@ function patchPublicPage(relativePath) {
   }
 
   if (relativePath === 'index.html' && html.includes('реальные истории благоустройства')) {
-    html = html.replace(
-      'реальные истории благоустройства',
-      'материалы о работе территорий и запросы сведений'
-    );
+    html = html.split('реальные истории благоустройства').join('материалы о работе территорий и запросы сведений');
     changed = true;
   }
 
