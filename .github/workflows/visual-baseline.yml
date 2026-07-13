@@ -6,7 +6,15 @@ on:
     branches:
       - release-2025-12-22
     paths:
-      - '**/index.html'
+      - 'index.html'
+      - 'tos/index.html'
+      - 'tos/mirolyubie/index.html'
+      - 'news/index.html'
+      - 'news/vk-community-channel-2026/index.html'
+      - 'workbench/index.html'
+      - 'site-health/index.html'
+      - 'workbench-routes/index.html'
+      - 'field-checklist/index.html'
       - 'assets/css/**'
       - 'assets/js/**'
       - 'data/css_regression_matrix.csv'
@@ -60,6 +68,14 @@ jobs:
       - name: Capture matrix screenshots
         run: node scripts/capture_visual_baseline.js
 
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f .artifacts/visual-baseline/server.pid ]; then
+            kill "$(cat .artifacts/visual-baseline/server.pid)" 2>/dev/null || true
+            rm -f .artifacts/visual-baseline/server.pid
+          fi
+
       - name: Upload visual baseline artifact
         if: always()
         uses: actions/upload-artifact@v4
@@ -68,10 +84,3 @@ jobs:
           path: .artifacts/visual-baseline
           if-no-files-found: error
           retention-days: 30
-
-      - name: Stop local static server
-        if: always()
-        run: |
-          if [ -f .artifacts/visual-baseline/server.pid ]; then
-            kill "$(cat .artifacts/visual-baseline/server.pid)" 2>/dev/null || true
-          fi
