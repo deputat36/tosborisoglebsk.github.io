@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-13T19:28:40.267Z",
+  "css_path": "assets/css/styles.css",
+  "report_path": "data/base_css_structure_report.json",
+  "sections_count": 15,
+  "sections": [
+    {
+      "number": "01",
+      "title": "Design tokens",
+      "marker": ":root{"
+    },
+    {
+      "number": "02",
+      "title": "Dark theme tokens",
+      "marker": "[data-theme=dark]{"
+    },
+    {
+      "number": "03",
+      "title": "Base and accessibility",
+      "marker": "*{box-sizing:border-box}"
+    },
+    {
+      "number": "04",
+      "title": "Header and navigation",
+      "marker": ".header{"
+    },
+    {
+      "number": "05",
+      "title": "Buttons and menu control",
+      "marker": ".btn{"
+    },
+    {
+      "number": "06",
+      "title": "Hero and action groups",
+      "marker": ".hero{"
+    },
+    {
+      "number": "07",
+      "title": "Sections, grids and cards",
+      "marker": ".section{"
+    },
+    {
+      "number": "08",
+      "title": "Status, metrics, forms and media",
+      "marker": ".meta{"
+    },
+    {
+      "number": "09",
+      "title": "Content, footer, lists and tables",
+      "marker": ".prose{"
+    },
+    {
+      "number": "10",
+      "title": "Statistics",
+      "marker": ".stats-grid{"
+    },
+    {
+      "number": "11",
+      "title": "Homepage-specific blocks",
+      "marker": ".home-panel{"
+    },
+    {
+      "number": "12",
+      "title": "Responsive layout",
+      "marker": "@media(max-width:900px){"
+    },
+    {
+      "number": "13",
+      "title": "Supporting utilities",
+      "marker": ".quick-list{"
+    },
+    {
+      "number": "14",
+      "title": "Semantic badges and template accents",
+      "marker": ".badge-city{"
+    },
+    {
+      "number": "15",
+      "title": "Print",
+      "marker": ".print-only{"
+    }
+  ],
+  "before_bytes": 11078,
+  "after_bytes": 11583,
+  "before_semantic_sha256": "7d7653001d3cfbc27d8a60f47191564887e932f09ed9dd6ed1a1184c96d31b89",
+  "after_semantic_sha256": "7d7653001d3cfbc27d8a60f47191564887e932f09ed9dd6ed1a1184c96d31b89",
+  "semantic_equal": true,
+  "idempotent": true,
+  "note": "Only section comments and formatting are added; selectors, declarations, values and rule order are preserved."
+}
