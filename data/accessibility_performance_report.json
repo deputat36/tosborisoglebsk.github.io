@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T18:18:33.034Z",
+  "generated_at": "2026-07-13T18:44:12.839Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 262,
+    "asset_files": 266,
     "over_budget_assets": 0,
     "total_css_bytes": 32380,
-    "total_js_bytes": 1345832,
+    "total_js_bytes": 1379762,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -103,6 +103,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 16461,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/capture_visual_baseline.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 13613,
       "over_budget": false
     },
     {
@@ -197,6 +204,13 @@
       "over_budget": false
     },
     {
+      "path": "scripts/compare_visual_baseline.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9374,
+      "over_budget": false
+    },
+    {
       "path": "scripts/patch_public_audience_focus.js",
       "group": "js",
       "extension": ".js",
@@ -222,20 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 9167,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/audit_site_health.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8972,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/audit_grants_page_content.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8800,
       "over_budget": false
     }
   ],
