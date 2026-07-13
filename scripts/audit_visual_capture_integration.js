@@ -55,6 +55,10 @@ requireTokens(capture, [
   'quality_failures',
   'failed_requests',
   'sha256',
+  'internalOverflowElements',
+  'overflowIsolationCandidates',
+  'scrollWidth > entry.clientWidth + 1',
+  "element.style.setProperty('overflow-x', 'hidden', 'important')",
   'if (failures.length)',
   'if (qualityFailures.length && ENFORCE_QUALITY)'
 ], 'visual capture script');
@@ -96,4 +100,4 @@ if (errors.length) {
   throw new Error(`Visual capture integration audit failed:\n${errors.join('\n')}`);
 }
 
-console.log('Visual capture integration audit OK: capture-only, read-only, 14 baseline_required cases');
+console.log('Visual capture integration audit OK: capture-only, read-only, detailed overflow diagnostics, 14 baseline_required cases');
