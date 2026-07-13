@@ -6,6 +6,9 @@ const INDEX_PATH = path.join(ROOT, 'admin', 'index.html');
 const EXPORT_PATH = path.join(ROOT, 'admin', 'admin-export-tools.js');
 const HISTORY_PATH = path.join(ROOT, 'admin', 'admin-history.js');
 const DOC_PATH = path.join(ROOT, 'docs', 'ADMIN-SAFE-TOOLS-2026-07-13.md');
+const PACKAGE_PATH = path.join(ROOT, 'package.json');
+const PROJECT_MODE_PATH = path.join(ROOT, 'scripts', 'audit_project_mode.js');
+const PROJECT_MODE_FULL_PATH = path.join(ROOT, 'scripts', 'audit_project_mode_full.js');
 const errors = [];
 
 function read(filePath, label) {
@@ -26,6 +29,9 @@ const indexHtml = read(INDEX_PATH, 'admin index');
 const exportTools = read(EXPORT_PATH, 'admin export tools');
 const history = read(HISTORY_PATH, 'admin history tools');
 const documentation = read(DOC_PATH, 'safe admin tools documentation');
+const packageText = read(PACKAGE_PATH, 'package.json');
+const projectMode = read(PROJECT_MODE_PATH, 'project-mode audit');
+const projectModeFull = read(PROJECT_MODE_FULL_PATH, 'full project-mode audit');
 
 const scripts = [...indexHtml.matchAll(/<script\s+src="([^"]+)"/g)].map((match) => match[1]);
 const expectedScripts = [
@@ -101,6 +107,29 @@ const forbiddenNetworkPatterns = [
   });
 });
 
+let packageJson = null;
+try {
+  packageJson = JSON.parse(packageText);
+} catch (error) {
+  errors.push(`package.json is invalid JSON: ${error.message}`);
+}
+if (packageJson) {
+  const scriptsConfig = packageJson.scripts || {};
+  if (scriptsConfig['audit:admin-safe-tools'] !== 'node scripts/audit_admin_safe_tools.js') {
+    errors.push('package.json must define audit:admin-safe-tools');
+  }
+  if (!String(scriptsConfig['audit:all'] || '').includes('npm run audit:admin-safe-tools')) {
+    errors.push('audit:all must include audit:admin-safe-tools');
+  }
+}
+
+requireTokens(projectMode, [
+  "['Admin safe tools', 'scripts/audit_admin_safe_tools.js']"
+], 'project-mode audit');
+requireTokens(projectModeFull, [
+  "['Admin safe tools audit', 'scripts/audit_admin_safe_tools.js']"
+], 'full project-mode audit');
+
 requireTokens(documentation, [
   'CSV-экспорт текущей отфильтрованной выборки',
   'максимум 10 снимков на раздел',
@@ -113,4 +142,4 @@ if (errors.length) {
   throw new Error(`Admin safe tools audit failed:\n${errors.join('\n')}`);
 }
 
-console.log('Admin safe tools audit OK: filtered CSV, 10 local snapshots and rollback safeguards verified');
+console.log('Admin safe tools audit OK: filtered CSV, 10 local snapshots, rollback safeguards and CI wiring verified');
