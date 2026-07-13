@@ -3,13 +3,7 @@ const path = require('path');
 
 const ROOT = process.cwd();
 const ADMIN_DIR = path.join(ROOT, 'admin');
-const INDEX_PATH = path.join(ADMIN_DIR, 'index.html');
-const PACKAGE_PATH = path.join(ROOT, 'package.json');
-const PROJECT_MODE_PATH = path.join(ROOT, 'scripts', 'audit_project_mode.js');
-const PROJECT_MODE_FULL_PATH = path.join(ROOT, 'scripts', 'audit_project_mode_full.js');
-const SEO_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_seo.js');
-const ACCESSIBILITY_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_accessibility_internal_tools.js');
-const DOC_PATH = path.join(ROOT, 'docs', 'ADMIN-CONSOLIDATION-2026-07-13.md');
+const errors = [];
 
 const requiredFiles = [
   'admin/index.html',
@@ -17,9 +11,11 @@ const requiredFiles = [
   'admin/admin2.js',
   'admin/admin-logo-tools.js',
   'admin/admin-dashboard.js',
-  'docs/ADMIN-CONSOLIDATION-2026-07-13.md'
+  'admin/admin-export-tools.js',
+  'admin/admin-history.js',
+  'docs/ADMIN-CONSOLIDATION-2026-07-13.md',
+  'docs/ADMIN-SAFE-TOOLS-2026-07-13.md'
 ];
-
 const forbiddenFiles = [
   'admin/admin-index-ready.html',
   'admin/admin.js',
@@ -28,27 +24,21 @@ const forbiddenFiles = [
   'admin/admin-mass-fill-all.js',
   'admin/admin-mass-all-autofill.js'
 ];
-
 const expectedScripts = [
   '/admin/admin2.js',
   '/admin/admin-logo-tools.js',
-  '/admin/admin-dashboard.js'
+  '/admin/admin-dashboard.js',
+  '/admin/admin-export-tools.js',
+  '/admin/admin-history.js'
 ];
 
-const errors = [];
-
-function read(filePath, label) {
+function read(relativePath) {
+  const filePath = path.join(ROOT, relativePath);
   if (!fs.existsSync(filePath)) {
-    errors.push(`missing ${label}: ${path.relative(ROOT, filePath)}`);
+    errors.push(`missing required file ${relativePath}`);
     return '';
   }
   return fs.readFileSync(filePath, 'utf8');
-}
-
-function requireTokens(text, tokens, context) {
-  tokens.forEach((token) => {
-    if (!text.includes(token)) errors.push(`${context} must contain ${token}`);
-  });
 }
 
 function walk(dir, out = []) {
@@ -61,47 +51,33 @@ function walk(dir, out = []) {
   return out;
 }
 
-requiredFiles.forEach((relativePath) => {
-  if (!fs.existsSync(path.join(ROOT, relativePath))) errors.push(`missing required admin file ${relativePath}`);
+requiredFiles.forEach((file) => {
+  if (!fs.existsSync(path.join(ROOT, file))) errors.push(`missing required admin file ${file}`);
+});
+forbiddenFiles.forEach((file) => {
+  if (fs.existsSync(path.join(ROOT, file))) errors.push(`obsolete admin file must be removed ${file}`);
 });
 
-forbiddenFiles.forEach((relativePath) => {
-  if (fs.existsSync(path.join(ROOT, relativePath))) errors.push(`obsolete admin file must be removed ${relativePath}`);
-});
+const indexHtml = read('admin/index.html');
+const packageText = read('package.json');
+const projectMode = read('scripts/audit_project_mode.js');
+const projectModeFull = read('scripts/audit_project_mode_full.js');
+const seoAudit = read('scripts/audit_seo.js');
+const accessibilityPatch = read('scripts/patch_accessibility_internal_tools.js');
+const documentation = read('docs/ADMIN-CONSOLIDATION-2026-07-13.md');
+const logoTools = read('admin/admin-logo-tools.js');
 
-const indexHtml = read(INDEX_PATH, 'admin index');
-const packageText = read(PACKAGE_PATH, 'package.json');
-const projectMode = read(PROJECT_MODE_PATH, 'project-mode audit');
-const projectModeFull = read(PROJECT_MODE_FULL_PATH, 'full project-mode audit');
-const seoAudit = read(SEO_AUDIT_PATH, 'SEO audit');
-const accessibilityPatch = read(ACCESSIBILITY_PATCH_PATH, 'accessibility patcher');
-const documentation = read(DOC_PATH, 'admin consolidation documentation');
-const logoTools = read(path.join(ADMIN_DIR, 'admin-logo-tools.js'), 'logo tools');
-
-if (!indexHtml.includes('<meta name="robots" content="noindex,nofollow"')) {
-  errors.push('admin index must remain noindex,nofollow');
-}
-
-requireTokens(indexHtml, [
-  'Эта админка не записывает данные прямо в GitHub',
-  'Прямая запись в GitHub намеренно не используется'
-], 'admin index');
+if (!indexHtml.includes('<meta name="robots" content="noindex,nofollow"')) errors.push('admin index must remain noindex,nofollow');
+if (!indexHtml.includes('Эта админка не записывает данные прямо в GitHub')) errors.push('admin index must explain local publication mode');
+if (!indexHtml.includes('Прямая запись в GitHub намеренно не используется')) errors.push('admin index must prohibit direct GitHub write');
 
 const scripts = [...indexHtml.matchAll(/<script\s+src="([^"]+)"/g)].map((match) => match[1]);
-if (scripts.length !== expectedScripts.length) {
-  errors.push(`admin index must contain exactly ${expectedScripts.length} scripts, found ${scripts.length}`);
-}
+if (scripts.join('|') !== expectedScripts.join('|')) errors.push(`unexpected admin scripts: ${scripts.join(', ')}`);
 if (new Set(scripts).size !== scripts.length) errors.push('admin index contains duplicate script sources');
-if (scripts.join('|') !== expectedScripts.join('|')) {
-  errors.push(`admin scripts must be ordered as ${expectedScripts.join(', ')}; found ${scripts.join(', ')}`);
-}
 
-requireTokens(logoTools, [
-  'bulkFillLogoPaths',
-  'downloadNoLogoCsv',
-  'option value="no-logo"',
-  '/assets/img/tos-logos/'
-], 'admin logo tools');
+['bulkFillLogoPaths','downloadNoLogoCsv','option value="no-logo"','/assets/img/tos-logos/'].forEach((token) => {
+  if (!logoTools.includes(token)) errors.push(`logo tools missing ${token}`);
+});
 
 const forbiddenNames = forbiddenFiles.map((file) => path.basename(file));
 const referenceFiles = [
@@ -109,23 +85,18 @@ const referenceFiles = [
   ...walk(path.join(ROOT, 'scripts')).filter((file) => file.endsWith('.js')),
   ...walk(path.join(ROOT, '.github', 'workflows')).filter((file) => /\.ya?ml$/i.test(file))
 ];
-referenceFiles.forEach((filePath) => {
+for (const filePath of referenceFiles) {
   const relative = path.relative(ROOT, filePath).replace(/\\/g, '/');
-  if (relative === 'scripts/audit_admin_consolidation.js') return;
+  if (relative === 'scripts/audit_admin_consolidation.js') continue;
   const text = fs.readFileSync(filePath, 'utf8');
   forbiddenNames.forEach((name) => {
-    if (text.includes(name)) errors.push(`obsolete admin filename ${name} is still referenced in ${relative}`);
+    if (text.includes(name)) errors.push(`obsolete filename ${name} is referenced in ${relative}`);
   });
-});
-
-if (seoAudit.includes('admin/admin-index-ready.html')) {
-  errors.push('SEO audit still contains obsolete admin/admin-index-ready.html exclusion');
-}
-if (accessibilityPatch.includes('admin-index-ready.html')) {
-  errors.push('accessibility patcher still targets obsolete admin-index-ready.html');
 }
 
-const adminJsFiles = walk(ADMIN_DIR).filter((file) => file.endsWith('.js'));
+if (seoAudit.includes('admin/admin-index-ready.html')) errors.push('SEO audit still references obsolete admin copy');
+if (accessibilityPatch.includes('admin-index-ready.html')) errors.push('accessibility patcher still references obsolete admin copy');
+
 const credentialPatterns = [
   /github_pat_/i,
   /ghp_[a-z0-9]/i,
@@ -135,53 +106,39 @@ const credentialPatterns = [
   /localStorage[^\n]{0,100}token/i,
   /sessionStorage[^\n]{0,100}token/i
 ];
-adminJsFiles.forEach((filePath) => {
+for (const filePath of walk(ADMIN_DIR).filter((file) => file.endsWith('.js'))) {
   const text = fs.readFileSync(filePath, 'utf8');
-  credentialPatterns.forEach((pattern) => {
-    if (pattern.test(text)) {
-      errors.push(`admin client code contains forbidden credential/API pattern ${pattern} in ${path.relative(ROOT, filePath)}`);
-    }
-  });
-});
+  for (const pattern of credentialPatterns) {
+    if (pattern.test(text)) errors.push(`credential/API pattern ${pattern} in ${path.relative(ROOT, filePath)}`);
+  }
+}
 
 let packageJson = null;
-try {
-  packageJson = JSON.parse(packageText);
-} catch (error) {
-  errors.push(`package.json is invalid JSON: ${error.message}`);
-}
+try { packageJson = JSON.parse(packageText); } catch (error) { errors.push(`invalid package.json: ${error.message}`); }
 if (packageJson) {
-  const scriptsConfig = packageJson.scripts || {};
-  const checkJs = String(scriptsConfig['check:js'] || '');
-  if (!/\badmin\b/.test(checkJs)) errors.push('check:js must include the admin directory');
-  if (scriptsConfig['audit:admin-consolidation'] !== 'node scripts/audit_admin_consolidation.js') {
-    errors.push('package.json must define audit:admin-consolidation');
-  }
-  if (!String(scriptsConfig['audit:all'] || '').includes('npm run audit:admin-consolidation')) {
-    errors.push('audit:all must include audit:admin-consolidation');
-  }
+  const config = packageJson.scripts || {};
+  if (!/\badmin\b/.test(String(config['check:js'] || ''))) errors.push('check:js must include admin');
+  if (config['audit:admin-consolidation'] !== 'node scripts/audit_admin_consolidation.js') errors.push('missing audit:admin-consolidation script');
+  if (!String(config['audit:all'] || '').includes('npm run audit:admin-consolidation')) errors.push('audit:all must include admin consolidation');
 }
 
-requireTokens(projectMode, [
-  "['Admin consolidation', 'scripts/audit_admin_consolidation.js']"
-], 'project-mode audit');
-requireTokens(projectModeFull, [
-  "['Admin consolidation audit', 'scripts/audit_admin_consolidation.js']"
-], 'full project-mode audit');
+if (!projectMode.includes("['Admin consolidation', 'scripts/audit_admin_consolidation.js']")) errors.push('normal project-mode missing admin consolidation');
+if (!projectModeFull.includes("['Admin consolidation audit', 'scripts/audit_admin_consolidation.js']")) errors.push('full project-mode missing admin consolidation');
 
-requireTokens(documentation, [
+[
   'Оставлена одна страница',
   'admin/admin2.js',
   'admin/admin-logo-tools.js',
   'admin/admin-dashboard.js',
+  'admin/admin-export-tools.js',
+  'admin/admin-history.js',
   'Удалённые файлы',
   'не обращается к `api.github.com`',
   'Прямая запись в GitHub намеренно не используется',
-  'Этот пакет не добавляет новые функции редактора'
-], 'admin consolidation documentation');
+  'одна поддерживаемая HTML-страница и пять модулей'
+].forEach((token) => {
+  if (!documentation.includes(token)) errors.push(`documentation missing ${token}`);
+});
 
-if (errors.length) {
-  throw new Error(`Admin consolidation audit failed:\n${errors.join('\n')}`);
-}
-
-console.log(`Admin consolidation audit OK: ${scripts.length} supported scripts, ${forbiddenFiles.length} obsolete files absent, credential/API patterns 0`);
+if (errors.length) throw new Error(`Admin consolidation audit failed:\n${errors.join('\n')}`);
+console.log('Admin consolidation audit OK: one page, five modules, obsolete files absent, credential/API patterns 0');
