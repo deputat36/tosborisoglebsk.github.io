@@ -31,7 +31,7 @@ const capture = read(CAPTURE_PATH);
 const evidenceAudit = read(EVIDENCE_AUDIT_PATH);
 const matrixText = read(MATRIX_PATH);
 const documentation = read(DOC_PATH);
-const baselineManifest = read(BASELINE_MANIFEST_PATH);
+const baselineManifestText = read(BASELINE_MANIFEST_PATH);
 
 requireTokens(workflow, [
   'name: Capture visual evidence',
@@ -74,24 +74,37 @@ requireTokens(evidenceAudit, [
   'Visual baseline evidence audit OK',
   'SHA-256 mismatch',
   'baseline_captured',
-  'exactly 14 PNG files'
+  'fs.readdirSync(BASELINE_DIR)',
+  'pngFiles.length !== 14'
 ], 'visual baseline evidence audit');
 
 requireTokens(documentation, [
-  'не объявляет снимки утверждённым baseline',
   'contents: read',
   '14 из 14 PNG',
   'VISUAL_CAPTURE_ENFORCE_QUALITY=true',
   'baseline_captured',
-  'pixel comparator'
+  'pixel comparator',
+  'audit_visual_baseline_evidence.js'
 ], 'visual capture documentation');
 
-requireTokens(baselineManifest, [
-  '"status": "baseline_captured"',
-  '"reviewed": true',
-  '"cases_captured": 14',
-  '"quality_failures": []'
-], 'approved baseline manifest');
+let baselineManifest = null;
+if (baselineManifestText) {
+  try {
+    baselineManifest = JSON.parse(baselineManifestText);
+  } catch (error) {
+    errors.push(`approved baseline manifest must be valid JSON: ${error.message}`);
+  }
+}
+if (baselineManifest) {
+  if (baselineManifest.cases_total !== 14 || baselineManifest.cases_captured !== 14) {
+    errors.push(`approved baseline manifest must contain 14/14 cases, found ${baselineManifest.cases_captured}/${baselineManifest.cases_total}`);
+  }
+  if (!baselineManifest.enforce_quality) errors.push('approved baseline manifest must use strict quality enforcement');
+  if (!Array.isArray(baselineManifest.failures) || baselineManifest.failures.length) errors.push('approved baseline manifest failures must be empty');
+  if (!Array.isArray(baselineManifest.quality_failures) || baselineManifest.quality_failures.length) errors.push('approved baseline manifest quality_failures must be empty');
+  if (baselineManifest.approval?.status !== 'baseline_captured') errors.push('approved baseline manifest status must be baseline_captured');
+  if (baselineManifest.approval?.reviewed !== true) errors.push('approved baseline manifest must record reviewed=true');
+}
 
 if (matrixText) {
   const rows = parseCsv(matrixText);
