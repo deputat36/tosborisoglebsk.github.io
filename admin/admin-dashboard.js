@@ -8,12 +8,12 @@
     return String(v ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   }
 
-  async function readDataset(key){
+  async function readDataset(key, fallbackFile){
     try{
       const local = localStorage.getItem('tosbgo_admin_' + key);
       if(local) return JSON.parse(local);
       const cfg = window.DATASETS ? window.DATASETS[key] : null;
-      const file = cfg?.file || `/data/${key}.json`;
+      const file = cfg?.file || fallbackFile || `/data/${key}.json`;
       const res = await fetch(file, {cache:'no-store'});
       return res.ok ? await res.json() : [];
     }catch(e){ return []; }
@@ -25,23 +25,33 @@
     const today = new Date().toISOString().slice(0,10);
     return events.filter(e => isPublished(e) && (!e.date || e.date >= today)).length;
   }
-  function pastPublished(events){
-    const today = new Date().toISOString().slice(0,10);
-    return events.filter(e => isPublished(e) && e.date && e.date < today).length;
-  }
   function linkedCount(arr){ return arr.filter(x => isPublished(x) && x.tos_slug).length; }
   function noLinkedCount(arr){ return arr.filter(x => isPublished(x) && !x.tos_slug).length; }
+  function resultNeedsEvidence(item){
+    if(!isPublished(item)) return false;
+    return item.content_origin !== 'verified' || !item.source_url || !!item.needs_details;
+  }
 
   async function buildDashboard(){
     const root = document.querySelector('#dashboardSection');
     if(!root) return;
     root.innerHTML = '<div class="empty">Загрузка сводки...</div>';
 
-    const [toses, news, articles, documents, grants, projects, events, needs] = await Promise.all([
-      readDataset('toses'), readDataset('news'), readDataset('articles'), readDataset('documents'), readDataset('grants'), readDataset('projects'), readDataset('events'), readDataset('needs')
+    const [toses, news, articles, documents, grants, projects, done, events, needs] = await Promise.all([
+      readDataset('toses'),
+      readDataset('news'),
+      readDataset('articles'),
+      readDataset('documents'),
+      readDataset('grants'),
+      readDataset('projects'),
+      readDataset('done','/data/done.json'),
+      readDataset('events'),
+      readDataset('needs')
     ]);
 
     const publishedTos = toses.filter(isPublished);
+    const publishedDone = done.filter(isPublished);
+    const doneNeedsEvidence = publishedDone.filter(resultNeedsEvidence);
     const stats = [
       ['ТОСов всего', publishedTos.length],
       ['Без телефона', publishedTos.filter(t => !(t.phones||[]).length).length],
@@ -53,6 +63,8 @@
       ['Актуальные потребности', needs.filter(isPublished).length],
       ['Проекты', projects.filter(isPublished).length],
       ['Проекты без ТОС', noLinkedCount(projects)],
+      ['Результатов', publishedDone.length],
+      ['Результаты требуют подтверждения', doneNeedsEvidence.length],
       ['Документы', documents.filter(isPublished).length],
       ['Конкурсы/гранты', grants.length]
     ];
@@ -62,9 +74,10 @@
 
     publishedTos.filter(t => !(t.phones||[]).length).slice(0,8).forEach(t => issues.push({type:'ТОС без телефона', title:`ТОС «${t.name || t.slug || 'без названия'}»`, action:'Проверить контакты председателя'}));
     publishedTos.filter(t => !t.logo).slice(0,8).forEach(t => issues.push({type:'ТОС без логотипа', title:`ТОС «${t.name || t.slug || 'без названия'}»`, action:'Добавить путь к логотипу'}));
-    [...news, ...projects, ...events, ...needs].filter(x => isPublished(x) && x.tos_slug && !knownSlugs.has(x.tos_slug)).slice(0,8).forEach(x => issues.push({type:'Неверный tos_slug', title:x.title || x.id || 'Запись без названия', action:`Не найден ТОС: ${x.tos_slug}`}));
+    [...news, ...projects, ...done, ...events, ...needs].filter(x => isPublished(x) && x.tos_slug && !knownSlugs.has(x.tos_slug)).slice(0,8).forEach(x => issues.push({type:'Неверный tos_slug', title:x.title || x.id || 'Запись без названия', action:`Не найден ТОС: ${x.tos_slug}`}));
     events.filter(e => isPublished(e) && e.date && e.date < new Date().toISOString().slice(0,10)).slice(0,8).forEach(e => issues.push({type:'Прошедшее событие', title:e.title || e.id || 'Событие', action:'Проверить статус или перенести дату'}));
     needs.filter(n => isPublished(n) && n.priority === 'Высокий' && !n.contact).slice(0,8).forEach(n => issues.push({type:'Потребность без контакта', title:n.title || n.id || 'Потребность', action:'Добавить контакт для связи'}));
+    doneNeedsEvidence.slice(0,8).forEach(item => issues.push({type:'Результат требует подтверждения', title:item.title || item.id || 'Результат', action:item.needs_details || 'Добавить проверяемый источник и закрыть пробелы подтверждения'}));
     documents.filter(d => isPublished(d) && !d.url).slice(0,8).forEach(d => issues.push({type:'Документ без ссылки', title:d.title || 'Документ', action:'Добавить url'}));
 
     const chairRows = publishedTos.map(t => [
@@ -103,6 +116,8 @@
             <div class="issue-row"><span>Привязка</span><b>${esc(linkedCount(news))}</b><em>новостей привязано к ТОСам</em></div>
             <div class="issue-row"><span>Привязка</span><b>${esc(linkedCount(events))}</b><em>событий привязано к ТОСам</em></div>
             <div class="issue-row"><span>Привязка</span><b>${esc(linkedCount(needs))}</b><em>потребностей привязано к ТОСам</em></div>
+            <div class="issue-row"><span>Результаты</span><b>${esc(linkedCount(done))}</b><em>результатов привязано к ТОСам</em></div>
+            <div class="issue-row"><span>Проверка</span><b>${esc(doneNeedsEvidence.length)}</b><em>результатов ещё требуют подтверждающих материалов</em></div>
             <div class="issue-row"><span>Материалы</span><b>${esc(articles.filter(isPublished).length)}</b><em>полезных материалов опубликовано</em></div>
           </div>
         </div>
