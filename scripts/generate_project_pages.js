@@ -1,12 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
+const legacyProjectRedirects = require('./lib/project_legacy_redirects');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
 const PROJECTS_PATH = path.join(ROOT, 'data', 'projects.json');
 const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
+const PROJECTS_DIR = path.join(ROOT, 'projects');
+const GENERATED_PAGE_MARKER = 'Страница проекта создана автоматически из data/projects.json.';
 
 function esc(v){
   return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
@@ -17,6 +20,33 @@ function readJson(file){
 function write(file, html){
   fs.mkdirSync(path.dirname(file), {recursive:true});
   fs.writeFileSync(file, html, 'utf8');
+}
+function removeStaleGeneratedPages(projects){
+  if (!fs.existsSync(PROJECTS_DIR)) return [];
+  const expectedIds = new Set(projects.map(project => project.id));
+  const removed = [];
+
+  for (const entry of fs.readdirSync(PROJECTS_DIR, { withFileTypes: true })) {
+    if (!entry.isDirectory() || expectedIds.has(entry.name)) continue;
+    const directory = path.join(PROJECTS_DIR, entry.name);
+    const indexPath = path.join(directory, 'index.html');
+    if (!fs.existsSync(indexPath)) continue;
+    const html = fs.readFileSync(indexPath, 'utf8');
+    if (!html.includes(GENERATED_PAGE_MARKER)) continue;
+    fs.rmSync(directory, { recursive: true, force: true });
+    removed.push(entry.name);
+  }
+
+  return removed.sort();
+}
+function makeLegacyRedirectPage(target){
+  const absoluteTarget = `${SITE_URL}${target}`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Страница проекта перемещена | ТОС БГО</title><meta name="description" content="Старая ссылка на проект ТОС сохранена и перенаправляет на актуальную страницу банка проектов."/><meta name="robots" content="noindex,follow"/><meta http-equiv="refresh" content="0; url=${esc(target)}"/><link rel="canonical" href="${esc(absoluteTarget)}"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="stylesheet" href="/assets/css/styles.css"/></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><main id="main"><section class="hero"><div class="container hero-card"><h1>Страница проекта перемещена</h1><p class="lead">Открываем актуальную страницу. Если переход не сработал автоматически, используйте кнопку ниже.</p><div class="hero-actions"><a class="btn primary" href="${esc(target)}">Перейти к проекту</a><a class="btn" href="/projects/">Все проекты</a></div></div></section></main></body></html>`;
+}
+function writeLegacyRedirectPages(){
+  for (const [legacyId, target] of Object.entries(legacyProjectRedirects)) {
+    write(path.join(PROJECTS_DIR, legacyId, 'index.html'), makeLegacyRedirectPage(target));
+  }
 }
 function arr(v){ return Array.isArray(v) ? v.filter(Boolean) : []; }
 function findTos(toses, slug){ return slug ? toses.find(t => t.slug === slug) : null; }
@@ -71,8 +101,12 @@ function updateSitemap(projects){
 function main(){
   const projects = readJson(PROJECTS_PATH).filter(p => p.id && p.status !== 'draft');
   const toses = readJson(TOSES_PATH);
+  const removed = removeStaleGeneratedPages(projects);
   projects.forEach(project => write(path.join(ROOT, 'projects', project.id, 'index.html'), makePage(project, toses)));
+  writeLegacyRedirectPages();
   updateSitemap(projects);
   console.log(`Generated project pages: ${projects.length}`);
+  console.log(`Generated legacy project redirects: ${Object.keys(legacyProjectRedirects).length}`);
+  if (removed.length) console.log(`Removed stale generated project pages: ${removed.join(', ')}`);
 }
 main();

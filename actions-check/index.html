@@ -26,21 +26,21 @@
   <section class="section tight"><div class="container notice"><b>Роль страницы:</b> служебная диагностика GitHub Actions и GitHub Pages. Она не оценивает качество карточек, контента и SEO целиком.</div></section>
 
   <section class="section"><div class="container prose">
-    <h2>Итог проверки на 2 июля 2026 года</h2>
+    <h2>Итог проверки на 13 июля 2026 года</h2>
     <p>Рабочий репозиторий проекта подтверждён: <code>deputat36/tosborisoglebsk.github.io</code>. Рабочая ветка совпадает с default branch: <code>release-2025-12-22</code>.</p>
-    <p>Workflow <code>Generate TOS pages</code> найден в <code>.github/workflows/generate-tos-pages.yml</code>. Он запускается вручную, по расписанию и при push в рабочую ветку по файлам страниц, данных, скриптов, стилей, логотипов и самого workflow.</p>
-    <div class="notice">Через доступный commit endpoint по последним автономным коммитам получен пустой список <code>workflow_runs</code>. Это не доказывает ошибку деплоя. Поэтому результат генерации дополнительно контролируется по файлам <code>data/site_health.json</code>, <code>rss.xml</code>, <code>sitemap.xml</code> и <code>data/page_index.json</code>, а GitHub Actions UI нужно проверить вручную.</div>
+    <p>Workflow <code>Generate TOS pages</code> найден в <code>.github/workflows/generate-tos-pages.yml</code>. Он запускается вручную, для pull request и при push в рабочую ветку по файлам страниц, данных, скриптов, стилей, логотипов и самого workflow. Scheduled импорт ВК выполняется отдельно через <code>update-vk-news.yml</code>.</p>
+    <div class="notice">Публикация GitHub Pages подтверждена: опубликованные <code>index.html</code>, <code>data/site_health.json</code> и <code>sitemap.xml</code> побайтово совпали с файлами <code>origin/release-2025-12-22</code>. Через commit endpoint по актуальному коммиту по-прежнему получен пустой список <code>workflow_runs</code>, поэтому conclusion последнего Actions run нужно проверить через интерфейс GitHub.</div>
   </div></section>
 
   <section class="section"><div class="container grid">
-    <article class="card"><div class="card-inner"><h2>Что проверено</h2><ul class="check-list"><li>репозиторий и ветка проекта;</li><li>наличие workflow генерации;</li><li>триггеры workflow;</li><li>commit endpoint по автономным коммитам;</li><li>наличие обновлённого <code>site_health.json</code>.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Что требует ручного контроля</h2><ul class="check-list"><li>открыть вкладку GitHub Actions;</li><li>проверить последний запуск <code>Generate TOS pages</code>;</li><li>при ошибке скачать логи job;</li><li>сверить GitHub Pages deployment;</li><li>после ручной проверки обновить CSV и задачу #164.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Текущее состояние генерации</h2><p>По последнему <code>data/site_health.json</code>: 369 HTML-страниц, 332 публичные, 37 <code>noindex</code>, 0 SEO-предупреждений и 0 битых внутренних ссылок.</p><a class="btn" href="/data/site_health.json">Открыть JSON</a></div></article>
+    <article class="card"><div class="card-inner"><h2>Что проверено</h2><ul class="check-list"><li>репозиторий и рабочая ветка;</li><li>структура и триггеры workflow;</li><li>отсутствие второго scheduled VK-импорта;</li><li>HTTP 200 и GitHub Pages headers;</li><li>побайтовое соответствие трёх опубликованных файлов рабочей ветке.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Что требует ручного контроля</h2><ul class="check-list"><li>открыть вкладку GitHub Actions;</li><li>проверить последний запуск <code>Generate TOS pages</code>;</li><li>зафиксировать conclusion и ссылку на run;</li><li>при ошибке скачать логи job;</li><li>обновить CSV и задачу #164.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Текущее состояние генерации</h2><p>По последнему <code>data/site_health.json</code>: 371 HTML-страница, 315 публичных, 56 <code>noindex</code>, 0 SEO-предупреждений и 0 битых внутренних ссылок.</p><a class="btn" href="/data/site_health.json">Открыть JSON</a></div></article>
   </div></section>
 
   <section class="section"><div class="container prose">
     <h2>Правило фиксации результата</h2>
-    <p>В документации нельзя писать «CI проверен», если доступны только производные файлы. Корректная формулировка: «генерация подтверждена по сгенерированным файлам и отчёту здоровья; журналы GitHub Actions требуют ручной проверки через Actions UI».</p>
+    <p>Корректная формулировка текущего результата: «публикация Pages подтверждена прямым сравнением файлов; локальный полный аудит проходит; conclusion последнего GitHub Actions run требует ручной проверки через Actions UI».</p>
     <p><a class="btn" href="/site-health/">Вернуться к общей сводке</a> <a class="btn" href="/github-tasks/">Открыть ручные задачи</a></p>
   </div></section>
 </main>

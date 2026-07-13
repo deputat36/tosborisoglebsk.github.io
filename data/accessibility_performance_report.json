@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T06:43:33.087Z",
+  "generated_at": "2026-07-13T09:14:55.581Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -10,7 +10,7 @@
   },
   "summary": {
     "html_pages": 373,
-    "public_pages": 331,
+    "public_pages": 315,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -21,7 +21,7 @@
     "asset_files": 262,
     "over_budget_assets": 0,
     "total_css_bytes": 32380,
-    "total_js_bytes": 1334823,
+    "total_js_bytes": 1338452,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -81,7 +81,14 @@
       "path": "scripts/audit_route_governance.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 17930,
+      "size_bytes": 18247,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_site_health_report.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 18164,
       "over_budget": false
     },
     {
@@ -89,13 +96,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 17399,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/generate_site_health_report.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 17354,
       "over_budget": false
     },
     {
@@ -131,6 +131,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11558,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/generate_project_pages.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 11270,
       "over_budget": false
     },
     {
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8800,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/audit_verification_tasks.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8683,
       "over_budget": false
     }
   ],

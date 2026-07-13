@@ -20,11 +20,11 @@ function main() {
   const csv = read(csvPath);
   const errors = [];
 
-  ['noindex,follow', 'Итог проверки на 2 июля 2026 года', 'workflow_runs', 'GitHub Actions UI нужно проверить вручную', '369 HTML-страниц', '0 SEO-предупреждений', '0 битых внутренних ссылок'].forEach((item) => {
+  ['noindex,follow', 'Итог проверки на 13 июля 2026 года', 'workflow_runs', 'интерфейс GitHub', '371 HTML-страница', '315 публичных', '0 SEO-предупреждений', '0 битых внутренних ссылок'].forEach((item) => {
     if (!html.includes(item)) errors.push(`page missing ${item}`);
   });
 
-  ['actions-009', 'workflow_runs', '7d9cbb7e244ff07a96d4cab98fb4416292748405', 'warning'].forEach((item) => {
+  ['actions-011', 'actions-012', 'workflow_runs', '667a1508d7ad0f03fae1dba3afcee4aa2df47f7e', 'warning'].forEach((item) => {
     if (!csv.includes(item)) errors.push(`csv missing ${item}`);
   });
 

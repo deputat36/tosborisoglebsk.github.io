@@ -181,7 +181,28 @@ function auditPages() {
       seoWarnings.push({ page: relative, url: canonical || urlFor(relative), warnings: pageWarnings });
     }
 
-    pages.push({ path: relative, url: canonical || urlFor(relative), title, noindex, h1_count: h1Count, warnings: pageWarnings });
+    pages.push({ path: relative, url: canonical || urlFor(relative), title, description, noindex, h1_count: h1Count, warnings: pageWarnings });
+  }
+
+  for (const [field, label] of [['title', 'title'], ['description', 'description']]) {
+    const groups = new Map();
+    for (const page of pages.filter((item) => !item.noindex)) {
+      const value = String(field === 'title' ? page.title : page.description)
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (!value) continue;
+      if (!groups.has(value)) groups.set(value, []);
+      groups.get(value).push(page.path);
+    }
+    for (const [value, files] of groups.entries()) {
+      if (files.length < 2) continue;
+      seoWarnings.push({
+        page: files.join(', '),
+        url: '',
+        warnings: [`дублируется ${label} на ${files.length} страницах: «${value}»`]
+      });
+    }
   }
 
   return { totalPages: htmlFiles.length, publicPages, noindexPages, seoWarnings, linkErrors, pages };

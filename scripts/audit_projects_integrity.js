@@ -1,10 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
+const legacyProjectRedirects = require('./lib/project_legacy_redirects');
 
 const projectsPath = path.join(process.cwd(), 'data', 'projects.json');
+const projectsDirectory = path.join(process.cwd(), 'projects');
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const allowedStatuses = new Set(['published', 'draft', 'archived']);
+const generatedPageMarker = 'Страница проекта создана автоматически из data/projects.json.';
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -74,6 +77,42 @@ function main() {
       errors.push(`${line}: missing generated page /projects/${id}/`);
     }
   });
+
+  const generatedIds = new Set(
+    projects
+      .filter((project) => project && project.id && project.status !== 'draft')
+      .map((project) => project.id)
+  );
+
+  if (fs.existsSync(projectsDirectory)) {
+    for (const entry of fs.readdirSync(projectsDirectory, { withFileTypes: true })) {
+      if (!entry.isDirectory() || generatedIds.has(entry.name)) continue;
+      const indexPath = path.join(projectsDirectory, entry.name, 'index.html');
+      if (!fs.existsSync(indexPath)) continue;
+      const html = fs.readFileSync(indexPath, 'utf8');
+      if (html.includes(generatedPageMarker)) {
+        errors.push(`stale generated page is not present in data/projects.json: /projects/${entry.name}/`);
+      }
+    }
+  }
+
+  for (const [legacyId, target] of Object.entries(legacyProjectRedirects)) {
+    const indexPath = path.join(projectsDirectory, legacyId, 'index.html');
+    if (!fs.existsSync(indexPath)) {
+      errors.push(`missing legacy project redirect: /projects/${legacyId}/`);
+      continue;
+    }
+    const html = fs.readFileSync(indexPath, 'utf8');
+    if (!html.includes('name="robots" content="noindex,follow"')) {
+      errors.push(`legacy project redirect must be noindex: /projects/${legacyId}/`);
+    }
+    if (!html.includes(`http-equiv="refresh" content="0; url=${target}"`)) {
+      errors.push(`legacy project redirect has wrong target: /projects/${legacyId}/ -> ${target}`);
+    }
+    if (!repoPathExists(target)) {
+      errors.push(`legacy project redirect target is missing: ${target}`);
+    }
+  }
 
   if (errors.length) {
     throw new Error(`Projects integrity audit failed:\n${errors.join('\n')}`);

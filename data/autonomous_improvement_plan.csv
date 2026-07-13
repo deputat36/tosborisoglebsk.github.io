@@ -14,3 +14,9 @@ stage,priority,area,task,mode,deliverable,status
 12,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent, проверенные публикации",waiting_for_files
 13,low,reporting,"Сделать регулярную сводку состояния проекта",assistant,"docs/STATUS.md и github-tasks",active
 14,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"data/route_cleanup_candidates.csv, docs/ROUTE-CLEANUP.md, data/route_review_summary.json",done
+15,high,generated-content,"Удалить устаревшее содержание проектов, сохранить legacy URL и защитить генератор от повторного накопления",assistant,"generate_project_pages.js, project_legacy_redirects.js, audit_projects_integrity.js, очищенные sitemap и page index",done
+16,high,quality-gates,"Сделать SEO-дубли, битые пути и статические якоря блокирующими проверками",assistant,"audit_seo.js, audit_site_links.js, audit_site_health.js",done
+17,high,workflow,"Устранить параллельный устаревший scheduled импорт ВК",assistant,"единственный update-vk-news.yml, удалённые legacy workflow и script",done
+18,high,indexing,"Закрыть внутренние страницы исходящих запросов от индексации",assistant,"noindex и route governance audit",done
+19,high,p0-trust,"Закрыть юридические и фактологические риски P0",mixed,"официальный реестр, проверенные карточки, правовая и privacy-модель",waiting_for_confirmed_data
+20,medium,user-testing,"Провести сценарные и визуальные проверки ключевых маршрутов",mixed,"протокол тестов жителей, председателей, партнёров и visual baseline",active

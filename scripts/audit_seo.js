@@ -127,7 +127,7 @@ function auditPage(file, sitemapUrls) {
   }
 }
 
-function warnDuplicates(field, label) {
+function recordDuplicates(field, label, target) {
   const map = new Map();
   for (const page of pageSnapshots) {
     const value = normalizeForDuplicateCheck(page[field]);
@@ -139,7 +139,7 @@ function warnDuplicates(field, label) {
   for (const [value, files] of map.entries()) {
     if (files.length < 2) continue;
     const sample = files.slice(0, 5).join(', ');
-    warnings.push(`дублируется ${label} (${files.length} стр.): ${sample}${files.length > 5 ? '...' : ''} — «${value}»`);
+    target.push(`дублируется ${label} (${files.length} стр.): ${sample}${files.length > 5 ? '...' : ''} — «${value}»`);
   }
 }
 
@@ -157,8 +157,8 @@ function main() {
     .filter((file) => !shouldSkipFile(file));
 
   files.forEach((file) => auditPage(file, sitemapUrls));
-  warnDuplicates('title', 'title');
-  warnDuplicates('description', 'description');
+  recordDuplicates('title', 'title', errors);
+  recordDuplicates('description', 'description', errors);
 
   if (warnings.length) {
     console.warn('Предупреждения SEO-аудита:');

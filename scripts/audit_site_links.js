@@ -28,18 +28,46 @@ function cleanHref(href) {
   return String(href || '').trim().replace(/&amp;/g, '&').split('#')[0].split('?')[0];
 }
 
+function parseHref(href) {
+  const value = String(href || '').trim().replace(/&amp;/g, '&');
+  const hashIndex = value.indexOf('#');
+  return {
+    value,
+    url: cleanHref(value),
+    anchor: hashIndex >= 0 ? value.slice(hashIndex + 1).split('?')[0] : ''
+  };
+}
+
 function htmlFiles() {
   return walk(ROOT).filter((file) => file.endsWith('.html'));
 }
 
-function fileExistsForUrl(url) {
-  if (!url || url === '/') return fs.existsSync(path.join(ROOT, 'index.html'));
-  const decoded = decodeURIComponent(url);
+function fileForUrl(url, currentFile = null) {
+  if (!url) return currentFile;
+  if (url === '/') return path.join(ROOT, 'index.html');
+  let decoded;
+  try { decoded = decodeURIComponent(url); }
+  catch { return null; }
   const safe = decoded.replace(/^\/+/, '');
-  if (!safe || safe.includes('..')) return false;
+  if (!safe || safe.includes('..')) return null;
   const full = path.join(ROOT, safe);
-  if (decoded.endsWith('/')) return fs.existsSync(path.join(full, 'index.html'));
-  return fs.existsSync(full) || fs.existsSync(path.join(full, 'index.html'));
+  if (decoded.endsWith('/')) return fs.existsSync(path.join(full, 'index.html')) ? path.join(full, 'index.html') : null;
+  if (fs.existsSync(full)) return full;
+  return fs.existsSync(path.join(full, 'index.html')) ? path.join(full, 'index.html') : null;
+}
+
+function fileExistsForUrl(url, currentFile = null) {
+  return Boolean(fileForUrl(url, currentFile));
+}
+
+function hasAnchor(file, anchor) {
+  if (!anchor || !file || !file.endsWith('.html')) return true;
+  const html = fs.readFileSync(file, 'utf8');
+  const anchors = new Set([
+    ...[...html.matchAll(/\sid=["']([^"']+)["']/gi)].map((match) => match[1]),
+    ...[...html.matchAll(/\sname=["']([^"']+)["']/gi)].map((match) => match[1])
+  ]);
+  return anchors.has(anchor);
 }
 
 function auditHtmlLinks() {
@@ -48,10 +76,20 @@ function auditHtmlLinks() {
     const matches = [...html.matchAll(/\s(?:href|src)=["']([^"']+)["']/gi)];
     for (const match of matches) {
       const raw = match[1];
-      const url = cleanHref(raw);
-      if (!url || url.startsWith('#') || isExternal(url) || url.startsWith('//') || url.startsWith('data:')) continue;
+      const parsed = parseHref(raw);
+      const url = parsed.url;
+      if (parsed.value.startsWith('#')) {
+        if (!hasAnchor(file, parsed.anchor)) errors.push(`${rel(file)}: якорь не найден — ${raw}`);
+        continue;
+      }
+      if (!url || isExternal(url) || url.startsWith('//') || url.startsWith('data:')) continue;
       if (!url.startsWith('/')) continue;
-      if (!fileExistsForUrl(url)) errors.push(`${rel(file)}: внутренняя ссылка не найдена — ${raw}`);
+      const targetFile = fileForUrl(url, file);
+      if (!targetFile) {
+        errors.push(`${rel(file)}: внутренняя ссылка не найдена — ${raw}`);
+        continue;
+      }
+      if (!hasAnchor(targetFile, parsed.anchor)) errors.push(`${rel(file)}: якорь целевой страницы не найден — ${raw}`);
     }
   }
 }

@@ -114,7 +114,7 @@ function main() {
   ]);
   requireFragments(errors, 'site-health page', siteHealthHtml, [
     '/assets/js/site-health-priority-readiness.js',
-    '/data-requests/priority-tos/#priority-tos-readiness',
+    '/data-requests/priority-tos/',
     '/data/priority_tos_update_readiness.json',
     'id="site-health-priority"'
   ]);

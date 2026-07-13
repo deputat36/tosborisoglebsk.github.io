@@ -138,6 +138,12 @@ function validateDataUpdateCleanup(errors) {
     'href="/update-tos/?type=card#message-builder"',
     'Подготовленный текст сам по себе не означает, что запрос отправлен'
   ]);
+  assertPageMarkers(errors, 'priority TOS requests indexing', '/data-requests/priority-tos/', [
+    '<meta name="robots" content="noindex,follow"/>'
+  ]);
+  assertPageMarkers(errors, 'TOS registry request indexing', '/data-requests/tos-registry-request/', [
+    '<meta name="robots" content="noindex,follow"/>'
+  ]);
 
   assertPageMarkers(errors, 'data-update cleanup', '/reply-review/', [
     'name="robots" content="noindex,nofollow"',

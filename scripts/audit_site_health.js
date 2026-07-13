@@ -106,6 +106,14 @@ function main() {
     errors.push('priority_tos length must match catalog.high_priority');
   }
 
+  if (isObject(data.pages) && data.pages.seo_warnings_count !== 0) {
+    errors.push(`pages.seo_warnings_count must be zero, got ${data.pages.seo_warnings_count}`);
+  }
+
+  if (isObject(data.pages) && data.pages.broken_internal_links_count !== 0) {
+    errors.push(`pages.broken_internal_links_count must be zero, got ${data.pages.broken_internal_links_count}`);
+  }
+
   if (errors.length) {
     throw new Error(`Site health audit failed:\n${errors.join('\n')}`);
   }
