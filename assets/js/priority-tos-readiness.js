@@ -53,13 +53,9 @@ function priorityReadinessCard(item) {
   </article>`;
 }
 
-function priorityReadinessSection(report) {
+function priorityReadinessMarkup(report) {
   const byStage = report.summary?.by_stage || {};
-  const section = document.createElement('section');
-  section.className = 'section';
-  section.id = 'priority-tos-readiness';
-  section.setAttribute('aria-labelledby', 'priority-tos-readiness-title');
-  section.innerHTML = `<div class="container section-head">
+  return `<div class="container section-head">
     <div>
       <h2 id="priority-tos-readiness-title">Готовность карточек к обновлению</h2>
       <p>Автоматическая сводка трекера отправки и разбора ответов без публикации контактов и закрытой переписки</p>
@@ -76,25 +72,19 @@ function priorityReadinessSection(report) {
     <div class="notice"><b style="color:var(--text)">Конфиденциальность:</b> ${priorityReadinessEsc(report.privacy_note || '')}</div>
     <div class="grid">${(report.items || []).map(priorityReadinessCard).join('')}</div>
   </div>`;
-  return section;
 }
 
 async function loadPriorityTosReadiness() {
-  const main = document.querySelector('main');
-  const hero = main?.querySelector('.hero');
-  if (!main || !hero || document.getElementById('priority-tos-readiness')) return;
+  const section = document.getElementById('priority-tos-readiness');
+  if (!section) return;
 
   try {
     const response = await fetch('/data/priority_tos_update_readiness.json', { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const report = await response.json();
-    hero.insertAdjacentElement('afterend', priorityReadinessSection(report));
+    section.innerHTML = priorityReadinessMarkup(report);
   } catch (error) {
-    const section = document.createElement('section');
-    section.className = 'section';
-    section.id = 'priority-tos-readiness';
     section.innerHTML = '<div class="container notice"><b>Сводка готовности временно недоступна.</b><br>Используйте трекер отправки и реестр разбора ответов.</div>';
-    hero.insertAdjacentElement('afterend', section);
   }
 }
 
