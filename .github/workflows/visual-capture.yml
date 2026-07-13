@@ -1,0 +1,98 @@
+name: Capture visual evidence
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'index.html'
+      - 'tos/index.html'
+      - 'tos/mirolyubie/index.html'
+      - 'news/index.html'
+      - 'news/vk-community-channel-2026/index.html'
+      - 'workbench/index.html'
+      - 'site-health/index.html'
+      - 'workbench-routes/index.html'
+      - 'field-checklist/index.html'
+      - 'assets/css/**'
+      - 'assets/js/**'
+      - 'data/css_regression_matrix.csv'
+      - 'scripts/capture_visual_baseline.js'
+      - 'scripts/lib/csv.js'
+      - '.github/workflows/visual-capture.yml'
+      - 'docs/VISUAL-CAPTURE.md'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visual-capture-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      VISUAL_BASELINE_BASE_URL: http://127.0.0.1:4173
+      VISUAL_BASELINE_OUTPUT: .artifacts/visual-baseline
+      VISUAL_CAPTURE_ENFORCE_QUALITY: 'false'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check capture script syntax
+        run: node --check scripts/capture_visual_baseline.js
+
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local static server
+        run: |
+          mkdir -p .artifacts/visual-baseline
+          python3 -m http.server 4173 --bind 127.0.0.1 > .artifacts/visual-baseline/server.log 2>&1 &
+          echo $! > .artifacts/visual-baseline/server.pid
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat .artifacts/visual-baseline/server.log
+          exit 1
+
+      - name: Capture matrix screenshots
+        run: node scripts/capture_visual_baseline.js
+
+      - name: Add capture summary
+        if: always()
+        run: |
+          if [ -f .artifacts/visual-baseline/README.md ]; then
+            cat .artifacts/visual-baseline/README.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f .artifacts/visual-baseline/server.pid ]; then
+            kill "$(cat .artifacts/visual-baseline/server.pid)" 2>/dev/null || true
+            rm -f .artifacts/visual-baseline/server.pid
+          fi
+
+      - name: Upload visual evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-evidence-${{ github.run_number }}-${{ github.run_attempt }}
+          path: .artifacts/visual-baseline
+          if-no-files-found: error
+          retention-days: 30
