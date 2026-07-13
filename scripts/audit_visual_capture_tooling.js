@@ -107,7 +107,7 @@ function main() {
     'GitHub Actions artifact',
     'не коммитит',
     'compare_approved',
-    'отдельного визуального review'
+    'отдельный визуальный review'
   ]);
 
   const approvedExists = fs.existsSync(APPROVED_MANIFEST_PATH);
