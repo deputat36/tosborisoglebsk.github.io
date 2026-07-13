@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-07-13T06:30:00.000Z",
+  "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
+  "stages": {
+    "find_channel": {
+      "label": "Найти канал связи",
+      "class_name": "warn"
+    },
+    "ready_to_send": {
+      "label": "Готово к отправке",
+      "class_name": "info"
+    },
+    "awaiting_response": {
+      "label": "Ожидаем ответ",
+      "class_name": "info"
+    },
+    "review_response": {
+      "label": "Разобрать ответ",
+      "class_name": "warn"
+    },
+    "ready_partial": {
+      "label": "Готово к частичному обновлению",
+      "class_name": "ok"
+    },
+    "ready_verified": {
+      "label": "Готово к подтверждению",
+      "class_name": "ok"
+    },
+    "blocked": {
+      "label": "Заблокировано",
+      "class_name": "warn"
+    }
+  },
+  "summary": {
+    "total": 4,
+    "by_stage": {
+      "find_channel": 2,
+      "ready_to_send": 2,
+      "awaiting_response": 0,
+      "review_response": 0,
+      "ready_partial": 0,
+      "ready_verified": 0,
+      "blocked": 0
+    },
+    "ready_for_card_update": 0,
+    "waiting_external_action": 4
+  },
+  "items": [
+    {
+      "slug": "ivanovka",
+      "name": "ТОС «Ивановка»",
+      "card_url": "/tos/ivanovka/",
+      "stage": "find_channel",
+      "stage_label": "Найти канал связи",
+      "stage_class": "warn",
+      "tracking_status": "Не начинали",
+      "review_status": "Нет ответа",
+      "sent_at": "",
+      "response_received_at": "",
+      "contact_channel_available": false,
+      "response_received": false,
+      "source_recorded": false,
+      "publication_consent_recorded": false,
+      "verification_decision": "",
+      "blockers": [
+        "Не найден рабочий канал связи",
+        "Запрос ещё не отправлен"
+      ],
+      "next_action": "Найти рабочий канал связи"
+    },
+    {
+      "slug": "podstepki",
+      "name": "ТОС «Подстёпки»",
+      "card_url": "/tos/podstepki/",
+      "stage": "find_channel",
+      "stage_label": "Найти канал связи",
+      "stage_class": "warn",
+      "tracking_status": "Не начинали",
+      "review_status": "Нет ответа",
+      "sent_at": "",
+      "response_received_at": "",
+      "contact_channel_available": false,
+      "response_received": false,
+      "source_recorded": false,
+      "publication_consent_recorded": false,
+      "verification_decision": "",
+      "blockers": [
+        "Не найден рабочий канал связи",
+        "Запрос ещё не отправлен"
+      ],
+      "next_action": "Найти рабочий канал связи"
+    },
+    {
+      "slug": "gubari",
+      "name": "ТОС «Губари»",
+      "card_url": "/tos/gubari/",
+      "stage": "ready_to_send",
+      "stage_label": "Готово к отправке",
+      "stage_class": "info",
+      "tracking_status": "Не начинали",
+      "review_status": "Нет ответа",
+      "sent_at": "",
+      "response_received_at": "",
+      "contact_channel_available": true,
+      "response_received": false,
+      "source_recorded": false,
+      "publication_consent_recorded": false,
+      "verification_decision": "",
+      "blockers": [
+        "Запрос ещё не отправлен"
+      ],
+      "next_action": "Отправить письмо и запросить подтверждение"
+    },
+    {
+      "slug": "tancyrey",
+      "name": "ТОС «Танцырей»",
+      "card_url": "/tos/tancyrey/",
+      "stage": "ready_to_send",
+      "stage_label": "Готово к отправке",
+      "stage_class": "info",
+      "tracking_status": "Не начинали",
+      "review_status": "Нет ответа",
+      "sent_at": "",
+      "response_received_at": "",
+      "contact_channel_available": true,
+      "response_received": false,
+      "source_recorded": false,
+      "publication_consent_recorded": false,
+      "verification_decision": "",
+      "blockers": [
+        "Запрос ещё не отправлен"
+      ],
+      "next_action": "Отправить письмо и запросить подтверждение"
+    }
+  ]
+}
