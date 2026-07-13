@@ -71,6 +71,8 @@ const checks = [
   ['Collection tasks', 'scripts/audit_collection_tasks.js'],
   ['Priority TOS tracking', 'scripts/audit_priority_tos_tracking.js'],
   ['Priority TOS response review', 'scripts/audit_priority_tos_response_review.js'],
+  ['Priority TOS update evidence', 'scripts/audit_priority_tos_update_evidence.js'],
+  ['Priority TOS update evidence self-test', 'scripts/test_priority_tos_update_evidence.js'],
   ['Registry workflow', 'scripts/audit_registry_workflow.js'],
   ['CSS maintenance inventory', 'scripts/audit_css_maintenance_inventory.js'],
   ['CSS visual regression matrix', 'scripts/audit_css_regression_matrix.js'],
