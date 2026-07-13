@@ -6,6 +6,7 @@ const HOME_STATS_PATH = path.join(ROOT, 'assets', 'js', 'home-stats.js');
 const RESPONSIVE_CSS_PATH = path.join(ROOT, 'assets', 'css', 'tos-detail-responsive.css');
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
 const PATCH_PATH = path.join(ROOT, 'scripts', 'patch_tos_detail_responsive_styles.js');
+const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
 const TOS_ROOT = path.join(ROOT, 'tos');
 const RESPONSIVE_LINK = '<link rel="stylesheet" href="/assets/css/tos-detail-responsive.css"/>';
 
@@ -16,15 +17,16 @@ function requireFragments(errors, label, content, fragments) {
 }
 
 function detailPages() {
-  return fs.readdirSync(TOS_ROOT, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => path.join(TOS_ROOT, entry.name, 'index.html'))
+  const toses = JSON.parse(fs.readFileSync(TOSES_PATH, 'utf8'));
+  return (Array.isArray(toses) ? toses : [])
+    .filter((tos) => tos && tos.slug && tos.status !== 'draft')
+    .map((tos) => path.join(TOS_ROOT, tos.slug, 'index.html'))
     .filter((filePath) => fs.existsSync(filePath));
 }
 
 function main() {
   const errors = [];
-  [HOME_STATS_PATH, RESPONSIVE_CSS_PATH, GENERATOR_PATH, PATCH_PATH, TOS_ROOT].forEach((filePath) => {
+  [HOME_STATS_PATH, RESPONSIVE_CSS_PATH, GENERATOR_PATH, PATCH_PATH, TOSES_PATH, TOS_ROOT].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing ${path.relative(ROOT, filePath)}`);
   });
   if (errors.length) throw new Error(`Visual overflow fixes audit failed:\n${errors.join('\n')}`);
@@ -55,6 +57,7 @@ function main() {
   requireFragments(errors, 'TOS responsive patch', patch, [
     'tos-detail-responsive.css',
     'generate_tos_pages.js',
+    'data/toses.json',
     'TOS responsive stylesheet patch OK'
   ]);
 
