@@ -102,6 +102,8 @@ jobs:
         run: node scripts/generate_collection_tasks_csv.js
       - name: Generate verification tasks CSV
         run: node scripts/generate_verification_tasks_csv.js
+      - name: Generate priority TOS readiness
+        run: node scripts/generate_priority_tos_readiness.js
       - name: Refine site audit next actions
         run: node scripts/refine_site_audit_actions.js
       - name: Patch TOS detail generator trust
@@ -142,6 +144,10 @@ jobs:
         run: node scripts/audit_tos_catalog_content.js
       - name: Patch contacts channel boundaries
         run: node scripts/patch_contacts_channel_boundaries.js
+      - name: Connect priority TOS readiness section
+        run: node scripts/patch_priority_tos_readiness_page.js
+      - name: Audit priority TOS readiness
+        run: node scripts/audit_priority_tos_readiness.js
       - name: Patch page index labels
         run: node scripts/patch_page_index_labels.js
       - name: Patch project passport label
