@@ -18,7 +18,9 @@ on:
       - 'assets/css/**'
       - 'assets/js/**'
       - 'data/css_regression_matrix.csv'
+      - 'docs/visual-baseline/**'
       - 'scripts/capture_visual_baseline.js'
+      - 'scripts/compare_visual_baseline.js'
       - 'scripts/lib/csv.js'
       - '.github/workflows/visual-baseline.yml'
 
@@ -37,6 +39,7 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       VISUAL_BASELINE_BASE_URL: http://127.0.0.1:4173
       VISUAL_BASELINE_OUTPUT: .artifacts/visual-baseline
+      VISUAL_BASELINE_APPROVED: docs/visual-baseline
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,9 +49,9 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Playwright Chromium
+      - name: Install Playwright Chromium and PNG comparator
         run: |
-          npm install --no-save --package-lock=false playwright@1.55.0
+          npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0
           npx playwright install --with-deps chromium
 
       - name: Start local static server
@@ -67,6 +70,9 @@ jobs:
 
       - name: Capture matrix screenshots
         run: node scripts/capture_visual_baseline.js
+
+      - name: Compare with approved visual baseline
+        run: node scripts/compare_visual_baseline.js
 
       - name: Stop local static server
         if: always()
