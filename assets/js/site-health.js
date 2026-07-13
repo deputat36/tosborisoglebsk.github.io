@@ -167,13 +167,34 @@ function renderActions(report, actionsBox) {
   actionsBox.innerHTML = `${actionHtml}${renderWorkPlan(report)}${renderBlocked(report)}`;
 }
 
+function renderPriorityReadiness(readiness) {
+  if (!readiness) {
+    return '<div class="notice"><b>Операционная стадия ещё не включена в отчёт.</b><br>Используйте рабочую страницу персональных запросов.</div>';
+  }
+
+  const blockers = Array.isArray(readiness.blockers) && readiness.blockers.length
+    ? `<div class="notice"><b style="color:var(--text)">Блокирует обновление</b><ul>${readiness.blockers.map((value) => `<li>${healthEsc(value)}</li>`).join('')}</ul></div>`
+    : '<div class="notice"><b style="color:var(--text)">Блокирующих условий нет.</b><br>Изменение карточки всё равно должно пройти evidence-guard.</div>';
+
+  return `<div class="priority-readiness-detail">
+    <div class="meta">
+      <span class="tag ${healthEsc(readiness.stage_class || '')}">${healthEsc(readiness.stage_label || readiness.stage || 'Стадия не определена')}</span>
+      <span class="tag ${readiness.source_recorded ? 'ok' : ''}">Источник: ${readiness.source_recorded ? 'зафиксирован' : 'не зафиксирован'}</span>
+      <span class="tag ${readiness.publication_consent_recorded ? 'ok' : ''}">Согласие: ${readiness.publication_consent_recorded ? 'зафиксировано' : 'не зафиксировано'}</span>
+    </div>
+    ${blockers}
+    <p><b>Следующий шаг:</b> ${healthEsc(readiness.next_action || 'Проверить рабочий статус')}</p>
+    <div class="card-actions"><a class="btn" href="/data-requests/priority-tos/#priority-tos-readiness">Открыть рабочую сводку</a></div>
+  </div>`;
+}
+
 function renderPriority(report, priorityBox) {
   const items = report.priority_tos || [];
   priorityBox.innerHTML = items.length
     ? `<div class="grid">${items.map((item) => {
       const slug = encodeURIComponent(item.slug || '');
       const missing = (item.missing || []).join(', ') || '—';
-      return `<article class="card"><div class="card-inner"><span class="tag">${healthEsc(item.verification || 'Проверка')}</span><h3>${healthEsc(item.name)}</h3><p>${healthEsc(item.location || '')}</p><p>Заполненность: ${healthEsc(item.score ?? '—')}%. Нужно уточнить: ${healthEsc(missing)}.</p><div class="card-actions"><a class="btn" href="/tos/${slug}/">Открыть карточку</a><a class="btn primary" href="/update-tos/?tos=${slug}&type=card#message-builder">Уточнить</a></div></div></article>`;
+      return `<article class="card"><div class="card-inner"><span class="tag">${healthEsc(item.verification || 'Проверка')}</span><h3>${healthEsc(item.name)}</h3><p>${healthEsc(item.location || '')}</p><p>Заполненность: ${healthEsc(item.score ?? '—')}%. Нужно уточнить: ${healthEsc(missing)}.</p><div class="card-actions"><a class="btn" href="/tos/${slug}/">Открыть карточку</a><a class="btn primary" href="/update-tos/?tos=${slug}&type=card#message-builder">Уточнить</a></div>${renderPriorityReadiness(item.readiness)}</div></article>`;
     }).join('')}</div>`
     : '<p>Карточек высокого приоритета нет.</p>';
 }
