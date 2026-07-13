@@ -8,6 +8,9 @@ const MATRIX_PATH = path.join(ROOT, 'data', 'css_regression_matrix.csv');
 const PAGE_PATH = path.join(ROOT, 'css-maintenance', 'index.html');
 const DOC_PATH = path.join(ROOT, 'docs', 'CSS-MAINTENANCE.md');
 const EVIDENCE_GUIDE_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'README.md');
+const CAPTURE_DOC_PATH = path.join(ROOT, 'docs', 'VISUAL-BASELINE-CAPTURE.md');
+const CAPTURE_SCRIPT_PATH = path.join(ROOT, 'scripts', 'capture_visual_baseline.js');
+const CAPTURE_WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'visual-baseline.yml');
 
 const expectedHeaders = [
   'case_id',
@@ -49,6 +52,12 @@ function isHttpUrl(value) {
   return /^https:\/\//i.test(value || '');
 }
 
+function requireTextTokens(text, tokens, errors, context) {
+  tokens.forEach((token) => {
+    if (!text.includes(token)) errors.push(`${context} must reference ${token}`);
+  });
+}
+
 function validateEvidenceRef(status, evidenceRef, notes, errors, line) {
   const requiresEvidence = ['baseline_captured', 'passed', 'failed'].includes(status);
 
@@ -77,7 +86,15 @@ function validateEvidenceRef(status, evidenceRef, notes, errors, line) {
 function main() {
   const errors = [];
 
-  [MATRIX_PATH, PAGE_PATH, DOC_PATH, EVIDENCE_GUIDE_PATH].forEach((filePath) => {
+  [
+    MATRIX_PATH,
+    PAGE_PATH,
+    DOC_PATH,
+    EVIDENCE_GUIDE_PATH,
+    CAPTURE_DOC_PATH,
+    CAPTURE_SCRIPT_PATH,
+    CAPTURE_WORKFLOW_PATH
+  ].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${path.relative(ROOT, filePath)}`);
   });
 
@@ -87,6 +104,9 @@ function main() {
   const pageHtml = fs.readFileSync(PAGE_PATH, 'utf8');
   const docText = fs.readFileSync(DOC_PATH, 'utf8');
   const evidenceGuide = fs.readFileSync(EVIDENCE_GUIDE_PATH, 'utf8');
+  const captureDoc = fs.readFileSync(CAPTURE_DOC_PATH, 'utf8');
+  const captureScript = fs.readFileSync(CAPTURE_SCRIPT_PATH, 'utf8');
+  const captureWorkflow = fs.readFileSync(CAPTURE_WORKFLOW_PATH, 'utf8');
   const headers = (rows[0] || []).map(normalize);
 
   if (headers.join('|') !== expectedHeaders.join('|')) {
@@ -195,6 +215,31 @@ function main() {
   if (!evidenceGuide.includes('data/css_regression_matrix.csv')) {
     errors.push('visual baseline evidence guide must reference data/css_regression_matrix.csv');
   }
+
+  requireTextTokens(captureScript, [
+    "require('playwright')",
+    'data/css_regression_matrix.csv',
+    'manifest.json',
+    'sha256',
+    'horizontalOverflow',
+    'failed_requests'
+  ], errors, 'visual baseline capture script');
+
+  requireTextTokens(captureWorkflow, [
+    'node scripts/capture_visual_baseline.js',
+    'python3 -m http.server 4173',
+    'actions/upload-artifact@v4',
+    'retention-days: 30',
+    'contents: read'
+  ], errors, 'visual baseline workflow');
+
+  requireTextTokens(captureDoc, [
+    '.github/workflows/visual-baseline.yml',
+    'scripts/capture_visual_baseline.js',
+    'data/css_regression_matrix.csv',
+    'manifest.json',
+    'baseline_captured'
+  ], errors, 'visual baseline capture documentation');
 
   if (errors.length) {
     throw new Error(`CSS regression matrix audit failed:\n${errors.join('\n')}`);
