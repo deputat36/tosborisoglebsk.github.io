@@ -87,6 +87,31 @@ async function applyThemeAndInteraction(page, item) {
   }
 }
 
+function buildTechnicalViolations(item, diagnostics, consoleErrors, pageErrors) {
+  const violations = [];
+
+  if (diagnostics.horizontalOverflow) {
+    const offenders = diagnostics.overflowElements
+      .slice(0, 5)
+      .map((entry) => `${entry.selector} [${entry.left}, ${entry.right}]`)
+      .join('; ');
+    violations.push(`horizontal overflow ${diagnostics.documentScrollWidth}px > ${diagnostics.documentClientWidth}px${offenders ? `; ${offenders}` : ''}`);
+  }
+
+  if (diagnostics.htmlTheme !== item.theme) {
+    violations.push(`theme mismatch: expected ${item.theme}, received ${diagnostics.htmlTheme}`);
+  }
+
+  if (item.interaction === 'open-menu' && (!diagnostics.menuOpen || diagnostics.menuExpanded !== 'true')) {
+    violations.push(`mobile menu state mismatch: open=${diagnostics.menuOpen}, aria-expanded=${diagnostics.menuExpanded}`);
+  }
+
+  if (consoleErrors.length) violations.push(`console errors: ${consoleErrors.length}`);
+  if (pageErrors.length) violations.push(`page errors: ${pageErrors.length}`);
+
+  return violations;
+}
+
 async function captureCase(browser, item) {
   const context = await browser.newContext({
     viewport: { width: item.viewport_width, height: item.viewport_height },
@@ -141,17 +166,52 @@ async function captureCase(browser, item) {
   const filePath = path.join(OUTPUT_DIR, fileName);
   await page.screenshot({ path: filePath, fullPage: item.mode === 'print' });
 
-  const diagnostics = await page.evaluate(() => ({
-    title: document.title,
-    htmlTheme: document.documentElement.dataset.theme || 'light',
-    bodyScrollWidth: document.body.scrollWidth,
-    bodyClientWidth: document.body.clientWidth,
-    horizontalOverflow: document.body.scrollWidth > document.body.clientWidth + 1,
-    menuExpanded: document.querySelector('[data-action=menu]')?.getAttribute('aria-expanded') || null,
-    menuOpen: document.querySelector('#site-nav')?.classList.contains('open') || false
-  }));
+  const diagnostics = await page.evaluate(() => {
+    const documentClientWidth = document.documentElement.clientWidth;
+    const documentScrollWidth = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth);
+
+    const selectorFor = (element) => {
+      if (element.id) return `${element.tagName.toLowerCase()}#${element.id}`;
+      const classNames = [...element.classList].slice(0, 3);
+      return `${element.tagName.toLowerCase()}${classNames.map((name) => `.${name}`).join('')}`;
+    };
+
+    const overflowElements = [...document.querySelectorAll('body *')]
+      .map((element) => {
+        const rect = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        return {
+          selector: selectorFor(element),
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          width: Math.round(rect.width),
+          position: style.position,
+          overflowX: style.overflowX,
+          visible: style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0
+        };
+      })
+      .filter((entry) => entry.visible && (entry.left < -1 || entry.right > documentClientWidth + 1))
+      .sort((a, b) => Math.max(Math.abs(b.left), b.right - documentClientWidth) - Math.max(Math.abs(a.left), a.right - documentClientWidth))
+      .slice(0, 20)
+      .map(({ visible, ...entry }) => entry);
+
+    return {
+      title: document.title,
+      htmlTheme: document.documentElement.dataset.theme || 'light',
+      documentScrollWidth,
+      documentClientWidth,
+      bodyScrollWidth: document.body.scrollWidth,
+      bodyClientWidth: document.body.clientWidth,
+      horizontalOverflow: documentScrollWidth > documentClientWidth + 1,
+      overflowElements,
+      menuExpanded: document.querySelector('[data-action=menu]')?.getAttribute('aria-expanded') || null,
+      menuOpen: document.querySelector('#site-nav')?.classList.contains('open') || false
+    };
+  });
 
   await context.close();
+
+  const technicalViolations = buildTechnicalViolations(item, diagnostics, consoleErrors, pageErrors);
 
   return {
     case_id: item.case_id,
@@ -167,6 +227,7 @@ async function captureCase(browser, item) {
     sha256: sha256(filePath),
     bytes: fs.statSync(filePath).size,
     diagnostics,
+    technical_violations: technicalViolations,
     console_errors: consoleErrors,
     page_errors: pageErrors,
     failed_requests: failedRequests
@@ -188,7 +249,8 @@ async function main() {
       try {
         const result = await captureCase(browser, item);
         results.push(result);
-        console.log(`Captured ${item.case_id}: ${item.route} ${item.viewport_width}x${item.viewport_height} ${item.theme}`);
+        const qualitySuffix = result.technical_violations.length ? `; violations=${result.technical_violations.length}` : '';
+        console.log(`Captured ${item.case_id}: ${item.route} ${item.viewport_width}x${item.viewport_height} ${item.theme}${qualitySuffix}`);
       } catch (error) {
         failures.push({ case_id: item.case_id, route: item.route, error: error.message });
         console.error(`Failed ${item.case_id}: ${error.message}`);
@@ -198,8 +260,16 @@ async function main() {
     await browser.close();
   }
 
+  const qualityFailures = results
+    .filter((result) => result.technical_violations.length)
+    .map((result) => ({
+      case_id: result.case_id,
+      route: result.route,
+      violations: result.technical_violations
+    }));
+
   const manifest = {
-    schema_version: 1,
+    schema_version: 2,
     captured_at: new Date().toISOString(),
     repository: process.env.GITHUB_REPOSITORY || null,
     commit_sha: process.env.GITHUB_SHA || null,
@@ -212,6 +282,7 @@ async function main() {
     cases_total: cases.length,
     cases_captured: results.length,
     failures,
+    quality_failures: qualityFailures,
     results
   };
 
@@ -222,15 +293,16 @@ async function main() {
     '',
     `- Matrix cases: ${cases.length}`,
     `- Captured: ${results.length}`,
-    `- Failed: ${failures.length}`,
+    `- Runtime failures: ${failures.length}`,
+    `- Quality failures: ${qualityFailures.length}`,
     `- Commit: ${manifest.commit_sha || 'local'}`,
     '',
     'The artifact is capture evidence only. Review screenshots before promoting them to baseline_captured.'
   ].join('\n');
   fs.writeFileSync(path.join(OUTPUT_DIR, 'README.md'), `${summary}\n`);
 
-  if (failures.length) {
-    throw new Error(`Visual baseline capture failed for ${failures.length} case(s)`);
+  if (failures.length || qualityFailures.length) {
+    throw new Error(`Visual baseline capture failed: runtime=${failures.length}, quality=${qualityFailures.length}`);
   }
 }
 
