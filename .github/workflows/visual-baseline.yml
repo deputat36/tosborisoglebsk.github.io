@@ -23,7 +23,7 @@ on:
       - '.github/workflows/visual-baseline.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: visual-baseline-${{ github.ref }}
@@ -40,8 +40,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -77,22 +75,6 @@ jobs:
             kill "$(cat .artifacts/visual-baseline/server.pid)" 2>/dev/null || true
             rm -f .artifacts/visual-baseline/server.pid
           fi
-
-      - name: Promote approved baseline evidence
-        if: success() && github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
-        run: |
-          if [ ! -f docs/visual-baseline/PROMOTE ]; then
-            echo "Promotion marker is absent; artifact only."
-            exit 0
-          fi
-          cp .artifacts/visual-baseline/css-reg-*.png docs/visual-baseline/
-          cp .artifacts/visual-baseline/manifest.json docs/visual-baseline/manifest.json
-          rm docs/visual-baseline/PROMOTE
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/visual-baseline
-          git commit -m "Store approved visual baseline evidence"
-          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
 
       - name: Upload visual baseline artifact
         if: always()
