@@ -6,6 +6,13 @@ const ROOT = process.cwd();
 
 const collections = [
   {
+    name: 'tos',
+    dataPath: path.join(ROOT, 'data', 'toses.json'),
+    dataKey: 'slug',
+    rootDir: path.join(ROOT, 'tos'),
+    marker: 'Данные страницы обновляются автоматически из JSON-файлов сайта.'
+  },
+  {
     name: 'materials',
     dataPath: path.join(ROOT, 'data', 'articles.json'),
     rootDir: path.join(ROOT, 'materials'),
@@ -31,13 +38,13 @@ const collections = [
   }
 ];
 
-function readPublishedIds(file) {
+function readPublishedIds(file, dataKey = 'id') {
   if (!fs.existsSync(file)) throw new Error(`Missing data file: ${file}`);
   const items = JSON.parse(fs.readFileSync(file, 'utf8'));
   if (!Array.isArray(items)) throw new Error(`Expected array in ${file}`);
   return items
-    .filter((item) => item && item.id && item.status !== 'draft')
-    .map((item) => item.id);
+    .filter((item) => item && item[dataKey] && item.status !== 'draft')
+    .map((item) => item[dataKey]);
 }
 
 function main() {
@@ -46,7 +53,7 @@ function main() {
   for (const collection of collections) {
     const removed = removeStaleGeneratedDirectories({
       rootDir: collection.rootDir,
-      validIds: readPublishedIds(collection.dataPath),
+      validIds: readPublishedIds(collection.dataPath, collection.dataKey),
       marker: collection.marker
     });
 
