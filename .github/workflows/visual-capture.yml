@@ -7,6 +7,7 @@ on:
       - release-2025-12-22
       - visual-capture-tooling-2026-07-13
       - fix-visual-overflow-2026-07-13
+      - approve-visual-baseline-2026-07-13
     paths:
       - 'index.html'
       - 'tos/index.html'
@@ -22,9 +23,11 @@ on:
       - 'data/css_regression_matrix.csv'
       - 'docs/visual-baseline/**'
       - 'scripts/capture_visual_baseline.js'
+      - 'scripts/compare_visual_baseline.js'
       - 'scripts/audit_visual_capture_integration.js'
       - 'scripts/audit_visual_overflow_fixes.js'
       - 'scripts/audit_visual_baseline_evidence.js'
+      - 'scripts/audit_visual_comparison_integration.js'
       - 'scripts/lib/csv.js'
       - '.github/workflows/visual-capture.yml'
       - 'docs/VISUAL-CAPTURE.md'
@@ -44,7 +47,10 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       VISUAL_BASELINE_BASE_URL: http://127.0.0.1:4173
       VISUAL_BASELINE_OUTPUT: .artifacts/visual-baseline
+      VISUAL_BASELINE_APPROVED: docs/visual-baseline
       VISUAL_CAPTURE_ENFORCE_QUALITY: 'true'
+      VISUAL_MAX_CHANNEL_DELTA: '16'
+      VISUAL_MAX_LOW_DELTA_RATIO: '0.005'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -63,9 +69,11 @@ jobs:
       - name: Check visual scripts syntax
         run: |
           node --check scripts/capture_visual_baseline.js
+          node --check scripts/compare_visual_baseline.js
           node --check scripts/audit_visual_capture_integration.js
           node --check scripts/audit_visual_overflow_fixes.js
           node --check scripts/audit_visual_baseline_evidence.js
+          node --check scripts/audit_visual_comparison_integration.js
 
       - name: Audit capture integration
         run: node scripts/audit_visual_capture_integration.js
@@ -76,9 +84,12 @@ jobs:
       - name: Audit approved baseline evidence
         run: node scripts/audit_visual_baseline_evidence.js
 
-      - name: Install Playwright Chromium
+      - name: Audit visual comparison integration
+        run: node scripts/audit_visual_comparison_integration.js
+
+      - name: Install Playwright Chromium and PNG comparator
         run: |
-          npm install --no-save --package-lock=false playwright@1.55.0
+          npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0
           npx playwright install --with-deps chromium
 
       - name: Start local static server
@@ -98,11 +109,18 @@ jobs:
       - name: Capture matrix screenshots
         run: node scripts/capture_visual_baseline.js
 
-      - name: Add capture summary
+      - name: Compare with approved visual baseline
+        run: node scripts/compare_visual_baseline.js
+
+      - name: Add capture and comparison summary
         if: always()
         run: |
           if [ -f .artifacts/visual-baseline/README.md ]; then
             cat .artifacts/visual-baseline/README.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f .artifacts/visual-baseline/comparison.md ]; then
+            printf '\n' >> "$GITHUB_STEP_SUMMARY"
+            cat .artifacts/visual-baseline/comparison.md >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Stop local static server
