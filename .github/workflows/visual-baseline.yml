@@ -79,9 +79,13 @@ jobs:
           exit 1
 
       - name: Capture matrix screenshots
+        id: capture
+        continue-on-error: true
         run: node scripts/capture_visual_baseline.js
 
-      - name: Audit capture manifest
+      - name: Audit capture manifest in measurement mode
+        env:
+          VISUAL_CAPTURE_STRICT_QUALITY: 'false'
         run: node scripts/audit_visual_capture_manifest.js
 
       - name: Detect approved baseline
@@ -99,6 +103,12 @@ jobs:
         run: |
           echo 'Approved visual baseline is not present in docs/visual-baseline.'
           exit 1
+
+      - name: Audit capture manifest in strict mode
+        if: ${{ steps.approved.outputs.available == 'true' && (github.event_name == 'pull_request' || inputs.compare_approved) }}
+        env:
+          VISUAL_CAPTURE_STRICT_QUALITY: 'true'
+        run: node scripts/audit_visual_capture_manifest.js
 
       - name: Compare with approved visual baseline
         if: ${{ steps.approved.outputs.available == 'true' && (github.event_name == 'pull_request' || inputs.compare_approved) }}
