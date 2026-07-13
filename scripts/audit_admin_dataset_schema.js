@@ -11,7 +11,7 @@ const datasets = [
   { section: 'toses', file: 'data/toses.json', key: 'slug', label: 'name', relation: false, source: 'core' },
   { section: 'news', file: 'data/news.json', key: 'id', label: 'title', relation: true, source: 'core' },
   { section: 'articles', file: 'data/articles.json', key: 'id', label: 'title', relation: false, source: 'core' },
-  { section: 'documents', file: 'data/documents.json', key: 'id', label: 'title', relation: false, source: 'core' },
+  { section: 'documents', file: 'data/documents.json', key: 'title', label: 'title', relation: false, source: 'core' },
   { section: 'grants', file: 'data/grants.json', key: 'id', label: 'title', relation: false, source: 'core' },
   { section: 'projects', file: 'data/projects.json', key: 'id', label: 'title', relation: true, source: 'core' },
   { section: 'done', file: 'data/done.json', key: 'id', label: 'title', relation: true, source: 'done' },
@@ -26,7 +26,7 @@ function escapeRegExp(value){
 function datasetBlockExists(text, dataset){
   const section = escapeRegExp(dataset.section);
   const file = escapeRegExp(`/${dataset.file}`);
-  const pattern = new RegExp(`(?:${section}\\s*:\\s*\\{|DATASETS\\.${section}\\s*=\\s*\\{)[\\s\\S]{0,1200}?file\\s*:\\s*['\"]${file}['\"]`);
+  const pattern = new RegExp(`(?:${section}\\s*:\\s*\\{|DATASETS\\.${section}\\s*=\\s*\\{)[\\s\\S]{0,1800}?file\\s*:\\s*['\"]${file}['\"]`);
   return pattern.test(text);
 }
 
@@ -66,8 +66,19 @@ function main(){
   const coreText = fs.readFileSync(ADMIN_CORE_PATH, 'utf8');
   const doneText = fs.readFileSync(ADMIN_DONE_PATH, 'utf8');
   const dashboardText = fs.readFileSync(DASHBOARD_PATH, 'utf8');
+  const recordsBySection = new Map();
   const seenFiles = new Set();
   let totalRecords = 0;
+
+  datasets.forEach(dataset => {
+    const records = readJsonArray(dataset.file, errors);
+    recordsBySection.set(dataset.section, records);
+    totalRecords += records.length;
+  });
+
+  const knownTosSlugs = new Set(
+    (recordsBySection.get('toses') || []).map(item => String(item.slug || '').trim()).filter(Boolean)
+  );
 
   datasets.forEach(dataset => {
     if(seenFiles.has(dataset.file)) errors.push(`duplicate admin dataset file ${dataset.file}`);
@@ -91,8 +102,7 @@ function main(){
       errors.push(`related admin dataset ${dataset.section} is missing tos_slug field`);
     }
 
-    const records = readJsonArray(dataset.file, errors);
-    totalRecords += records.length;
+    const records = recordsBySection.get(dataset.section) || [];
     const ids = new Set();
     records.forEach((record, index) => {
       const line = `${dataset.file}[${index}]`;
@@ -105,8 +115,10 @@ function main(){
       if(identifier && ids.has(identifier)) errors.push(`${line} duplicates ${dataset.key} ${identifier}`);
       if(identifier) ids.add(identifier);
       if(!(dataset.label in record)) errors.push(`${line} is missing label field ${dataset.label}`);
-      if(dataset.relation && !Object.prototype.hasOwnProperty.call(record, 'tos_slug')){
-        errors.push(`${line} must explicitly contain tos_slug`);
+
+      const tosSlug = String(record.tos_slug || '').trim();
+      if(dataset.relation && tosSlug && !knownTosSlugs.has(tosSlug)){
+        errors.push(`${line} references unknown tos_slug ${tosSlug}`);
       }
     });
 
@@ -126,12 +138,18 @@ function main(){
     errors.push('admin scripts must load in order: admin2.js, admin-done-dataset.js, admin-dashboard.js');
   }
 
-  if(!doneText.includes("['content_origin','Происхождение материала','select',['verified','editorial','starter','request']]")){
-    errors.push('done admin dataset must expose the controlled content_origin status set');
-  }
-  if(!doneText.includes("['needs_details','Каких подтверждений не хватает','textarea']")){
-    errors.push('done admin dataset must expose needs_details');
-  }
+  [
+    "download: 'done.json'",
+    'label: (x) =>',
+    'sub: (x) =>',
+    'template: () =>',
+    "['tos_slug','Привязка к ТОС: slug','tosSlug']",
+    "['needs_details','Каких подтверждений не хватает','textarea']",
+    "['content_origin','Происхождение материала','select:verified|editorial|starter|request']"
+  ].forEach(token => {
+    if(!doneText.includes(token)) errors.push(`done admin dataset must contain ${token}`);
+  });
+
   if(!dashboardText.includes('doneNeedsEvidence')){
     errors.push('admin dashboard must calculate result evidence gaps');
   }
