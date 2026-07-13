@@ -14,7 +14,6 @@ const SKIP_FILES = new Set([
   'tos/view.html',
   'tools/import.html',
   'admin/index.html',
-  'admin/admin-index-ready.html',
   'audit/index.html',
   'tos/chkalovets/index.html',
   'documents/demo/charter.html',
