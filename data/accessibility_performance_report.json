@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T19:01:54.276Z",
+  "generated_at": "2026-07-13T19:13:05.621Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,16 +18,114 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 269,
+    "asset_files": 283,
     "over_budget_assets": 0,
     "total_css_bytes": 33178,
     "total_js_bytes": 1385895,
-    "total_image_bytes": 2464,
+    "total_image_bytes": 2834816,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
   "page_findings": [],
   "largest_assets": [
+    {
+      "path": "docs/visual-baseline/css-reg-001.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 448688,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-002.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 313918,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-014.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 264730,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-011.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 201727,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-010.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 200811,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-009.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 188455,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-004.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 188397,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-013.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 185149,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-008.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 170319,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-012.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 165285,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-005.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 135982,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-006.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 132925,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-003.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 130902,
+      "over_budget": false
+    },
+    {
+      "path": "docs/visual-baseline/css-reg-007.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 105064,
+      "over_budget": false
+    },
     {
       "path": "data/tos.data.js",
       "group": "js",
@@ -138,104 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11558,
-      "over_budget": false
-    },
-    {
-      "path": "assets/css/styles.css",
-      "group": "css",
-      "extension": ".css",
-      "size_bytes": 11078,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/update-center.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10685,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/audit_projects_2026_workflow.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10306,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/audit_project_pages_content.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10265,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/collection-board.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10200,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/workbench-drafts.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10020,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/generate_content_audit.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9883,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/generate_accessibility_performance_report.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9679,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/needs.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9678,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/compare_visual_baseline.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9374,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/patch_public_audience_focus.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9339,
-      "over_budget": false
-    },
-    {
-      "path": "admin/admin-dashboard.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9258,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/audit_priority_tos_response_review.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9174,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/generate_places_pages.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9167,
       "over_budget": false
     }
   ],
