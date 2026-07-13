@@ -1,0 +1,58 @@
+name: Audit admin data schemas
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'admin/**'
+      - 'data/toses.json'
+      - 'data/news.json'
+      - 'data/articles.json'
+      - 'data/documents.json'
+      - 'data/grants.json'
+      - 'data/projects.json'
+      - 'data/done.json'
+      - 'data/events.json'
+      - 'data/needs.json'
+      - 'data/admin_capability_inventory.csv'
+      - 'docs/ADMIN-AUDIT-2026-07-13.md'
+      - 'scripts/audit_admin_capabilities.js'
+      - 'scripts/audit_admin_dataset_schema.js'
+      - 'scripts/lib/csv.js'
+      - '.github/workflows/admin-schema.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: admin-schema-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Check admin and audit JavaScript syntax
+        run: |
+          find admin -name "*.js" -print0 | xargs -0 -n1 node --check
+          node --check scripts/audit_admin_capabilities.js
+          node --check scripts/audit_admin_dataset_schema.js
+
+      - name: Audit admin capabilities
+        run: node scripts/audit_admin_capabilities.js
+
+      - name: Audit admin dataset schemas
+        run: node scripts/audit_admin_dataset_schema.js
