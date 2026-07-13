@@ -72,6 +72,7 @@ requireTokens(evidenceAudit, [
   'Visual baseline evidence audit OK',
   'SHA-256 mismatch',
   'baseline_captured',
+  'status must be passed after comparator',
   'fs.readdirSync(BASELINE_DIR)',
   'pngFiles.length !== 14'
 ], 'visual baseline evidence audit');
@@ -82,7 +83,8 @@ requireTokens(documentation, [
   'VISUAL_CAPTURE_ENFORCE_QUALITY=true',
   'baseline_captured',
   'pixel comparator',
-  'audit_visual_baseline_evidence.js'
+  'audit_visual_baseline_evidence.js',
+  'статус `passed`'
 ], 'visual capture documentation');
 
 let baselineManifest = null;
@@ -100,7 +102,7 @@ if (baselineManifest) {
   if (!baselineManifest.enforce_quality) errors.push('approved baseline manifest must use strict quality enforcement');
   if (!Array.isArray(baselineManifest.failures) || baselineManifest.failures.length) errors.push('approved baseline manifest failures must be empty');
   if (!Array.isArray(baselineManifest.quality_failures) || baselineManifest.quality_failures.length) errors.push('approved baseline manifest quality_failures must be empty');
-  if (baselineManifest.approval?.status !== 'baseline_captured') errors.push('approved baseline manifest status must be baseline_captured');
+  if (baselineManifest.approval?.status !== 'baseline_captured') errors.push('approved baseline manifest status must remain baseline_captured');
   if (baselineManifest.approval?.reviewed !== true) errors.push('approved baseline manifest must record reviewed=true');
 }
 
@@ -121,12 +123,16 @@ if (matrixText) {
     const id = String(row[0] || '').trim();
     const status = String(row[9] || '').trim();
     const evidence = String(row[10] || '').trim();
+    const notes = String(row[11] || '').trim();
     const expectedEvidence = `docs/visual-baseline/${id}.png`;
     if (!/^css-reg-\d{3}$/.test(id)) errors.push(`matrix row ${index + 2}: invalid case_id ${id}`);
     if (ids.has(id)) errors.push(`matrix row ${index + 2}: duplicate case_id ${id}`);
     ids.add(id);
-    if (status !== 'baseline_captured') errors.push(`matrix row ${index + 2}: status must be baseline_captured`);
+    if (status !== 'passed') errors.push(`matrix row ${index + 2}: status must be passed`);
     if (evidence !== expectedEvidence) errors.push(`matrix row ${index + 2}: evidence_ref must be ${expectedEvidence}`);
+    if (!notes.includes('pixel_identical=true') || !notes.includes('pixel_equivalent=true')) {
+      errors.push(`matrix row ${index + 2}: comparator result is missing from notes`);
+    }
   });
 }
 
@@ -134,4 +140,4 @@ if (errors.length) {
   throw new Error(`Visual capture integration audit failed:\n${errors.join('\n')}`);
 }
 
-console.log('Visual capture integration audit OK: read-only strict capture with 14 approved baseline evidence files');
+console.log('Visual capture integration audit OK: read-only strict capture with 14 passed visual cases');
