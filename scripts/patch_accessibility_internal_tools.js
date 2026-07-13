@@ -4,7 +4,6 @@ const path = require('path');
 const ROOT = process.cwd();
 const TARGET_FILES = [
   path.join(ROOT, 'admin', 'index.html'),
-  path.join(ROOT, 'admin', 'admin-index-ready.html'),
   path.join(ROOT, 'tools', 'import.html')
 ];
 
