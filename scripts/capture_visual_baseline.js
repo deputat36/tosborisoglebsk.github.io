@@ -32,6 +32,16 @@ function sha256(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
 }
 
+function prepareOutputDir() {
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  fs.readdirSync(OUTPUT_DIR, { withFileTypes: true }).forEach((entry) => {
+    if (!entry.isFile()) return;
+    if (/^css-reg-\d{3}\.png$/.test(entry.name) || ['manifest.json', 'README.md'].includes(entry.name)) {
+      fs.rmSync(path.join(OUTPUT_DIR, entry.name), { force: true });
+    }
+  });
+}
+
 function readCases() {
   if (!fs.existsSync(MATRIX_PATH)) throw new Error(`Matrix not found: ${MATRIX_PATH}`);
 
@@ -167,8 +177,7 @@ async function main() {
   const cases = readCases();
   if (!cases.length) throw new Error('CSS regression matrix has no cases');
 
-  fs.rmSync(OUTPUT_DIR, { recursive: true, force: true });
-  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  prepareOutputDir();
 
   const browser = await chromium.launch({ headless: true });
   const results = [];
