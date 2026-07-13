@@ -91,10 +91,16 @@ function buildTechnicalViolations(item, diagnostics, consoleErrors, pageErrors) 
   const violations = [];
 
   if (diagnostics.horizontalOverflow) {
-    const offenders = diagnostics.overflowElements
+    const directOffenders = diagnostics.overflowElements
       .slice(0, 5)
-      .map((entry) => `${entry.selector} [${entry.left}, ${entry.right}]`)
-      .join('; ');
+      .map((entry) => `${entry.selector} [${entry.left}, ${entry.right}]`);
+    const internalOffenders = diagnostics.internalOverflowElements
+      .slice(0, 5)
+      .map((entry) => `${entry.selector} (${entry.scrollWidth}>${entry.clientWidth})`);
+    const isolationOffenders = diagnostics.overflowIsolationCandidates
+      .slice(0, 5)
+      .map((entry) => `${entry.selector} (-${entry.reduction}px)`);
+    const offenders = [...directOffenders, ...internalOffenders, ...isolationOffenders].join('; ');
     violations.push(`horizontal overflow ${diagnostics.documentScrollWidth}px > ${diagnostics.documentClientWidth}px${offenders ? `; ${offenders}` : ''}`);
   }
 
@@ -167,8 +173,9 @@ async function captureCase(browser, item) {
   await page.screenshot({ path: filePath, fullPage: item.mode === 'print' });
 
   const diagnostics = await page.evaluate(() => {
+    const measureDocumentWidth = () => Math.max(document.documentElement.scrollWidth, document.body.scrollWidth);
     const documentClientWidth = document.documentElement.clientWidth;
-    const documentScrollWidth = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth);
+    const documentScrollWidth = measureDocumentWidth();
 
     const selectorFor = (element) => {
       if (element.id) return `${element.tagName.toLowerCase()}#${element.id}`;
@@ -176,24 +183,63 @@ async function captureCase(browser, item) {
       return `${element.tagName.toLowerCase()}${classNames.map((name) => `.${name}`).join('')}`;
     };
 
-    const overflowElements = [...document.querySelectorAll('body *')]
-      .map((element) => {
-        const rect = element.getBoundingClientRect();
-        const style = getComputedStyle(element);
-        return {
-          selector: selectorFor(element),
-          left: Math.round(rect.left),
-          right: Math.round(rect.right),
-          width: Math.round(rect.width),
-          position: style.position,
-          overflowX: style.overflowX,
-          visible: style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0
-        };
-      })
+    const elements = [...document.querySelectorAll('body *')];
+    const describeElement = (element) => {
+      const rect = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      return {
+        selector: selectorFor(element),
+        left: Math.round(rect.left),
+        right: Math.round(rect.right),
+        width: Math.round(rect.width),
+        scrollWidth: element.scrollWidth,
+        clientWidth: element.clientWidth,
+        position: style.position,
+        overflowX: style.overflowX,
+        visible: style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0
+      };
+    };
+
+    const describedElements = elements.map((element) => ({ element, details: describeElement(element) }));
+
+    const overflowElements = describedElements
+      .map(({ details }) => details)
       .filter((entry) => entry.visible && (entry.left < -1 || entry.right > documentClientWidth + 1))
       .sort((a, b) => Math.max(Math.abs(b.left), b.right - documentClientWidth) - Math.max(Math.abs(a.left), a.right - documentClientWidth))
       .slice(0, 20)
       .map(({ visible, ...entry }) => entry);
+
+    const internalOverflowElements = describedElements
+      .map(({ details }) => details)
+      .filter((entry) => entry.visible && entry.clientWidth > 0 && entry.scrollWidth > entry.clientWidth + 1)
+      .sort((a, b) => (b.scrollWidth - b.clientWidth) - (a.scrollWidth - a.clientWidth))
+      .slice(0, 20)
+      .map(({ visible, ...entry }) => entry);
+
+    const overflowIsolationCandidates = [];
+    if (documentScrollWidth > documentClientWidth + 1) {
+      describedElements.forEach(({ element, details }) => {
+        if (!details.visible) return;
+        const previousValue = element.style.getPropertyValue('overflow-x');
+        const previousPriority = element.style.getPropertyPriority('overflow-x');
+        element.style.setProperty('overflow-x', 'hidden', 'important');
+        const isolatedWidth = measureDocumentWidth();
+        if (previousValue) element.style.setProperty('overflow-x', previousValue, previousPriority);
+        else element.style.removeProperty('overflow-x');
+
+        if (isolatedWidth < documentScrollWidth) {
+          overflowIsolationCandidates.push({
+            selector: details.selector,
+            originalWidth: documentScrollWidth,
+            isolatedWidth,
+            reduction: documentScrollWidth - isolatedWidth,
+            elementScrollWidth: details.scrollWidth,
+            elementClientWidth: details.clientWidth
+          });
+        }
+      });
+      overflowIsolationCandidates.sort((a, b) => b.reduction - a.reduction);
+    }
 
     return {
       title: document.title,
@@ -204,6 +250,8 @@ async function captureCase(browser, item) {
       bodyClientWidth: document.body.clientWidth,
       horizontalOverflow: documentScrollWidth > documentClientWidth + 1,
       overflowElements,
+      internalOverflowElements,
+      overflowIsolationCandidates: overflowIsolationCandidates.slice(0, 20),
       menuExpanded: document.querySelector('[data-action=menu]')?.getAttribute('aria-expanded') || null,
       menuOpen: document.querySelector('#site-nav')?.classList.contains('open') || false
     };
@@ -269,7 +317,7 @@ async function main() {
     }));
 
   const manifest = {
-    schema_version: 2,
+    schema_version: 3,
     captured_at: new Date().toISOString(),
     repository: process.env.GITHUB_REPOSITORY || null,
     commit_sha: process.env.GITHUB_SHA || null,
