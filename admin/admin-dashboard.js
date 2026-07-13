@@ -38,15 +38,15 @@
     root.innerHTML = '<div class="empty">Загрузка сводки...</div>';
 
     const [toses, news, articles, documents, grants, projects, done, events, needs] = await Promise.all([
-      readDataset('toses'),
-      readDataset('news'),
-      readDataset('articles'),
-      readDataset('documents'),
-      readDataset('grants'),
-      readDataset('projects'),
+      readDataset('toses','/data/toses.json'),
+      readDataset('news','/data/news.json'),
+      readDataset('articles','/data/articles.json'),
+      readDataset('documents','/data/documents.json'),
+      readDataset('grants','/data/grants.json'),
+      readDataset('projects','/data/projects.json'),
       readDataset('done','/data/done.json'),
-      readDataset('events'),
-      readDataset('needs')
+      readDataset('events','/data/events.json'),
+      readDataset('needs','/data/needs.json')
     ]);
 
     const publishedTos = toses.filter(isPublished);
