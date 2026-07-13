@@ -24,6 +24,7 @@ on:
       - 'assets/css/**'
       - 'assets/js/**'
       - 'data/css_regression_matrix.csv'
+      - 'docs/VISUAL-BASELINE-CAPTURE.md'
       - 'docs/visual-baseline/**'
       - 'scripts/capture_visual_baseline.js'
       - 'scripts/compare_visual_baseline.js'
