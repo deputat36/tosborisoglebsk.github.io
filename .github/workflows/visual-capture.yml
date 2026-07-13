@@ -19,6 +19,7 @@ on:
       - 'assets/js/**'
       - 'data/css_regression_matrix.csv'
       - 'scripts/capture_visual_baseline.js'
+      - 'scripts/audit_visual_capture_integration.js'
       - 'scripts/lib/csv.js'
       - '.github/workflows/visual-capture.yml'
       - 'docs/VISUAL-CAPTURE.md'
@@ -48,8 +49,13 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Check capture script syntax
-        run: node --check scripts/capture_visual_baseline.js
+      - name: Check capture scripts syntax
+        run: |
+          node --check scripts/capture_visual_baseline.js
+          node --check scripts/audit_visual_capture_integration.js
+
+      - name: Audit capture-only integration
+        run: node scripts/audit_visual_capture_integration.js
 
       - name: Install Playwright Chromium
         run: |
