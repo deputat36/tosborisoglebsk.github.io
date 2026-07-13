@@ -4,19 +4,23 @@
 
 ## Назначение
 
-Workflow `.github/workflows/visual-baseline.yml` воспроизводимо снимает все случаи из `data/css_regression_matrix.csv` на локально поднятой версии сайта.
+Workflow `.github/workflows/visual-baseline.yml` воспроизводимо снимает все случаи из `data/css_regression_matrix.csv` на локально поднятой версии сайта и сравнивает их с утверждёнными PNG из `docs/visual-baseline/`.
 
-Контур нужен для подготовки доказательств перед CSS-рефакторингом. Он не меняет стили, не публикует сайт и не переводит случаи в `baseline_captured` автоматически.
+Контур нужен для безопасного CSS-сопровождения. Он не публикует сайт и работает с правами `contents: read`.
 
 ## Что делает workflow
 
 1. Проверяет текущую ветку репозитория.
-2. Устанавливает Chromium через Playwright.
+2. Устанавливает Chromium через Playwright и PNG-декодер `pngjs`.
 3. Поднимает локальный статический сервер на `127.0.0.1:4173`.
 4. Для каждого случая задаёт точный viewport, тему и действие.
 5. Делает PNG-снимок.
 6. Записывает `manifest.json` с SHA-256, размером файла, маршрутом, режимом и диагностикой страницы.
-7. Загружает папку `.artifacts/visual-baseline` как GitHub Actions artifact на 30 дней.
+7. Запускает `scripts/compare_visual_baseline.js`.
+8. Декодирует текущий и утверждённый PNG и сравнивает размеры и RGBA-пиксели.
+9. Создаёт `comparison.json` и `comparison.md`.
+10. Блокирует workflow при изменённом пикселе, пропущенном случае или техническом нарушении.
+11. Загружает папку `.artifacts/visual-baseline` как GitHub Actions artifact на 30 дней.
 
 ## Поддерживаемые действия
 
@@ -34,35 +38,48 @@ Workflow `.github/workflows/visual-baseline.yml` воспроизводимо с
 - SHA-256 и размер PNG;
 - наличие горизонтального переполнения;
 - состояние мобильного меню;
-- ошибки JavaScript, console errors и failed requests.
+- ошибки JavaScript, console errors и failed requests;
+- элементы с внешним и внутренним overflow;
+- технические нарушения каждого случая.
+
+## Что фиксируется в comparison
+
+`comparison.json` содержит:
+
+- baseline commit и workflow run;
+- текущий commit и workflow run;
+- количество сравниваемых случаев;
+- равенство размеров изображений;
+- количество изменённых пикселей;
+- максимальное отличие цветового канала;
+- SHA-256 обоих PNG;
+- побайтовое и пиксельное совпадение.
+
+Побайтовое отличие PNG допустимо только тогда, когда декодированные пиксели полностью совпадают. Это учитывает различия способа упаковки PNG без ложной визуальной регрессии.
 
 ## Правило повышения статуса
 
-Artifact является черновым доказательством захвата, а не автоматически одобренным baseline.
+- `baseline_captured` означает, что утверждённый PNG сохранён в `docs/visual-baseline/` и связан с manifest.
+- `passed` означает, что после изменения выполнен новый capture и все пиксели совпали с утверждённым baseline.
+- `failed` означает, что comparator обнаружил визуальное отличие или проверяющий выявил содержательную регрессию.
 
-Перед переводом случая в `baseline_captured` нужно:
-
-1. Открыть PNG и визуально проверить `expected_check`.
-2. Убедиться, что снимок не содержит закрытых данных.
-3. Скопировать одобренный PNG в `docs/visual-baseline/`.
-4. Указать локальный путь в `evidence_ref`.
-5. Перевести только соответствующую строку матрицы в `baseline_captured`.
-6. Запустить `npm run audit:css-regression` и полный project-mode audit.
+Перед утверждением нового baseline нужно отдельно проверить PNG, отсутствие закрытых данных и технические поля manifest.
 
 ## Запуск
 
 Workflow запускается:
 
 - вручную через `workflow_dispatch`;
-- автоматически в pull request при изменении HTML, CSS, JavaScript, матрицы или самого capture-контура.
+- автоматически в pull request при изменении контрольных HTML, CSS, JavaScript, матрицы, baseline evidence или capture-контура.
 
 Локальный запуск:
 
 ```bash
-npm install --no-save --package-lock=false playwright@1.55.0
+npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0
 npx playwright install chromium
 python3 -m http.server 4173 --bind 127.0.0.1
 node scripts/capture_visual_baseline.js
+node scripts/compare_visual_baseline.js
 ```
 
 Результат появится в `.artifacts/visual-baseline`.
@@ -71,5 +88,5 @@ node scripts/capture_visual_baseline.js
 
 - Скриншот сам по себе не подтверждает корректность фактов и контактов.
 - Print media фиксирует CSS-представление, но не системный диалог печати браузера.
-- Внешние сетевые ресурсы могут дать failed request; это отражается в manifest и оценивается отдельно.
-- CSS-рефакторинг остаётся запрещённым, пока обязательные случаи не имеют одобренных локальных доказательств.
+- Внешние сетевые ресурсы могут дать failed request; это отражается в manifest и блокирует утверждение чистого baseline.
+- Намеренное изменение дизайна требует отдельного визуального review и осознанного обновления утверждённых PNG.
