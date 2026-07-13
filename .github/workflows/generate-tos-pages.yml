@@ -166,6 +166,8 @@ jobs:
         run: node scripts/generate_accessibility_performance_report.js
       - name: Generate site health report
         run: node scripts/generate_site_health_report.js
+      - name: Enrich site health with priority readiness
+        run: node scripts/enrich_site_health_readiness.js
       - name: Generate public index
         run: node scripts/generate_page_index.js
       - name: Generate extended sitemap
