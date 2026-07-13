@@ -12,6 +12,7 @@ const requiredFiles = [
   'admin/index.html',
   'admin/admin.css',
   'admin/admin2.js',
+  'admin/admin-done-dataset.js',
   'admin/admin-logo-tools.js',
   'admin/admin-dashboard.js',
   'admin/admin-export-tools.js',
@@ -31,6 +32,7 @@ const forbiddenFiles = [
 
 const expectedScripts = [
   '/admin/admin2.js',
+  '/admin/admin-done-dataset.js',
   '/admin/admin-logo-tools.js',
   '/admin/admin-dashboard.js',
   '/admin/admin-export-tools.js',
@@ -79,6 +81,7 @@ function main(){
 
   const indexHtml = fs.readFileSync(INDEX_PATH, 'utf8');
   const admin2 = fs.readFileSync(path.join(ADMIN_DIR, 'admin2.js'), 'utf8');
+  const doneDataset = fs.readFileSync(path.join(ADMIN_DIR, 'admin-done-dataset.js'), 'utf8');
   const logoTools = fs.readFileSync(path.join(ADMIN_DIR, 'admin-logo-tools.js'), 'utf8');
   const dashboard = fs.readFileSync(path.join(ADMIN_DIR, 'admin-dashboard.js'), 'utf8');
   const exportTools = fs.readFileSync(path.join(ADMIN_DIR, 'admin-export-tools.js'), 'utf8');
@@ -91,6 +94,9 @@ function main(){
   requireTokens(indexHtml, [
     'Эта админка не записывает данные прямо в GitHub',
     'Прямая запись в GitHub намеренно не используется',
+    'data-section="done"',
+    'data/done.json',
+    '/admin/admin-done-dataset.js',
     '/admin/admin-export-tools.js',
     '/admin/admin-history.js'
   ], errors, 'admin index');
@@ -106,6 +112,9 @@ function main(){
   scripts.forEach(script => {
     if(!expectedScripts.includes(script)) errors.push(`admin index includes unsupported script ${script}`);
   });
+  if(scripts.indexOf('/admin/admin-done-dataset.js') < scripts.indexOf('/admin/admin2.js')) {
+    errors.push('admin-done-dataset.js must load after admin2.js');
+  }
 
   requireTokens(admin2, [
     'localStorage.setItem',
@@ -123,16 +132,28 @@ function main(){
     'function preview'
   ], errors, 'admin editor');
 
+  requireTokens(doneDataset, [
+    'DATASETS.done',
+    "file: '/data/done.json'",
+    "['tos_slug'",
+    "['source_url'",
+    "['needs_details'",
+    "['content_origin'",
+    "['verified','editorial','starter','request']"
+  ], errors, 'admin results dataset');
+
   requireTokens(logoTools, [
     'bulkFillLogoPaths',
     'downloadNoLogoCsv',
-    "option value=\"no-logo\"",
+    'option value="no-logo"',
     '/assets/img/tos-logos/'
   ], errors, 'admin logo tools');
 
   requireTokens(dashboard, [
-    'Обзор сайта',
-    'Что исправить в первую очередь',
+    "readDataset('done','/data/done.json')",
+    'Результатов',
+    'Результаты требуют подтверждения',
+    'doneNeedsEvidence',
     'CSV председателей',
     'Проекты без ТОС',
     'Документ без ссылки'
@@ -210,6 +231,9 @@ function main(){
   }
 
   requireTokens(docText, [
+    'девять коллекций',
+    'admin/admin-done-dataset.js',
+    'data/done.json',
     'data/admin_capability_inventory.csv',
     'admin/admin-export-tools.js',
     'admin/admin-history.js',
@@ -226,7 +250,7 @@ function main(){
     result[status] = (result[status] || 0) + 1;
     return result;
   }, {});
-  console.log(`Admin capability audit OK: ${rows.length - 1} capabilities, ${JSON.stringify(statusCounts)}`);
+  console.log(`Admin capability audit OK: ${rows.length - 1} capabilities, ${expectedScripts.length} modules, ${JSON.stringify(statusCounts)}`);
 }
 
 main();
