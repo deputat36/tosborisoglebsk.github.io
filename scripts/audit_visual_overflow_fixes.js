@@ -57,7 +57,8 @@ function main() {
   requireFragments(errors, 'TOS responsive patch', patch, [
     'tos-detail-responsive.css',
     'generate_tos_pages.js',
-    'data/toses.json',
+    'TOSES_PATH',
+    "path.join(ROOT, 'data', 'toses.json')",
     'TOS responsive stylesheet patch OK'
   ]);
 
