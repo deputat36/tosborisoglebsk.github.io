@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const { parseCsv } = require('./lib/csv');
 
 const ROOT = process.cwd();
@@ -7,6 +8,8 @@ const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'visual-baseline.y
 const CAPTURE_PATH = path.join(ROOT, 'scripts', 'capture_visual_baseline.js');
 const COMPARE_PATH = path.join(ROOT, 'scripts', 'compare_visual_baseline.js');
 const MANIFEST_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_visual_capture_manifest.js');
+const OVERFLOW_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_visual_overflow_fixes.js');
+const RESPONSIVE_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_tos_detail_responsive_styles.js');
 const DOC_PATH = path.join(ROOT, 'docs', 'VISUAL-BASELINE-CAPTURE.md');
 const MATRIX_PATH = path.join(ROOT, 'data', 'css_regression_matrix.csv');
 const APPROVED_MANIFEST_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'manifest.json');
@@ -38,7 +41,16 @@ function requireFragments(errors, label, content, fragments) {
 
 function main() {
   const errors = [];
-  const requiredFiles = [WORKFLOW_PATH, CAPTURE_PATH, COMPARE_PATH, MANIFEST_AUDIT_PATH, DOC_PATH, MATRIX_PATH];
+  const requiredFiles = [
+    WORKFLOW_PATH,
+    CAPTURE_PATH,
+    COMPARE_PATH,
+    MANIFEST_AUDIT_PATH,
+    OVERFLOW_AUDIT_PATH,
+    RESPONSIVE_PATCH_PATH,
+    DOC_PATH,
+    MATRIX_PATH
+  ];
 
   requiredFiles.forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${path.relative(ROOT, filePath)}`);
@@ -65,6 +77,8 @@ function main() {
     'pull_request:',
     'contents: read',
     'node-version: \'24\'',
+    'node scripts/patch_tos_detail_responsive_styles.js',
+    'node scripts/audit_visual_overflow_fixes.js',
     'continue-on-error: true',
     "VISUAL_CAPTURE_STRICT_QUALITY: 'false'",
     "VISUAL_CAPTURE_STRICT_QUALITY: 'true'",
@@ -137,6 +151,11 @@ function main() {
   if (errors.length) {
     throw new Error(`Visual capture tooling audit failed:\n${errors.join('\n')}`);
   }
+
+  execFileSync(process.execPath, [OVERFLOW_AUDIT_PATH], {
+    cwd: ROOT,
+    stdio: 'inherit'
+  });
 
   console.log(`Visual capture tooling OK: ${records.length} cases, approved baseline ${approvedExists ? 'present' : 'not yet present'}, workflow read-only`);
 }
