@@ -1,6 +1,7 @@
 (function(){
   if(typeof DATASETS === 'undefined') throw new Error('admin2.js must be loaded before admin-done-dataset.js');
 
+  // Allowed content origins: ['verified','editorial','starter','request'].
   DATASETS.done = {
     title: 'Результаты',
     hint: 'Редактирование data/done.json',
