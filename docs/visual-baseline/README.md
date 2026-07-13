@@ -6,8 +6,8 @@
 
 - ветка capture: `approve-visual-baseline-main-2026-07-13`;
 - commit capture: `c090990a74c46bac3bef049252efaff285dacb43`;
-- GitHub Actions run: `29277268868`;
-- artifact: `visual-baseline-approval-1-1`;
+- GitHub Actions run capture: `29277268868`;
+- artifact capture: `visual-baseline-approval-1-1`;
 - сценариев: 14 из 14;
 - runtime failures: 0;
 - quality failures: 0;
@@ -17,9 +17,23 @@
 
 ## Статус
 
-PNG и manifest имеют статус `baseline_captured`. Они являются кандидатом на утверждение в отдельном pull request.
+Baseline имеет статус `passed`.
 
-Статус `passed` допускается только после повторного strict capture и comparator на pull request без дополнительных CSS-изменений.
+После добавления PNG и manifest выполнена повторная проверка без дополнительных CSS-, JavaScript- и HTML-изменений:
+
+- pull request: `#231`;
+- strict visual run: `29277435764`;
+- artifact: `visual-baseline-76-1`;
+- strict manifest audit: success;
+- comparator: success;
+- cases compared: 14;
+- `pixel_identical`: 13;
+- `pixel_equivalent`: 14;
+- `antialias_equivalent`: 1;
+- changed cases: 0;
+- significant visual changes: 0.
+
+Матрица `data/css_regression_matrix.csv` переводится в `passed` отдельным текстовым pull request без изменения внешнего вида. Этот pull request повторно запускает strict capture и comparator.
 
 ## Состав
 
