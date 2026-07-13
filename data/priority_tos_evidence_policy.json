@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "description": "Правила защиты доверительных полей четырёх приоритетных карточек ТОС. Изменение этих полей допускается только вместе с зафиксированным ответом, источником и решением редактора.",
+  "slugs": [
+    "ivanovka",
+    "podstepki",
+    "gubari",
+    "tancyrey"
+  ],
+  "ready_review_statuses": [
+    "Частично подтверждено",
+    "Готово к обновлению",
+    "Подтверждено"
+  ],
+  "allowed_decisions": [
+    "partial",
+    "verified"
+  ],
+  "protected_fields": {
+    "chairperson": {
+      "review_flag": "chairperson_confirmed",
+      "publication_consent_if_nonempty": false
+    },
+    "boundaries": {
+      "review_flag": "boundaries_confirmed",
+      "publication_consent_if_nonempty": false
+    },
+    "phones": {
+      "review_flag": "public_phone_confirmed",
+      "publication_consent_if_nonempty": true
+    },
+    "emails": {
+      "review_flag": "email_confirmed",
+      "publication_consent_if_nonempty": true
+    },
+    "chairperson_links": {
+      "review_flag": "social_confirmed",
+      "publication_consent_if_nonempty": true
+    },
+    "social_links": {
+      "review_flag": "social_confirmed",
+      "publication_consent_if_nonempty": true
+    },
+    "logo": {
+      "review_flag": "logo_rights_confirmed",
+      "publication_consent_if_nonempty": true
+    },
+    "trust": {
+      "review_flag": "",
+      "publication_consent_if_nonempty": false
+    }
+  }
+}
