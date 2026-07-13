@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { parseCsv } = require('./lib/csv');
 const { repoPathExists } = require('./lib/path_checks');
 
@@ -8,6 +9,7 @@ const MATRIX_PATH = path.join(ROOT, 'data', 'css_regression_matrix.csv');
 const PAGE_PATH = path.join(ROOT, 'css-maintenance', 'index.html');
 const DOC_PATH = path.join(ROOT, 'docs', 'CSS-MAINTENANCE.md');
 const EVIDENCE_GUIDE_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'README.md');
+const EVIDENCE_MANIFEST_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'manifest.json');
 const CAPTURE_DOC_PATH = path.join(ROOT, 'docs', 'VISUAL-BASELINE-CAPTURE.md');
 const CAPTURE_SCRIPT_PATH = path.join(ROOT, 'scripts', 'capture_visual_baseline.js');
 const CAPTURE_WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'visual-baseline.yml');
@@ -52,6 +54,10 @@ function isHttpUrl(value) {
   return /^https:\/\//i.test(value || '');
 }
 
+function sha256(filePath) {
+  return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
+}
+
 function requireTextTokens(text, tokens, errors, context) {
   tokens.forEach((token) => {
     if (!text.includes(token)) errors.push(`${context} must reference ${token}`);
@@ -83,6 +89,76 @@ function validateEvidenceRef(status, evidenceRef, notes, errors, line) {
   }
 }
 
+function validateManifest(manifest, rowCount, errors) {
+  if (!Number.isInteger(manifest.schema_version) || manifest.schema_version < 3) {
+    errors.push('visual baseline manifest schema_version must be at least 3');
+  }
+  if (manifest.cases_total !== rowCount || manifest.cases_captured !== rowCount) {
+    errors.push(`visual baseline manifest must contain ${rowCount}/${rowCount} cases`);
+  }
+  if (!Array.isArray(manifest.failures) || manifest.failures.length) {
+    errors.push('visual baseline manifest must have an empty failures array');
+  }
+  if (!Array.isArray(manifest.quality_failures) || manifest.quality_failures.length) {
+    errors.push('visual baseline manifest must have an empty quality_failures array');
+  }
+  if (!Array.isArray(manifest.results) || manifest.results.length !== rowCount) {
+    errors.push(`visual baseline manifest results must contain ${rowCount} entries`);
+  }
+}
+
+function validateEvidenceAgainstManifest(item, manifestItem, errors, line) {
+  const {
+    caseId,
+    route,
+    viewportWidth,
+    viewportHeight,
+    theme,
+    interaction,
+    mode,
+    evidenceRef
+  } = item;
+
+  if (!manifestItem) {
+    errors.push(`${line}: missing manifest result for ${caseId}`);
+    return;
+  }
+
+  const evidencePath = path.join(ROOT, evidenceRef);
+  const evidenceName = path.basename(evidenceRef);
+
+  if (manifestItem.screenshot !== evidenceName) {
+    errors.push(`${line}: manifest screenshot ${manifestItem.screenshot} does not match ${evidenceName}`);
+  }
+  if (manifestItem.sha256 !== sha256(evidencePath)) {
+    errors.push(`${line}: evidence SHA-256 does not match manifest for ${caseId}`);
+  }
+  if (manifestItem.route !== route) errors.push(`${line}: manifest route mismatch for ${caseId}`);
+  if (manifestItem.theme !== theme) errors.push(`${line}: manifest theme mismatch for ${caseId}`);
+  if (manifestItem.interaction !== interaction) errors.push(`${line}: manifest interaction mismatch for ${caseId}`);
+  if (manifestItem.mode !== mode) errors.push(`${line}: manifest mode mismatch for ${caseId}`);
+  if (manifestItem.viewport?.width !== viewportWidth || manifestItem.viewport?.height !== viewportHeight) {
+    errors.push(`${line}: manifest viewport mismatch for ${caseId}`);
+  }
+  if (!Array.isArray(manifestItem.technical_violations) || manifestItem.technical_violations.length) {
+    errors.push(`${line}: manifest technical_violations must be empty for ${caseId}`);
+  }
+  if (manifestItem.diagnostics?.horizontalOverflow) {
+    errors.push(`${line}: manifest reports horizontal overflow for ${caseId}`);
+  }
+  if (manifestItem.diagnostics?.htmlTheme !== theme) {
+    errors.push(`${line}: manifest rendered theme mismatch for ${caseId}`);
+  }
+  if (interaction === 'open-menu') {
+    if (!manifestItem.diagnostics?.menuOpen || manifestItem.diagnostics?.menuExpanded !== 'true') {
+      errors.push(`${line}: manifest mobile menu state is invalid for ${caseId}`);
+    }
+  }
+  if ((manifestItem.console_errors || []).length) errors.push(`${line}: manifest contains console errors for ${caseId}`);
+  if ((manifestItem.page_errors || []).length) errors.push(`${line}: manifest contains page errors for ${caseId}`);
+  if ((manifestItem.failed_requests || []).length) errors.push(`${line}: manifest contains failed requests for ${caseId}`);
+}
+
 function main() {
   const errors = [];
 
@@ -91,6 +167,7 @@ function main() {
     PAGE_PATH,
     DOC_PATH,
     EVIDENCE_GUIDE_PATH,
+    EVIDENCE_MANIFEST_PATH,
     CAPTURE_DOC_PATH,
     CAPTURE_SCRIPT_PATH,
     CAPTURE_WORKFLOW_PATH
@@ -104,17 +181,21 @@ function main() {
   const pageHtml = fs.readFileSync(PAGE_PATH, 'utf8');
   const docText = fs.readFileSync(DOC_PATH, 'utf8');
   const evidenceGuide = fs.readFileSync(EVIDENCE_GUIDE_PATH, 'utf8');
+  const evidenceManifest = JSON.parse(fs.readFileSync(EVIDENCE_MANIFEST_PATH, 'utf8'));
   const captureDoc = fs.readFileSync(CAPTURE_DOC_PATH, 'utf8');
   const captureScript = fs.readFileSync(CAPTURE_SCRIPT_PATH, 'utf8');
   const captureWorkflow = fs.readFileSync(CAPTURE_WORKFLOW_PATH, 'utf8');
   const headers = (rows[0] || []).map(normalize);
+  const rowCount = Math.max(0, rows.length - 1);
 
   if (headers.join('|') !== expectedHeaders.join('|')) {
     errors.push(`unexpected headers: ${headers.join(', ')}`);
   }
 
   if (rows.length < 11) errors.push('matrix must contain at least 10 control cases');
+  validateManifest(evidenceManifest, rowCount, errors);
 
+  const manifestById = new Map((evidenceManifest.results || []).map((item) => [item.case_id, item]));
   const seenIds = new Set();
   const seenRoutes = new Set();
   const seenWidths = new Set();
@@ -171,6 +252,19 @@ function main() {
     if (!allowedStatuses.has(status)) errors.push(`${line}: unsupported status ${status}`);
 
     validateEvidenceRef(status, evidenceRef, notes, errors, line);
+
+    if (['baseline_captured', 'passed'].includes(status) && evidenceRef && !isHttpUrl(evidenceRef) && fs.existsSync(path.join(ROOT, evidenceRef))) {
+      validateEvidenceAgainstManifest({
+        caseId,
+        route,
+        viewportWidth,
+        viewportHeight,
+        theme,
+        interaction,
+        mode,
+        evidenceRef
+      }, manifestById.get(caseId), errors, line);
+    }
 
     if (interaction === 'open-menu') {
       mobileMenuCases += 1;
@@ -245,7 +339,7 @@ function main() {
     throw new Error(`CSS regression matrix audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`CSS regression matrix OK: ${rows.length - 1} cases, ${seenRoutes.size} routes, ${seenWidths.size} viewport widths`);
+  console.log(`CSS regression matrix OK: ${rowCount} cases, ${seenRoutes.size} routes, ${seenWidths.size} viewport widths, durable evidence verified`);
 }
 
 main();
