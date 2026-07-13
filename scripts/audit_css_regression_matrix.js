@@ -7,6 +7,7 @@ const ROOT = process.cwd();
 const MATRIX_PATH = path.join(ROOT, 'data', 'css_regression_matrix.csv');
 const PAGE_PATH = path.join(ROOT, 'css-maintenance', 'index.html');
 const DOC_PATH = path.join(ROOT, 'docs', 'CSS-MAINTENANCE.md');
+const EVIDENCE_GUIDE_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'README.md');
 
 const expectedHeaders = [
   'case_id',
@@ -44,10 +45,39 @@ function normalize(value) {
   return String(value || '').replace(/^\uFEFF/, '').trim();
 }
 
+function isHttpUrl(value) {
+  return /^https:\/\//i.test(value || '');
+}
+
+function validateEvidenceRef(status, evidenceRef, notes, errors, line) {
+  const requiresEvidence = ['baseline_captured', 'passed', 'failed'].includes(status);
+
+  if (status === 'baseline_required' && evidenceRef) {
+    errors.push(`${line}: baseline_required must not contain evidence_ref`);
+  }
+
+  if (requiresEvidence && !evidenceRef) {
+    errors.push(`${line}: ${status} requires evidence_ref`);
+  }
+
+  if (evidenceRef && !isHttpUrl(evidenceRef)) {
+    if (!evidenceRef.startsWith('docs/visual-baseline/')) {
+      errors.push(`${line}: local evidence_ref must be stored under docs/visual-baseline/`);
+    }
+    if (!repoPathExists(evidenceRef)) {
+      errors.push(`${line}: local evidence_ref does not exist ${evidenceRef}`);
+    }
+  }
+
+  if (['failed', 'blocked'].includes(status) && !notes) {
+    errors.push(`${line}: ${status} requires notes with the observed problem or blocking reason`);
+  }
+}
+
 function main() {
   const errors = [];
 
-  [MATRIX_PATH, PAGE_PATH, DOC_PATH].forEach((filePath) => {
+  [MATRIX_PATH, PAGE_PATH, DOC_PATH, EVIDENCE_GUIDE_PATH].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${path.relative(ROOT, filePath)}`);
   });
 
@@ -56,6 +86,7 @@ function main() {
   const rows = parseCsv(fs.readFileSync(MATRIX_PATH, 'utf8'));
   const pageHtml = fs.readFileSync(PAGE_PATH, 'utf8');
   const docText = fs.readFileSync(DOC_PATH, 'utf8');
+  const evidenceGuide = fs.readFileSync(EVIDENCE_GUIDE_PATH, 'utf8');
   const headers = (rows[0] || []).map(normalize);
 
   if (headers.join('|') !== expectedHeaders.join('|')) {
@@ -86,7 +117,8 @@ function main() {
       mode,
       expectedCheck,
       status,
-      evidenceRef
+      evidenceRef,
+      notes
     ] = values;
 
     const viewportWidth = Number(viewportWidthRaw);
@@ -118,9 +150,7 @@ function main() {
     if (!expectedCheck) errors.push(`${line}: missing expected_check`);
     if (!allowedStatuses.has(status)) errors.push(`${line}: unsupported status ${status}`);
 
-    if (['baseline_captured', 'passed', 'failed'].includes(status) && !evidenceRef) {
-      errors.push(`${line}: ${status} requires evidence_ref`);
-    }
+    validateEvidenceRef(status, evidenceRef, notes, errors, line);
 
     if (interaction === 'open-menu') {
       mobileMenuCases += 1;
@@ -158,6 +188,12 @@ function main() {
   }
   if (!docText.includes('data/css_regression_matrix.csv')) {
     errors.push('CSS maintenance documentation must reference data/css_regression_matrix.csv');
+  }
+  if (!docText.includes('docs/visual-baseline/README.md')) {
+    errors.push('CSS maintenance documentation must reference docs/visual-baseline/README.md');
+  }
+  if (!evidenceGuide.includes('data/css_regression_matrix.csv')) {
+    errors.push('visual baseline evidence guide must reference data/css_regression_matrix.csv');
   }
 
   if (errors.length) {
