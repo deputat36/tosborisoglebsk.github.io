@@ -103,15 +103,22 @@ function main() {
   }
 
   requireFragments(errors, 'priority TOS request page', pageHtml, [
+    'id="priority-tos-readiness"',
+    'id="priority-tos-readiness-title"',
+    'aria-labelledby="priority-tos-readiness-title"',
     '/assets/js/priority-tos-readiness.js'
   ]);
   requireFragments(errors, 'priority readiness client', clientJs, [
     '/data/priority_tos_update_readiness.json',
-    'priority-tos-readiness',
+    "document.getElementById('priority-tos-readiness')",
+    'priorityReadinessMarkup',
     'stage_label',
     'blockers',
     'next_action'
   ]);
+  if (/createElement\(['"]section['"]\)|insertAdjacentElement/.test(clientJs)) {
+    errors.push('priority readiness client must fill the static section instead of creating a dynamic anchor');
+  }
   requireFragments(errors, 'site-health page', siteHealthHtml, [
     '/assets/js/site-health-priority-readiness.js',
     '/data-requests/priority-tos/#priority-tos-readiness',
@@ -136,7 +143,7 @@ function main() {
     throw new Error(`Priority TOS readiness audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Priority TOS readiness OK: ${report.summary.total} cards, ${report.summary.ready_for_card_update} ready for update, site-health enriched`);
+  console.log(`Priority TOS readiness OK: ${report.summary.total} cards, ${report.summary.ready_for_card_update} ready for update, static anchor and site-health integration verified`);
 }
 
 main();
