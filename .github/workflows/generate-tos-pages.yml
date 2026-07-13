@@ -7,6 +7,7 @@ on:
       - release-2025-12-22
     paths:
       - '**/index.html'
+      - 'admin/**'
       - 'data/*.json'
       - 'data/*.csv'
       - 'scripts/*.js'
@@ -19,6 +20,7 @@ on:
       - release-2025-12-22
     paths:
       - '**/index.html'
+      - 'admin/**'
       - 'data/*.json'
       - 'data/*.csv'
       - 'scripts/*.js'
@@ -50,7 +52,7 @@ jobs:
           node-version: '24'
       - name: Check JavaScript syntax
         run: |
-          find scripts assets/js -name "*.js" -print0 | xargs -0 -n1 node --check
+          find scripts assets/js admin -name "*.js" -print0 | xargs -0 -n1 node --check
       - name: Guard priority TOS update evidence
         run: node scripts/audit_priority_tos_update_evidence.js
       - name: Test priority TOS update evidence guard
