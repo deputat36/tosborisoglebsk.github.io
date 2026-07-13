@@ -33,6 +33,6 @@ async function renderHomeStats(){
     ['Проектов с ТОС',linkedProjects,'Привязаны к конкретным территориям'],
     ['Событий с ТОС',linkedEvents,'Отображаются на страницах ТОСов']
   ];
-  root.innerHTML=stats.map(([value,label,hint])=>`<article class="stat-card"><b>${esc(value)}</b><span>${esc(label)}</span><em>${esc(hint)}</em></article>`).join('');
+  root.innerHTML=stats.map(([label,value,hint])=>`<article class="stat-card"><b>${esc(value)}</b><span>${esc(label)}</span><em>${esc(hint)}</em></article>`).join('');
 }
 renderHomeStats();
