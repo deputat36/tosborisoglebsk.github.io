@@ -276,6 +276,7 @@ function makePage(tos, data) {
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <link rel="stylesheet" href="/assets/css/tos-detail-responsive.css"/>
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
 </head>
 <body>

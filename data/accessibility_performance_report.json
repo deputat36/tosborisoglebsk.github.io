@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T18:44:12.839Z",
+  "generated_at": "2026-07-13T19:01:54.276Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 266,
+    "asset_files": 269,
     "over_budget_assets": 0,
-    "total_css_bytes": 32380,
-    "total_js_bytes": 1379762,
+    "total_css_bytes": 33178,
+    "total_js_bytes": 1385895,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -53,7 +53,7 @@
       "path": "scripts/generate_tos_pages.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 26064,
+      "size_bytes": 26136,
       "over_budget": false
     },
     {
