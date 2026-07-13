@@ -20,6 +20,41 @@ Workflow `.github/workflows/visual-baseline.yml` воспроизводимо с
 
 Контур нужен для подготовки visual evidence на актуальной ветке `release-2025-12-22`. Он работает с правами `contents: read` и не может записывать изменения в репозиторий.
 
+## Два уровня строгости
+
+### Измерительный режим
+
+Пока утверждённого baseline нет, workflow должен показать фактическое состояние сайта, а не заблокировать внедрение самого инструмента.
+
+В измерительном режиме:
+
+- обязательно снимаются все 14 сценариев;
+- runtime failures блокируют workflow;
+- отсутствие PNG или manifest блокирует workflow;
+- несовпадение SHA-256 или размера PNG блокирует workflow;
+- console errors, page errors и failed requests блокируют workflow;
+- horizontal overflow и другие quality findings записываются в manifest и лог, но сами по себе не блокируют tooling-PR;
+- artifact сохраняется для отдельного анализа и исправления найденных проблем.
+
+Capture-скрипт может завершиться кодом ошибки после записи manifest из-за quality findings. Шаг workflow имеет `continue-on-error: true`, но следующий аудит manifest проверяет, что это именно измерительное замечание, а не потеря снимков или runtime-дефект.
+
+### Строгий режим
+
+Строгий режим автоматически включается, когда в репозитории появляется утверждённый `docs/visual-baseline/manifest.json` и выполняется pull request либо запрошено ручное сравнение.
+
+В строгом режиме дополнительно блокируются:
+
+- quality failures;
+- horizontal overflow;
+- любые technical violations;
+- значимые пиксельные отличия от утверждённого baseline;
+- отсутствие или изменение контрольного сценария.
+
+Переключение реализовано переменной `VISUAL_CAPTURE_STRICT_QUALITY`:
+
+- `false` — измерительный режим;
+- `true` — строгий режим.
+
 ## Режимы запуска
 
 ### Pull request
@@ -39,7 +74,7 @@ Workflow `.github/workflows/visual-baseline.yml` воспроизводимо с
 Параметр `compare_approved`:
 
 - `false` — только снять кандидаты и сформировать artifact;
-- `true` — дополнительно сравнить с утверждённым baseline.
+- `true` — дополнительно выполнить строгий аудит и сравнить с утверждённым baseline.
 
 Если выбран `compare_approved=true`, но manifest отсутствует, workflow завершается ошибкой вместо пропуска проверки.
 
@@ -51,9 +86,10 @@ Workflow `.github/workflows/visual-baseline.yml` воспроизводимо с
 4. Для каждого случая задаёт точный viewport, тему и действие.
 5. Делает PNG-снимок.
 6. Записывает `manifest.json` с SHA-256, размером файла, маршрутом, режимом и диагностикой страницы.
-7. Запускает `scripts/audit_visual_capture_manifest.js`.
-8. При наличии утверждённого baseline запускает `scripts/compare_visual_baseline.js`.
-9. Загружает capture, manifest, логи и comparison как GitHub Actions artifact.
+7. Запускает `scripts/audit_visual_capture_manifest.js` в измерительном режиме.
+8. При наличии утверждённого baseline повторяет аудит в строгом режиме.
+9. При наличии утверждённого baseline запускает `scripts/compare_visual_baseline.js`.
+10. Загружает capture, manifest, логи и comparison как GitHub Actions artifact.
 
 ## Поддерживаемые действия
 
@@ -76,7 +112,7 @@ Workflow `.github/workflows/visual-baseline.yml` воспроизводимо с
 - элементы с внешним и внутренним overflow;
 - технические нарушения каждого случая.
 
-Capture считается чистым только когда:
+Capture считается полностью чистым только когда:
 
 - сняты все 14 сценариев;
 - runtime failures отсутствуют;
@@ -85,6 +121,8 @@ Capture считается чистым только когда:
 - console errors и page errors отсутствуют;
 - failed requests отсутствуют;
 - SHA-256 и размер каждого PNG совпадают с manifest.
+
+Нечистый по quality capture может использоваться для диагностики, но не может быть утверждён как baseline.
 
 ## Comparator
 
@@ -120,10 +158,11 @@ Artifact capture не является утверждённым baseline.
 2. визуально проверить все 14 PNG;
 3. проверить manifest и отсутствие закрытых данных;
 4. убедиться, что capture сделан на актуальном main;
-5. создать отдельный pull request только с утверждёнными PNG, manifest и обновлением `evidence_ref`;
-6. провести отдельный визуальный review;
-7. после слияния запустить compare на неизменённой ветке;
-8. только после успешного сравнения рассматривать статус `passed`.
+5. устранить все quality findings;
+6. создать отдельный pull request только с утверждёнными PNG, manifest и обновлением `evidence_ref`;
+7. провести отдельный визуальный review;
+8. после слияния запустить compare на неизменённой ветке;
+9. только после успешного сравнения рассматривать статус `passed`.
 
 ## Локальный запуск
 
@@ -132,12 +171,13 @@ npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0
 npx playwright install chromium
 python3 -m http.server 4173 --bind 127.0.0.1
 node scripts/capture_visual_baseline.js
-node scripts/audit_visual_capture_manifest.js
+VISUAL_CAPTURE_STRICT_QUALITY=false node scripts/audit_visual_capture_manifest.js
 ```
 
-Сравнение после появления утверждённого baseline:
+Строгий аудит и сравнение после появления утверждённого baseline:
 
 ```bash
+VISUAL_CAPTURE_STRICT_QUALITY=true node scripts/audit_visual_capture_manifest.js
 node scripts/compare_visual_baseline.js
 ```
 
@@ -148,5 +188,6 @@ node scripts/compare_visual_baseline.js
 - Скриншот не подтверждает корректность фактов и контактов.
 - Print media фиксирует CSS-представление, но не системный диалог печати браузера.
 - Внешние ресурсы не должны маскировать failed requests.
+- Измерительный режим не означает, что найденное переполнение допустимо для baseline.
 - Намеренное изменение дизайна требует отдельного visual review и осознанного обновления PNG.
 - Draft PR #220 не является источником утверждённого baseline для актуального main.
