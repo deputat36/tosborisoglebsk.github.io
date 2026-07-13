@@ -17,7 +17,10 @@ const requiredFiles = [
   'admin/admin2.js',
   'admin/admin-logo-tools.js',
   'admin/admin-dashboard.js',
-  'docs/ADMIN-CONSOLIDATION-2026-07-13.md'
+  'admin/admin-export-tools.js',
+  'admin/admin-history.js',
+  'docs/ADMIN-CONSOLIDATION-2026-07-13.md',
+  'docs/ADMIN-SAFE-TOOLS-2026-07-13.md'
 ];
 
 const forbiddenFiles = [
@@ -32,7 +35,9 @@ const forbiddenFiles = [
 const expectedScripts = [
   '/admin/admin2.js',
   '/admin/admin-logo-tools.js',
-  '/admin/admin-dashboard.js'
+  '/admin/admin-dashboard.js',
+  '/admin/admin-export-tools.js',
+  '/admin/admin-history.js'
 ];
 
 const errors = [];
@@ -174,10 +179,12 @@ requireTokens(documentation, [
   'admin/admin2.js',
   'admin/admin-logo-tools.js',
   'admin/admin-dashboard.js',
+  'admin/admin-export-tools.js',
+  'admin/admin-history.js',
   'Удалённые файлы',
   'не обращается к `api.github.com`',
   'Прямая запись в GitHub намеренно не используется',
-  'Этот пакет не добавляет новые функции редактора'
+  'одна поддерживаемая HTML-страница и пять модулей'
 ], 'admin consolidation documentation');
 
 if (errors.length) {
