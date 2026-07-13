@@ -92,7 +92,7 @@ requireTokens(report, [
   'changed cases: 0',
   'missing current cases: 0',
   'unexpected current cases: 0',
-  'status `passed`'
+  'Статус `passed` означает'
 ], 'visual comparison report');
 
 if (matrixText) {
