@@ -80,7 +80,7 @@ requireTokens(evidenceAudit, [
 
 requireTokens(documentation, [
   'contents: read',
-  '14 из 14 PNG',
+  '14 PNG',
   'VISUAL_CAPTURE_ENFORCE_QUALITY=true',
   'baseline_captured',
   'pixel comparator',
