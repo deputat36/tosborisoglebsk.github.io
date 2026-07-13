@@ -73,6 +73,7 @@ const checks = [
   ['Registry workflow audit', 'scripts/audit_registry_workflow.js'],
   ['CSS maintenance inventory audit', 'scripts/audit_css_maintenance_inventory.js'],
   ['CSS visual regression matrix audit', 'scripts/audit_css_regression_matrix.js'],
+  ['Visual comparison integration audit', 'scripts/audit_visual_comparison_integration.js'],
   ['User journey matrix audit', 'scripts/audit_user_journey_matrix.js'],
   ['Technical diagnostics audit', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links audit', 'scripts/audit_open_data_links.js'],
