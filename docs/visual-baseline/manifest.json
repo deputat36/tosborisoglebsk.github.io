@@ -1,0 +1,965 @@
+{
+  "schema_version": 3,
+  "captured_at": "2026-07-13T19:08:53.921Z",
+  "repository": "deputat36/tosborisoglebsk.github.io",
+  "commit_sha": "c090990a74c46bac3bef049252efaff285dacb43",
+  "workflow_run_id": "29277268868",
+  "workflow_run_attempt": "1",
+  "base_url": "http://127.0.0.1:4173",
+  "matrix_path": "data/css_regression_matrix.csv",
+  "output_path": "docs/visual-baseline",
+  "browser": "chromium",
+  "cases_total": 14,
+  "cases_captured": 14,
+  "failures": [],
+  "quality_failures": [],
+  "results": [
+    {
+      "case_id": "css-reg-001",
+      "area": "Главная",
+      "route": "/",
+      "target_url": "http://127.0.0.1:4173/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Hero, карточки, портал и футер без смещений",
+      "screenshot": "css-reg-001.png",
+      "sha256": "f2a436ddd917def06915ae1ce6234bd37fca17df68a1623be7c441bb3dfb353c",
+      "bytes": 448688,
+      "diagnostics": {
+        "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card.home-hero",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-002",
+      "area": "Главная",
+      "route": "/",
+      "target_url": "http://127.0.0.1:4173/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "dark",
+      "interaction": "toggle-theme",
+      "mode": "screen",
+      "expected_check": "Тёмная тема сохраняет контраст, поверхности и границы",
+      "screenshot": "css-reg-002.png",
+      "sha256": "a56d80d2eba4c9a62e66a995cf2f0d13bb82b3d53f269600a449e13d77602273",
+      "bytes": 313918,
+      "diagnostics": {
+        "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
+        "htmlTheme": "dark",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card.home-hero",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-003",
+      "area": "Главная мобильная",
+      "route": "/",
+      "target_url": "http://127.0.0.1:4173/",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "theme": "light",
+      "interaction": "open-menu",
+      "mode": "screen",
+      "expected_check": "Мобильное меню открывается, не выходит за экран и не перекрывает действия",
+      "screenshot": "css-reg-003.png",
+      "sha256": "794bac3a4baa0f730397c43d1af1010332dc05c1f13da6c9b4c0fa4cf1430b98",
+      "bytes": 130902,
+      "diagnostics": {
+        "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
+        "htmlTheme": "light",
+        "documentScrollWidth": 360,
+        "documentClientWidth": 360,
+        "bodyScrollWidth": 360,
+        "bodyClientWidth": 360,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card.home-hero",
+            "left": 11,
+            "right": 349,
+            "width": 338,
+            "scrollWidth": 406,
+            "clientWidth": 336,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "true",
+        "menuOpen": true
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-004",
+      "area": "Каталог ТОС",
+      "route": "/tos/",
+      "target_url": "http://127.0.0.1:4173/tos/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Фильтры, карточки и логотипы сохраняют сетку",
+      "screenshot": "css-reg-004.png",
+      "sha256": "78320e3ae7b62041f2a5d58bbe325be85326b055a0adaebe76190433cc566805",
+      "bytes": 188397,
+      "diagnostics": {
+        "title": "Каталог ТОС Борисоглебского городского округа",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-005",
+      "area": "Каталог ТОС мобильный",
+      "route": "/tos/",
+      "target_url": "http://127.0.0.1:4173/tos/",
+      "viewport": {
+        "width": 620,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Фильтры и карточки переходят в одноколоночный режим без горизонтальной прокрутки",
+      "screenshot": "css-reg-005.png",
+      "sha256": "bf0db25b8a225a6453937d16e96a488ac341260b23d50cb7e2d43bfb5a6af867",
+      "bytes": 135982,
+      "diagnostics": {
+        "title": "Каталог ТОС Борисоглебского городского округа",
+        "htmlTheme": "light",
+        "documentScrollWidth": 620,
+        "documentClientWidth": 620,
+        "bodyScrollWidth": 620,
+        "bodyClientWidth": 620,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 11,
+            "right": 609,
+            "width": 598,
+            "scrollWidth": 666,
+            "clientWidth": 596,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-006",
+      "area": "Карточка ТОС",
+      "route": "/tos/mirolyubie/",
+      "target_url": "http://127.0.0.1:4173/tos/mirolyubie/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Hero, паспорт, связанные блоки и действия отображаются без смещений",
+      "screenshot": "css-reg-006.png",
+      "sha256": "8f459b9930804c7eb92cba3800f9a9836da45479477e19a7f2f33164def5d8d0",
+      "bytes": 132925,
+      "diagnostics": {
+        "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-007",
+      "area": "Карточка ТОС мобильная",
+      "route": "/tos/mirolyubie/",
+      "target_url": "http://127.0.0.1:4173/tos/mirolyubie/",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "theme": "dark",
+      "interaction": "toggle-theme",
+      "mode": "screen",
+      "expected_check": "Карточки складываются в одну колонку, текст и действия читаемы",
+      "screenshot": "css-reg-007.png",
+      "sha256": "0a479d75c6edaa2dbfb2867223b4c37d0849c3f7b02a463320f10837dd6563ee",
+      "bytes": 105064,
+      "diagnostics": {
+        "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
+        "htmlTheme": "dark",
+        "documentScrollWidth": 360,
+        "documentClientWidth": 360,
+        "bodyScrollWidth": 360,
+        "bodyClientWidth": 360,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 11,
+            "right": 349,
+            "width": 338,
+            "scrollWidth": 406,
+            "clientWidth": 336,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-008",
+      "area": "Новости",
+      "route": "/news/",
+      "target_url": "http://127.0.0.1:4173/news/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Фильтры и список новостей сохраняют размеры и интервалы",
+      "screenshot": "css-reg-008.png",
+      "sha256": "09fb3a35617f4e93a0fd849df0d3ecd2c8b555047da52734ab0cfcf046943cbf",
+      "bytes": 170319,
+      "diagnostics": {
+        "title": "Новости ТОС БГО — лента, фотоотчёты, объявления и полезные материалы",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-009",
+      "area": "Отдельная новость",
+      "route": "/news/vk-community-channel-2026/",
+      "target_url": "http://127.0.0.1:4173/news/vk-community-channel-2026/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Заголовок, основной текст, источник и связанные действия читаемы",
+      "screenshot": "css-reg-009.png",
+      "sha256": "1637d2a20e3130a72293a97940a69b8d88a23cfec414a3e3c2e344fdfa3e2cfe",
+      "bytes": 188455,
+      "diagnostics": {
+        "title": "Для ТОСов БГО появился единый онлайн-канал связи | ТОС БГО",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-010",
+      "area": "Рабочая панель",
+      "route": "/workbench/",
+      "target_url": "http://127.0.0.1:4173/workbench/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Сводки, карточки и рабочие действия сохраняют сетку",
+      "screenshot": "css-reg-010.png",
+      "sha256": "c0abcc822d2899505e0b66dcd9b4c6ab819fcbe524c046ff4dca528dc34085b6",
+      "bytes": 200811,
+      "diagnostics": {
+        "title": "Рабочая панель портала ТОС БГО",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-011",
+      "area": "Табличная страница",
+      "route": "/site-health/",
+      "target_url": "http://127.0.0.1:4173/site-health/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Таблицы, метрики и уведомления не обрезаются",
+      "screenshot": "css-reg-011.png",
+      "sha256": "b68c1e1e0c4915308a3579f24d2ed03f7589e2e42aa52edebe3a8ade3d753899",
+      "bytes": 201727,
+      "diagnostics": {
+        "title": "Аудит и здоровье сайта ТОС БГО",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 16,
+            "right": 1164,
+            "width": 1148,
+            "scrollWidth": 1216,
+            "clientWidth": 1146,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-012",
+      "area": "Табличная страница мобильная",
+      "route": "/site-health/",
+      "target_url": "http://127.0.0.1:4173/site-health/",
+      "viewport": {
+        "width": 620,
+        "height": 900
+      },
+      "theme": "dark",
+      "interaction": "toggle-theme",
+      "mode": "screen",
+      "expected_check": "Метрики и таблицы остаются доступными без наложений",
+      "screenshot": "css-reg-012.png",
+      "sha256": "a4a002a006064a1eb7369bafa318966420a65aedaa48d435e93f9ed84747688c",
+      "bytes": 165285,
+      "diagnostics": {
+        "title": "Аудит и здоровье сайта ТОС БГО",
+        "htmlTheme": "dark",
+        "documentScrollWidth": 620,
+        "documentClientWidth": 620,
+        "bodyScrollWidth": 620,
+        "bodyClientWidth": 620,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "th",
+            "left": 602,
+            "right": 691,
+            "width": 89,
+            "scrollWidth": 89,
+            "clientWidth": 89,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "td",
+            "left": 602,
+            "right": 691,
+            "width": 89,
+            "scrollWidth": 89,
+            "clientWidth": 89,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "td",
+            "left": 602,
+            "right": 691,
+            "width": 89,
+            "scrollWidth": 89,
+            "clientWidth": 89,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "td",
+            "left": 602,
+            "right": 691,
+            "width": 89,
+            "scrollWidth": 89,
+            "clientWidth": 89,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "td",
+            "left": 602,
+            "right": 691,
+            "width": 89,
+            "scrollWidth": 89,
+            "clientWidth": 89,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "table",
+            "left": 11,
+            "right": 693,
+            "width": 682,
+            "scrollWidth": 682,
+            "clientWidth": 682,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "thead",
+            "left": 13,
+            "right": 691,
+            "width": 678,
+            "scrollWidth": 678,
+            "clientWidth": 678,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "tr",
+            "left": 13,
+            "right": 691,
+            "width": 678,
+            "scrollWidth": 678,
+            "clientWidth": 678,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "tbody",
+            "left": 13,
+            "right": 691,
+            "width": 678,
+            "scrollWidth": 678,
+            "clientWidth": 678,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "tr",
+            "left": 13,
+            "right": 691,
+            "width": 678,
+            "scrollWidth": 678,
+            "clientWidth": 678,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "tr",
+            "left": 13,
+            "right": 691,
+            "width": 678,
+            "scrollWidth": 678,
+            "clientWidth": 678,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "tr",
+            "left": 13,
+            "right": 691,
+            "width": 678,
+            "scrollWidth": 678,
+            "clientWidth": 678,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "tr",
+            "left": 13,
+            "right": 691,
+            "width": 678,
+            "scrollWidth": 678,
+            "clientWidth": 678,
+            "position": "static",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.table",
+            "left": 11,
+            "right": 609,
+            "width": 598,
+            "scrollWidth": 682,
+            "clientWidth": 598,
+            "position": "static",
+            "overflowX": "hidden"
+          },
+          {
+            "selector": "div.container.hero-card",
+            "left": 11,
+            "right": 609,
+            "width": 598,
+            "scrollWidth": 666,
+            "clientWidth": 596,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-013",
+      "area": "Быстрые маршруты",
+      "route": "/workbench-routes/",
+      "target_url": "http://127.0.0.1:4173/workbench-routes/",
+      "viewport": {
+        "width": 900,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "expected_check": "Карточки маршрутов и группы кнопок сохраняют структуру",
+      "screenshot": "css-reg-013.png",
+      "sha256": "0e26bbe85c6740a21d118cd8311024ec55d4b7a2d22c18ff4a4f6fb696868e88",
+      "bytes": 185149,
+      "diagnostics": {
+        "title": "Быстрые маршруты редактора ТОС БГО",
+        "htmlTheme": "light",
+        "documentScrollWidth": 900,
+        "documentClientWidth": 900,
+        "bodyScrollWidth": 900,
+        "bodyClientWidth": 900,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 16,
+            "right": 884,
+            "width": 868,
+            "scrollWidth": 936,
+            "clientWidth": 866,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    },
+    {
+      "case_id": "css-reg-014",
+      "area": "Печать чек-листа",
+      "route": "/field-checklist/",
+      "target_url": "http://127.0.0.1:4173/field-checklist/",
+      "viewport": {
+        "width": 1180,
+        "height": 900
+      },
+      "theme": "light",
+      "interaction": "print-preview",
+      "mode": "print",
+      "expected_check": "Шапка и кнопки скрыты, содержимое помещается на лист без обрезки",
+      "screenshot": "css-reg-014.png",
+      "sha256": "d5f67db44cf9c6e72fb2d7dee7418fa1086b2f2725acce3406c60ca7e6de4ac0",
+      "bytes": 264730,
+      "diagnostics": {
+        "title": "Чек-лист проверки карточки ТОС БГО",
+        "htmlTheme": "light",
+        "documentScrollWidth": 1180,
+        "documentClientWidth": 1180,
+        "bodyScrollWidth": 1180,
+        "bodyClientWidth": 1180,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [
+          {
+            "selector": "div.container.hero-card",
+            "left": 0,
+            "right": 1180,
+            "width": 1180,
+            "scrollWidth": 1248,
+            "clientWidth": 1178,
+            "position": "relative",
+            "overflowX": "hidden"
+          }
+        ],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": []
+    }
+  ],
+  "approval_status": "baseline_captured",
+  "approved_at": "2026-07-13T19:08:54.018Z",
+  "approved_source": {
+    "branch": "approve-visual-baseline-main-2026-07-13",
+    "commit_sha": "c090990a74c46bac3bef049252efaff285dacb43",
+    "workflow_run_id": "29277268868",
+    "workflow_run_attempt": "1",
+    "artifact": "visual-baseline-approval-1-1"
+  }
+}
