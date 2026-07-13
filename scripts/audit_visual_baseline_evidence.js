@@ -7,6 +7,7 @@ const ROOT = process.cwd();
 const BASELINE_DIR = path.join(ROOT, 'docs', 'visual-baseline');
 const MANIFEST_PATH = path.join(BASELINE_DIR, 'manifest.json');
 const README_PATH = path.join(BASELINE_DIR, 'README.md');
+const COMPARISON_REPORT_PATH = path.join(BASELINE_DIR, 'COMPARISON-2026-07-13.md');
 const MATRIX_PATH = path.join(ROOT, 'data', 'css_regression_matrix.csv');
 const errors = [];
 
@@ -26,7 +27,7 @@ function requireFile(filePath) {
   return true;
 }
 
-if (requireFile(MANIFEST_PATH) && requireFile(MATRIX_PATH) && requireFile(README_PATH)) {
+if (requireFile(MANIFEST_PATH) && requireFile(MATRIX_PATH) && requireFile(README_PATH) && requireFile(COMPARISON_REPORT_PATH)) {
   let manifest;
   try {
     manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
@@ -42,7 +43,7 @@ if (requireFile(MANIFEST_PATH) && requireFile(MATRIX_PATH) && requireFile(README
     if (!manifest.enforce_quality) errors.push('manifest must be captured with strict quality enforcement');
     if (!Array.isArray(manifest.failures) || manifest.failures.length) errors.push('manifest failures must be an empty array');
     if (!Array.isArray(manifest.quality_failures) || manifest.quality_failures.length) errors.push('manifest quality_failures must be an empty array');
-    if (!manifest.approval || manifest.approval.status !== 'baseline_captured') errors.push('manifest approval.status must be baseline_captured');
+    if (!manifest.approval || manifest.approval.status !== 'baseline_captured') errors.push('manifest approval.status must remain baseline_captured');
     if (!manifest.approval?.reviewed) errors.push('manifest approval.reviewed must be true');
     if (!manifest.approval?.reviewed_at) errors.push('manifest approval.reviewed_at is required');
     if (!manifest.approval?.source_workflow_run_id) errors.push('manifest approval.source_workflow_run_id is required');
@@ -87,11 +88,15 @@ if (requireFile(MANIFEST_PATH) && requireFile(MATRIX_PATH) && requireFile(README
       const caseId = normalize(row[0]);
       const status = normalize(row[9]);
       const evidenceRef = normalize(row[10]);
+      const notes = normalize(row[11]);
       const expectedRef = `docs/visual-baseline/${caseId}.png`;
       if (seenMatrixIds.has(caseId)) errors.push(`matrix row ${index + 2}: duplicate case_id ${caseId}`);
       seenMatrixIds.add(caseId);
-      if (status !== 'baseline_captured') errors.push(`matrix row ${index + 2}: status must be baseline_captured`);
+      if (status !== 'passed') errors.push(`matrix row ${index + 2}: status must be passed after comparator`);
       if (evidenceRef !== expectedRef) errors.push(`matrix row ${index + 2}: evidence_ref must be ${expectedRef}`);
+      if (!notes.includes('pixel_identical=true') || !notes.includes('pixel_equivalent=true')) {
+        errors.push(`matrix row ${index + 2}: notes must record successful comparator result`);
+      }
       if (!resultById.has(caseId)) errors.push(`matrix row ${index + 2}: case missing from manifest ${caseId}`);
       if (!requireFile(path.join(ROOT, evidenceRef))) errors.push(`matrix row ${index + 2}: evidence file does not exist ${evidenceRef}`);
     });
@@ -118,8 +123,21 @@ const readme = fs.existsSync(README_PATH) ? fs.readFileSync(README_PATH, 'utf8')
   if (!readme.includes(token)) errors.push(`visual baseline README must contain ${token}`);
 });
 
+const comparisonReport = fs.existsSync(COMPARISON_REPORT_PATH) ? fs.readFileSync(COMPARISON_REPORT_PATH, 'utf8') : '';
+[
+  'Comparator run: `29277336532`',
+  'pixel_identical: 14',
+  'pixel_equivalent: 14',
+  'changed cases: 0',
+  'missing current cases: 0',
+  'unexpected current cases: 0',
+  'status `passed`'
+].forEach((token) => {
+  if (!comparisonReport.includes(token)) errors.push(`visual comparison report must contain ${token}`);
+});
+
 if (errors.length) {
   throw new Error(`Visual baseline evidence audit failed:\n${errors.join('\n')}`);
 }
 
-console.log('Visual baseline evidence audit OK: 14 PNG files, manifest hashes and matrix references verified');
+console.log('Visual baseline evidence audit OK: 14 PNG files, manifest hashes, passed matrix and comparison report verified');
