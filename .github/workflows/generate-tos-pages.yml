@@ -9,7 +9,7 @@ on:
       - '**/index.html'
       - 'data/*.json'
       - 'data/*.csv'
-      - 'scripts/*.js'
+      - 'scripts/**/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
@@ -21,7 +21,7 @@ on:
       - '**/index.html'
       - 'data/*.json'
       - 'data/*.csv'
-      - 'scripts/*.js'
+      - 'scripts/**/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
@@ -114,6 +114,8 @@ jobs:
         run: node scripts/generate_tos_pages.js
       - name: Audit generated TOS detail trust pages
         run: node scripts/audit_tos_detail_pages_content.js
+      - name: Clean stale generated collection pages
+        run: node scripts/cleanup_generated_collection_pages.js
       - name: Generate news pages
         run: node scripts/generate_news_pages.js
       - name: Generate material pages
