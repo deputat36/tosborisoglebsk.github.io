@@ -40,6 +40,8 @@ jobs:
       VISUAL_BASELINE_BASE_URL: http://127.0.0.1:4173
       VISUAL_BASELINE_OUTPUT: .artifacts/visual-baseline
       VISUAL_BASELINE_APPROVED: docs/visual-baseline
+      VISUAL_MAX_CHANNEL_DELTA: '16'
+      VISUAL_MAX_LOW_DELTA_RATIO: '0.005'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
