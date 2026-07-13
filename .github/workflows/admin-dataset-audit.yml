@@ -1,0 +1,66 @@
+name: Audit admin dataset schemas
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - release-2025-12-22
+      - admin-safe-tools-v2-2026-07-13
+    paths:
+      - 'admin/**'
+      - 'data/toses.json'
+      - 'data/news.json'
+      - 'data/articles.json'
+      - 'data/documents.json'
+      - 'data/grants.json'
+      - 'data/projects.json'
+      - 'data/done.json'
+      - 'data/events.json'
+      - 'data/needs.json'
+      - 'docs/ADMIN-DATASETS-*.md'
+      - 'scripts/audit_admin_dataset_schema.js'
+      - '.github/workflows/admin-dataset-audit.yml'
+  push:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'admin/**'
+      - 'data/*.json'
+      - 'scripts/audit_admin_dataset_schema.js'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: admin-dataset-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check project JavaScript
+        run: npm run check:js
+
+      - name: Audit admin consolidation
+        run: node scripts/audit_admin_consolidation.js
+
+      - name: Audit safe admin tools
+        run: node scripts/audit_admin_safe_tools.js
+
+      - name: Audit admin dataset schemas
+        run: node scripts/audit_admin_dataset_schema.js
+
+      - name: Run full project mode audits
+        run: npm run audit:project-mode-full
