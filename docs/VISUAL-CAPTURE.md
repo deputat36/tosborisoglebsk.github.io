@@ -6,13 +6,13 @@
 
 Инструмент выполняет воспроизводимый браузерный захват 14 контрольных сценариев из `data/css_regression_matrix.csv`.
 
-Сам workflow:
+Обычный capture-workflow:
 
 - не изменяет CSS, HTML или данные сайта;
-- не сохраняет PNG в репозиторий;
-- не объявляет снимки утверждённым baseline;
-- не сравнивает кадры со старыми файлами из draft PR №220;
-- создаёт временный GitHub Actions artifact для проверки актуальной ветки.
+- не делает commit или push;
+- не объявляет снимки утверждённым baseline автоматически;
+- создаёт временный GitHub Actions artifact для проверки актуальной ветки;
+- работает только с правом `contents: read`.
 
 Исправления, найденные с помощью capture, оформляются отдельным небольшим PR и повторно проверяются тем же набором сценариев.
 
@@ -29,16 +29,15 @@ permissions:
 
 Workflow:
 
-1. проверяет синтаксис capture- и audit-скриптов;
+1. проверяет JavaScript и полный project-mode audit;
 2. проверяет read-only контракт и source-level регрессии;
-3. устанавливает Chromium через Playwright;
-4. поднимает локальный статический сервер;
-5. выполняет 14 сценариев матрицы;
-6. формирует PNG, `manifest.json`, `README.md` и серверный лог;
-7. загружает результат как Actions artifact на 30 дней;
-8. останавливает локальный сервер.
-
-Workflow не делает commit, push и не использует токены для записи.
+3. сверяет сохранённый baseline с manifest и матрицей;
+4. устанавливает Chromium через Playwright;
+5. поднимает локальный статический сервер;
+6. выполняет 14 сценариев матрицы;
+7. формирует PNG, `manifest.json`, `README.md` и серверный лог;
+8. загружает текущий результат как Actions artifact на 30 дней;
+9. останавливает локальный сервер.
 
 ## Что проверяет capture
 
@@ -68,17 +67,17 @@ Workflow не делает commit, push и не использует токен�
 VISUAL_CAPTURE_ENFORCE_QUALITY=false
 ```
 
-Runtime-сбой, отсутствующий маршрут или неполный набор снимков блокировали workflow. Визуальные и браузерные замечания записывались в `quality_failures`, но не блокировали capture-only пакет до ручного просмотра доказательств.
-
-Первый artifact подтвердил 14 из 14 кадров и выявил три overflow-сценария:
+Он подтвердил 14 из 14 кадров и выявил три overflow-сценария:
 
 - светлая главная;
 - тёмная главная;
 - мобильная карточка ТОС.
 
-## Строгий режим после исправлений
+Точная диагностика позволила исправить порядок `label/value` в статистике, skip-link и мобильную шапку отдельным stacked PR.
 
-После точечной коррекции причин overflow workflow работает с:
+## Строгий режим
+
+После точечной коррекции workflow работает с:
 
 ```text
 VISUAL_CAPTURE_ENFORCE_QUALITY=true
@@ -94,23 +93,47 @@ VISUAL_CAPTURE_ENFORCE_QUALITY=true
 - page errors;
 - failed requests.
 
-Это технический quality-gate. Он не является pixel comparator и не означает автоматическое утверждение визуального baseline.
+Это технический quality-gate. Он не заменяет pixel comparator.
 
-## Порядок дальнейшей работы
+## Утверждённый captured baseline
 
-1. Получить 14 из 14 кадров в строгом режиме.
-2. Скачать artifact и проверить все PNG.
-3. Убедиться, что `failures` и `quality_failures` пусты.
-4. Только после визуального review сохранить утверждённые PNG и manifest отдельным коммитом.
-5. Добавить pixel comparator отдельным пакетом.
+После строгого run и визуального просмотра сохранены:
+
+- 14 PNG в `docs/visual-baseline/`;
+- `docs/visual-baseline/manifest.json`;
+- `docs/visual-baseline/README.md`;
+- SHA-256 и размер каждого PNG;
+- route, viewport, theme, interaction и браузерная диагностика каждого сценария.
+
+Все строки `data/css_regression_matrix.csv` имеют статус `baseline_captured` и ссылаются на соответствующий PNG.
+
+`baseline_captured` означает:
+
+- кадры получены в строгом режиме;
+- 14/14 сценариев завершились;
+- runtime failures и quality failures равны нулю;
+- контактный лист и проблемные сценарии просмотрены;
+- файлы защищены `scripts/audit_visual_baseline_evidence.js`.
+
+Этот статус ещё не означает `passed`: автоматическое сравнение нового capture с утверждёнными PNG появится в отдельном pixel comparator пакете.
+
+## Защита evidence
+
+`audit_visual_baseline_evidence.js` блокирует изменения, если:
+
+- отсутствует хотя бы один из 14 PNG;
+- SHA-256 или размер не совпадает с manifest;
+- manifest содержит runtime или quality failures;
+- approval metadata отсутствует;
+- матрица не имеет статуса `baseline_captured`;
+- `evidence_ref` не совпадает с фактическим путём PNG;
+- появляются лишние или дублирующиеся visual cases.
+
+## Следующий этап
+
+1. Добавить pixel comparator отдельным stacked PR.
+2. Декодировать PNG и сравнивать размеры и RGBA-пиксели.
+3. Разрешить только ограниченный шум сглаживания шрифта.
+4. Блокировать геометрические и значимые визуальные изменения.
+5. После успешного comparator перевести матрицу из `baseline_captured` в `passed`.
 6. Не менять утверждённый baseline без отдельного review.
-
-## Критерий готовности исправлений
-
-- основной project-mode CI проходит;
-- получено 14 из 14 PNG;
-- `failures` в manifest пуст;
-- `quality_failures` в manifest пуст;
-- artifact содержит manifest, README и серверный лог;
-- CSS-матрица остаётся `baseline_required` до ручного утверждения кадров;
-- утверждённые baseline-файлы ещё не добавляются в репозиторий.
