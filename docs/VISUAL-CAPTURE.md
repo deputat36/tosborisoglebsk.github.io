@@ -60,25 +60,15 @@ Workflow:
 - ошибки страницы;
 - failed requests.
 
-## Первый диагностический запуск
+## Диагностический и строгий режимы
 
-Первый запуск на актуальной основной ветке выполнялся с:
+Первый запуск выполнялся с:
 
 ```text
 VISUAL_CAPTURE_ENFORCE_QUALITY=false
 ```
 
-Он подтвердил 14 из 14 кадров и выявил три overflow-сценария:
-
-- светлая главная;
-- тёмная главная;
-- мобильная карточка ТОС.
-
-Точная диагностика позволила исправить порядок `label/value` в статистике, skip-link и мобильную шапку отдельным stacked PR.
-
-## Строгий режим
-
-После точечной коррекции workflow работает с:
+Он подтвердил 14 из 14 кадров и выявил три overflow-сценария. После исправления порядка `label/value` в статистике, skip-link и мобильной шапки workflow переведён в строгий режим:
 
 ```text
 VISUAL_CAPTURE_ENFORCE_QUALITY=true
@@ -94,7 +84,7 @@ VISUAL_CAPTURE_ENFORCE_QUALITY=true
 - page errors;
 - failed requests.
 
-## Утверждённый captured baseline
+## Утверждённый baseline
 
 После строгого run и визуального просмотра сохранены:
 
@@ -104,25 +94,15 @@ VISUAL_CAPTURE_ENFORCE_QUALITY=true
 - SHA-256 и размер каждого PNG;
 - route, viewport, theme, interaction и браузерная диагностика каждого сценария.
 
-Все строки `data/css_regression_matrix.csv` имеют статус `baseline_captured` и ссылаются на соответствующий PNG.
+Manifest сохраняет approval-статус `baseline_captured`: он описывает происхождение неизменяемых PNG и подтверждает visual review.
 
-`baseline_captured` означает:
-
-- кадры получены в строгом режиме;
-- 14/14 сценариев завершились;
-- runtime failures и quality failures равны нулю;
-- контактный лист и проблемные сценарии просмотрены;
-- файлы защищены `scripts/audit_visual_baseline_evidence.js`.
-
-## Защита evidence
-
-`audit_visual_baseline_evidence.js` блокирует изменения, если:
+Файлы защищены `scripts/audit_visual_baseline_evidence.js`. Аудит блокирует изменения, если:
 
 - отсутствует хотя бы один из 14 PNG;
 - SHA-256 или размер не совпадает с manifest;
 - manifest содержит runtime или quality failures;
 - approval metadata отсутствует;
-- статус и `evidence_ref` матрицы не совпадают с baseline;
+- статус и `evidence_ref` матрицы не согласованы с comparator;
 - появляются лишние или дублирующиеся visual cases.
 
 ## Pixel comparator
@@ -146,7 +126,7 @@ VISUAL_CAPTURE_ENFORCE_QUALITY=true
 - `max_channel_delta`;
 - `metadata_mismatches`.
 
-Отчёт сохраняется в `.artifacts/visual-baseline/comparison.json` и `comparison.md`.
+Отчёт сохраняется в `.artifacts/visual-baseline/comparison.json` и `comparison.md`. Долговечный итог первого успешного сравнения сохранён в `docs/visual-baseline/COMPARISON-2026-07-13.md`.
 
 ## Допуск сглаживания
 
@@ -173,16 +153,33 @@ hard_max_low_delta_ratio = 0.01
 
 Порог 0,5% предназначен только для нестабильного антиалиасинга шрифтов на разных GitHub runner. Он не допускает геометрические изменения, смещение блоков, новые элементы, изменение размеров или заметную смену цвета.
 
-## Критерий `passed`
+## Первый успешный comparator run
 
-Строка матрицы может получить статус `passed`, только когда:
+Run `29277336532` завершён успешно:
 
-- строгий capture завершён без технических ошибок;
-- сохранённый baseline прошёл SHA-аудит;
-- comparator нашёл соответствующий case;
-- размеры и метаданные совпали;
-- `pixel_equivalent = true`;
-- значимых пикселей нет;
-- общий список changed cases пуст.
+- cases compared: 14;
+- pixel_identical: 14;
+- pixel_equivalent: 14;
+- antialias_equivalent: 0;
+- bytes_identical: 14;
+- changed cases: 0;
+- missing current cases: 0;
+- unexpected current cases: 0.
+
+Допуск антиалиасинга в этом запуске не потребовался: все 14 PNG совпали пиксельно и побайтово.
+
+## Статус матрицы
+
+Все 14 строк `data/css_regression_matrix.csv` имеют статус `passed`.
+
+Статус `passed` означает, что:
+
+1. строгий capture завершён без технических ошибок;
+2. сохранённый baseline прошёл SHA-аудит;
+3. comparator нашёл соответствующий case;
+4. размеры и метаданные совпали;
+5. `pixel_equivalent = true`;
+6. значимых пикселей нет;
+7. changed, missing и unexpected cases отсутствуют.
 
 Утверждённый baseline нельзя менять автоматически. Его обновление требует отдельного visual review и нового evidence-пакета.
