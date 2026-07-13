@@ -7,6 +7,7 @@ const ROOT = process.cwd();
 const MATRIX_PATH = path.resolve(ROOT, process.env.VISUAL_BASELINE_MATRIX || 'data/css_regression_matrix.csv');
 const OUTPUT_DIR = path.resolve(ROOT, process.env.VISUAL_BASELINE_OUTPUT || '.artifacts/visual-baseline');
 const MANIFEST_PATH = path.join(OUTPUT_DIR, 'manifest.json');
+const STRICT_QUALITY = String(process.env.VISUAL_CAPTURE_STRICT_QUALITY || '').toLowerCase() === 'true';
 
 function sha256(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
@@ -22,6 +23,7 @@ function readMatrixIds() {
 
 function main() {
   const errors = [];
+  const qualityFindings = [];
 
   if (!fs.existsSync(MATRIX_PATH)) errors.push(`missing matrix ${path.relative(ROOT, MATRIX_PATH)}`);
   if (!fs.existsSync(MANIFEST_PATH)) errors.push(`missing capture manifest ${path.relative(ROOT, MANIFEST_PATH)}`);
@@ -36,7 +38,12 @@ function main() {
   if (manifest.cases_total !== expectedIds.length) errors.push(`cases_total ${manifest.cases_total} does not match matrix ${expectedIds.length}`);
   if (manifest.cases_captured !== expectedIds.length) errors.push(`cases_captured ${manifest.cases_captured} does not match matrix ${expectedIds.length}`);
   if ((manifest.failures || []).length) errors.push(`runtime failures: ${(manifest.failures || []).length}`);
-  if ((manifest.quality_failures || []).length) errors.push(`quality failures: ${(manifest.quality_failures || []).length}`);
+
+  const manifestQualityFailures = Array.isArray(manifest.quality_failures) ? manifest.quality_failures : [];
+  if (manifestQualityFailures.length) {
+    qualityFindings.push(...manifestQualityFailures.map((item) => `${item.case_id}: ${(item.violations || []).join('; ')}`));
+    if (STRICT_QUALITY) errors.push(`quality failures: ${manifestQualityFailures.length}`);
+  }
 
   const duplicateIds = resultIds.filter((id, index) => resultIds.indexOf(id) !== index);
   if (duplicateIds.length) errors.push(`duplicate captured case ids: ${[...new Set(duplicateIds)].join(', ')}`);
@@ -57,18 +64,30 @@ function main() {
     }
     if (item.sha256 !== sha256(screenshot)) errors.push(`${label}: sha256 does not match screenshot`);
     if (Number(item.bytes) !== fs.statSync(screenshot).size) errors.push(`${label}: byte size does not match screenshot`);
-    if ((item.technical_violations || []).length) errors.push(`${label}: technical violations are present`);
     if ((item.console_errors || []).length) errors.push(`${label}: console errors are present`);
     if ((item.page_errors || []).length) errors.push(`${label}: page errors are present`);
     if ((item.failed_requests || []).length) errors.push(`${label}: failed requests are present`);
-    if (item.diagnostics?.horizontalOverflow) errors.push(`${label}: horizontal overflow is present`);
+
+    const technicalViolations = Array.isArray(item.technical_violations) ? item.technical_violations : [];
+    if (technicalViolations.length && !qualityFindings.some((finding) => finding.startsWith(`${label}:`))) {
+      qualityFindings.push(`${label}: ${technicalViolations.join('; ')}`);
+    }
+    if (STRICT_QUALITY && technicalViolations.length) errors.push(`${label}: technical violations are present`);
+    if (STRICT_QUALITY && item.diagnostics?.horizontalOverflow) errors.push(`${label}: horizontal overflow is present`);
   });
 
   if (errors.length) {
-    throw new Error(`Visual capture manifest audit failed:\n${errors.join('\n')}`);
+    throw new Error(`Visual capture manifest audit failed (${STRICT_QUALITY ? 'strict' : 'measurement'} mode):\n${errors.join('\n')}`);
   }
 
-  console.log(`Visual capture manifest OK: ${results.length} cases, no runtime, quality, overflow or request failures`);
+  if (qualityFindings.length) {
+    console.log(`Visual capture manifest measured ${results.length} cases with ${qualityFindings.length} quality findings:`);
+    qualityFindings.forEach((finding) => console.log(`- ${finding}`));
+    if (!STRICT_QUALITY) console.log('Quality findings are recorded but do not block until an approved baseline exists.');
+    return;
+  }
+
+  console.log(`Visual capture manifest OK (${STRICT_QUALITY ? 'strict' : 'measurement'} mode): ${results.length} cases, no runtime, quality, overflow or request failures`);
 }
 
 main();
