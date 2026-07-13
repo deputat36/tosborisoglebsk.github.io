@@ -33,7 +33,18 @@
   }
 
   .actions [data-action="theme"] {
-    display: none;
+    width: 36px;
+    min-width: 36px;
+    padding-inline: 0;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .actions [data-action="theme"]::after {
+    content: "◐";
+    display: block;
+    font-size: 18px;
+    line-height: 1;
   }
 
   .nav {
