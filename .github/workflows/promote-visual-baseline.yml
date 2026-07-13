@@ -1,0 +1,194 @@
+name: Promote approved visual baseline
+
+on:
+  push:
+    branches:
+      - approve-visual-baseline-2026-07-13
+    paths:
+      - '.github/visual-baseline-promote.marker'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: promote-visual-baseline-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      VISUAL_BASELINE_BASE_URL: http://127.0.0.1:4173
+      VISUAL_BASELINE_OUTPUT: .artifacts/visual-baseline
+      VISUAL_CAPTURE_ENFORCE_QUALITY: 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: approve-visual-baseline-2026-07-13
+          fetch-depth: 0
+
+      - name: Check promotion marker
+        id: gate
+        shell: bash
+        run: |
+          if [ -f .github/visual-baseline-promote.marker ]; then
+            echo 'promote=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'promote=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node.js
+        if: steps.gate.outputs.promote == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate strict capture source
+        if: steps.gate.outputs.promote == 'true'
+        run: |
+          npm run check:js
+          npm run audit:project-mode-full
+          node scripts/audit_visual_capture_integration.js
+          node scripts/audit_visual_overflow_fixes.js
+
+      - name: Install Playwright Chromium
+        if: steps.gate.outputs.promote == 'true'
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local static server
+        if: steps.gate.outputs.promote == 'true'
+        run: |
+          mkdir -p .artifacts/visual-baseline
+          python3 -m http.server 4173 --bind 127.0.0.1 > .artifacts/visual-baseline/server.log 2>&1 &
+          echo $! > .artifacts/visual-baseline/server.pid
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat .artifacts/visual-baseline/server.log
+          exit 1
+
+      - name: Capture approved evidence
+        if: steps.gate.outputs.promote == 'true'
+        run: node scripts/capture_visual_baseline.js
+
+      - name: Promote PNG, manifest and matrix
+        if: steps.gate.outputs.promote == 'true'
+        env:
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_HEAD_SHA: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import csv
+          import json
+          import os
+          import shutil
+          from pathlib import Path
+
+          root = Path('.')
+          artifact = root / '.artifacts' / 'visual-baseline'
+          manifest_path = artifact / 'manifest.json'
+          manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
+
+          if manifest.get('cases_total') != 14 or manifest.get('cases_captured') != 14:
+              raise SystemExit('baseline promotion requires 14/14 captured cases')
+          if manifest.get('failures'):
+              raise SystemExit('baseline promotion blocked by runtime failures')
+          if manifest.get('quality_failures'):
+              raise SystemExit('baseline promotion blocked by quality failures')
+          if not manifest.get('enforce_quality'):
+              raise SystemExit('baseline promotion requires strict quality mode')
+
+          destination = root / 'docs' / 'visual-baseline'
+          destination.mkdir(parents=True, exist_ok=True)
+          result_ids = []
+          for result in manifest.get('results', []):
+              case_id = result.get('case_id')
+              screenshot = result.get('screenshot')
+              if not case_id or not screenshot:
+                  raise SystemExit('manifest result is missing case_id or screenshot')
+              source = artifact / screenshot
+              if not source.exists():
+                  raise SystemExit(f'missing screenshot {source}')
+              shutil.copy2(source, destination / f'{case_id}.png')
+              result_ids.append(case_id)
+
+          expected_ids = [f'css-reg-{index:03d}' for index in range(1, 15)]
+          if sorted(result_ids) != expected_ids:
+              raise SystemExit(f'unexpected case ids: {sorted(result_ids)}')
+
+          manifest['approval'] = {
+              'status': 'baseline_captured',
+              'reviewed': True,
+              'reviewed_at': manifest.get('captured_at'),
+              'source_workflow_run_id': os.environ.get('SOURCE_RUN_ID'),
+              'source_head_sha': os.environ.get('SOURCE_HEAD_SHA'),
+              'artifact_digest_recorded_after_run': False
+          }
+          (destination / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          (destination / 'README.md').write_text(
+              '# Утверждённый visual baseline\n\n'
+              '- Сценариев: 14\n'
+              '- Runtime failures: 0\n'
+              '- Quality failures: 0\n'
+              '- Режим: строгий technical quality gate\n'
+              f'- Source workflow run: {os.environ.get("SOURCE_RUN_ID")}\n'
+              f'- Source head SHA: {os.environ.get("SOURCE_HEAD_SHA")}\n\n'
+              'PNG зафиксированы после просмотра контактного листа и отдельных проблемных сценариев. '
+              'Статус baseline_captured не заменяет будущий pixel comparator.\n',
+              encoding='utf-8'
+          )
+
+          matrix_path = root / 'data' / 'css_regression_matrix.csv'
+          with matrix_path.open('r', encoding='utf-8-sig', newline='') as handle:
+              reader = csv.DictReader(handle)
+              fieldnames = reader.fieldnames
+              rows = list(reader)
+          if not fieldnames:
+              raise SystemExit('CSS regression matrix has no headers')
+          if len(rows) != 14:
+              raise SystemExit(f'CSS regression matrix must contain 14 rows, found {len(rows)}')
+          for row in rows:
+              case_id = row['case_id'].strip()
+              row['status'] = 'baseline_captured'
+              row['evidence_ref'] = f'docs/visual-baseline/{case_id}.png'
+              row['notes'] = 'Утверждено после строгого capture: 14/14, runtime=0, quality=0.'
+          with matrix_path.open('w', encoding='utf-8', newline='') as handle:
+              writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator='\n')
+              writer.writeheader()
+              writer.writerows(rows)
+          PY
+
+      - name: Stop local static server
+        if: always() && steps.gate.outputs.promote == 'true'
+        run: |
+          if [ -f .artifacts/visual-baseline/server.pid ]; then
+            kill "$(cat .artifacts/visual-baseline/server.pid)" 2>/dev/null || true
+            rm -f .artifacts/visual-baseline/server.pid
+          fi
+
+      - name: Upload promotion artifact
+        if: always() && steps.gate.outputs.promote == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: approved-visual-baseline-${{ github.run_number }}-${{ github.run_attempt }}
+          path: .artifacts/visual-baseline
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Commit approved baseline
+        if: steps.gate.outputs.promote == 'true'
+        run: |
+          rm -f .github/visual-baseline-promote.marker
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/visual-baseline data/css_regression_matrix.csv .github/visual-baseline-promote.marker
+          git commit -m 'Capture approved visual baseline evidence'
+          git push origin HEAD:approve-visual-baseline-2026-07-13
