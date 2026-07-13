@@ -5,9 +5,9 @@ const { parseCsv } = require('./lib/csv');
 const { isIsoDate } = require('./lib/date_checks');
 
 const ROOT = process.cwd();
-const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
-const REVIEW_PATH = path.join(ROOT, 'data', 'priority_tos_response_review.csv');
-const POLICY_PATH = path.join(ROOT, 'data', 'priority_tos_evidence_policy.json');
+const TOSES_PATH = path.resolve(ROOT, process.env.PRIORITY_TOS_CURRENT_FILE || path.join('data', 'toses.json'));
+const REVIEW_PATH = path.resolve(ROOT, process.env.PRIORITY_TOS_REVIEW_FILE || path.join('data', 'priority_tos_response_review.csv'));
+const POLICY_PATH = path.resolve(ROOT, process.env.PRIORITY_TOS_POLICY_FILE || path.join('data', 'priority_tos_evidence_policy.json'));
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -71,6 +71,14 @@ function gitShowJson(ref, filePath) {
 }
 
 function resolveBaseToses() {
+  const baseFile = String(process.env.PRIORITY_TOS_BASE_FILE || '').trim();
+  if (baseFile) {
+    const resolved = path.resolve(ROOT, baseFile);
+    if (!fs.existsSync(resolved)) return null;
+    const value = readJson(resolved);
+    return Array.isArray(value) ? { ref: `file:${resolved}`, toses: value } : null;
+  }
+
   const refs = [];
   const explicit = String(process.env.PRIORITY_TOS_BASE_REF || '').trim();
   const baseBranch = String(process.env.GITHUB_BASE_REF || '').trim();
