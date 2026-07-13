@@ -17,16 +17,17 @@ function listNames(items) {
 }
 
 function actionForStage(stage, items) {
-  const count = items.length;
+  if (!items.length) return '';
+
   const names = listNames(items);
   const labels = {
-    find_channel: `Найти рабочий канал связи для ${count} карточек: ${names}.`,
-    ready_to_send: `После разрешения пользователя вручную отправить ${count} подготовленных запроса: ${names}.`,
-    awaiting_response: `Проверить ожидание ответа и при необходимости подготовить корректное напоминание для ${count} карточек: ${names}.`,
-    review_response: `Разобрать полученные ответы и зафиксировать доказательства для ${count} карточек: ${names}.`,
-    ready_partial: `Обновить только подтверждённые поля и сохранить статус partial для ${count} карточек: ${names}.`,
-    ready_verified: `Обновить карточки и проверить все условия статуса verified для ${count} карточек: ${names}.`,
-    blocked: `Устранить противоречия или получить дополнительный источник для ${count} карточек: ${names}.`
+    find_channel: `Найти рабочий канал связи: ${names}.`,
+    ready_to_send: `После разрешения пользователя вручную отправить подготовленные запросы: ${names}.`,
+    awaiting_response: `Проверить ожидание ответа и при необходимости подготовить корректное напоминание: ${names}.`,
+    review_response: `Разобрать полученные ответы и зафиксировать доказательства: ${names}.`,
+    ready_partial: `Обновить только подтверждённые поля и сохранить статус partial: ${names}.`,
+    ready_verified: `Обновить карточки и проверить все условия статуса verified: ${names}.`,
+    blocked: `Устранить противоречия или получить дополнительный источник: ${names}.`
   };
   return labels[stage] || '';
 }
