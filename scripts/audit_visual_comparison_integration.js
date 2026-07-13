@@ -31,7 +31,10 @@ function main() {
     'docs/visual-baseline',
     'comparison.json',
     'pixel_identical',
-    'changed_pixels',
+    'pixel_equivalent',
+    'significant_changed_pixels',
+    'VISUAL_MAX_CHANNEL_DELTA',
+    'VISUAL_MAX_LOW_DELTA_RATIO',
     'Visual regression detected'
   ], errors, 'visual comparator');
 
@@ -40,6 +43,8 @@ function main() {
     'node scripts/compare_visual_baseline.js',
     'Compare with approved visual baseline',
     'VISUAL_BASELINE_APPROVED: docs/visual-baseline',
+    "VISUAL_MAX_CHANNEL_DELTA: '16'",
+    "VISUAL_MAX_LOW_DELTA_RATIO: '0.005'",
     'contents: read'
   ], errors, 'visual baseline workflow');
 
@@ -53,7 +58,9 @@ function main() {
   requireTokens(captureDoc, [
     'scripts/compare_visual_baseline.js',
     'comparison.json',
-    'pixel'
+    'pixel_equivalent',
+    'max_channel_delta',
+    'max_low_delta_ratio'
   ], errors, 'visual capture documentation');
 
   if (errors.length) {
