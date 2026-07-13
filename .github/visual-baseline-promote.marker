@@ -1,6 +1,0 @@
-approved-by: autonomous visual review
-source-pr: 227
-source-run: 29275971134
-expected-cases: 14
-expected-runtime-failures: 0
-expected-quality-failures: 0
