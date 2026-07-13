@@ -6,6 +6,8 @@ const ROOT = process.cwd();
 const REPORT_PATH = path.join(ROOT, 'data', 'priority_tos_update_readiness.json');
 const PAGE_PATH = path.join(ROOT, 'data-requests', 'priority-tos', 'index.html');
 const CLIENT_PATH = path.join(ROOT, 'assets', 'js', 'priority-tos-readiness.js');
+const SITE_HEALTH_PAGE_PATH = path.join(ROOT, 'site-health', 'index.html');
+const SITE_HEALTH_CLIENT_PATH = path.join(ROOT, 'assets', 'js', 'site-health-priority-readiness.js');
 const REQUIRED_SLUGS = ['ivanovka', 'podstepki', 'gubari', 'tancyrey'];
 const FORBIDDEN_KEYS = new Set([
   'send_channel',
@@ -45,10 +47,16 @@ function comparable(report) {
   };
 }
 
+function requireFragments(errors, label, content, fragments) {
+  fragments.forEach((fragment) => {
+    if (!content.includes(fragment)) errors.push(`${label} missing ${fragment}`);
+  });
+}
+
 function main() {
   const errors = [];
 
-  [REPORT_PATH, PAGE_PATH, CLIENT_PATH].forEach((filePath) => {
+  [REPORT_PATH, PAGE_PATH, CLIENT_PATH, SITE_HEALTH_PAGE_PATH, SITE_HEALTH_CLIENT_PATH].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${path.relative(ROOT, filePath)}`);
   });
   if (errors.length) throw new Error(`Priority TOS readiness audit failed:\n${errors.join('\n')}`);
@@ -56,6 +64,8 @@ function main() {
   const report = JSON.parse(fs.readFileSync(REPORT_PATH, 'utf8'));
   const pageHtml = fs.readFileSync(PAGE_PATH, 'utf8');
   const clientJs = fs.readFileSync(CLIENT_PATH, 'utf8');
+  const siteHealthHtml = fs.readFileSync(SITE_HEALTH_PAGE_PATH, 'utf8');
+  const siteHealthClientJs = fs.readFileSync(SITE_HEALTH_CLIENT_PATH, 'utf8');
 
   if (!/^\d{4}-\d{2}-\d{2}T/.test(report.generated_at || '')) errors.push('generated_at must be an ISO timestamp');
   if (!report.privacy_note) errors.push('privacy_note is required');
@@ -92,21 +102,41 @@ function main() {
     errors.push('report does not match current tracking and response-review data');
   }
 
-  if (!pageHtml.includes('/assets/js/priority-tos-readiness.js')) {
-    errors.push('priority TOS request page does not load readiness client script');
-  }
-  if (!clientJs.includes('/data/priority_tos_update_readiness.json')) {
-    errors.push('readiness client does not load the generated report');
-  }
-  if (!clientJs.includes('priority-tos-readiness')) {
-    errors.push('readiness client is missing stable section id');
+  requireFragments(errors, 'priority TOS request page', pageHtml, [
+    '/assets/js/priority-tos-readiness.js'
+  ]);
+  requireFragments(errors, 'priority readiness client', clientJs, [
+    '/data/priority_tos_update_readiness.json',
+    'priority-tos-readiness',
+    'stage_label',
+    'blockers',
+    'next_action'
+  ]);
+  requireFragments(errors, 'site-health page', siteHealthHtml, [
+    '/assets/js/site-health-priority-readiness.js',
+    '/data-requests/priority-tos/#priority-tos-readiness',
+    '/data/priority_tos_update_readiness.json',
+    'id="site-health-priority"'
+  ]);
+  requireFragments(errors, 'site-health readiness client', siteHealthClientJs, [
+    '/data/priority_tos_update_readiness.json',
+    'site-health-priority',
+    'readinessEnriched',
+    'stage_label',
+    'blockers',
+    'next_action',
+    '/data-requests/priority-tos/#priority-tos-readiness'
+  ]);
+
+  if (/public_source_url|private_source_recorded|send_channel|response_text|message_text/.test(siteHealthClientJs)) {
+    errors.push('site-health readiness client must not request or render sensitive report fields');
   }
 
   if (errors.length) {
     throw new Error(`Priority TOS readiness audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Priority TOS readiness OK: ${report.summary.total} cards, ${report.summary.ready_for_card_update} ready for update`);
+  console.log(`Priority TOS readiness OK: ${report.summary.total} cards, ${report.summary.ready_for_card_update} ready for update, site-health enriched`);
 }
 
 main();
