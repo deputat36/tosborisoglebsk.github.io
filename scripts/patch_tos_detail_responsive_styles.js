@@ -3,17 +3,21 @@ const path = require('path');
 
 const ROOT = process.cwd();
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
+const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
 const TOS_ROOT = path.join(ROOT, 'tos');
-const BASE_LINK = '  <link rel="stylesheet" href="/assets/css/styles.css"/>';
-const RESPONSIVE_LINK = '  <link rel="stylesheet" href="/assets/css/tos-detail-responsive.css"/>';
+const BASE_LINK_RE = /<link\s+rel=["']stylesheet["']\s+href=["']\/assets\/css\/styles\.css["']\s*\/?>/;
+const RESPONSIVE_LINK = '<link rel="stylesheet" href="/assets/css/tos-detail-responsive.css"/>';
 
 function patchHtml(content, label) {
   if (content.includes(RESPONSIVE_LINK)) return { content, changed: false };
-  if (!content.includes(BASE_LINK)) {
-    throw new Error(`${label} is missing the base stylesheet marker`);
-  }
+  const match = content.match(BASE_LINK_RE);
+  if (!match) throw new Error(`${label} is missing the base stylesheet marker`);
+
+  const indent = match.index > 0
+    ? (content.slice(0, match.index).match(/(^|\n)([ \t]*)$/)?.[2] || '')
+    : '';
   return {
-    content: content.replace(BASE_LINK, `${BASE_LINK}\n${RESPONSIVE_LINK}`),
+    content: content.replace(BASE_LINK_RE, `${match[0]}\n${indent}${RESPONSIVE_LINK}`),
     changed: true
   };
 }
@@ -26,10 +30,11 @@ function patchFile(filePath, label) {
 }
 
 function detailPages() {
-  if (!fs.existsSync(TOS_ROOT)) return [];
-  return fs.readdirSync(TOS_ROOT, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => path.join(TOS_ROOT, entry.name, 'index.html'))
+  if (!fs.existsSync(TOSES_PATH)) throw new Error(`Missing TOS data: ${TOSES_PATH}`);
+  const toses = JSON.parse(fs.readFileSync(TOSES_PATH, 'utf8'));
+  return (Array.isArray(toses) ? toses : [])
+    .filter((tos) => tos && tos.slug && tos.status !== 'draft')
+    .map((tos) => path.join(TOS_ROOT, tos.slug, 'index.html'))
     .filter((filePath) => fs.existsSync(filePath));
 }
 
