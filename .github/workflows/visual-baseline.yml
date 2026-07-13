@@ -30,6 +30,8 @@ on:
       - 'scripts/compare_visual_baseline.js'
       - 'scripts/audit_visual_capture_manifest.js'
       - 'scripts/audit_visual_capture_tooling.js'
+      - 'scripts/audit_visual_overflow_fixes.js'
+      - 'scripts/patch_tos_detail_responsive_styles.js'
       - 'scripts/lib/csv.js'
       - '.github/workflows/visual-baseline.yml'
 
@@ -64,6 +66,12 @@ jobs:
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0
           npx playwright install --with-deps chromium
+
+      - name: Apply TOS detail responsive stylesheet
+        run: node scripts/patch_tos_detail_responsive_styles.js
+
+      - name: Audit visual overflow fixes
+        run: node scripts/audit_visual_overflow_fixes.js
 
       - name: Start local static server
         run: |

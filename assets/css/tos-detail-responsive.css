@@ -1,0 +1,53 @@
+@media (max-width: 620px) {
+  .header-inner {
+    gap: 6px;
+    min-width: 0;
+    padding: 10px 0;
+  }
+
+  .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .brand img {
+    display: block;
+    width: auto;
+    max-width: 112px;
+    height: 40px;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .actions {
+    flex: 0 0 auto;
+    gap: 4px;
+  }
+
+  .actions .btn {
+    padding: 8px 9px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1;
+  }
+
+  .actions [data-action="theme"] {
+    width: 36px;
+    min-width: 36px;
+    padding-inline: 0;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .actions [data-action="theme"]::after {
+    content: "◐";
+    display: block;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .nav {
+    top: 68px;
+  }
+}

@@ -108,12 +108,16 @@ jobs:
         run: node scripts/refine_site_audit_actions.js
       - name: Patch TOS detail generator trust
         run: node scripts/patch_tos_detail_generator_trust.js
+      - name: Patch TOS detail responsive stylesheet
+        run: node scripts/patch_tos_detail_responsive_styles.js
       - name: Check patched TOS generator syntax
         run: node --check scripts/generate_tos_pages.js
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
       - name: Audit generated TOS detail trust pages
         run: node scripts/audit_tos_detail_pages_content.js
+      - name: Audit visual overflow fixes
+        run: node scripts/audit_visual_overflow_fixes.js
       - name: Generate news pages
         run: node scripts/generate_news_pages.js
       - name: Generate material pages
