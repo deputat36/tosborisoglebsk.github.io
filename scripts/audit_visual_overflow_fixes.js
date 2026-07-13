@@ -51,8 +51,14 @@ function main() {
     'min-width: 0',
     'max-width: 112px',
     '.actions [data-action="theme"]',
-    'display: none'
+    'width: 36px',
+    'font-size: 0',
+    '.actions [data-action="theme"]::after',
+    'content: "◐"'
   ]);
+  if (/\[data-action="theme"\][^{]*\{[^}]*display:\s*none/s.test(css)) {
+    errors.push('mobile theme control must remain visible and interactive');
+  }
 
   requireFragments(errors, 'TOS responsive patch', patch, [
     'tos-detail-responsive.css',
@@ -75,7 +81,7 @@ function main() {
 
   if (errors.length) throw new Error(`Visual overflow fixes audit failed:\n${errors.join('\n')}`);
 
-  console.log(`Visual overflow fixes OK: home stats order corrected, ${pages.length} TOS detail pages use responsive header CSS`);
+  console.log(`Visual overflow fixes OK: home stats order corrected, ${pages.length} TOS detail pages use responsive header CSS with an interactive theme control`);
 }
 
 main();
