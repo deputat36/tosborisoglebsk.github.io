@@ -101,8 +101,8 @@ function main() {
   ]);
   requireFragments(errors, 'capture manifest audit', manifestAudit, [
     'VISUAL_CAPTURE_STRICT_QUALITY',
-    'measurement mode',
-    'strict mode',
+    "STRICT_QUALITY ? 'strict' : 'measurement'",
+    'qualityFindings',
     'failed requests are present',
     'horizontal overflow is present',
     'sha256 does not match screenshot',
