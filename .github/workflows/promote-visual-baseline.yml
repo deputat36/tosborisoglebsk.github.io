@@ -6,6 +6,12 @@ on:
       - approve-visual-baseline-2026-07-13
     paths:
       - '.github/visual-baseline-promote.marker'
+  pull_request:
+    branches:
+      - fix-visual-overflow-2026-07-13
+    paths:
+      - '.github/visual-baseline-promote.marker'
+      - '.github/workflows/promote-visual-baseline.yml'
 
 permissions:
   contents: write
