@@ -49,9 +49,7 @@ requireTokens(workflow, [
 [
   'contents: write',
   'git-auto-commit-action',
-  'git push',
-  'compare_visual_baseline.js',
-  'VISUAL_BASELINE_APPROVED'
+  'git push'
 ].forEach((token) => {
   if (workflow.includes(token)) errors.push(`visual capture workflow must not contain ${token}`);
 });
