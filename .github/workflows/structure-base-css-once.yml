@@ -1,0 +1,62 @@
+name: Structure base CSS once
+
+on:
+  push:
+    branches:
+      - structure-base-css-2026-07-13
+    paths:
+      - '.github/workflows/structure-base-css-once.yml'
+      - 'scripts/structure_base_styles_css.js'
+      - 'scripts/audit_base_css_structure.js'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: structure-base-css-once-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  structure:
+    if: github.ref == 'refs/heads/structure-base-css-2026-07-13'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout working branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check structure scripts
+        run: |
+          node --check scripts/structure_base_styles_css.js
+          node --check scripts/audit_base_css_structure.js
+
+      - name: Structure base stylesheet
+        run: node scripts/structure_base_styles_css.js
+
+      - name: Audit semantic equivalence and idempotency
+        run: node scripts/audit_base_css_structure.js
+
+      - name: Re-run structure script to prove idempotency
+        run: |
+          before_css=$(sha256sum assets/css/styles.css | cut -d' ' -f1)
+          before_report=$(sha256sum data/base_css_structure_report.json | cut -d' ' -f1)
+          node scripts/structure_base_styles_css.js
+          after_css=$(sha256sum assets/css/styles.css | cut -d' ' -f1)
+          after_report=$(sha256sum data/base_css_structure_report.json | cut -d' ' -f1)
+          test "$before_css" = "$after_css"
+          test "$before_report" = "$after_report"
+
+      - name: Commit structured CSS and report
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Structure base stylesheet without semantic changes'
+          file_pattern: 'assets/css/styles.css data/base_css_structure_report.json'
