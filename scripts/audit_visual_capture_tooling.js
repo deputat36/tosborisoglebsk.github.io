@@ -65,8 +65,11 @@ function main() {
     'pull_request:',
     'contents: read',
     'node-version: \'24\'',
-    'node scripts/capture_visual_baseline.js',
-    'node scripts/audit_visual_capture_manifest.js',
+    'continue-on-error: true',
+    "VISUAL_CAPTURE_STRICT_QUALITY: 'false'",
+    "VISUAL_CAPTURE_STRICT_QUALITY: 'true'",
+    'Audit capture manifest in measurement mode',
+    'Audit capture manifest in strict mode',
     'Detect approved baseline',
     'node scripts/compare_visual_baseline.js',
     'actions/upload-artifact@v4',
@@ -77,7 +80,7 @@ function main() {
     errors.push('visual workflow must be read-only and must not commit or push');
   }
   if (!workflow.includes("steps.approved.outputs.available == 'true'")) {
-    errors.push('visual comparison must be gated by an approved baseline check');
+    errors.push('visual comparison and strict quality audit must be gated by an approved baseline check');
   }
 
   requireFragments(errors, 'capture script', capture, [
@@ -97,16 +100,21 @@ function main() {
     'comparison.json'
   ]);
   requireFragments(errors, 'capture manifest audit', manifestAudit, [
+    'VISUAL_CAPTURE_STRICT_QUALITY',
+    'measurement mode',
+    'strict mode',
     'failed requests are present',
     'horizontal overflow is present',
     'sha256 does not match screenshot',
-    'Visual capture manifest OK'
+    'Quality findings are recorded but do not block until an approved baseline exists.'
   ]);
   requireFragments(errors, 'visual capture documentation', doc, [
     'baseline_required',
     'GitHub Actions artifact',
     'не коммитит',
     'compare_approved',
+    'измерительный режим',
+    'строгий режим',
     'отдельный визуальный review'
   ]);
 
