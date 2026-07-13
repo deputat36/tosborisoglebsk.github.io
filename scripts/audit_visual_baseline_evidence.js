@@ -131,7 +131,7 @@ const comparisonReport = fs.existsSync(COMPARISON_REPORT_PATH) ? fs.readFileSync
   'changed cases: 0',
   'missing current cases: 0',
   'unexpected current cases: 0',
-  'status `passed`'
+  'Статус `passed` означает'
 ].forEach((token) => {
   if (!comparisonReport.includes(token)) errors.push(`visual comparison report must contain ${token}`);
 });
