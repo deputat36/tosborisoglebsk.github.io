@@ -32,8 +32,9 @@ const documentation = read(DOC_PATH);
 requireTokens(workflow, [
   'name: Capture visual evidence',
   'contents: read',
-  "VISUAL_CAPTURE_ENFORCE_QUALITY: 'false'",
+  "VISUAL_CAPTURE_ENFORCE_QUALITY: 'true'",
   'node --check scripts/capture_visual_baseline.js',
+  'node scripts/audit_visual_overflow_fixes.js',
   'node scripts/capture_visual_baseline.js',
   'actions/upload-artifact@v4',
   'retention-days: 30'
@@ -46,7 +47,7 @@ requireTokens(workflow, [
   'compare_visual_baseline.js',
   'VISUAL_BASELINE_APPROVED'
 ].forEach((token) => {
-  if (workflow.includes(token)) errors.push(`capture-only workflow must not contain ${token}`);
+  if (workflow.includes(token)) errors.push(`capture workflow must not contain ${token}`);
 });
 
 requireTokens(capture, [
@@ -64,10 +65,10 @@ requireTokens(capture, [
 ], 'visual capture script');
 
 requireTokens(documentation, [
-  'не изменяет CSS',
   'не объявляет снимки утверждённым baseline',
   'contents: read',
   '14 из 14 PNG',
+  'VISUAL_CAPTURE_ENFORCE_QUALITY=true',
   'отдельным небольшим PR'
 ], 'visual capture documentation');
 
@@ -91,7 +92,7 @@ if (matrixText) {
     if (!/^css-reg-\d{3}$/.test(id)) errors.push(`matrix row ${index + 2}: invalid case_id ${id}`);
     if (ids.has(id)) errors.push(`matrix row ${index + 2}: duplicate case_id ${id}`);
     ids.add(id);
-    if (status !== 'baseline_required') errors.push(`matrix row ${index + 2}: status must remain baseline_required in capture-only package`);
+    if (status !== 'baseline_required') errors.push(`matrix row ${index + 2}: status must remain baseline_required before baseline review`);
     if (evidence) errors.push(`matrix row ${index + 2}: evidence_ref must remain empty before review`);
   });
 }
@@ -100,4 +101,4 @@ if (errors.length) {
   throw new Error(`Visual capture integration audit failed:\n${errors.join('\n')}`);
 }
 
-console.log('Visual capture integration audit OK: capture-only, read-only, detailed overflow diagnostics, 14 baseline_required cases');
+console.log('Visual capture integration audit OK: read-only, strict technical quality, detailed overflow diagnostics, 14 baseline_required cases');
