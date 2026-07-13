@@ -146,8 +146,6 @@ jobs:
         run: node scripts/patch_contacts_channel_boundaries.js
       - name: Connect priority TOS readiness section
         run: node scripts/patch_priority_tos_readiness_page.js
-      - name: Audit priority TOS readiness
-        run: node scripts/audit_priority_tos_readiness.js
       - name: Patch page index labels
         run: node scripts/patch_page_index_labels.js
       - name: Patch project passport label
@@ -168,6 +166,8 @@ jobs:
         run: node scripts/generate_site_health_report.js
       - name: Enrich site health with priority readiness
         run: node scripts/enrich_site_health_readiness.js
+      - name: Audit priority TOS readiness
+        run: node scripts/audit_priority_tos_readiness.js
       - name: Generate public index
         run: node scripts/generate_page_index.js
       - name: Generate extended sitemap
