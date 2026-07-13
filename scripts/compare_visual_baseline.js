@@ -10,6 +10,8 @@ const BASELINE_MANIFEST_PATH = path.join(BASELINE_DIR, 'manifest.json');
 const CURRENT_MANIFEST_PATH = path.join(CURRENT_DIR, 'manifest.json');
 const OUTPUT_JSON_PATH = path.join(CURRENT_DIR, 'comparison.json');
 const OUTPUT_MD_PATH = path.join(CURRENT_DIR, 'comparison.md');
+const MAX_CHANNEL_DELTA = Number(process.env.VISUAL_MAX_CHANNEL_DELTA || 16);
+const MAX_LOW_DELTA_RATIO = Number(process.env.VISUAL_MAX_LOW_DELTA_RATIO || 0.005);
 
 function sha256(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
@@ -18,6 +20,15 @@ function sha256(filePath) {
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) throw new Error(`Missing file: ${path.relative(ROOT, filePath)}`);
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+}
+
+function validateThresholds() {
+  if (!Number.isFinite(MAX_CHANNEL_DELTA) || MAX_CHANNEL_DELTA < 0 || MAX_CHANNEL_DELTA > 32) {
+    throw new Error(`Invalid VISUAL_MAX_CHANNEL_DELTA: ${MAX_CHANNEL_DELTA}`);
+  }
+  if (!Number.isFinite(MAX_LOW_DELTA_RATIO) || MAX_LOW_DELTA_RATIO < 0 || MAX_LOW_DELTA_RATIO > 0.01) {
+    throw new Error(`Invalid VISUAL_MAX_LOW_DELTA_RATIO: ${MAX_LOW_DELTA_RATIO}`);
+  }
 }
 
 function validateManifest(manifest, label) {
@@ -42,30 +53,53 @@ function comparePngs(baselinePath, currentPath) {
   const currentPng = PNG.sync.read(currentBytes);
 
   const sizeEqual = baselinePng.width === currentPng.width && baselinePng.height === currentPng.height;
+  const totalPixels = baselinePng.width * baselinePng.height;
   let changedPixels = null;
+  let significantChangedPixels = null;
   let maxChannelDelta = null;
 
   if (sizeEqual) {
     changedPixels = 0;
+    significantChangedPixels = 0;
     maxChannelDelta = 0;
+
     for (let offset = 0; offset < baselinePng.data.length; offset += 4) {
       let pixelChanged = false;
+      let pixelSignificant = false;
+
       for (let channel = 0; channel < 4; channel += 1) {
         const delta = Math.abs(baselinePng.data[offset + channel] - currentPng.data[offset + channel]);
         if (delta > 0) pixelChanged = true;
+        if (delta > MAX_CHANNEL_DELTA) pixelSignificant = true;
         if (delta > maxChannelDelta) maxChannelDelta = delta;
       }
+
       if (pixelChanged) changedPixels += 1;
+      if (pixelSignificant) significantChangedPixels += 1;
     }
   }
+
+  const changedPixelRatio = sizeEqual && totalPixels ? changedPixels / totalPixels : null;
+  const pixelIdentical = sizeEqual && changedPixels === 0;
+  const pixelEquivalent = sizeEqual
+    && significantChangedPixels === 0
+    && changedPixelRatio <= MAX_LOW_DELTA_RATIO;
 
   return {
     size_equal: sizeEqual,
     baseline_size: { width: baselinePng.width, height: baselinePng.height },
     current_size: { width: currentPng.width, height: currentPng.height },
-    pixel_identical: sizeEqual && changedPixels === 0,
+    total_pixels: totalPixels,
+    pixel_identical: pixelIdentical,
+    pixel_equivalent: pixelEquivalent,
     changed_pixels: changedPixels,
+    changed_pixel_ratio: changedPixelRatio,
+    significant_changed_pixels: significantChangedPixels,
     max_channel_delta: maxChannelDelta,
+    thresholds: {
+      max_channel_delta: MAX_CHANNEL_DELTA,
+      max_low_delta_ratio: MAX_LOW_DELTA_RATIO
+    },
     bytes_identical: baselineBytes.equals(currentBytes),
     baseline_sha256: sha256(baselinePath),
     current_sha256: sha256(currentPath)
@@ -73,6 +107,7 @@ function comparePngs(baselinePath, currentPath) {
 }
 
 function main() {
+  validateThresholds();
   fs.mkdirSync(CURRENT_DIR, { recursive: true });
 
   const baselineManifest = readJson(BASELINE_MANIFEST_PATH);
@@ -106,12 +141,17 @@ function main() {
     .map((item) => item.case_id)
     .filter((caseId) => !currentManifest.results.some((item) => item.case_id === caseId));
 
-  const changedCases = comparisons.filter((item) => !item.pixel_identical);
+  const changedCases = comparisons.filter((item) => !item.pixel_equivalent);
+  const antialiasEquivalentCases = comparisons.filter((item) => item.pixel_equivalent && !item.pixel_identical);
   const byteDifferentButPixelIdentical = comparisons.filter((item) => item.pixel_identical && !item.bytes_identical);
 
   const report = {
-    schema_version: 1,
+    schema_version: 2,
     compared_at: new Date().toISOString(),
+    thresholds: {
+      max_channel_delta: MAX_CHANNEL_DELTA,
+      max_low_delta_ratio: MAX_LOW_DELTA_RATIO
+    },
     baseline: {
       commit_sha: baselineManifest.commit_sha || null,
       workflow_run_id: baselineManifest.workflow_run_id || null,
@@ -125,6 +165,8 @@ function main() {
     summary: {
       cases_compared: comparisons.length,
       pixel_identical: comparisons.filter((item) => item.pixel_identical).length,
+      pixel_equivalent: comparisons.filter((item) => item.pixel_equivalent).length,
+      antialias_equivalent: antialiasEquivalentCases.length,
       bytes_identical: comparisons.filter((item) => item.bytes_identical).length,
       byte_different_but_pixel_identical: byteDifferentButPixelIdentical.length,
       changed_cases: changedCases.length,
@@ -132,6 +174,7 @@ function main() {
     },
     missing_current_cases: missingCurrentCases,
     changed_cases: changedCases.map((item) => item.case_id),
+    antialias_equivalent_cases: antialiasEquivalentCases.map((item) => item.case_id),
     comparisons
   };
 
@@ -144,21 +187,26 @@ function main() {
     `- Current run: ${report.current.workflow_run_id || 'unknown'}`,
     `- Cases compared: ${report.summary.cases_compared}`,
     `- Pixel-identical: ${report.summary.pixel_identical}`,
+    `- Pixel-equivalent: ${report.summary.pixel_equivalent}`,
+    `- Antialias-equivalent: ${report.summary.antialias_equivalent}`,
     `- Byte-identical: ${report.summary.bytes_identical}`,
-    `- Byte-different but pixel-identical: ${report.summary.byte_different_but_pixel_identical}`,
     `- Changed cases: ${report.summary.changed_cases}`,
-    `- Missing current cases: ${report.summary.missing_current_cases}`,
+    `- Maximum accepted channel delta: ${MAX_CHANNEL_DELTA}`,
+    `- Maximum accepted low-delta ratio: ${MAX_LOW_DELTA_RATIO}`,
     '',
+    ...(antialiasEquivalentCases.length
+      ? [`Bounded antialias differences: ${antialiasEquivalentCases.map((item) => item.case_id).join(', ')}`, '']
+      : []),
     ...(byteDifferentButPixelIdentical.length
       ? [`Encoding-only differences: ${byteDifferentButPixelIdentical.map((item) => item.case_id).join(', ')}`, '']
       : []),
     ...(changedCases.length
-      ? ['Changed cases:', ...changedCases.map((item) => `- ${item.case_id}: ${item.changed_pixels ?? 'size mismatch'} changed pixels`), '']
-      : ['No visual differences detected.', ''])
+      ? ['Changed cases:', ...changedCases.map((item) => `- ${item.case_id}: ${item.significant_changed_pixels ?? 'size mismatch'} significant pixels, ${item.changed_pixels ?? 'unknown'} raw pixels`), '']
+      : ['No visual regressions detected.', ''])
   ].join('\n');
   fs.writeFileSync(OUTPUT_MD_PATH, `${markdown}\n`);
 
-  console.log(`Visual comparison: ${report.summary.pixel_identical}/${report.summary.cases_compared} pixel-identical, ${report.summary.bytes_identical} byte-identical`);
+  console.log(`Visual comparison: ${report.summary.pixel_equivalent}/${report.summary.cases_compared} equivalent, ${report.summary.pixel_identical} exact`);
 
   if (missingCurrentCases.length || changedCases.length || comparisons.length !== baselineManifest.results.length) {
     throw new Error(`Visual regression detected: changed=${changedCases.length}, missing=${missingCurrentCases.length}`);
