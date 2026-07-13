@@ -51,6 +51,12 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Check project JavaScript
+        run: npm run check:js
+
+      - name: Run full project mode audits
+        run: npm run audit:project-mode-full
+
       - name: Check visual scripts syntax
         run: |
           node --check scripts/capture_visual_baseline.js
