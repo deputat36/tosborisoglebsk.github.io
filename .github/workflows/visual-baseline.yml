@@ -1,0 +1,122 @@
+name: Capture visual baseline candidates
+
+on:
+  workflow_dispatch:
+    inputs:
+      compare_approved:
+        description: Compare captured screenshots with an approved baseline if it exists
+        required: false
+        type: boolean
+        default: false
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'index.html'
+      - 'tos/index.html'
+      - 'tos/mirolyubie/index.html'
+      - 'news/index.html'
+      - 'news/vk-community-channel-2026/index.html'
+      - 'workbench/index.html'
+      - 'site-health/index.html'
+      - 'workbench-routes/index.html'
+      - 'field-checklist/index.html'
+      - 'assets/css/**'
+      - 'assets/js/**'
+      - 'data/css_regression_matrix.csv'
+      - 'docs/visual-baseline/**'
+      - 'scripts/capture_visual_baseline.js'
+      - 'scripts/compare_visual_baseline.js'
+      - 'scripts/audit_visual_capture_manifest.js'
+      - 'scripts/audit_visual_capture_tooling.js'
+      - 'scripts/lib/csv.js'
+      - '.github/workflows/visual-baseline.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: visual-baseline-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      VISUAL_BASELINE_BASE_URL: http://127.0.0.1:4173
+      VISUAL_BASELINE_OUTPUT: .artifacts/visual-baseline
+      VISUAL_BASELINE_APPROVED: docs/visual-baseline
+      VISUAL_MAX_CHANNEL_DELTA: '16'
+      VISUAL_MAX_LOW_DELTA_RATIO: '0.005'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install Playwright Chromium and PNG comparator
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local static server
+        run: |
+          mkdir -p .artifacts/visual-baseline
+          python3 -m http.server 4173 --bind 127.0.0.1 > .artifacts/visual-baseline/server.log 2>&1 &
+          echo $! > .artifacts/visual-baseline/server.pid
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat .artifacts/visual-baseline/server.log
+          exit 1
+
+      - name: Capture matrix screenshots
+        run: node scripts/capture_visual_baseline.js
+
+      - name: Audit capture manifest
+        run: node scripts/audit_visual_capture_manifest.js
+
+      - name: Detect approved baseline
+        id: approved
+        shell: bash
+        run: |
+          if [ -f docs/visual-baseline/manifest.json ]; then
+            echo 'available=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'available=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Require approved baseline for requested comparison
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.compare_approved && steps.approved.outputs.available != 'true' }}
+        run: |
+          echo 'Approved visual baseline is not present in docs/visual-baseline.'
+          exit 1
+
+      - name: Compare with approved visual baseline
+        if: ${{ steps.approved.outputs.available == 'true' && (github.event_name == 'pull_request' || inputs.compare_approved) }}
+        run: node scripts/compare_visual_baseline.js
+
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f .artifacts/visual-baseline/server.pid ]; then
+            kill "$(cat .artifacts/visual-baseline/server.pid)" 2>/dev/null || true
+            rm -f .artifacts/visual-baseline/server.pid
+          fi
+
+      - name: Upload visual capture artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-baseline-${{ github.run_number }}-${{ github.run_attempt }}
+          path: .artifacts/visual-baseline
+          if-no-files-found: error
+          retention-days: 30
