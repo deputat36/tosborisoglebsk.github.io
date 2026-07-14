@@ -94,6 +94,12 @@ jobs:
         run: rm -f sensitive-data-audit.log
       - name: Audit personal data readiness
         run: node scripts/audit_personal_data_readiness.js
+      - name: Generate publication basis inventory
+        run: node scripts/generate_publication_basis_inventory.js
+      - name: Test publication basis inventory
+        run: node scripts/test_publication_basis_inventory.js
+      - name: Audit publication basis inventory
+        run: node scripts/audit_publication_basis_inventory.js
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data
