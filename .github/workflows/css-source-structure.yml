@@ -1,0 +1,100 @@
+name: Prepare CSS source structure
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'assets/css/styles.css'
+      - 'data/css_source_fingerprint.json'
+      - 'data/css_maintenance_inventory.csv'
+      - 'scripts/prepare_css_source_structure.js'
+      - 'scripts/format_css_whitespace_only.js'
+      - 'scripts/audit_css_source_structure.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'package.json'
+      - 'docs/CSS-SOURCE-STRUCTURE-2026-07-14.md'
+      - '.github/workflows/css-source-structure.yml'
+      - '.github/workflows/visual-baseline.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: css-source-structure-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      CSS_STRUCTURE_PRETTIER_INPUT: .artifacts/css-source-structure/styles.with-sections.css
+      CSS_STRUCTURE_CANDIDATE: .artifacts/css-source-structure/styles.css
+      CSS_STRUCTURE_REPORT: .artifacts/css-source-structure/report.json
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Initialize diagnostics directory
+        run: mkdir -p .artifacts/css-source-structure
+
+      - name: Check JavaScript syntax
+        run: npm run check:js
+
+      - name: Prepare sectioned CSS source
+        run: |
+          set -o pipefail
+          node scripts/prepare_css_source_structure.js 2>&1 | tee .artifacts/css-source-structure/prepare.log
+
+      - name: Format candidate using whitespace only
+        run: |
+          set -o pipefail
+          node scripts/format_css_whitespace_only.js 2>&1 | tee .artifacts/css-source-structure/format.log
+
+      - name: Prove canonical CSS equivalence
+        run: |
+          set -o pipefail
+          node scripts/audit_css_source_structure.js 2>&1 | tee .artifacts/css-source-structure/structure-audit.log
+
+      - name: Run current full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee .artifacts/css-source-structure/project-audit.log
+
+      - name: Apply verified candidate to PR branch
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        run: cp .artifacts/css-source-structure/styles.css assets/css/styles.css
+
+      - name: Audit applied CSS against repository fingerprint
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        run: |
+          set -o pipefail
+          env -u CSS_STRUCTURE_CANDIDATE CSS_STRUCTURE_REPORT=.artifacts/css-source-structure/repository-report.json node scripts/audit_css_source_structure.js 2>&1 | tee .artifacts/css-source-structure/repository-audit.log
+
+      - name: Commit structured CSS
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Структурировать основной CSS без изменения каскада'
+          file_pattern: 'assets/css/styles.css'
+
+      - name: Upload structured CSS candidate and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: css-source-structure
+          path: .artifacts/css-source-structure
+          if-no-files-found: error
+          retention-days: 14
