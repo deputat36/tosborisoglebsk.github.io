@@ -44,6 +44,26 @@
 - missing local references: 0;
 - JavaScript syntax failures: 0.
 
+## Подтверждённый baseline
+
+Машиночитаемый отчёт от 14 июля 2026 года фиксирует:
+
+- файлов в `/admin/`: 6;
+- HTML-входов: 2;
+- активных JavaScript-файлов: 3;
+- CSS-файлов: 1;
+- неиспользуемых файлов: 0;
+- разрешённых локальных GET-целей: 8;
+- external network targets: 0;
+- external write signals: 0;
+- dangerous execution signals: 0;
+- potential secret signals: 0;
+- forbidden backend references: 0;
+- missing local references: 0;
+- JavaScript syntax failures: 0.
+
+Все девять контролей noindex, CSP, честного описания модели, robots и sitemap имеют значение `true`. Восемь обнаруженных упоминаний browser storage считаются допустимыми только для локальных черновиков и не являются средством авторизации.
+
 ## Индексация
 
 - каждый HTML-файл в `/admin/` обязан иметь `noindex,nofollow`;
