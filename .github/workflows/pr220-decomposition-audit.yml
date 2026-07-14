@@ -1,0 +1,67 @@
+name: Audit PR 220 decomposition
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'data/pr220_changed_paths.json'
+      - 'data/pr220_decomposition_inventory.csv'
+      - 'docs/PR220-DECOMPOSITION-2026-07-14.md'
+      - 'scripts/generate_pr220_decomposition_inventory.js'
+      - 'scripts/audit_pr220_decomposition.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'package.json'
+      - '.github/workflows/pr220-decomposition-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr220-decomposition-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: npm run check:js
+
+      - name: Generate PR 220 decomposition inventory
+        run: npm run report:pr220-decomposition
+
+      - name: Audit PR 220 decomposition
+        run: |
+          set -o pipefail
+          npm run audit:pr220-decomposition 2>&1 | tee pr220-decomposition-audit.log
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee pr220-decomposition-project-audit.log
+
+      - name: Upload decomposition inventory and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr220-decomposition-audit
+          path: |
+            data/pr220_decomposition_inventory.csv
+            pr220-decomposition-audit.log
+            pr220-decomposition-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
