@@ -1,0 +1,73 @@
+name: Audit technical quality gates
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/technical-quality-audit.yml'
+      - 'docs/TECHNICAL-QUALITY-GATES-2026-07-14.md'
+      - 'package.json'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'scripts/audit_public_metadata_uniqueness.js'
+      - 'scripts/audit_site_health.js'
+      - 'scripts/audit_site_health_quality_gate.js'
+      - 'scripts/audit_site_links.js'
+      - 'scripts/test_technical_quality_gates.js'
+      - 'scripts/generate_project_pages.js'
+      - 'scripts/generate_site_health_report.js'
+      - 'scripts/enrich_site_health_readiness.js'
+      - 'scripts/lib/project_legacy_redirects.js'
+      - 'scripts/test_project_legacy_redirects.js'
+      - 'projects/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: technical-quality-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: npm run check:js
+
+      - name: Test project legacy redirects
+        run: node scripts/test_project_legacy_redirects.js
+
+      - name: Generate project pages and legacy redirects
+        run: node scripts/generate_project_pages.js
+
+      - name: Generate site health report
+        run: |
+          node scripts/generate_site_health_report.js
+          node scripts/enrich_site_health_readiness.js
+
+      - name: Test technical quality gates
+        run: node scripts/test_technical_quality_gates.js
+
+      - name: Audit internal links and anchors
+        run: node scripts/audit_site_links.js
+
+      - name: Audit public metadata uniqueness
+        run: node scripts/audit_public_metadata_uniqueness.js
+
+      - name: Audit site health structure
+        run: node scripts/audit_site_health.js
+
+      - name: Enforce zero technical findings
+        run: node scripts/audit_site_health_quality_gate.js
+
+      - name: Run full project mode audits
+        run: node scripts/audit_project_mode_full.js
