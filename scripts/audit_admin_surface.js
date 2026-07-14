@@ -114,9 +114,11 @@ function main() {
 
   if (!read(MAIN_WORKFLOW_PATH).includes('Audit local admin surface')) errors.push('main workflow must audit local admin surface');
   const workflow = read(WORKFLOW_PATH);
-  for (const token of ['contents: write', 'Generate admin surface inventory', 'Audit admin surface', 'Commit admin surface inventory']) {
+  for (const token of ['contents: read', 'Generate admin surface inventory', 'Audit admin surface', 'Run full project mode audits']) {
     if (!workflow.includes(token)) errors.push(`admin workflow is missing ${token}`);
   }
+  if (/contents:\s*write/i.test(workflow)) errors.push('admin workflow must not request contents: write');
+  if (/git-auto-commit|Commit admin surface inventory/i.test(workflow)) errors.push('admin workflow must remain read-only');
 
   const doc = read(DOC_PATH);
   for (const token of [
