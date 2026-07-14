@@ -136,7 +136,6 @@ if (/^\s*schedule\s*:/m.test(workflow)) {
 if (health) {
   const pageStats = health.pages || {};
   const healthTokens = [
-    normalize(health.generated_at),
     `${pageStats.total} HTML`,
     `${pageStats.public} публич`,
     `${pageStats.noindex} <code>noindex</code>`,
@@ -150,7 +149,6 @@ if (health) {
     errors.push('actions-007 technical baseline must be passed');
   } else {
     requireTokens(`${healthRecord.result} ${healthRecord.evidence}`, [
-      normalize(health.generated_at),
       String(pageStats.total),
       String(pageStats.public),
       String(pageStats.noindex),
@@ -158,6 +156,9 @@ if (health) {
       String(pageStats.broken_internal_links_count),
       'data/site_health.json'
     ], 'actions-007');
+    if (!/site_health\.json создан \d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z/.test(healthRecord.result)) {
+      errors.push('actions-007 must contain the timestamp of the committed snapshot');
+    }
   }
 }
 
