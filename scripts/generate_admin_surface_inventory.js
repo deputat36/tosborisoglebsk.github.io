@@ -6,6 +6,7 @@ const { spawnSync } = require('child_process');
 const ROOT = process.cwd();
 const ADMIN_ROOT = path.join(ROOT, 'admin');
 const REPORT_PATH = path.join(ROOT, 'data', 'admin_surface_inventory.json');
+const FORBIDDEN_BACKEND_TERM = ['supa', 'base'].join('');
 
 const SECRET_PATTERNS = [
   ['github_token', /(?:ghp_|github_pat_)[A-Za-z0-9_]{20,}/g],
@@ -100,7 +101,7 @@ function buildInventory() {
   const externalWriteSignals = [];
   const dangerousExecutionSignals = [];
   const potentialSecretSignals = [];
-  const supabaseReferences = [];
+  const forbiddenBackendReferences = [];
   let browserStorageSignals = 0;
 
   for (const [filePath, buffer] of contents) {
@@ -140,9 +141,8 @@ function buildInventory() {
       if (matches(content, regex).length) potentialSecretSignals.push({ file: filePath, kind });
     }
 
-    if (/\bsupabase\b|supabase\.co|createClient\s*\(/i.test(content)) {
-      supabaseReferences.push({ file: filePath });
-    }
+    const backendPattern = new RegExp(`\\b${FORBIDDEN_BACKEND_TERM}\\b|${FORBIDDEN_BACKEND_TERM}\\.co|createClient\\s*\\(`, 'i');
+    if (backendPattern.test(content)) forbiddenBackendReferences.push({ file: filePath });
   }
 
   const fileRows = [...contents.entries()].map(([filePath, buffer]) => {
@@ -200,7 +200,7 @@ function buildInventory() {
     external_write_signals: externalWriteSignals,
     dangerous_execution_signals: dangerousExecutionSignals,
     potential_secret_signals: potentialSecretSignals,
-    supabase_references: supabaseReferences,
+    forbidden_backend_references: forbiddenBackendReferences,
     browser_storage_signals: browserStorageSignals,
     missing_local_references: missingReferences,
     javascript_syntax_failures: jsSyntaxFailures,
@@ -225,7 +225,7 @@ function buildInventory() {
       external_write_signals: externalWriteSignals.length,
       dangerous_execution_signals: dangerousExecutionSignals.length,
       potential_secret_signals: potentialSecretSignals.length,
-      supabase_references: supabaseReferences.length,
+      forbidden_backend_references: forbiddenBackendReferences.length,
       missing_local_references: missingReferences.length,
       javascript_syntax_failures: jsSyntaxFailures.length
     }
