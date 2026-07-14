@@ -40,7 +40,7 @@
 - write signals: 0;
 - dangerous execution signals: 0;
 - potential secrets: 0;
-- Supabase references: 0;
+- forbidden backend client references: 0;
 - missing local references: 0;
 - JavaScript syntax failures: 0.
 
