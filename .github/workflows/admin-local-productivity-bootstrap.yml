@@ -1,0 +1,46 @@
+name: Bootstrap admin productivity inventory
+
+on:
+  pull_request:
+    branches:
+      - admin-local-safety-2026-07-14
+    paths:
+      - 'admin/**'
+      - 'scripts/generate_admin_surface_inventory.js'
+      - '.github/workflows/admin-local-productivity-bootstrap.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: admin-productivity-bootstrap-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Generate admin surface inventory once
+        run: node scripts/generate_admin_surface_inventory.js
+
+      - name: Commit only admin surface inventory
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Обновить inventory локального admin-редактора'
+          file_pattern: 'data/admin_surface_inventory.json'
