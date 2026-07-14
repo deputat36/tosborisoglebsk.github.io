@@ -1,0 +1,80 @@
+name: Audit local admin surface
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'admin/**'
+      - 'data/admin_surface_inventory.json'
+      - 'docs/ADMIN-LOCAL-SECURITY-MODEL.md'
+      - 'scripts/generate_admin_surface_inventory.js'
+      - 'scripts/audit_admin_surface.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'package.json'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - '.github/workflows/admin-surface-audit.yml'
+      - '.github/workflows/generate-tos-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: admin-surface-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax including admin
+        run: npm run check:js
+
+      - name: Generate admin surface inventory
+        run: npm run report:admin-surface
+
+      - name: Audit admin surface
+        run: |
+          set -o pipefail
+          npm run audit:admin-surface 2>&1 | tee admin-surface-audit.log
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee admin-surface-project-audit.log
+
+      - name: Commit admin surface inventory
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Обновить инвентаризацию локального admin-редактора'
+          file_pattern: 'data/admin_surface_inventory.json'
+
+      - name: Upload admin diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: admin-surface-audit
+          path: |
+            data/admin_surface_inventory.json
+            admin-surface-audit.log
+            admin-surface-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
