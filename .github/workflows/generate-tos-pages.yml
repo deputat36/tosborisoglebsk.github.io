@@ -51,6 +51,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           find scripts assets/js -name "*.js" -print0 | xargs -0 -n1 node --check
+      - name: Test dynamic Actions check contract
+        run: node scripts/test_actions_check_dynamic_contract.js
       - name: Guard priority TOS update evidence
         run: node scripts/audit_priority_tos_update_evidence.js
       - name: Test priority TOS update evidence guard
@@ -170,6 +172,10 @@ jobs:
         run: node scripts/generate_site_health_report.js
       - name: Enrich site health with priority readiness
         run: node scripts/enrich_site_health_readiness.js
+      - name: Generate dynamic Actions check page
+        run: node scripts/generate_actions_check_page.js
+      - name: Audit dynamic Actions check page
+        run: node scripts/audit_actions_check_content.js
       - name: Audit priority TOS readiness
         run: node scripts/audit_priority_tos_readiness.js
       - name: Generate public index
