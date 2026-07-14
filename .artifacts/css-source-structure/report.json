@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "mode": "repository",
+  "source_path": "assets/css/styles.css",
+  "target_path": "assets/css/styles.css",
+  "canonical_sha256": "fbd390565c9412734d716b2de0dad501fa17b0041a1f4c18a5449e61b7881d9c",
+  "expected_canonical_sha256": "fbd390565c9412734d716b2de0dad501fa17b0041a1f4c18a5449e61b7881d9c",
+  "canonical_equal": true,
+  "section_count": 14,
+  "line_count": 873,
+  "max_line_length": 175,
+  "errors": []
+}

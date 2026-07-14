@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T13:24:58.940Z",
+  "generated_at": "2026-07-14T14:08:28.487Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,11 +18,11 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 283,
+    "asset_files": 286,
     "over_budget_assets": 0,
-    "total_css_bytes": 33178,
-    "total_js_bytes": 1386896,
-    "total_image_bytes": 2834816,
+    "total_css_bytes": 35902,
+    "total_js_bytes": 1399791,
+    "total_image_bytes": 2834913,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
@@ -60,7 +60,7 @@
       "path": "docs/visual-baseline/css-reg-010.png",
       "group": "images",
       "extension": ".png",
-      "size_bytes": 200811,
+      "size_bytes": 200905,
       "over_budget": false
     },
     {
@@ -116,7 +116,7 @@
       "path": "docs/visual-baseline/css-reg-003.png",
       "group": "images",
       "extension": ".png",
-      "size_bytes": 130902,
+      "size_bytes": 130905,
       "over_budget": false
     },
     {
@@ -204,6 +204,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/css/styles.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 13802,
+      "over_budget": false
+    },
+    {
       "path": "scripts/capture_visual_baseline.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11977,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/audit_needs_pages_content.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 11558,
       "over_budget": false
     }
   ],
