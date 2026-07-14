@@ -43,19 +43,27 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Initialize diagnostics directory
+        run: mkdir -p .artifacts/css-source-structure
+
       - name: Check JavaScript syntax
         run: npm run check:js
 
       - name: Prepare sectioned CSS source
-        run: node scripts/prepare_css_source_structure.js
+        run: |
+          set -o pipefail
+          node scripts/prepare_css_source_structure.js 2>&1 | tee .artifacts/css-source-structure/prepare.log
 
       - name: Format candidate with pinned Prettier
         run: |
-          npm install --no-save --package-lock=false prettier@3.6.2
+          set -o pipefail
+          npm install --no-save --package-lock=false prettier@3.6.2 2>&1 | tee .artifacts/css-source-structure/prettier-install.log
           npx prettier .artifacts/css-source-structure/styles.with-sections.css --parser css > .artifacts/css-source-structure/styles.css
 
       - name: Prove canonical CSS equivalence
-        run: node scripts/audit_css_source_structure.js
+        run: |
+          set -o pipefail
+          node scripts/audit_css_source_structure.js 2>&1 | tee .artifacts/css-source-structure/structure-audit.log
 
       - name: Run current full project mode audits
         run: |
