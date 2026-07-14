@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T16:57:41.148Z",
-  "total": 319,
+  "generated_at": "2026-07-14T17:22:29.121Z",
+  "total": 309,
   "pages": [
     {
       "path": "data-update/index.html",
@@ -451,13 +451,6 @@
       "section": "Материалы"
     },
     {
-      "path": "materials/tos-data-standard/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/tos-data-standard/",
-      "title": "Единый стандарт карточки ТОС | Материалы ТОС БГО",
-      "description": "Единый стандарт карточки ТОС помогает собрать название, границы, контакты, проекты, фото, источники и статус проверки сведений.",
-      "section": "Материалы"
-    },
-    {
       "path": "materials/tos-social-networks/index.html",
       "url": "https://tosborisoglebsk.ru/materials/tos-social-networks/",
       "title": "Как вести группу ТОС во ВКонтакте или Одноклассниках | Материалы ТОС БГО",
@@ -479,20 +472,6 @@
       "section": "Материалы"
     },
     {
-      "path": "materials/tos-photo-guide/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/tos-photo-guide/",
-      "title": "Как делать фотоотчёты для проектов ТОС | Материалы ТОС БГО",
-      "description": "Как делать фотоотчёты для проектов ТОС: фото до, процесса и после, единые ракурсы, хранение оригиналов и правила публикации снимков жителей.",
-      "section": "Материалы"
-    },
-    {
-      "path": "materials/tos-volunteers/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/tos-volunteers/",
-      "title": "Как организовать добровольцев в ТОС | Материалы ТОС БГО",
-      "description": "Добровольцев в ТОС проще организовать через короткие задачи, понятных ответственных, заранее подготовленный инвентарь и публичную благодарность.",
-      "section": "Материалы"
-    },
-    {
       "path": "materials/project-reporting-after-grant/index.html",
       "url": "https://tosborisoglebsk.ru/materials/project-reporting-after-grant/",
       "title": "Как отчитаться по проекту ТОС: фото, публикации, документы | Материалы ТОС БГО",
@@ -504,13 +483,6 @@
       "url": "https://tosborisoglebsk.ru/materials/tos-boundaries-guide/",
       "title": "Как подготовить границы ТОС для карты | Материалы ТОС БГО",
       "description": "Даже если точных координат пока нет, можно начать с текстового описания и точки на карте. Сначала проверьте текстовое описание границ: улицы, дома…",
-      "section": "Материалы"
-    },
-    {
-      "path": "materials/meeting-notice/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/meeting-notice/",
-      "title": "Как подготовить объявление о собрании жителей | Материалы ТОС БГО",
-      "description": "Чем понятнее объявление, тем выше шанс, что люди придут или заранее зададут вопросы.",
       "section": "Материалы"
     },
     {
@@ -546,13 +518,6 @@
       "url": "https://tosborisoglebsk.ru/materials/photo-report/",
       "title": "Как правильно делать фото для проекта ТОС | Материалы ТОС БГО",
       "description": "Фотоотчёт проекта ТОС помогает доказать проблему, показать ход работ, подтвердить результат и подготовить публикацию для жителей. Снимайте общий план…",
-      "section": "Материалы"
-    },
-    {
-      "path": "materials/tos-conflict-dialogue/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/tos-conflict-dialogue/",
-      "title": "Как реагировать на конфликты и критику жителей | Материалы ТОС БГО",
-      "description": "Критика не всегда враг. Часто это источник задач для развития территории.",
       "section": "Материалы"
     },
     {
@@ -598,24 +563,10 @@
       "section": "Материалы"
     },
     {
-      "path": "materials/conflict-management/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/conflict-management/",
-      "title": "Как ТОСу работать с конфликтами между жителями | Материалы ТОС БГО",
-      "description": "Конфликты неизбежны, но их можно переводить в понятные правила и решения.",
-      "section": "Материалы"
-    },
-    {
       "path": "materials/partnerships/index.html",
       "url": "https://tosborisoglebsk.ru/materials/partnerships/",
       "title": "Как ТОСу работать с партнёрами | Материалы ТОС БГО",
       "description": "Партнёры помогают ресурсами, экспертизой, техникой, материалами и информационной поддержкой. Составьте список потенциальных партнёров: предприниматели…",
-      "section": "Материалы"
-    },
-    {
-      "path": "materials/tos-yandex-disk/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/tos-yandex-disk/",
-      "title": "Как хранить файлы ТОС на Яндекс.Диске и не перегружать сайт | Материалы ТОС БГО",
-      "description": "GitHub Pages лучше использовать для сайта, а тяжёлые документы и фото — хранить во внешнем облаке.",
       "section": "Материалы"
     },
     {
@@ -633,20 +584,6 @@
       "section": "Материалы"
     },
     {
-      "path": "materials/chairperson-daily-work/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/chairperson-daily-work/",
-      "title": "Рабочий минимум председателя ТОС | Материалы ТОС БГО",
-      "description": "Что держать в порядке, чтобы ТОС был не формальностью, а живой командой.",
-      "section": "Материалы"
-    },
-    {
-      "path": "materials/tos-event-scenario/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/tos-event-scenario/",
-      "title": "Сценарий дворового или сельского мероприятия ТОС | Материалы ТОС БГО",
-      "description": "Как провести встречу, праздник или тематическую акцию без лишней бюрократии.",
-      "section": "Материалы"
-    },
-    {
       "path": "materials/tos-bgo-in-numbers/index.html",
       "url": "https://tosborisoglebsk.ru/materials/tos-bgo-in-numbers/",
       "title": "ТОС БГО в цифрах и фактах — справочный материал",
@@ -658,13 +595,6 @@
       "url": "https://tosborisoglebsk.ru/materials/regional-tos-practices-voronezh/",
       "title": "Что делают сильные ТОСы Воронежской области: идеи для БГО | Материалы ТОС БГО",
       "description": "Опыт других территорий помогает председателям быстрее выбирать сильные и понятные проекты. Сильные ТОСы обычно не ограничиваются одним субботником. Они…",
-      "section": "Материалы"
-    },
-    {
-      "path": "materials/tos-public-report-template/index.html",
-      "url": "https://tosborisoglebsk.ru/materials/tos-public-report-template/",
-      "title": "Шаблон публичного отчёта ТОС | Материалы ТОС БГО",
-      "description": "Шаблон публичного отчёта ТОС: что планировали, что сделали, кто помог, какие фото подтверждают результат и какие задачи остаются дальше.",
       "section": "Материалы"
     },
     {
