@@ -66,11 +66,18 @@ function main() {
     '/data/documents.json',
     '/data/grants.json',
     '/data/projects.json',
+    '/data/done.json',
     '/data/events.json',
     '/data/needs.json'
   ]);
   for (const target of expected.local_read_targets) {
     if (!allowedTargets.has(target)) errors.push(`unexpected local read target: ${target}`);
+  }
+  if (expected.local_read_targets.length !== allowedTargets.size) {
+    errors.push(`admin must expose exactly ${allowedTargets.size} local read targets, found ${expected.local_read_targets.length}`);
+  }
+  for (const target of allowedTargets) {
+    if (!expected.local_read_targets.includes(target)) errors.push(`missing allowed local read target: ${target}`);
   }
 
   const activeEntry = expected.files.find((row) => row.path === 'admin/index.html');
@@ -81,6 +88,9 @@ function main() {
   const expectedAssets = [
     'admin/admin.css',
     'admin/admin-dashboard.js',
+    'admin/admin-done-dataset.js',
+    'admin/admin-export-tools.js',
+    'admin/admin-history.js',
     'admin/admin-logo-tools.js',
     'admin/admin2.js'
   ];
@@ -133,7 +143,7 @@ function main() {
 
   if (errors.length) throw new Error(`Admin surface audit failed:\n${Array.from(new Set(errors)).join('\n')}`);
 
-  console.log(`Admin surface OK: ${expected.summary.files_total} files, no external network/write/secret signals`);
+  console.log(`Admin surface OK: ${expected.summary.files_total} files, ${allowedTargets.size} local read targets, no external network/write/secret signals`);
 }
 
 main();
