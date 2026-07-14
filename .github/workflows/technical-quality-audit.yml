@@ -14,6 +14,8 @@ on:
       - 'scripts/audit_site_links.js'
       - 'scripts/test_technical_quality_gates.js'
       - 'scripts/generate_project_pages.js'
+      - 'scripts/generate_page_index.js'
+      - 'scripts/generate_sitemap.js'
       - 'scripts/generate_site_health_report.js'
       - 'scripts/enrich_site_health_readiness.js'
       - 'scripts/lib/project_legacy_redirects.js'
@@ -49,6 +51,11 @@ jobs:
       - name: Generate project pages and legacy redirects
         run: node scripts/generate_project_pages.js
 
+      - name: Regenerate dependent indexes
+        run: |
+          node scripts/generate_page_index.js
+          node scripts/generate_sitemap.js
+
       - name: Generate site health report
         run: |
           node scripts/generate_site_health_report.js
@@ -70,4 +77,15 @@ jobs:
         run: node scripts/audit_site_health_quality_gate.js
 
       - name: Run full project mode audits
-        run: node scripts/audit_project_mode_full.js
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee project-audit.log
+
+      - name: Upload project audit diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: technical-quality-project-audit
+          path: project-audit.log
+          if-no-files-found: warn
+          retention-days: 7
