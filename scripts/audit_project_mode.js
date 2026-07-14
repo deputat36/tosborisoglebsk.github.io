@@ -18,6 +18,7 @@ const checks = [
   ['TOS integrity', 'scripts/audit_tos_integrity.js'],
   ['TOS catalog content', 'scripts/audit_tos_catalog_content.js'],
   ['TOS detail pages content', 'scripts/audit_tos_detail_pages_content.js'],
+  ['Project legacy redirects self-test', 'scripts/test_project_legacy_redirects.js'],
   ['Projects integrity', 'scripts/audit_projects_integrity.js'],
   ['Project pages content', 'scripts/audit_project_pages_content.js'],
   ['Projects action routes content', 'scripts/audit_projects_action_routes_content.js'],
