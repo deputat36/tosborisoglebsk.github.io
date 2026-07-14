@@ -10,6 +10,9 @@ on:
       - 'scripts/audit_actions_check_content.js'
       - 'scripts/test_actions_check_dynamic_contract.js'
       - 'package.json'
+      - '.github/workflows/generate-tos-pages.yml'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
   workflow_dispatch:
 
 permissions:
@@ -41,45 +44,7 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Integrate runner and workflow blocks
-        run: |
-          node <<'NODE'
-          const fs = require('fs');
-
-          function insertAfter(file, marker, insertion) {
-            let text = fs.readFileSync(file, 'utf8');
-            if (text.includes(insertion.trim())) return;
-            if (!text.includes(marker)) throw new Error(`${file}: marker not found: ${marker}`);
-            text = text.replace(marker, `${marker}${insertion}`);
-            fs.writeFileSync(file, text, 'utf8');
-          }
-
-          insertAfter(
-            'scripts/audit_project_mode.js',
-            "  ['PR 220 decomposition', 'scripts/audit_pr220_decomposition.js'],",
-            "\n  ['Actions check dynamic contract self-test', 'scripts/test_actions_check_dynamic_contract.js'],\n  ['Actions check content', 'scripts/audit_actions_check_content.js'],"
-          );
-
-          insertAfter(
-            'scripts/audit_project_mode_full.js',
-            "  ['PR 220 decomposition audit', 'scripts/audit_pr220_decomposition.js'],",
-            "\n  ['Actions check dynamic contract self-test', 'scripts/test_actions_check_dynamic_contract.js'],\n  ['Actions check content audit', 'scripts/audit_actions_check_content.js'],"
-          );
-
-          insertAfter(
-            '.github/workflows/generate-tos-pages.yml',
-            '          find scripts assets/js -name "*.js" -print0 | xargs -0 -n1 node --check',
-            "\n      - name: Test dynamic Actions check contract\n        run: node scripts/test_actions_check_dynamic_contract.js"
-          );
-
-          insertAfter(
-            '.github/workflows/generate-tos-pages.yml',
-            '      - name: Enrich site health with priority readiness\n        run: node scripts/enrich_site_health_readiness.js',
-            "\n      - name: Generate dynamic Actions check page\n        run: node scripts/generate_actions_check_page.js\n      - name: Audit dynamic Actions check page\n        run: node scripts/audit_actions_check_content.js"
-          );
-          NODE
-
-      - name: Validate integration and generate page
+      - name: Generate and validate current Actions page
         run: |
           node scripts/test_actions_check_dynamic_contract.js
           node scripts/generate_actions_check_page.js
@@ -88,9 +53,9 @@ jobs:
           node scripts/audit_pr220_decomposition.js
           node scripts/audit_project_mode_full.js
 
-      - name: Commit only integrated Actions files
+      - name: Commit only generated Actions page
         if: github.event_name == 'pull_request'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Интегрировать динамический Actions check от актуального main'
-          file_pattern: 'actions-check/index.html scripts/audit_project_mode.js scripts/audit_project_mode_full.js .github/workflows/generate-tos-pages.yml'
+          commit_message: 'Сгенерировать динамическую страницу Actions check'
+          file_pattern: 'actions-check/index.html'
