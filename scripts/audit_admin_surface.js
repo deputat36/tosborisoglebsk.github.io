@@ -46,7 +46,7 @@ function main() {
     'external_write_signals',
     'dangerous_execution_signals',
     'potential_secret_signals',
-    'supabase_references',
+    'forbidden_backend_references',
     'missing_local_references',
     'javascript_syntax_failures',
     'unlinked_files'
