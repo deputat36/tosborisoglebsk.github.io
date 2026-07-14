@@ -33,6 +33,12 @@ function rowsFromCsv(text) {
   return matrix.slice(1).map((cells) => Object.fromEntries(headers.map((header, index) => [header, cells[index] || ''])));
 }
 
+function sortedObject(value) {
+  return Object.fromEntries(
+    Object.entries(value || {}).sort(([left], [right]) => left.localeCompare(right))
+  );
+}
+
 function main() {
   const errors = [];
   const source = JSON.parse(read(SOURCE_PATH));
@@ -77,9 +83,10 @@ function main() {
     if (!(source.paths || []).includes(filePath)) errors.push(`unexpected inventory path: ${filePath}`);
   }
 
-  const expectedCounts = source.category_counts || {};
-  if (JSON.stringify(categoryCounts) !== JSON.stringify(expectedCounts)) {
-    errors.push(`category counts differ: ${JSON.stringify(categoryCounts)} != ${JSON.stringify(expectedCounts)}`);
+  const normalizedActualCounts = sortedObject(categoryCounts);
+  const normalizedExpectedCounts = sortedObject(source.category_counts || {});
+  if (JSON.stringify(normalizedActualCounts) !== JSON.stringify(normalizedExpectedCounts)) {
+    errors.push(`category counts differ: ${JSON.stringify(normalizedActualCounts)} != ${JSON.stringify(normalizedExpectedCounts)}`);
   }
 
   for (const filePath of REQUIRED_PROTECTED) {
