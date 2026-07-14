@@ -4,12 +4,12 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Проверка GitHub Actions — портал ТОС БГО</title>
-  <meta name="description" content="Служебная диагностика GitHub Actions, генерации страниц, RSS, sitemap и GitHub Pages портала ТОС БГО."/>
+  <meta name="description" content="Служебный снимок GitHub Actions, генерации страниц и ручного контроля production deploy портала ТОС БГО."/>
   <meta name="robots" content="noindex,follow"/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="https://tosborisoglebsk.ru/actions-check/"/>
   <meta property="og:title" content="Проверка GitHub Actions портала ТОС БГО"/>
-  <meta property="og:description" content="Диагностика workflow, генерации и ручного контроля деплоя."/>
+  <meta property="og:description" content="Диагностика PR-CI, генерации и ручного контроля production deploy."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://tosborisoglebsk.ru/actions-check/"/>
   <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
@@ -21,30 +21,37 @@
 <a class="skip-link" href="#main">Перейти к содержимому</a>
 <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
 <main id="main">
-  <section class="hero"><div class="container hero-card"><div class="eyebrow">Диагностика workflow и Pages</div><h1>Проверка GitHub Actions</h1><p class="lead">Этот раздел фиксирует состояние автоматической генерации сайта: workflow, триггеры, доступность статусов через API, сгенерированные отчёты и ручные действия после публикации. Общая оценка проекта находится в `/site-health/`.</p><div class="hero-actions"><a class="btn primary" href="/data/actions_diagnostics.csv">Скачать CSV</a><a class="btn" href="/site-health/">Вернуться к сводке</a><a class="btn" href="/github-tasks/">Ручные задачи</a><a class="btn" href="/open-data/">Открытые данные</a></div></div></section>
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Снимок CI и deployment evidence</div><h1>Проверка GitHub Actions</h1><p class="lead">Страница разделяет три уровня доказательств: успешный PR-CI, будущий push-run основной ветки и фактическую публикацию GitHub Pages. Успех одного уровня не подменяет проверку другого.</p><div class="hero-actions"><a class="btn primary" href="/data/actions_diagnostics.csv">Скачать CSV</a><a class="btn" href="/data/domain_access_check.csv">История проверки домена</a><a class="btn" href="/site-health/">Состояние сайта</a><a class="btn" href="/github-tasks/">Ручные задачи</a></div></div></section>
 
-  <section class="section tight"><div class="container notice"><b>Роль страницы:</b> служебная диагностика GitHub Actions и GitHub Pages. Она не оценивает качество карточек, контента и SEO целиком.</div></section>
+  <section class="section tight"><div class="container notice"><b>Снимок на 14 июля 2026 года.</b> Это зафиксированный результат конкретных run, а не автоматически обновляемый live-status.</div></section>
 
   <section class="section"><div class="container prose">
-    <h2>Итог проверки на 2 июля 2026 года</h2>
-    <p>Рабочий репозиторий проекта подтверждён: <code>deputat36/tosborisoglebsk.github.io</code>. Рабочая ветка совпадает с default branch: <code>release-2025-12-22</code>.</p>
-    <p>Workflow <code>Generate TOS pages</code> найден в <code>.github/workflows/generate-tos-pages.yml</code>. Он запускается вручную, по расписанию и при push в рабочую ветку по файлам страниц, данных, скриптов, стилей, логотипов и самого workflow.</p>
-    <div class="notice">Через доступный commit endpoint по последним автономным коммитам получен пустой список <code>workflow_runs</code>. Это не доказывает ошибку деплоя. Поэтому результат генерации дополнительно контролируется по файлам <code>data/site_health.json</code>, <code>rss.xml</code>, <code>sitemap.xml</code> и <code>data/page_index.json</code>, а GitHub Actions UI нужно проверить вручную.</div>
+    <h2>Что подтверждено</h2>
+    <p>Рабочий репозиторий: <code>deputat36/tosborisoglebsk.github.io</code>. Default branch: <code>release-2025-12-22</code>.</p>
+    <p>Основной workflow <code>Generate TOS pages</code> запускается через <code>workflow_dispatch</code>, для <code>pull_request</code> и при <code>push</code> в рабочую ветку. Триггер <code>schedule</code> в этом workflow отсутствует.</p>
+    <div class="notice"><b>PR-CI подтверждён реальными run:</b> №1293 / <code>29306238698</code>, №1295 / <code>29306614320</code> и №1298 / <code>29307180271</code> завершились с conclusion <code>success</code>. В каждом прошли генераторы, публичные аудиты и полный project-mode.</div>
   </div></section>
 
   <section class="section"><div class="container grid">
-    <article class="card"><div class="card-inner"><h2>Что проверено</h2><ul class="check-list"><li>репозиторий и ветка проекта;</li><li>наличие workflow генерации;</li><li>триггеры workflow;</li><li>commit endpoint по автономным коммитам;</li><li>наличие обновлённого <code>site_health.json</code>.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Что требует ручного контроля</h2><ul class="check-list"><li>открыть вкладку GitHub Actions;</li><li>проверить последний запуск <code>Generate TOS pages</code>;</li><li>при ошибке скачать логи job;</li><li>сверить GitHub Pages deployment;</li><li>после ручной проверки обновить CSV и задачу #164.</li></ul></div></article>
-    <article class="card"><div class="card-inner"><h2>Текущее состояние генерации</h2><p>По последнему <code>data/site_health.json</code>: 369 HTML-страниц, 332 публичные, 37 <code>noindex</code>, 0 SEO-предупреждений и 0 битых внутренних ссылок.</p><a class="btn" href="/data/site_health.json">Открыть JSON</a></div></article>
+    <article class="card"><div class="card-inner"><h2>PR №241</h2><p><b>Generated pages.</b> Run <code>29306238698</code>: self-test безопасной очистки, генераторы, SEO, ссылки и full project-mode — success.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>PR №242</h2><p><b>Пользовательские маршруты.</b> Run <code>29306614320</code>: пять структурных сценариев и full project-mode — success.</p></div></article>
+    <article class="card"><div class="card-inner"><h2>PR №243</h2><p><b>Старые URL проектов.</b> Run <code>29307180271</code>: 14 redirects, sitemap, SEO, ссылки и full project-mode — success.</p></div></article>
+  </div></section>
+
+  <section class="section"><div class="container grid">
+    <article class="card"><div class="card-inner"><h2>Технический baseline</h2><p>По <code>data/site_health.json</code>, созданному <code>2026-07-13T19:17:48.746Z</code>: 371 HTML-страница, 331 публичная, 40 <code>noindex</code>, 0 SEO-предупреждений и 0 битых внутренних ссылок.</p><a class="btn" href="/data/site_health.json">Открыть JSON</a></div></article>
+    <article class="card"><div class="card-inner"><h2>Что ещё не подтверждено</h2><ul class="check-list"><li>push-run ветки <code>release-2025-12-22</code> после будущего слияния;</li><li>автоматический commit сгенерированных файлов;</li><li>GitHub Pages deployment после слияния;</li><li>актуальная внешняя доступность HTTPS и www-варианта.</li></ul></div></article>
+    <article class="card"><div class="card-inner"><h2>Следующая ручная проверка</h2><ul class="check-list"><li>после merge открыть push-run основной ветки;</li><li>зафиксировать conclusion и generated commit;</li><li>проверить Pages deployment;</li><li>проверить ключевые URL из внешнего браузера;</li><li>обновить CSV только подтверждёнными результатами.</li></ul></div></article>
   </div></section>
 
   <section class="section"><div class="container prose">
-    <h2>Правило фиксации результата</h2>
-    <p>В документации нельзя писать «CI проверен», если доступны только производные файлы. Корректная формулировка: «генерация подтверждена по сгенерированным файлам и отчёту здоровья; журналы GitHub Actions требуют ручной проверки через Actions UI».</p>
-    <p><a class="btn" href="/site-health/">Вернуться к общей сводке</a> <a class="btn" href="/github-tasks/">Открыть ручные задачи</a></p>
+    <h2>Правило интерпретации</h2>
+    <p><b>Успешный PR-run</b> подтверждает код и проверки в merge-ref pull request. Он не доказывает, что изменения уже находятся в default branch или опубликованы через GitHub Pages.</p>
+    <p><b>Успешный push-run</b> подтверждает workflow основной ветки, но публикацию нужно дополнительно сверить по Pages deployment и внешним URL.</p>
+    <p>Исторические результаты проверки домена хранятся в <a href="/data/domain_access_check.csv"><code>data/domain_access_check.csv</code></a>. Дата 23 июня 2026 года не считается текущей проверкой на 14 июля 2026 года.</p>
   </div></section>
 </main>
-<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Служебная диагностика автоматической генерации.</div></div></footer>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Служебный снимок CI; не live-status.</div></div></footer>
 <script src="/assets/js/site.js"></script>
 </body>
 </html>
