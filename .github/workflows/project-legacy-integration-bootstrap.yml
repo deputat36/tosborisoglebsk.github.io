@@ -46,15 +46,16 @@ jobs:
           node scripts/audit_projects_integrity.js
           node --check scripts/generate_project_pages.js
 
-      - name: Commit only shared-core integration
+      - name: Commit package and project-mode integration
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add package.json scripts/audit_project_mode.js scripts/audit_project_mode_full.js .github/workflows/generate-tos-pages.yml
+          git restore .github/workflows/generate-tos-pages.yml
+          git add package.json scripts/audit_project_mode.js scripts/audit_project_mode_full.js
           if git diff --cached --quiet; then
-            echo 'No shared-core changes to commit.'
+            echo 'No package or project-mode changes to commit.'
             exit 0
           fi
-          git commit -m 'Подключить legacy redirects проектов к CI'
+          git commit -m 'Подключить legacy redirects проектов к project-mode'
           git push origin HEAD:project-legacy-redirects-main-2026-07-14
