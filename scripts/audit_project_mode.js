@@ -15,6 +15,8 @@ const checks = [
   ['Local admin surface', 'scripts/audit_admin_surface.js'],
   ['Local admin productivity', 'scripts/audit_admin_local_productivity.js'],
   ['Admin dataset schemas', 'scripts/audit_admin_dataset_schema.js'],
+  ['Generated page cleanup self-test', 'scripts/test_generated_page_cleanup.js'],
+  ['Generated collection pages', 'scripts/audit_generated_page_cleanup.js'],
   ['Content origins', 'scripts/audit_content_origins.js'],
   ['Supabase scope', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine', 'scripts/audit_foreign_module_inventory.js'],
