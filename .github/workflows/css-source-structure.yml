@@ -9,6 +9,7 @@ on:
       - 'data/css_source_fingerprint.json'
       - 'data/css_maintenance_inventory.csv'
       - 'scripts/prepare_css_source_structure.js'
+      - 'scripts/format_css_whitespace_only.js'
       - 'scripts/audit_css_source_structure.js'
       - 'scripts/audit_project_mode.js'
       - 'scripts/audit_project_mode_full.js'
@@ -54,11 +55,10 @@ jobs:
           set -o pipefail
           node scripts/prepare_css_source_structure.js 2>&1 | tee .artifacts/css-source-structure/prepare.log
 
-      - name: Format candidate with pinned Prettier
+      - name: Format candidate using whitespace only
         run: |
           set -o pipefail
-          npm install --no-save --package-lock=false prettier@3.6.2 2>&1 | tee .artifacts/css-source-structure/prettier-install.log
-          npx prettier .artifacts/css-source-structure/styles.with-sections.css --parser css > .artifacts/css-source-structure/styles.css
+          node scripts/format_css_whitespace_only.js 2>&1 | tee .artifacts/css-source-structure/format.log
 
       - name: Prove canonical CSS equivalence
         run: |
