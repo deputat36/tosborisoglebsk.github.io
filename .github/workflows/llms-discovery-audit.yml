@@ -12,6 +12,7 @@ on:
       - 'scripts/audit_editorial_request_pages.js'
       - 'scripts/audit_project_mode.js'
       - 'scripts/audit_project_mode_full.js'
+      - 'scripts/generate_page_index.js'
       - 'scripts/generate_sitemap.js'
       - 'data-requests/**'
   workflow_dispatch:
@@ -41,8 +42,10 @@ jobs:
       - name: Patch llms public links
         run: node scripts/patch_llms_links.js
 
-      - name: Regenerate sitemap
-        run: node scripts/generate_sitemap.js
+      - name: Regenerate public index and sitemap
+        run: |
+          node scripts/generate_page_index.js
+          node scripts/generate_sitemap.js
 
       - name: Audit editorial request pages
         run: node scripts/audit_editorial_request_pages.js
