@@ -1,0 +1,97 @@
+name: Audit local admin productivity
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'admin/**'
+      - 'data/admin_capability_inventory.csv'
+      - 'data/admin_surface_inventory.json'
+      - 'data/toses.json'
+      - 'data/news.json'
+      - 'data/articles.json'
+      - 'data/documents.json'
+      - 'data/grants.json'
+      - 'data/projects.json'
+      - 'data/done.json'
+      - 'data/events.json'
+      - 'data/needs.json'
+      - 'docs/ADMIN-LOCAL-PRODUCTIVITY.md'
+      - 'scripts/audit_admin_surface.js'
+      - 'scripts/audit_admin_local_productivity.js'
+      - 'scripts/audit_admin_dataset_schema.js'
+      - 'scripts/generate_admin_surface_inventory.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'package.json'
+      - '.github/workflows/admin-local-productivity-audit.yml'
+      - '.github/workflows/generate-tos-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: admin-local-productivity-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check admin and audit JavaScript syntax
+        run: |
+          find admin -name "*.js" -print0 | xargs -0 -n1 node --check
+          node --check scripts/audit_admin_surface.js
+          node --check scripts/audit_admin_local_productivity.js
+          node --check scripts/audit_admin_dataset_schema.js
+
+      - name: Generate admin surface inventory
+        run: node scripts/generate_admin_surface_inventory.js
+
+      - name: Audit admin surface
+        run: |
+          set -o pipefail
+          node scripts/audit_admin_surface.js 2>&1 | tee admin-surface-audit.log
+
+      - name: Audit local admin productivity
+        run: |
+          set -o pipefail
+          node scripts/audit_admin_local_productivity.js 2>&1 | tee admin-productivity-audit.log
+
+      - name: Audit nine admin data schemas
+        run: |
+          set -o pipefail
+          node scripts/audit_admin_dataset_schema.js 2>&1 | tee admin-schema-audit.log
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee admin-productivity-project-audit.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: admin-local-productivity-audit
+          path: |
+            data/admin_surface_inventory.json
+            data/admin_capability_inventory.csv
+            admin-surface-audit.log
+            admin-productivity-audit.log
+            admin-schema-audit.log
+            admin-productivity-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
