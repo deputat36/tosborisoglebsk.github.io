@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Админ-панель ТОС БГО</title>
+  <title>Локальный редактор данных ТОС БГО</title>
   <meta name="robots" content="noindex,nofollow"/>
+  <meta name="referrer" content="no-referrer"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'"/>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
   <link rel="stylesheet" href="/admin/admin.css"/>
 </head>
 <body><a class="skip-link" href="#main">Перейти к содержимому</a>
   <header class="admin-header">
     <div>
-      <div class="eyebrow">Локальная админ-панель</div>
-      <h1>Управление сайтом ТОС БГО</h1>
-      <p>Редактирование данных сайта без сервера. Изменения сохраняются в браузере, затем скачиваются JSON-файлом и загружаются в GitHub.</p>
+      <div class="eyebrow">Локальный редактор в браузере</div>
+      <h1>Редактор открытых данных ТОС БГО</h1>
+      <p>Это публично доступный клиентский инструмент без серверной авторизации. Он загружает открытые JSON-файлы только с этого сайта, хранит черновики в текущем браузере и позволяет скачать результат на компьютер.</p>
     </div>
     <div class="header-actions">
       <a class="btn" href="/" target="_blank" rel="noopener">Открыть сайт</a>
@@ -23,7 +25,7 @@
   </header>
 
   <main id="main" class="layout">
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Разделы локального редактора">
       <button class="tab active" data-section="toses" type="button">Каталог ТОС</button>
       <button class="tab" data-section="news" type="button">Новости</button>
       <button class="tab" data-section="articles" type="button">Материалы</button>
@@ -38,7 +40,10 @@
 
     <section class="workspace">
       <div class="panel warning">
-        <b>Важно.</b> Эта админка не записывает данные прямо в GitHub. После правок скачайте JSON и замените соответствующий файл в папке <code>data/</code> репозитория.
+        <b>Это не защищённая админка.</b> На странице нет аккаунтов, серверной сессии, PIN-защиты или разграничения доступа. Не вводите сюда паспорта, подписи, банковские данные, закрытую переписку, оригиналы согласий и непубличные контакты. Черновики в <code>localStorage</code> доступны пользователям этого браузера до ручного сброса.
+      </div>
+      <div class="panel warning">
+        <b>Публикация выполняется вручную.</b> Редактор не записывает данные в GitHub и не отправляет их на сторонние серверы. После проверки скачайте JSON и замените соответствующий файл в <code>data/</code> отдельным контролируемым изменением репозитория.
       </div>
 
       <section id="editorSection" class="panel">
@@ -50,7 +55,7 @@
           <div class="toolbar-actions">
             <button class="btn" id="addItem" type="button">Добавить запись</button>
             <button class="btn" id="importJson" type="button">Загрузить JSON</button>
-            <input class="hidden" id="importJsonFile" type="file" accept="application/json,.json" aria-label="Загрузить JSON-файл"/>
+            <input class="hidden" id="importJsonFile" type="file" accept="application/json,.json" aria-label="Загрузить локальный JSON-файл"/>
             <button class="btn primary" id="downloadJson" type="button">Скачать JSON</button>
           </div>
         </div>
@@ -71,13 +76,15 @@
       </section>
 
       <section id="helpSection" class="panel hidden">
-        <h2>Как пользоваться админ-панелью</h2>
+        <h2>Как пользоваться локальным редактором</h2>
         <ol>
-          <li>Выберите раздел слева.</li>
-          <li>Найдите нужную запись или нажмите «Добавить запись».</li>
-          <li>Отредактируйте поля. Черновик автоматически сохраняется в браузере.</li>
+          <li>Работайте только с данными, которые допустимо хранить в публичном репозитории.</li>
+          <li>Выберите раздел слева и найдите нужную запись.</li>
+          <li>Отредактируйте поля. Черновик автоматически сохраняется только в браузере.</li>
+          <li>Проверьте ошибки и качество записи.</li>
           <li>Нажмите «Скачать JSON».</li>
-          <li>В GitHub замените соответствующий файл в папке <code>data/</code>.</li>
+          <li>Проверьте diff и только затем замените соответствующий файл в <code>data/</code>.</li>
+          <li>После завершения нажмите «Сбросить черновики», если компьютером пользуются другие люди.</li>
         </ol>
         <h3>Разделы</h3>
         <ul>
@@ -90,7 +97,7 @@
           <li><code>data/events.json</code> — календарь событий.</li>
           <li><code>data/needs.json</code> — потребности ТОСов и предложения помощи.</li>
         </ul>
-        <p>Админка не хранит пароли и токены. Она работает только с открытыми JSON-файлами и скачивает обновлённую версию на ваш компьютер.</p>
+        <p>Инструмент не хранит пароли и токены, не выполняет серверную авторизацию и не делает сетевые запросы на запись. Его безопасность ограничена браузером, устройством и качеством ручной проверки скачанного файла.</p>
       </section>
     </section>
   </main>
@@ -98,6 +105,5 @@
   <script src="/admin/admin2.js"></script>
   <script src="/admin/admin-logo-tools.js"></script>
   <script src="/admin/admin-dashboard.js"></script>
-  <script src="/admin/admin-logo-bulk.js"></script>
 </body>
 </html>

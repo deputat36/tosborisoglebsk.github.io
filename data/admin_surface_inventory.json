@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "directory": "admin",
+  "security_model": "public_client_side_local_editor",
+  "server_authentication": false,
+  "network_write_enabled": false,
+  "private_data_allowed": false,
+  "files": [
+    {
+      "path": "admin/admin-dashboard.js",
+      "extension": "js",
+      "bytes": 9258,
+      "lines": 151,
+      "sha256": "cd810d0c3f8ffa8e9597448a1395ea1b82396c2da07841802011e23cff140a21",
+      "role": "active_asset",
+      "referenced_by": [
+        "admin/index.html"
+      ],
+      "javascript_syntax": {
+        "ok": true,
+        "message": ""
+      }
+    },
+    {
+      "path": "admin/admin-index-ready.html",
+      "extension": "html",
+      "bytes": 884,
+      "lines": 21,
+      "sha256": "4bf3b0b5313691e5210cb60a90e8da64fe246767cc7fa11fd68eb327eda89973",
+      "role": "legacy_redirect",
+      "referenced_by": [],
+      "noindex_nofollow": true,
+      "content_security_policy": false,
+      "admin_references": [
+        "admin/index.html"
+      ]
+    },
+    {
+      "path": "admin/admin-logo-tools.js",
+      "extension": "js",
+      "bytes": 3827,
+      "lines": 91,
+      "sha256": "5563ffab550063b93570709890e21152bc5367f2a0477b5f952e04ec33a7d6eb",
+      "role": "active_asset",
+      "referenced_by": [
+        "admin/index.html"
+      ],
+      "javascript_syntax": {
+        "ok": true,
+        "message": ""
+      }
+    },
+    {
+      "path": "admin/admin.css",
+      "extension": "css",
+      "bytes": 5230,
+      "lines": 1,
+      "sha256": "315c3b77a8edf1b98a5d29f9a7ddc9a4eb6162f2a8a704fe0b1adc7accebd3e3",
+      "role": "active_asset",
+      "referenced_by": [
+        "admin/index.html"
+      ]
+    },
+    {
+      "path": "admin/admin2.js",
+      "extension": "js",
+      "bytes": 18681,
+      "lines": 40,
+      "sha256": "f1f2a1b2cebd34528e17fd4f35983a531947c0f2710cc7358293cd54a0a2c2c1",
+      "role": "active_asset",
+      "referenced_by": [
+        "admin/index.html"
+      ],
+      "javascript_syntax": {
+        "ok": true,
+        "message": ""
+      }
+    },
+    {
+      "path": "admin/index.html",
+      "extension": "html",
+      "bytes": 7924,
+      "lines": 110,
+      "sha256": "10a268d91b33f7544b59bc23479667f0f9b927bd2ef9d4581ab8c4a75640d34c",
+      "role": "active_entry",
+      "referenced_by": [
+        "admin/admin-index-ready.html"
+      ],
+      "noindex_nofollow": true,
+      "content_security_policy": true,
+      "admin_references": [
+        "admin/admin-dashboard.js",
+        "admin/admin-logo-tools.js",
+        "admin/admin.css",
+        "admin/admin2.js"
+      ]
+    }
+  ],
+  "local_read_targets": [
+    "/data/articles.json",
+    "/data/documents.json",
+    "/data/events.json",
+    "/data/grants.json",
+    "/data/needs.json",
+    "/data/news.json",
+    "/data/projects.json",
+    "/data/toses.json"
+  ],
+  "external_network_targets": [],
+  "external_write_signals": [],
+  "dangerous_execution_signals": [],
+  "potential_secret_signals": [],
+  "forbidden_backend_references": [],
+  "browser_storage_signals": 8,
+  "missing_local_references": [],
+  "javascript_syntax_failures": [],
+  "controls": {
+    "all_html_noindex_nofollow": true,
+    "main_csp_self_only_connect": true,
+    "main_declares_no_server_auth": true,
+    "main_declares_not_protected_admin": true,
+    "main_forbids_sensitive_data": true,
+    "main_declares_no_network_write": true,
+    "legacy_redirects_to_main": true,
+    "robots_disallow_admin": true,
+    "sitemap_excludes_admin": true
+  },
+  "summary": {
+    "files_total": 6,
+    "html_files": 2,
+    "javascript_files": 3,
+    "css_files": 1,
+    "unlinked_files": 0,
+    "external_network_targets": 0,
+    "external_write_signals": 0,
+    "dangerous_execution_signals": 0,
+    "potential_secret_signals": 0,
+    "forbidden_backend_references": 0,
+    "missing_local_references": 0,
+    "javascript_syntax_failures": 0
+  }
+}

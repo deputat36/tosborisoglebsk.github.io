@@ -7,6 +7,7 @@ on:
       - release-2025-12-22
     paths:
       - '**/index.html'
+      - 'admin/**'
       - 'data/*.json'
       - 'data/*.csv'
       - 'scripts/*.js'
@@ -19,6 +20,7 @@ on:
       - release-2025-12-22
     paths:
       - '**/index.html'
+      - 'admin/**'
       - 'data/*.json'
       - 'data/*.csv'
       - 'scripts/*.js'
@@ -50,7 +52,7 @@ jobs:
           node-version: '24'
       - name: Check JavaScript syntax
         run: |
-          find scripts assets/js -name "*.js" -print0 | xargs -0 -n1 node --check
+          find scripts assets/js admin -name "*.js" -print0 | xargs -0 -n1 node --check
       - name: Test dynamic Actions check contract
         run: node scripts/test_actions_check_dynamic_contract.js
       - name: Guard priority TOS update evidence
@@ -94,6 +96,10 @@ jobs:
       - name: Remove sensitive data audit log
         if: always()
         run: rm -f sensitive-data-audit.log
+      - name: Generate admin surface inventory
+        run: node scripts/generate_admin_surface_inventory.js
+      - name: Audit local admin surface
+        run: node scripts/audit_admin_surface.js
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data
@@ -196,6 +202,8 @@ jobs:
         run: node scripts/audit_css_regression_matrix.js
       - name: Audit CSS source structure fingerprint
         run: node scripts/audit_css_source_structure.js
+      - name: Refresh admin surface inventory after patch steps
+        run: node scripts/generate_admin_surface_inventory.js
       - name: Run full project mode audits
         run: |
           set -o pipefail
