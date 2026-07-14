@@ -139,6 +139,8 @@ jobs:
       - name: Generate need pages
         run: node scripts/generate_need_pages.js
       - name: Audit generated collection pages
+        env:
+          GENERATED_PAGE_CLEANUP_STRICT: 'true'
         run: node scripts/audit_generated_page_cleanup.js
       - name: Generate project pages
         run: node scripts/generate_project_pages.js
