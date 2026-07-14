@@ -5,6 +5,7 @@ const { repoPathExists } = require('./lib/path_checks');
 const homePath = path.join(process.cwd(), 'index.html');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 const navigationPatchPath = path.join(process.cwd(), 'scripts', 'patch_site_navigation.js');
+const homeStatsScriptPath = path.join(process.cwd(), 'assets', 'js', 'home-stats.js');
 
 const requiredRoutes = [
   '/',
@@ -100,9 +101,14 @@ function main() {
     throw new Error(`Missing file: ${navigationPatchPath}`);
   }
 
+  if (!fs.existsSync(homeStatsScriptPath)) {
+    throw new Error(`Missing file: ${homeStatsScriptPath}`);
+  }
+
   const html = fs.readFileSync(homePath, 'utf8');
   const toses = JSON.parse(fs.readFileSync(tosesPath, 'utf8'));
   const navigationPatch = fs.readFileSync(navigationPatchPath, 'utf8');
+  const homeStatsScript = fs.readFileSync(homeStatsScriptPath, 'utf8');
   const errors = [];
 
   const title = textMatch(html, /<title>([^<]+)<\/title>/i);
@@ -189,6 +195,18 @@ function main() {
       errors.push(`homepage must not contain unverified showcase dynamic block: ${blockId}`);
     }
   });
+
+  if (!homeStatsScript.includes('stats.map(([label,value,hint])')) {
+    errors.push('homepage statistics must destructure rows as label, value, hint');
+  }
+
+  if (!homeStatsScript.includes('<b>${esc(value)}</b><span>${esc(label)}</span>')) {
+    errors.push('homepage statistics must render the value in b and the label in span');
+  }
+
+  if (homeStatsScript.includes('stats.map(([value,label,hint])')) {
+    errors.push('homepage statistics must not swap labels and values');
+  }
 
   const primaryActions = countMatches(html, /data-home-primary-action/g);
   if (primaryActions !== 5) {

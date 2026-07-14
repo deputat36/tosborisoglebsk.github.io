@@ -42,7 +42,6 @@
 - Памятка подтверждения карточки: https://tosborisoglebsk.ru/chairperson/verify-card/
 - Статусы проверки данных: https://tosborisoglebsk.ru/verification-levels/
 - Качество данных: https://tosborisoglebsk.ru/data-quality/
-- Запросы на уточнение данных: https://tosborisoglebsk.ru/data-requests/
 - Коммуникационный набор: https://tosborisoglebsk.ru/communication-kit/
 - Кампания актуализации данных: https://tosborisoglebsk.ru/campaign/
 - Чек-лист проверки карточки: https://tosborisoglebsk.ru/field-checklist/
@@ -72,7 +71,7 @@
 
 ## Рабочие страницы
 
-Некоторые технические страницы портала используются редактором и закрыты от индексации через `noindex,nofollow`. Их не нужно считать основными публичными разделами: `/audit/`, `/site-health/`, `/collection-board/`, `/verification-tasks/`, `/workbench/`, `/verification-control/`, старые `/news/view.html`, `/tos/view.html` и локальный инструмент `/tools/import.html`.
+Некоторые технические страницы портала используются редактором и закрыты от индексации через `noindex,nofollow`. Их не нужно считать основными публичными разделами: `/audit/`, `/site-health/`, `/collection-board/`, `/data-requests/`, `/data-requests/priority-tos/`, `/data-requests/tos-registry-request/`, `/verification-tasks/`, `/workbench/`, `/verification-control/`, старые `/news/view.html`, `/tos/view.html` и локальный инструмент `/tools/import.html`.
 
 ## Использование данных
 
