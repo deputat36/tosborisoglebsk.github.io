@@ -9,7 +9,7 @@ on:
       - '**/index.html'
       - 'data/*.json'
       - 'data/*.csv'
-      - 'scripts/*.js'
+      - 'scripts/**/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
@@ -21,7 +21,7 @@ on:
       - '**/index.html'
       - 'data/*.json'
       - 'data/*.csv'
-      - 'scripts/*.js'
+      - 'scripts/**/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
@@ -112,6 +112,10 @@ jobs:
         run: node scripts/patch_tos_detail_responsive_styles.js
       - name: Check patched TOS generator syntax
         run: node --check scripts/generate_tos_pages.js
+      - name: Test generated page cleanup safety
+        run: node scripts/test_generated_page_cleanup.js
+      - name: Clean stale generated collection pages
+        run: node scripts/cleanup_generated_collection_pages.js
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
       - name: Audit generated TOS detail trust pages
@@ -126,6 +130,8 @@ jobs:
         run: node scripts/generate_done_pages.js
       - name: Generate need pages
         run: node scripts/generate_need_pages.js
+      - name: Audit generated collection pages
+        run: node scripts/audit_generated_page_cleanup.js
       - name: Generate project pages
         run: node scripts/generate_project_pages.js
       - name: Patch P0 public trust guardrails
