@@ -24,9 +24,9 @@
     {
       "path": "admin/admin-index-ready.html",
       "extension": "html",
-      "bytes": 884,
+      "bytes": 972,
       "lines": 21,
-      "sha256": "4bf3b0b5313691e5210cb60a90e8da64fe246767cc7fa11fd68eb327eda89973",
+      "sha256": "ac5da5ddf37b0ed1a07e91439f23582d31c392d8b37cdc3b913c3941559fd699",
       "role": "legacy_redirect",
       "referenced_by": [],
       "noindex_nofollow": true,

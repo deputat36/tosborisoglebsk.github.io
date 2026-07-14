@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14T14:54:01.698Z",
+  "generated_at": "2026-07-14T16:36:59.074Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 290,
+    "asset_files": 287,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 1438452,
+    "total_js_bytes": 1418285,
     "total_image_bytes": 2834913,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -141,13 +141,6 @@
       "over_budget": false
     },
     {
-      "path": "admin/admin.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 27602,
-      "over_budget": false
-    },
-    {
       "path": "scripts/generate_tos_pages.js",
       "group": "js",
       "extension": ".js",
@@ -236,6 +229,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 12307,
+      "over_budget": false
+    },
+    {
+      "path": "scripts/audit_tos_detail_pages_content.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 11977,
       "over_budget": false
     }
   ],
