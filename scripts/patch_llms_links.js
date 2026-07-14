@@ -9,7 +9,6 @@ const methodLinks = [
   ['Памятка подтверждения карточки', 'https://tosborisoglebsk.ru/chairperson/verify-card/'],
   ['Статусы проверки данных', 'https://tosborisoglebsk.ru/verification-levels/'],
   ['Качество данных', 'https://tosborisoglebsk.ru/data-quality/'],
-  ['Запросы на уточнение данных', 'https://tosborisoglebsk.ru/data-requests/'],
   ['Коммуникационный набор', 'https://tosborisoglebsk.ru/communication-kit/'],
   ['Кампания актуализации данных', 'https://tosborisoglebsk.ru/campaign/'],
   ['Чек-лист проверки карточки', 'https://tosborisoglebsk.ru/field-checklist/'],
@@ -40,6 +39,7 @@ const dataLinks = [
 
 const deprecatedUrls = [
   'https://tosborisoglebsk.ru/site-health/',
+  'https://tosborisoglebsk.ru/data-requests/',
   'https://tosborisoglebsk.ru/verification-tasks/',
   'https://tosborisoglebsk.ru/publication-templates/',
   'https://tosborisoglebsk.ru/weekly-digest/',

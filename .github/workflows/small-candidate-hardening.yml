@@ -1,0 +1,75 @@
+name: Audit small candidate hardening
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'data-requests/priority-tos/index.html'
+      - 'data-requests/tos-registry-request/index.html'
+      - 'llms.txt'
+      - 'scripts/patch_llms_links.js'
+      - 'scripts/audit_homepage_content.js'
+      - 'scripts/audit_priority_tos_readiness.js'
+      - 'scripts/audit_route_governance.js'
+      - 'docs/PR220-SMALL-CANDIDATES-2026-07-14.md'
+      - '.github/workflows/small-candidate-hardening.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: small-candidate-hardening-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: npm run check:js
+
+      - name: Prove llms patch is idempotent
+        run: |
+          node scripts/patch_llms_links.js
+          git diff --exit-code -- llms.txt
+
+      - name: Audit homepage statistics regression
+        run: node scripts/audit_homepage_content.js
+
+      - name: Audit route governance and noindex
+        run: node scripts/audit_route_governance.js
+
+      - name: Preserve priority readiness anchor contract
+        run: node scripts/audit_priority_tos_readiness.js
+
+      - name: Audit SEO and links
+        run: |
+          node scripts/audit_seo.js
+          node scripts/audit_site_links.js
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee small-candidate-project-audit.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: small-candidate-hardening-audit
+          path: small-candidate-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14

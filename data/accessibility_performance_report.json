@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-13T19:17:48.563Z",
+  "generated_at": "2026-07-14T13:24:58.940Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -10,7 +10,7 @@
   },
   "summary": {
     "html_pages": 373,
-    "public_pages": 331,
+    "public_pages": 329,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -21,7 +21,7 @@
     "asset_files": 283,
     "over_budget_assets": 0,
     "total_css_bytes": 33178,
-    "total_js_bytes": 1385895,
+    "total_js_bytes": 1386896,
     "total_image_bytes": 2834816,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -179,7 +179,7 @@
       "path": "scripts/audit_route_governance.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 17930,
+      "size_bytes": 18236,
       "over_budget": false
     },
     {
