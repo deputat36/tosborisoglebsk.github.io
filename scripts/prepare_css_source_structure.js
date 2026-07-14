@@ -9,28 +9,32 @@ const OUTPUT_PATH = path.resolve(
 );
 
 const SECTIONS = [
-  [':root{', '01. Переменные и темы'],
-  ['*{', '02. Базовые стили и доступность'],
-  ['.header{', '03. Шапка и навигация'],
-  ['.btn{', '04. Кнопки и группы действий'],
-  ['.hero{', '05. Hero-блоки'],
-  ['.section{', '06. Секции, сетки и карточки'],
-  ['.toolbar{', '07. Формы, фильтры и элементы ТОС'],
-  ['.prose{', '08. Текст, уведомления и таблицы'],
-  ['.footer{', '09. Футер и вспомогательные списки'],
-  ['.stats-grid{', '10. Статистика и KPI'],
-  ['.home-panel{', '11. Специальные блоки главной'],
-  ['@media(max-width:900px){', '12. Адаптивные правила'],
-  ['.quick-list{', '13. Дополнительные компоненты'],
-  ['.print-only{', '14. Печать']
+  { pattern: /:root\s*\{/, title: '01. Переменные и темы' },
+  { pattern: /\*\s*\{/, title: '02. Базовые стили и доступность' },
+  { pattern: /\.header\s*\{/, title: '03. Шапка и навигация' },
+  { pattern: /\.btn\s*\{/, title: '04. Кнопки и группы действий' },
+  { pattern: /\.hero\s*\{/, title: '05. Hero-блоки' },
+  { pattern: /\.section\s*\{/, title: '06. Секции, сетки и карточки' },
+  { pattern: /\.toolbar\s*\{/, title: '07. Формы, фильтры и элементы ТОС' },
+  { pattern: /\.prose\s*\{/, title: '08. Текст, уведомления и таблицы' },
+  { pattern: /\.footer\s*\{/, title: '09. Футер и вспомогательные списки' },
+  { pattern: /\.stats-grid\s*\{/, title: '10. Статистика и KPI' },
+  { pattern: /\.home-panel\s*\{/, title: '11. Специальные блоки главной' },
+  { pattern: /@media\s*\(\s*max-width\s*:\s*900px\s*\)\s*\{/, title: '12. Адаптивные правила' },
+  { pattern: /\.quick-list\s*\{/, title: '13. Дополнительные компоненты' },
+  { pattern: /\.print-only\s*\{/, title: '14. Печать' }
 ];
 
-function insertSection(source, marker, title) {
-  const occurrences = source.split(marker).length - 1;
-  if (occurrences !== 1) {
-    throw new Error(`Expected exactly one marker ${marker}, found ${occurrences}`);
+function insertSection(source, pattern, title) {
+  const marker = `/* ${title} */`;
+  if (source.includes(marker)) return source;
+
+  const match = source.match(pattern);
+  if (!match || typeof match.index !== 'number') {
+    throw new Error(`Missing CSS section anchor for ${title}: ${pattern}`);
   }
-  return source.replace(marker, `\n\n/* ${title} */\n${marker}`);
+
+  return `${source.slice(0, match.index)}\n\n${marker}\n${source.slice(match.index)}`;
 }
 
 function main() {
@@ -39,8 +43,8 @@ function main() {
   }
 
   let css = fs.readFileSync(INPUT_PATH, 'utf8').trim();
-  for (const [marker, title] of SECTIONS) {
-    css = insertSection(css, marker, title);
+  for (const section of SECTIONS) {
+    css = insertSection(css, section.pattern, section.title);
   }
 
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
