@@ -67,7 +67,9 @@ jobs:
           npm run audit:publication-basis-queue
 
       - name: Audit publication basis confirmation templates
-        run: npm run audit:publication-basis-confirmation
+        run: |
+          set -o pipefail
+          npm run audit:publication-basis-confirmation 2>&1 | tee publication-basis-confirmation-audit.log
 
       - name: Run full project mode audits
         run: |
@@ -79,6 +81,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: publication-basis-confirmation-audit
-          path: publication-basis-confirmation-project-audit.log
-          if-no-files-found: error
+          path: |
+            publication-basis-confirmation-audit.log
+            publication-basis-confirmation-project-audit.log
+          if-no-files-found: warn
           retention-days: 7
