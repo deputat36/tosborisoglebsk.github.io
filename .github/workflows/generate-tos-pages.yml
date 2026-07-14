@@ -188,6 +188,8 @@ jobs:
         run: node scripts/audit_route_governance.js
       - name: Audit CSS visual regression matrix
         run: node scripts/audit_css_regression_matrix.js
+      - name: Audit CSS source structure fingerprint
+        run: node scripts/audit_css_source_structure.js
       - name: Run full project mode audits
         run: |
           set -o pipefail
