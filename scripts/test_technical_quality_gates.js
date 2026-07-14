@@ -6,6 +6,7 @@ const { spawnSync } = require('child_process');
 const ROOT = process.cwd();
 const SCRIPTS_DIR = path.join(ROOT, 'scripts');
 const DOC_PATH = path.join(ROOT, 'docs', 'TECHNICAL-QUALITY-GATES-2026-07-14.md');
+const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'technical-quality-audit.yml');
 
 function write(filePath, content) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -103,6 +104,12 @@ function testSiteHealthGate() {
   }
 }
 
+function requireTokens(text, tokens, label) {
+  for (const token of tokens) {
+    if (!text.includes(token)) throw new Error(`${label} must contain ${token}`);
+  }
+}
+
 function testIntegration() {
   const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const scripts = packageJson.scripts || {};
@@ -126,14 +133,31 @@ function testIntegration() {
     }
   }
 
-  for (const token of ['function parseHref', 'function hasAnchor', 'якорь целевой страницы не найден']) {
-    if (!linksAudit.includes(token)) throw new Error(`audit_site_links.js must contain ${token}`);
-  }
+  requireTokens(linksAudit, ['function parseHref', 'function hasAnchor', 'якорь целевой страницы не найден'], 'audit_site_links.js');
 
   if (!fs.existsSync(DOC_PATH)) throw new Error('missing technical quality gates documentation');
   const doc = fs.readFileSync(DOC_PATH, 'utf8');
-  for (const token of ['якорей', 'title', 'description', 'нулевыми', 'site_health.json', 'PR №243']) {
-    if (!doc.includes(token)) throw new Error(`technical quality documentation must contain ${token}`);
+  requireTokens(doc, ['якорей', 'title', 'description', 'нулевыми', 'site_health.json', 'PR №243', 'technical-quality-audit.yml'], 'technical quality documentation');
+
+  if (!fs.existsSync(WORKFLOW_PATH)) throw new Error('missing technical quality workflow');
+  const workflow = fs.readFileSync(WORKFLOW_PATH, 'utf8');
+  requireTokens(workflow, [
+    'permissions:',
+    'contents: read',
+    'node scripts/test_project_legacy_redirects.js',
+    'node scripts/generate_project_pages.js',
+    'node scripts/test_technical_quality_gates.js',
+    'node scripts/audit_site_links.js',
+    'node scripts/audit_public_metadata_uniqueness.js',
+    'node scripts/audit_site_health_quality_gate.js',
+    'node scripts/audit_project_mode_full.js'
+  ], 'technical quality workflow');
+  if (/contents:\s*write/i.test(workflow)) throw new Error('technical quality workflow must remain read-only');
+
+  const redirectIndex = workflow.indexOf('node scripts/generate_project_pages.js');
+  const metadataIndex = workflow.indexOf('node scripts/audit_public_metadata_uniqueness.js');
+  if (redirectIndex < 0 || metadataIndex < 0 || redirectIndex > metadataIndex) {
+    throw new Error('legacy redirects must be generated before metadata uniqueness audit');
   }
 }
 
