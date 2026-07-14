@@ -109,8 +109,12 @@ if (packageJson) {
     errors.push('package.json must define audit:generated-pages');
   }
   const auditAll = String(scripts['audit:all'] || '');
-  if (!auditAll.includes('npm run test:generated-pages') || !auditAll.includes('npm run audit:generated-pages')) {
-    errors.push('audit:all must include generated page self-test and audit');
+  if (
+    !auditAll.includes('npm run test:generated-pages')
+    || !auditAll.includes('npm run cleanup:generated-pages')
+    || !auditAll.includes('npm run audit:generated-pages')
+  ) {
+    errors.push('audit:all must include generated page self-test, cleanup and audit');
   }
 }
 
@@ -126,7 +130,7 @@ requireTokens(projectModeFull, [
 requireTokens(documentation, [
   'Охваченные коллекции',
   'Защита ручных страниц',
-  'пять наборов',
+  'пяти наборов',
   'scripts/**/*.js',
   'Удаление ручных страниц без маркера намеренно запрещено'
 ], 'generated page cleanup documentation');
