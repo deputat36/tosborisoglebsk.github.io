@@ -9,9 +9,54 @@
     {
       "path": "admin/admin-dashboard.js",
       "extension": "js",
-      "bytes": 9258,
-      "lines": 151,
-      "sha256": "cd810d0c3f8ffa8e9597448a1395ea1b82396c2da07841802011e23cff140a21",
+      "bytes": 11249,
+      "lines": 169,
+      "sha256": "0dc30877b1b9b651f6bb113d7414b56b9395179dbe834a4cbd1f0654324cb22b",
+      "role": "active_asset",
+      "referenced_by": [
+        "admin/index.html"
+      ],
+      "javascript_syntax": {
+        "ok": true,
+        "message": ""
+      }
+    },
+    {
+      "path": "admin/admin-done-dataset.js",
+      "extension": "js",
+      "bytes": 1984,
+      "lines": 47,
+      "sha256": "ab9ccdf00d9261ba546440df091ac427bbae25dc91dc686de08153d0dcb2f350",
+      "role": "active_asset",
+      "referenced_by": [
+        "admin/index.html"
+      ],
+      "javascript_syntax": {
+        "ok": true,
+        "message": ""
+      }
+    },
+    {
+      "path": "admin/admin-export-tools.js",
+      "extension": "js",
+      "bytes": 2814,
+      "lines": 68,
+      "sha256": "00f5b6e2ffdb9dcc63e6f76c6f258bbce932b38f71fcda1d02ca2cb62eb4fa6c",
+      "role": "active_asset",
+      "referenced_by": [
+        "admin/index.html"
+      ],
+      "javascript_syntax": {
+        "ok": true,
+        "message": ""
+      }
+    },
+    {
+      "path": "admin/admin-history.js",
+      "extension": "js",
+      "bytes": 5330,
+      "lines": 141,
+      "sha256": "24039db74c4b0c1bea3098786a764879018f00bf5dd17ede5e4e4b636d1504b3",
       "role": "active_asset",
       "referenced_by": [
         "admin/index.html"
@@ -79,9 +124,9 @@
     {
       "path": "admin/index.html",
       "extension": "html",
-      "bytes": 7924,
-      "lines": 110,
-      "sha256": "10a268d91b33f7544b59bc23479667f0f9b927bd2ef9d4581ab8c4a75640d34c",
+      "bytes": 8893,
+      "lines": 117,
+      "sha256": "c8d2be8d2b66bd9eb8a58c5b4822bf6c0303a2649e3873b63bb7b22f1de7414e",
       "role": "active_entry",
       "referenced_by": [
         "admin/admin-index-ready.html"
@@ -90,6 +135,9 @@
       "content_security_policy": true,
       "admin_references": [
         "admin/admin-dashboard.js",
+        "admin/admin-done-dataset.js",
+        "admin/admin-export-tools.js",
+        "admin/admin-history.js",
         "admin/admin-logo-tools.js",
         "admin/admin.css",
         "admin/admin2.js"
@@ -99,6 +147,7 @@
   "local_read_targets": [
     "/data/articles.json",
     "/data/documents.json",
+    "/data/done.json",
     "/data/events.json",
     "/data/grants.json",
     "/data/needs.json",
@@ -111,7 +160,7 @@
   "dangerous_execution_signals": [],
   "potential_secret_signals": [],
   "forbidden_backend_references": [],
-  "browser_storage_signals": 8,
+  "browser_storage_signals": 10,
   "missing_local_references": [],
   "javascript_syntax_failures": [],
   "controls": {
@@ -126,9 +175,9 @@
     "sitemap_excludes_admin": true
   },
   "summary": {
-    "files_total": 6,
+    "files_total": 9,
     "html_files": 2,
-    "javascript_files": 3,
+    "javascript_files": 6,
     "css_files": 1,
     "unlinked_files": 0,
     "external_network_targets": 0,
