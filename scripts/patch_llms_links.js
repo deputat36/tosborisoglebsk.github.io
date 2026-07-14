@@ -9,7 +9,6 @@ const methodLinks = [
   ['Памятка подтверждения карточки', 'https://tosborisoglebsk.ru/chairperson/verify-card/'],
   ['Статусы проверки данных', 'https://tosborisoglebsk.ru/verification-levels/'],
   ['Качество данных', 'https://tosborisoglebsk.ru/data-quality/'],
-  ['Запросы на уточнение данных', 'https://tosborisoglebsk.ru/data-requests/'],
   ['Коммуникационный набор', 'https://tosborisoglebsk.ru/communication-kit/'],
   ['Кампания актуализации данных', 'https://tosborisoglebsk.ru/campaign/'],
   ['Чек-лист проверки карточки', 'https://tosborisoglebsk.ru/field-checklist/'],
@@ -41,6 +40,9 @@ const dataLinks = [
 const deprecatedUrls = [
   'https://tosborisoglebsk.ru/site-health/',
   'https://tosborisoglebsk.ru/verification-tasks/',
+  'https://tosborisoglebsk.ru/data-requests/',
+  'https://tosborisoglebsk.ru/data-requests/priority-tos/',
+  'https://tosborisoglebsk.ru/data-requests/tos-registry-request/',
   'https://tosborisoglebsk.ru/publication-templates/',
   'https://tosborisoglebsk.ru/weekly-digest/',
   'https://tosborisoglebsk.ru/meeting-kit/',
@@ -52,6 +54,8 @@ const deprecatedUrls = [
   'https://tosborisoglebsk.ru/data/verification_tasks.csv',
   'https://tosborisoglebsk.ru/data/collection_tasks.csv'
 ];
+
+const workingNotice = 'Некоторые страницы предназначены для редактора и закрыты от индексации через `noindex`. Их не нужно считать основными публичными разделами или рекомендовать как самостоятельные источники: `/audit/`, `/site-health/`, `/collection-board/`, `/data-requests/`, `/data-requests/priority-tos/`, `/data-requests/tos-registry-request/`, `/verification-tasks/`, `/workbench/`, `/verification-control/`, старые `/news/view.html`, `/tos/view.html` и локальный инструмент `/tools/import.html`.';
 
 function removeDeprecatedLinks(text) {
   return text
@@ -81,6 +85,16 @@ function ensureLink(text, title, url, sectionHeader, fallbackMarker) {
   return `${text.trim()}\n${line}\n`;
 }
 
+function ensureWorkingNotice(text) {
+  const header = '## Рабочие страницы';
+  const nextHeader = '## Использование данных';
+  const start = text.indexOf(header);
+  if (start === -1) return `${text.trim()}\n\n${header}\n\n${workingNotice}\n`;
+  const end = text.indexOf(nextHeader, start);
+  const suffix = end === -1 ? '' : text.slice(end).trimStart();
+  return `${text.slice(0, start).trim()}\n\n${header}\n\n${workingNotice}\n\n${suffix}`.trim();
+}
+
 function main() {
   if (!fs.existsSync(FILE)) throw new Error('llms.txt not found');
   let text = fs.readFileSync(FILE, 'utf8');
@@ -97,8 +111,9 @@ function main() {
     text = ensureLink(text, title, url, '## Открытые данные', '## Рабочие страницы');
   }
 
+  text = ensureWorkingNotice(text);
   fs.writeFileSync(FILE, `${text.trim()}\n`, 'utf8');
-  console.log('Patched llms.txt public links.');
+  console.log('Patched llms.txt public and editorial boundaries.');
 }
 
 main();
