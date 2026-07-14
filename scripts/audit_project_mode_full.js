@@ -9,6 +9,8 @@ const checks = [
   ['Status sets self-test', 'scripts/test_status_sets.js'],
   ['Content origins audit', 'scripts/audit_content_origins.js'],
   ['Local admin surface audit', 'scripts/audit_admin_surface.js'],
+  ['Local admin productivity audit', 'scripts/audit_admin_local_productivity.js'],
+  ['Admin dataset schemas audit', 'scripts/audit_admin_dataset_schema.js'],
   ['Supabase scope audit', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine audit', 'scripts/audit_foreign_module_inventory.js'],
   ['TOS integrity audit', 'scripts/audit_tos_integrity.js'],
