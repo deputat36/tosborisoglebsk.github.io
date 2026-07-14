@@ -10,7 +10,6 @@ const PACKAGE_PATH = path.join(ROOT, 'package.json');
 const PROJECT_MODE_PATH = path.join(ROOT, 'scripts', 'audit_project_mode.js');
 const PROJECT_MODE_FULL_PATH = path.join(ROOT, 'scripts', 'audit_project_mode_full.js');
 const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'pr220-decomposition-audit.yml');
-const MAIN_WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'generate-tos-pages.yml');
 
 const REQUIRED_PROTECTED = new Set([
   '.github/workflows/generate-tos-pages.yml',
@@ -119,12 +118,11 @@ function main() {
   }
 
   const workflow = read(WORKFLOW_PATH);
-  for (const token of ['Generate PR 220 decomposition inventory', 'Audit PR 220 decomposition', 'Run full project mode audits']) {
+  for (const token of ['contents: read', 'Generate PR 220 decomposition inventory', 'Audit PR 220 decomposition', 'Run full project mode audits']) {
     if (!workflow.includes(token)) errors.push(`decomposition workflow is missing ${token}`);
   }
-  if (!read(MAIN_WORKFLOW_PATH).includes('Generate PR 220 decomposition inventory')) {
-    errors.push('main workflow must generate PR 220 decomposition inventory');
-  }
+  if (/contents:\s*write/i.test(workflow)) errors.push('decomposition workflow must not request contents: write');
+  if (/git-auto-commit|Commit PR 220 decomposition inventory/i.test(workflow)) errors.push('decomposition workflow must remain read-only');
 
   const doc = read(DOC_PATH);
   for (const token of [
