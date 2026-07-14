@@ -10,7 +10,20 @@ const domainHeaders = ['checked_at', 'target', 'method', 'result', 'status', 'no
 const actionsHeaders = ['check_id', 'group', 'subject', 'result', 'evidence', 'status', 'next_action', 'checked_at'];
 const domainStatuses = new Set(['ok_public_web', 'environment_limited', 'needs_manual_check', 'failed']);
 const actionStatuses = new Set(['passed', 'warning', 'pending', 'failed', 'blocked']);
-const actionGroups = new Set(['repo', 'branch', 'workflow', 'triggers', 'statuses', 'runs', 'generated-files', 'manual-check']);
+const actionGroups = new Set([
+  'repo',
+  'branch',
+  'workflow',
+  'triggers',
+  'statuses',
+  'runs',
+  'pr-ci',
+  'production-ci',
+  'pages',
+  'domain',
+  'generated-files',
+  'manual-check'
+]);
 
 function readCsv(filePath, label) {
   if (!fs.existsSync(filePath)) {
@@ -78,11 +91,20 @@ function validateActionsDiagnostics(errors) {
     if (!nextAction) errors.push(`${label}: line ${line}: missing next_action`);
     if (!isIsoDate(checkedAt)) errors.push(`${label}: line ${line}: invalid checked_at ${checkedAt}`);
 
-    if ((status === 'warning' || status === 'pending') && !nextAction.match(/провер|открыть|свер|использ|скач/i)) {
+    if ((status === 'warning' || status === 'pending') && !nextAction.match(/провер|открыть|свер|использ|скач|повтор/i)) {
       errors.push(`${label}: line ${line}: status ${status} needs an actionable next_action`);
     }
     if ((group === 'statuses' || group === 'runs') && status === 'failed') {
       errors.push(`${label}: line ${line}: empty status/run API responses must not be recorded as failed without log evidence`);
+    }
+    if (group === 'pr-ci' && status !== 'passed') {
+      errors.push(`${label}: line ${line}: confirmed pr-ci evidence must be passed`);
+    }
+    if ((group === 'production-ci' || group === 'pages') && status !== 'pending') {
+      errors.push(`${label}: line ${line}: ${group} must stay pending until post-merge evidence exists`);
+    }
+    if (group === 'domain' && status !== 'warning') {
+      errors.push(`${label}: line ${line}: historical domain evidence must be warning until rechecked`);
     }
   });
 }
