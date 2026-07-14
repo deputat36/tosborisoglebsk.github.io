@@ -1,6 +1,11 @@
 name: Sync PR 220 decomposition with main
 
 on:
+  push:
+    branches:
+      - pr220-decomposition-2026-07-14
+    paths:
+      - '.github/workflows/sync-pr220-decomposition.yml'
   pull_request:
     branches:
       - release-2025-12-22
@@ -11,14 +16,15 @@ permissions:
   contents: write
 
 concurrency:
-  group: sync-pr220-decomposition-${{ github.event.pull_request.number }}
+  group: sync-pr220-decomposition-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   sync:
     if: >-
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      github.event.pull_request.head.ref == 'pr220-decomposition-2026-07-14'
+      github.event_name == 'push' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'pr220-decomposition-2026-07-14')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
