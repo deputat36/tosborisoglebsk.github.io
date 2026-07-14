@@ -73,6 +73,8 @@ const checks = [
   ['CSS visual regression matrix audit', 'scripts/audit_css_regression_matrix.js'],
   ['CSS source structure audit', 'scripts/audit_css_source_structure.js'],
   ['PR 220 decomposition audit', 'scripts/audit_pr220_decomposition.js'],
+  ['Actions check dynamic contract self-test', 'scripts/test_actions_check_dynamic_contract.js'],
+  ['Actions check content audit', 'scripts/audit_actions_check_content.js'],
   ['Visual capture tooling audit', 'scripts/audit_visual_capture_tooling.js'],
   ['Technical diagnostics audit', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links audit', 'scripts/audit_open_data_links.js'],
