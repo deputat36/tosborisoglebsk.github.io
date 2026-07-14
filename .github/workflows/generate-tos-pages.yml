@@ -92,6 +92,8 @@ jobs:
       - name: Remove sensitive data audit log
         if: always()
         run: rm -f sensitive-data-audit.log
+      - name: Audit personal data readiness
+        run: node scripts/audit_personal_data_readiness.js
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data
