@@ -77,6 +77,12 @@ jobs:
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
         run: cp .artifacts/css-source-structure/styles.css assets/css/styles.css
 
+      - name: Audit applied CSS against repository fingerprint
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        run: |
+          set -o pipefail
+          env -u CSS_STRUCTURE_CANDIDATE CSS_STRUCTURE_REPORT=.artifacts/css-source-structure/repository-report.json node scripts/audit_css_source_structure.js 2>&1 | tee .artifacts/css-source-structure/repository-audit.log
+
       - name: Commit structured CSS
         if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
         uses: stefanzweifel/git-auto-commit-action@v5
