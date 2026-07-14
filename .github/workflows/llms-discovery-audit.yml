@@ -1,0 +1,65 @@
+name: Audit llms discovery boundaries
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/llms-discovery-audit.yml'
+      - 'llms.txt'
+      - 'docs/LLMS-DISCOVERY-BOUNDARIES-2026-07-14.md'
+      - 'package.json'
+      - 'scripts/patch_llms_links.js'
+      - 'scripts/audit_llms_discovery_boundaries.js'
+      - 'scripts/audit_editorial_request_pages.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'scripts/generate_sitemap.js'
+      - 'data-requests/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: llms-discovery-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: npm run check:js
+
+      - name: Patch llms public links
+        run: node scripts/patch_llms_links.js
+
+      - name: Regenerate sitemap
+        run: node scripts/generate_sitemap.js
+
+      - name: Audit editorial request pages
+        run: node scripts/audit_editorial_request_pages.js
+
+      - name: Audit llms discovery boundaries
+        run: node scripts/audit_llms_discovery_boundaries.js
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee llms-project-audit.log
+
+      - name: Upload audit diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llms-discovery-project-audit
+          path: llms-project-audit.log
+          if-no-files-found: warn
+          retention-days: 7
