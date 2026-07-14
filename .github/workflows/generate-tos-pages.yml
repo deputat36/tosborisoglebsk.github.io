@@ -106,6 +106,8 @@ jobs:
         run: node scripts/test_publication_basis_review_queue.js
       - name: Audit publication basis review queue
         run: node scripts/audit_publication_basis_review_queue.js
+      - name: Audit publication basis confirmation templates
+        run: node scripts/audit_publication_basis_confirmation_templates.js
       - name: Audit content origins
         run: node scripts/audit_content_origins.js
       - name: Audit TOS data
