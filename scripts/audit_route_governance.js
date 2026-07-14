@@ -139,6 +139,13 @@ function validateDataUpdateCleanup(errors) {
     'Подготовленный текст сам по себе не означает, что запрос отправлен'
   ]);
 
+  assertPageMarkers(errors, 'priority TOS requests indexing', '/data-requests/priority-tos/', [
+    'name="robots" content="noindex,nofollow"'
+  ]);
+  assertPageMarkers(errors, 'TOS registry request indexing', '/data-requests/tos-registry-request/', [
+    'name="robots" content="noindex,nofollow"'
+  ]);
+
   assertPageMarkers(errors, 'data-update cleanup', '/reply-review/', [
     'name="robots" content="noindex,nofollow"',
     'Для редактора — этап 2 из 3',
