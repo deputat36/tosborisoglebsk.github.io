@@ -4,6 +4,7 @@ const { findStaleGeneratedDirectories } = require('./lib/generated_page_cleanup'
 const { GENERATED_COLLECTIONS, readPublishedIds } = require('./lib/generated_collection_pages');
 
 const ROOT = process.cwd();
+const STRICT = process.env.GENERATED_PAGE_CLEANUP_STRICT === 'true';
 const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'generate-tos-pages.yml');
 const PACKAGE_PATH = path.join(ROOT, 'package.json');
 const PROJECT_MODE_PATH = path.join(ROOT, 'scripts', 'audit_project_mode.js');
@@ -37,24 +38,26 @@ const helper = read(HELPER_PATH, 'generated page cleanup helper');
 const cleanup = read(CLEANUP_PATH, 'generated page cleanup command');
 const selfTest = read(TEST_PATH, 'generated page cleanup self-test');
 
-for (const collection of GENERATED_COLLECTIONS) {
-  let validIds = [];
-  try {
-    validIds = readPublishedIds(collection);
-  } catch (error) {
-    errors.push(`${collection.name}: ${error.message}`);
-    continue;
+if (STRICT) {
+  for (const collection of GENERATED_COLLECTIONS) {
+    let validIds = [];
+    try {
+      validIds = readPublishedIds(collection);
+    } catch (error) {
+      errors.push(`${collection.name}: ${error.message}`);
+      continue;
+    }
+
+    const stale = findStaleGeneratedDirectories({
+      rootDir: collection.rootDir,
+      validIds,
+      marker: collection.marker
+    });
+
+    stale.forEach((entry) => {
+      errors.push(`${collection.name}: stale generated page ${collection.route}${entry.id}/`);
+    });
   }
-
-  const stale = findStaleGeneratedDirectories({
-    rootDir: collection.rootDir,
-    validIds,
-    marker: collection.marker
-  });
-
-  stale.forEach((entry) => {
-    errors.push(`${collection.name}: stale generated page ${collection.route}${entry.id}/`);
-  });
 }
 
 requireTokens(helper, [
@@ -88,6 +91,7 @@ requireTokens(workflow, [
   'Clean stale generated collection pages',
   'node scripts/cleanup_generated_collection_pages.js',
   'Audit generated collection pages',
+  "GENERATED_PAGE_CLEANUP_STRICT: 'true'",
   'node scripts/audit_generated_page_cleanup.js'
 ], 'generation workflow');
 
@@ -132,6 +136,7 @@ requireTokens(documentation, [
   'Защита ручных страниц',
   'пяти наборов',
   'scripts/**/*.js',
+  'GENERATED_PAGE_CLEANUP_STRICT=true',
   'Удаление ручных страниц без маркера намеренно запрещено'
 ], 'generated page cleanup documentation');
 
@@ -143,4 +148,4 @@ if (errors.length) {
   throw new Error(`Generated page cleanup audit failed:\n${errors.join('\n')}`);
 }
 
-console.log(`Generated page cleanup audit OK: ${GENERATED_COLLECTIONS.length} collections, stale pages 0, manual pages protected`);
+console.log(`Generated page cleanup audit OK: ${GENERATED_COLLECTIONS.length} collections, mode ${STRICT ? 'strict' : 'integration'}, manual pages protected`);
