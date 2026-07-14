@@ -2,6 +2,11 @@
   "policy_started_at": "2026-07-12",
   "repository_visibility": "public",
   "storage_rule": "private_evidence_outside_repository",
+  "operator_status": "pending",
+  "formal_privacy_policy_status": "not_approved",
+  "distribution_consent_form_status": "not_approved",
+  "media_permission_form_status": "not_approved",
+  "withdrawal_process_status": "editorial_interim",
   "allowed_public_references": {
     "source_ref_prefix": "source:",
     "consent_ref_prefix": "consent:",
