@@ -62,13 +62,19 @@ jobs:
         run: node scripts/generate_admin_surface_inventory.js
 
       - name: Audit admin surface
-        run: node scripts/audit_admin_surface.js
+        run: |
+          set -o pipefail
+          node scripts/audit_admin_surface.js 2>&1 | tee admin-surface-audit.log
 
       - name: Audit local admin productivity
-        run: node scripts/audit_admin_local_productivity.js
+        run: |
+          set -o pipefail
+          node scripts/audit_admin_local_productivity.js 2>&1 | tee admin-productivity-audit.log
 
       - name: Audit nine admin data schemas
-        run: node scripts/audit_admin_dataset_schema.js
+        run: |
+          set -o pipefail
+          node scripts/audit_admin_dataset_schema.js 2>&1 | tee admin-schema-audit.log
 
       - name: Run full project mode audits
         run: |
@@ -83,6 +89,9 @@ jobs:
           path: |
             data/admin_surface_inventory.json
             data/admin_capability_inventory.csv
+            admin-surface-audit.log
+            admin-productivity-audit.log
+            admin-schema-audit.log
             admin-productivity-project-audit.log
           if-no-files-found: warn
           retention-days: 14
