@@ -17,6 +17,7 @@ const checks = [
   ['Publication basis inventory', 'scripts/audit_publication_basis_inventory.js'],
   ['Publication basis review queue self-test', 'scripts/test_publication_basis_review_queue.js'],
   ['Publication basis review queue', 'scripts/audit_publication_basis_review_queue.js'],
+  ['Publication basis confirmation templates', 'scripts/audit_publication_basis_confirmation_templates.js'],
   ['Content origins', 'scripts/audit_content_origins.js'],
   ['Supabase scope', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine', 'scripts/audit_foreign_module_inventory.js'],
