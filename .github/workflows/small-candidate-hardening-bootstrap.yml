@@ -1,0 +1,51 @@
+name: Bootstrap small candidate hardening
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'scripts/bootstrap_small_candidate_hardening.js'
+      - '.github/workflows/small-candidate-hardening-bootstrap.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: small-candidate-hardening-bootstrap-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Apply bounded migration
+        run: node scripts/bootstrap_small_candidate_hardening.js
+
+      - name: Check changed JavaScript syntax
+        run: |
+          node --check scripts/patch_llms_links.js
+          node --check scripts/audit_homepage_content.js
+          node --check scripts/audit_route_governance.js
+
+      - name: Commit only bounded candidate files
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Укрепить редакционные страницы и проверки'
+          file_pattern: 'data-requests/priority-tos/index.html data-requests/tos-registry-request/index.html llms.txt scripts/patch_llms_links.js scripts/audit_homepage_content.js scripts/audit_route_governance.js'
