@@ -55,7 +55,7 @@ function validatePrimaryWorkflow(text) {
     'VK_HASHTAGS: ${{ vars.VK_HASHTAGS }}',
     'VK_COUNT: ${{ vars.VK_COUNT }}',
     'NEWS_LIMIT: ${{ vars.NEWS_LIMIT }}',
-    'node scripts/audit_vk_workflow_topology.js --self-test',
+    'node scripts/test_vk_workflow_topology.js',
     'node scripts/audit_vk_workflow_topology.js',
     'node scripts/import_vk_news.js',
     'node scripts/migrate_content_origins.js',
@@ -207,7 +207,7 @@ function runRepositoryAudit() {
       if (scripts['audit:vk-workflow'] !== 'node scripts/audit_vk_workflow_topology.js') {
         errors.push('package.json must define audit:vk-workflow');
       }
-      if (scripts['test:vk-workflow'] !== 'node scripts/audit_vk_workflow_topology.js --self-test') {
+      if (scripts['test:vk-workflow'] !== 'node scripts/test_vk_workflow_topology.js') {
         errors.push('package.json must define test:vk-workflow');
       }
       const auditAll = String(scripts['audit:all'] || '');
@@ -219,8 +219,8 @@ function runRepositoryAudit() {
   }
 
   for (const [filePath, label, tokenA, tokenB] of [
-    [PROJECT_MODE_PATH, 'project-mode audit', "['VK workflow topology self-test', 'scripts/audit_vk_workflow_topology.js', ['--self-test']]", "['VK workflow topology', 'scripts/audit_vk_workflow_topology.js']"],
-    [PROJECT_MODE_FULL_PATH, 'full project-mode audit', "['VK workflow topology self-test', 'scripts/audit_vk_workflow_topology.js', ['--self-test']]", "['VK workflow topology audit', 'scripts/audit_vk_workflow_topology.js']"]
+    [PROJECT_MODE_PATH, 'project-mode audit', "['VK workflow topology self-test', 'scripts/test_vk_workflow_topology.js']", "['VK workflow topology', 'scripts/audit_vk_workflow_topology.js']"],
+    [PROJECT_MODE_FULL_PATH, 'full project-mode audit', "['VK workflow topology self-test', 'scripts/test_vk_workflow_topology.js']", "['VK workflow topology audit', 'scripts/audit_vk_workflow_topology.js']"]
   ]) {
     if (!fs.existsSync(filePath)) {
       errors.push(`missing ${label}`);
@@ -233,8 +233,16 @@ function runRepositoryAudit() {
   console.log(`VK workflow topology OK: ${entries.length} workflow files, one scheduled VK owner (${PRIMARY_WORKFLOW})`);
 }
 
-if (process.argv.includes('--self-test')) {
-  runSelfTest();
-} else {
+if (require.main === module) {
   runRepositoryAudit();
 }
+
+module.exports = {
+  isScheduledVkWorkflow,
+  runRepositoryAudit,
+  runSelfTest,
+  validateImporter,
+  validatePrimaryWorkflow,
+  validateTopology,
+  workflowEntriesFromDirectory
+};
