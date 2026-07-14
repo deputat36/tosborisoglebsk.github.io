@@ -16,6 +16,7 @@ const checks = [
   ['User journey matrix audit', 'scripts/audit_user_journey_matrix.js'],
   ['VK workflow topology self-test', 'scripts/test_vk_workflow_topology.js'],
   ['VK workflow topology audit', 'scripts/audit_vk_workflow_topology.js'],
+  ['Project legacy redirects self-test', 'scripts/test_project_legacy_redirects.js'],
   ['Supabase scope audit', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine audit', 'scripts/audit_foreign_module_inventory.js'],
   ['TOS integrity audit', 'scripts/audit_tos_integrity.js'],
