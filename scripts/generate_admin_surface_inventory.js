@@ -45,14 +45,20 @@ function matches(content, regex) {
   return found;
 }
 
+function normalizeAdminReference(value) {
+  const clean = value.split(/[?#]/)[0];
+  if (clean === '/admin' || clean === '/admin/') return 'admin/index.html';
+  if (!clean.startsWith('/admin/')) return '';
+  return clean.replace(/^\//, '');
+}
+
 function extractAdminReferences(html) {
   const refs = [];
   const regex = /\b(?:src|href)\s*=\s*["']([^"']+)["']/gi;
   let match;
   while ((match = regex.exec(html))) {
-    const value = match[1].split(/[?#]/)[0];
-    if (!value.startsWith('/admin/')) continue;
-    refs.push(value.replace(/^\//, ''));
+    const normalized = normalizeAdminReference(match[1]);
+    if (normalized) refs.push(normalized);
   }
   return [...new Set(refs)].sort();
 }
@@ -79,7 +85,6 @@ function buildInventory() {
   const files = walk(ADMIN_ROOT);
   const contents = new Map(files.map((file) => [rel(file), fs.readFileSync(file)]));
   const htmlPaths = [...contents.keys()].filter((file) => file.endsWith('.html'));
-  const jsPaths = [...contents.keys()].filter((file) => file.endsWith('.js'));
   const references = new Map();
 
   for (const htmlPath of htmlPaths) {
@@ -106,6 +111,7 @@ function buildInventory() {
       if (/^(?:https?:)?\/\//i.test(target)) externalNetworkTargets.push({ file: filePath, target });
       else localReadTargets.add(target);
     }
+    for (const target of matches(content, /\/data\/[A-Za-z0-9_.-]+\.json/g)) localReadTargets.add(target);
 
     const writePatterns = [
       ['network_method', /\bmethod\s*:\s*["'](?:POST|PUT|PATCH|DELETE)["']/gi],
