@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: css-source-structure-${{ github.event.pull_request.number || github.ref }}
@@ -36,8 +36,11 @@ jobs:
       CSS_STRUCTURE_CANDIDATE: .artifacts/css-source-structure/styles.css
       CSS_STRUCTURE_REPORT: .artifacts/css-source-structure/report.json
     steps:
-      - name: Checkout
+      - name: Checkout PR head
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -69,6 +72,17 @@ jobs:
         run: |
           set -o pipefail
           node scripts/audit_project_mode_full.js 2>&1 | tee .artifacts/css-source-structure/project-audit.log
+
+      - name: Apply verified candidate to PR branch
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        run: cp .artifacts/css-source-structure/styles.css assets/css/styles.css
+
+      - name: Commit structured CSS
+        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository }}
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Структурировать основной CSS без изменения каскада'
+          file_pattern: 'assets/css/styles.css'
 
       - name: Upload structured CSS candidate and diagnostics
         if: always()
