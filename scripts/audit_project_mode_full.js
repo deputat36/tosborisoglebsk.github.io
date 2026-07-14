@@ -14,6 +14,8 @@ const checks = [
   ['Generated page cleanup self-test', 'scripts/test_generated_page_cleanup.js'],
   ['Generated collection pages audit', 'scripts/audit_generated_page_cleanup.js'],
   ['User journey matrix audit', 'scripts/audit_user_journey_matrix.js'],
+  ['VK workflow topology self-test', 'scripts/test_vk_workflow_topology.js'],
+  ['VK workflow topology audit', 'scripts/audit_vk_workflow_topology.js'],
   ['Supabase scope audit', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine audit', 'scripts/audit_foreign_module_inventory.js'],
   ['TOS integrity audit', 'scripts/audit_tos_integrity.js'],

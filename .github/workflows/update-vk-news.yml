@@ -25,6 +25,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Test VK workflow topology
+        run: node scripts/test_vk_workflow_topology.js
+      - name: Audit VK workflow topology
+        run: node scripts/audit_vk_workflow_topology.js
       - name: Import VK posts to news.json
         env:
           VK_TOKEN: ${{ secrets.VK_TOKEN }}
