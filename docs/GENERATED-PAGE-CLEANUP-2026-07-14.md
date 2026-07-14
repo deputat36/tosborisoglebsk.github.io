@@ -38,11 +38,13 @@ node scripts/test_generated_page_cleanup.js
 node scripts/cleanup_generated_collection_pages.js
 ```
 
-После генераторов выполняется блокирующая проверка:
+После генераторов выполняется блокирующая строгая проверка:
 
 ```text
-node scripts/audit_generated_page_cleanup.js
+GENERATED_PAGE_CLEANUP_STRICT=true node scripts/audit_generated_page_cleanup.js
 ```
+
+Строгий режим проверяет отсутствие stale-каталогов уже после cleanup и повторной генерации. Обычный project-mode запускает тот же audit в integration-режиме: проверяет helper, маркеры, конфигурацию и подключение к CI, но не изменяет checkout профильных read-only workflow.
 
 Изменения в `scripts/lib/**` запускают основной workflow благодаря пути `scripts/**/*.js`.
 
@@ -51,8 +53,9 @@ node scripts/audit_generated_page_cleanup.js
 - `scripts/lib/generated_page_cleanup.js` содержит только поиск и удаление каталогов с подтверждённым маркером;
 - `scripts/lib/generated_collection_pages.js` хранит единый список коллекций, ключей и маркеров;
 - `scripts/test_generated_page_cleanup.js` доказывает сохранение актуальных и ручных страниц;
-- `scripts/audit_generated_page_cleanup.js` блокирует оставшиеся stale-страницы и проверяет подключение к CI;
-- аудит включён в обычный и полный project-mode.
+- `scripts/audit_generated_page_cleanup.js` в strict-режиме блокирует оставшиеся stale-страницы, а в integration-режиме проверяет контракт;
+- аудит включён в обычный и полный project-mode без изменения файлов;
+- строгая проверка выполняется только основным генерационным pipeline после cleanup.
 
 ## Границы
 
