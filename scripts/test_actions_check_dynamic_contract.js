@@ -1,4 +1,5 @@
 const assert = require('assert');
+const fs = require('fs');
 const {
   buildPage,
   countStatuses,
@@ -85,5 +86,17 @@ assert.throws(
   () => buildPage({ health, diagnostics, workflow: 'name: missing triggers\n' }),
   /No workflow triggers detected/
 );
+
+const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+const auditAll = packageJson.scripts && packageJson.scripts['audit:all'];
+assert.ok(typeof auditAll === 'string', 'package.json must define audit:all');
+
+const healthIndex = auditAll.indexOf('npm run report:health');
+const actionsCheckIndex = auditAll.indexOf('npm run generate:actions-check');
+const projectModeIndex = auditAll.indexOf('npm run audit:project-mode');
+
+assert.ok(healthIndex >= 0, 'audit:all must generate site health');
+assert.ok(actionsCheckIndex > healthIndex, 'audit:all must regenerate actions-check after site health');
+assert.ok(projectModeIndex > actionsCheckIndex, 'audit:all must regenerate actions-check before project-mode');
 
 console.log('Actions check dynamic contract self-test OK');
