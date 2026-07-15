@@ -1,0 +1,72 @@
+name: Audit publication basis inventory
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/publication-basis-audit.yml'
+      - '.github/workflows/generate-tos-pages.yml'
+      - 'data/toses.json'
+      - 'data/personal_data_readiness.json'
+      - 'data/private_evidence_reference_policy.json'
+      - 'data/publication_basis_inventory.json'
+      - 'docs/PUBLICATION-BASIS-INVENTORY-2026-07-14.md'
+      - 'docs/PERSONAL-DATA-READINESS-2026-07-14.md'
+      - 'package.json'
+      - 'privacy/index.html'
+      - 'scripts/generate_publication_basis_inventory.js'
+      - 'scripts/audit_publication_basis_inventory.js'
+      - 'scripts/test_publication_basis_inventory.js'
+      - 'scripts/audit_personal_data_readiness.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publication-basis-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: npm run check:js
+
+      - name: Audit personal data readiness
+        run: npm run audit:personal-data-readiness
+
+      - name: Generate publication basis inventory
+        run: npm run report:publication-basis
+
+      - name: Test publication basis classification
+        run: npm run test:publication-basis
+
+      - name: Audit publication basis inventory
+        run: npm run audit:publication-basis
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee publication-basis-project-audit.log
+
+      - name: Upload inventory and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-basis-inventory
+          path: |
+            data/publication_basis_inventory.json
+            publication-basis-project-audit.log
+          if-no-files-found: error
+          retention-days: 7
