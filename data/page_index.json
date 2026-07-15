@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-07-14T17:42:59.900Z",
-  "total": 309,
+  "generated_at": "2026-07-15T07:48:12.464Z",
+  "total": 295,
   "pages": [
     {
       "path": "data-update/index.html",
@@ -1305,13 +1305,6 @@
       "section": "Проекты"
     },
     {
-      "path": "projects/safe-path/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/safe-path/",
-      "title": "Безопасная дорожка или тротуар | Проекты ТОС БГО",
-      "description": "Проект для мест, где жители регулярно ходят по грязи, обочине или опасному участку.",
-      "section": "Проекты"
-    },
-    {
       "path": "projects/safe-path-or-sidewalk/index.html",
       "url": "https://tosborisoglebsk.ru/projects/safe-path-or-sidewalk/",
       "title": "Безопасная дорожка или тротуар | Проекты ТОС БГО",
@@ -1326,31 +1319,10 @@
       "section": "Проекты"
     },
     {
-      "path": "projects/volunteer-day/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/volunteer-day/",
-      "title": "День добрых дел ТОС | Проекты ТОС БГО",
-      "description": "Формат, который помогает собрать жителей вокруг конкретных небольших задач.",
-      "section": "Проекты"
-    },
-    {
       "path": "projects/child-sport-playground/index.html",
       "url": "https://tosborisoglebsk.ru/projects/child-sport-playground/",
       "title": "Детская или спортивная площадка | Проекты ТОС БГО",
       "description": "Один из самых понятных для жителей проектов: безопасное место для детей, подростков и семейного отдыха. Подходит для дворов, сельских территорий и общественных пространств.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/playground/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/playground/",
-      "title": "Детская или спортивная площадка | Проекты ТОС БГО",
-      "description": "Понятный жителям проект: место для детей, подростков и семейного отдыха.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/green-route/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/green-route/",
-      "title": "Зелёный маршрут ТОС | Проекты ТОС БГО",
-      "description": "Маршрут ухода за деревьями, клумбами, газонами и общественными зелёными зонами.",
       "section": "Проекты"
     },
     {
@@ -1529,27 +1501,6 @@
       "section": "Проекты"
     },
     {
-      "path": "projects/notice-board/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/notice-board/",
-      "title": "Информационный стенд ТОС | Проекты ТОС БГО",
-      "description": "Стенд помогает жителям без соцсетей узнавать новости, контакты и планы работ.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/yard-navigation/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/yard-navigation/",
-      "title": "Информационный стенд ТОС | Проекты ТОС БГО",
-      "description": "Недорогой проект, который помогает жителям знать контакты, правила и планы ТОС.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/history-route/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/history-route/",
-      "title": "Исторический маршрут территории | Проекты ТОС БГО",
-      "description": "Подходит для сёл и старых районов: таблички, рассказы, фотоархив, экскурсия.",
-      "section": "Проекты"
-    },
-    {
       "path": "projects/history-route-memory/index.html",
       "url": "https://tosborisoglebsk.ru/projects/history-route-memory/",
       "title": "Исторический маршрут территории | Проекты ТОС БГО",
@@ -1585,20 +1536,6 @@
       "section": "Проекты"
     },
     {
-      "path": "projects/public-space/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/public-space/",
-      "title": "Место отдыха или встреч жителей | Проекты ТОС БГО",
-      "description": "Лавочки, навес, сцена, зона общения или небольшое пространство для мероприятий.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/green-yard/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/green-yard/",
-      "title": "Озеленение и клумбы | Проекты ТОС БГО",
-      "description": "Быстрый видимый результат, который хорошо подходит для первого проекта.",
-      "section": "Проекты"
-    },
-    {
       "path": "projects/green-yard-flowerbeds/index.html",
       "url": "https://tosborisoglebsk.ru/projects/green-yard-flowerbeds/",
       "title": "Озеленение, клумбы и уход за зелёными зонами | Проекты ТОС БГО",
@@ -1610,13 +1547,6 @@
       "url": "https://tosborisoglebsk.ru/projects/lighting-safe-way/",
       "title": "Освещение и безопасный маршрут | Проекты ТОС БГО",
       "description": "Проект для мест, где жителям небезопасно ходить вечером: двор, проход к остановке, дороге, школе, магазину, общественному месту.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/archive-memory/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/archive-memory/",
-      "title": "Память территории | Проекты ТОС БГО",
-      "description": "Сбор фотографий, историй жителей, материалов о памятных местах и ветеранах.",
       "section": "Проекты"
     },
     {
@@ -1648,13 +1578,6 @@
       "section": "Проекты"
     },
     {
-      "path": "projects/memorial/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/memorial/",
-      "title": "Ремонт памятника или памятного места | Проекты ТОС БГО",
-      "description": "Подходит для сельских территорий и микрорайонов, где есть общественно значимые памятные объекты.",
-      "section": "Проекты"
-    },
-    {
       "path": "projects/memorial-renovation/index.html",
       "url": "https://tosborisoglebsk.ru/projects/memorial-renovation/",
       "title": "Ремонт памятника или памятного места | Проекты ТОС БГО",
@@ -1683,20 +1606,6 @@
       "section": "Проекты"
     },
     {
-      "path": "projects/village-stage/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/village-stage/",
-      "title": "Сцена или место для сельских мероприятий | Проекты ТОС БГО",
-      "description": "Проект сцены или места для сельских мероприятий создаёт точку притяжения для праздников, концертов, встреч жителей и работы актива ТОС.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/lighting/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/lighting/",
-      "title": "Уличное освещение и безопасность | Проекты ТОС БГО",
-      "description": "Проект с понятным эффектом: безопаснее возвращаться домой и пользоваться территорией.",
-      "section": "Проекты"
-    },
-    {
       "path": "projects/street-lighting-upgrade/index.html",
       "url": "https://tosborisoglebsk.ru/projects/street-lighting-upgrade/",
       "title": "Уличное освещение на проблемном участке | Проекты ТОС БГО",
@@ -1715,13 +1624,6 @@
       "url": "https://tosborisoglebsk.ru/projects/project-school-for-tos/",
       "title": "Школа подготовки проектов ТОС | Проекты ТОС БГО",
       "description": "Серия встреч или онлайн-материалов для председателей и активистов: как выбрать проблему, оформить проект, собрать смету, подготовить фото и вовлечь жителей.",
-      "section": "Проекты"
-    },
-    {
-      "path": "projects/eco-place/index.html",
-      "url": "https://tosborisoglebsk.ru/projects/eco-place/",
-      "title": "Экоплощадка или раздельный сбор | Проекты ТОС БГО",
-      "description": "Помогает объединить экологию, просвещение и реальное улучшение территории.",
       "section": "Проекты"
     },
     {
