@@ -106,6 +106,12 @@ jobs:
         run: node scripts/test_publication_basis_inventory.js
       - name: Audit publication basis inventory
         run: node scripts/audit_publication_basis_inventory.js
+      - name: Generate publication basis review queue
+        run: node scripts/generate_publication_basis_review_queue.js
+      - name: Test publication basis review queue
+        run: node scripts/test_publication_basis_review_queue.js
+      - name: Audit publication basis review queue
+        run: node scripts/audit_publication_basis_review_queue.js
       - name: Generate admin surface inventory
         run: node scripts/generate_admin_surface_inventory.js
       - name: Audit local admin surface
