@@ -60,7 +60,13 @@ for (const marker of [
   'data-actions-status-warning>1<',
   'data-actions-status-pending>1<',
   '3 июля 2026 года',
-  'ручной запуск, pull request, push в рабочую ветку'
+  'ручной запуск, pull request, push в рабочую ветку',
+  'data-pages-manual-check',
+  '/data/github_pages_manual_check_template.csv',
+  '/docs/GITHUB-PAGES-MANUAL-CHECK.md',
+  'actions-013',
+  'not_checked',
+  'не закрывает issue #164'
 ]) {
   assert.ok(html.includes(marker), `generated HTML is missing ${marker}`);
 }
