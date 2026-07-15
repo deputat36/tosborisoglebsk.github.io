@@ -10,6 +10,8 @@ on:
       - 'admin/**'
       - 'data/*.json'
       - 'data/*.csv'
+      - 'docs/STATUS.md'
+      - 'docs/STATUS-DOCUMENT-GOVERNANCE.md'
       - 'scripts/**/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
@@ -23,6 +25,8 @@ on:
       - 'admin/**'
       - 'data/*.json'
       - 'data/*.csv'
+      - 'docs/STATUS.md'
+      - 'docs/STATUS-DOCUMENT-GOVERNANCE.md'
       - 'scripts/**/*.js'
       - 'assets/js/*.js'
       - 'assets/css/*.css'
@@ -53,6 +57,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           find scripts assets/js admin -name "*.js" -print0 | xargs -0 -n1 node --check
+      - name: Test status document contracts
+        run: npm run test:status-document
       - name: Test generated page cleanup safety
         run: node scripts/test_generated_page_cleanup.js
       - name: Test dynamic Actions check contract
@@ -210,6 +216,10 @@ jobs:
         run: node scripts/generate_actions_check_page.js
       - name: Audit dynamic Actions check page
         run: node scripts/audit_actions_check_content.js
+      - name: Update status document metrics
+        run: node scripts/update_status_document_metrics.js
+      - name: Audit status document
+        run: node scripts/audit_status_document.js
       - name: Audit priority TOS readiness
         run: node scripts/audit_priority_tos_readiness.js
       - name: Generate public index
