@@ -74,6 +74,18 @@ Production-сеть проверяется:
 
 `actions-011` остаётся `pending`, потому что source branch, HTTPS enforcement и deployment logs по-прежнему требуют ручного просмотра в интерфейсе GitHub.
 
+## Ручная проверка Settings → Pages
+
+Для оставшейся части issue #164 подготовлены:
+
+- `data/github_pages_manual_check_template.csv` — незаполненный рабочий лист из восьми обязательных пунктов;
+- `docs/GITHUB-PAGES-MANUAL-CHECK.md` — пошаговая инструкция и критерий закрытия;
+- `/actions-check/` — встроенный краткий протокол и ссылки на пакет.
+
+Шаблон хранится только со статусами `not_checked`, пустыми `observed_value` и `evidence_ref`. Он не является evidence и не может перевести `actions-011` в `passed`.
+
+После фактической проверки результат фиксируется новой строкой `actions-013` в `data/actions_diagnostics.csv`. Статус `passed` допустим только после проверки source branch или способа публикации, папки, custom domain, HTTPS enforcement, deployment status и опубликованного URL.
+
 ## Файлы
 
 - `scripts/lib/public_deployment_smoke.js` — цели, retry, SHA-сравнение и JSON-report;
@@ -81,4 +93,6 @@ Production-сеть проверяется:
 - `scripts/test_public_deployment_smoke.js` — локальный self-test;
 - `scripts/audit_public_deployment_smoke_contract.js` — защита read-only архитектуры и разделения PR/production;
 - `.github/workflows/public-deployment-smoke.yml` — PR-валидация и сетевой production workflow;
+- `data/github_pages_manual_check_template.csv` — безопасный незаполненный шаблон ручной проверки;
+- `docs/GITHUB-PAGES-MANUAL-CHECK.md` — инструкция по ручной проверке и фиксации результата;
 - `.artifacts/public-deployment-smoke/report.json` — временный artifact, не коммитится.

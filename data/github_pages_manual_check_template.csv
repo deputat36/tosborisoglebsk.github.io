@@ -1,0 +1,9 @@
+item_id,field,label,where_to_check,expected_value,observed_value,status,evidence_ref
+pages-check-01,source_branch,"Source branch","Settings > Pages > Build and deployment","release-2025-12-22",,not_checked,
+pages-check-02,publish_folder,"Папка публикации","Settings > Pages > Build and deployment","Фактическая папка публикации: / (root), /docs или GitHub Actions",,not_checked,
+pages-check-03,custom_domain,"Custom domain","Settings > Pages > Custom domain","tosborisoglebsk.ru",,not_checked,
+pages-check-04,https_enforcement,"HTTPS enforcement","Settings > Pages","enabled",,not_checked,
+pages-check-05,deployment_status,"Последний Pages deployment","Actions / Deployments / Pages","success",,not_checked,
+pages-check-06,deployment_url,"Опубликованный URL","Открыть URL из Settings > Pages или deployment","https://tosborisoglebsk.ru/",,not_checked,
+pages-check-07,checked_at,"Дата проверки","Заполнить после фактической проверки","YYYY-MM-DD",,not_checked,
+pages-check-08,evidence_ref,"Безопасная ссылка на evidence","Указать публичный deployment URL, run URL или обезличенную ссылку; приватные скриншоты не коммитить","safe reference",,not_checked,

@@ -7,7 +7,10 @@ on:
     paths:
       - 'actions-check/index.html'
       - 'data/actions_diagnostics.csv'
+      - 'data/github_pages_manual_check_template.csv'
       - 'data/site_health.json'
+      - 'docs/GITHUB-PAGES-MANUAL-CHECK.md'
+      - 'docs/PUBLIC-DEPLOYMENT-SMOKE.md'
       - 'scripts/generate_actions_check_page.js'
       - 'scripts/audit_actions_check_content.js'
       - 'scripts/test_actions_check_dynamic_contract.js'
@@ -74,6 +77,8 @@ jobs:
           name: actions-check-dynamic-audit
           path: |
             actions-check/index.html
+            data/github_pages_manual_check_template.csv
+            docs/GITHUB-PAGES-MANUAL-CHECK.md
             actions-check-audit.log
             actions-check-project-audit.log
           if-no-files-found: warn
