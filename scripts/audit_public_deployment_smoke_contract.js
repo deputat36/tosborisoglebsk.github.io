@@ -32,12 +32,14 @@ const projectMode = read('scripts/audit_project_mode.js');
 const projectModeFull = read('scripts/audit_project_mode_full.js');
 
 for (const token of [
+  'pull_request:',
   'workflow_dispatch:',
   'schedule:',
   'workflow_run:',
   'Generate TOS pages',
   'contents: read',
-  'ref: release-2025-12-22',
+  "github.event.pull_request.head.sha",
+  "'release-2025-12-22'",
   'npm run test:public-deployment-smoke',
   'npm run audit:public-deployment-smoke-contract',
   'npm run smoke:public-deployment',
@@ -58,7 +60,7 @@ for (const token of [
 
 for (const token of [
   "fs.readFileSync(cnamePath, 'utf8').trim()",
-  "env.GITHUB_REPOSITORY",
+  'env.GITHUB_REPOSITORY',
   "localPath: 'index.html'",
   "localPath: 'data/site_health.json'",
   "localPath: 'actions-check/index.html'",
