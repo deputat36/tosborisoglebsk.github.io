@@ -21,6 +21,7 @@ const checks = [
   ['VK workflow topology self-test', 'scripts/test_vk_workflow_topology.js'],
   ['VK workflow topology', 'scripts/audit_vk_workflow_topology.js'],
   ['Project legacy redirects self-test', 'scripts/test_project_legacy_redirects.js'],
+  ['Personal data readiness', 'scripts/audit_personal_data_readiness.js'],
   ['Content origins', 'scripts/audit_content_origins.js'],
   ['Supabase scope', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine', 'scripts/audit_foreign_module_inventory.js'],
