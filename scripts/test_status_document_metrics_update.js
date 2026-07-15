@@ -43,6 +43,8 @@ const stale = `# Состояние проекта
 
 ## Актуальные метрики основной ветки
 
+По \`data/site_health.json\`:
+
 - управляемых HTML-страниц: 371;
 - публичных страниц: 315;
 - служебных страниц \`noindex\`: 56;
@@ -56,40 +58,63 @@ const stale = `# Состояние проекта
 - средняя заполненность карточек: 88%;
 - общая оценка \`site_health\`: 72/100.
 
-Технический accessibility/performance-аудит проверяет 373 HTML-файла.
+Технический accessibility/performance-аудит имеет более широкую область обхода и проверяет 373 HTML-файла. В нём:
 
+- публичных страниц: 315;
+- страниц с замечаниями: 2;
+- high / medium / low: 1 / 1 / 0;
 - публичных runtime-ресурсов: 70;
-- ресурсов сверх бюджета: 0;
+- ресурсов сверх бюджета: 1;
 - общий CSS: 35 902 байта;
 - общий JavaScript: 363 317 байт.
 
 Разница между 371 и 373 страницами связана с областями обхода.
 
-- всего материалов: 146;
-- \`verified\`: 1;
-- \`editorial\`: 64;
-- \`starter\`: 24;
-- \`request\`: 57;
+## Завершённые технические циклы в основной ветке
+
+### Происхождение и доверие к контенту
+
+Текущая картина \`data/content_origin_report.json\`:
+
+- всего материалов: 140;
+- \`verified\`: 0;
+- \`editorial\`: 60;
+- \`starter\`: 20;
+- \`request\`: 60;
+
+### Доступность и производительность
+
+## Готовность к работе с персональными данными
 
 Портал работает в режиме \`old_status\`.
 Реестр фиксирует семь обязательных решений; все они остаются \`pending\`.
+
+## Сохранение старых URL проектов
 `;
 
 const updated = updateStatusDocument({ documentText: stale, siteHealth, technicalReport, contentOrigin, personalData });
 assert(updated.includes('Обновлено: 15 июля 2026 года.'), 'Date must be updated from report timestamps.');
 assert(updated.includes('управляемых HTML-страниц: 361;'), 'Managed page count must be updated.');
-assert(updated.includes('публичных страниц: 305;'), 'Public page count must be updated.');
+assert(updated.match(/- публичных страниц: 305;/g)?.length === 2, 'Both public page counts must be updated.');
+assert(updated.includes('страниц с замечаниями: 0;'), 'Technical findings count must be updated.');
+assert(updated.includes('high / medium / low: 0 / 0 / 0;'), 'Technical severities must be updated.');
 assert(updated.includes('публичных runtime-ресурсов: 68;'), 'Runtime asset count must be updated.');
+assert(updated.includes('ресурсов сверх бюджета: 0;'), 'Budget count must be updated.');
 assert(updated.includes('общий JavaScript: 355 440 байт.'), 'JavaScript byte count must be updated.');
+assert(updated.includes('всего материалов: 146;'), 'Content total must be updated.');
 assert(updated.includes('режиме `pre_legal_readiness`.'), 'Personal-data status must be updated.');
 assert(updated.includes('восемь обязательных решений'), 'Decision count must be updated.');
 
 const secondPass = updateStatusDocument({ documentText: updated, siteHealth, technicalReport, contentOrigin, personalData });
 assert.strictEqual(secondPass, updated, 'Second update must be idempotent.');
 
+const ambiguous = stale.replace(
+  '- управляемых HTML-страниц: 371;',
+  '- управляемых HTML-страниц: 371;\n- управляемых HTML-страниц: 999;'
+);
 assert.throws(
   () => updateStatusDocument({
-    documentText: `${stale}\n- управляемых HTML-страниц: 999;\n`,
+    documentText: ambiguous,
     siteHealth,
     technicalReport,
     contentOrigin,
