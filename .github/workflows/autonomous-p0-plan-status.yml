@@ -1,0 +1,68 @@
+name: Audit autonomous P0 plan status
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'docs/AUTONOMOUS-P0-PLAN-2026-07-12.md'
+      - 'index.html'
+      - 'workbench/index.html'
+      - 'scripts/audit_autonomous_p0_plan_status.js'
+      - 'scripts/test_autonomous_p0_plan_status.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'package.json'
+      - '.github/workflows/autonomous-p0-plan-status.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autonomous-p0-plan-status-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check scripts/audit_autonomous_p0_plan_status.js
+          node --check scripts/test_autonomous_p0_plan_status.js
+
+      - name: Test autonomous P0 plan status
+        run: npm run test:p0-plan-status
+
+      - name: Audit autonomous P0 plan status
+        run: npm run audit:p0-plan-status
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee autonomous-p0-plan-project-audit.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: autonomous-p0-plan-status-audit
+          path: |
+            docs/AUTONOMOUS-P0-PLAN-2026-07-12.md
+            index.html
+            workbench/index.html
+            autonomous-p0-plan-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
