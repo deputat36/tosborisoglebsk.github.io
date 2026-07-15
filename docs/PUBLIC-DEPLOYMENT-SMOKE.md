@@ -57,7 +57,18 @@ Workflow запускается:
 - содержание deployment logs;
 - юридическую или фактологическую достоверность опубликованных данных.
 
-Поэтому workflow не изменяет `data/actions_diagnostics.csv`, не переводит `actions-011` в `passed` и не закрывает issue №164 автоматически.
+Сам workflow не изменяет `data/actions_diagnostics.csv`, не переводит `actions-011` в `passed` и не закрывает issue №164 автоматически. Проверенный успешный запуск можно зафиксировать отдельной исторической строкой CSV без изменения статуса ручной проверки Settings → Pages.
+
+## Зафиксированное evidence
+
+Успешный run №2 / id `29416737813` от 15 июля 2026 года сохранён как `actions-012`:
+
+- четыре обязательные цели прошли с первой попытки;
+- blocking failures — 0;
+- warnings — 0;
+- GitHub Pages alias вернул HTTP 200 и перенаправил на custom domain.
+
+`actions-011` остаётся `pending`, потому что source branch, HTTPS enforcement и deployment logs по-прежнему требуют ручного просмотра в интерфейсе GitHub.
 
 ## Файлы
 
