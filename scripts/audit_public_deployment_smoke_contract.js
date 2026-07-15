@@ -22,6 +22,14 @@ function forbidToken(content, token, label) {
   if (content.includes(token)) errors.push(`${label} contains forbidden token: ${token}`);
 }
 
+function workflowStep(content, name) {
+  const marker = `- name: ${name}`;
+  const start = content.indexOf(marker);
+  if (start < 0) return '';
+  const next = content.indexOf('\n      - name:', start + marker.length);
+  return content.slice(start, next < 0 ? content.length : next);
+}
+
 const workflow = read('.github/workflows/public-deployment-smoke.yml');
 const library = read('scripts/lib/public_deployment_smoke.js');
 const runner = read('scripts/public_deployment_smoke.js');
@@ -57,6 +65,14 @@ for (const token of [
   'curl -X PATCH',
   'curl -X DELETE'
 ]) forbidToken(workflow, token, 'public deployment workflow');
+
+const networkStep = workflowStep(workflow, 'Check public deployment');
+requireToken(networkStep, "if: github.event_name != 'pull_request'", 'public deployment network step');
+requireToken(networkStep, 'run: npm run smoke:public-deployment', 'public deployment network step');
+
+const uploadStep = workflowStep(workflow, 'Upload public deployment diagnostics');
+requireToken(uploadStep, "if: always() && github.event_name != 'pull_request'", 'public deployment upload step');
+requireToken(uploadStep, 'uses: actions/upload-artifact@v4', 'public deployment upload step');
 
 for (const token of [
   "fs.readFileSync(cnamePath, 'utf8').trim()",
@@ -100,7 +116,9 @@ for (const token of [
   'точное совпадение опубликованных файлов',
   'GitHub Pages URL',
   'custom domain',
-  'read-only'
+  'read-only',
+  'PR-проверка',
+  'сетевой запрос не выполняется'
 ]) requireToken(docs, token, 'public deployment documentation');
 
 let packageJson = null;
