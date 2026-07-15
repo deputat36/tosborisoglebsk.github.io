@@ -70,10 +70,11 @@ jobs:
         run: npm run audit:public-deployment-smoke-contract
 
       - name: Check public deployment
+        if: github.event_name != 'pull_request'
         run: npm run smoke:public-deployment
 
       - name: Upload public deployment diagnostics
-        if: always()
+        if: always() && github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
         with:
           name: public-deployment-smoke-${{ github.run_number }}-${{ github.run_attempt }}
