@@ -1,0 +1,77 @@
+name: Audit publication basis review queue
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/publication-basis-queue-audit.yml'
+      - '.github/workflows/generate-tos-pages.yml'
+      - 'data/toses.json'
+      - 'data/publication_basis_inventory.json'
+      - 'data/publication_basis_review_queue.csv'
+      - 'docs/PUBLICATION-BASIS-INVENTORY-2026-07-14.md'
+      - 'docs/PUBLICATION-BASIS-REVIEW-QUEUE-2026-07-14.md'
+      - 'package.json'
+      - 'scripts/generate_publication_basis_inventory.js'
+      - 'scripts/audit_publication_basis_inventory.js'
+      - 'scripts/test_publication_basis_inventory.js'
+      - 'scripts/generate_publication_basis_review_queue.js'
+      - 'scripts/audit_publication_basis_review_queue.js'
+      - 'scripts/test_publication_basis_review_queue.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publication-basis-queue-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: npm run check:js
+
+      - name: Generate publication basis inventory
+        run: npm run report:publication-basis
+
+      - name: Test and audit publication basis inventory
+        run: |
+          npm run test:publication-basis
+          npm run audit:publication-basis
+
+      - name: Generate publication basis review queue
+        run: npm run report:publication-basis-queue
+
+      - name: Test publication basis review queue
+        run: npm run test:publication-basis-queue
+
+      - name: Audit publication basis review queue
+        run: npm run audit:publication-basis-queue
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee publication-basis-queue-project-audit.log
+
+      - name: Upload queue and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-basis-review-queue
+          path: |
+            data/publication_basis_review_queue.csv
+            publication-basis-queue-project-audit.log
+          if-no-files-found: error
+          retention-days: 7
