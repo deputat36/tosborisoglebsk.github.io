@@ -44,6 +44,8 @@ assert(planStatuses.has('needs_review'), 'plan status needs_review is required')
 assert(!planStatuses.has('published'), 'plan status published must not be allowed');
 
 assert(manualTaskGroups.has('data-verification'), 'manual task group data-verification is required');
+assert(manualTaskGroups.has('legal-readiness'), 'manual task group legal-readiness is required');
+assert(manualTaskGroups.has('publication-basis'), 'manual task group publication-basis is required');
 assert(manualTaskGroups.has('project-control'), 'manual task group project-control is required');
 assert(!manualTaskGroups.has('random'), 'random manual task group must not be allowed');
 
