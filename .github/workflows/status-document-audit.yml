@@ -1,0 +1,93 @@
+name: Audit status document
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'docs/STATUS.md'
+      - 'docs/STATUS-DOCUMENT-GOVERNANCE.md'
+      - 'data/site_health.json'
+      - 'data/accessibility_performance_report.json'
+      - 'data/content_origin_report.json'
+      - 'data/personal_data_readiness.json'
+      - 'scripts/audit_status_document.js'
+      - 'scripts/update_status_document_metrics.js'
+      - 'scripts/test_status_document_audit.js'
+      - 'scripts/test_status_document_metrics_update.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'package.json'
+      - '.github/workflows/status-document-audit.yml'
+      - '.github/workflows/generate-tos-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: status-document-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check scripts/audit_status_document.js
+          node --check scripts/update_status_document_metrics.js
+          node --check scripts/test_status_document_audit.js
+          node --check scripts/test_status_document_metrics_update.js
+
+      - name: Test status metrics updater
+        run: |
+          set -o pipefail
+          node scripts/test_status_document_metrics_update.js 2>&1 | tee status-updater-test.log
+
+      - name: Test status document audit
+        run: |
+          set -o pipefail
+          node scripts/test_status_document_audit.js 2>&1 | tee status-audit-test.log
+
+      - name: Rebuild status metrics in runner
+        run: npm run update:status-document
+
+      - name: Require stored status document to be current
+        run: git diff --exit-code -- docs/STATUS.md
+
+      - name: Audit status document
+        run: npm run audit:status-document
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee status-document-project-audit.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: status-document-audit
+          path: |
+            docs/STATUS.md
+            data/site_health.json
+            data/accessibility_performance_report.json
+            data/content_origin_report.json
+            data/personal_data_readiness.json
+            status-updater-test.log
+            status-audit-test.log
+            status-document-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
