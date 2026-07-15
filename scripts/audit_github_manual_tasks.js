@@ -226,7 +226,7 @@ function auditRepositoryContract() {
   }
 
   for (const token of [
-    'закрытая issue #165',
+    'Закрытая issue #165',
     'issues #34, #164, #166, #205 и #254',
     'не обращается к GitHub API',
     'data-manual-issue',
