@@ -99,6 +99,7 @@ const checks = [
   ['Open data links audit', 'scripts/audit_open_data_links.js'],
   ['Autonomous improvement plan audit', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue audit', 'scripts/audit_user_decision_queue.js'],
+  ['Manual tasks governance self-test', 'scripts/test_github_manual_tasks.js'],
   ['Manual tasks audit', 'scripts/audit_github_manual_tasks.js'],
   ['Request source tables audit', 'scripts/audit_request_sources.js'],
   ['Request source imports self-test', 'scripts/test_request_sources_import.js'],
