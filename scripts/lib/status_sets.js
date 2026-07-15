@@ -19,6 +19,8 @@ const manualTaskGroups = new Set([
   'technical-ops',
   'frontend',
   'outreach',
+  'legal-readiness',
+  'publication-basis',
   'project-control'
 ]);
 const outreachStatuses = new Set([

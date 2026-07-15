@@ -1,6 +1,8 @@
 decision_id,priority,area,topic,default_mode,status,linked_task
 udq-001,high,outreach,"режим работы с 15 запросами","подготовка и учёт выполняются автономно",assumed_default,166
-udq-002,high,data,"4 приоритетные карточки","ожидать подтверждённые данные",waiting,34
-udq-003,high,registry,"официальный реестр ТОС","ждать первичный источник",waiting,
-udq-004,medium,technical,"GitHub Actions и Pages","ждать ручную проверку",waiting,164
-udq-005,medium,visual,"заметные визуальные изменения","не менять стиль без отдельного решения",not_needed_now,165
+udq-002,high,data,"4 приоритетные карточки","ожидать подтверждённые данные и не менять защищённые поля без evidence",waiting,34
+udq-003,high,registry,"официальный реестр ТОС","ждать первичный официальный источник",waiting,205
+udq-004,medium,technical,"GitHub Pages","public smoke подтверждён; ждать ручную проверку Settings > Pages",waiting,164
+udq-005,medium,visual,"заметные визуальные изменения","не менять стиль без отдельного решения и visual comparison",not_needed_now,
+udq-006,high,legal,"оператор и модель персональных данных","не включать сбор и автоматическую публикацию до юридического решения",waiting,205
+udq-007,high,publication,"основания публикации 24 карточек","не повышать trust и не создавать consent_ref без внешнего подтверждения",waiting,254
