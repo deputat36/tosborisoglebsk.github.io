@@ -18,6 +18,8 @@ const checks = [
   ['VK workflow topology audit', 'scripts/audit_vk_workflow_topology.js'],
   ['Project legacy redirects self-test', 'scripts/test_project_legacy_redirects.js'],
   ['Personal data readiness audit', 'scripts/audit_personal_data_readiness.js'],
+  ['Publication basis inventory self-test', 'scripts/test_publication_basis_inventory.js'],
+  ['Publication basis inventory audit', 'scripts/audit_publication_basis_inventory.js'],
   ['Supabase scope audit', 'scripts/audit_supabase_scope.js'],
   ['Foreign module quarantine audit', 'scripts/audit_foreign_module_inventory.js'],
   ['TOS integrity audit', 'scripts/audit_tos_integrity.js'],
