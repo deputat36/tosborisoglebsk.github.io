@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T08:26:00.271Z",
+  "generated_at": "2026-07-15T11:17:10.229Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 70,
+    "asset_files": 68,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 363317,
+    "total_js_bytes": 355440,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -183,13 +183,6 @@
       "over_budget": false
     },
     {
-      "path": "assets/js/nav-v2/role-menu-v2.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 5573,
-      "over_budget": false
-    },
-    {
       "path": "assets/js/tos-audit.js",
       "group": "js",
       "extension": ".js",
@@ -236,6 +229,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 4697,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/projects.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 4144,
       "over_budget": false
     }
   ],
