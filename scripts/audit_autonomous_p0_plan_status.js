@@ -84,7 +84,8 @@ function auditAutonomousP0Plan({ planText, indexHtml, workbenchHtml }) {
   requireToken(indexHtml, '<h2>Состояние каталога</h2>', 'catalog state section');
   requireToken(indexHtml, 'data-portal-working-status', 'working catalog status');
 
-  requireToken(workbenchHtml, '<h1>Рабочая панель редактора</h1>', 'workbench role');
+  requireToken(workbenchHtml, '<div class="eyebrow">Рабочая панель</div>', 'workbench role marker');
+  requireToken(workbenchHtml, '<h1>Инструменты развития портала ТОС БГО</h1>', 'workbench heading');
   requireToken(workbenchHtml, '/site-health/', 'workbench site health link');
   requireToken(workbenchHtml, '/verification-tasks/', 'workbench verification tasks link');
 
