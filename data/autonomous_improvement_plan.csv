@@ -1,16 +1,19 @@
 stage,priority,area,task,mode,deliverable,status
 0,high,work-rules,"Зафиксировать правила автономной работы",assistant,"docs/AUTONOMOUS-WORK-PLAN.md и docs/STATUS.md",done
-1,high,trust,"Довести 4 приоритетные карточки до готовности к проверке",mixed,"evidence/readiness CSV и затем data/toses.json",waiting_for_confirmed_data
-2,high,outreach,"Сопровождать 15 подготовленных запросов",mixed,"актуальный outreach_register.csv",waiting_for_send_confirmation
-3,high,registry,"Подготовить импорт официального реестра 46 ТОС",assistant,"registry-intake, registry-diff, новые карточки после сверки",waiting_for_source
+1,high,trust,"Довести 4 приоритетные карточки до готовности к проверке",mixed,"data/verification_readiness_matrix.csv и затем data/toses.json",waiting_for_confirmed_data
+2,high,outreach,"Сопровождать 15 подготовленных запросов",mixed,"data/outreach_register.csv",waiting_for_send_confirmation
+3,high,registry,"Подготовить импорт официального реестра ТОС",assistant,"registry-intake, registry-diff и новые карточки после сверки",waiting_for_source
 4,high,project-content,"Собрать подтверждение реализации проекта Миролюбия",mixed,"проверенная новость, проект или история результата",waiting_for_confirmed_data
-5,high,audit,"Провести расширенный аудит сайта и зафиксировать план улучшений",assistant,"docs/AUDIT-2026-07-03.md, расширенный site_health",done
+5,high,audit,"Провести расширенный аудит сайта и зафиксировать план улучшений",assistant,"docs/AUDIT-2026-07-10.md и data/site_health.json",done
 6,high,health-report,"Расширить /site-health/ до понятного управленческого отчёта",assistant,"scripts/generate_site_health_report.js и assets/js/site-health.js",done
-7,medium,technical,"Сделать явные npm-команды проверки",assistant,"package.json: check:js, validate:data, audit:links, audit:seo, audit:health, audit:all",done
-8,medium,technical,"Проверить Actions и Pages",mixed,"updated actions_diagnostics.csv",waiting_for_manual_check
-9,medium,frontend,"Упростить CSS без визуальных изменений",assistant,"docs/CSS-MAINTENANCE.md, затем комментарии-разделители в styles.css после проверки",active
-10,medium,ux,"Упростить рабочие маршруты редактора",assistant,"/workbench-routes/ с короткими маршрутами и ссылками на рабочие инструменты",done
-11,medium,seo-content,"Усилить публичные страницы без выдумывания фактов",assistant,"лучшие тексты, FAQ, навигация, internal links",active
-12,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent, проверенные публикации",waiting_for_files
-13,low,reporting,"Сделать регулярную сводку состояния проекта",assistant,"docs/STATUS.md и github-tasks",active
-14,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"data/route_cleanup_candidates.csv, docs/ROUTE-CLEANUP.md, data/route_review_summary.json",done
+7,medium,technical,"Сделать явные npm-команды и единый блокирующий pipeline",assistant,"package.json и .github/workflows/generate-tos-pages.yml",done
+8,medium,technical,"Завершить ручную проверку Settings > Pages после успешного production smoke",mixed,"data/actions_diagnostics.csv",waiting_for_manual_check
+9,medium,frontend,"Ввести безопасный CSS-контур без визуальных поломок",assistant,"docs/CSS-MAINTENANCE.md, data/css_regression_matrix.csv и scripts/audit_css_source_structure.js",done
+10,medium,ux,"Упростить рабочие маршруты редактора",assistant,"/workbench-routes/ и /workbench/",done
+11,medium,seo-content,"Усилить публичные страницы без выдумывания фактов",assistant,"лучшие тексты, FAQ, навигация и internal links",active
+12,medium,media,"Подготовить систему приёма фото и логотипов",assistant,"media intake, consent и проверенные публикации",waiting_for_files
+13,low,reporting,"Поддерживать регулярную сводку состояния проекта",assistant,"docs/STATUS.md, /site-health/ и /github-tasks/",active
+14,low,cleanup,"Найти дубли и устаревшие служебные маршруты",mixed,"data/route_cleanup_candidates.csv, docs/ROUTE-CLEANUP.md и data/route_review_summary.json",done
+15,high,legal-readiness,"Определить оператора и утвердить юридическую модель персональных данных и медиа",mixed,"data/personal_data_readiness.json и docs/PORTAL-USER-LEGAL-STRATEGY-AUDIT-2026-07-12.md",waiting_for_manual_check
+16,high,publication-basis,"Проверить основания публикации по 24 карточкам ТОС",mixed,"data/publication_basis_review_queue.csv и data/publication_basis_inventory.json",waiting_for_confirmed_data
+17,medium,project-control,"Синхронизировать открытые ручные блокеры между Issues, CSV и служебной страницей",assistant,"data/github_manual_tasks.csv, data/user_decision_queue.csv и /github-tasks/",done
