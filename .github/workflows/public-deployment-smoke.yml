@@ -1,6 +1,20 @@
 name: Audit public deployment smoke
 
 on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'CNAME'
+      - 'package.json'
+      - 'scripts/lib/public_deployment_smoke.js'
+      - 'scripts/public_deployment_smoke.js'
+      - 'scripts/test_public_deployment_smoke.js'
+      - 'scripts/audit_public_deployment_smoke_contract.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'docs/PUBLIC-DEPLOYMENT-SMOKE.md'
+      - '.github/workflows/public-deployment-smoke.yml'
   workflow_dispatch:
   schedule:
     - cron: '17 */6 * * *'
@@ -14,7 +28,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: public-deployment-smoke
+  group: public-deployment-smoke-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -32,10 +46,10 @@ jobs:
       PUBLIC_DEPLOYMENT_RETRY_DELAY_MS: '20000'
       PUBLIC_DEPLOYMENT_TIMEOUT_MS: '15000'
     steps:
-      - name: Checkout current release branch
+      - name: Checkout audited source
         uses: actions/checkout@v4
         with:
-          ref: release-2025-12-22
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'release-2025-12-22' }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
