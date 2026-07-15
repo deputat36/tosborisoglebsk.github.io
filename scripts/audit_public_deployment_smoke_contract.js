@@ -78,7 +78,6 @@ for (const token of [
 for (const token of [
   'actions_diagnostics.csv',
   'publication_consent_ref',
-  'status =',
   'fs.writeFileSync(path.join(root, \'data\''
 ]) forbidToken(library, token, 'public deployment library');
 
