@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T08:13:01.005Z",
+  "generated_at": "2026-07-15T08:22:24.876Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,114 +18,16 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 308,
+    "asset_files": 70,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 1530826,
-    "total_image_bytes": 2834913,
+    "total_js_bytes": 363317,
+    "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
   "page_findings": [],
   "largest_assets": [
-    {
-      "path": "docs/visual-baseline/css-reg-001.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 448688,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-002.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 313918,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-014.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 264730,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-011.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 201727,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-010.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 200905,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-009.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 188455,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-004.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 188397,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-013.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 185149,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-008.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 170319,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-012.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 165285,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-005.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 135982,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-006.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 132925,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-003.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 130905,
-      "over_budget": false
-    },
-    {
-      "path": "docs/visual-baseline/css-reg-007.png",
-      "group": "images",
-      "extension": ".png",
-      "size_bytes": 105064,
-      "over_budget": false
-    },
     {
       "path": "data/tos.data.js",
       "group": "js",
@@ -138,13 +40,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 32605,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/generate_tos_pages.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 26136,
       "over_budget": false
     },
     {
@@ -169,27 +64,6 @@
       "over_budget": false
     },
     {
-      "path": "scripts/audit_route_governance.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 18236,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/patch_tos_detail_generator_trust.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 17399,
-      "over_budget": false
-    },
-    {
-      "path": "scripts/generate_site_health_report.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 17354,
-      "over_budget": false
-    },
-    {
       "path": "assets/js/site-health.js",
       "group": "js",
       "extension": ".js",
@@ -204,43 +78,170 @@
       "over_budget": false
     },
     {
-      "path": "scripts/capture_visual_baseline.js",
+      "path": "admin/admin-dashboard.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 13613,
+      "size_bytes": 11249,
       "over_budget": false
     },
     {
-      "path": "scripts/import_vk_news.js",
+      "path": "assets/js/update-center.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 13499,
+      "size_bytes": 10685,
       "over_budget": false
     },
     {
-      "path": "scripts/generate_actions_check_page.js",
+      "path": "assets/js/collection-board.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 12495,
+      "size_bytes": 10200,
       "over_budget": false
     },
     {
-      "path": "scripts/audit_done_pages_content.js",
+      "path": "assets/js/workbench-drafts.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 12307,
+      "size_bytes": 10020,
       "over_budget": false
     },
     {
-      "path": "scripts/audit_tos_detail_pages_content.js",
+      "path": "assets/js/needs.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 11977,
+      "size_bytes": 9678,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/tos-logos.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8293,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/tos-catalog.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8246,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/done.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8242,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/outreach-register.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8157,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/update-center-data.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 7678,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/events.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 7226,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/data-requests.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 6499,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/data-update.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 6300,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/news.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 6269,
+      "over_budget": false
+    },
+    {
+      "path": "assets/css/design-upgrades.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 5581,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/nav-v2/role-menu-v2.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 5573,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/tos-audit.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 5420,
+      "over_budget": false
+    },
+    {
+      "path": "admin/admin-history.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 5330,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/technical-quality.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 5318,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/priority-tos-readiness.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 5257,
+      "over_budget": false
+    },
+    {
+      "path": "admin/admin.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 5230,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/data-quality.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 5145,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/verification-tasks.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 4697,
       "over_budget": false
     }
   ],
   "over_budget_assets": [],
   "notes": [
+    "Бюджеты ресурсов учитывают публичные runtime-файлы из assets/, admin/, data/ и корня сайта; CI-скрипты и документационные baseline-снимки не являются браузерной нагрузкой.",
     "Отчёт является измерительным baseline и не заменяет ручную проверку клавиатурной навигации, контраста и экранного диктора.",
     "Доступное имя поля распознаётся через aria-label, aria-labelledby, title, label[for] и оборачивающий label.",
     "Пустой alt может быть корректным для декоративного изображения; ошибкой считается отсутствие атрибута alt.",

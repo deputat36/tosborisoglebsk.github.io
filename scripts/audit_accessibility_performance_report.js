@@ -59,6 +59,9 @@ function main() {
     }
     const filePath = path.join(ROOT, asset.path);
     if (!fs.existsSync(filePath)) errors.push(`largest_assets row ${index + 1}: missing file ${asset.path}`);
+    if (/^(?:scripts|docs|\.github)\//.test(asset.path)) {
+      errors.push(`largest_assets row ${index + 1}: non-runtime file must not affect browser budgets: ${asset.path}`);
+    }
     if (asset.over_budget) errors.push(`largest_assets row ${index + 1}: ${asset.path} exceeds its configured budget`);
   });
 
