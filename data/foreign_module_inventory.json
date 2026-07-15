@@ -1,34 +1,45 @@
 {
-  "reviewed_at": "2026-07-10",
+  "reviewed_at": "2026-07-15",
   "repository": "deputat36/tosborisoglebsk.github.io",
   "modules": [
     {
       "id": "navigator-deals-v2",
       "name": "Навигатор сделок v2",
       "classification": "foreign_or_orphaned",
-      "status": "quarantined_in_place",
+      "status": "removed_after_canonical_confirmation",
       "belongs_to_tos_portal": false,
       "public_html_references_expected": 0,
-      "files": [
+      "canonical_repository": {
+        "full_name": "deputat36/vktg",
+        "default_branch": "main",
+        "verified_at": "2026-07-15"
+      },
+      "removed_files": [
         {
-          "path": "assets/js/nav-v2/admin-guard-v2.js",
-          "role": "Проверка owner/admin роли через Supabase RPC",
-          "keep_until_decision": true
+          "local_path": "assets/js/nav-v2/admin-guard-v2.js",
+          "former_local_blob_sha": "469e6a0b0772f40e92f6e262efb6b58734a06170",
+          "canonical_path": "assets/js/nav-v2/admin-guard-v2.js",
+          "canonical_blob_sha": "469e6a0b0772f40e92f6e262efb6b58734a06170",
+          "relationship": "exact_copy"
         },
         {
-          "path": "assets/js/nav-v2/role-menu-v2.js",
-          "role": "Ролевое меню приложения Навигатор сделок",
-          "keep_until_decision": true
+          "local_path": "assets/js/nav-v2/role-menu-v2.js",
+          "former_local_blob_sha": "bd9dc02250fca4d0a5003da6daba6303772a7d6f",
+          "canonical_path": "assets/js/nav-v2/role-menu-v2.js",
+          "canonical_blob_sha": "639cdac46ff38a51a728cdad7f88c9a3d2f1d7a4",
+          "relationship": "superseded_by_newer_canonical"
         },
         {
-          "path": "tools/patch_vktg_nav_roles.py",
-          "role": "Патчер подключения nav-v2 к страницам другого приложения",
-          "keep_until_decision": true
+          "local_path": "tools/patch_vktg_nav_roles.py",
+          "former_local_blob_sha": "fae91bc8198fd82d645ddd4b5151147a5bd60c7c",
+          "canonical_path": "tools/patch_vktg_nav_roles.py",
+          "canonical_blob_sha": "fae91bc8198fd82d645ddd4b5151147a5bd60c7c",
+          "relationship": "exact_copy"
         }
       ],
       "missing_dependency": {
         "path": "config/supabase.js",
-        "expected_absent_while_quarantined": true
+        "expected_absent": true
       },
       "target_pages": [
         "dashboard-v2.html",
@@ -41,13 +52,17 @@
         "nav-access-v2.html",
         "nav-access-audit-v2.html"
       ],
-      "risks": [
-        "Смешение портала ТОС с отдельным приложением по сопровождению сделок",
-        "Случайное подключение к внешнему Supabase-проекту",
-        "Появление неработающих ссылок на отсутствующие страницы",
-        "Путаница при аудите безопасности, ролей и публикационного контура"
+      "decision_evidence": [
+        "Два файла имеют одинаковые blob SHA в обоих репозиториях.",
+        "role-menu-v2.js в canonical repository имеет более новую расширенную реализацию.",
+        "Целевые страницы и Supabase-контур существуют в deputat36/vktg.",
+        "HTML портала ТОС не содержит ссылок на assets/js/nav-v2/."
       ],
-      "decision_required": "После подтверждения владельца перенести модуль в отдельный репозиторий или архивную директорию. До решения не удалять и не подключать к HTML портала ТОС."
+      "resolved_risks": [
+        "Чужой Supabase-код больше не хранится в публичном runtime-дереве портала ТОС.",
+        "Отсутствует риск случайного подключения nav-v2 к страницам портала.",
+        "История и актуальная реализация сохранены в каноническом репозитории Навигатора сделок."
+      ]
     }
   ]
 }

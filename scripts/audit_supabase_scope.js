@@ -4,8 +4,6 @@ const path = require('path');
 const root = process.cwd();
 
 const allowedReferenceFiles = new Set([
-  'assets/js/nav-v2/role-menu-v2.js',
-  'assets/js/nav-v2/admin-guard-v2.js',
   'scripts/audit_supabase_scope.js',
   'scripts/audit_project_mode.js',
   'scripts/audit_project_mode_full.js',
@@ -70,11 +68,21 @@ function main() {
     errors.push('scripts/audit_supabase_scope.js must be visible to its own scope check');
   }
 
+  for (const removedPath of [
+    'assets/js/nav-v2/role-menu-v2.js',
+    'assets/js/nav-v2/admin-guard-v2.js',
+    'tools/patch_vktg_nav_roles.py'
+  ]) {
+    if (fs.existsSync(path.join(root, removedPath))) {
+      errors.push(`foreign nav-v2 file must remain absent: ${removedPath}`);
+    }
+  }
+
   if (errors.length) {
     throw new Error(`Supabase scope audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Supabase scope OK: ${foundReferenceFiles.size} files with references`);
+  console.log(`Supabase scope OK: ${foundReferenceFiles.size} documentation and audit files with references`);
 }
 
 main();
