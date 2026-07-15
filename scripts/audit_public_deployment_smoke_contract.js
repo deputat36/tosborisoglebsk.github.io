@@ -118,7 +118,7 @@ for (const token of [
   'custom domain',
   'read-only',
   'PR-проверка',
-  'сетевой запрос не выполняется'
+  'Сетевой запрос не выполняется'
 ]) requireToken(docs, token, 'public deployment documentation');
 
 let packageJson = null;
