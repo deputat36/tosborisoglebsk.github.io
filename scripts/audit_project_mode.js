@@ -98,6 +98,8 @@ const checks = [
   ['PR 220 decomposition', 'scripts/audit_pr220_decomposition.js'],
   ['Actions check dynamic contract self-test', 'scripts/test_actions_check_dynamic_contract.js'],
   ['Actions check content', 'scripts/audit_actions_check_content.js'],
+  ['Public deployment smoke self-test', 'scripts/test_public_deployment_smoke.js'],
+  ['Public deployment smoke contract', 'scripts/audit_public_deployment_smoke_contract.js'],
   ['Visual capture tooling', 'scripts/audit_visual_capture_tooling.js'],
   ['Technical diagnostics', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links', 'scripts/audit_open_data_links.js'],
