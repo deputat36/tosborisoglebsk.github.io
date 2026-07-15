@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-07-14",
+  "portal_status": "pre_legal_readiness",
+  "operator": {
+    "status": "pending",
+    "public_name": "",
+    "legal_status": "",
+    "decision_ref": "",
+    "approved_at": "",
+    "approved_by": ""
+  },
+  "public_controls": {
+    "privacy_page_role": "editorial_guidance_not_legal_policy",
+    "personal_data_collection_enabled": false,
+    "signed_consent_collection_enabled": false,
+    "private_evidence_in_public_repository": false,
+    "automatic_publication_from_submissions": false
+  },
+  "decisions": [
+    {
+      "id": "operator_assignment",
+      "status": "pending",
+      "required_before": "personal_data_collection_or_formal_policy_publication",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Определить оператора портала, его правовой статус, полномочия и публичные реквизиты."
+    },
+    {
+      "id": "purposes_and_data_categories",
+      "status": "pending",
+      "required_before": "personal_data_collection_or_publication",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Зафиксировать цели, минимальный состав данных и категории субъектов для каждого сценария."
+    },
+    {
+      "id": "processing_and_distribution_basis",
+      "status": "pending",
+      "required_before": "personal_contact_or_portrait_publication",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Определить применимое основание обработки и отдельные условия распространения данных."
+    },
+    {
+      "id": "distribution_consent_form",
+      "status": "pending",
+      "required_before": "signed_consent_collection",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Подготовить и юридически проверить форму согласия на распространение конкретного перечня данных."
+    },
+    {
+      "id": "media_permission_form",
+      "status": "pending",
+      "required_before": "portrait_logo_or_other_media_publication",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Подготовить отдельные условия использования фотографий, логотипов и иных медиа."
+    },
+    {
+      "id": "withdrawal_correction_and_deletion_process",
+      "status": "pending",
+      "required_before": "formal_policy_publication",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Определить канал, сроки, журналирование и ответственных за отзыв, исправление и удаление."
+    },
+    {
+      "id": "private_evidence_storage",
+      "status": "pending",
+      "required_before": "signed_consent_or_private_evidence_collection",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Выбрать закрытое хранилище с контролем доступа, журналом, резервным копированием и удалением."
+    },
+    {
+      "id": "retention_access_and_incident_rules",
+      "status": "pending",
+      "required_before": "personal_data_collection",
+      "decision_ref": "",
+      "legal_review_ref": "",
+      "approved_at": "",
+      "approved_by": "",
+      "notes": "Установить сроки хранения, роли доступа, порядок уничтожения, резервирования и реагирования на инциденты."
+    }
+  ]
+}

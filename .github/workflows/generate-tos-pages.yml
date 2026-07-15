@@ -98,6 +98,8 @@ jobs:
       - name: Remove sensitive data audit log
         if: always()
         run: rm -f sensitive-data-audit.log
+      - name: Audit personal data readiness
+        run: node scripts/audit_personal_data_readiness.js
       - name: Generate admin surface inventory
         run: node scripts/generate_admin_surface_inventory.js
       - name: Audit local admin surface
