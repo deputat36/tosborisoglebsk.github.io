@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "captured_at": "2026-07-14T13:53:40.808Z",
+  "captured_at": "2026-07-15T11:09:18.984Z",
   "repository": "deputat36/tosborisoglebsk.github.io",
-  "commit_sha": "23136041e2ec5dab43435c7a6ee57562102f517f",
-  "workflow_run_id": "29338352787",
+  "commit_sha": "f74d70ddb151bfdedee4290133f0b7d877b7c963",
+  "workflow_run_id": "29410583666",
   "workflow_run_attempt": "1",
   "base_url": "http://127.0.0.1:4173",
   "matrix_path": "data/css_regression_matrix.csv",
@@ -142,8 +142,8 @@
       "mode": "screen",
       "expected_check": "Мобильное меню открывается, не выходит за экран и не перекрывает действия",
       "screenshot": "css-reg-003.png",
-      "sha256": "4eb6f8bec9e75c788d4ece3d674e66b6731e219bee43545d211d24db98ab4e6c",
-      "bytes": 130905,
+      "sha256": "794bac3a4baa0f730397c43d1af1010332dc05c1f13da6c9b4c0fa4cf1430b98",
+      "bytes": 130902,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "light",
@@ -541,8 +541,8 @@
       "mode": "screen",
       "expected_check": "Сводки, карточки и рабочие действия сохраняют сетку",
       "screenshot": "css-reg-010.png",
-      "sha256": "e630c821dc470b1aed6696541279bf96092c5b38c3f3910a4d9608360e0e667f",
-      "bytes": 200905,
+      "sha256": "590d870f632ab5e8a2c671ff8ad22f98e8e90571d1dcdd167baccb7936cab74e",
+      "bytes": 200884,
       "diagnostics": {
         "title": "Рабочая панель портала ТОС БГО",
         "htmlTheme": "light",
@@ -953,5 +953,5 @@
       "failed_requests": []
     }
   ],
-  "approval_reason": "PR #258 changed only the public page counter on /workbench/: 331 to 329."
+  "approval_reason": "P0 packages changed only the public page counter on /workbench/: 329 to 305."
 }
