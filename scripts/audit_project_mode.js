@@ -103,6 +103,7 @@ const checks = [
   ['Visual capture tooling', 'scripts/audit_visual_capture_tooling.js'],
   ['Technical diagnostics', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links', 'scripts/audit_open_data_links.js'],
+  ['Autonomous improvement plan self-test', 'scripts/test_autonomous_improvement_plan.js'],
   ['Autonomous improvement plan', 'scripts/audit_autonomous_improvement_plan.js'],
   ['User decision queue', 'scripts/audit_user_decision_queue.js'],
   ['Manual tasks governance self-test', 'scripts/test_github_manual_tasks.js'],
