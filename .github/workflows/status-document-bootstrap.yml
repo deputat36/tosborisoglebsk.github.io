@@ -1,0 +1,58 @@
+name: Bootstrap status document metrics
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - '.github/workflows/status-document-bootstrap.yml'
+      - 'docs/STATUS.md'
+      - 'scripts/audit_status_document.js'
+      - 'scripts/update_status_document_metrics.js'
+      - 'data/site_health.json'
+      - 'data/accessibility_performance_report.json'
+      - 'data/content_origin_report.json'
+      - 'data/personal_data_readiness.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: status-document-bootstrap-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  bootstrap:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'status-document-governance-2026-07-15'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: status-document-governance-2026-07-15
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Test status contracts
+        run: npm run test:status-document
+
+      - name: Update status metrics
+        run: npm run update:status-document
+
+      - name: Audit updated status
+        run: npm run audit:status-document
+
+      - name: Commit only status document
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Синхронизировать метрики статусного документа'
+          file_pattern: 'docs/STATUS.md'
