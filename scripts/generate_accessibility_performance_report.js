@@ -6,9 +6,16 @@ const OUT = path.join(ROOT, 'data', 'accessibility_performance_report.json');
 const SKIP_DIRS = new Set(['.git', 'node_modules']);
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg']);
 const ASSET_EXTENSIONS = new Set(['.css', '.js', ...IMAGE_EXTENSIONS]);
+const RUNTIME_ASSET_DIRS = new Set(['assets', 'admin', 'data']);
 
 function repoPath(filePath) {
   return path.relative(ROOT, filePath).split(path.sep).join('/');
+}
+
+function isRuntimeAsset(filePath) {
+  const relativePath = repoPath(filePath);
+  const parts = relativePath.split('/');
+  return parts.length === 1 || RUNTIME_ASSET_DIRS.has(parts[0]);
 }
 
 function walk(directory, files = []) {
@@ -168,7 +175,7 @@ function main() {
   const issueSummary = summarizeIssues(pages);
 
   const assets = files
-    .filter((filePath) => ASSET_EXTENSIONS.has(path.extname(filePath).toLowerCase()))
+    .filter((filePath) => ASSET_EXTENSIONS.has(path.extname(filePath).toLowerCase()) && isRuntimeAsset(filePath))
     .map((filePath) => {
       const extension = path.extname(filePath).toLowerCase();
       const group = assetGroup(extension);
@@ -215,6 +222,7 @@ function main() {
     largest_assets: assets.sort((a, b) => b.size_bytes - a.size_bytes).slice(0, 30),
     over_budget_assets: assets.filter((asset) => asset.over_budget).sort((a, b) => b.size_bytes - a.size_bytes),
     notes: [
+      'Бюджеты ресурсов учитывают публичные runtime-файлы из assets/, admin/, data/ и корня сайта; CI-скрипты и документационные baseline-снимки не являются браузерной нагрузкой.',
       'Отчёт является измерительным baseline и не заменяет ручную проверку клавиатурной навигации, контраста и экранного диктора.',
       'Доступное имя поля распознаётся через aria-label, aria-labelledby, title, label[for] и оборачивающий label.',
       'Пустой alt может быть корректным для декоративного изображения; ошибкой считается отсутствие атрибута alt.',
