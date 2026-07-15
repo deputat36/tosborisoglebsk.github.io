@@ -1,0 +1,61 @@
+name: Bootstrap nav-v2 status cleanup
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'scripts/apply_nav_v2_status_cleanup.js'
+      - '.github/workflows/nav-v2-status-cleanup-bootstrap.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nav-v2-status-cleanup-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  patch:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+       github.event.pull_request.head.ref == 'remove-foreign-nav-v2-2026-07-15')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          ref: remove-foreign-nav-v2-2026-07-15
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Apply status cleanup
+        run: node scripts/apply_nav_v2_status_cleanup.js
+
+      - name: Validate removal contracts
+        run: |
+          node scripts/audit_foreign_module_inventory.js
+          node scripts/audit_supabase_scope.js
+          node scripts/audit_project_mode_full.js
+
+      - name: Commit only status document
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/STATUS.md
+          if git diff --cached --quiet; then
+            echo 'No status update to commit.'
+            exit 0
+          fi
+          git commit -m 'Синхронизировать статус удаления nav-v2'
+          git push origin HEAD:remove-foreign-nav-v2-2026-07-15
