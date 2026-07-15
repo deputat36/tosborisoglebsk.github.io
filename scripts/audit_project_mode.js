@@ -8,6 +8,8 @@ const checks = [
   ['Path checks', 'scripts/test_path_checks.js'],
   ['Status sets', 'scripts/test_status_sets.js'],
   ['P0 trust guardrails', 'scripts/audit_p0_trust_guardrails.js'],
+  ['Autonomous P0 plan status self-test', 'scripts/test_autonomous_p0_plan_status.js'],
+  ['Autonomous P0 plan status', 'scripts/audit_autonomous_p0_plan_status.js'],
   ['Public surface changes', 'scripts/audit_public_surface_changes.js'],
   ['TOS trust metadata', 'scripts/audit_tos_trust_metadata.js'],
   ['Document legal statuses', 'scripts/audit_document_legal_statuses.js'],
