@@ -1,0 +1,82 @@
+name: Audit public deployment smoke
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'CNAME'
+      - 'package.json'
+      - 'scripts/lib/public_deployment_smoke.js'
+      - 'scripts/public_deployment_smoke.js'
+      - 'scripts/test_public_deployment_smoke.js'
+      - 'scripts/audit_public_deployment_smoke_contract.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'docs/PUBLIC-DEPLOYMENT-SMOKE.md'
+      - '.github/workflows/public-deployment-smoke.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_run:
+    workflows:
+      - Generate TOS pages
+    types:
+      - completed
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-deployment-smoke-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'release-2025-12-22')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      PUBLIC_DEPLOYMENT_REPORT: .artifacts/public-deployment-smoke/report.json
+      PUBLIC_DEPLOYMENT_ATTEMPTS: '5'
+      PUBLIC_DEPLOYMENT_RETRY_DELAY_MS: '20000'
+      PUBLIC_DEPLOYMENT_TIMEOUT_MS: '15000'
+    steps:
+      - name: Checkout audited source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'release-2025-12-22' }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check smoke JavaScript syntax
+        run: |
+          node --check scripts/lib/public_deployment_smoke.js
+          node --check scripts/public_deployment_smoke.js
+          node --check scripts/test_public_deployment_smoke.js
+          node --check scripts/audit_public_deployment_smoke_contract.js
+
+      - name: Test public deployment smoke logic
+        run: npm run test:public-deployment-smoke
+
+      - name: Audit public deployment smoke contract
+        run: npm run audit:public-deployment-smoke-contract
+
+      - name: Check public deployment
+        run: npm run smoke:public-deployment
+
+      - name: Upload public deployment diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-deployment-smoke-${{ github.run_number }}-${{ github.run_attempt }}
+          path: .artifacts/public-deployment-smoke/report.json
+          if-no-files-found: warn
+          retention-days: 30
