@@ -8,15 +8,22 @@ on:
       - 'data/publication_basis_confirmation_register.csv'
       - 'data/publication_basis_review_queue.csv'
       - 'data/publication_basis_confirmation_templates.json'
+      - 'data/tos.json'
       - 'publication-basis-review/index.html'
       - 'assets/js/publication-basis-validation.js'
       - 'assets/js/publication-basis-register.js'
+      - 'assets/js/publication-basis-execution.js'
+      - 'assets/js/publication-basis-execution-ui.js'
       - 'scripts/test_publication_basis_execution.js'
+      - 'scripts/test_publication_basis_execution_workspace.js'
       - 'scripts/audit_publication_basis_confirmation_register.js'
       - 'scripts/audit_publication_basis_review_page.js'
+      - 'scripts/audit_publication_basis_execution_workspace.js'
+      - 'scripts/audit_manual_extensions.js'
       - 'scripts/audit_project_mode.js'
       - 'scripts/audit_project_mode_full.js'
       - 'docs/PUBLICATION-BASIS-CONFIRMATION-PACKET-2026-07-14.md'
+      - 'docs/PUBLICATION-BASIS-EXECUTION-WORKSPACE.md'
       - 'package.json'
       - '.github/workflows/publication-basis-execution-audit.yml'
   workflow_dispatch:
@@ -47,18 +54,30 @@ jobs:
         run: |
           node --check assets/js/publication-basis-validation.js
           node --check assets/js/publication-basis-register.js
+          node --check assets/js/publication-basis-execution.js
+          node --check assets/js/publication-basis-execution-ui.js
           node --check scripts/test_publication_basis_execution.js
+          node --check scripts/test_publication_basis_execution_workspace.js
           node --check scripts/audit_publication_basis_confirmation_register.js
           node --check scripts/audit_publication_basis_review_page.js
+          node --check scripts/audit_publication_basis_execution_workspace.js
 
       - name: Test publication basis execution states
         run: node scripts/test_publication_basis_execution.js
+
+      - name: Test publication basis execution workspace
+        run: node scripts/test_publication_basis_execution_workspace.js
 
       - name: Audit publication basis confirmation register
         run: node scripts/audit_publication_basis_confirmation_register.js
 
       - name: Audit publication basis review page
         run: node scripts/audit_publication_basis_review_page.js
+
+      - name: Audit publication basis execution workspace
+        run: |
+          set -o pipefail
+          node scripts/audit_publication_basis_execution_workspace.js 2>&1 | tee publication-basis-execution-workspace-audit.log
 
       - name: Audit queue and request templates
         run: |
@@ -78,6 +97,7 @@ jobs:
           path: |
             data/publication_basis_confirmation_register.csv
             publication-basis-review/index.html
+            publication-basis-execution-workspace-audit.log
             publication-basis-execution-project-audit.log
           if-no-files-found: warn
           retention-days: 14
