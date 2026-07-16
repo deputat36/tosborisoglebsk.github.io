@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T06:09:25.862Z",
+  "generated_at": "2026-07-16T09:00:20.742Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,7 +9,7 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 364,
+    "html_pages": 365,
     "public_pages": 305,
     "pages_with_issues": 0,
     "issue_counts": {},
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 71,
+    "asset_files": 73,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 379778,
+    "total_js_bytes": 398253,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -106,6 +106,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/personal-data-decision-validation.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10059,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/workbench-drafts.js",
       "group": "js",
       "extension": ".js",
@@ -124,6 +131,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8581,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/personal-data-decisions.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8416,
       "over_budget": false
     },
     {
@@ -222,20 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 5257,
-      "over_budget": false
-    },
-    {
-      "path": "admin/admin.css",
-      "group": "css",
-      "extension": ".css",
-      "size_bytes": 5230,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/data-quality.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 5145,
       "over_budget": false
     }
   ],
