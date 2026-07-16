@@ -4,9 +4,7 @@ const { repoPathExists } = require('./lib/path_checks');
 
 const ROOT = process.cwd();
 const PAGE_PATH = path.join(ROOT, 'publication-basis-review', 'index.html');
-const PACKAGE_PATH = path.join(ROOT, 'package.json');
-const PROJECT_MODE_PATH = path.join(ROOT, 'scripts', 'audit_project_mode.js');
-const PROJECT_MODE_FULL_PATH = path.join(ROOT, 'scripts', 'audit_project_mode_full.js');
+const MANUAL_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_manual_extensions.js');
 const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'publication-basis-execution-audit.yml');
 
 const REQUIRED_LINKS = [
@@ -109,33 +107,13 @@ function main() {
     if (!repoPathExists(filePath)) errors.push(`missing publication basis execution file ${filePath}`);
   }
 
-  const packageJson = JSON.parse(read(PACKAGE_PATH));
-  const scripts = packageJson.scripts || {};
-  const expectedScripts = {
-    'test:publication-basis-execution': 'node scripts/test_publication_basis_execution.js',
-    'audit:publication-basis-execution': 'node scripts/audit_publication_basis_confirmation_register.js',
-    'audit:publication-basis-review-page': 'node scripts/audit_publication_basis_review_page.js'
-  };
-  Object.entries(expectedScripts).forEach(([name, command]) => {
-    if (scripts[name] !== command) errors.push(`package.json must define ${name}`);
-  });
-  const auditAll = String(scripts['audit:all'] || '');
-  Object.keys(expectedScripts).forEach((name) => {
-    if (!auditAll.includes(`npm run ${name}`)) errors.push(`audit:all must include ${name}`);
-  });
-
-  for (const [label, filePath] of [
-    ['project-mode', PROJECT_MODE_PATH],
-    ['project-mode-full', PROJECT_MODE_FULL_PATH]
+  const manualAudit = read(MANUAL_AUDIT_PATH);
+  for (const script of [
+    'scripts/test_publication_basis_execution.js',
+    'scripts/audit_publication_basis_confirmation_register.js',
+    'scripts/audit_publication_basis_review_page.js'
   ]) {
-    const content = read(filePath);
-    for (const script of [
-      'scripts/test_publication_basis_execution.js',
-      'scripts/audit_publication_basis_confirmation_register.js',
-      'scripts/audit_publication_basis_review_page.js'
-    ]) {
-      if (!content.includes(script)) errors.push(`${label} must include ${script}`);
-    }
+    if (!manualAudit.includes(script)) errors.push(`audit_manual_extensions.js must include ${script}`);
   }
 
   const workflow = read(WORKFLOW_PATH);
