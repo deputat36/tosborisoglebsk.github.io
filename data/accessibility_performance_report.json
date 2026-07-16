@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-15T15:29:04.537Z",
+  "generated_at": "2026-07-16T04:46:54.842Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 68,
+    "asset_files": 69,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 355440,
+    "total_js_bytes": 360541,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -113,6 +113,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/outreach-register.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8581,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/tos-logos.js",
       "group": "js",
       "extension": ".js",
@@ -131,13 +138,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8242,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/outreach-register.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8157,
       "over_budget": false
     },
     {
@@ -232,10 +232,10 @@
       "over_budget": false
     },
     {
-      "path": "assets/js/projects.js",
+      "path": "assets/js/outreach-validation.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 4144,
+      "size_bytes": 4677,
       "over_budget": false
     }
   ],
