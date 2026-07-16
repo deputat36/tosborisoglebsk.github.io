@@ -111,7 +111,7 @@ function main() {
   for (const token of [
     'data/personal_data_decision_packet.csv',
     '/personal-data-decisions/',
-    'пакет не выбирает решения за оператора или юриста'
+    'Пакет не выбирает решения за оператора или юриста'
   ]) checkContains(errors, readinessDoc, 'PERSONAL-DATA-READINESS-2026-07-14.md', token);
 
   for (const script of [
