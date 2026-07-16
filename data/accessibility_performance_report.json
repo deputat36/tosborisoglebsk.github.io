@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T09:00:20.742Z",
+  "generated_at": "2026-07-16T10:23:49.443Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 73,
+    "asset_files": 75,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 398253,
+    "total_js_bytes": 410411,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -183,6 +183,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/manual-blocker-summary.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 7030,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/data-requests.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 5318,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/priority-tos-readiness.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 5257,
       "over_budget": false
     }
   ],
