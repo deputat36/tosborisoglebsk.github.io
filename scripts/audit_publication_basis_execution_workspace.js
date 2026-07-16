@@ -43,10 +43,12 @@ function main() {
 
   const queueBySlug = execution.indexBy(queue, 'slug');
   const templatesById = execution.indexBy(templates.templates || [], 'id');
-  const tosBySlug = execution.indexBy(tos, 'id');
+  const tosBySlug = execution.buildTosIndex(tos);
 
   if (register.length !== 24) errors.push(`register must contain 24 rows, found ${register.length}`);
   if (register.some((item) => item.request_status !== 'draft')) errors.push('canonical register must remain draft in this technical change');
+  if (tosBySlug.get('tancyrey')?.name !== 'Танцырей') errors.push('tancyrey compatibility alias is missing');
+  if (tosBySlug.get('chkalovec')?.name !== 'Чкаловец') errors.push('chkalovec compatibility alias is missing');
 
   register.forEach((item) => {
     const packet = execution.buildRequestPacket(item, queueBySlug.get(item.tos_slug), tosBySlug.get(item.tos_slug), templatesById.get(item.template_id), '2026-07-30');
@@ -71,8 +73,9 @@ function main() {
   }
 
   requireTokens(errors, core, paths.core, [
-    'REGISTER_HEADERS', 'buildRequestPacket', 'buildPreflightText', 'validateExecution',
-    'serializeUpdatedRow', 'actual_sent', 'publication_consent_ref'
+    'REGISTER_HEADERS', 'TOS_ID_ALIASES', 'buildTosIndex', 'buildRequestPacket',
+    'buildPreflightText', 'validateExecution', 'serializeUpdatedRow', 'actual_sent',
+    'publication_consent_ref'
   ]);
   if (/\.contacts\b|\.chair\b/.test(core)) errors.push('execution core must not read personal contacts or chairperson value from tos.json');
 
@@ -82,6 +85,7 @@ function main() {
     "loadCsv('/data/publication_basis_review_queue.csv')",
     "loadJson('/data/publication_basis_confirmation_templates.json')",
     "loadJson('/data/tos.json')",
+    'tosBySlug = api.buildTosIndex(tos)',
     'Редакционный запрос действительно отправлен',
     'Скачать строку sent',
     'localStorage',
