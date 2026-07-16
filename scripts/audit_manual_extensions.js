@@ -12,6 +12,8 @@ runChecks([
   ['submit materials page', 'scripts/audit_submit_materials_content.js'],
   ['verification levels page', 'scripts/audit_verification_levels_content.js'],
   ['actions check page', 'scripts/audit_actions_check_content.js'],
+  ['GitHub Pages manual check wizard self-test', 'scripts/test_github_pages_manual_check.js'],
+  ['GitHub Pages manual check wizard', 'scripts/audit_github_pages_manual_check.js'],
   ['publication basis execution self-test', 'scripts/test_publication_basis_execution.js'],
   ['publication basis confirmation register', 'scripts/audit_publication_basis_confirmation_register.js'],
   ['publication basis review page', 'scripts/audit_publication_basis_review_page.js'],
