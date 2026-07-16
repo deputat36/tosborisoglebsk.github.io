@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
 const { validateHeaders } = require('./lib/csv_schema');
-const { isIsoDate } = require('./lib/date_checks');
 const { outreachStatuses, outreachGroups } = require('./lib/status_sets');
+const { validationIssues } = require('../assets/js/outreach-validation');
 
 const filePath = path.join(process.cwd(), 'data', 'outreach_register.csv');
 const expectedHeaders = [
@@ -23,12 +23,6 @@ const expectedHeaders = [
   'blocker',
   'next_step'
 ];
-const sentStatuses = new Set(['sent', 'waiting', 'follow_up']);
-const resultStatuses = new Set(['received', 'closed', 'resolved']);
-
-function compareDates(a, b) {
-  return a.localeCompare(b);
-}
 
 function readCsvIds(relativePath, fieldName) {
   const sourcePath = path.join(process.cwd(), relativePath);
@@ -51,36 +45,26 @@ function buildSourceIndex() {
   };
 }
 
-function main() {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`Missing file: ${filePath}`);
-  }
+function rowObject(headers, cells) {
+  return Object.fromEntries(headers.map((header, index) => [header, cells[index] || '']));
+}
 
-  const sourceIndex = buildSourceIndex();
-  const rows = parseCsv(fs.readFileSync(filePath, 'utf8'));
-  const [headers, ...items] = rows;
-  const errors = validateHeaders(headers, expectedHeaders, 'outreach_register.csv');
+function auditRows(headers, items, sourceIndex = buildSourceIndex()) {
+  const errors = [];
   const seen = new Set();
 
-  items.forEach((item, index) => {
+  items.forEach((cells, index) => {
     const line = index + 2;
-    const [
-      outreachId,
-      requestGroup,
-      sourceRequestId,
+    const item = rowObject(headers, cells);
+    const {
+      outreach_id: outreachId,
+      request_group: requestGroup,
+      source_request_id: sourceRequestId,
       subject,
-      recipientType,
-      channel,
-      contact,
+      recipient_type: recipientType,
       status,
-      sentDate,
-      followUpDate,
-      responseDate,
-      responseSource,
-      owner,
-      blocker,
-      nextStep
-    ] = item;
+      next_step: nextStep
+    } = item;
 
     if (!outreachId) errors.push(`line ${line}: missing outreach_id`);
     if (seen.has(outreachId)) errors.push(`line ${line}: duplicate outreach_id ${outreachId}`);
@@ -96,36 +80,21 @@ function main() {
     if (!outreachStatuses.has(status)) errors.push(`line ${line}: unsupported status ${status}`);
     if (!nextStep) errors.push(`line ${line}: missing next_step`);
 
-    if (sentDate && !isIsoDate(sentDate)) errors.push(`line ${line}: invalid sent_date ${sentDate}`);
-    if (followUpDate && !isIsoDate(followUpDate)) errors.push(`line ${line}: invalid follow_up_date ${followUpDate}`);
-    if (responseDate && !isIsoDate(responseDate)) errors.push(`line ${line}: invalid response_date ${responseDate}`);
-
-    if (sentStatuses.has(status)) {
-      if (!channel) errors.push(`line ${line}: status ${status} requires channel`);
-      if (!sentDate) errors.push(`line ${line}: status ${status} requires sent_date`);
-    }
-
-    if (status === 'waiting' || status === 'follow_up') {
-      if (!followUpDate) errors.push(`line ${line}: status ${status} requires follow_up_date`);
-    }
-
-    if (resultStatuses.has(status)) {
-      if (!responseDate) errors.push(`line ${line}: status ${status} requires response_date`);
-      if (!responseSource) errors.push(`line ${line}: status ${status} requires response_source`);
-    }
-
-    if (sentDate && followUpDate && compareDates(followUpDate, sentDate) < 0) {
-      errors.push(`line ${line}: follow_up_date is earlier than sent_date`);
-    }
-
-    if (sentDate && responseDate && compareDates(responseDate, sentDate) < 0) {
-      errors.push(`line ${line}: response_date is earlier than sent_date`);
-    }
-
-    void contact;
-    void owner;
-    void blocker;
+    validationIssues(item).forEach((issue) => errors.push(`line ${line}: ${issue}`));
   });
+
+  return errors;
+}
+
+function main() {
+  if (!fs.existsSync(filePath)) {
+    throw new Error(`Missing file: ${filePath}`);
+  }
+
+  const rows = parseCsv(fs.readFileSync(filePath, 'utf8'));
+  const [headers, ...items] = rows;
+  const errors = validateHeaders(headers, expectedHeaders, 'outreach_register.csv');
+  errors.push(...auditRows(headers, items));
 
   if (errors.length) {
     throw new Error(`Outreach register audit failed:\n${errors.join('\n')}`);
@@ -138,4 +107,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { buildSourceIndex, readCsvIds };
+module.exports = { auditRows, buildSourceIndex, readCsvIds, rowObject };
