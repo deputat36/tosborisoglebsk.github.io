@@ -6,6 +6,8 @@ on:
       - release-2025-12-22
     paths:
       - 'actions-check/index.html'
+      - 'assets/js/github-pages-manual-check.js'
+      - 'assets/js/github-pages-manual-check-workspace.js'
       - 'data/actions_diagnostics.csv'
       - 'data/github_pages_manual_check_template.csv'
       - 'data/site_health.json'
@@ -14,6 +16,9 @@ on:
       - 'scripts/generate_actions_check_page.js'
       - 'scripts/audit_actions_check_content.js'
       - 'scripts/test_actions_check_dynamic_contract.js'
+      - 'scripts/test_github_pages_manual_check.js'
+      - 'scripts/audit_github_pages_manual_check.js'
+      - 'scripts/audit_manual_extensions.js'
       - 'scripts/audit_project_mode.js'
       - 'scripts/audit_project_mode_full.js'
       - 'package.json'
@@ -45,12 +50,21 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
+          node --check assets/js/github-pages-manual-check.js
+          node --check assets/js/github-pages-manual-check-workspace.js
           node --check scripts/generate_actions_check_page.js
           node --check scripts/audit_actions_check_content.js
           node --check scripts/test_actions_check_dynamic_contract.js
+          node --check scripts/test_github_pages_manual_check.js
+          node --check scripts/audit_github_pages_manual_check.js
 
       - name: Test stale snapshot rejection
         run: node scripts/test_actions_check_dynamic_contract.js
+
+      - name: Test Pages manual wizard
+        run: |
+          set -o pipefail
+          node scripts/test_github_pages_manual_check.js 2>&1 | tee pages-manual-test.log
 
       - name: Generate Actions check page
         run: node scripts/generate_actions_check_page.js
@@ -59,6 +73,11 @@ jobs:
         run: |
           set -o pipefail
           node scripts/audit_actions_check_content.js 2>&1 | tee actions-check-audit.log
+
+      - name: Audit Pages manual wizard
+        run: |
+          set -o pipefail
+          node scripts/audit_github_pages_manual_check.js 2>&1 | tee pages-manual-audit.log
 
       - name: Audit SEO and links
         run: |
@@ -77,8 +96,12 @@ jobs:
           name: actions-check-dynamic-audit
           path: |
             actions-check/index.html
+            assets/js/github-pages-manual-check.js
+            assets/js/github-pages-manual-check-workspace.js
             data/github_pages_manual_check_template.csv
             docs/GITHUB-PAGES-MANUAL-CHECK.md
+            pages-manual-test.log
+            pages-manual-audit.log
             actions-check-audit.log
             actions-check-project-audit.log
           if-no-files-found: warn

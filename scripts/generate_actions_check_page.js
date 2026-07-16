@@ -153,6 +153,8 @@ function buildPage({ health, diagnostics, workflow }) {
 </main>
 <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Служебная диагностика автоматической генерации.</div></div></footer>
 <script src="/assets/js/site.js"></script>
+<script src="/assets/js/github-pages-manual-check.js"></script>
+<script src="/assets/js/github-pages-manual-check-workspace.js"></script>
 </body>
 </html>
 `;
