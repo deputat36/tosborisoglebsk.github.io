@@ -24,7 +24,8 @@ runChecks([
   ['personal data decision page', 'scripts/audit_personal_data_decision_page.js'],
   ['personal data scenario matrix self-test', 'scripts/test_personal_data_scenario_matrix.js'],
   ['personal data scenario matrix', 'scripts/audit_personal_data_scenario_matrix.js'],
-  ['personal data scenario page', 'scripts/audit_personal_data_scenario_page.js']
+  ['personal data scenario page', 'scripts/audit_personal_data_scenario_page.js'],
+  ['workbench manual blockers', 'scripts/audit_workbench_manual_blockers.js']
 ], {
   verbose: true,
   successMessage: 'Manual audit extensions OK'

@@ -13,19 +13,25 @@ on:
       - 'data/personal_data_decision_packet.csv'
       - 'data/publication_basis_confirmation_register.csv'
       - 'github-tasks/index.html'
+      - 'workbench/index.html'
       - 'assets/js/manual-blocker-summary.js'
       - 'assets/js/github-tasks.js'
+      - 'assets/js/workbench-drafts.js'
+      - 'assets/js/workbench-manual-blockers.js'
       - 'assets/js/outreach-validation.js'
       - 'assets/js/publication-basis-validation.js'
       - 'assets/js/personal-data-decision-validation.js'
       - 'scripts/audit_github_manual_tasks.js'
       - 'scripts/test_github_manual_tasks.js'
       - 'scripts/audit_user_decision_queue.js'
+      - 'scripts/audit_workbench_manual_blockers.js'
+      - 'scripts/audit_manual_extensions.js'
       - 'scripts/lib/status_sets.js'
       - 'scripts/test_status_sets.js'
       - 'scripts/audit_project_mode.js'
       - 'scripts/audit_project_mode_full.js'
       - 'docs/GITHUB-MANUAL-TASKS-GOVERNANCE.md'
+      - 'docs/WORKBENCH-MANUAL-BLOCKERS.md'
       - 'package.json'
       - '.github/workflows/manual-tasks-governance.yml'
   workflow_dispatch:
@@ -56,9 +62,12 @@ jobs:
         run: |
           node --check assets/js/manual-blocker-summary.js
           node --check assets/js/github-tasks.js
+          node --check assets/js/workbench-drafts.js
+          node --check assets/js/workbench-manual-blockers.js
           node --check scripts/audit_github_manual_tasks.js
           node --check scripts/test_github_manual_tasks.js
           node --check scripts/audit_user_decision_queue.js
+          node --check scripts/audit_workbench_manual_blockers.js
           node --check scripts/lib/status_sets.js
           node --check scripts/test_status_sets.js
 
@@ -75,6 +84,11 @@ jobs:
           set -o pipefail
           npm run audit:github-manual-tasks 2>&1 | tee audit.log
 
+      - name: Audit workbench manual blockers
+        run: |
+          set -o pipefail
+          node scripts/audit_workbench_manual_blockers.js 2>&1 | tee workbench-manual-blockers-audit.log
+
       - name: Audit user decision queue
         run: node scripts/audit_user_decision_queue.js
 
@@ -89,5 +103,6 @@ jobs:
           path: |
             test.log
             audit.log
+            workbench-manual-blockers-audit.log
           if-no-files-found: warn
           retention-days: 14
