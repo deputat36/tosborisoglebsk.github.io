@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "captured_at": "2026-07-15T11:09:18.984Z",
+  "captured_at": "2026-07-16T19:01:03.719Z",
   "repository": "deputat36/tosborisoglebsk.github.io",
-  "commit_sha": "f74d70ddb151bfdedee4290133f0b7d877b7c963",
-  "workflow_run_id": "29410583666",
+  "commit_sha": "b51d027a3a16a0a25b2475ae61a2254176324f33",
+  "workflow_run_id": "29526225009",
   "workflow_run_attempt": "1",
   "base_url": "http://127.0.0.1:4173",
   "matrix_path": "data/css_regression_matrix.csv",
@@ -541,8 +541,8 @@
       "mode": "screen",
       "expected_check": "Сводки, карточки и рабочие действия сохраняют сетку",
       "screenshot": "css-reg-010.png",
-      "sha256": "590d870f632ab5e8a2c671ff8ad22f98e8e90571d1dcdd167baccb7936cab74e",
-      "bytes": 200884,
+      "sha256": "db98425ba2683ae9098161712ce882848d2ae45ad5d72b15625f70562e547dde",
+      "bytes": 201661,
       "diagnostics": {
         "title": "Рабочая панель портала ТОС БГО",
         "htmlTheme": "light",
