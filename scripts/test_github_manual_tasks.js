@@ -62,7 +62,7 @@ assert(
   'Dashboard audit must reject a missing priority card row'
 );
 
-const fakeSentOutreach = sources.outreachCsv.replace(',draft,,,,,,"не определены официальный адресат и канал"', ',sent,,,,,,"не определены официальный адресат и канал"');
+const fakeSentOutreach = sources.outreachCsv.replace(',draft,', ',sent,');
 const fakeSentErrors = auditManualTaskSources({ ...sources, outreachCsv: fakeSentOutreach });
 assert(
   fakeSentErrors.some((error) => error.includes('issue 166: source contains')),
