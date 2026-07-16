@@ -1,0 +1,83 @@
+name: Audit publication basis execution
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'data/publication_basis_confirmation_register.csv'
+      - 'data/publication_basis_review_queue.csv'
+      - 'data/publication_basis_confirmation_templates.json'
+      - 'publication-basis-review/index.html'
+      - 'assets/js/publication-basis-validation.js'
+      - 'assets/js/publication-basis-register.js'
+      - 'scripts/test_publication_basis_execution.js'
+      - 'scripts/audit_publication_basis_confirmation_register.js'
+      - 'scripts/audit_publication_basis_review_page.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'docs/PUBLICATION-BASIS-CONFIRMATION-PACKET-2026-07-14.md'
+      - 'package.json'
+      - '.github/workflows/publication-basis-execution-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publication-basis-execution-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/publication-basis-validation.js
+          node --check assets/js/publication-basis-register.js
+          node --check scripts/test_publication_basis_execution.js
+          node --check scripts/audit_publication_basis_confirmation_register.js
+          node --check scripts/audit_publication_basis_review_page.js
+
+      - name: Test publication basis execution states
+        run: node scripts/test_publication_basis_execution.js
+
+      - name: Audit publication basis confirmation register
+        run: node scripts/audit_publication_basis_confirmation_register.js
+
+      - name: Audit publication basis review page
+        run: node scripts/audit_publication_basis_review_page.js
+
+      - name: Audit queue and request templates
+        run: |
+          node scripts/audit_publication_basis_review_queue.js
+          node scripts/audit_publication_basis_confirmation_templates.js
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee publication-basis-execution-project-audit.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-basis-execution-audit
+          path: |
+            data/publication_basis_confirmation_register.csv
+            publication-basis-review/index.html
+            publication-basis-execution-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
