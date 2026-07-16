@@ -78,7 +78,9 @@ jobs:
         run: node scripts/audit_personal_data_decision_page.js
 
       - name: Audit personal data scenario page
-        run: node scripts/audit_personal_data_scenario_page.js
+        run: |
+          set -o pipefail
+          node scripts/audit_personal_data_scenario_page.js 2>&1 | tee personal-data-scenario-page-audit.log
 
       - name: Audit canonical personal data readiness
         run: node scripts/audit_personal_data_readiness.js
@@ -97,6 +99,7 @@ jobs:
             data/personal_data_decision_packet.csv
             data/personal_data_scenario_matrix.csv
             personal-data-decisions/index.html
+            personal-data-scenario-page-audit.log
             personal-data-decisions-project-audit.log
           if-no-files-found: warn
           retention-days: 14
