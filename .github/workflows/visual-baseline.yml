@@ -36,7 +36,7 @@ on:
       - '.github/workflows/visual-baseline.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: visual-baseline-${{ github.ref }}
@@ -56,8 +56,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -98,63 +96,6 @@ jobs:
         env:
           VISUAL_CAPTURE_STRICT_QUALITY: 'false'
         run: node scripts/audit_visual_capture_manifest.js
-
-      - name: Approve reviewed workbench baseline once
-        if: ${{ github.event_name == 'pull_request' && github.head_ref == 'agent/workbench-manual-blockers' && hashFiles('docs/visual-baseline/APPROVE-WORKBENCH-300') != '' }}
-        env:
-          APPROVAL_RUN_ID: ${{ github.run_id }}
-          APPROVAL_RUN_ATTEMPT: ${{ github.run_attempt }}
-        run: |
-          python3 - <<'PY'
-          import json
-          import os
-          import pathlib
-          import re
-          import shutil
-
-          approved_path = pathlib.Path('docs/visual-baseline/manifest.json')
-          captured_path = pathlib.Path('.artifacts/visual-baseline/manifest.json')
-          approved = json.loads(approved_path.read_text(encoding='utf-8'))
-          captured = json.loads(captured_path.read_text(encoding='utf-8'))
-
-          captured_item = next(item for item in captured['results'] if item['case_id'] == 'css-reg-010')
-          approved_index = next(index for index, item in enumerate(approved['results']) if item['case_id'] == 'css-reg-010')
-          approved['results'][approved_index] = captured_item
-          approved['captured_at'] = captured['captured_at']
-          approved['commit_sha'] = captured['commit_sha']
-          approved['workflow_run_id'] = str(os.environ['APPROVAL_RUN_ID'])
-          approved['workflow_run_attempt'] = str(os.environ['APPROVAL_RUN_ATTEMPT'])
-          approved['output_path'] = 'docs/visual-baseline'
-          approved_path.write_text(json.dumps(approved, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-
-          shutil.copyfile('.artifacts/visual-baseline/css-reg-010.png', 'docs/visual-baseline/css-reg-010.png')
-
-          readme_path = pathlib.Path('docs/visual-baseline/README.md')
-          readme = readme_path.read_text(encoding='utf-8')
-          readme = re.sub(
-              r'(- `css-reg-010\.png`[^`]+SHA-256 `)[0-9a-f]{64}(`\.)',
-              rf'\g<1>{captured_item["sha256"]}\2',
-              readme,
-          )
-          note = (
-              '\n## Обновление рабочей панели 16 июля 2026 года\n\n'
-              '- pull request: `#300`;\n'
-              f'- visual run: `{os.environ["APPROVAL_RUN_ID"]}`;\n'
-              '- обновлён только сценарий `css-reg-010`;\n'
-              '- остальные 13 утверждённых PNG не изменялись;\n'
-              '- технические нарушения, горизонтальное переполнение, console/page errors и failed requests отсутствуют.\n'
-          )
-          if '## Обновление рабочей панели 16 июля 2026 года' not in readme:
-              readme = readme.rstrip() + '\n' + note
-          readme_path.write_text(readme, encoding='utf-8')
-          PY
-
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add docs/visual-baseline/css-reg-010.png docs/visual-baseline/manifest.json docs/visual-baseline/README.md
-          git rm docs/visual-baseline/APPROVE-WORKBENCH-300
-          git commit -m 'Approve workbench visual baseline for PR 300'
-          git push origin "HEAD:${GITHUB_HEAD_REF}"
 
       - name: Detect approved baseline
         id: approved
