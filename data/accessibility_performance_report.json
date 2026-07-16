@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T12:58:37.293Z",
+  "generated_at": "2026-07-16T14:27:26.225Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 77,
+    "asset_files": 79,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 432358,
+    "total_js_bytes": 455002,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -85,6 +85,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/outreach-execution-ui.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 12501,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-validation.js",
       "group": "js",
       "extension": ".js",
@@ -110,6 +117,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10200,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/outreach-execution.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10143,
       "over_budget": false
     },
     {
@@ -222,20 +236,6 @@
       "group": "css",
       "extension": ".css",
       "size_bytes": 5581,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/tos-audit.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 5420,
-      "over_budget": false
-    },
-    {
-      "path": "admin/admin-history.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 5330,
       "over_budget": false
     }
   ],
