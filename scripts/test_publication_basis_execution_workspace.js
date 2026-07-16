@@ -12,7 +12,7 @@ const templates = JSON.parse(readText('data/publication_basis_confirmation_templ
 const tos = JSON.parse(readText('data/tos.json'));
 
 const queueBySlug = execution.indexBy(queue, 'slug');
-const tosBySlug = execution.indexBy(tos, 'id');
+const tosBySlug = execution.buildTosIndex(tos);
 const templatesById = execution.indexBy(templates.templates, 'id');
 const drafts = register.filter((item) => item.request_status === 'draft');
 
@@ -20,6 +20,8 @@ assert.strictEqual(register.length, 24, 'register must contain 24 rows');
 assert.strictEqual(drafts.length, 24, 'all 24 rows must remain draft before external action');
 assert.strictEqual(queue.length, 24, 'queue must contain 24 rows');
 assert.strictEqual(templates.templates.length, 3, 'three wave templates are required');
+assert.strictEqual(tosBySlug.get('tancyrey')?.name, 'Танцырей');
+assert.strictEqual(tosBySlug.get('chkalovec')?.name, 'Чкаловец');
 
 for (const item of drafts) {
   const packet = execution.buildRequestPacket(
