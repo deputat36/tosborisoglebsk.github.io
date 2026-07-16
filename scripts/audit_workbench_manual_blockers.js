@@ -79,10 +79,10 @@ function main() {
     '/assets/js/personal-data-decision-validation.js',
     '/assets/js/manual-blocker-summary.js',
     'Promise.allSettled',
-    'data.workbenchManualReady'
+    'dataset.workbenchManualReady'
   ]);
 
-  const issueOrder = Array.from(moduleSource.matchAll(/data-workbench-manual-issue=\"(\d+)\"/g), (match) => match[1]);
+  const issueOrder = Array.from(moduleSource.matchAll(/data-workbench-manual-issue="(\d+)"/g), (match) => match[1]);
   if (issueOrder.join(',') !== EXPECTED_ISSUES.join(',')) {
     errors.push(`workbench manual issue order must be ${EXPECTED_ISSUES.join(',')}, found ${issueOrder.join(',')}`);
   }
