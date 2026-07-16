@@ -256,3 +256,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (event.key === DRAFTS_KEY) renderDraftSummary();
   });
 });
+
+(() => {
+  'use strict';
+  if (document.querySelector('script[data-workbench-manual-loader]')) return;
+  const script = document.createElement('script');
+  script.src = '/assets/js/workbench-manual-blockers.js';
+  script.async = false;
+  script.dataset.workbenchManualLoader = 'true';
+  document.head.appendChild(script);
+})();
