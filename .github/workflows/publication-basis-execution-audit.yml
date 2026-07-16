@@ -66,7 +66,9 @@ jobs:
         run: node scripts/test_publication_basis_execution.js
 
       - name: Test publication basis execution workspace
-        run: node scripts/test_publication_basis_execution_workspace.js
+        run: |
+          set -o pipefail
+          node scripts/test_publication_basis_execution_workspace.js 2>&1 | tee publication-basis-execution-workspace-test.log
 
       - name: Audit publication basis confirmation register
         run: node scripts/audit_publication_basis_confirmation_register.js
@@ -97,6 +99,7 @@ jobs:
           path: |
             data/publication_basis_confirmation_register.csv
             publication-basis-review/index.html
+            publication-basis-execution-workspace-test.log
             publication-basis-execution-workspace-audit.log
             publication-basis-execution-project-audit.log
           if-no-files-found: warn
