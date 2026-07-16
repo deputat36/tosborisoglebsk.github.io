@@ -1,0 +1,77 @@
+name: Audit outreach execution governance
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'outreach-register/index.html'
+      - 'data/outreach_register.csv'
+      - 'assets/js/outreach-validation.js'
+      - 'assets/js/outreach-register.js'
+      - 'scripts/audit_outreach_register.js'
+      - 'scripts/audit_outreach_register_content.js'
+      - 'scripts/test_outreach_validation.js'
+      - 'scripts/test_outreach_source_index.js'
+      - 'scripts/audit_project_mode.js'
+      - 'scripts/audit_project_mode_full.js'
+      - 'scripts/lib/status_sets.js'
+      - 'package.json'
+      - '.github/workflows/outreach-governance.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: outreach-governance-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/outreach-validation.js
+          node --check assets/js/outreach-register.js
+          node --check scripts/audit_outreach_register.js
+          node --check scripts/audit_outreach_register_content.js
+          node --check scripts/test_outreach_validation.js
+
+      - name: Test outreach state contract
+        run: node scripts/test_outreach_validation.js
+
+      - name: Audit outreach register
+        run: node scripts/audit_outreach_register.js
+
+      - name: Audit outreach page
+        run: node scripts/audit_outreach_register_content.js
+
+      - name: Test outreach source index
+        run: node scripts/test_outreach_source_index.js
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee outreach-project-audit.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: outreach-governance-audit
+          path: outreach-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
