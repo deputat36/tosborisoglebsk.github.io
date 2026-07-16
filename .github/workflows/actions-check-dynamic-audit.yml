@@ -7,6 +7,7 @@ on:
     paths:
       - 'actions-check/index.html'
       - 'assets/js/github-pages-manual-check.js'
+      - 'assets/js/github-pages-manual-check-workspace.js'
       - 'data/actions_diagnostics.csv'
       - 'data/github_pages_manual_check_template.csv'
       - 'data/site_health.json'
@@ -50,6 +51,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check assets/js/github-pages-manual-check.js
+          node --check assets/js/github-pages-manual-check-workspace.js
           node --check scripts/generate_actions_check_page.js
           node --check scripts/audit_actions_check_content.js
           node --check scripts/test_actions_check_dynamic_contract.js
@@ -95,6 +97,7 @@ jobs:
           path: |
             actions-check/index.html
             assets/js/github-pages-manual-check.js
+            assets/js/github-pages-manual-check-workspace.js
             data/github_pages_manual_check_template.csv
             docs/GITHUB-PAGES-MANUAL-CHECK.md
             pages-manual-test.log
