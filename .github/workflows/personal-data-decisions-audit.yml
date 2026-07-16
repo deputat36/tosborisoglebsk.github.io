@@ -6,16 +6,23 @@ on:
       - release-2025-12-22
     paths:
       - 'data/personal_data_decision_packet.csv'
+      - 'data/personal_data_scenario_matrix.csv'
       - 'data/personal_data_readiness.json'
       - 'personal-data-decisions/index.html'
       - 'assets/js/personal-data-decision-validation.js'
       - 'assets/js/personal-data-decisions.js'
+      - 'assets/js/personal-data-scenario-validation.js'
+      - 'assets/js/personal-data-scenarios.js'
       - 'scripts/test_personal_data_decision_packet.js'
       - 'scripts/audit_personal_data_decision_packet.js'
       - 'scripts/audit_personal_data_decision_page.js'
+      - 'scripts/test_personal_data_scenario_matrix.js'
+      - 'scripts/audit_personal_data_scenario_matrix.js'
+      - 'scripts/audit_personal_data_scenario_page.js'
       - 'scripts/audit_personal_data_readiness.js'
       - 'scripts/audit_manual_extensions.js'
       - 'docs/PERSONAL-DATA-DECISION-PACKET.md'
+      - 'docs/PERSONAL-DATA-SCENARIO-MATRIX.md'
       - 'docs/PERSONAL-DATA-READINESS-2026-07-14.md'
       - '.github/workflows/personal-data-decisions-audit.yml'
   workflow_dispatch:
@@ -46,9 +53,14 @@ jobs:
         run: |
           node --check assets/js/personal-data-decision-validation.js
           node --check assets/js/personal-data-decisions.js
+          node --check assets/js/personal-data-scenario-validation.js
+          node --check assets/js/personal-data-scenarios.js
           node --check scripts/test_personal_data_decision_packet.js
           node --check scripts/audit_personal_data_decision_packet.js
           node --check scripts/audit_personal_data_decision_page.js
+          node --check scripts/test_personal_data_scenario_matrix.js
+          node --check scripts/audit_personal_data_scenario_matrix.js
+          node --check scripts/audit_personal_data_scenario_page.js
 
       - name: Test personal data decision packet
         run: node scripts/test_personal_data_decision_packet.js
@@ -56,8 +68,17 @@ jobs:
       - name: Audit personal data decision packet
         run: node scripts/audit_personal_data_decision_packet.js
 
+      - name: Test personal data scenario matrix
+        run: node scripts/test_personal_data_scenario_matrix.js
+
+      - name: Audit personal data scenario matrix
+        run: node scripts/audit_personal_data_scenario_matrix.js
+
       - name: Audit personal data decision page
         run: node scripts/audit_personal_data_decision_page.js
+
+      - name: Audit personal data scenario page
+        run: node scripts/audit_personal_data_scenario_page.js
 
       - name: Audit canonical personal data readiness
         run: node scripts/audit_personal_data_readiness.js
@@ -74,6 +95,7 @@ jobs:
           name: personal-data-decisions-audit
           path: |
             data/personal_data_decision_packet.csv
+            data/personal_data_scenario_matrix.csv
             personal-data-decisions/index.html
             personal-data-decisions-project-audit.log
           if-no-files-found: warn
