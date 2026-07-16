@@ -66,13 +66,28 @@ jobs:
         run: node scripts/test_status_sets.js
 
       - name: Test manual tasks governance
-        run: npm run test:manual-tasks
+        run: |
+          set -o pipefail
+          npm run test:manual-tasks 2>&1 | tee test.log
 
       - name: Audit manual tasks governance
-        run: npm run audit:github-manual-tasks
+        run: |
+          set -o pipefail
+          npm run audit:github-manual-tasks 2>&1 | tee audit.log
 
       - name: Audit user decision queue
         run: node scripts/audit_user_decision_queue.js
 
       - name: Run full project mode audits
         run: node scripts/audit_project_mode_full.js
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: manual-tasks-diagnostics
+          path: |
+            test.log
+            audit.log
+          if-no-files-found: warn
+          retention-days: 14
