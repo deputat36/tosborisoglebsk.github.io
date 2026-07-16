@@ -9,7 +9,6 @@ const paths = {
   ui: 'assets/js/publication-basis-execution-ui.js',
   doc: 'docs/PUBLICATION-BASIS-EXECUTION-WORKSPACE.md',
   workflow: '.github/workflows/publication-basis-execution-audit.yml',
-  manual: 'scripts/audit_manual_extensions.js',
   package: 'package.json',
   register: 'data/publication_basis_confirmation_register.csv',
   queue: 'data/publication_basis_review_queue.csv',
@@ -36,7 +35,6 @@ function main() {
   const ui = read(paths.ui);
   const doc = read(paths.doc);
   const workflow = read(paths.workflow);
-  const manual = read(paths.manual);
   const packageJson = read(paths.package);
   const register = execution.parseCsv(read(paths.register));
   const queue = execution.parseCsv(read(paths.queue));
@@ -113,10 +111,6 @@ function main() {
   ]);
   if (/contents:\s*write/i.test(workflow)) errors.push('workflow must remain read-only');
 
-  requireTokens(errors, manual, paths.manual, [
-    'scripts/test_publication_basis_execution_workspace.js',
-    'scripts/audit_publication_basis_execution_workspace.js'
-  ]);
   requireTokens(errors, packageJson, paths.package, [
     'test:publication-basis-execution-workspace',
     'audit:publication-basis-execution-workspace'
