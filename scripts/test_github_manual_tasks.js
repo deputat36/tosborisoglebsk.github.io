@@ -1,10 +1,17 @@
 const fs = require('fs');
 const path = require('path');
-const { auditManualTasksSnapshot } = require('./audit_github_manual_tasks');
+const { auditManualTasksSnapshot, auditManualTaskSources } = require('./audit_github_manual_tasks');
 
 const ROOT = process.cwd();
 const csvText = fs.readFileSync(path.join(ROOT, 'data', 'github_manual_tasks.csv'), 'utf8');
 const pageHtml = fs.readFileSync(path.join(ROOT, 'github-tasks', 'index.html'), 'utf8');
+const sources = {
+  verificationCsv: fs.readFileSync(path.join(ROOT, 'data', 'verification_readiness_matrix.csv'), 'utf8'),
+  pagesCsv: fs.readFileSync(path.join(ROOT, 'data', 'github_pages_manual_check_template.csv'), 'utf8'),
+  outreachCsv: fs.readFileSync(path.join(ROOT, 'data', 'outreach_register.csv'), 'utf8'),
+  personalDataCsv: fs.readFileSync(path.join(ROOT, 'data', 'personal_data_decision_packet.csv'), 'utf8'),
+  publicationCsv: fs.readFileSync(path.join(ROOT, 'data', 'publication_basis_confirmation_register.csv'), 'utf8')
+};
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -12,6 +19,9 @@ function assert(condition, message) {
 
 const validErrors = auditManualTasksSnapshot({ csvText, pageHtml });
 assert(validErrors.length === 0, `Current manual tasks snapshot must pass: ${validErrors.join('; ')}`);
+
+const sourceErrors = auditManualTaskSources(sources);
+assert(sourceErrors.length === 0, `Current manual blocker sources must pass: ${sourceErrors.join('; ')}`);
 
 const closedIssueCsv = csvText.replace(/^205,/m, '165,');
 const closedIssueErrors = auditManualTasksSnapshot({ csvText: closedIssueCsv, pageHtml });
@@ -45,4 +55,18 @@ assert(
   'Decision queue control row must remain required'
 );
 
-console.log('Manual tasks governance self-test OK');
+const missingVerificationRow = sources.verificationCsv.split(/\r?\n/).slice(0, -2).concat('').join('\n');
+const missingVerificationErrors = auditManualTaskSources({ ...sources, verificationCsv: missingVerificationRow });
+assert(
+  missingVerificationErrors.some((error) => error.includes('issue 34: dashboard total must be 4')),
+  'Dashboard audit must reject a missing priority card row'
+);
+
+const fakeSentOutreach = sources.outreachCsv.replace(',draft,', ',sent,');
+const fakeSentErrors = auditManualTaskSources({ ...sources, outreachCsv: fakeSentOutreach });
+assert(
+  fakeSentErrors.some((error) => error.includes('issue 166: source contains')),
+  'Dashboard audit must reject a fake sent outreach row without required fields'
+);
+
+console.log('Manual tasks governance self-test OK: snapshot and dynamic source summaries');

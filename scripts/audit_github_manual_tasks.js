@@ -5,6 +5,10 @@ const { validateHeaders } = require('./lib/csv_schema');
 const { isIsoDate } = require('./lib/date_checks');
 const { repoPathExists } = require('./lib/path_checks');
 const { manualTaskStatuses, manualTaskGroups } = require('./lib/status_sets');
+const summaryApi = require('../assets/js/manual-blocker-summary');
+const outreachValidation = require('../assets/js/outreach-validation');
+const publicationBasisValidation = require('../assets/js/publication-basis-validation');
+const personalDataDecisionValidation = require('../assets/js/personal-data-decision-validation');
 
 const ROOT = process.cwd();
 const CSV_PATH = path.join(ROOT, 'data', 'github_manual_tasks.csv');
@@ -14,6 +18,16 @@ const PROJECT_MODE_PATH = path.join(ROOT, 'scripts', 'audit_project_mode.js');
 const PROJECT_MODE_FULL_PATH = path.join(ROOT, 'scripts', 'audit_project_mode_full.js');
 const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'manual-tasks-governance.yml');
 const DOCS_PATH = path.join(ROOT, 'docs', 'GITHUB-MANUAL-TASKS-GOVERNANCE.md');
+const DASHBOARD_SCRIPT_PATH = path.join(ROOT, 'assets', 'js', 'github-tasks.js');
+const SUMMARY_SCRIPT_PATH = path.join(ROOT, 'assets', 'js', 'manual-blocker-summary.js');
+
+const SOURCE_PATHS = {
+  verification: path.join(ROOT, 'data', 'verification_readiness_matrix.csv'),
+  pages: path.join(ROOT, 'data', 'github_pages_manual_check_template.csv'),
+  outreach: path.join(ROOT, 'data', 'outreach_register.csv'),
+  personalData: path.join(ROOT, 'data', 'personal_data_decision_packet.csv'),
+  publication: path.join(ROOT, 'data', 'publication_basis_confirmation_register.csv')
+};
 
 const expectedHeaders = [
   'issue_number',
@@ -47,7 +61,7 @@ const expectedTasks = {
     group: 'technical-ops',
     status: 'open',
     siteTool: '/actions-check/',
-    sourceFile: 'data/actions_diagnostics.csv'
+    sourceFile: 'data/github_pages_manual_check_template.csv'
   },
   '166': {
     title: 'Отправить 15 подготовленных запросов из outreach-register',
@@ -60,15 +74,15 @@ const expectedTasks = {
     title: 'ТОС БГО 2.0: закрыть юридические и фактологические риски P0',
     group: 'legal-readiness',
     status: 'open',
-    siteTool: '/site-health/',
-    sourceFile: 'data/personal_data_readiness.json'
+    siteTool: '/personal-data-decisions/',
+    sourceFile: 'data/personal_data_decision_packet.csv'
   },
   '254': {
     title: 'Получить фактические подтверждения по 24 карточкам ТОС',
     group: 'publication-basis',
     status: 'open',
-    siteTool: '/reply-review/',
-    sourceFile: 'data/publication_basis_review_queue.csv'
+    siteTool: '/publication-basis-review/',
+    sourceFile: 'data/publication_basis_confirmation_register.csv'
   }
 };
 
@@ -115,7 +129,7 @@ function auditManualTasksSnapshot({ csvText, pageHtml }) {
     if (!successCriteria || successCriteria.length < 40) errors.push(`line ${line}: success_criteria is missing or too short`);
     if (!nextAction || nextAction.length < 30) errors.push(`line ${line}: next_action is missing or too short`);
     if (!isIsoDate(date)) errors.push(`line ${line}: invalid created_or_updated ${date}`);
-    if (isIsoDate(date) && date < '2026-07-15') errors.push(`line ${line}: stale created_or_updated ${date}`);
+    if (isIsoDate(date) && date < '2026-07-16') errors.push(`line ${line}: stale created_or_updated ${date}`);
 
     const expected = expectedTasks[issueNumber];
     if (!expected) {
@@ -151,27 +165,82 @@ function auditManualTasksSnapshot({ csvText, pageHtml }) {
 
   for (const token of [
     '<meta name="robots" content="noindex,follow"/>',
-    'Сводка актуализирована 15 июля 2026 года',
+    'Центр ручных блокеров',
+    'id="manual-blocker-stats"',
     'data-manual-issue="34"',
     'data-manual-issue="164"',
     'data-manual-issue="166"',
     'data-manual-issue="205"',
     'data-manual-issue="254"',
+    'data-manual-progress',
+    'data-manual-headline',
     'actions-012',
     'Settings → Pages',
     'pre_legal_readiness',
     '13 / 9 / 2',
-    '/data/github_manual_tasks.csv',
-    '/data/user_decision_queue.csv'
+    '/personal-data-decisions/',
+    '/publication-basis-review/',
+    '/data/github_pages_manual_check_template.csv',
+    '/data/personal_data_decision_packet.csv',
+    '/data/publication_basis_confirmation_register.csv',
+    '/assets/js/manual-blocker-summary.js',
+    '/assets/js/github-tasks.js'
   ]) requireToken(pageHtml, token, 'github-tasks page', errors);
+
+  const siteIndex = pageHtml.indexOf('/assets/js/site.js');
+  const outreachIndex = pageHtml.indexOf('/assets/js/outreach-validation.js');
+  const publicationIndex = pageHtml.indexOf('/assets/js/publication-basis-validation.js');
+  const personalIndex = pageHtml.indexOf('/assets/js/personal-data-decision-validation.js');
+  const summaryIndex = pageHtml.indexOf('/assets/js/manual-blocker-summary.js');
+  const dashboardIndex = pageHtml.indexOf('/assets/js/github-tasks.js');
+  if (!(siteIndex >= 0 && outreachIndex > siteIndex && publicationIndex > outreachIndex && personalIndex > publicationIndex && summaryIndex > personalIndex && dashboardIndex > summaryIndex)) {
+    errors.push('github-tasks scripts must load in order: site, validators, summary, dashboard');
+  }
 
   for (const token of [
     'data-manual-issue="165"',
     '<h2>#165',
     'commit endpoint не показал workflow-runs',
     'Сводка составлена 25 июня 2026 года',
+    'Сводка актуализирована 15 июля 2026 года',
     'CSS-регрессия'
   ]) forbidToken(pageHtml, token, 'github-tasks page', errors);
+
+  return errors;
+}
+
+function auditManualTaskSources({ verificationCsv, pagesCsv, outreachCsv, personalDataCsv, publicationCsv }) {
+  const errors = [];
+  const summaries = [
+    summaryApi.summarizeVerification(summaryApi.parseCsv(verificationCsv)),
+    summaryApi.summarizePages(summaryApi.parseCsv(pagesCsv)),
+    summaryApi.summarizeOutreach(summaryApi.parseCsv(outreachCsv), outreachValidation),
+    summaryApi.summarizePersonalData(summaryApi.parseCsv(personalDataCsv), personalDataDecisionValidation),
+    summaryApi.summarizePublicationBasis(summaryApi.parseCsv(publicationCsv), publicationBasisValidation)
+  ];
+  const expectedTotals = { '34': 4, '164': 8, '166': 15, '205': 8, '254': 24 };
+  const seen = new Set();
+
+  for (const summary of summaries) {
+    if (seen.has(summary.issue)) errors.push(`duplicate dashboard summary ${summary.issue}`);
+    seen.add(summary.issue);
+    if (summary.total !== expectedTotals[summary.issue]) {
+      errors.push(`issue ${summary.issue}: dashboard total must be ${expectedTotals[summary.issue]}, found ${summary.total}`);
+    }
+    if (Number(summary.invalid || 0) > 0) errors.push(`issue ${summary.issue}: source contains ${summary.invalid} invalid rows`);
+    if (!/^\d+\/\d+$/.test(summary.progress || '')) errors.push(`issue ${summary.issue}: invalid progress label`);
+    if (!summary.headline || !summary.detail) errors.push(`issue ${summary.issue}: missing dashboard text`);
+  }
+
+  const pages = summaryApi.parseCsv(pagesCsv);
+  const allowedPageStatuses = new Set(['not_checked', 'passed', 'confirmed', 'success', 'failed', 'mismatch', 'blocked']);
+  pages.forEach((row, index) => {
+    if (!row.item_id || !row.field) errors.push(`pages line ${index + 2}: missing item_id or field`);
+    if (!allowedPageStatuses.has(row.status)) errors.push(`pages line ${index + 2}: unsupported status ${row.status}`);
+    if (row.status !== 'not_checked' && (!row.observed_value || !row.evidence_ref)) {
+      errors.push(`pages line ${index + 2}: checked item requires observed_value and evidence_ref`);
+    }
+  });
 
   return errors;
 }
@@ -183,6 +252,8 @@ function auditRepositoryContract() {
   const projectModeFull = readRequired(PROJECT_MODE_FULL_PATH, 'full project mode', errors);
   const workflow = readRequired(WORKFLOW_PATH, 'manual tasks workflow', errors);
   const docs = readRequired(DOCS_PATH, 'manual tasks governance documentation', errors);
+  const dashboardScript = readRequired(DASHBOARD_SCRIPT_PATH, 'github tasks dashboard script', errors);
+  const summaryScript = readRequired(SUMMARY_SCRIPT_PATH, 'manual blocker summary script', errors);
 
   let packageJson = null;
   try {
@@ -216,10 +287,15 @@ function auditRepositoryContract() {
   for (const token of [
     'pull_request:',
     'contents: read',
+    'node --check assets/js/manual-blocker-summary.js',
+    'node --check assets/js/github-tasks.js',
     'npm run test:manual-tasks',
     'npm run audit:github-manual-tasks',
     'node scripts/audit_user_decision_queue.js',
-    'node scripts/audit_project_mode_full.js'
+    'node scripts/audit_project_mode_full.js',
+    'data/github_pages_manual_check_template.csv',
+    'data/personal_data_decision_packet.csv',
+    'data/publication_basis_confirmation_register.csv'
   ]) requireToken(workflow, token, 'manual tasks workflow', errors);
   for (const token of ['contents: write', 'git push', 'git-auto-commit']) {
     forbidToken(workflow, token, 'manual tasks workflow', errors);
@@ -230,8 +306,27 @@ function auditRepositoryContract() {
     'issues #34, #164, #166, #205 и #254',
     'не обращается к GitHub API',
     'data-manual-issue',
+    'динамические счётчики',
+    '4 / 8 / 15 / 8 / 24',
     'read-only'
   ]) requireToken(docs, token, 'manual tasks governance documentation', errors);
+
+  for (const token of [
+    'verification_readiness_matrix.csv',
+    'github_pages_manual_check_template.csv',
+    'outreach_register.csv',
+    'personal_data_decision_packet.csv',
+    'publication_basis_confirmation_register.csv',
+    'Promise.allSettled'
+  ]) requireToken(dashboardScript, token, 'github tasks dashboard script', errors);
+
+  for (const token of [
+    'summarizeVerification',
+    'summarizePages',
+    'summarizeOutreach',
+    'summarizePersonalData',
+    'summarizePublicationBasis'
+  ]) requireToken(summaryScript, token, 'manual blocker summary script', errors);
 
   return errors;
 }
@@ -241,17 +336,25 @@ function main() {
   const csvText = readRequired(CSV_PATH, 'github_manual_tasks.csv', errors);
   const pageHtml = readRequired(PAGE_PATH, 'github-tasks page', errors);
   errors.push(...auditManualTasksSnapshot({ csvText, pageHtml }));
+  errors.push(...auditManualTaskSources({
+    verificationCsv: readRequired(SOURCE_PATHS.verification, 'verification readiness source', errors),
+    pagesCsv: readRequired(SOURCE_PATHS.pages, 'GitHub Pages manual source', errors),
+    outreachCsv: readRequired(SOURCE_PATHS.outreach, 'outreach source', errors),
+    personalDataCsv: readRequired(SOURCE_PATHS.personalData, 'personal data decision source', errors),
+    publicationCsv: readRequired(SOURCE_PATHS.publication, 'publication basis source', errors)
+  }));
   errors.push(...auditRepositoryContract());
 
   if (errors.length) {
     throw new Error(`Manual tasks governance audit failed:\n${Array.from(new Set(errors)).join('\n')}`);
   }
 
-  console.log(`Manual tasks governance OK: ${Object.keys(expectedTasks).length} rows, ${expectedPageIssueIds.length} issue cards`);
+  console.log(`Manual tasks governance OK: ${Object.keys(expectedTasks).length} rows, ${expectedPageIssueIds.length} issue cards, dynamic totals 4/8/15/8/24`);
 }
 
 module.exports = {
   auditManualTasksSnapshot,
+  auditManualTaskSources,
   auditRepositoryContract,
   expectedPageIssueIds,
   expectedTasks
