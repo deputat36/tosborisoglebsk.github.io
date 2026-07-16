@@ -14,6 +14,11 @@
     'blocker', 'next_step'
   ];
 
+  const TOS_ID_ALIASES = Object.freeze({
+    tancyrey: 'tantsyrey',
+    chkalovec: 'chkalovets'
+  });
+
   const clean = (value) => String(value == null ? '' : value).trim();
 
   function parseCsv(text) {
@@ -52,6 +57,14 @@
 
   function indexBy(rows, field) {
     return new Map((rows || []).filter((row) => clean(row[field])).map((row) => [clean(row[field]), row]));
+  }
+
+  function buildTosIndex(rows) {
+    const byId = indexBy(rows, 'id');
+    Object.entries(TOS_ID_ALIASES).forEach(([publicSlug, sourceId]) => {
+      if (!byId.has(publicSlug) && byId.has(sourceId)) byId.set(publicSlug, byId.get(sourceId));
+    });
+    return byId;
   }
 
   function isIsoDate(value) {
@@ -191,8 +204,10 @@
 
   return {
     REGISTER_HEADERS,
+    TOS_ID_ALIASES,
     buildPreflightText,
     buildRequestPacket,
+    buildTosIndex,
     buildUpdatedRow,
     escapeCsv,
     fieldTypeLabel,
