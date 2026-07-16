@@ -55,7 +55,7 @@ function main() {
     '`retention_class_code`, `basis_code` и `distribution_rule_code` остаются пустыми',
     'Матрица не переводит решение `purposes_and_data_categories`',
     'ровно четыре строки и их порядок'
-  ]) requireToken(errors, doc, 'PERSONAL-DATA-SCENARIO-MATRIX.md');
+  ]) requireToken(errors, doc, token, 'PERSONAL-DATA-SCENARIO-MATRIX.md');
 
   for (const token of [
     'data/personal_data_scenario_matrix.csv',
@@ -67,7 +67,7 @@ function main() {
     'Test personal data scenario matrix',
     'Audit personal data scenario matrix',
     'Audit personal data scenario page'
-  ]) requireToken(errors, workflow, 'personal-data-decisions-audit.yml');
+  ]) requireToken(errors, workflow, token, 'personal-data-decisions-audit.yml');
 
   for (const script of [
     'scripts/test_personal_data_scenario_matrix.js',
