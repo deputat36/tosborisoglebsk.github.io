@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T18:16:00.791Z",
+  "generated_at": "2026-07-16T19:05:27.041Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 83,
+    "asset_files": 84,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 487557,
+    "total_js_bytes": 499973,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -99,6 +99,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/workbench-manual-blockers.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 12087,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-validation.js",
       "group": "js",
       "extension": ".js",
@@ -117,6 +124,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10685,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/workbench-drafts.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10349,
       "over_budget": false
     },
     {
@@ -145,13 +159,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10059,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/workbench-drafts.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10020,
       "over_budget": false
     },
     {
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 6499,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/data-update.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 6300,
       "over_budget": false
     }
   ],
