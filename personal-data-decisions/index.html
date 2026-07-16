@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Решения по персональным данным — ТОС БГО</title>
+  <meta name="description" content="Служебная панель восьми обязательных решений по персональным данным, медиа, хранению и обработке обращений портала ТОС БГО."/>
+  <meta name="robots" content="noindex,nofollow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/personal-data-decisions/"/>
+  <meta property="og:title" content="Решения по персональным данным — ТОС БГО"/>
+  <meta property="og:description" content="Служебный пакет восьми решений без фиктивного назначения оператора или юридического утверждения."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/personal-data-decisions/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/workbench/">Рабочая панель</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <section class="hero"><div class="container hero-card"><div class="eyebrow">Служебный контур · issue #205</div><h1>Восемь решений по персональным данным и медиа</h1><p class="lead">Панель помогает назначить обезличенные роли, подготовить пакет для юридической проверки, зафиксировать утверждение и отдельно проконтролировать реализацию. Она не выбирает оператора и не создаёт юридическое заключение.</p><div class="hero-actions"><a class="btn primary" href="/data/personal_data_decision_packet.csv">Открыть CSV</a><a class="btn" href="/data/personal_data_readiness.json">Канонический реестр</a><a class="btn" href="/docs/PERSONAL-DATA-DECISION-PACKET.md">Инструкция</a><a class="btn" href="/privacy/">Редакционная памятка</a></div></div></section>
+
+  <section class="section tight"><div class="container notice"><b>Граница доверия:</b> все восемь решений остаются <code>pending</code>, пока реальные роли не назначены, материалы не переданы проверяющему и не появились обезличенные <code>decision:</code> и <code>evidence:</code> ссылки. Портал сохраняет режим <code>pre_legal_readiness</code>. Страница не включает сбор данных, согласий или автоматическую публикацию.</div></section>
+
+  <section class="section"><div class="container section-head"><div><h2>Состояние пакета</h2><p>Данные загружаются из CSV и сверяются с <code>personal_data_readiness.json</code></p></div></div><div class="container stats" id="personal-data-decision-stats"><article class="stat"><b>...</b><span>загрузка</span></article></div></section>
+
+  <section class="section tight"><div class="container card"><div class="card-inner"><h2>Фильтры решений</h2><div class="card-actions"><button class="btn primary" type="button" data-personal-data-decision-filter="all">Все</button><button class="btn" type="button" data-personal-data-decision-filter="pending">Ожидают</button><button class="btn" type="button" data-personal-data-decision-filter="in_review">На проверке</button><button class="btn" type="button" data-personal-data-decision-filter="blocked">Заблокированы</button><button class="btn" type="button" data-personal-data-decision-filter="approved">Утверждены</button><button class="btn" type="button" data-personal-data-decision-filter="needs_owner">Без владельца</button><button class="btn" type="button" data-personal-data-decision-filter="needs_legal_reviewer">Без юриста</button><button class="btn" type="button" data-personal-data-decision-filter="ready_for_review">Готовы к передаче</button><button class="btn" type="button" data-personal-data-decision-filter="implementation_pending">Ждут реализации</button><button class="btn" type="button" data-personal-data-decision-filter="invalid">Ошибки данных</button></div></div></div></section>
+
+  <section class="section"><div class="container section-head"><div><h2>Очередь решений</h2><p>Рекомендуемые зависимости являются организационным маршрутом и не заменяют мнение юридического проверяющего</p></div></div><div class="container" id="personal-data-decision-list"><div class="empty">Загрузка восьми решений...</div></div></section>
+
+  <section class="section tight"><div class="container grid"><article class="card"><div class="card-inner"><span class="tag warn">Нельзя автоматически</span><h2>Что статус не доказывает</h2><p><code>in_review</code> не означает одобрение. <code>approved</code> не означает завершённую реализацию. Заполнение CSV не включает формы, сбор данных или хранение закрытых доказательств.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Следующий ручной шаг</span><h2>Начать с оператора</h2><p>Определить возможного оператора портала, назначить владельца решения и юридического проверяющего. Реальные ФИО, контакты и документы остаются вне публичного репозитория.</p><a class="btn" href="/docs/PERSONAL-DATA-DECISION-PACKET.md">Открыть полный пакет</a></div></article></div></section>
+</main>
+<footer class="footer"><div class="container footer-inner"><div><b>ТОС БГО</b><p class="tiny">Служебная панель. Не является юридической политикой или формой согласия.</p></div><div class="card-actions"><a href="/workbench/">Рабочая панель</a><a href="/privacy/">Памятка</a><a href="/contacts/">Контакты</a></div></div></footer>
+<script src="/assets/js/site.js"></script>
+<script src="/assets/js/personal-data-decision-validation.js"></script>
+<script src="/assets/js/personal-data-decisions.js"></script>
+</body>
+</html>

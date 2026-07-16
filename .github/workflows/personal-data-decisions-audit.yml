@@ -1,0 +1,80 @@
+name: Audit personal data decisions
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'data/personal_data_decision_packet.csv'
+      - 'data/personal_data_readiness.json'
+      - 'personal-data-decisions/index.html'
+      - 'assets/js/personal-data-decision-validation.js'
+      - 'assets/js/personal-data-decisions.js'
+      - 'scripts/test_personal_data_decision_packet.js'
+      - 'scripts/audit_personal_data_decision_packet.js'
+      - 'scripts/audit_personal_data_decision_page.js'
+      - 'scripts/audit_personal_data_readiness.js'
+      - 'scripts/audit_manual_extensions.js'
+      - 'docs/PERSONAL-DATA-DECISION-PACKET.md'
+      - 'docs/PERSONAL-DATA-READINESS-2026-07-14.md'
+      - '.github/workflows/personal-data-decisions-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: personal-data-decisions-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/personal-data-decision-validation.js
+          node --check assets/js/personal-data-decisions.js
+          node --check scripts/test_personal_data_decision_packet.js
+          node --check scripts/audit_personal_data_decision_packet.js
+          node --check scripts/audit_personal_data_decision_page.js
+
+      - name: Test personal data decision packet
+        run: node scripts/test_personal_data_decision_packet.js
+
+      - name: Audit personal data decision packet
+        run: node scripts/audit_personal_data_decision_packet.js
+
+      - name: Audit personal data decision page
+        run: node scripts/audit_personal_data_decision_page.js
+
+      - name: Audit canonical personal data readiness
+        run: node scripts/audit_personal_data_readiness.js
+
+      - name: Run full project mode audits
+        run: |
+          set -o pipefail
+          node scripts/audit_project_mode_full.js 2>&1 | tee personal-data-decisions-project-audit.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: personal-data-decisions-audit
+          path: |
+            data/personal_data_decision_packet.csv
+            personal-data-decisions/index.html
+            personal-data-decisions-project-audit.log
+          if-no-files-found: warn
+          retention-days: 14
