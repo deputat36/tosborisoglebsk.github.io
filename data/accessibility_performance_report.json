@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T10:23:49.443Z",
+  "generated_at": "2026-07-16T12:58:37.293Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 75,
+    "asset_files": 77,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 410411,
+    "total_js_bytes": 432358,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -47,6 +47,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 25417,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/github-pages-manual-check.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 19500,
       "over_budget": false
     },
     {
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 5330,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/technical-quality.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 5318,
       "over_budget": false
     }
   ],
