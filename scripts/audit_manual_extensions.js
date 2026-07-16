@@ -21,7 +21,10 @@ runChecks([
   ['publication basis review page', 'scripts/audit_publication_basis_review_page.js'],
   ['personal data decision packet self-test', 'scripts/test_personal_data_decision_packet.js'],
   ['personal data decision packet', 'scripts/audit_personal_data_decision_packet.js'],
-  ['personal data decision page', 'scripts/audit_personal_data_decision_page.js']
+  ['personal data decision page', 'scripts/audit_personal_data_decision_page.js'],
+  ['personal data scenario matrix self-test', 'scripts/test_personal_data_scenario_matrix.js'],
+  ['personal data scenario matrix', 'scripts/audit_personal_data_scenario_matrix.js'],
+  ['personal data scenario page', 'scripts/audit_personal_data_scenario_page.js']
 ], {
   verbose: true,
   successMessage: 'Manual audit extensions OK'
