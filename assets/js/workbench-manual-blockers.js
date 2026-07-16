@@ -39,11 +39,9 @@
     let root = document.querySelector('#workbench-manual-blockers');
     if (root) return root;
     const main = document.querySelector('#main');
-    const prioritySection = document.querySelector('#workbench-priority-list')?.closest('section');
-    const anchor = prioritySection || main?.querySelector('.hero');
-    if (!main || !anchor) return null;
+    if (!main) return null;
 
-    anchor.insertAdjacentHTML('afterend', `
+    main.insertAdjacentHTML('beforeend', `
       <section class="section tight" id="workbench-manual-blockers" data-workbench-manual-blockers>
         <div class="container section-head">
           <div>
