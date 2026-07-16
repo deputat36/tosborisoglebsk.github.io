@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16T04:46:54.842Z",
+  "generated_at": "2026-07-16T06:09:25.862Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,7 +9,7 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 363,
+    "html_pages": 364,
     "public_pages": 305,
     "pages_with_issues": 0,
     "issue_counts": {},
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 69,
+    "asset_files": 71,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
-    "total_js_bytes": 360541,
+    "total_js_bytes": 379778,
     "total_image_bytes": 2464,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -75,6 +75,13 @@
       "group": "css",
       "extension": ".css",
       "size_bytes": 13802,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/publication-basis-validation.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 11423,
       "over_budget": false
     },
     {
@@ -138,6 +145,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8242,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/publication-basis-register.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 7814,
       "over_budget": false
     },
     {
@@ -222,20 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 5145,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/verification-tasks.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 4697,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/outreach-validation.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 4677,
       "over_budget": false
     }
   ],
