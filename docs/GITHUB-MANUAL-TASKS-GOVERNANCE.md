@@ -17,12 +17,12 @@
 Динамические счётчики страницы читают пять локальных источников:
 
 - #34 — `data/verification_readiness_matrix.csv`, 4 карточки;
-- #164 — `data/github_pages_manual_check_template.csv`, 7 пунктов;
+- #164 — `data/github_pages_manual_check_template.csv`, 8 пунктов;
 - #166 — `data/outreach_register.csv`, 15 активных задач;
 - #205 — `data/personal_data_decision_packet.csv`, 8 решений;
 - #254 — `data/publication_basis_confirmation_register.csv`, 24 карточки.
 
-Ожидаемые размеры сводки: `4 / 7 / 15 / 8 / 24`. Изменение размера требует отдельного осознанного обновления контракта, а не молчаливого изменения HTML.
+Ожидаемые размеры сводки: `4 / 8 / 15 / 8 / 24`. Изменение размера требует отдельного осознанного обновления контракта, а не молчаливого изменения HTML.
 
 ## Контракт данных
 
@@ -77,7 +77,7 @@
 - потеря одной из четырёх приоритетных карточек;
 - фиктивный `sent` без обязательных полей.
 
-`.github/workflows/manual-tasks-governance.yml` работает в режиме read-only и не изменяет Issues, CSV или HTML.
+`.github/workflows/manual-tasks-governance.yml` работает в режиме read-only и не изменяет Issues, CSV или HTML. При каждом запуске он сохраняет короткие `test.log` и `audit.log` в artifact `manual-tasks-diagnostics` для разбора сбоев.
 
 ## Порядок обновления
 
