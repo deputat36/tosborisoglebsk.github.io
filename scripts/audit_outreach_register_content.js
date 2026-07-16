@@ -5,6 +5,11 @@ const { repoPathExists } = require('./lib/path_checks');
 const htmlPath = path.join(process.cwd(), 'outreach-register', 'index.html');
 const validationPath = path.join(process.cwd(), 'assets', 'js', 'outreach-validation.js');
 const registerScriptPath = path.join(process.cwd(), 'assets', 'js', 'outreach-register.js');
+const registerAuditPath = path.join(process.cwd(), 'scripts', 'audit_outreach_register.js');
+const packagePath = path.join(process.cwd(), 'package.json');
+const workflowPath = path.join(process.cwd(), '.github', 'workflows', 'outreach-governance.yml');
+const projectModePath = path.join(process.cwd(), 'scripts', 'audit_project_mode.js');
+const projectModeFullPath = path.join(process.cwd(), 'scripts', 'audit_project_mode_full.js');
 
 const requiredInternalLinks = [
   '/data/outreach_register.csv',
@@ -89,6 +94,11 @@ function main() {
   const html = read(htmlPath);
   const validation = read(validationPath);
   const registerScript = read(registerScriptPath);
+  const registerAudit = read(registerAuditPath);
+  const packageJson = JSON.parse(read(packagePath));
+  const workflow = read(workflowPath);
+  const projectMode = read(projectModePath);
+  const projectModeFull = read(projectModeFullPath);
   const errors = [];
 
   checkContains(errors, html, 'outreach-register/index.html', '<html lang="ru"');
@@ -157,11 +167,54 @@ function main() {
     checkContains(errors, registerScript, 'assets/js/outreach-register.js', token);
   }
 
+  for (const token of [
+    "require('../assets/js/outreach-validation')",
+    'validationIssues(item)',
+    'errors.push(...auditRows(headers, items))'
+  ]) {
+    checkContains(errors, registerAudit, 'scripts/audit_outreach_register.js', token);
+  }
+
+  const scripts = packageJson.scripts || {};
+  if (scripts['test:outreach-validation'] !== 'node scripts/test_outreach_validation.js') {
+    errors.push('package.json: missing exact test:outreach-validation command');
+  }
+  if (scripts['audit:outreach-content'] !== 'node scripts/audit_outreach_register_content.js') {
+    errors.push('package.json: missing exact audit:outreach-content command');
+  }
+  const auditAll = String(scripts['audit:all'] || '');
+  for (const command of ['test:outreach-validation', 'audit:outreach', 'audit:outreach-content', 'audit:outreach-sources']) {
+    if (!auditAll.includes(`npm run ${command}`)) errors.push(`package.json audit:all: missing npm run ${command}`);
+  }
+
+  for (const token of [
+    'contents: read',
+    'Test outreach state contract',
+    'Audit outreach register',
+    'Audit outreach page',
+    'Test outreach source index',
+    'Run full project mode audits'
+  ]) {
+    checkContains(errors, workflow, '.github/workflows/outreach-governance.yml', token);
+  }
+  if (/contents:\s*write/i.test(workflow)) {
+    errors.push('.github/workflows/outreach-governance.yml must remain read-only');
+  }
+
+  for (const [label, content] of [
+    ['scripts/audit_project_mode.js', projectMode],
+    ['scripts/audit_project_mode_full.js', projectModeFull]
+  ]) {
+    checkContains(errors, content, label, 'scripts/audit_outreach_register.js');
+    checkContains(errors, content, label, 'scripts/audit_outreach_register_content.js');
+    checkContains(errors, content, label, 'scripts/test_outreach_source_index.js');
+  }
+
   if (errors.length) {
     throw new Error(`Outreach register content audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log('Outreach register content OK: execution readiness and shared validation enabled');
+  console.log('Outreach register content OK: execution readiness, shared validation and CI governance enabled');
 }
 
 main();
