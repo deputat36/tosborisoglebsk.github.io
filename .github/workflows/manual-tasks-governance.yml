@@ -7,7 +7,17 @@ on:
     paths:
       - 'data/github_manual_tasks.csv'
       - 'data/user_decision_queue.csv'
+      - 'data/verification_readiness_matrix.csv'
+      - 'data/github_pages_manual_check_template.csv'
+      - 'data/outreach_register.csv'
+      - 'data/personal_data_decision_packet.csv'
+      - 'data/publication_basis_confirmation_register.csv'
       - 'github-tasks/index.html'
+      - 'assets/js/manual-blocker-summary.js'
+      - 'assets/js/github-tasks.js'
+      - 'assets/js/outreach-validation.js'
+      - 'assets/js/publication-basis-validation.js'
+      - 'assets/js/personal-data-decision-validation.js'
       - 'scripts/audit_github_manual_tasks.js'
       - 'scripts/test_github_manual_tasks.js'
       - 'scripts/audit_user_decision_queue.js'
@@ -44,6 +54,8 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
+          node --check assets/js/manual-blocker-summary.js
+          node --check assets/js/github-tasks.js
           node --check scripts/audit_github_manual_tasks.js
           node --check scripts/test_github_manual_tasks.js
           node --check scripts/audit_user_decision_queue.js
