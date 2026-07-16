@@ -74,7 +74,7 @@ function main() {
     'serializeCsv',
     'mergeDraft',
     'localStorage',
-    "summary.passed ? 'passed'",
+    "const status = passed ? 'passed'",
     "summary.status === 'warning'",
     "status === 'not_checked'",
     'обнаружен признак токена, пароля или секрета',
