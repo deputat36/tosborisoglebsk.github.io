@@ -7,12 +7,21 @@ on:
     paths:
       - 'outreach-register/index.html'
       - 'data/outreach_register.csv'
+      - 'data/priority_tos_requests.csv'
+      - 'data/candidate_registry_requests.csv'
+      - 'data/projects_2026_result_requests.csv'
       - 'assets/js/outreach-validation.js'
       - 'assets/js/outreach-register.js'
+      - 'assets/js/outreach-execution.js'
+      - 'assets/js/outreach-execution-ui.js'
+      - 'docs/OUTREACH-EXECUTION-PACKET.md'
       - 'scripts/audit_outreach_register.js'
       - 'scripts/audit_outreach_register_content.js'
       - 'scripts/test_outreach_validation.js'
       - 'scripts/test_outreach_source_index.js'
+      - 'scripts/test_outreach_execution.js'
+      - 'scripts/audit_outreach_execution.js'
+      - 'scripts/audit_manual_extensions.js'
       - 'scripts/audit_project_mode.js'
       - 'scripts/audit_project_mode_full.js'
       - 'scripts/lib/status_sets.js'
@@ -46,18 +55,32 @@ jobs:
         run: |
           node --check assets/js/outreach-validation.js
           node --check assets/js/outreach-register.js
+          node --check assets/js/outreach-execution.js
+          node --check assets/js/outreach-execution-ui.js
           node --check scripts/audit_outreach_register.js
           node --check scripts/audit_outreach_register_content.js
           node --check scripts/test_outreach_validation.js
+          node --check scripts/test_outreach_execution.js
+          node --check scripts/audit_outreach_execution.js
 
       - name: Test outreach state contract
         run: node scripts/test_outreach_validation.js
+
+      - name: Test outreach execution packet
+        run: |
+          set -o pipefail
+          node scripts/test_outreach_execution.js 2>&1 | tee outreach-execution-test.log
 
       - name: Audit outreach register
         run: node scripts/audit_outreach_register.js
 
       - name: Audit outreach page
         run: node scripts/audit_outreach_register_content.js
+
+      - name: Audit outreach execution packet
+        run: |
+          set -o pipefail
+          node scripts/audit_outreach_execution.js 2>&1 | tee outreach-execution-audit.log
 
       - name: Test outreach source index
         run: node scripts/test_outreach_source_index.js
@@ -72,6 +95,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: outreach-governance-audit
-          path: outreach-project-audit.log
+          path: |
+            outreach-execution-test.log
+            outreach-execution-audit.log
+            outreach-project-audit.log
+            docs/OUTREACH-EXECUTION-PACKET.md
           if-no-files-found: warn
           retention-days: 14
