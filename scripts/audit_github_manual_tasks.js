@@ -218,7 +218,7 @@ function auditManualTaskSources({ verificationCsv, pagesCsv, outreachCsv, person
     summaryApi.summarizePersonalData(summaryApi.parseCsv(personalDataCsv), personalDataDecisionValidation),
     summaryApi.summarizePublicationBasis(summaryApi.parseCsv(publicationCsv), publicationBasisValidation)
   ];
-  const expectedTotals = { '34': 4, '164': 7, '166': 15, '205': 8, '254': 24 };
+  const expectedTotals = { '34': 4, '164': 8, '166': 15, '205': 8, '254': 24 };
   const seen = new Set();
 
   for (const summary of summaries) {
@@ -307,7 +307,7 @@ function auditRepositoryContract() {
     'не обращается к GitHub API',
     'data-manual-issue',
     'динамические счётчики',
-    '4 / 7 / 15 / 8 / 24',
+    '4 / 8 / 15 / 8 / 24',
     'read-only'
   ]) requireToken(docs, token, 'manual tasks governance documentation', errors);
 
@@ -349,7 +349,7 @@ function main() {
     throw new Error(`Manual tasks governance audit failed:\n${Array.from(new Set(errors)).join('\n')}`);
   }
 
-  console.log(`Manual tasks governance OK: ${Object.keys(expectedTasks).length} rows, ${expectedPageIssueIds.length} issue cards, dynamic totals 4/7/15/8/24`);
+  console.log(`Manual tasks governance OK: ${Object.keys(expectedTasks).length} rows, ${expectedPageIssueIds.length} issue cards, dynamic totals 4/8/15/8/24`);
 }
 
 module.exports = {
