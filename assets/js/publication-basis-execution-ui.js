@@ -257,7 +257,7 @@
   ]).then(([register, queue, templates, tos]) => {
     registerRows = register.filter((item) => item.request_status === 'draft');
     queueBySlug = api.indexBy(queue, 'slug');
-    tosBySlug = api.indexBy(tos, 'id');
+    tosBySlug = api.buildTosIndex(tos);
     templatesById = api.indexBy(templates.templates || [], 'id');
     const saved = loadStore().selected;
     selectedSlug = registerRows.some((item) => item.tos_slug === saved) ? saved : (registerRows[0]?.tos_slug || '');
