@@ -1,0 +1,58 @@
+name: Audit brand assets
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'assets/img/logo.svg'
+      - 'assets/img/logo-dark.svg'
+      - 'assets/img/og-cover.svg'
+      - 'favicon.svg'
+      - 'site.webmanifest'
+      - 'index.html'
+      - 'docs/BRAND-LOGO.md'
+      - 'scripts/audit_brand_assets.js'
+      - '.github/workflows/brand-assets-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: brand-assets-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check audit syntax
+        run: node --check scripts/audit_brand_assets.js
+
+      - name: Audit logo package
+        run: node scripts/audit_brand_assets.js
+
+      - name: Upload brand package
+        uses: actions/upload-artifact@v4
+        with:
+          name: brand-assets
+          path: |
+            assets/img/logo.svg
+            assets/img/logo-dark.svg
+            assets/img/og-cover.svg
+            favicon.svg
+            docs/BRAND-LOGO.md
+          if-no-files-found: error
+          retention-days: 14
