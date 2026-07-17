@@ -36,6 +36,9 @@ function main() {
   requireIncludes(errors, html, 'Медиа для портала', 'eyebrow');
   requireIncludes(errors, html, 'Фото и логотипы для карточек ТОС', 'main heading');
   requireIncludes(errors, html, 'публикуем только то, что можно размещать открыто', 'open publication principle');
+  requireIncludes(errors, html, 'Редакционная граница', 'editorial boundary');
+  requireIncludes(errors, html, 'не является формой согласия', 'consent boundary');
+  requireIncludes(errors, html, 'не подтверждает права на изображение', 'rights boundary');
   requireIncludes(errors, html, 'Что прислать', 'materials section');
   requireIncludes(errors, html, 'Логотип ТОС', 'logo card');
   requireIncludes(errors, html, 'Фото территории', 'territory photos card');
@@ -48,8 +51,9 @@ function main() {
   requireIncludes(errors, html, 'где сделано фото', 'place caption field');
   requireIncludes(errors, html, 'когда сделано фото', 'date caption field');
   requireIncludes(errors, html, 'что происходит на фото', 'event caption field');
-  requireIncludes(errors, html, 'можно ли публиковать фото открыто', 'publication permission field');
-  requireIncludes(errors, html, 'Фото можно публиковать', 'example permission phrase');
+  requireIncludes(errors, html, 'какой объём открытой публикации предполагает отправитель', 'editorial publication field');
+  requireIncludes(errors, html, 'Редакционная отметка отправителя: фото предполагается для открытой публикации', 'editorial example phrase');
+  requireIncludes(errors, html, 'Отметка отправителя не считается окончательным разрешением', 'checklist boundary');
 
   requireIncludes(errors, html, 'Технические рекомендации', 'technical section');
   requireIncludes(errors, html, 'без сильного сжатия', 'quality recommendation');
