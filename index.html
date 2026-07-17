@@ -57,7 +57,7 @@
               <span class="tag">Практические инструкции</span>
             </div>
             <div class="hero-actions">
-              <a class="btn primary" href="/tos/">Найти свой ТОС</a>
+              <a class="btn primary" href="#home-finder">Найти свой ТОС</a>
               <a class="btn" href="/residents/action-routes/">Сообщить проблему или идею</a>
               <a class="btn" href="/chairperson/">Раздел председателя</a>
               <a class="btn" href="/update-tos/?type=card#message-builder">Исправить сведения</a>
@@ -69,6 +69,23 @@
             <div class="proof-card"><b>Статус</b><span>у каждого материала</span><p>Проверяйте источник и происхождение данных перед использованием.</p></div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="home-finder">
+      <div class="container section-head"><div><h2>Найдите свой ТОС прямо здесь</h2><p>Поиск использует только опубликованные сведения и сразу показывает статус проверки карточки</p></div><a class="btn" href="/tos/">Открыть полный каталог</a></div>
+      <div class="container home-discovery-grid">
+        <div class="home-finder-card">
+          <label for="home-tos-search"><b>Название, населённый пункт, улица или председатель</b></label>
+          <div class="home-finder-controls"><input class="input" id="home-tos-search" type="search" autocomplete="off" placeholder="Например: Чигорак, Подстёпки, Северный..." aria-describedby="home-finder-help"/><button class="btn" id="home-tos-search-clear" type="button">Очистить</button></div>
+          <p class="tiny" id="home-finder-help">Поиск не определяет официальную принадлежность адреса к границам ТОС. Для официального действия проверяйте документ о границах.</p>
+          <div class="home-search-results" id="home-tos-search-results" role="status" aria-live="polite"><div class="home-finder-empty">Загрузка каталога...</div></div>
+        </div>
+        <aside class="home-current-card" aria-labelledby="home-current-title">
+          <div class="home-current-head"><div><span class="eyebrow">По данным портала</span><h2 id="home-current-title">Что актуально сейчас</h2></div><a href="/calendar/">Календарь →</a></div>
+          <div class="home-current-overview" id="home-current-overview"><div class="home-finder-empty">Загрузка актуальной сводки...</div></div>
+          <p class="tiny">Дата технической сборки не считается датой проверки сведений. Редакционные ориентиры не заменяют официальное объявление.</p>
+        </aside>
       </div>
     </section>
 
@@ -111,15 +128,17 @@
     </section>
 
     <section class="section">
-      <div class="container grid"><article class="card full highlight-card"><div class="card-inner"><h2>Связь и исправления</h2><p>Передайте обновление карточки, новость, фотографию, проект, потребность или сообщение об ошибке. Укажите название ТОС, дату, место, источник сведений и разрешение на публикацию персональных данных или изображений, когда оно требуется.</p><div class="card-actions"><a class="btn primary" href="/update-tos/?type=news#message-builder">Составить сообщение</a><a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Открыть ВК-сообщество</a><a class="btn" href="/contacts/">Контакты</a><a class="btn" href="/editorial-policy/">О портале</a></div></div></article></div>
+      <div class="container grid"><article class="card full highlight-card"><div class="card-inner"><h2>Связь и исправления</h2><p>Передайте обновление карточки, новость, фотографию, проект, потребность или сообщение об ошибке. Укажите название ТОС, дату, место, источник сведений и предполагаемый объём открытой публикации. Эта редакционная отметка не заменяет проверку права на использование персональных данных, изображений или сторонних материалов.</p><div class="card-actions"><a class="btn primary" href="/update-tos/?type=news#message-builder">Составить сообщение</a><a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Открыть ВК-сообщество</a><a class="btn" href="/contacts/">Контакты</a><a class="btn" href="/editorial-policy/">О портале</a></div></div></article></div>
     </section>
   </main>
 
-  <div class="sticky-mobile-cta"><a class="btn primary" href="/tos/">Найти ТОС</a><a class="btn" href="/update-tos/?type=card#message-builder">Исправить</a></div>
+  <div class="sticky-mobile-cta"><a class="btn primary" href="#home-finder">Найти ТОС</a><a class="btn" href="/update-tos/?type=card#message-builder">Исправить</a></div>
 
   <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru. Информационный проект для жителей, активистов и председателей ТОС.</div></div><div class="tiny">Сайт не является официальным сайтом администрации. Для официальных действий проверяйте документы и сведения по официальным источникам.</div></div></footer>
   <script src="/assets/js/site.js"></script>
   <script src="/assets/js/tos-logos.js"></script>
   <script src="/assets/js/home-stats.js"></script>
+  <script src="/assets/js/home-discovery-core.js"></script>
+  <script src="/assets/js/home-discovery.js"></script>
 </body>
 </html>
