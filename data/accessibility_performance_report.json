@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T18:39:46.817Z",
+  "generated_at": "2026-07-17T19:58:16.541Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 93,
+    "asset_files": 95,
     "over_budget_assets": 0,
-    "total_css_bytes": 35902,
-    "total_js_bytes": 530830,
+    "total_css_bytes": 38638,
+    "total_js_bytes": 540146,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -183,6 +183,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/css/design-upgrades.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 8317,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/tos-logos.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 7030,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/data-requests.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 6499,
       "over_budget": false
     }
   ],
