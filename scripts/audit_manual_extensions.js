@@ -25,6 +25,9 @@ runChecks([
   ['personal data scenario matrix self-test', 'scripts/test_personal_data_scenario_matrix.js'],
   ['personal data scenario matrix', 'scripts/audit_personal_data_scenario_matrix.js'],
   ['personal data scenario page', 'scripts/audit_personal_data_scenario_page.js'],
+  ['private evidence storage requirements self-test', 'scripts/test_private_evidence_storage_requirements.js'],
+  ['private evidence storage requirements', 'scripts/audit_private_evidence_storage_requirements.js'],
+  ['private evidence storage page', 'scripts/audit_private_evidence_storage_page.js'],
   ['workbench manual blockers', 'scripts/audit_workbench_manual_blockers.js']
 ], {
   verbose: true,

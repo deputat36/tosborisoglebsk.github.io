@@ -7,23 +7,31 @@ on:
     paths:
       - 'data/personal_data_decision_packet.csv'
       - 'data/personal_data_scenario_matrix.csv'
+      - 'data/private_evidence_storage_requirements.csv'
       - 'data/personal_data_readiness.json'
       - 'personal-data-decisions/index.html'
       - 'assets/js/personal-data-decision-validation.js'
       - 'assets/js/personal-data-decisions.js'
       - 'assets/js/personal-data-scenario-validation.js'
       - 'assets/js/personal-data-scenarios.js'
+      - 'assets/js/private-evidence-storage-validation.js'
+      - 'assets/js/private-evidence-storage.js'
       - 'scripts/test_personal_data_decision_packet.js'
       - 'scripts/audit_personal_data_decision_packet.js'
       - 'scripts/audit_personal_data_decision_page.js'
       - 'scripts/test_personal_data_scenario_matrix.js'
       - 'scripts/audit_personal_data_scenario_matrix.js'
       - 'scripts/audit_personal_data_scenario_page.js'
+      - 'scripts/test_private_evidence_storage_requirements.js'
+      - 'scripts/audit_private_evidence_storage_requirements.js'
+      - 'scripts/audit_private_evidence_storage_page.js'
       - 'scripts/audit_personal_data_readiness.js'
       - 'scripts/audit_manual_extensions.js'
       - 'docs/PERSONAL-DATA-DECISION-PACKET.md'
       - 'docs/PERSONAL-DATA-SCENARIO-MATRIX.md'
+      - 'docs/PRIVATE-EVIDENCE-STORAGE-REQUIREMENTS.md'
       - 'docs/PERSONAL-DATA-READINESS-2026-07-14.md'
+      - 'package.json'
       - '.github/workflows/personal-data-decisions-audit.yml'
   workflow_dispatch:
 
@@ -55,12 +63,17 @@ jobs:
           node --check assets/js/personal-data-decisions.js
           node --check assets/js/personal-data-scenario-validation.js
           node --check assets/js/personal-data-scenarios.js
+          node --check assets/js/private-evidence-storage-validation.js
+          node --check assets/js/private-evidence-storage.js
           node --check scripts/test_personal_data_decision_packet.js
           node --check scripts/audit_personal_data_decision_packet.js
           node --check scripts/audit_personal_data_decision_page.js
           node --check scripts/test_personal_data_scenario_matrix.js
           node --check scripts/audit_personal_data_scenario_matrix.js
           node --check scripts/audit_personal_data_scenario_page.js
+          node --check scripts/test_private_evidence_storage_requirements.js
+          node --check scripts/audit_private_evidence_storage_requirements.js
+          node --check scripts/audit_private_evidence_storage_page.js
 
       - name: Test personal data decision packet
         run: node scripts/test_personal_data_decision_packet.js
@@ -82,6 +95,17 @@ jobs:
           set -o pipefail
           node scripts/audit_personal_data_scenario_page.js 2>&1 | tee personal-data-scenario-page-audit.log
 
+      - name: Test private evidence storage requirements
+        run: node scripts/test_private_evidence_storage_requirements.js
+
+      - name: Audit private evidence storage requirements
+        run: node scripts/audit_private_evidence_storage_requirements.js
+
+      - name: Audit private evidence storage page
+        run: |
+          set -o pipefail
+          node scripts/audit_private_evidence_storage_page.js 2>&1 | tee private-evidence-storage-page-audit.log
+
       - name: Audit canonical personal data readiness
         run: node scripts/audit_personal_data_readiness.js
 
@@ -98,8 +122,10 @@ jobs:
           path: |
             data/personal_data_decision_packet.csv
             data/personal_data_scenario_matrix.csv
+            data/private_evidence_storage_requirements.csv
             personal-data-decisions/index.html
             personal-data-scenario-page-audit.log
+            private-evidence-storage-page-audit.log
             personal-data-decisions-project-audit.log
           if-no-files-found: warn
           retention-days: 14
