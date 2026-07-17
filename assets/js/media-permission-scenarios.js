@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
     listRoot.innerHTML = `<div class="grid">${rows.map((row, index) => {
       const issues = api.validationIssues(row, index);
       const state = issues.length ? '<span class="tag warn">Ошибка структуры</span>' : '<span class="tag">Черновик</span>';
-      return `<article class="card"><div class="card-inner"><div class="meta"><span class="tag">${esc(row.sequence)}</span><span class="tag">${esc(labels[row.scenario_group] || row.scenario_group)}</span>${state}</div><h3>${esc(row.scenario_title)}</h3><p><b>Типы:</b> ${codes(row.media_type_codes)}</p><p><b>Контекст:</b> ${codes(row.participant_context_codes)}</p><p><b>Поверхности:</b> ${codes(row.publication_surface_codes)}</p><p><b>Вопросы:</b> ${codes(row.verification_question_codes)}</p><p><b>Решение:</b> <span class="tiny">не выбрано</span></p><div class="notice"><b>Блокер:</b> ${esc(row.blocker)}<br><span class="tiny">${esc(row.next_step)}</span></div></div></article>`;
+      const decision = row.selected_permission_scope_code ? `<code>${esc(row.selected_permission_scope_code)}</code>` : '<span class="tiny">не выбрано</span>';
+      return `<article class="card"><div class="card-inner"><div class="meta"><span class="tag">${esc(row.sequence)}</span><span class="tag">${esc(labels[row.scenario_group] || row.scenario_group)}</span>${state}</div><h3>${esc(row.scenario_title)}</h3><p><b>Типы:</b> ${codes(row.media_type_codes)}</p><p><b>Контекст:</b> ${codes(row.participant_context_codes)}</p><p><b>Поверхности:</b> ${codes(row.publication_surface_codes)}</p><p><b>Вопросы:</b> ${codes(row.verification_question_codes)}</p><p><b>Решение:</b> ${decision}</p><div class="notice"><b>Блокер:</b> ${esc(row.blocker)}<br><span class="tiny">${esc(row.next_step)}</span></div></div></article>`;
     }).join('')}</div>`;
   }
 
