@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "captured_at": "2026-07-16T19:01:03.719Z",
+  "captured_at": "2026-07-17T18:30:21.398Z",
   "repository": "deputat36/tosborisoglebsk.github.io",
-  "commit_sha": "b51d027a3a16a0a25b2475ae61a2254176324f33",
-  "workflow_run_id": "29526225009",
+  "commit_sha": "b3246cbc598d89bcbca01aed68300467b974bee3",
+  "workflow_run_id": "29603996994",
   "workflow_run_attempt": "1",
   "base_url": "http://127.0.0.1:4173",
   "matrix_path": "data/css_regression_matrix.csv",
@@ -28,8 +28,8 @@
       "mode": "screen",
       "expected_check": "Hero, карточки, портал и футер без смещений",
       "screenshot": "css-reg-001.png",
-      "sha256": "f2a436ddd917def06915ae1ce6234bd37fca17df68a1623be7c441bb3dfb353c",
-      "bytes": 448688,
+      "sha256": "3bed071cabdcb26e92883ab834b644b79d1685824fd2655c4f0d02165869e476",
+      "bytes": 448598,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "light",
@@ -85,8 +85,8 @@
       "mode": "screen",
       "expected_check": "Тёмная тема сохраняет контраст, поверхности и границы",
       "screenshot": "css-reg-002.png",
-      "sha256": "a56d80d2eba4c9a62e66a995cf2f0d13bb82b3d53f269600a449e13d77602273",
-      "bytes": 313918,
+      "sha256": "934338d066e987e7a3791c9096b829e96ce6d1aeda01ecff7b79f10f654ab9a5",
+      "bytes": 314727,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "dark",
@@ -142,8 +142,8 @@
       "mode": "screen",
       "expected_check": "Мобильное меню открывается, не выходит за экран и не перекрывает действия",
       "screenshot": "css-reg-003.png",
-      "sha256": "794bac3a4baa0f730397c43d1af1010332dc05c1f13da6c9b4c0fa4cf1430b98",
-      "bytes": 130902,
+      "sha256": "0d63eca8ed739cb249351e7cacfdd2462cb76c7310c49b8511e4a6febecaa7fd",
+      "bytes": 130831,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "light",
@@ -199,8 +199,8 @@
       "mode": "screen",
       "expected_check": "Фильтры, карточки и логотипы сохраняют сетку",
       "screenshot": "css-reg-004.png",
-      "sha256": "78320e3ae7b62041f2a5d58bbe325be85326b055a0adaebe76190433cc566805",
-      "bytes": 188397,
+      "sha256": "2d511ba00298a19949b1e0b7e4f5b5394948124c9c010983cd494323b980b465",
+      "bytes": 188272,
       "diagnostics": {
         "title": "Каталог ТОС Борисоглебского городского округа",
         "htmlTheme": "light",
@@ -256,8 +256,8 @@
       "mode": "screen",
       "expected_check": "Фильтры и карточки переходят в одноколоночный режим без горизонтальной прокрутки",
       "screenshot": "css-reg-005.png",
-      "sha256": "bf0db25b8a225a6453937d16e96a488ac341260b23d50cb7e2d43bfb5a6af867",
-      "bytes": 135982,
+      "sha256": "17572ca3fcbe39b7daacfa86f5c8a281076448bdd30d40a9d9c762a4cbef6c20",
+      "bytes": 136396,
       "diagnostics": {
         "title": "Каталог ТОС Борисоглебского городского округа",
         "htmlTheme": "light",
@@ -313,8 +313,8 @@
       "mode": "screen",
       "expected_check": "Hero, паспорт, связанные блоки и действия отображаются без смещений",
       "screenshot": "css-reg-006.png",
-      "sha256": "8f459b9930804c7eb92cba3800f9a9836da45479477e19a7f2f33164def5d8d0",
-      "bytes": 132925,
+      "sha256": "0d87808fb0dd2bddf6eadd6c9aa6684d1bac34d7574a1c17d68bbb99d1aa6f53",
+      "bytes": 132785,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "light",
@@ -370,8 +370,8 @@
       "mode": "screen",
       "expected_check": "Карточки складываются в одну колонку, текст и действия читаемы",
       "screenshot": "css-reg-007.png",
-      "sha256": "0a479d75c6edaa2dbfb2867223b4c37d0849c3f7b02a463320f10837dd6563ee",
-      "bytes": 105064,
+      "sha256": "43051c17764b60715ccf2b4442c628eb69a15e4254ecc6fb5e75f23890f1ab43",
+      "bytes": 105737,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "dark",
@@ -427,8 +427,8 @@
       "mode": "screen",
       "expected_check": "Фильтры и список новостей сохраняют размеры и интервалы",
       "screenshot": "css-reg-008.png",
-      "sha256": "09fb3a35617f4e93a0fd849df0d3ecd2c8b555047da52734ab0cfcf046943cbf",
-      "bytes": 170319,
+      "sha256": "0b2f8c13d34e110354fae92f978c99478d3706d0e2a08c9fb3fae305d544096a",
+      "bytes": 170211,
       "diagnostics": {
         "title": "Новости ТОС БГО — лента, фотоотчёты, объявления и полезные материалы",
         "htmlTheme": "light",
@@ -484,8 +484,8 @@
       "mode": "screen",
       "expected_check": "Заголовок, основной текст, источник и связанные действия читаемы",
       "screenshot": "css-reg-009.png",
-      "sha256": "1637d2a20e3130a72293a97940a69b8d88a23cfec414a3e3c2e344fdfa3e2cfe",
-      "bytes": 188455,
+      "sha256": "9639cbd05d4ee4cf9c5635ce47baa1fa9a3e60e2bdb5c090553d3bdafbfa5a5f",
+      "bytes": 188404,
       "diagnostics": {
         "title": "Для ТОСов БГО появился единый онлайн-канал связи | ТОС БГО",
         "htmlTheme": "light",
@@ -541,8 +541,8 @@
       "mode": "screen",
       "expected_check": "Сводки, карточки и рабочие действия сохраняют сетку",
       "screenshot": "css-reg-010.png",
-      "sha256": "db98425ba2683ae9098161712ce882848d2ae45ad5d72b15625f70562e547dde",
-      "bytes": 201661,
+      "sha256": "19091f53d39cca9a0273a7ba882051b20e1e77255250117e10f33f119213bd7f",
+      "bytes": 201509,
       "diagnostics": {
         "title": "Рабочая панель портала ТОС БГО",
         "htmlTheme": "light",
@@ -598,8 +598,8 @@
       "mode": "screen",
       "expected_check": "Таблицы, метрики и уведомления не обрезаются",
       "screenshot": "css-reg-011.png",
-      "sha256": "b68c1e1e0c4915308a3579f24d2ed03f7589e2e42aa52edebe3a8ade3d753899",
-      "bytes": 201727,
+      "sha256": "8a5ea2ba3cc98d0b437606d6774b59e20484f278ec97e0137e078f951900082a",
+      "bytes": 201562,
       "diagnostics": {
         "title": "Аудит и здоровье сайта ТОС БГО",
         "htmlTheme": "light",
@@ -655,8 +655,8 @@
       "mode": "screen",
       "expected_check": "Метрики и таблицы остаются доступными без наложений",
       "screenshot": "css-reg-012.png",
-      "sha256": "a4a002a006064a1eb7369bafa318966420a65aedaa48d435e93f9ed84747688c",
-      "bytes": 165285,
+      "sha256": "357da2d1d2a9517e9b2b4663d5e0d030e9b6e9993ce948c2dfa57c66ef677b4b",
+      "bytes": 166553,
       "diagnostics": {
         "title": "Аудит и здоровье сайта ТОС БГО",
         "htmlTheme": "dark",
@@ -852,8 +852,8 @@
       "mode": "screen",
       "expected_check": "Карточки маршрутов и группы кнопок сохраняют структуру",
       "screenshot": "css-reg-013.png",
-      "sha256": "0e26bbe85c6740a21d118cd8311024ec55d4b7a2d22c18ff4a4f6fb696868e88",
-      "bytes": 185149,
+      "sha256": "777d3dcfbf840ee6331af4e8194ef6f0508bde887f8bc6a3b59593812fbd199f",
+      "bytes": 185248,
       "diagnostics": {
         "title": "Быстрые маршруты редактора ТОС БГО",
         "htmlTheme": "light",
@@ -952,6 +952,5 @@
       "page_errors": [],
       "failed_requests": []
     }
-  ],
-  "approval_reason": "P0 packages changed only the public page counter on /workbench/: 329 to 305."
+  ]
 }
