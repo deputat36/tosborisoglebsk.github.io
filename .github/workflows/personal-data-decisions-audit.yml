@@ -7,6 +7,7 @@ on:
     paths:
       - 'data/personal_data_decision_packet.csv'
       - 'data/personal_data_scenario_matrix.csv'
+      - 'data/withdrawal_correction_deletion_process.csv'
       - 'data/private_evidence_storage_requirements.csv'
       - 'data/personal_data_readiness.json'
       - 'personal-data-decisions/index.html'
@@ -14,6 +15,8 @@ on:
       - 'assets/js/personal-data-decisions.js'
       - 'assets/js/personal-data-scenario-validation.js'
       - 'assets/js/personal-data-scenarios.js'
+      - 'assets/js/withdrawal-correction-deletion-validation.js'
+      - 'assets/js/withdrawal-correction-deletion.js'
       - 'assets/js/private-evidence-storage-validation.js'
       - 'assets/js/private-evidence-storage.js'
       - 'scripts/test_personal_data_decision_packet.js'
@@ -22,6 +25,9 @@ on:
       - 'scripts/test_personal_data_scenario_matrix.js'
       - 'scripts/audit_personal_data_scenario_matrix.js'
       - 'scripts/audit_personal_data_scenario_page.js'
+      - 'scripts/test_withdrawal_correction_deletion_process.js'
+      - 'scripts/audit_withdrawal_correction_deletion_process.js'
+      - 'scripts/audit_withdrawal_correction_deletion_page.js'
       - 'scripts/test_private_evidence_storage_requirements.js'
       - 'scripts/audit_private_evidence_storage_requirements.js'
       - 'scripts/audit_private_evidence_storage_page.js'
@@ -29,6 +35,7 @@ on:
       - 'scripts/audit_manual_extensions.js'
       - 'docs/PERSONAL-DATA-DECISION-PACKET.md'
       - 'docs/PERSONAL-DATA-SCENARIO-MATRIX.md'
+      - 'docs/WITHDRAWAL-CORRECTION-DELETION-PROCESS.md'
       - 'docs/PRIVATE-EVIDENCE-STORAGE-REQUIREMENTS.md'
       - 'docs/PERSONAL-DATA-READINESS-2026-07-14.md'
       - 'package.json'
@@ -63,6 +70,8 @@ jobs:
           node --check assets/js/personal-data-decisions.js
           node --check assets/js/personal-data-scenario-validation.js
           node --check assets/js/personal-data-scenarios.js
+          node --check assets/js/withdrawal-correction-deletion-validation.js
+          node --check assets/js/withdrawal-correction-deletion.js
           node --check assets/js/private-evidence-storage-validation.js
           node --check assets/js/private-evidence-storage.js
           node --check scripts/test_personal_data_decision_packet.js
@@ -71,6 +80,9 @@ jobs:
           node --check scripts/test_personal_data_scenario_matrix.js
           node --check scripts/audit_personal_data_scenario_matrix.js
           node --check scripts/audit_personal_data_scenario_page.js
+          node --check scripts/test_withdrawal_correction_deletion_process.js
+          node --check scripts/audit_withdrawal_correction_deletion_process.js
+          node --check scripts/audit_withdrawal_correction_deletion_page.js
           node --check scripts/test_private_evidence_storage_requirements.js
           node --check scripts/audit_private_evidence_storage_requirements.js
           node --check scripts/audit_private_evidence_storage_page.js
@@ -94,6 +106,17 @@ jobs:
         run: |
           set -o pipefail
           node scripts/audit_personal_data_scenario_page.js 2>&1 | tee personal-data-scenario-page-audit.log
+
+      - name: Test withdrawal correction deletion process
+        run: node scripts/test_withdrawal_correction_deletion_process.js
+
+      - name: Audit withdrawal correction deletion process
+        run: node scripts/audit_withdrawal_correction_deletion_process.js
+
+      - name: Audit withdrawal correction deletion page
+        run: |
+          set -o pipefail
+          node scripts/audit_withdrawal_correction_deletion_page.js 2>&1 | tee withdrawal-correction-deletion-page-audit.log
 
       - name: Test private evidence storage requirements
         run: node scripts/test_private_evidence_storage_requirements.js
@@ -122,9 +145,11 @@ jobs:
           path: |
             data/personal_data_decision_packet.csv
             data/personal_data_scenario_matrix.csv
+            data/withdrawal_correction_deletion_process.csv
             data/private_evidence_storage_requirements.csv
             personal-data-decisions/index.html
             personal-data-scenario-page-audit.log
+            withdrawal-correction-deletion-page-audit.log
             private-evidence-storage-page-audit.log
             personal-data-decisions-project-audit.log
           if-no-files-found: warn
