@@ -37,12 +37,15 @@ const requiredTemplateFields = [
   'Кто участвовал:',
   'Какой результат:',
   'Кого указать источником:',
+  'Какой объём открытой публикации я предполагаю',
+  'Что нельзя публиковать, но можно использовать для проверки:',
   'Фото или файлы прикрепляю.'
 ];
 
 const requiredAfterSteps = [
   'Материал разбирается по типу',
-  'Источник и разрешение на публикацию фиксируются',
+  'Источник и редакционная отметка отправителя фиксируются',
+  'Отметка не считается утверждённым разрешением',
   'Черновик можно подготовить',
   'После публикации карточка или материал проверяются повторно'
 ];
@@ -66,6 +69,11 @@ function main() {
   checkContains(errors, html, '<main id="main">');
   checkContains(errors, html, '/assets/js/site.js');
   checkContains(errors, html, 'https://vk.ru/tosbgo');
+  checkContains(errors, html, 'Редакционная граница');
+  checkContains(errors, html, 'не является юридически проверенным разрешением');
+  checkContains(errors, html, 'не подтверждает права на чужие фотографии');
+  checkContains(errors, html, '<h3>Редакционная отметка</h3>');
+  checkContains(errors, html, 'не доказывает авторство');
 
   requiredMaterialTypes.forEach((item) => checkContains(errors, html, item));
   requiredSections.forEach((item) => checkContains(errors, html, item));
