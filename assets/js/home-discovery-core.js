@@ -17,7 +17,7 @@
   function buildCurrentOverview({events=[],news=[],health={},now=new Date(),freshDays=30}={}){
     const current=todayKey(now);
     const upcoming=events.filter(isPublished).map(item=>({item,key:dayKey(item.date)})).filter(entry=>entry.key!==null&&entry.key>=current).sort((a,b)=>a.key-b.key||String(a.item.title||'').localeCompare(String(b.item.title||''),'ru')).slice(0,2).map(entry=>entry.item);
-    const publishedNews=news.filter(isPublished).map(item=>({item,key:dayKey(item.date)})).filter(entry=>entry.key!==null&&entry.key<=current).sort((a,b)=>b.key-a.key);
+    const publishedNews=news.filter(item=>isPublished(item)&&item.content_origin!=='request').map(item=>({item,key:dayKey(item.date)})).filter(entry=>entry.key!==null&&entry.key<=current).sort((a,b)=>b.key-a.key);
     const freshLimit=current-freshDays*86400000;
     return{upcoming,freshNews:publishedNews.filter(entry=>entry.key>=freshLimit).slice(0,2).map(entry=>entry.item),latestNews:publishedNews.length?publishedNews[0].item:null,generatedAt:health.generated_at||'',catalog:health.catalog||{},freshDays};
   }
