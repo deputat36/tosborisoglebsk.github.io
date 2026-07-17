@@ -31,6 +31,9 @@ runChecks([
   ['private evidence storage requirements self-test', 'scripts/test_private_evidence_storage_requirements.js'],
   ['private evidence storage requirements', 'scripts/audit_private_evidence_storage_requirements.js'],
   ['private evidence storage page', 'scripts/audit_private_evidence_storage_page.js'],
+  ['retention access incident rules self-test', 'scripts/test_retention_access_incident_rules.js'],
+  ['retention access incident rules', 'scripts/audit_retention_access_incident_rules.js'],
+  ['retention access incident page', 'scripts/audit_retention_access_incident_page.js'],
   ['workbench manual blockers', 'scripts/audit_workbench_manual_blockers.js']
 ], {
   verbose: true,
