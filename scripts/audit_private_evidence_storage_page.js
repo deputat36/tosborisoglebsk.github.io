@@ -90,9 +90,8 @@ function main() {
 
   for (const token of [
     "fetch('/data/private_evidence_storage_requirements.csv', { cache: 'no-store' })",
-    'candidate_a_result',
-    'candidate_b_result',
-    'candidate_c_result',
+    "['a', 'b', 'c']",
+    'candidate_${code}_result',
     'not_assessed'
   ]) requireToken(errors, moduleSource, token, 'private-evidence-storage.js');
   if (/fetch\([^)]*,\s*\{[^}]*method\s*:/is.test(moduleSource)) errors.push('storage page module must not specify a write method');
