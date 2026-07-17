@@ -92,8 +92,8 @@ function main() {
 
   for (const token of [
     "fetch('/data/retention_access_incident_rules.csv', { cache: 'no-store' })",
-    'decision_value_code',
-    'not_started'
+    'summary.undecided',
+    'row.implementation_status'
   ]) requireToken(errors, moduleSource, token, 'retention-access-incident.js');
   if (/fetch\([^)]*,\s*\{[^}]*method\s*:/is.test(moduleSource)) errors.push('rules page module must not specify a write method');
   if (/\b(?:localStorage|sessionStorage|XMLHttpRequest|sendBeacon|WebSocket)\b/.test(moduleSource)) errors.push('rules page module must remain read-only and storage-free');
