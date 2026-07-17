@@ -1,0 +1,66 @@
+name: Audit homepage discovery
+
+on:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'index.html'
+      - 'assets/css/design-upgrades.css'
+      - 'assets/js/home-discovery-core.js'
+      - 'assets/js/home-discovery.js'
+      - 'data/toses.json'
+      - 'data/events.json'
+      - 'data/news.json'
+      - 'data/site_health.json'
+      - 'scripts/test_home_discovery.js'
+      - 'scripts/audit_home_discovery.js'
+      - '.github/workflows/homepage-discovery-audit.yml'
+  push:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'index.html'
+      - 'assets/css/design-upgrades.css'
+      - 'assets/js/home-discovery-core.js'
+      - 'assets/js/home-discovery.js'
+      - 'data/toses.json'
+      - 'data/events.json'
+      - 'data/news.json'
+      - 'data/site_health.json'
+      - 'scripts/test_home_discovery.js'
+      - 'scripts/audit_home_discovery.js'
+      - '.github/workflows/homepage-discovery-audit.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: homepage-discovery-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/home-discovery-core.js
+          node --check assets/js/home-discovery.js
+          node --check scripts/test_home_discovery.js
+          node --check scripts/audit_home_discovery.js
+      - name: Test homepage discovery
+        run: node scripts/test_home_discovery.js
+      - name: Audit homepage discovery
+        run: node scripts/audit_home_discovery.js
+      - name: Audit existing homepage contract
+        run: node scripts/audit_homepage_content.js
