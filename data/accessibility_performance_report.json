@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T17:35:47.552Z",
+  "generated_at": "2026-07-17T18:39:46.817Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,11 +18,11 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 92,
+    "asset_files": 93,
     "over_budget_assets": 0,
     "total_css_bytes": 35902,
     "total_js_bytes": 530830,
-    "total_image_bytes": 2464,
+    "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
