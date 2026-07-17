@@ -9,6 +9,7 @@ on:
       - 'data/personal_data_scenario_matrix.csv'
       - 'data/withdrawal_correction_deletion_process.csv'
       - 'data/private_evidence_storage_requirements.csv'
+      - 'data/retention_access_incident_rules.csv'
       - 'data/personal_data_readiness.json'
       - 'personal-data-decisions/index.html'
       - 'assets/js/personal-data-decision-validation.js'
@@ -19,6 +20,8 @@ on:
       - 'assets/js/withdrawal-correction-deletion.js'
       - 'assets/js/private-evidence-storage-validation.js'
       - 'assets/js/private-evidence-storage.js'
+      - 'assets/js/retention-access-incident-validation.js'
+      - 'assets/js/retention-access-incident.js'
       - 'scripts/test_personal_data_decision_packet.js'
       - 'scripts/audit_personal_data_decision_packet.js'
       - 'scripts/audit_personal_data_decision_page.js'
@@ -31,12 +34,16 @@ on:
       - 'scripts/test_private_evidence_storage_requirements.js'
       - 'scripts/audit_private_evidence_storage_requirements.js'
       - 'scripts/audit_private_evidence_storage_page.js'
+      - 'scripts/test_retention_access_incident_rules.js'
+      - 'scripts/audit_retention_access_incident_rules.js'
+      - 'scripts/audit_retention_access_incident_page.js'
       - 'scripts/audit_personal_data_readiness.js'
       - 'scripts/audit_manual_extensions.js'
       - 'docs/PERSONAL-DATA-DECISION-PACKET.md'
       - 'docs/PERSONAL-DATA-SCENARIO-MATRIX.md'
       - 'docs/WITHDRAWAL-CORRECTION-DELETION-PROCESS.md'
       - 'docs/PRIVATE-EVIDENCE-STORAGE-REQUIREMENTS.md'
+      - 'docs/RETENTION-ACCESS-INCIDENT-RULES.md'
       - 'docs/PERSONAL-DATA-READINESS-2026-07-14.md'
       - 'package.json'
       - '.github/workflows/personal-data-decisions-audit.yml'
@@ -74,6 +81,8 @@ jobs:
           node --check assets/js/withdrawal-correction-deletion.js
           node --check assets/js/private-evidence-storage-validation.js
           node --check assets/js/private-evidence-storage.js
+          node --check assets/js/retention-access-incident-validation.js
+          node --check assets/js/retention-access-incident.js
           node --check scripts/test_personal_data_decision_packet.js
           node --check scripts/audit_personal_data_decision_packet.js
           node --check scripts/audit_personal_data_decision_page.js
@@ -86,6 +95,9 @@ jobs:
           node --check scripts/test_private_evidence_storage_requirements.js
           node --check scripts/audit_private_evidence_storage_requirements.js
           node --check scripts/audit_private_evidence_storage_page.js
+          node --check scripts/test_retention_access_incident_rules.js
+          node --check scripts/audit_retention_access_incident_rules.js
+          node --check scripts/audit_retention_access_incident_page.js
 
       - name: Test personal data decision packet
         run: node scripts/test_personal_data_decision_packet.js
@@ -129,6 +141,17 @@ jobs:
           set -o pipefail
           node scripts/audit_private_evidence_storage_page.js 2>&1 | tee private-evidence-storage-page-audit.log
 
+      - name: Test retention access incident rules
+        run: node scripts/test_retention_access_incident_rules.js
+
+      - name: Audit retention access incident rules
+        run: node scripts/audit_retention_access_incident_rules.js
+
+      - name: Audit retention access incident page
+        run: |
+          set -o pipefail
+          node scripts/audit_retention_access_incident_page.js 2>&1 | tee retention-access-incident-page-audit.log
+
       - name: Audit canonical personal data readiness
         run: node scripts/audit_personal_data_readiness.js
 
@@ -147,10 +170,12 @@ jobs:
             data/personal_data_scenario_matrix.csv
             data/withdrawal_correction_deletion_process.csv
             data/private_evidence_storage_requirements.csv
+            data/retention_access_incident_rules.csv
             personal-data-decisions/index.html
             personal-data-scenario-page-audit.log
             withdrawal-correction-deletion-page-audit.log
             private-evidence-storage-page-audit.log
+            retention-access-incident-page-audit.log
             personal-data-decisions-project-audit.log
           if-no-files-found: warn
           retention-days: 14
