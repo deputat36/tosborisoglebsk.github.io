@@ -7,15 +7,20 @@ on:
     paths:
       - 'data/personal_data_decision_packet.csv'
       - 'data/personal_data_scenario_matrix.csv'
+      - 'data/media_permission_scenarios.csv'
       - 'data/withdrawal_correction_deletion_process.csv'
       - 'data/private_evidence_storage_requirements.csv'
       - 'data/retention_access_incident_rules.csv'
       - 'data/personal_data_readiness.json'
       - 'personal-data-decisions/index.html'
+      - 'media-guide/index.html'
+      - 'submit-materials/index.html'
       - 'assets/js/personal-data-decision-validation.js'
       - 'assets/js/personal-data-decisions.js'
       - 'assets/js/personal-data-scenario-validation.js'
       - 'assets/js/personal-data-scenarios.js'
+      - 'assets/js/media-permission-scenario-validation.js'
+      - 'assets/js/media-permission-scenarios.js'
       - 'assets/js/withdrawal-correction-deletion-validation.js'
       - 'assets/js/withdrawal-correction-deletion.js'
       - 'assets/js/private-evidence-storage-validation.js'
@@ -28,6 +33,11 @@ on:
       - 'scripts/test_personal_data_scenario_matrix.js'
       - 'scripts/audit_personal_data_scenario_matrix.js'
       - 'scripts/audit_personal_data_scenario_page.js'
+      - 'scripts/test_media_permission_scenarios.js'
+      - 'scripts/audit_media_permission_scenarios.js'
+      - 'scripts/audit_media_permission_scenario_page.js'
+      - 'scripts/audit_media_guide_content.js'
+      - 'scripts/audit_submit_materials_content.js'
       - 'scripts/test_withdrawal_correction_deletion_process.js'
       - 'scripts/audit_withdrawal_correction_deletion_process.js'
       - 'scripts/audit_withdrawal_correction_deletion_page.js'
@@ -41,6 +51,7 @@ on:
       - 'scripts/audit_manual_extensions.js'
       - 'docs/PERSONAL-DATA-DECISION-PACKET.md'
       - 'docs/PERSONAL-DATA-SCENARIO-MATRIX.md'
+      - 'docs/MEDIA-PERMISSION-SCENARIOS.md'
       - 'docs/WITHDRAWAL-CORRECTION-DELETION-PROCESS.md'
       - 'docs/PRIVATE-EVIDENCE-STORAGE-REQUIREMENTS.md'
       - 'docs/RETENTION-ACCESS-INCIDENT-RULES.md'
@@ -77,6 +88,8 @@ jobs:
           node --check assets/js/personal-data-decisions.js
           node --check assets/js/personal-data-scenario-validation.js
           node --check assets/js/personal-data-scenarios.js
+          node --check assets/js/media-permission-scenario-validation.js
+          node --check assets/js/media-permission-scenarios.js
           node --check assets/js/withdrawal-correction-deletion-validation.js
           node --check assets/js/withdrawal-correction-deletion.js
           node --check assets/js/private-evidence-storage-validation.js
@@ -89,6 +102,11 @@ jobs:
           node --check scripts/test_personal_data_scenario_matrix.js
           node --check scripts/audit_personal_data_scenario_matrix.js
           node --check scripts/audit_personal_data_scenario_page.js
+          node --check scripts/test_media_permission_scenarios.js
+          node --check scripts/audit_media_permission_scenarios.js
+          node --check scripts/audit_media_permission_scenario_page.js
+          node --check scripts/audit_media_guide_content.js
+          node --check scripts/audit_submit_materials_content.js
           node --check scripts/test_withdrawal_correction_deletion_process.js
           node --check scripts/audit_withdrawal_correction_deletion_process.js
           node --check scripts/audit_withdrawal_correction_deletion_page.js
@@ -118,6 +136,23 @@ jobs:
         run: |
           set -o pipefail
           node scripts/audit_personal_data_scenario_page.js 2>&1 | tee personal-data-scenario-page-audit.log
+
+      - name: Test media permission scenarios
+        run: node scripts/test_media_permission_scenarios.js
+
+      - name: Audit media permission scenarios
+        run: node scripts/audit_media_permission_scenarios.js
+
+      - name: Audit media permission scenario page
+        run: |
+          set -o pipefail
+          node scripts/audit_media_permission_scenario_page.js 2>&1 | tee media-permission-scenario-page-audit.log
+
+      - name: Audit media guide boundary
+        run: node scripts/audit_media_guide_content.js
+
+      - name: Audit submit materials boundary
+        run: node scripts/audit_submit_materials_content.js
 
       - name: Test withdrawal correction deletion process
         run: node scripts/test_withdrawal_correction_deletion_process.js
@@ -168,11 +203,16 @@ jobs:
           path: |
             data/personal_data_decision_packet.csv
             data/personal_data_scenario_matrix.csv
+            data/media_permission_scenarios.csv
             data/withdrawal_correction_deletion_process.csv
             data/private_evidence_storage_requirements.csv
             data/retention_access_incident_rules.csv
+            docs/MEDIA-PERMISSION-SCENARIOS.md
             personal-data-decisions/index.html
+            media-guide/index.html
+            submit-materials/index.html
             personal-data-scenario-page-audit.log
+            media-permission-scenario-page-audit.log
             withdrawal-correction-deletion-page-audit.log
             private-evidence-storage-page-audit.log
             retention-access-incident-page-audit.log
