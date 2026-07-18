@@ -36,7 +36,7 @@ function main(){
     '/assets/js/resident-route-navigator.js'
   ].forEach(needle=>need(errors,html,'residents/action-routes/index.html',needle));
 
-  const requiredLinks=['/residents/','/#find-tos','/tos/','/places/','/needs/','/projects/','/partners/','/calendar/','/done/','/contacts/','/field-checklist/','/update-tos/'];
+  const requiredLinks=['/residents/','/#home-finder','/tos/','/places/','/needs/','/projects/','/partners/','/calendar/','/done/','/contacts/','/field-checklist/','/update-tos/'];
   requiredLinks.forEach(link=>{need(errors,html,'residents/action-routes/index.html',`href="${link}`);if(!repoPathExists(link.split('#')[0].split('?')[0]||'/'))errors.push(`missing linked local page ${link}`);});
 
   ['type=need#message-builder','type=project#message-builder','type=event#message-builder','type=news#message-builder','type=photo#message-builder'].forEach(route=>need(errors,html,'residents/action-routes/index.html',route));
