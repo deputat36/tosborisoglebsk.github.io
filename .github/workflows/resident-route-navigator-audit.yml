@@ -1,0 +1,50 @@
+name: Audit resident route navigator
+
+on:
+  pull_request:
+    paths:
+      - 'residents/action-routes/index.html'
+      - 'assets/js/resident-route-core.js'
+      - 'assets/js/resident-route-navigator.js'
+      - 'assets/css/design-upgrades.css'
+      - 'scripts/test_resident_route_navigator.js'
+      - 'scripts/audit_residents_action_routes_content.js'
+      - '.github/workflows/resident-route-navigator-audit.yml'
+  push:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'residents/action-routes/index.html'
+      - 'assets/js/resident-route-core.js'
+      - 'assets/js/resident-route-navigator.js'
+      - 'assets/css/design-upgrades.css'
+      - 'scripts/test_resident_route_navigator.js'
+      - 'scripts/audit_residents_action_routes_content.js'
+      - '.github/workflows/resident-route-navigator-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/resident-route-core.js
+          node --check assets/js/resident-route-navigator.js
+          node --check scripts/test_resident_route_navigator.js
+          node --check scripts/audit_residents_action_routes_content.js
+      - name: Test route decisions
+        run: node scripts/test_resident_route_navigator.js
+      - name: Audit page contract
+        run: node scripts/audit_residents_action_routes_content.js
