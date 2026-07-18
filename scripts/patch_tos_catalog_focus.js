@@ -4,7 +4,7 @@ const filePath=path.join(process.cwd(),'tos','index.html');
 if(!fs.existsSync(filePath))throw new Error('Missing tos/index.html');
 let html=fs.readFileSync(filePath,'utf8');
 const original=html;
-const currentMarkers=['id="sort-filter"','id="reset-filters"','id="catalog-filter-status"','data-catalog-trust="needs_review"','/assets/js/tos-catalog-core.js','Исправить эту карточку'];
+const currentMarkers=['id="sort-filter"','id="reset-filters"','id="catalog-filter-status"','data-catalog-trust="needs_review"','/assets/js/tos-catalog-core.js'];
 if(currentMarkers.every(marker=>html.includes(marker))){
   if(html.includes('href="/map/"'))throw new Error('Catalog must not promote an empty map');
   console.log('Focused TOS catalog actuality controls already applied');
