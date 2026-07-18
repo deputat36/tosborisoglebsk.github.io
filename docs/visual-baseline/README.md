@@ -1,9 +1,15 @@
-# Visual baseline capture
+# Утверждённый visual baseline
 
-- Matrix cases: 14
-- Captured: 14
-- Runtime failures: 0
-- Quality failures: 0
-- Commit: cf3644a1cdd5575796a20069a11949abec3f08c5
+Обновлён 18 июля 2026 года после улучшения фильтров, сортировки и адресных исправлений в каталоге ТОС.
 
-The artifact is capture evidence only. Review screenshots before promoting them to baseline_captured.
+- сценариев: 14;
+- успешно снято: 14;
+- runtime failures: 0;
+- quality failures: 0;
+- горизонтальное переполнение: 0;
+- console/page errors: 0;
+- failed requests: 0.
+
+Изменены только контрольные экраны каталога для компьютера и телефона. Фильтры, карточки и кнопки сохраняют сетку, а мобильная версия остаётся одноколоночной без горизонтальной прокрутки.
+
+Скриншоты подтверждают визуальную целостность интерфейса, но не подтверждают достоверность сведений о ТОСах.
