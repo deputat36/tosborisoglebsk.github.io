@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T19:58:16.541Z",
+  "generated_at": "2026-07-18T14:09:46.276Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 95,
+    "asset_files": 97,
     "over_budget_assets": 0,
-    "total_css_bytes": 38638,
-    "total_js_bytes": 540146,
+    "total_css_bytes": 40996,
+    "total_js_bytes": 548864,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -127,6 +127,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/css/design-upgrades.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 10675,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/workbench-drafts.js",
       "group": "js",
       "extension": ".js",
@@ -180,13 +187,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8416,
-      "over_budget": false
-    },
-    {
-      "path": "assets/css/design-upgrades.css",
-      "group": "css",
-      "extension": ".css",
-      "size_bytes": 8317,
       "over_budget": false
     },
     {
