@@ -1,0 +1,46 @@
+name: Audit TOS catalog actuality
+
+on:
+  pull_request:
+    paths:
+      - 'tos/index.html'
+      - 'assets/css/tos-catalog.css'
+      - 'assets/js/tos-catalog.js'
+      - 'assets/js/tos-catalog-core.js'
+      - 'scripts/test_tos_catalog_actuality.js'
+      - 'scripts/audit_tos_catalog_content.js'
+      - '.github/workflows/tos-catalog-actuality-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tos-catalog-actuality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/tos-catalog-core.js
+          node --check assets/js/tos-catalog.js
+          node --check scripts/test_tos_catalog_actuality.js
+          node --check scripts/audit_tos_catalog_content.js
+      - name: Test catalog actuality controls
+        run: node scripts/test_tos_catalog_actuality.js
+      - name: Audit catalog page contract
+        run: node scripts/audit_tos_catalog_content.js
+      - name: Audit internal links
+        run: node scripts/audit_internal_links.js
+      - name: Audit SEO basics
+        run: node scripts/audit_seo.js
