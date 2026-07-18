@@ -39,13 +39,14 @@ function main(){
   const requiredLinks=['/residents/','/#find-tos','/tos/','/places/','/needs/','/projects/','/partners/','/calendar/','/done/','/contacts/','/field-checklist/','/update-tos/'];
   requiredLinks.forEach(link=>{need(errors,html,'residents/action-routes/index.html',`href="${link}`);if(!repoPathExists(link.split('#')[0].split('?')[0]||'/'))errors.push(`missing linked local page ${link}`);});
 
-  ['type=need#message-builder','type=project#message-builder','type=event#message-builder','type=news#message-builder','type=photo#message-builder','type=card#message-builder'].forEach(route=>need(errors,html,'residents/action-routes/index.html',route));
+  ['type=need#message-builder','type=project#message-builder','type=event#message-builder','type=news#message-builder','type=photo#message-builder'].forEach(route=>need(errors,html,'residents/action-routes/index.html',route));
 
   if(html.includes('href="/map/"'))errors.push('empty map must not be presented as a resident action route');
   if(html.includes('0</b><span>сложных формальностей'))errors.push('page must not promise zero formalities');
 
   ['urgent','building','municipal','collective','event','result','portal'].forEach(code=>need(errors,core,'resident-route-core.js',`${code}:`));
   need(errors,core,'resident-route-core.js','actions:[]');
+  need(errors,core,'resident-route-core.js','type=card#message-builder');
   need(errors,core,'resident-route-core.js','function buildMessage');
   need(errors,ui,'resident-route-navigator.js','aria-pressed');
   need(errors,ui,'resident-route-navigator.js','navigator.clipboard.writeText');
