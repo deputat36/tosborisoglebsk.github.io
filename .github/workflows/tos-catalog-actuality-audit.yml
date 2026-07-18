@@ -39,7 +39,21 @@ jobs:
       - name: Test catalog actuality controls
         run: node scripts/test_tos_catalog_actuality.js
       - name: Audit catalog page contract
-        run: node scripts/audit_tos_catalog_content.js
+        id: catalog-audit
+        shell: bash
+        run: |
+          set +e
+          node scripts/audit_tos_catalog_content.js > catalog-audit.log 2>&1
+          status=$?
+          cat catalog-audit.log
+          exit $status
+      - name: Upload catalog audit diagnostics
+        if: failure() && steps.catalog-audit.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-audit-diagnostics
+          path: catalog-audit.log
+          retention-days: 7
       - name: Audit internal links
         run: node scripts/audit_internal_links.js
       - name: Audit SEO basics
