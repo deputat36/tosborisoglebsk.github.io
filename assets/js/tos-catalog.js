@@ -1,6 +1,7 @@
 async function renderImprovedTosCatalog(){
   const root=document.querySelector('#tos-list');
   const core=window.TosCatalogCore;
+  const sortModes=['name','updated_desc','attention'];
   if(!root||!core)return;
   const esc=v=>String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const fmt=(v,f='Информация уточняется')=>(v===undefined||v===null||String(v).trim()==='')?f:String(v).trim();
@@ -74,8 +75,8 @@ async function renderImprovedTosCatalog(){
     if(type)type.value=initial.type;
     if(loc&&[...loc.options].some(option=>option.value===initial.location))loc.value=initial.location;
     if(trust)trust.value=initial.trust;
-    if(sort)sort.value=initial.sort;
-    function state(){return{q:search?.value||'',location:loc?.value||'',type:type?.value||'',trust:trust?.value||'',sort:sort?.value||'name'};}
+    if(sort)sort.value=sortModes.includes(initial.sort)?initial.sort:'name';
+    function state(){const selectedSort=sort?.value||'name';return{q:search?.value||'',location:loc?.value||'',type:type?.value||'',trust:trust?.value||'',sort:sortModes.includes(selectedSort)?selectedSort:'name'};}
     function syncUrl(value){history.replaceState(null,'',`${location.pathname}${core.stateToSearch(value)}${location.hash||''}`);}
     function updateShortcuts(value){document.querySelectorAll('[data-catalog-trust]').forEach(button=>button.classList.toggle('primary',button.dataset.catalogTrust===value.trust));document.querySelectorAll('[data-catalog-sort]').forEach(button=>button.classList.toggle('primary',button.dataset.catalogSort===value.sort));}
     function apply(){
