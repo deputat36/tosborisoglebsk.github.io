@@ -55,6 +55,6 @@ jobs:
           path: catalog-audit.log
           retention-days: 7
       - name: Audit internal links
-        run: node scripts/audit_internal_links.js
+        run: node scripts/audit_site_links.js
       - name: Audit SEO basics
         run: node scripts/audit_seo.js
