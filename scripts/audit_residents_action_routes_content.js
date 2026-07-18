@@ -26,6 +26,7 @@ function main(){
     'data-route-copy',
     'data-route-reset',
     'data-route-status',
+    'aria-live="polite"',
     'Личные сведения вводить не нужно',
     'навигатор даёт общую подсказку',
     'Шесть основных действий через ТОС',
@@ -48,7 +49,6 @@ function main(){
   need(errors,core,'resident-route-core.js','function buildMessage');
   need(errors,ui,'resident-route-navigator.js','aria-pressed');
   need(errors,ui,'resident-route-navigator.js','navigator.clipboard.writeText');
-  need(errors,ui,'resident-route-navigator.js','aria-live');
   need(errors,css,'design-upgrades.css','.route-navigator-grid');
   need(errors,css,'design-upgrades.css','.route-choice[aria-pressed=true]');
 
