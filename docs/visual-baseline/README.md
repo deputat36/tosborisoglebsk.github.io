@@ -1,14 +1,9 @@
-# Утверждённый visual baseline
+# Visual baseline capture
 
-Обновлён 17 июля 2026 года после внедрения быстрого поиска ТОС и блока актуальной сводки на главной странице.
+- Matrix cases: 14
+- Captured: 14
+- Runtime failures: 0
+- Quality failures: 0
+- Commit: cf3644a1cdd5575796a20069a11949abec3f08c5
 
-- сценариев: 14;
-- runtime failures: 0;
-- quality failures: 0;
-- горизонтальное переполнение: 0;
-- console/page errors: 0;
-- failed requests: 0.
-
-Изменение главной проверено в светлой и тёмной теме, а также на мобильном экране с открытым меню. Остальные контрольные маршруты сохранены без функциональных изменений.
-
-Скриншоты подтверждают только визуальную целостность и не подтверждают достоверность сведений о ТОСах.
+The artifact is capture evidence only. Review screenshots before promoting them to baseline_captured.
