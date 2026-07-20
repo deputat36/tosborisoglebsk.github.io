@@ -18,6 +18,8 @@ function build(scenarioKey, data = {}) {
 }
 
 assert.deepStrictEqual(Object.keys(exporter.PROFILES).sort(), ['card', 'event', 'need', 'news', 'photo', 'project']);
+assert.strictEqual(exporter.TEMPLATE_FILES.intake, 'data/content_intake_template.csv');
+assert.strictEqual(exporter.TEMPLATE_FILES.queue, 'data/publication_queue.csv');
 assert.strictEqual(exporter.profileFor('card').submissionType, 'card_update');
 assert.strictEqual(exporter.profileFor('event').submissionType, 'news');
 assert.strictEqual(exporter.profileFor('photo').submissionType, 'media');
@@ -61,6 +63,10 @@ assert.strictEqual(card.intake.title, 'Обновление карточки Т�
 const quoted = exporter.toCsv(['a', 'b'], { a: 'текст, с запятой', b: 'строка "в кавычках"\nи перенос' });
 assert.ok(quoted.includes('"текст, с запятой"'));
 assert.ok(quoted.includes('"строка ""в кавычках""\nи перенос"'));
+assert.strictEqual(exporter.safeSpreadsheetText('=HYPERLINK("https://example.test")'), "'=HYPERLINK(\"https://example.test\")");
+assert.strictEqual(exporter.safeSpreadsheetText('+1+1'), "'+1+1");
+assert.strictEqual(exporter.safeSpreadsheetText('@SUM(A1:A2)'), "'@SUM(A1:A2)");
+assert.ok(exporter.toCsv(['value'], { value: '=1+1' }).includes("'=1+1"));
 
 ['card', 'news', 'photo', 'event', 'project', 'need'].forEach((scenarioKey) => {
   const result = build(scenarioKey);
@@ -72,4 +78,4 @@ assert.ok(quoted.includes('"строка ""в кавычках""\nи перен�
   assert.strictEqual(result.queue.personal_data_checked, 'нет');
 });
 
-console.log('Update center editorial export OK: 6 scenarios remain draft and unverified');
+console.log('Update center editorial export OK: 6 scenarios remain draft, unverified and CSV-safe');
