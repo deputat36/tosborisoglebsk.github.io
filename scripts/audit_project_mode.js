@@ -123,6 +123,7 @@ const checks = [
   ['Status document', 'scripts/audit_status_document.js'],
   ['Homepage content', 'scripts/audit_homepage_content.js'],
   ['Sections page content', 'scripts/audit_sections_page_content.js'],
+  ['Update center editorial export self-test', 'scripts/test_update_center_editorial_export.js'],
   ['Update center content', 'scripts/audit_update_center_content.js'],
   ['Search content', 'scripts/audit_search_content.js'],
   ['News page content', 'scripts/audit_news_page_content.js'],

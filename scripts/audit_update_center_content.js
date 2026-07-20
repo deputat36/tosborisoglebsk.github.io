@@ -6,6 +6,8 @@ const { repoPathExists } = require('./lib/path_checks');
 const pagePath = path.join(process.cwd(), 'update-tos', 'index.html');
 const scenariosPath = path.join(process.cwd(), 'assets', 'js', 'update-center-data.js');
 const qualityPath = path.join(process.cwd(), 'assets', 'js', 'update-center-quality.js');
+const editorialExportPath = path.join(process.cwd(), 'assets', 'js', 'update-center-editorial-export.js');
+const editorialUiPath = path.join(process.cwd(), 'assets', 'js', 'update-center-editorial-ui.js');
 const appPath = path.join(process.cwd(), 'assets', 'js', 'update-center.js');
 
 const requiredScenarios = new Set(['card', 'news', 'photo', 'event', 'project', 'need']);
@@ -13,7 +15,9 @@ const requiredPageFiles = [
   '/assets/css/update-center.css',
   '/assets/js/update-center-data.js',
   '/assets/js/update-center-quality.js',
+  '/assets/js/update-center-editorial-export.js',
   '/assets/js/update-center.js',
+  '/assets/js/update-center-editorial-ui.js',
   '/data/toses.json'
 ];
 const requiredControls = [
@@ -31,12 +35,14 @@ const requiredControls = [
   'message-preview',
   'copy-message',
   'download-message',
+  'download-intake-csv',
+  'download-queue-csv',
   'open-vk',
   'reset-form',
   'required-status',
   'builder-progress'
 ];
-const requiredRoutes = ['/tos/', '/contacts/', '/audit/'];
+const requiredRoutes = ['/tos/', '/contacts/', '/audit/', '/content-intake/', '/publication-queue/'];
 
 function textMatch(content, pattern) {
   const match = content.match(pattern);
@@ -60,7 +66,7 @@ function loadScenarioData(errors) {
 function main() {
   const errors = [];
 
-  [pagePath, scenariosPath, qualityPath, appPath].forEach((filePath) => {
+  [pagePath, scenariosPath, qualityPath, editorialExportPath, editorialUiPath, appPath].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${filePath}`);
   });
 
@@ -71,6 +77,8 @@ function main() {
   const html = fs.readFileSync(pagePath, 'utf8');
   const app = fs.readFileSync(appPath, 'utf8');
   const quality = fs.readFileSync(qualityPath, 'utf8');
+  const editorialExport = fs.readFileSync(editorialExportPath, 'utf8');
+  const editorialUi = fs.readFileSync(editorialUiPath, 'utf8');
   const { scenarios, labels } = loadScenarioData(errors);
 
   const title = textMatch(html, /<title>([^<]+)<\/title>/i);
@@ -96,6 +104,10 @@ function main() {
     errors.push('quality check limitations must be explicit');
   }
 
+  if (!html.includes('оба CSV создаются локально') || !html.includes('не добавляются в очередь автоматически')) {
+    errors.push('editorial export boundary must be explicit');
+  }
+
   requiredControls.forEach((id) => {
     if (!html.includes(`id="${id}"`)) errors.push(`missing required control #${id}`);
   });
@@ -108,14 +120,16 @@ function main() {
   });
 
   const qualityIndex = html.indexOf('/assets/js/update-center-quality.js');
+  const exportIndex = html.indexOf('/assets/js/update-center-editorial-export.js');
   const appIndex = html.indexOf('/assets/js/update-center.js');
-  if (qualityIndex < 0 || appIndex < 0 || qualityIndex > appIndex) {
-    errors.push('quality module must load before update center app');
+  const editorialUiIndex = html.indexOf('/assets/js/update-center-editorial-ui.js');
+  if (qualityIndex < 0 || exportIndex < 0 || appIndex < 0 || editorialUiIndex < 0 || qualityIndex > exportIndex || exportIndex > appIndex || appIndex > editorialUiIndex) {
+    errors.push('quality, editorial export, app and editorial UI scripts must load in safe order');
   }
 
   requiredRoutes.forEach((route) => {
     if (!repoPathExists(route)) errors.push(`linked route does not exist ${route}`);
-    if (!html.includes(`href="${route}"`)) errors.push(`page does not link to ${route}`);
+    if (!html.includes(`href="${route}`)) errors.push(`page does not link to ${route}`);
   });
 
   if (!html.includes('https://vk.ru/tosbgo')) {
@@ -199,17 +213,38 @@ function main() {
 
   ['fetch(', 'XMLHttpRequest', 'sendBeacon', 'WebSocket'].forEach((signal) => {
     if (quality.includes(signal)) errors.push(`quality module must stay local-only: ${signal}`);
+    if (editorialExport.includes(signal)) errors.push(`editorial export module must stay local-only: ${signal}`);
+    if (editorialUi.includes(signal)) errors.push(`editorial export UI must stay local-only: ${signal}`);
   });
 
   if (!quality.includes('missingRequired') || !quality.includes('publicationChecked') || !quality.includes('ready:')) {
     errors.push('quality module must evaluate required fields and publication confirmation');
   }
 
+  const requiredExportSignals = [
+    'INTAKE_HEADERS',
+    'QUEUE_HEADERS',
+    "status: 'draft'",
+    "source_checked: 'нет'",
+    "permission_checked: 'нет'",
+    "personal_data_checked: 'нет'",
+    "owner: ''",
+    'content_intake',
+    'publication_queue'
+  ];
+  requiredExportSignals.forEach((signal) => {
+    if (!editorialExport.includes(signal)) errors.push(`editorial export contract missing ${signal}`);
+  });
+
+  if (!editorialUi.includes('readyForEditorialExport') || !editorialUi.includes('new Blob') || !editorialUi.includes('download-intake-csv') || !editorialUi.includes('download-queue-csv')) {
+    errors.push('editorial export UI must gate and download both CSV files');
+  }
+
   if (errors.length) {
     throw new Error(`Update center audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Update center OK: ${Object.keys(scenarios).length} scenarios with local quality checks`);
+  console.log(`Update center OK: ${Object.keys(scenarios).length} scenarios with local quality and draft editorial export`);
 }
 
 main();
