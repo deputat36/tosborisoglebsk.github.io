@@ -4,11 +4,11 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Обновить данные ТОС или прислать материал — ТОС БГО</title>
-  <meta name="description" content="Удобный конструктор сообщения для обновления карточки ТОС, новости, фотоотчёта, события, проекта или потребности."/>
+  <meta name="description" content="Удобный конструктор сообщения с проверкой готовности для обновления карточки ТОС, новости, фотоотчёта, события, проекта или потребности."/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="https://tosborisoglebsk.ru/update-tos/"/>
   <meta property="og:title" content="Обновить данные ТОС или прислать материал"/>
-  <meta property="og:description" content="Заполните короткую форму и получите готовое сообщение для редакции портала ТОС БГО."/>
+  <meta property="og:description" content="Заполните короткую форму, проверьте статус и источник и получите готовое сообщение для редакции портала ТОС БГО."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://tosborisoglebsk.ru/update-tos/"/>
   <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
@@ -38,7 +38,7 @@
     <div class="container hero-card home-hero">
       <div class="eyebrow">Передача материалов</div>
       <h1>Обновить данные ТОС или прислать материал</h1>
-      <p class="lead">Выберите задачу, заполните только нужные поля и получите готовое сообщение. Ничего оформлять вручную не нужно.</p>
+      <p class="lead">Выберите задачу, укажите фактический статус и источник, пройдите короткую проверку и получите готовое сообщение. Ничего оформлять вручную не нужно.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#message-builder">Составить сообщение</a>
         <a class="btn" href="/tos/">Каталог ТОС</a>
@@ -48,13 +48,13 @@
   </section>
 
   <section class="section tight">
-    <div class="container notice"><b>Конфиденциальность:</b> указывайте только данные, которые можно передать редакции. Не присылайте паспортные данные, реквизиты банковских карт, пароли и другие закрытые сведения.</div>
+    <div class="container notice"><b>Конфиденциальность:</b> указывайте только данные, которые можно передать редакции. Не присылайте паспортные данные, реквизиты банковских карт, пароли и другие закрытые сведения. Фото, контакты и документы не публикуются автоматически: редакция должна отдельно проверить источник и допустимость размещения.</div>
   </section>
 
   <section class="section" id="message-builder">
     <div class="container section-head">
       <div><h2>Конструктор сообщения</h2><p>Черновик сохраняется только в вашем браузере</p></div>
-      <span class="tag" id="builder-progress">Шаг 1 из 3</span>
+      <span class="tag" id="builder-progress">Шаг 1 из 4</span>
     </div>
 
     <div class="container update-builder">
@@ -86,7 +86,7 @@
               <small id="tos-card-link" class="field-hint">Список загружается из каталога сайта.</small>
             </label>
             <label class="field-group field-wide">
-              <span>Название ТОС, если его нет в списке</span>
+              <span>Название ТОС или территория, если её нет в списке</span>
               <input class="input" name="tos_custom" type="text" placeholder="Например: инициативная группа новой территории"/>
             </label>
             <div id="dynamic-fields" class="dynamic-fields"></div>
@@ -95,17 +95,30 @@
               <input class="input" name="contact" type="text" autocomplete="name" placeholder="Имя и удобный способ связи"/>
               <small class="field-hint">Этот контакт нужен редакции и не публикуется автоматически.</small>
             </label>
-            <label class="consent-row field-wide">
-              <input name="confirmed" type="checkbox"/>
-              <span>Подтверждаю, что сведения передаются добросовестно и не содержат закрытых персональных данных.</span>
+            <label class="consent-row field-wide" for="confirmed">
+              <input id="confirmed" name="confirmed" type="checkbox"/>
+              <span>Подтверждаю, что сведения передаются добросовестно, а всё неподтверждённое прямо обозначено как требующее проверки.</span>
+            </label>
+            <label class="consent-row field-wide" for="publication-checked">
+              <input id="publication-checked" name="publication_checked" type="checkbox"/>
+              <span>Я проверил(а), что фото, контакты, документы и другие материалы можно передать редакции для проверки публикации.</span>
             </label>
           </div>
         </form>
       </section>
 
+      <section class="update-panel update-quality" aria-labelledby="quality-title">
+        <div class="update-panel-head">
+          <div><h3 id="quality-title">3. Проверка готовности</h3><p class="tiny" id="quality-summary">Заполните сведения, чтобы увидеть рекомендации.</p></div>
+          <span class="tag" id="quality-score">0 из 7</span>
+        </div>
+        <ul class="quality-list" id="quality-list" aria-live="polite"></ul>
+        <div class="notice compact"><b>Что означает проверка:</b> она помогает собрать материал без очевидных пропусков, но не подтверждает достоверность, согласие, авторские права или юридическую возможность публикации.</div>
+      </section>
+
       <section class="update-panel update-preview" aria-labelledby="preview-title">
         <div class="update-panel-head">
-          <div><h3 id="preview-title">3. Готовое сообщение</h3><p class="tiny">Пустые необязательные поля в сообщение не попадут</p></div>
+          <div><h3 id="preview-title">4. Готовое сообщение</h3><p class="tiny">Пустые необязательные поля в сообщение не попадут</p></div>
           <span class="tag" id="required-status">Заполните обязательные поля</span>
         </div>
         <textarea class="input preview-text" id="message-preview" rows="16" readonly aria-label="Готовое сообщение"></textarea>
@@ -121,11 +134,11 @@
   </section>
 
   <section class="section">
-    <div class="container section-head"><div><h2>Что приложить к сообщению</h2><p>Несколько простых правил ускорят публикацию</p></div></div>
+    <div class="container section-head"><div><h2>Что приложить к сообщению</h2><p>Несколько простых правил ускорят проверку</p></div></div>
     <div class="container grid">
       <article class="card"><div class="card-inner"><span class="tag">Фото</span><h3>Присылайте исходные файлы</h3><p>Для отчёта желательно 3–10 фотографий: общий вид, процесс и итог. Не накладывайте на них лишний текст.</p></div></article>
-      <article class="card"><div class="card-inner"><span class="tag">Факты</span><h3>Укажите дату и место</h3><p>Не пишите приблизительные сведения как точные. То, что требует проверки, так и обозначьте.</p></div></article>
-      <article class="card"><div class="card-inner"><span class="tag">Согласие</span><h3>Проверьте право на публикацию</h3><p>Не отправляйте для открытого размещения телефоны, адреса и фотографии людей без необходимого согласия.</p></div></article>
+      <article class="card"><div class="card-inner"><span class="tag">Факты</span><h3>Укажите дату, место и статус</h3><p>Не пишите приблизительные сведения как точные. Отделяйте идею, анонс, процесс и завершённый результат.</p></div></article>
+      <article class="card"><div class="card-inner"><span class="tag">Источник</span><h3>Объясните, откуда сведения</h3><p>Назовите организатора, документ, председателя, автора материала или добавьте проверяемую ссылку.</p></div></article>
     </div>
   </section>
 
@@ -139,6 +152,7 @@
 <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Материал публикуется после проверки редакцией.</div></div></footer>
 <script src="/assets/js/site.js"></script>
 <script src="/assets/js/update-center-data.js"></script>
+<script src="/assets/js/update-center-quality.js"></script>
 <script src="/assets/js/update-center.js"></script>
 </body>
 </html>
