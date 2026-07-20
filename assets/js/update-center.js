@@ -1,9 +1,11 @@
 (() => {
   'use strict';
 
-  const STORAGE_KEY = 'tos-update-center-draft-v2';
+  const STORAGE_KEY = 'tos-update-center-draft-v3';
+  const LEGACY_STORAGE_KEY = 'tos-update-center-draft-v2';
   const scenarios = window.TOS_UPDATE_SCENARIOS || {};
   const labels = window.TOS_UPDATE_LABELS || {};
+  const quality = window.TOS_UPDATE_QUALITY;
   let currentScenario = 'card';
   let tosItems = [];
 
@@ -13,14 +15,20 @@
   const tosSelect = document.querySelector('#tos-select');
   const status = document.querySelector('#copy-status');
   const scenarioGrid = document.querySelector('#scenario-grid');
+  const qualityList = document.querySelector('#quality-list');
 
-  if (!form || !fieldsRoot || !preview || !tosSelect || !scenarioGrid || !scenarios.card) return;
+  if (!form || !fieldsRoot || !preview || !tosSelect || !scenarioGrid || !qualityList || !scenarios.card || !quality?.evaluate) return;
 
   const clean = (value) => String(value ?? '').trim();
 
-  function loadDraft() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+  function readStorage(key) {
+    try { return JSON.parse(localStorage.getItem(key) || '{}'); }
     catch { return {}; }
+  }
+
+  function loadDraft() {
+    const current = readStorage(STORAGE_KEY);
+    return Object.keys(current).length ? current : readStorage(LEGACY_STORAGE_KEY);
   }
 
   function formValues() {
@@ -38,7 +46,8 @@
         scenario: currentScenario,
         tos: tosSelect.value,
         scenarioValues,
-        confirmed: Boolean(form.elements.confirmed?.checked)
+        confirmed: Boolean(form.elements.confirmed?.checked),
+        publicationChecked: Boolean(form.elements.publication_checked?.checked)
       }));
     } catch {
       // Конструктор продолжает работать, даже если localStorage недоступен.
@@ -53,13 +62,39 @@
     title.textContent = definition.label;
     label.appendChild(title);
 
-    const control = definition.type === 'textarea' ? document.createElement('textarea') : document.createElement('input');
+    let control;
+    if (definition.type === 'textarea') {
+      control = document.createElement('textarea');
+    } else if (definition.type === 'select') {
+      control = document.createElement('select');
+      const emptyOption = document.createElement('option');
+      emptyOption.value = '';
+      emptyOption.textContent = 'Выберите вариант';
+      control.appendChild(emptyOption);
+      (definition.options || []).forEach((optionValue) => {
+        const option = document.createElement('option');
+        option.value = optionValue;
+        option.textContent = optionValue;
+        control.appendChild(option);
+      });
+    } else {
+      control = document.createElement('input');
+      control.type = definition.type || 'text';
+    }
+
     control.className = 'input';
     control.name = definition.name;
     control.required = Boolean(definition.required);
-    control.placeholder = definition.placeholder || '';
-    if (definition.type !== 'textarea') control.type = definition.type || 'text';
+    if ('placeholder' in control) control.placeholder = definition.placeholder || '';
     label.appendChild(control);
+
+    if (definition.placeholder && definition.type === 'select') {
+      const hint = document.createElement('small');
+      hint.className = 'field-hint';
+      hint.textContent = definition.placeholder;
+      label.appendChild(hint);
+    }
+
     return label;
   }
 
@@ -67,9 +102,10 @@
     const draft = loadDraft();
     const saved = draft.scenarioValues?.[currentScenario] || (draft.scenario === currentScenario ? draft.values : {}) || {};
     Object.entries(saved).forEach(([name, value]) => {
-      if (form.elements[name]) form.elements[name].value = value;
+      if (form.elements[name] && name !== 'confirmed' && name !== 'publication_checked') form.elements[name].value = value;
     });
     if (form.elements.confirmed) form.elements.confirmed.checked = Boolean(draft.confirmed);
+    if (form.elements.publication_checked) form.elements.publication_checked.checked = Boolean(draft.publicationChecked);
   }
 
   function selectedTos() {
@@ -86,7 +122,7 @@
       lines.push(`ТОС: ${tos.title || `ТОС «${tos.name}»`}`);
       lines.push(`Карточка: https://tosborisoglebsk.ru/tos/${tos.slug}/`);
     } else if (data.tos_custom) {
-      lines.push(`ТОС: ${data.tos_custom}`);
+      lines.push(`ТОС / территория: ${data.tos_custom}`);
     }
 
     scenario.fields.forEach((field) => {
@@ -95,7 +131,7 @@
     });
 
     if (data.contact) lines.push(`Контакт для уточнения: ${data.contact}`);
-    lines.push('', 'Материал передан для проверки редакцией портала ТОС БГО.');
+    lines.push('', 'Материал передан для проверки редакцией портала ТОС БГО. Публикация и статус подтверждения определяются отдельно после проверки.');
     return lines.join('\n');
   }
 
@@ -103,23 +139,69 @@
     return scenarios[currentScenario].fields.filter((field) => field.required && !clean(form.elements[field.name]?.value));
   }
 
+  function qualityResult() {
+    return quality.evaluate({
+      scenarioKey: currentScenario,
+      scenario: scenarios[currentScenario],
+      data: formValues(),
+      tosSelected: Boolean(selectedTos()),
+      confirmed: Boolean(form.elements.confirmed?.checked),
+      publicationChecked: Boolean(form.elements.publication_checked?.checked)
+    });
+  }
+
+  function renderQuality(result) {
+    const score = document.querySelector('#quality-score');
+    const summary = document.querySelector('#quality-summary');
+    score.textContent = `${result.passed} из ${result.total}`;
+    score.className = `tag ${result.ready ? 'ok' : result.percent >= 60 ? 'warn' : ''}`.trim();
+    summary.textContent = result.ready
+      ? 'Обязательные проверки пройдены. Рекомендации без галочки можно уточнить до отправки.'
+      : `Нужно устранить обязательных замечаний: ${result.blocking.length}.`;
+
+    qualityList.replaceChildren(...result.checks.map((check) => {
+      const item = document.createElement('li');
+      item.className = `quality-item ${check.passed ? 'is-passed' : check.blocking ? 'is-blocking' : 'is-advisory'}`;
+
+      const marker = document.createElement('span');
+      marker.className = 'quality-marker';
+      marker.setAttribute('aria-hidden', 'true');
+      marker.textContent = check.passed ? '✓' : check.blocking ? '!' : 'i';
+
+      const text = document.createElement('span');
+      const title = document.createElement('b');
+      title.textContent = check.label;
+      text.appendChild(title);
+      if (!check.passed && check.hint) {
+        const hint = document.createElement('small');
+        hint.textContent = check.hint;
+        text.appendChild(hint);
+      }
+
+      item.append(marker, text);
+      return item;
+    }));
+  }
+
   function updatePreview() {
     preview.value = buildMessage();
+    const result = qualityResult();
     const missing = missingRequired();
-    const confirmed = Boolean(form.elements.confirmed?.checked);
     const requiredStatus = document.querySelector('#required-status');
     const progress = document.querySelector('#builder-progress');
     const panel = document.querySelector('.update-preview');
 
-    if (!missing.length && confirmed) {
+    renderQuality(result);
+
+    if (result.ready) {
       requiredStatus.textContent = 'Сообщение готово';
       requiredStatus.className = 'tag ok';
       progress.textContent = 'Готово к отправке';
       panel.classList.add('is-ready');
     } else {
-      requiredStatus.textContent = missing.length ? `Не заполнено: ${missing.length}` : 'Подтвердите сведения';
+      requiredStatus.textContent = missing.length ? `Не заполнено: ${missing.length}` : 'Подтвердите две проверки';
       requiredStatus.className = 'tag warn';
-      progress.textContent = 'Шаг 2 из 3';
+      progress.textContent = missing.length ? 'Шаг 2 из 4' : 'Шаг 3 из 4';
       panel.classList.remove('is-ready');
     }
     saveDraft();
@@ -177,7 +259,7 @@
       updateTosLink();
       updatePreview();
     } catch {
-      document.querySelector('#tos-card-link').textContent = 'Каталог не загрузился. Укажите название ТОС в поле ниже.';
+      document.querySelector('#tos-card-link').textContent = 'Каталог не загрузился. Укажите название ТОС или территорию в поле ниже.';
     }
   }
 
@@ -185,12 +267,15 @@
     form.querySelectorAll('.field-error').forEach((element) => element.classList.remove('field-error'));
     missingRequired().forEach((field) => form.elements[field.name]?.classList.add('field-error'));
     if (!form.elements.confirmed.checked) form.elements.confirmed.closest('.consent-row')?.classList.add('field-error');
+    if (!form.elements.publication_checked.checked) form.elements.publication_checked.closest('.consent-row')?.classList.add('field-error');
   }
 
   function readyToExport() {
     markErrors();
-    if (missingRequired().length || !form.elements.confirmed.checked) {
-      status.textContent = 'Заполните обязательные поля и подтвердите сведения.';
+    const result = qualityResult();
+    if (!result.ready) {
+      status.textContent = 'Заполните обязательные поля и подтвердите две проверки перед отправкой.';
+      document.querySelector('#quality-title')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return false;
     }
     return true;
@@ -223,7 +308,10 @@
   }
 
   function resetForm() {
-    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    } catch {}
     form.reset();
     tosSelect.value = '';
     currentScenario = 'card';
