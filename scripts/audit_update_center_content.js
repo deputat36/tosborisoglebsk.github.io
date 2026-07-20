@@ -5,12 +5,14 @@ const { repoPathExists } = require('./lib/path_checks');
 
 const pagePath = path.join(process.cwd(), 'update-tos', 'index.html');
 const scenariosPath = path.join(process.cwd(), 'assets', 'js', 'update-center-data.js');
+const qualityPath = path.join(process.cwd(), 'assets', 'js', 'update-center-quality.js');
 const appPath = path.join(process.cwd(), 'assets', 'js', 'update-center.js');
 
 const requiredScenarios = new Set(['card', 'news', 'photo', 'event', 'project', 'need']);
 const requiredPageFiles = [
   '/assets/css/update-center.css',
   '/assets/js/update-center-data.js',
+  '/assets/js/update-center-quality.js',
   '/assets/js/update-center.js',
   '/data/toses.json'
 ];
@@ -20,6 +22,12 @@ const requiredControls = [
   'tos-select',
   'dynamic-fields',
   'update-form',
+  'confirmed',
+  'publication-checked',
+  'quality-title',
+  'quality-score',
+  'quality-summary',
+  'quality-list',
   'message-preview',
   'copy-message',
   'download-message',
@@ -52,7 +60,7 @@ function loadScenarioData(errors) {
 function main() {
   const errors = [];
 
-  [pagePath, scenariosPath, appPath].forEach((filePath) => {
+  [pagePath, scenariosPath, qualityPath, appPath].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${filePath}`);
   });
 
@@ -62,6 +70,7 @@ function main() {
 
   const html = fs.readFileSync(pagePath, 'utf8');
   const app = fs.readFileSync(appPath, 'utf8');
+  const quality = fs.readFileSync(qualityPath, 'utf8');
   const { scenarios, labels } = loadScenarioData(errors);
 
   const title = textMatch(html, /<title>([^<]+)<\/title>/i);
@@ -83,6 +92,10 @@ function main() {
     errors.push('privacy warning is missing or too weak');
   }
 
+  if (!html.includes('не подтверждает достоверность') || !html.includes('не публикуются автоматически')) {
+    errors.push('quality check limitations must be explicit');
+  }
+
   requiredControls.forEach((id) => {
     if (!html.includes(`id="${id}"`)) errors.push(`missing required control #${id}`);
   });
@@ -93,6 +106,12 @@ function main() {
       errors.push(`page does not include dependency ${filePath}`);
     }
   });
+
+  const qualityIndex = html.indexOf('/assets/js/update-center-quality.js');
+  const appIndex = html.indexOf('/assets/js/update-center.js');
+  if (qualityIndex < 0 || appIndex < 0 || qualityIndex > appIndex) {
+    errors.push('quality module must load before update center app');
+  }
 
   requiredRoutes.forEach((route) => {
     if (!repoPathExists(route)) errors.push(`linked route does not exist ${route}`);
@@ -122,8 +141,8 @@ function main() {
       errors.push(`scenario ${scenarioKey} must have title and help`);
     }
 
-    if (!Array.isArray(scenario.fields) || scenario.fields.length < 4) {
-      errors.push(`scenario ${scenarioKey} must contain at least 4 fields`);
+    if (!Array.isArray(scenario.fields) || scenario.fields.length < 6) {
+      errors.push(`scenario ${scenarioKey} must contain at least 6 fields`);
       return;
     }
 
@@ -135,21 +154,30 @@ function main() {
       if (!field.name) errors.push(`${line}: missing name`);
       if (!field.label) errors.push(`${line}: missing label`);
       if (field.name && !labels[field.name]) errors.push(`${line}: missing public label for ${field.name}`);
-      if (field.type && !['text', 'textarea', 'tel', 'email', 'url', 'date', 'time'].includes(field.type)) {
+      if (field.type && !['text', 'textarea', 'tel', 'email', 'url', 'date', 'time', 'select'].includes(field.type)) {
         errors.push(`${line}: unsupported type ${field.type}`);
       }
+      if (field.type === 'select' && (!Array.isArray(field.options) || field.options.length < 2)) {
+        errors.push(`${line}: select must contain at least 2 options`);
+      }
     });
-  });
 
-  if (!scenarios.card?.fields?.some((field) => field.name === 'source' && field.required)) {
-    errors.push('card update scenario must require a confirmation source');
-  }
+    const statusField = scenario.fields.find((field) => field.name === 'material_status');
+    if (!statusField?.required || statusField.type !== 'select') {
+      errors.push(`scenario ${scenarioKey} must require material_status select`);
+    }
+
+    const sourceField = scenario.fields.find((field) => field.name === 'source');
+    if (!sourceField?.required) {
+      errors.push(`scenario ${scenarioKey} must require a confirmation source`);
+    }
+  });
 
   if (!app.includes("fetch('/data/toses.json'")) {
     errors.push('update center app must load the current TOS catalog');
   }
 
-  if (!app.includes('localStorage') || !app.includes('tos-update-center-draft')) {
+  if (!app.includes('localStorage') || !app.includes('tos-update-center-draft-v3')) {
     errors.push('update center app must keep a browser-local draft');
   }
 
@@ -157,19 +185,31 @@ function main() {
     errors.push('update center app must support copy and TXT export');
   }
 
-  if (!app.includes('confirmed') || !app.includes('readyToExport')) {
-    errors.push('update center app must require confirmation before export');
+  if (!app.includes('TOS_UPDATE_QUALITY') || !app.includes("createElement('select')")) {
+    errors.push('update center app must render select fields and use the quality module');
+  }
+
+  if (!app.includes('publicationChecked') || !app.includes('publication_checked') || !app.includes('readyToExport')) {
+    errors.push('update center app must require both confirmations before export');
   }
 
   if (!app.includes('URLSearchParams(location.search)') || !app.includes("params.get('type')")) {
     errors.push('update center app must support scenario links by query parameter');
   }
 
+  ['fetch(', 'XMLHttpRequest', 'sendBeacon', 'WebSocket'].forEach((signal) => {
+    if (quality.includes(signal)) errors.push(`quality module must stay local-only: ${signal}`);
+  });
+
+  if (!quality.includes('missingRequired') || !quality.includes('publicationChecked') || !quality.includes('ready:')) {
+    errors.push('quality module must evaluate required fields and publication confirmation');
+  }
+
   if (errors.length) {
     throw new Error(`Update center audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Update center OK: ${Object.keys(scenarios).length} scenarios`);
+  console.log(`Update center OK: ${Object.keys(scenarios).length} scenarios with local quality checks`);
 }
 
 main();
