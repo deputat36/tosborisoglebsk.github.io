@@ -112,8 +112,13 @@
     return candidates.map(clean).filter(Boolean).join(' — ').slice(0, 700);
   }
 
-  function csvCell(value) {
+  function safeSpreadsheetText(value) {
     const text = clean(value);
+    return /^[=+\-@]/.test(text) ? `'${text}` : text;
+  }
+
+  function csvCell(value) {
+    const text = safeSpreadsheetText(value);
     return /[",\n\r]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
   }
 
@@ -187,6 +192,7 @@
     PROFILES,
     profileFor,
     timestampId,
+    safeSpreadsheetText,
     toCsv,
     buildPackage
   };
