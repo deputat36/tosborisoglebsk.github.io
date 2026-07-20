@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-18T15:08:31.168Z",
+  "generated_at": "2026-07-20T15:06:50.262Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 98,
+    "asset_files": 99,
     "over_budget_assets": 0,
-    "total_css_bytes": 41934,
-    "total_js_bytes": 553806,
+    "total_css_bytes": 43057,
+    "total_js_bytes": 565203,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -85,6 +85,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/update-center.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 14555,
+      "over_budget": false
+    },
+    {
       "path": "assets/css/styles.css",
       "group": "css",
       "extension": ".css",
@@ -106,6 +113,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/update-center-data.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 11490,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-validation.js",
       "group": "js",
       "extension": ".js",
@@ -117,13 +131,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11249,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/update-center.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10685,
       "over_budget": false
     },
     {
@@ -215,13 +222,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 7814,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/update-center-data.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 7678,
       "over_budget": false
     },
     {
