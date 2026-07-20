@@ -4,6 +4,11 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
+  const TEMPLATE_FILES = {
+    intake: 'data/content_intake_template.csv',
+    queue: 'data/publication_queue.csv'
+  };
+
   const INTAKE_HEADERS = [
     'submission_type',
     'tos_name',
@@ -176,6 +181,7 @@
   }
 
   return {
+    TEMPLATE_FILES,
     INTAKE_HEADERS,
     QUEUE_HEADERS,
     PROFILES,
