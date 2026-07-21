@@ -34,12 +34,19 @@
       "editorial": 8,
       "starter": 0,
       "request": 16
+    },
+    "articles": {
+      "total": 19,
+      "verified": 0,
+      "editorial": 19,
+      "starter": 0,
+      "request": 0
     }
   },
   "totals": {
-    "total": 146,
+    "total": 165,
     "verified": 1,
-    "editorial": 64,
+    "editorial": 83,
     "starter": 24,
     "request": 57
   },

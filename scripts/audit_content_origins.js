@@ -4,7 +4,13 @@ const { CONTENT_ORIGINS, inferContentOrigin } = require('./lib/content_origin');
 
 const ROOT = process.cwd();
 const REPORT_PATH = path.join(ROOT, 'data', 'content_origin_report.json');
-const COLLECTIONS = ['news', 'projects', 'needs', 'done'];
+const COLLECTIONS = [
+  { name: 'news', requireExplicit: true },
+  { name: 'projects', requireExplicit: true },
+  { name: 'needs', requireExplicit: true },
+  { name: 'done', requireExplicit: true },
+  { name: 'articles', requireExplicit: false }
+];
 
 function readJson(filePath) {
   if (!fs.existsSync(filePath)) throw new Error(`Missing file: ${filePath}`);
@@ -30,7 +36,7 @@ function main() {
   const toses = readJson(path.join(ROOT, 'data', 'toses.json')).filter((item) => item && item.slug && item.status !== 'draft');
   const coverage = new Map(toses.map((tos) => [tos.slug, new Set()]));
 
-  COLLECTIONS.forEach((collection) => {
+  COLLECTIONS.forEach(({ name: collection, requireExplicit }) => {
     const filePath = path.join(ROOT, 'data', `${collection}.json`);
     const items = readJson(filePath);
     if (!Array.isArray(items)) {
@@ -44,29 +50,35 @@ function main() {
       const label = `${collection} row ${index + 1} ${item?.id || 'unknown'}`;
       const explicit = String(item?.content_origin || '').trim().toLowerCase();
       const inferred = inferContentOrigin(item, collection, { ignoreExplicit: true });
+      let origin = inferred;
 
-      if (!CONTENT_ORIGINS.has(explicit)) {
-        errors.push(`${label}: invalid or missing content_origin ${explicit || '(empty)'}`);
+      if (explicit) {
+        if (!CONTENT_ORIGINS.has(explicit)) {
+          errors.push(`${label}: invalid content_origin ${explicit}`);
+          return;
+        }
+        if (explicit !== inferred) {
+          errors.push(`${label}: content_origin ${explicit} conflicts with deterministic classification ${inferred}`);
+        }
+        origin = explicit;
+      } else if (requireExplicit) {
+        errors.push(`${label}: missing content_origin`);
         return;
       }
 
-      if (explicit !== inferred) {
-        errors.push(`${label}: content_origin ${explicit} conflicts with deterministic classification ${inferred}`);
-      }
-
       counts[collection].total += 1;
-      counts[collection][explicit] += 1;
+      counts[collection][origin] += 1;
       totalCounts.total += 1;
-      totalCounts[explicit] += 1;
-      if (item.tos_slug && coverage.has(item.tos_slug)) coverage.get(item.tos_slug).add(explicit);
+      totalCounts[origin] += 1;
+      if (item.tos_slug && coverage.has(item.tos_slug)) coverage.get(item.tos_slug).add(origin);
 
-      if (explicit === 'verified') {
+      if (origin === 'verified') {
         const source = item.source || item.source_label;
         if (!source) errors.push(`${label}: verified content requires source or source_label`);
         if (!item.source_url) errors.push(`${label}: verified content requires source_url`);
       }
 
-      if (explicit === 'request' && collection === 'done' && !item.needs_details) {
+      if (origin === 'request' && collection === 'done' && !item.needs_details) {
         errors.push(`${label}: result request requires needs_details`);
       }
     });
@@ -88,7 +100,7 @@ function main() {
   });
 
   const report = readJson(REPORT_PATH);
-  COLLECTIONS.forEach((collection) => compareCounts(errors, `report.collections.${collection}`, report.collections?.[collection], counts[collection]));
+  COLLECTIONS.forEach(({ name: collection }) => compareCounts(errors, `report.collections.${collection}`, report.collections?.[collection], counts[collection]));
   compareCounts(errors, 'report.totals', report.totals, totalCounts);
   compareCounts(errors, 'report.tos_coverage', report.tos_coverage, expectedCoverage);
 
