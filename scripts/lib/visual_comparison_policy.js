@@ -1,7 +1,9 @@
 const DEFAULT_VISUAL_THRESHOLDS = Object.freeze({
   maxLowDeltaRatio: 0.005,
   maxSubpixelChannelDelta: 4,
-  maxSubpixelRatio: 0.1
+  maxSubpixelRatio: 0.1,
+  maxBroadSubpixelChannelDelta: 3,
+  maxBroadSubpixelRatio: 0.3
 });
 
 function numeric(value, fallback) {
@@ -35,6 +37,14 @@ function classifyVisualEquivalence(metrics = {}, thresholds = {}) {
     thresholds.maxSubpixelRatio ?? thresholds.max_subpixel_ratio,
     DEFAULT_VISUAL_THRESHOLDS.maxSubpixelRatio
   );
+  const maxBroadSubpixelChannelDelta = numeric(
+    thresholds.maxBroadSubpixelChannelDelta ?? thresholds.max_broad_subpixel_channel_delta,
+    DEFAULT_VISUAL_THRESHOLDS.maxBroadSubpixelChannelDelta
+  );
+  const maxBroadSubpixelRatio = numeric(
+    thresholds.maxBroadSubpixelRatio ?? thresholds.max_broad_subpixel_ratio,
+    DEFAULT_VISUAL_THRESHOLDS.maxBroadSubpixelRatio
+  );
 
   if (!sizeEqual) return { equivalent: false, reason: 'size_mismatch' };
   if (significantChangedPixels > 0) return { equivalent: false, reason: 'significant_pixels' };
@@ -44,6 +54,9 @@ function classifyVisualEquivalence(metrics = {}, thresholds = {}) {
   }
   if (maxChannelDelta <= maxSubpixelChannelDelta && changedPixelRatio <= maxSubpixelRatio) {
     return { equivalent: true, reason: 'subpixel_rendering' };
+  }
+  if (maxChannelDelta <= maxBroadSubpixelChannelDelta && changedPixelRatio <= maxBroadSubpixelRatio) {
+    return { equivalent: true, reason: 'broad_subpixel_rendering' };
   }
   return { equivalent: false, reason: 'changed' };
 }

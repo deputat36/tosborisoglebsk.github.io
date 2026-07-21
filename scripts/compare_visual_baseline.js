@@ -15,6 +15,8 @@ const MAX_CHANNEL_DELTA = Number(process.env.VISUAL_MAX_CHANNEL_DELTA || 16);
 const MAX_LOW_DELTA_RATIO = Number(process.env.VISUAL_MAX_LOW_DELTA_RATIO || 0.005);
 const MAX_SUBPIXEL_CHANNEL_DELTA = Number(process.env.VISUAL_MAX_SUBPIXEL_CHANNEL_DELTA || 4);
 const MAX_SUBPIXEL_RATIO = Number(process.env.VISUAL_MAX_SUBPIXEL_RATIO || 0.1);
+const MAX_BROAD_SUBPIXEL_CHANNEL_DELTA = Number(process.env.VISUAL_MAX_BROAD_SUBPIXEL_CHANNEL_DELTA || 3);
+const MAX_BROAD_SUBPIXEL_RATIO = Number(process.env.VISUAL_MAX_BROAD_SUBPIXEL_RATIO || 0.3);
 
 function sha256(filePath) {
   return crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
@@ -37,6 +39,16 @@ function validateThresholds() {
   }
   if (!Number.isFinite(MAX_SUBPIXEL_RATIO) || MAX_SUBPIXEL_RATIO < MAX_LOW_DELTA_RATIO || MAX_SUBPIXEL_RATIO > 0.2) {
     throw new Error(`Invalid VISUAL_MAX_SUBPIXEL_RATIO: ${MAX_SUBPIXEL_RATIO}`);
+  }
+  if (!Number.isFinite(MAX_BROAD_SUBPIXEL_CHANNEL_DELTA)
+    || MAX_BROAD_SUBPIXEL_CHANNEL_DELTA < 0
+    || MAX_BROAD_SUBPIXEL_CHANNEL_DELTA > MAX_SUBPIXEL_CHANNEL_DELTA) {
+    throw new Error(`Invalid VISUAL_MAX_BROAD_SUBPIXEL_CHANNEL_DELTA: ${MAX_BROAD_SUBPIXEL_CHANNEL_DELTA}`);
+  }
+  if (!Number.isFinite(MAX_BROAD_SUBPIXEL_RATIO)
+    || MAX_BROAD_SUBPIXEL_RATIO < MAX_SUBPIXEL_RATIO
+    || MAX_BROAD_SUBPIXEL_RATIO > 0.35) {
+    throw new Error(`Invalid VISUAL_MAX_BROAD_SUBPIXEL_RATIO: ${MAX_BROAD_SUBPIXEL_RATIO}`);
   }
 }
 
@@ -98,7 +110,9 @@ function comparePngs(baselinePath, currentPath) {
   }, {
     maxLowDeltaRatio: MAX_LOW_DELTA_RATIO,
     maxSubpixelChannelDelta: MAX_SUBPIXEL_CHANNEL_DELTA,
-    maxSubpixelRatio: MAX_SUBPIXEL_RATIO
+    maxSubpixelRatio: MAX_SUBPIXEL_RATIO,
+    maxBroadSubpixelChannelDelta: MAX_BROAD_SUBPIXEL_CHANNEL_DELTA,
+    maxBroadSubpixelRatio: MAX_BROAD_SUBPIXEL_RATIO
   });
 
   return {
@@ -117,7 +131,9 @@ function comparePngs(baselinePath, currentPath) {
       max_channel_delta: MAX_CHANNEL_DELTA,
       max_low_delta_ratio: MAX_LOW_DELTA_RATIO,
       max_subpixel_channel_delta: MAX_SUBPIXEL_CHANNEL_DELTA,
-      max_subpixel_ratio: MAX_SUBPIXEL_RATIO
+      max_subpixel_ratio: MAX_SUBPIXEL_RATIO,
+      max_broad_subpixel_channel_delta: MAX_BROAD_SUBPIXEL_CHANNEL_DELTA,
+      max_broad_subpixel_ratio: MAX_BROAD_SUBPIXEL_RATIO
     },
     bytes_identical: baselineBytes.equals(currentBytes),
     baseline_sha256: sha256(baselinePath),
@@ -163,6 +179,7 @@ function main() {
   const changedCases = comparisons.filter((item) => !item.pixel_equivalent);
   const antialiasEquivalentCases = comparisons.filter((item) => item.equivalence_reason === 'bounded_antialias');
   const subpixelEquivalentCases = comparisons.filter((item) => item.equivalence_reason === 'subpixel_rendering');
+  const broadSubpixelEquivalentCases = comparisons.filter((item) => item.equivalence_reason === 'broad_subpixel_rendering');
   const byteDifferentButPixelIdentical = comparisons.filter((item) => item.pixel_identical && !item.bytes_identical);
 
   const report = {
@@ -172,7 +189,9 @@ function main() {
       max_channel_delta: MAX_CHANNEL_DELTA,
       max_low_delta_ratio: MAX_LOW_DELTA_RATIO,
       max_subpixel_channel_delta: MAX_SUBPIXEL_CHANNEL_DELTA,
-      max_subpixel_ratio: MAX_SUBPIXEL_RATIO
+      max_subpixel_ratio: MAX_SUBPIXEL_RATIO,
+      max_broad_subpixel_channel_delta: MAX_BROAD_SUBPIXEL_CHANNEL_DELTA,
+      max_broad_subpixel_ratio: MAX_BROAD_SUBPIXEL_RATIO
     },
     baseline: {
       commit_sha: baselineManifest.commit_sha || null,
@@ -190,6 +209,7 @@ function main() {
       pixel_equivalent: comparisons.filter((item) => item.pixel_equivalent).length,
       antialias_equivalent: antialiasEquivalentCases.length,
       subpixel_equivalent: subpixelEquivalentCases.length,
+      broad_subpixel_equivalent: broadSubpixelEquivalentCases.length,
       bytes_identical: comparisons.filter((item) => item.bytes_identical).length,
       byte_different_but_pixel_identical: byteDifferentButPixelIdentical.length,
       changed_cases: changedCases.length,
@@ -199,6 +219,7 @@ function main() {
     changed_cases: changedCases.map((item) => item.case_id),
     antialias_equivalent_cases: antialiasEquivalentCases.map((item) => item.case_id),
     subpixel_equivalent_cases: subpixelEquivalentCases.map((item) => item.case_id),
+    broad_subpixel_equivalent_cases: broadSubpixelEquivalentCases.map((item) => item.case_id),
     comparisons
   };
 
@@ -214,17 +235,22 @@ function main() {
     `- Pixel-equivalent: ${report.summary.pixel_equivalent}`,
     `- Antialias-equivalent: ${report.summary.antialias_equivalent}`,
     `- Subpixel-equivalent: ${report.summary.subpixel_equivalent}`,
+    `- Broad-subpixel-equivalent: ${report.summary.broad_subpixel_equivalent}`,
     `- Byte-identical: ${report.summary.bytes_identical}`,
     `- Changed cases: ${report.summary.changed_cases}`,
     `- Maximum accepted channel delta: ${MAX_CHANNEL_DELTA}`,
     `- Maximum accepted low-delta ratio: ${MAX_LOW_DELTA_RATIO}`,
     `- Subpixel guard: delta <= ${MAX_SUBPIXEL_CHANNEL_DELTA}, ratio <= ${MAX_SUBPIXEL_RATIO}`,
+    `- Broad subpixel guard: delta <= ${MAX_BROAD_SUBPIXEL_CHANNEL_DELTA}, ratio <= ${MAX_BROAD_SUBPIXEL_RATIO}`,
     '',
     ...(antialiasEquivalentCases.length
       ? [`Bounded antialias differences: ${antialiasEquivalentCases.map((item) => item.case_id).join(', ')}`, '']
       : []),
     ...(subpixelEquivalentCases.length
       ? [`Bounded subpixel rendering differences: ${subpixelEquivalentCases.map((item) => item.case_id).join(', ')}`, '']
+      : []),
+    ...(broadSubpixelEquivalentCases.length
+      ? [`Broad low-amplitude rendering differences: ${broadSubpixelEquivalentCases.map((item) => item.case_id).join(', ')}`, '']
       : []),
     ...(byteDifferentButPixelIdentical.length
       ? [`Encoding-only differences: ${byteDifferentButPixelIdentical.map((item) => item.case_id).join(', ')}`, '']
@@ -235,7 +261,7 @@ function main() {
   ].join('\n');
   fs.writeFileSync(OUTPUT_MD_PATH, `${markdown}\n`);
 
-  console.log(`Visual comparison: ${report.summary.pixel_equivalent}/${report.summary.cases_compared} equivalent, ${report.summary.pixel_identical} exact, ${report.summary.subpixel_equivalent} subpixel`);
+  console.log(`Visual comparison: ${report.summary.pixel_equivalent}/${report.summary.cases_compared} equivalent, ${report.summary.pixel_identical} exact, ${report.summary.subpixel_equivalent} subpixel, ${report.summary.broad_subpixel_equivalent} broad-subpixel`);
 
   if (missingCurrentCases.length || changedCases.length || comparisons.length !== baselineManifest.results.length) {
     throw new Error(`Visual regression detected: changed=${changedCases.length}, missing=${missingCurrentCases.length}`);

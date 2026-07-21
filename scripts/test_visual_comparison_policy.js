@@ -4,7 +4,9 @@ const { classifyVisualEquivalence } = require('./lib/visual_comparison_policy');
 const thresholds = {
   maxLowDeltaRatio: 0.005,
   maxSubpixelChannelDelta: 4,
-  maxSubpixelRatio: 0.1
+  maxSubpixelRatio: 0.1,
+  maxBroadSubpixelChannelDelta: 3,
+  maxBroadSubpixelRatio: 0.3
 };
 
 function classify(metrics) {
@@ -27,7 +29,22 @@ assert.deepStrictEqual(
 );
 
 assert.deepStrictEqual(
-  classify({ sizeEqual: true, significantChangedPixels: 0, changedPixelRatio: 0.1001, maxChannelDelta: 3 }),
+  classify({ sizeEqual: true, significantChangedPixels: 0, changedPixelRatio: 0.268, maxChannelDelta: 3 }),
+  { equivalent: true, reason: 'broad_subpixel_rendering' }
+);
+
+assert.deepStrictEqual(
+  classify({ sizeEqual: true, significantChangedPixels: 0, changedPixelRatio: 0.1001, maxChannelDelta: 4 }),
+  { equivalent: false, reason: 'changed' }
+);
+
+assert.deepStrictEqual(
+  classify({ sizeEqual: true, significantChangedPixels: 0, changedPixelRatio: 0.3001, maxChannelDelta: 3 }),
+  { equivalent: false, reason: 'changed' }
+);
+
+assert.deepStrictEqual(
+  classify({ sizeEqual: true, significantChangedPixels: 0, changedPixelRatio: 0.2, maxChannelDelta: 4 }),
   { equivalent: false, reason: 'changed' }
 );
 
@@ -37,7 +54,7 @@ assert.deepStrictEqual(
 );
 
 assert.deepStrictEqual(
-  classify({ sizeEqual: true, significantChangedPixels: 1, changedPixelRatio: 0.0001, maxChannelDelta: 17 }),
+  classify({ sizeEqual: true, significantChangedPixels: 1, changedPixelRatio: 0.0001, maxChannelDelta: 3 }),
   { equivalent: false, reason: 'significant_pixels' }
 );
 
