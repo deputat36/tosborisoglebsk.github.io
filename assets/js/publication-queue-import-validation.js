@@ -174,6 +174,9 @@
     const idMatch = currentRows.find((row) => clean(row.queue_id) === clean(candidate.queue_id));
     if (idMatch) return { level: 'exact', reason: 'queue_id уже есть в рабочей очереди' };
 
+    const previousIdMatch = candidateRows.find((row, index) => index < candidateIndex && clean(row.queue_id) === clean(candidate.queue_id));
+    if (previousIdMatch) return { level: 'exact', reason: 'временный queue_id повторяется внутри импортируемого файла' };
+
     const fingerprint = contentFingerprint(candidate);
     const contentMatch = currentRows.find((row) => contentFingerprint(row) === fingerprint);
     if (contentMatch) return { level: 'exact', reason: 'такой тип, ТОС и заголовок уже есть в рабочей очереди' };
