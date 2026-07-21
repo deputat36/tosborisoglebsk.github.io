@@ -1,4 +1,5 @@
 const assert = require('assert');
+const contract = require('../assets/js/publication-queue-contract.js');
 const exporter = require('../assets/js/update-center-editorial-export.js');
 
 function build(scenarioKey, data = {}) {
@@ -17,6 +18,8 @@ function build(scenarioKey, data = {}) {
   });
 }
 
+assert.strictEqual(exporter.contract, contract);
+assert.deepStrictEqual(exporter.QUEUE_HEADERS, contract.QUEUE_HEADERS);
 assert.deepStrictEqual(Object.keys(exporter.PROFILES).sort(), ['card', 'event', 'need', 'news', 'photo', 'project']);
 assert.strictEqual(exporter.TEMPLATE_FILES.intake, 'data/content_intake_template.csv');
 assert.strictEqual(exporter.TEMPLATE_FILES.queue, 'data/publication_queue.csv');
@@ -25,6 +28,10 @@ assert.strictEqual(exporter.profileFor('event').submissionType, 'news');
 assert.strictEqual(exporter.profileFor('photo').submissionType, 'media');
 assert.strictEqual(exporter.profileFor('project').targetFile, 'data/projects.json');
 assert.strictEqual(exporter.profileFor('need').targetFile, 'data/needs.json');
+Object.values(exporter.PROFILES).forEach((profile) => {
+  assert.ok(contract.SUBMISSION_TYPES.has(profile.submissionType));
+  assert.ok(contract.TARGET_FILES.has(profile.targetFile));
+});
 
 const news = build('news', {
   date: '2026-07-19',
@@ -34,6 +41,7 @@ const news = build('news', {
 });
 
 assert.strictEqual(news.queue.queue_id, 'incoming-20260720-153045');
+assert.ok(contract.INCOMING_ID_PATTERN.test(news.queue.queue_id));
 assert.strictEqual(news.intake.status, 'draft');
 assert.strictEqual(news.queue.status, 'draft');
 assert.strictEqual(news.queue.source_checked, 'нет');
@@ -48,7 +56,7 @@ assert.strictEqual(news.intake.personal_data_present, 'не проверено')
 assert.strictEqual(news.intake.event_or_fact_date, '2026-07-19');
 assert.ok(news.intake.short_summary.includes('Состоялась встреча жителей'));
 assert.ok(news.intakeCsv.startsWith(`${exporter.INTAKE_HEADERS.join(',')}\n`));
-assert.ok(news.queueCsv.startsWith(`${exporter.QUEUE_HEADERS.join(',')}\n`));
+assert.ok(news.queueCsv.startsWith(`${contract.QUEUE_HEADERS.join(',')}\n`));
 
 const photo = build('photo', { media: 'https://example.test/photo', work: 'Выполнены работы', after: 'Территория убрана' });
 assert.strictEqual(photo.intake.submission_type, 'media');
@@ -76,6 +84,7 @@ assert.ok(exporter.toCsv(['value'], { value: '=1+1' }).includes("'=1+1"));
   assert.strictEqual(result.queue.source_checked, 'нет');
   assert.strictEqual(result.queue.permission_checked, 'нет');
   assert.strictEqual(result.queue.personal_data_checked, 'нет');
+  assert.ok(contract.INCOMING_ID_PATTERN.test(result.queue.queue_id));
 });
 
-console.log('Update center editorial export OK: 6 scenarios remain draft, unverified and CSV-safe');
+console.log('Update center editorial export OK: shared queue contract, 6 draft scenarios and CSV safety');
