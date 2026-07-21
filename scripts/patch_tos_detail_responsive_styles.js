@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { patchTosRelatedContentTrust } = require('./patch_tos_related_content_trust');
 
 const ROOT = process.cwd();
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
@@ -40,6 +41,8 @@ function detailPages() {
 
 function main() {
   if (!fs.existsSync(GENERATOR_PATH)) throw new Error(`Missing generator: ${GENERATOR_PATH}`);
+
+  patchTosRelatedContentTrust();
 
   let changed = 0;
   if (patchFile(GENERATOR_PATH, 'TOS page generator')) changed += 1;
