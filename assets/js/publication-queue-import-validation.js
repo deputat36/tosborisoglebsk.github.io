@@ -1,25 +1,15 @@
 (function (root, factory) {
-  if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.PublicationQueueImportValidation = factory();
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  if (typeof module === 'object' && module.exports) {
+    module.exports = factory(require('./publication-queue-contract.js'));
+  } else {
+    root.PublicationQueueImportValidation = factory(root.PublicationQueueContract);
+  }
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (contract) {
   'use strict';
 
-  const QUEUE_HEADERS = [
-    'queue_id',
-    'submission_type',
-    'tos_name',
-    'title',
-    'source_checked',
-    'permission_checked',
-    'personal_data_checked',
-    'media_checked',
-    'target_file',
-    'status',
-    'blocker',
-    'owner',
-    'next_step'
-  ];
+  if (!contract) throw new Error('PublicationQueueContract is required.');
 
+  const QUEUE_HEADERS = contract.QUEUE_HEADERS;
   const INTAKE_HEADERS = [
     'submission_type',
     'tos_name',
@@ -37,15 +27,8 @@
     'next_step'
   ];
 
-  const SUBMISSION_TYPES = new Set(['news', 'project', 'need', 'done', 'card_update', 'media']);
-  const TARGET_FILES = new Set([
-    'data/news.json',
-    'data/projects.json',
-    'data/needs.json',
-    'data/done.json',
-    'data/toses.json',
-    'data/media_intake_register.csv'
-  ]);
+  const SUBMISSION_TYPES = contract.SUBMISSION_TYPES;
+  const TARGET_FILES = contract.TARGET_FILES;
   const TARGET_SECTIONS = new Set([
     '/news/ и data/news.json',
     '/projects/ и data/projects.json',
@@ -56,7 +39,7 @@
   ]);
   const FORMULA_PREFIX = /^[=+\-@]/;
 
-  const clean = (value) => String(value ?? '').trim();
+  const clean = contract.clean;
 
   function parseCsv(text) {
     const source = String(text ?? '').replace(/^\uFEFF/, '');
@@ -155,7 +138,9 @@
 
   function validateQueueRow(row) {
     const errors = [];
-    if (!/^incoming-\d{8}-\d{6}(?:-[a-z0-9]+)?$/i.test(clean(row.queue_id))) errors.push('Некорректный queue_id входящего материала.');
+    if (!contract.INCOMING_ID_PATTERN.test(clean(row.queue_id))) {
+      errors.push('Некорректный временный queue_id входящего материала.');
+    }
     if (!SUBMISSION_TYPES.has(clean(row.submission_type))) errors.push('Неизвестный тип материала.');
     if (!clean(row.title)) errors.push('Не указан заголовок.');
     if (clean(row.source_checked) !== 'нет') errors.push('Проверка источника должна оставаться незакрытой.');
@@ -235,6 +220,10 @@
     });
   }
 
+  function canonicalizeApprovedRows(rows, currentRows) {
+    return contract.assignCanonicalIds(rows, currentRows);
+  }
+
   function escapeFormula(value) {
     const text = clean(value);
     return FORMULA_PREFIX.test(text) ? `'${text}` : text;
@@ -251,6 +240,7 @@
   }
 
   return {
+    contract,
     QUEUE_HEADERS,
     INTAKE_HEADERS,
     SUBMISSION_TYPES,
@@ -264,6 +254,7 @@
     validateQueueRow,
     validateIntakeRow,
     analyze,
+    canonicalizeApprovedRows,
     escapeFormula,
     toCsv
   };
