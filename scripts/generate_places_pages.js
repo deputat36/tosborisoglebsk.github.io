@@ -12,6 +12,13 @@ const CYR = {
   ф: 'f', х: 'h', ц: 'c', ч: 'ch', ш: 'sh', щ: 'sch', ъ: '', ы: 'y', ь: '', э: 'e', ю: 'yu', я: 'ya'
 };
 
+const VERIFICATION_LABELS = {
+  verified: 'Сведения подтверждены',
+  partial: 'Проверено частично',
+  needs_review: 'Требует проверки',
+  stale: 'Нужно перепроверить'
+};
+
 function readJson(file, fallback = []) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8')); }
   catch { return fallback; }
@@ -51,6 +58,79 @@ function write(file, html) {
   fs.writeFileSync(file, html, 'utf8');
 }
 
+function niceDate(value) {
+  if (!value) return '';
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime())
+    ? String(value)
+    : date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function cardCountLabel(count) {
+  const mod100 = count % 100;
+  const mod10 = count % 10;
+  if (mod100 >= 11 && mod100 <= 14) return `${count} карточек`;
+  if (mod10 === 1) return `${count} карточка`;
+  if (mod10 >= 2 && mod10 <= 4) return `${count} карточки`;
+  return `${count} карточек`;
+}
+
+function verificationInfo(tos) {
+  const trust = tos?.trust && typeof tos.trust === 'object' ? tos.trust : {};
+  const allowed = ['verified', 'partial', 'needs_review', 'stale'];
+  let status = allowed.includes(tos?.verification_status) ? tos.verification_status : 'needs_review';
+
+  if (trust.recheck_after && status !== 'needs_review') {
+    const recheck = new Date(`${trust.recheck_after}T00:00:00`);
+    if (!Number.isNaN(recheck.getTime()) && recheck.getTime() < Date.now()) status = 'stale';
+  }
+
+  return {
+    status,
+    label: VERIFICATION_LABELS[status] || VERIFICATION_LABELS.needs_review,
+    checkedAt: String(trust.checked_at || ''),
+    scope: arr(trust.verification_scope)
+  };
+}
+
+function verificationClass(status) {
+  if (status === 'verified') return 'ok';
+  if (status === 'partial') return 'info';
+  return 'warn';
+}
+
+function trustSummary(info) {
+  if (info.status === 'needs_review') {
+    return 'Источник, дата и объём проверки сведений пока не зафиксированы.';
+  }
+  if (info.status === 'stale') {
+    return 'Сведения опубликованы, но срок их повторной проверки уже наступил.';
+  }
+
+  const details = [];
+  if (info.checkedAt) details.push(`проверено ${niceDate(info.checkedAt)}`);
+  if (info.scope.length) details.push(`объём: ${info.scope.join(', ')}`);
+  if (!details.length) return 'Статус установлен, но подробности проверки требуют уточнения.';
+  return `${info.label}: ${details.join(' · ')}.`;
+}
+
+function updateUrl(tos) {
+  return `/update-tos/?tos=${encodeURIComponent(tos.slug)}&type=card#message-builder`;
+}
+
+function placeVerificationSummary(place) {
+  if (place.verifiedCount === place.count) {
+    return { className: 'ok', label: 'Все карточки подтверждены' };
+  }
+  if (place.verifiedCount || place.partialCount) {
+    return {
+      className: 'info',
+      label: `${place.verifiedCount} подтверждено · ${place.partialCount} частично`
+    };
+  }
+  return { className: 'warn', label: 'Сведения требуют проверки' };
+}
+
 function baseHead(title, description, canonical) {
   return `<meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -80,20 +160,23 @@ function footer(note = 'Справочник территорий формиру
 function makeIndex(places) {
   const canonical = `${SITE_URL}/places/`;
   const description = 'Справочник населённых пунктов и территорий Борисоглебского городского округа, связанных с карточками ТОС.';
-  const cards = places.map((place) => `<article class="card"><div class="card-inner"><div class="meta"><span class="tag">${esc(place.count)} ТОС</span></div><h3>${esc(place.name)}</h3><p>${esc(place.summary)}</p><div class="card-actions"><a class="btn" href="/places/${esc(place.slug)}/">Открыть территорию</a></div></div></article>`).join('');
-  return `<!doctype html><html lang="ru"><head>${baseHead('Населённые пункты и территории ТОС БГО', description, canonical)}</head><body>${header()}<main id="main"><section class="hero"><div class="container hero-card"><div class="eyebrow">Справочник территорий</div><h1>Населённые пункты и территории ТОС БГО</h1><p class="lead">${esc(description)}</p><div class="hero-actions"><a class="btn primary" href="/tos/">Каталог ТОС</a><a class="btn" href="/map/">Карта</a><a class="btn" href="/sources/">Источники данных</a></div></div></section><section class="section"><div class="container grid">${cards}</div></section></main>${footer()}</body></html>`;
+  const cards = places.map((place) => {
+    const verification = placeVerificationSummary(place);
+    return `<article class="card"><div class="card-inner"><div class="meta"><span class="tag">${esc(cardCountLabel(place.count))}</span><span class="tag ${verification.className}">${esc(verification.label)}</span></div><h3>${esc(place.name)}</h3><p>${esc(place.summary)}</p><div class="card-actions"><a class="btn" href="/places/${esc(place.slug)}/">Открыть территорию</a></div></div></article>`;
+  }).join('');
+  return `<!doctype html><html lang="ru"><head>${baseHead('Населённые пункты и территории ТОС БГО', description, canonical)}</head><body>${header()}<main id="main"><section class="hero"><div class="container hero-card"><div class="eyebrow">Справочник территорий</div><h1>Населённые пункты и территории ТОС БГО</h1><p class="lead">${esc(description)}</p><div class="hero-actions"><a class="btn primary" href="/tos/">Каталог ТОС</a><a class="btn" href="/map/">Карта</a><a class="btn" href="/sources/">Источники данных</a></div></div></section><section class="section tight"><div class="container notice"><b>О достоверности:</b> справочник объединяет карточки по указанному населённому пункту. Метка на каждой территории показывает состояние проверки связанных карточек, а не официальное подтверждение границ.</div></section><section class="section"><div class="container grid">${cards}</div></section></main>${footer()}</body></html>`;
 }
 
 function makePlacePage(place) {
   const canonical = `${SITE_URL}/places/${place.slug}/`;
-  const description = `${place.name}: связанные ТОСы, границы территорий, новости, проекты, потребности и материалы портала ТОС БГО.`;
+  const description = `${place.name}: связанные карточки ТОС и опубликованные в них границы территорий Борисоглебского городского округа.`;
   const tosCards = place.toses.map((tos) => {
+    const verification = verificationInfo(tos);
     const contacts = [
-      arr(tos.phones).length ? `Телефон: ${arr(tos.phones).join(', ')}` : '',
-      arr(tos.social_links).length ? 'Есть соцсети' : '',
-      tos.founded ? `Создан: ${tos.founded}` : ''
+      arr(tos.social_links).length ? 'Есть открытая группа ТОС' : '',
+      tos.founded ? `Год создания: ${tos.founded}` : ''
     ].filter(Boolean).join(' · ');
-    return `<article class="card"><div class="card-inner"><div class="meta"><span class="tag">${esc(tos.type || 'ТОС')}</span>${tos.population ? `<span class="tag">${esc(tos.population)} жителей</span>` : ''}</div><h3>ТОС «${esc(tos.name)}»</h3><p>${esc(tos.description || 'Описание уточняется.')}</p><p class="tiny">${esc(contacts || 'Контакты и сведения уточняются.')}</p><div class="card-actions"><a class="btn" href="/tos/${esc(tos.slug)}/">Открыть карточку</a></div></div></article>`;
+    return `<article class="card" data-tos-slug="${esc(tos.slug)}" data-verification-status="${esc(verification.status)}"><div class="card-inner"><div class="meta"><span class="tag">${esc(tos.type || 'ТОС')}</span>${tos.population ? `<span class="tag">${esc(tos.population)} жителей</span>` : ''}<span class="tag ${verificationClass(verification.status)}">${esc(verification.label)}</span></div><h3>ТОС «${esc(tos.name)}»</h3><p>${esc(tos.description || 'Описание уточняется.')}</p><p class="tiny">${esc(contacts || 'Дополнительные сведения уточняются.')}</p><p class="tiny" data-trust-summary>${esc(trustSummary(verification))}</p><div class="card-actions"><a class="btn" href="/tos/${esc(tos.slug)}/">Открыть карточку</a><a class="btn" href="${esc(updateUrl(tos))}">Уточнить сведения</a></div></div></article>`;
   }).join('');
   const boundaries = place.toses.map((tos) => `<li><a href="/tos/${esc(tos.slug)}/">ТОС «${esc(tos.name)}»</a>: ${esc(tos.boundaries || 'границы уточняются')}</li>`).join('');
   const schema = {
@@ -106,7 +189,7 @@ function makePlacePage(place) {
       name: 'Борисоглебский городской округ'
     }
   };
-  return `<!doctype html><html lang="ru"><head>${baseHead(`${place.name} | Территории ТОС БГО`, description, canonical)}<script type="application/ld+json">${JSON.stringify(schema)}</script></head><body>${header()}<main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/places/">← Все территории</a><div class="eyebrow">Территория ТОС БГО</div><h1>${esc(place.name)}</h1><p class="lead">${esc(description)}</p><div class="hero-actions"><a class="btn primary" href="/tos/">Каталог ТОС</a><a class="btn" href="/map/">Карта</a><a class="btn" href="/update-tos/?type=card#message-builder">Обновить данные</a></div></div></section><section class="section"><div class="container section-head"><div><h2>Связанные ТОСы</h2><p>${esc(place.toses.length)} карточек на этой территории</p></div></div><div class="container grid">${tosCards}</div></section><section class="section"><div class="container prose"><h2>Границы по карточкам ТОС</h2><ul>${boundaries}</ul><div class="notice">Справка сформирована автоматически из каталога ТОС. Если в границах или названии территории есть ошибка, отправьте уточнение через раздел «Обновить данные».</div></div></section></main>${footer()}</body></html>`;
+  return `<!doctype html><html lang="ru"><head>${baseHead(`${place.name} | Территории ТОС БГО`, description, canonical)}<script type="application/ld+json">${JSON.stringify(schema)}</script></head><body>${header()}<main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/places/">← Все территории</a><div class="eyebrow">Территория ТОС БГО</div><h1>${esc(place.name)}</h1><p class="lead">${esc(description)}</p><div class="hero-actions"><a class="btn primary" href="/tos/">Каталог ТОС</a><a class="btn" href="/map/">Карта</a><a class="btn" href="/update-tos/?type=card#message-builder">Обновить данные</a></div></div></section><section class="section tight" id="place-trust" aria-labelledby="place-trust-title"><div class="container notice"><b id="place-trust-title">Как читать эту страницу:</b> сведения собраны из карточек ТОС и могут быть проверены частично. Телефоны, email и личные профили здесь не дублируются — они доступны только в основной карточке вместе со статусом проверки.</div></section><section class="section"><div class="container section-head"><div><h2>Связанные ТОСы</h2><p>${esc(cardCountLabel(place.toses.length))} на этой территории</p></div></div><div class="container grid">${tosCards}</div></section><section class="section"><div class="container prose"><h2>Границы по карточкам ТОС</h2><ul>${boundaries}</ul><div class="notice">Границы приведены в том виде, в котором они записаны в каталоге. Публикация на портале не заменяет официальный реестр или муниципальный документ.</div></div></section><section class="section tight" id="place-context" aria-labelledby="place-context-title"><div class="container prose"><h2 id="place-context-title">Что делать дальше</h2><ul><li><a href="/tos/">Открыть полный каталог ТОС</a></li><li><a href="/map/">Посмотреть территории на карте</a></li><li><a href="/verification-guide/">Узнать, как портал проверяет сведения</a></li><li><a href="/update-tos/?type=card#message-builder">Передать уточнение по карточке или границам</a></li></ul></div></section></main>${footer()}</body></html>`;
 }
 
 function main() {
@@ -119,15 +202,22 @@ function main() {
     grouped.get(location).push(tos);
   }
 
-  const places = [...grouped.entries()].map(([name, items]) => ({
-    name,
-    slug: slugify(placeTitle(name)),
-    count: items.length,
-    toses: items.sort((a, b) => String(a.name).localeCompare(String(b.name), 'ru')),
-    summary: items.length === 1
-      ? `На этой территории сейчас связана 1 карточка ТОС.`
-      : `На этой территории сейчас связано ${items.length} карточек ТОС.`
-  })).sort((a, b) => String(a.name).localeCompare(String(b.name), 'ru'));
+  const places = [...grouped.entries()].map(([name, items]) => {
+    const sortedItems = items.sort((a, b) => String(a.name).localeCompare(String(b.name), 'ru'));
+    const statuses = sortedItems.map(verificationInfo);
+    return {
+      name,
+      slug: slugify(placeTitle(name)),
+      count: sortedItems.length,
+      toses: sortedItems,
+      verifiedCount: statuses.filter((item) => item.status === 'verified').length,
+      partialCount: statuses.filter((item) => item.status === 'partial').length,
+      reviewCount: statuses.filter((item) => item.status === 'needs_review' || item.status === 'stale').length,
+      summary: sortedItems.length === 1
+        ? 'На этой территории сейчас связана 1 карточка ТОС.'
+        : `На этой территории сейчас связано ${sortedItems.length} карточек ТОС.`
+    };
+  }).sort((a, b) => String(a.name).localeCompare(String(b.name), 'ru'));
 
   fs.rmSync(PLACES_DIR, { recursive: true, force: true });
   write(path.join(PLACES_DIR, 'index.html'), makeIndex(places));
