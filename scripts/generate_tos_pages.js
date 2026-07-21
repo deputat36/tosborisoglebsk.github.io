@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
@@ -11,6 +12,7 @@ const EVENTS_PATH = path.join(ROOT, 'data', 'events.json');
 const NEEDS_PATH = path.join(ROOT, 'data', 'needs.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const DETAIL_TRUST_VERSION = '2026-07-12';
+const RELATED_CONTENT_TRUST_VERSION = '2026-07-21';
 
 function esc(value) {
   return String(value ?? '')
@@ -182,21 +184,40 @@ function clarifyBlock(tos, qualityScore, verification) {
     : '<p>Основные поля заполнены и доказательная проверка зафиксирована.</p>';
   return `<section class="section tight"><div class="container grid"><article class="card full"><div class="card-inner"><div class="meta"><span class="tag">Проверка данных</span><span class="tag ${verificationClass(verification.status)}">${esc(verification.label)}</span></div><h2>Что нужно уточнить</h2>${message}<p class="tiny">Техническая заполненность полей: ${esc(qualityScore)}%. Это не является подтверждением актуальности.</p><div class="notice"><b style="color:var(--text)">Как помочь</b><br>Пришлите только данные, которые можно размещать открыто, и укажите, откуда они получены.</div><div class="card-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Прислать уточнение</a></div><p class="tiny"><a href="/data-quality/">Состояние данных</a> · <a href="/sources/">Правила источников</a></p></div></article></div></section>`;
 }
+function relatedTrust(item, collection) {
+  const origin = inferContentOrigin(item, collection);
+  return {
+    origin,
+    label: contentOriginLabel(origin),
+    className: contentOriginClass(origin),
+    notice: contentOriginNotice(origin, collection)
+  };
+}
+function relatedAttributes(item, collection, origin = '') {
+  return `data-related-collection="${esc(collection)}" data-related-id="${esc(item.id || '')}" data-related-tos="${esc(item.tos_slug || '')}"${origin ? ` data-content-origin="${esc(origin)}"` : ''}`;
+}
+function relatedOriginNotice(item, collection, trust) {
+  return `<p class="tiny" data-related-origin-notice="${esc(`${collection}:${item.id || ''}`)}">${esc(trust.notice)}</p>`;
+}
 function newsCard(n) {
-  return `<article class="list-item"><div class="meta"><span class="tag">${esc(n.category || 'Новость')}</span><span class="tag">${esc(niceDate(n.date))}</span></div><h3>${esc(n.title || 'Новость')}</h3><p>${esc(n.lead || '')}</p><div class="card-actions"><a class="btn" href="/news/${esc(n.id)}/">Читать</a>${n.source_url ? `<a class="btn" href="${esc(n.source_url)}" target="_blank" rel="noopener">Источник</a>` : ''}</div></article>`;
+  const trust = relatedTrust(n, 'news');
+  return `<article class="list-item" ${relatedAttributes(n, 'news', trust.origin)}><div class="meta"><span class="tag">${esc(n.category || 'Новость')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span><span class="tag">${esc(niceDate(n.date))}</span></div><h3>${esc(n.title || 'Новость')}</h3><p>${esc(n.lead || '')}</p>${relatedOriginNotice(n, 'news', trust)}<div class="card-actions"><a class="btn" href="/news/${esc(n.id)}/">Открыть запись</a>${n.source_url ? `<a class="btn" href="${esc(n.source_url)}" target="_blank" rel="noopener">Источник</a>` : ''}</div></article>`;
 }
 function eventCard(e) {
-  return `<article class="list-item"><div class="meta"><span class="tag">${esc(e.type || 'Событие')}</span><span class="tag">${esc(niceDate(e.date))}${e.time ? ' · ' + esc(e.time) : ''}</span></div><h3>${esc(e.title || 'Событие')}</h3><p>${esc(e.description || '')}</p><p class="tiny"><b>Место:</b> ${esc(e.place || 'Уточняется')}</p><div class="card-actions"><a class="btn" href="/calendar/">Календарь</a></div></article>`;
+  return `<article class="list-item" ${relatedAttributes(e, 'events')}><div class="meta"><span class="tag">${esc(e.type || 'Событие')}</span><span class="tag">${esc(niceDate(e.date))}${e.time ? ' · ' + esc(e.time) : ''}</span></div><h3>${esc(e.title || 'Событие')}</h3><p>${esc(e.description || '')}</p><p class="tiny"><b>Место:</b> ${esc(e.place || 'Уточняется')}</p><div class="card-actions"><a class="btn" href="/calendar/">Календарь</a></div></article>`;
 }
 function projectCard(p) {
+  const trust = relatedTrust(p, 'projects');
   const steps = arr(p.steps).slice(0, 4).map(s => `<li>${esc(s)}</li>`).join('');
-  return `<article class="card"><div class="card-inner"><div class="tag">${esc(p.type || 'Проект')}</div><h3>${esc(p.title || 'Проект')}</h3><p>${esc(p.description || '')}</p>${steps ? `<hr class="sep"/><ul class="tiny">${steps}</ul>` : ''}<div class="card-actions"><a class="btn" href="/projects/${esc(p.id)}/">Подробнее</a></div></div></article>`;
+  return `<article class="card" ${relatedAttributes(p, 'projects', trust.origin)}><div class="card-inner"><div class="meta"><span class="tag">${esc(p.type || 'Проект')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span></div><h3>${esc(p.title || 'Проект')}</h3><p>${esc(p.description || '')}</p>${relatedOriginNotice(p, 'projects', trust)}${steps ? `<hr class="sep"/><ul class="tiny">${steps}</ul>` : ''}<div class="card-actions"><a class="btn" href="/projects/${esc(p.id)}/">Открыть запись</a></div></div></article>`;
 }
 function doneCard(d) {
-  return `<article class="list-item"><div class="meta"><span class="tag">${esc(d.type || 'Сделано')}</span><span class="tag">${esc(niceDate(d.date))}</span></div><h3>${esc(d.title || 'История ТОС')}</h3><p>${esc(d.summary || '')}</p><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${esc(d.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${esc(d.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Результат</span><p>${esc(d.result || 'Информация уточняется.')}</p></div></article></div><div class="card-actions"><a class="btn" href="/done/">Все истории</a><a class="btn" href="${esc(updateUrl({ slug: d.tos_slug || '' }, 'photo'))}">Прислать фото</a></div></article>`;
+  const trust = relatedTrust(d, 'done');
+  return `<article class="list-item" ${relatedAttributes(d, 'done', trust.origin)}><div class="meta"><span class="tag">${esc(d.type || 'Сделано')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span><span class="tag">${esc(niceDate(d.date))}</span></div><h3>${esc(d.title || 'История ТОС')}</h3><p>${esc(d.summary || '')}</p>${relatedOriginNotice(d, 'done', trust)}<div class="grid"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${esc(d.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${esc(d.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Результат</span><p>${esc(d.result || 'Информация уточняется.')}</p></div></article></div><div class="card-actions"><a class="btn" href="/done/${esc(d.id)}/">Открыть запись</a><a class="btn" href="${esc(updateUrl({ slug: d.tos_slug || '' }, 'photo'))}">Прислать фото</a></div></article>`;
 }
 function needCard(n) {
-  return `<article class="list-item"><div class="meta"><span class="tag">${esc(n.need_type || 'Помощь')}</span><span class="tag ${n.priority === 'Высокий' ? 'warn' : ''}">${esc(n.priority || 'Приоритет уточняется')}</span></div><h3>${esc(n.title || 'Потребность')}</h3><p>${esc(n.description || '')}</p><p class="tiny"><b>Контакт:</b> ${esc(n.contact || 'Уточняется')}</p><div class="card-actions"><a class="btn" href="/needs/">Все потребности</a><a class="btn" href="/contacts/">Предложить помощь</a></div></article>`;
+  const trust = relatedTrust(n, 'needs');
+  return `<article class="list-item" ${relatedAttributes(n, 'needs', trust.origin)}><div class="meta"><span class="tag">${esc(n.need_type || 'Помощь')}</span><span class="tag ${n.priority === 'Высокий' ? 'warn' : ''}">${esc(n.priority || 'Приоритет уточняется')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span></div><h3>${esc(n.title || 'Потребность')}</h3><p>${esc(n.description || '')}</p>${relatedOriginNotice(n, 'needs', trust)}<p class="tiny" data-related-contact-policy="${esc(n.id || '')}">Контакт и способ помощи доступны в основной записи после проверки статуса материала.</p><div class="card-actions"><a class="btn" href="/needs/${esc(n.id)}/">Открыть запись</a><a class="btn" href="/contacts/">Предложить помощь</a></div></article>`;
 }
 function block(title, subtitle, linkText, linkUrl, content, layout = 'list') {
   if (!content) return '';
