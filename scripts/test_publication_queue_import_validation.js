@@ -1,4 +1,5 @@
 const assert = require('assert');
+const contract = require('../assets/js/publication-queue-contract.js');
 const validation = require('../assets/js/publication-queue-import-validation.js');
 
 function queueRow(overrides = {}) {
@@ -16,6 +17,14 @@ function queueRow(overrides = {}) {
     blocker: 'источник и разрешения не проверены',
     owner: '',
     next_step: 'проверить источник дату и разрешение',
+    ...overrides
+  };
+}
+
+function canonicalRow(overrides = {}) {
+  return {
+    ...queueRow(),
+    queue_id: 'queue-008',
     ...overrides
   };
 }
@@ -40,11 +49,15 @@ function intakeRow(overrides = {}) {
   };
 }
 
-assert.deepStrictEqual(validation.QUEUE_HEADERS, [
-  'queue_id', 'submission_type', 'tos_name', 'title', 'source_checked', 'permission_checked',
-  'personal_data_checked', 'media_checked', 'target_file', 'status', 'blocker', 'owner', 'next_step'
-]);
+assert.deepStrictEqual(validation.QUEUE_HEADERS, contract.QUEUE_HEADERS);
+assert.deepStrictEqual([...contract.STATUSES], ['draft', 'checking', 'ready', 'published', 'rejected']);
+assert.strictEqual(contract.formatCanonicalId(8), 'queue-008');
+assert.strictEqual(contract.parseCanonicalNumber('queue-107'), 107);
+assert.strictEqual(contract.parseCanonicalNumber('incoming-20260721-090000'), null);
+assert.throws(() => contract.formatCanonicalId(1000), /от 1 до 999/);
+
 assert.strictEqual(validation.validateQueueRow(queueRow()).length, 0);
+assert.ok(validation.validateQueueRow(queueRow({ queue_id: 'queue-008' })).some((message) => message.includes('временный')));
 assert.strictEqual(validation.validateIntakeRow(intakeRow()).length, 0);
 
 const queueCsv = validation.toCsv(validation.QUEUE_HEADERS, [queueRow()]);
@@ -67,16 +80,24 @@ const exactId = validation.analyze([queueRow()], [queueRow()], []);
 assert.strictEqual(exactId[0].duplicate.level, 'exact');
 assert.strictEqual(exactId[0].canApprove, false);
 
+const repeatedIncomingId = validation.analyze(
+  [queueRow({ title: 'Первая строка' }), queueRow({ title: 'Вторая строка' })],
+  [],
+  []
+);
+assert.strictEqual(repeatedIncomingId[1].duplicate.level, 'exact');
+assert.ok(repeatedIncomingId[1].duplicate.reason.includes('временный queue_id'));
+
 const exactContent = validation.analyze(
   [queueRow({ queue_id: 'incoming-20260721-090001' })],
-  [queueRow({ queue_id: 'queue-100' })],
+  [canonicalRow({ queue_id: 'queue-100' })],
   []
 );
 assert.strictEqual(exactContent[0].duplicate.level, 'exact');
 
 const possible = validation.analyze(
   [queueRow({ title: 'Большой субботник на территории ТОС Проверка' })],
-  [queueRow({ queue_id: 'queue-101', title: 'Субботник на территории ТОС Проверка' })],
+  [canonicalRow({ queue_id: 'queue-101', title: 'Субботник на территории ТОС Проверка' })],
   []
 );
 assert.strictEqual(possible[0].duplicate.level, 'possible');
@@ -92,8 +113,41 @@ const unsafeIntake = validation.analyze([queueRow()], [], [intakeRow({ source_co
 assert.strictEqual(unsafeIntake[0].valid, false);
 assert.ok(unsafeIntake[0].intakeErrors.some((message) => message.includes('CSV-формула')));
 
+const current = [canonicalRow({ queue_id: 'queue-001' }), canonicalRow({ queue_id: 'queue-007' })];
+assert.strictEqual(contract.nextCanonicalNumber(current), 8);
+const sourceRows = [
+  queueRow({ queue_id: 'incoming-20260721-090010', title: 'Материал один' }),
+  queueRow({ queue_id: 'incoming-20260721-090011', title: 'Материал два' })
+];
+const canonicalized = validation.canonicalizeApprovedRows(sourceRows, current);
+assert.deepStrictEqual(canonicalized.map((row) => row.queue_id), ['queue-008', 'queue-009']);
+assert.deepStrictEqual(sourceRows.map((row) => row.queue_id), ['incoming-20260721-090010', 'incoming-20260721-090011']);
+canonicalized.forEach((row) => assert.deepStrictEqual(contract.validateCanonicalRow(row), []));
+assert.throws(
+  () => validation.canonicalizeApprovedRows([queueRow()], [canonicalRow({ queue_id: 'queue-999' })]),
+  /закончился диапазон/
+);
+
+assert.ok(contract.validateCanonicalRow(canonicalRow({ status: 'source_check' })).some((message) => message.includes('unsupported status')));
+assert.ok(contract.validateCanonicalRow(canonicalRow({ status: 'checking', blocker: '' })).some((message) => message.includes('requires blocker')));
+assert.ok(contract.validateCanonicalRow(canonicalRow({ status: 'ready', blocker: '' })).some((message) => message.includes('requires owner')));
+const ready = canonicalRow({
+  status: 'ready',
+  source_checked: 'да',
+  permission_checked: 'не применимо',
+  personal_data_checked: 'да',
+  media_checked: 'не применимо',
+  blocker: '',
+  owner: 'редакция портала'
+});
+assert.deepStrictEqual(contract.validateCanonicalRow(ready), []);
+const published = { ...ready, status: 'published', target_file: 'news/test-material/index.html' };
+assert.deepStrictEqual(contract.validateCanonicalRow(published), []);
+assert.ok(contract.validateCanonicalRow({ ...ready, target_file: '../private.txt' }).some((message) => message.includes('unsupported target_file')));
+assert.ok(contract.validateCanonicalRow({ ...ready, submission_type: 'media' }).some((message) => message.includes('media submission')));
+
 const formulaCsv = validation.toCsv(['title'], [{ title: '=1+1' }]);
 assert.ok(formulaCsv.includes("'=1+1"));
 assert.ok(!formulaCsv.includes('\n=1+1'));
 
-console.log('Publication queue import validation OK: draft-only, duplicate-aware and formula-safe');
+console.log('Publication queue contract OK: canonical IDs, unified statuses, duplicate-aware and formula-safe');
