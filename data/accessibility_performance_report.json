@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T12:26:44.328Z",
+  "generated_at": "2026-07-21T13:07:39.189Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 105,
     "over_budget_assets": 0,
     "total_css_bytes": 45337,
-    "total_js_bytes": 609228,
+    "total_js_bytes": 609408,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -162,6 +162,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/tos-catalog.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10230,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-execution.js",
       "group": "js",
       "extension": ".js",
@@ -187,13 +194,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10059,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/tos-catalog.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10050,
       "over_budget": false
     },
     {
