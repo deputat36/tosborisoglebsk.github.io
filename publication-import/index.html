@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Предварительный импорт редакционной очереди — ТОС БГО</title>
+  <meta name="description" content="Локальная проверка CSV редакционной очереди ТОС БГО: схема, дубли, ручное подтверждение строк и безопасный экспорт предпросмотра без записи на сайт."/>
+  <meta name="robots" content="noindex,follow"/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/publication-import/"/>
+  <meta property="og:title" content="Предварительный импорт редакционной очереди — ТОС БГО"/>
+  <meta property="og:description" content="Проверка локальных CSV перед ручным добавлением в редакционную очередь."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/publication-import/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <link rel="stylesheet" href="/assets/css/design-upgrades.css"/>
+  <link rel="stylesheet" href="/assets/css/publication-queue-import.css"/>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+<main id="main">
+  <noscript><section class="section tight"><div class="container notice"><b>Для проверки CSV нужен JavaScript.</b> Страница не может читать локальные файлы без выполнения сценария в браузере.</div></section></noscript>
+
+  <section class="hero"><div class="container hero-card home-hero"><div class="eyebrow">Редакционный контроль</div><h1>Предварительный импорт очереди публикаций</h1><p class="lead">Загрузите CSV, созданные конструктором материалов. Страница проверит схему, сравнит строки с рабочей очередью, покажет дубли и сформирует локальный файл только после ручного подтверждения каждой строки.</p><div class="hero-actions"><a class="btn primary" href="#import-workspace">Проверить CSV</a><a class="btn" href="/update-tos/">Создать материал</a><a class="btn" href="/publication-queue/">Правила очереди</a><a class="btn" href="/content-intake/">Правила приёма</a></div></div></section>
+
+  <section class="section tight"><div class="container notice"><b>Без автоматической записи:</b> страница не изменяет <code>data/publication_queue.csv</code>, не отправляет файлы на сервер и не повышает статус материала. Итоговый CSV остаётся локальным предпросмотром, который нужно проверить и добавить в репозиторий отдельным осознанным действием.</div></section>
+
+  <section class="section" id="import-workspace">
+    <div class="container import-workspace">
+      <section class="import-panel" aria-labelledby="files-title">
+        <div class="section-head"><div><h2 id="files-title">1. Выберите локальные CSV</h2><p>Строка очереди обязательна, карточка приёма добавляет контекст</p></div></div>
+        <div class="import-file-grid">
+          <label class="import-file" for="queue-import-file"><b>Строка очереди CSV</b><span class="tiny">Файл с полями рабочей очереди. Каждая строка должна оставаться в статусе <code>draft</code>.</span><input id="queue-import-file" type="file" accept=".csv,text/csv"/></label>
+          <label class="import-file" for="intake-import-file"><b>Карточка приёма CSV</b><span class="tiny">Необязательный локальный файл с источником, датой и контактом для редакции.</span><input id="intake-import-file" type="file" accept=".csv,text/csv"/></label>
+        </div>
+        <div id="current-queue-status" class="notice compact" aria-live="polite">Загрузка действующей очереди для проверки дублей…</div>
+        <div id="import-status" class="notice compact" aria-live="polite">Локальные файлы ещё не выбраны.</div>
+        <div class="notice compact privacy-callout"><b>Конфиденциальность:</b> карточка приёма может содержать контакт для уточнения. Она читается только в текущей вкладке, не включается в объединённую очередь и не должна попадать в публичный репозиторий без очистки закрытых сведений.</div>
+      </section>
+
+      <section class="import-panel" aria-labelledby="summary-title">
+        <div class="section-head"><div><h2 id="summary-title">2. Результат автоматической проверки</h2><p>Схема, обязательные статусы и совпадения с действующей очередью</p></div></div>
+        <div class="import-summary" id="import-summary" aria-live="polite"></div>
+      </section>
+
+      <section class="import-panel" aria-labelledby="review-title">
+        <div class="section-head"><div><h2 id="review-title">3. Ручная проверка каждой строки</h2><p>Группового подтверждения нет: каждую строку нужно просмотреть отдельно</p></div></div>
+        <div class="import-candidate-list" id="import-candidate-list"></div>
+      </section>
+
+      <section class="import-panel" aria-labelledby="export-title">
+        <div class="section-head"><div><h2 id="export-title">4. Локальный экспорт</h2><p>Скачивание не изменяет рабочую очередь на сайте</p></div></div>
+        <div class="import-actions">
+          <button class="btn primary" id="download-approved-rows" type="button" disabled>Скачать подтверждённые строки</button>
+          <button class="btn" id="download-merged-preview" type="button" disabled>Скачать объединённый предпросмотр</button>
+          <button class="btn" id="reset-import" type="button">Очистить локальные файлы</button>
+          <a class="btn" href="/data/publication_queue.csv">Открыть действующую очередь</a>
+        </div>
+        <div class="notice compact privacy-callout"><b>Ограничение:</b> даже подтверждённая здесь строка остаётся <code>draft</code>. Переход в <code>source_check</code>, <code>consent_check</code>, <code>ready</code> или <code>published</code> выполняется только после отдельных редакционных проверок.</div>
+      </section>
+    </div>
+  </section>
+</main>
+<footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Локальная проверка редакционного импорта.</div></div></footer>
+<script src="/assets/js/site.js"></script>
+<script src="/assets/js/publication-queue-import-validation.js"></script>
+<script src="/assets/js/publication-queue-import.js"></script>
+</body>
+</html>
