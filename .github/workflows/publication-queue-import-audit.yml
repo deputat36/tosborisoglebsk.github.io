@@ -7,9 +7,13 @@ on:
     paths:
       - 'publication-import/**'
       - 'assets/css/publication-queue-import.css'
+      - 'assets/js/publication-queue-contract.js'
       - 'assets/js/publication-queue-import-validation.js'
       - 'assets/js/publication-queue-import.js'
+      - 'data/publication_queue.csv'
       - 'scripts/test_publication_queue_import_validation.js'
+      - 'scripts/audit_publication_queue.js'
+      - 'scripts/audit_publication_queue_content.js'
       - 'scripts/audit_publication_queue_import_page.js'
       - 'content-intake/index.html'
       - 'publication-queue/index.html'
@@ -40,13 +44,22 @@ jobs:
 
       - name: Check JavaScript syntax
         run: |
+          node --check assets/js/publication-queue-contract.js
           node --check assets/js/publication-queue-import-validation.js
           node --check assets/js/publication-queue-import.js
           node --check scripts/test_publication_queue_import_validation.js
+          node --check scripts/audit_publication_queue.js
+          node --check scripts/audit_publication_queue_content.js
           node --check scripts/audit_publication_queue_import_page.js
 
-      - name: Test import validation
+      - name: Test queue contract and import validation
         run: node scripts/test_publication_queue_import_validation.js
+
+      - name: Audit canonical publication queue
+        run: node scripts/audit_publication_queue.js
+
+      - name: Audit publication queue content
+        run: node scripts/audit_publication_queue_content.js
 
       - name: Audit import page
         run: |
@@ -63,6 +76,8 @@ jobs:
           name: publication-queue-import-audit
           path: |
             publication-import/index.html
+            publication-queue/index.html
+            data/publication_queue.csv
             publication-queue-import-audit.log
           if-no-files-found: warn
           retention-days: 14
