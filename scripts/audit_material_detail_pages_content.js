@@ -23,8 +23,13 @@ function expectIncludes(errors, line, html, value, message) {
   if (!html.includes(value)) errors.push(`${line}: ${message}`);
 }
 
-function htmlEntityAmp(value) {
-  return String(value || '').replace(/&/g, '&amp;');
+function esc(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 function compactText(value, maxLength) {
@@ -75,8 +80,8 @@ function main() {
     const originNotice = contentOriginNotice(origin, 'articles');
 
     expectIncludes(errors, line, html, '<html lang="ru">', 'page must declare Russian language');
-    expectIncludes(errors, line, html, `<title>${title} | Материалы ТОС БГО</title>`, 'title must match material template');
-    expectIncludes(errors, line, html, `<meta name="description" content="${htmlEntityAmp(description)}"`, 'meta description must match generated description');
+    expectIncludes(errors, line, html, `<title>${esc(title)} | Материалы ТОС БГО</title>`, 'title must match material template');
+    expectIncludes(errors, line, html, `<meta name="description" content="${esc(description)}"`, 'meta description must match generated description');
     expectIncludes(errors, line, html, `<link rel="canonical" href="${canonical}"`, 'canonical URL is missing');
     expectIncludes(errors, line, html, '<meta property="og:type" content="article"', 'Open Graph type must be article');
     expectIncludes(errors, line, html, `<meta property="og:url" content="${canonical}"`, 'Open Graph URL is missing');
@@ -84,10 +89,10 @@ function main() {
     expectIncludes(errors, line, html, `"headline":"${title}`, 'JSON-LD headline is missing');
     expectIncludes(errors, line, html, `"articleSection":"${category}`, 'JSON-LD articleSection is missing');
     expectIncludes(errors, line, html, `"mainEntityOfPage":"${canonical}"`, 'JSON-LD mainEntityOfPage is missing');
-    expectIncludes(errors, line, html, `<h1>${title}</h1>`, 'h1 must match material title');
-    expectIncludes(errors, line, html, `<p class="lead">${lead}</p>`, 'lead is missing');
-    expectIncludes(errors, line, html, `<span class="tag ">${originLabel}</span>`, 'content origin label is missing');
-    expectIncludes(errors, line, html, `<b>Статус материала:</b> ${originNotice}`, 'content origin notice is missing');
+    expectIncludes(errors, line, html, `<h1>${esc(title)}</h1>`, 'h1 must match material title');
+    expectIncludes(errors, line, html, `<p class="lead">${esc(lead)}</p>`, 'lead is missing');
+    expectIncludes(errors, line, html, `<span class="tag ">${esc(originLabel)}</span>`, 'content origin label is missing');
+    expectIncludes(errors, line, html, `<b>Статус материала:</b> ${esc(originNotice)}`, 'content origin notice is missing');
     expectIncludes(errors, line, html, '<a class="chip" href="/materials/">', 'back link to materials is missing');
     expectIncludes(errors, line, html, 'id="material-context"', 'material context section is missing');
     expectIncludes(errors, line, html, '/verification-guide/', 'verification guide link is missing');
@@ -101,7 +106,7 @@ function main() {
     const content = Array.isArray(article.content) ? article.content.filter(Boolean) : [];
     if (!content.length) errors.push(`${line}: article content is empty`);
     content.forEach((paragraph, paragraphIndex) => {
-      if (!html.includes(`<p>${paragraph}</p>`)) {
+      if (!html.includes(`<p>${esc(paragraph)}</p>`)) {
         errors.push(`${line}: missing paragraph ${paragraphIndex + 1}`);
       }
     });
