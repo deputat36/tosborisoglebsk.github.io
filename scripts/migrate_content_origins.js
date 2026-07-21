@@ -3,7 +3,7 @@ const path = require('path');
 const { inferContentOrigin } = require('./lib/content_origin');
 
 const ROOT = process.cwd();
-const COLLECTIONS = ['news', 'projects', 'needs', 'done'];
+const COLLECTIONS = ['news', 'projects', 'needs', 'done', 'articles'];
 
 function readJson(filePath) {
   try {
