@@ -34,6 +34,7 @@ function read(filePath) {
 function main() {
   const errors = [];
   const html = read(pagePath);
+  const htmlLower = html.toLocaleLowerCase('ru');
   const validation = read(validationPath);
   const app = read(appPath);
   const css = read(cssPath);
@@ -44,7 +45,7 @@ function main() {
   if (!html.includes('Без автоматической записи') || !html.includes('не изменяет <code>data/publication_queue.csv</code>')) errors.push('no-write limitation is missing');
   if (!html.includes('Группового подтверждения нет') || !html.includes('каждую строку нужно просмотреть отдельно')) errors.push('manual per-row review must be explicit');
   if (!html.includes('остаётся <code>draft</code>') || !html.includes('<code>ready</code>')) errors.push('draft-only status boundary is missing');
-  if (!html.includes('Карточка приёма может содержать контакт') || !html.includes('не должна попадать в публичный репозиторий')) errors.push('intake privacy warning is missing');
+  if (!htmlLower.includes('карточка приёма может содержать контакт') || !htmlLower.includes('не должна попадать в публичный репозиторий')) errors.push('intake privacy warning is missing');
 
   requiredControls.forEach((id) => {
     if (!html.includes(`id="${id}"`)) errors.push(`missing control #${id}`);
