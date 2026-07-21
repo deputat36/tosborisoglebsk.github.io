@@ -8,6 +8,7 @@ runChecks([
   ['rss feed content', 'scripts/audit_rss_feed_content.js'],
   ['required project ids', 'scripts/audit_projects_required_ids.js'],
   ['required done ids', 'scripts/audit_done_required_ids.js'],
+  ['collection context navigation', 'scripts/audit_collection_context_navigation.js'],
   ['required catalog slugs', 'scripts/audit_required_slugs.js'],
   ['submit materials page', 'scripts/audit_submit_materials_content.js'],
   ['verification levels page', 'scripts/audit_verification_levels_content.js'],
