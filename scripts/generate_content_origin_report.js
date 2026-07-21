@@ -4,7 +4,7 @@ const { inferContentOrigin } = require('./lib/content_origin');
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, 'data', 'content_origin_report.json');
-const COLLECTIONS = ['news', 'projects', 'needs', 'done'];
+const COLLECTIONS = ['news', 'projects', 'needs', 'done', 'articles'];
 
 function readJson(relativePath, fallback = []) {
   const filePath = path.join(ROOT, relativePath);
