@@ -29,6 +29,7 @@
     'data/toses.json',
     'data/media_intake_register.csv'
   ]);
+  const PUBLISHED_TARGET_PATTERN = /^(?:news|projects|needs|done|tos)\/[a-z0-9-]+\/index\.html$/;
   const CHECK_VALUES = new Set(['да', 'нет', 'не применимо']);
   const STATUSES = new Set(['draft', 'checking', 'ready', 'published', 'rejected']);
   const CANONICAL_ID_PATTERN = /^queue-(\d{3})$/;
@@ -59,6 +60,11 @@
   });
 
   const clean = (value) => String(value ?? '').trim();
+
+  function isAllowedCanonicalTargetFile(value) {
+    const target = clean(value);
+    return TARGET_FILES.has(target) || PUBLISHED_TARGET_PATTERN.test(target);
+  }
 
   function parseCanonicalNumber(value) {
     const match = clean(value).match(CANONICAL_ID_PATTERN);
@@ -112,6 +118,7 @@
     const queueId = clean(row?.queue_id);
     const submissionType = clean(row?.submission_type);
     const status = clean(row?.status);
+    const targetFile = clean(row?.target_file);
 
     if (!queueId) errors.push('missing queue_id');
     else if (!CANONICAL_ID_PATTERN.test(queueId)) errors.push(`invalid queue_id ${queueId}`);
@@ -120,7 +127,7 @@
       const value = clean(row?.[field]);
       if (!CHECK_VALUES.has(value)) errors.push(`unsupported ${field} ${value}`);
     });
-    if (!TARGET_FILES.has(clean(row?.target_file))) errors.push(`unsupported target_file ${clean(row?.target_file)}`);
+    if (!isAllowedCanonicalTargetFile(targetFile)) errors.push(`unsupported target_file ${targetFile}`);
     if (!STATUSES.has(status)) errors.push(`unsupported status ${status}`);
     if (!clean(row?.next_step)) errors.push('missing next_step');
     if (['draft', 'checking', 'rejected'].includes(status) && !clean(row?.blocker)) {
@@ -137,6 +144,7 @@
     QUEUE_HEADERS,
     SUBMISSION_TYPES,
     TARGET_FILES,
+    PUBLISHED_TARGET_PATTERN,
     CHECK_VALUES,
     STATUSES,
     CANONICAL_ID_PATTERN,
@@ -144,6 +152,7 @@
     MAX_QUEUE_NUMBER,
     STATUS_DETAILS,
     clean,
+    isAllowedCanonicalTargetFile,
     parseCanonicalNumber,
     formatCanonicalId,
     nextCanonicalNumber,
