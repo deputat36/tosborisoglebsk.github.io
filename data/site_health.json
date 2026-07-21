@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T20:27:08.254Z",
+  "generated_at": "2026-07-21T05:11:30.135Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 72,
   "score_breakdown": {
@@ -22,7 +22,7 @@
     "приоритеты автономной работы и блокировки по неподтверждённым данным"
   ],
   "catalog": {
-    "generated_at": "2026-07-20T20:27:05.673Z",
+    "generated_at": "2026-07-21T05:11:27.687Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -42,9 +42,9 @@
     "average_score": 88
   },
   "pages": {
-    "total": 363,
+    "total": 364,
     "public": 305,
-    "noindex": 58,
+    "noindex": 59,
     "seo_warnings_count": 0,
     "broken_internal_links_count": 0
   },
@@ -176,7 +176,7 @@
     {
       "level": "good",
       "area": "Техническая база",
-      "finding": "Собрано 363 HTML-страниц, из них 305 публичных и 58 служебных."
+      "finding": "Собрано 364 HTML-страниц, из них 305 публичных и 59 служебных."
     },
     {
       "level": "good",
@@ -265,7 +265,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-07-20T20:27:05.846Z",
+    "generated_at": "2026-07-21T05:11:27.845Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {

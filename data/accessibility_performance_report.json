@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20T20:27:08.054Z",
+  "generated_at": "2026-07-21T05:11:29.913Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,7 +9,7 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 365,
+    "html_pages": 366,
     "public_pages": 305,
     "pages_with_issues": 0,
     "issue_counts": {},
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 101,
+    "asset_files": 104,
     "over_budget_assets": 0,
-    "total_css_bytes": 43057,
-    "total_js_bytes": 575118,
+    "total_css_bytes": 45337,
+    "total_js_bytes": 599829,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -99,6 +99,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/publication-queue-import.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 13755,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/outreach-execution-ui.js",
       "group": "js",
       "extension": ".js",
@@ -131,6 +138,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11249,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/publication-queue-import-validation.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10956,
       "over_budget": false
     },
     {
@@ -222,20 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 7814,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/events.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 7226,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/manual-blocker-summary.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 7030,
       "over_budget": false
     }
   ],
