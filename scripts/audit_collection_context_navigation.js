@@ -8,7 +8,8 @@ const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
 const COLLECTIONS = [
   { name: 'projects', dataPath: path.join(ROOT, 'data', 'projects.json'), directory: 'projects' },
   { name: 'needs', dataPath: path.join(ROOT, 'data', 'needs.json'), directory: 'needs' },
-  { name: 'done', dataPath: path.join(ROOT, 'data', 'done.json'), directory: 'done' }
+  { name: 'done', dataPath: path.join(ROOT, 'data', 'done.json'), directory: 'done' },
+  { name: 'articles', dataPath: path.join(ROOT, 'data', 'articles.json'), directory: 'materials' }
 ];
 
 function readArray(filePath, errors) {
