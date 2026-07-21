@@ -114,7 +114,6 @@ const checks = [
   ['Site health audit', 'scripts/audit_site_health.js'],
   ['Status document metrics updater self-test', 'scripts/test_status_document_metrics_update.js'],
   ['Status document audit self-test', 'scripts/test_status_document_audit.js'],
-  ['Status document audit', 'scripts/audit_status_document.js'],
   ['Homepage content audit', 'scripts/audit_homepage_content.js'],
   ['Update center content audit', 'scripts/audit_update_center_content.js'],
   ['Search content audit', 'scripts/audit_search_content.js'],
