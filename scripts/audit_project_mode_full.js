@@ -69,6 +69,7 @@ const checks = [
   ['Done integrity audit', 'scripts/audit_done_integrity.js'],
   ['Done pages content audit', 'scripts/audit_done_pages_content.js'],
   ['Done action routes content audit', 'scripts/audit_done_action_routes_content.js'],
+  ['Collection context navigation audit', 'scripts/audit_collection_context_navigation.js'],
   ['Content intake template audit', 'scripts/audit_content_intake_template.js'],
   ['Publication consent checklist audit', 'scripts/audit_publication_consent_checklist.js'],
   ['Publication queue audit', 'scripts/audit_publication_queue.js'],
