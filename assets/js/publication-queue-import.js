@@ -21,7 +21,8 @@
     analysis: [],
     currentLoaded: false,
     approved: new Set(),
-    duplicateOverrides: new Set()
+    duplicateOverrides: new Set(),
+    canonicalizationError: ''
   };
 
   const clean = (value) => String(value ?? '').trim();
@@ -51,7 +52,7 @@
     URL.revokeObjectURL(link.href);
   }
 
-  function approvedRows() {
+  function approvedSourceRows() {
     return state.analysis
       .filter((item) => item.canApprove)
       .filter((item) => state.approved.has(item.index))
@@ -59,10 +60,31 @@
       .map((item) => item.row);
   }
 
+  function approvedRows() {
+    const rows = approvedSourceRows();
+    if (!rows.length || !state.currentLoaded) return [];
+    return validation.canonicalizeApprovedRows(rows, state.currentRows);
+  }
+
+  function canonicalRange(rows) {
+    if (!rows.length) return '—';
+    const first = rows[0].queue_id;
+    const last = rows[rows.length - 1].queue_id;
+    return first === last ? first : `${first}…${last}`;
+  }
+
   function refreshActions() {
-    const approved = approvedRows();
-    downloadApprovedButton.disabled = !state.currentLoaded || approved.length === 0;
-    downloadMergedButton.disabled = !state.currentLoaded || approved.length === 0;
+    let approved = [];
+    state.canonicalizationError = '';
+    try {
+      approved = approvedRows();
+    } catch (error) {
+      state.canonicalizationError = error.message;
+    }
+
+    const exportAvailable = state.currentLoaded && approved.length > 0 && !state.canonicalizationError;
+    downloadApprovedButton.disabled = !exportAvailable;
+    downloadMergedButton.disabled = !exportAvailable;
 
     const total = state.analysis.length;
     const valid = state.analysis.filter((item) => item.valid).length;
@@ -73,8 +95,13 @@
       `<div class="stat"><b>${valid}</b><span>прошли схему</span></div>`,
       `<div class="stat"><b>${exact}</b><span>точных дублей</span></div>`,
       `<div class="stat"><b>${possible}</b><span>похожих строк</span></div>`,
-      `<div class="stat"><b>${approved.length}</b><span>подтверждено вручную</span></div>`
+      `<div class="stat"><b>${approved.length}</b><span>подтверждено вручную</span></div>`,
+      `<div class="stat"><b>${canonicalRange(approved)}</b><span>канонические ID экспорта</span></div>`
     ].join('');
+
+    if (state.canonicalizationError) {
+      setStatus(importStatus, `Экспорт заблокирован: ${state.canonicalizationError}`, 'danger-notice');
+    }
   }
 
   function detail(label, value) {
@@ -135,7 +162,7 @@
     const details = document.createElement('div');
     details.className = 'import-details';
     details.append(
-      detail('Queue ID', item.row.queue_id),
+      detail('Временный ID', item.row.queue_id),
       detail('ТОС', item.row.tos_name),
       detail('Целевой файл', item.row.target_file),
       detail('Следующий шаг', item.row.next_step)
@@ -160,6 +187,7 @@
     const controls = document.createElement('div');
     controls.className = 'import-review-controls';
 
+    let approve;
     if (item.requiresDuplicateOverride && item.canApprove) {
       const overrideLabel = document.createElement('label');
       overrideLabel.className = 'consent-row';
@@ -171,9 +199,9 @@
         else {
           state.duplicateOverrides.delete(item.index);
           state.approved.delete(item.index);
-          approve.checked = false;
+          if (approve) approve.checked = false;
         }
-        approve.disabled = !override.checked;
+        if (approve) approve.disabled = !override.checked;
         refreshActions();
       });
       const overrideText = document.createElement('span');
@@ -184,7 +212,7 @@
 
     const approveLabel = document.createElement('label');
     approveLabel.className = 'consent-row';
-    const approve = document.createElement('input');
+    approve = document.createElement('input');
     approve.type = 'checkbox';
     approve.checked = state.approved.has(item.index);
     approve.disabled = !state.currentLoaded || !item.canApprove || (item.requiresDuplicateOverride && !state.duplicateOverrides.has(item.index));
@@ -194,7 +222,7 @@
       refreshActions();
     });
     const approveText = document.createElement('span');
-    approveText.textContent = 'Проверил(а) эту строку вручную и включаю её в локальный draft-экспорт.';
+    approveText.textContent = 'Проверил(а) эту строку вручную и включаю её в локальный draft-экспорт с новым каноническим ID.';
     approveLabel.append(approve, approveText);
     controls.appendChild(approveLabel);
 
@@ -221,13 +249,17 @@
     try {
       const response = await fetch('/data/publication_queue.csv', { method: 'GET', cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      state.currentRows = validation.parseDocument(await response.text(), validation.QUEUE_HEADERS);
+      const rows = validation.parseDocument(await response.text(), validation.QUEUE_HEADERS);
+      const invalid = rows.flatMap((row, index) => validation.contract.validateCanonicalRow(row).map((message) => `строка ${index + 2}: ${message}`));
+      if (invalid.length) throw new Error(invalid.slice(0, 3).join(' '));
+      state.currentRows = rows;
       state.currentLoaded = true;
-      setStatus(currentStatus, `Рабочая очередь загружена: ${state.currentRows.length} строк. Сравнение дублей доступно.`, 'ok-notice');
+      const nextId = validation.contract.formatCanonicalId(validation.contract.nextCanonicalNumber(rows));
+      setStatus(currentStatus, `Рабочая очередь загружена: ${rows.length} строк. Следующий свободный идентификатор: ${nextId}.`, 'ok-notice');
     } catch (error) {
       state.currentRows = [];
       state.currentLoaded = false;
-      setStatus(currentStatus, `Не удалось загрузить рабочую очередь: ${error.message}. Экспорт заблокирован, чтобы не пропустить дубли.`, 'danger-notice');
+      setStatus(currentStatus, `Не удалось загрузить рабочую очередь: ${error.message}. Экспорт заблокирован, чтобы не пропустить дубли или конфликт ID.`, 'danger-notice');
     }
     refreshAnalysis();
   }
@@ -242,7 +274,7 @@
     }
     try {
       state.queueRows = validation.parseDocument(await readLocalFile(file), validation.QUEUE_HEADERS);
-      setStatus(importStatus, `Файл очереди прочитан: ${state.queueRows.length} строк. Проверьте каждую строку ниже.`, 'ok-notice');
+      setStatus(importStatus, `Файл очереди прочитан: ${state.queueRows.length} строк. Временные incoming-ID будут заменены при экспорте.`, 'ok-notice');
     } catch (error) {
       state.queueRows = [];
       setStatus(importStatus, `Файл очереди отклонён: ${error.message}`, 'danger-notice');
@@ -277,6 +309,7 @@
     state.intakeRows = [];
     state.approved.clear();
     state.duplicateOverrides.clear();
+    state.canonicalizationError = '';
     setStatus(importStatus, 'Локальные файлы очищены. Рабочая очередь на сайте не изменялась.');
     refreshAnalysis();
   }
@@ -286,18 +319,30 @@
   resetButton.addEventListener('click', resetImport);
 
   downloadApprovedButton.addEventListener('click', () => {
-    const rows = approvedRows();
+    let rows;
+    try {
+      rows = approvedRows();
+    } catch (error) {
+      setStatus(importStatus, `Экспорт заблокирован: ${error.message}`, 'danger-notice');
+      return;
+    }
     if (!rows.length || !state.currentLoaded) return;
     downloadCsv(`publication-queue-approved-${new Date().toISOString().slice(0, 10)}.csv`, validation.toCsv(validation.QUEUE_HEADERS, rows));
-    setStatus(importStatus, `Скачаны только подтверждённые строки: ${rows.length}. Репозиторий не изменён.`, 'ok-notice');
+    setStatus(importStatus, `Скачаны подтверждённые строки с каноническими ID ${canonicalRange(rows)}. Репозиторий не изменён.`, 'ok-notice');
   });
 
   downloadMergedButton.addEventListener('click', () => {
-    const rows = approvedRows();
+    let rows;
+    try {
+      rows = approvedRows();
+    } catch (error) {
+      setStatus(importStatus, `Экспорт заблокирован: ${error.message}`, 'danger-notice');
+      return;
+    }
     if (!rows.length || !state.currentLoaded) return;
     const merged = [...state.currentRows, ...rows];
     downloadCsv(`publication_queue.merged-preview-${new Date().toISOString().slice(0, 10)}.csv`, validation.toCsv(validation.QUEUE_HEADERS, merged));
-    setStatus(importStatus, `Скачан локальный предпросмотр объединённой очереди: ${merged.length} строк. Он не загружен на сайт.`, 'ok-notice');
+    setStatus(importStatus, `Скачан локальный предпросмотр очереди: ${merged.length} строк, новые ID ${canonicalRange(rows)}. Он не загружен на сайт.`, 'ok-notice');
   });
 
   refreshAnalysis();
