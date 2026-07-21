@@ -70,9 +70,9 @@
 
 Текущая картина `data/content_origin_report.json`:
 
-- всего материалов: 146;
+- всего материалов: 165;
 - `verified`: 1;
-- `editorial`: 64;
+- `editorial`: 83;
 - `starter`: 24;
 - `request`: 57;
 - подтверждённый контент есть у одного ТОС;
