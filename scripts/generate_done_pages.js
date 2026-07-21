@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
+const { buildCollectionContextLinks, collectionContextSectionId } = require('./lib/collection_context_navigation');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
@@ -63,6 +64,8 @@ function makePage(item, toses) {
   const originLabel = contentOriginLabel(origin);
   const originClass = contentOriginClass(origin);
   const originNotice = contentOriginNotice(origin, 'done');
+  const contextLinks = buildCollectionContextLinks('done', item, tos, origin);
+  const contextSectionId = collectionContextSectionId('done');
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -100,6 +103,7 @@ function makePage(item, toses) {
     <section class="section tight"><div class="container notice"><b>Статус материала:</b> ${esc(originNotice)}</div></section>
     <section class="section"><div class="container grid">${stepCard('Было', item.before)}${stepCard('Сделали', item.done)}${stepCard('Стало', item.result)}</div></section>
     <section class="section"><div class="container prose"><p><b>Кто участвовал:</b> ${esc(item.participants || 'Информация уточняется.')}</p>${item.needs_details ? `<div class="notice"><b>Что нужно уточнить для полной истории</b><br>${esc(item.needs_details)}</div>` : ''}${gallery.length ? `<div class="grid">${gallery.map((src) => `<img src="${esc(src)}" alt="${esc(title)}" loading="lazy" style="width:100%;border-radius:20px;border:1px solid var(--line);">`).join('')}</div>` : ''}<hr class="sep"/><p class="source"><b>Источник:</b> ${esc(item.source_label || 'Редакция портала')}${item.source_url ? `<br><a href="${esc(item.source_url)}"${item.source_url.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(item.source_url)}</a>` : ''}</p><div class="card-actions"><a class="btn primary" href="/contacts/">Прислать фото или уточнение</a><a class="btn" href="/needs/">Потребности ТОСов</a><a class="btn" href="/projects/">Банк проектов</a></div></div></section>
+    <section class="section tight" id="${esc(contextSectionId)}" aria-labelledby="${esc(contextSectionId)}-title"><div class="container prose"><h2 id="${esc(contextSectionId)}-title">Что делать дальше</h2><ul>${contextLinks.map((link) => `<li><a href="${esc(link.href)}">${esc(link.label)}</a></li>`).join('')}</ul><p class="tiny">Ссылки помогают проверить историю, оформить фотоотчёт и передать недостающие материалы.</p></div></section>
   </main>
   <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Страница истории результата создана автоматически из data/done.json.</div></div></footer>
   <script src="/assets/js/site.js"></script>

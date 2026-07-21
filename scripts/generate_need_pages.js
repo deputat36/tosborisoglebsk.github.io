@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
+const { buildCollectionContextLinks, collectionContextSectionId } = require('./lib/collection_context_navigation');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
@@ -68,6 +69,8 @@ function makePage(item, toses) {
   const originLabel = contentOriginLabel(origin);
   const originClass = contentOriginClass(origin);
   const originNotice = contentOriginNotice(origin, 'needs');
+  const contextLinks = buildCollectionContextLinks('needs', item, tos, origin);
+  const contextSectionId = collectionContextSectionId('needs');
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -106,6 +109,7 @@ function makePage(item, toses) {
     <section class="section tight"><div class="container notice"><b>Статус материала:</b> ${esc(originNotice)}</div></section>
     <section class="section"><div class="container grid">${infoCard('Что нужно', description, item.need_type || 'Потребность')}${infoCard('Приоритет', item.priority || 'Уточняется', 'Приоритет', priorityClass(item.priority))}${infoCard('Контакт', item.contact || 'Контакт уточняется', 'Связь')}</div></section>
     <section class="section"><div class="container prose"><div class="notice"><b>Как помочь</b><br>Свяжитесь с ответственным, уточните количество, сроки, место передачи помощи и нужен ли фотоотчёт. После закрытия потребности желательно прислать короткую историю результата.</div><p><b>Источник:</b> ${esc(item.source || 'Редакция портала')}${item.source_url ? `<br><a href="${esc(item.source_url)}"${item.source_url.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${esc(item.source_url)}</a>` : ''}</p><div class="card-actions"><a class="btn primary" href="/contacts/">Связаться</a><a class="btn" href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК ТОС БГО</a><a class="btn" href="/needs/">Все потребности</a></div></div></section>
+    <section class="section tight" id="${esc(contextSectionId)}" aria-labelledby="${esc(contextSectionId)}-title"><div class="container prose"><h2 id="${esc(contextSectionId)}-title">Что делать дальше</h2><ul>${contextLinks.map((link) => `<li><a href="${esc(link.href)}">${esc(link.label)}</a></li>`).join('')}</ul><p class="tiny">Ссылки помогают проверить потребность, организовать поддержку и передать актуальное уточнение.</p></div></section>
   </main>
   <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Страница потребности создана автоматически из data/needs.json.</div></div></footer>
   <script src="/assets/js/site.js"></script>
