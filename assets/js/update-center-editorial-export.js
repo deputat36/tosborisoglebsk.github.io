@@ -1,8 +1,13 @@
 (function (root, factory) {
-  if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.TOS_UPDATE_EDITORIAL_EXPORT = factory();
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  if (typeof module === 'object' && module.exports) {
+    module.exports = factory(require('./publication-queue-contract.js'));
+  } else {
+    root.TOS_UPDATE_EDITORIAL_EXPORT = factory(root.PublicationQueueContract);
+  }
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (contract) {
   'use strict';
+
+  if (!contract) throw new Error('PublicationQueueContract is required.');
 
   const TEMPLATE_FILES = {
     intake: 'data/content_intake_template.csv',
@@ -26,21 +31,7 @@
     'next_step'
   ];
 
-  const QUEUE_HEADERS = [
-    'queue_id',
-    'submission_type',
-    'tos_name',
-    'title',
-    'source_checked',
-    'permission_checked',
-    'personal_data_checked',
-    'media_checked',
-    'target_file',
-    'status',
-    'blocker',
-    'owner',
-    'next_step'
-  ];
+  const QUEUE_HEADERS = contract.QUEUE_HEADERS;
 
   const PROFILES = {
     card: {
@@ -81,7 +72,16 @@
     }
   };
 
-  const clean = (value) => String(value ?? '').trim();
+  Object.entries(PROFILES).forEach(([scenarioKey, profile]) => {
+    if (!contract.SUBMISSION_TYPES.has(profile.submissionType)) {
+      throw new Error(`Unsupported submission type for ${scenarioKey}: ${profile.submissionType}`);
+    }
+    if (!contract.TARGET_FILES.has(profile.targetFile)) {
+      throw new Error(`Unsupported target file for ${scenarioKey}: ${profile.targetFile}`);
+    }
+  });
+
+  const clean = contract.clean;
 
   function profileFor(scenarioKey) {
     return PROFILES[scenarioKey] || PROFILES.news;
@@ -176,6 +176,10 @@
       next_step: profile.nextStep
     };
 
+    if (!contract.INCOMING_ID_PATTERN.test(queue.queue_id)) {
+      throw new Error(`Generated temporary queue ID is invalid: ${queue.queue_id}`);
+    }
+
     return {
       intake,
       queue,
@@ -186,6 +190,7 @@
   }
 
   return {
+    contract,
     TEMPLATE_FILES,
     INTAKE_HEADERS,
     QUEUE_HEADERS,
