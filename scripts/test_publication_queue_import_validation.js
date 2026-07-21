@@ -80,6 +80,14 @@ const exactId = validation.analyze([queueRow()], [queueRow()], []);
 assert.strictEqual(exactId[0].duplicate.level, 'exact');
 assert.strictEqual(exactId[0].canApprove, false);
 
+const repeatedIncomingId = validation.analyze(
+  [queueRow({ title: 'Первая строка' }), queueRow({ title: 'Вторая строка' })],
+  [],
+  []
+);
+assert.strictEqual(repeatedIncomingId[1].duplicate.level, 'exact');
+assert.ok(repeatedIncomingId[1].duplicate.reason.includes('временный queue_id'));
+
 const exactContent = validation.analyze(
   [queueRow({ queue_id: 'incoming-20260721-090001' })],
   [canonicalRow({ queue_id: 'queue-100' })],
@@ -133,6 +141,9 @@ const ready = canonicalRow({
   owner: 'редакция портала'
 });
 assert.deepStrictEqual(contract.validateCanonicalRow(ready), []);
+const published = { ...ready, status: 'published', target_file: 'news/test-material/index.html' };
+assert.deepStrictEqual(contract.validateCanonicalRow(published), []);
+assert.ok(contract.validateCanonicalRow({ ...ready, target_file: '../private.txt' }).some((message) => message.includes('unsupported target_file')));
 assert.ok(contract.validateCanonicalRow({ ...ready, submission_type: 'media' }).some((message) => message.includes('media submission')));
 
 const formulaCsv = validation.toCsv(['title'], [{ title: '=1+1' }]);
