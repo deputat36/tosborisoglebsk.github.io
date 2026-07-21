@@ -53,6 +53,41 @@ function sourceLink(url){
   const attributes = external ? ' target="_blank" rel="noopener noreferrer"' : '';
   return `<br><a href="${esc(url)}"${attributes}>Открыть источник</a>`;
 }
+function buildContextLinks(item, tos, origin){
+  const contextText = [
+    item.category,
+    item.title,
+    item.lead,
+    ...(Array.isArray(item.text) ? item.text : [item.text])
+  ].filter(Boolean).join(' ');
+
+  const links = [];
+  const add = (href, label) => {
+    if(!href || !label || links.some((link) => link.href === href)) return;
+    links.push({href, label});
+  };
+
+  if(tos) add(`/tos/${tos.slug}/`, `Карточка ТОС «${tos.name}»`);
+
+  const topicRules = [
+    {pattern: /(грант|конкурс|субсид|заявк)/i, href: '/grants/', label: 'Конкурсы и гранты'},
+    {pattern: /(прав|закон|устав|собрани|регистрац|границ)/i, href: '/legal/', label: 'Правовая база ТОС'},
+    {pattern: /(проект|благоустрой|площадк|ремонт|смет|инициатив)/i, href: '/projects/', label: 'Банк проектов и идей'},
+    {pattern: /(партн|спонсор|организац|предпринимат)/i, href: '/partners/', label: 'Партнёрам и организациям'},
+    {pattern: /(новост|фото|публикац|соцсет|канал|материал)/i, href: '/materials/', label: 'Материалы и инструкции'}
+  ];
+
+  topicRules
+    .filter((rule) => rule.pattern.test(contextText))
+    .slice(0, 2)
+    .forEach((rule) => add(rule.href, rule.label));
+
+  if(origin !== 'verified') add('/verification-guide/', 'Как портал проверяет сведения');
+  if(links.length < 3) add('/residents/', 'Практические маршруты для жителей');
+  add('/update-tos/', 'Передать новость или уточнение');
+
+  return links.slice(0, 5);
+}
 function makePage(item, toses){
   const title = item.title || 'Новость ТОС БГО';
   const lead = item.lead || 'Новость портала ТОС Борисоглебского городского округа.';
@@ -67,6 +102,7 @@ function makePage(item, toses){
   const originLabel = contentOriginLabel(origin);
   const originClass = contentOriginClass(origin);
   const originNotice = contentOriginNotice(origin, 'news');
+  const contextLinks = buildContextLinks(item, tos, origin);
   const schema = {
     '@context':'https://schema.org',
     '@type':'NewsArticle',
@@ -80,7 +116,7 @@ function makePage(item, toses){
     publisher:{'@type':'Organization',name:'Портал ТОС БГО',url:SITE_URL}
   };
   if(item.source_url) schema.citation = absoluteUrl(item.source_url);
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${esc(title)} | ТОС БГО</title><meta name="description" content="${esc(lead)}"/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="${esc(canonical)}"/><meta property="og:title" content="${esc(title)}"/><meta property="og:description" content="${esc(lead)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${esc(canonical)}"/><meta property="og:image" content="${esc(socialImageFull)}"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><script type="application/ld+json">${JSON.stringify(schema)}</script></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/residents/">Жителям</a><a href="/partners/">Партнёрам</a><a href="/projects/">Проекты</a><a href="/done/">Сделано</a><a href="/needs/">Нужна помощь</a><a href="/documents/">Документы</a><a href="/contacts/">Контакты</a><a href="/sections/">Все разделы</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/news/">← Новости</a><div class="eyebrow">${esc(item.category || 'Новости')} · ${esc(dateRu(item.date))}</div><div class="meta"><span class="tag ${esc(originClass)}">${esc(originLabel)}</span></div><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></div></section><section class="section tight"><div class="container notice"><b>Статус материала:</b> ${esc(originNotice)}</div></section><section class="section"><div class="container prose">${articleImage ? `<img src="${esc(articleImage)}" alt="${esc(item.image_alt || title)}" loading="lazy" style="width:100%;border-radius:24px;margin:18px 0;border:1px solid var(--line);">` : ''}${text.map(p => `<p>${esc(p)}</p>`).join('')}${tos ? `<p><a class="btn" href="/tos/${esc(tos.slug)}/">Открыть связанный ТОС «${esc(tos.name)}»</a></p>` : ''}<hr class="sep"/><p class="source"><b>Источник:</b> ${esc(item.source || 'Редакция портала')}${sourceLink(item.source_url)}</p></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Страница новости создана автоматически из data/news.json.</div></div></footer><script src="/assets/js/site.js"></script></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${esc(title)} | ТОС БГО</title><meta name="description" content="${esc(lead)}"/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="${esc(canonical)}"/><meta property="og:title" content="${esc(title)}"/><meta property="og:description" content="${esc(lead)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${esc(canonical)}"/><meta property="og:image" content="${esc(socialImageFull)}"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><script type="application/ld+json">${JSON.stringify(schema)}</script></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/residents/">Жителям</a><a href="/partners/">Партнёрам</a><a href="/projects/">Проекты</a><a href="/done/">Сделано</a><a href="/needs/">Нужна помощь</a><a href="/documents/">Документы</a><a href="/contacts/">Контакты</a><a href="/sections/">Все разделы</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/news/">← Новости</a><div class="eyebrow">${esc(item.category || 'Новости')} · ${esc(dateRu(item.date))}</div><div class="meta"><span class="tag ${esc(originClass)}">${esc(originLabel)}</span></div><h1>${esc(title)}</h1><p class="lead">${esc(lead)}</p></div></section><section class="section tight"><div class="container notice"><b>Статус материала:</b> ${esc(originNotice)}</div></section><section class="section"><div class="container prose">${articleImage ? `<img src="${esc(articleImage)}" alt="${esc(item.image_alt || title)}" loading="lazy" style="width:100%;border-radius:24px;margin:18px 0;border:1px solid var(--line);">` : ''}${text.map(p => `<p>${esc(p)}</p>`).join('')}<hr class="sep"/><p class="source"><b>Источник:</b> ${esc(item.source || 'Редакция портала')}${sourceLink(item.source_url)}</p></div></section><section class="section tight" id="news-context" aria-labelledby="news-context-title"><div class="container prose"><h2 id="news-context-title">Что посмотреть дальше</h2><ul>${contextLinks.map((link) => `<li><a href="${esc(link.href)}">${esc(link.label)}</a></li>`).join('')}</ul><p class="tiny">Ссылки подобраны по теме и статусу материала и ведут только на действующие разделы портала.</p></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Страница новости создана автоматически из data/news.json.</div></div></footer><script src="/assets/js/site.js"></script></body></html>`;
 }
 function updateSitemap(news){
   const today = new Date().toISOString().slice(0, 10);

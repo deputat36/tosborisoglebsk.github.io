@@ -1,10 +1,21 @@
 const fs = require('fs');
 const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
+const { inferContentOrigin } = require('./lib/content_origin');
 
 const newsPath = path.join(process.cwd(), 'data', 'news.json');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 const siteUrl = 'https://tosborisoglebsk.ru';
+const allowedContextRoutes = new Set([
+  '/grants/',
+  '/legal/',
+  '/projects/',
+  '/partners/',
+  '/materials/',
+  '/verification-guide/',
+  '/residents/',
+  '/update-tos/'
+]);
 
 function pagePathForNews(id) {
   return path.join(process.cwd(), 'news', id, 'index.html');
@@ -16,6 +27,16 @@ function expectIncludes(errors, line, html, value, message) {
 
 function htmlEntityAmp(value) {
   return String(value || '').replace(/&/g, '&amp;');
+}
+
+function contextLinksFromHtml(html) {
+  const match = html.match(/<section class="section tight" id="news-context" aria-labelledby="news-context-title">([\s\S]*?)<\/section>/);
+  if (!match) return null;
+  return [...match[1].matchAll(/href="([^"]+)"/g)].map((entry) => entry[1]);
+}
+
+function isAllowedContextRoute(href) {
+  return allowedContextRoutes.has(href) || /^\/tos\/[a-z0-9-]+\/$/.test(href);
 }
 
 function main() {
@@ -78,6 +99,8 @@ function main() {
     expectIncludes(errors, line, html, `"datePublished":"${date}"`, 'JSON-LD datePublished is missing');
     expectIncludes(errors, line, html, `"mainEntityOfPage":"${pageUrl}"`, 'JSON-LD mainEntityOfPage is missing');
     expectIncludes(errors, line, html, '<a class="chip" href="/news/">', 'back link to news feed is missing');
+    expectIncludes(errors, line, html, 'id="news-context"', 'context navigation section is missing');
+    expectIncludes(errors, line, html, '<h2 id="news-context-title">Что посмотреть дальше</h2>', 'context navigation heading is missing');
 
     if (category) expectIncludes(errors, line, html, category, 'category is missing');
     if (date) expectIncludes(errors, line, html, date.slice(0, 4), 'news year is missing');
@@ -107,10 +130,43 @@ function main() {
       expectIncludes(errors, line, html, `"citation":"${absoluteCitation}`, 'JSON-LD citation is missing');
     }
 
+    const contextLinks = contextLinksFromHtml(html);
+    if (!contextLinks) {
+      errors.push(`${line}: context navigation block could not be parsed`);
+    } else {
+      if (contextLinks.length < 3 || contextLinks.length > 5) {
+        errors.push(`${line}: context navigation must contain 3 to 5 links, got ${contextLinks.length}`);
+      }
+
+      const uniqueLinks = new Set(contextLinks);
+      if (uniqueLinks.size !== contextLinks.length) {
+        errors.push(`${line}: context navigation contains duplicate links`);
+      }
+
+      contextLinks.forEach((href) => {
+        if (!isAllowedContextRoute(href)) {
+          errors.push(`${line}: context navigation contains disallowed route ${href}`);
+          return;
+        }
+        if (!repoPathExists(href)) errors.push(`${line}: context route is missing ${href}`);
+      });
+
+      if (!contextLinks.includes('/update-tos/')) {
+        errors.push(`${line}: context navigation must include /update-tos/`);
+      }
+
+      if (inferContentOrigin(item, 'news') !== 'verified' && !contextLinks.includes('/verification-guide/')) {
+        errors.push(`${line}: non-verified news must link to /verification-guide/`);
+      }
+    }
+
     if (item.tos_slug) {
       if (!tosSlugs.has(item.tos_slug)) errors.push(`${line}: unknown tos_slug ${item.tos_slug}`);
       if (!repoPathExists(`/tos/${item.tos_slug}/`)) errors.push(`${line}: linked TOS page is missing /tos/${item.tos_slug}/`);
       expectIncludes(errors, line, html, `href="/tos/${item.tos_slug}/"`, 'linked TOS route is missing');
+      if (contextLinks && !contextLinks.includes(`/tos/${item.tos_slug}/`)) {
+        errors.push(`${line}: linked TOS route must be inside context navigation`);
+      }
     }
 
     if (id === 'mirolyubie-project-winner-2026') {
