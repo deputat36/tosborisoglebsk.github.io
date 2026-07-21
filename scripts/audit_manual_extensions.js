@@ -1,6 +1,7 @@
 const { runChecks } = require('./lib/run_checks');
 
 runChecks([
+  ['visual comparison policy self-test', 'scripts/test_visual_comparison_policy.js'],
   ['data quality page', 'scripts/audit_data_quality_content.js'],
   ['media guide page', 'scripts/audit_media_guide_content.js'],
   ['places page', 'scripts/audit_places_content.js'],
