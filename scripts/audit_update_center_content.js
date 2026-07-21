@@ -6,6 +6,7 @@ const { repoPathExists } = require('./lib/path_checks');
 const pagePath = path.join(process.cwd(), 'update-tos', 'index.html');
 const scenariosPath = path.join(process.cwd(), 'assets', 'js', 'update-center-data.js');
 const qualityPath = path.join(process.cwd(), 'assets', 'js', 'update-center-quality.js');
+const queueContractPath = path.join(process.cwd(), 'assets', 'js', 'publication-queue-contract.js');
 const editorialExportPath = path.join(process.cwd(), 'assets', 'js', 'update-center-editorial-export.js');
 const editorialUiPath = path.join(process.cwd(), 'assets', 'js', 'update-center-editorial-ui.js');
 const appPath = path.join(process.cwd(), 'assets', 'js', 'update-center.js');
@@ -15,6 +16,7 @@ const requiredPageFiles = [
   '/assets/css/update-center.css',
   '/assets/js/update-center-data.js',
   '/assets/js/update-center-quality.js',
+  '/assets/js/publication-queue-contract.js',
   '/assets/js/update-center-editorial-export.js',
   '/assets/js/update-center.js',
   '/assets/js/update-center-editorial-ui.js',
@@ -66,7 +68,7 @@ function loadScenarioData(errors) {
 function main() {
   const errors = [];
 
-  [pagePath, scenariosPath, qualityPath, editorialExportPath, editorialUiPath, appPath].forEach((filePath) => {
+  [pagePath, scenariosPath, qualityPath, queueContractPath, editorialExportPath, editorialUiPath, appPath].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${filePath}`);
   });
 
@@ -77,6 +79,7 @@ function main() {
   const html = fs.readFileSync(pagePath, 'utf8');
   const app = fs.readFileSync(appPath, 'utf8');
   const quality = fs.readFileSync(qualityPath, 'utf8');
+  const queueContract = fs.readFileSync(queueContractPath, 'utf8');
   const editorialExport = fs.readFileSync(editorialExportPath, 'utf8');
   const editorialUi = fs.readFileSync(editorialUiPath, 'utf8');
   const { scenarios, labels } = loadScenarioData(errors);
@@ -120,11 +123,15 @@ function main() {
   });
 
   const qualityIndex = html.indexOf('/assets/js/update-center-quality.js');
+  const contractIndex = html.indexOf('/assets/js/publication-queue-contract.js');
   const exportIndex = html.indexOf('/assets/js/update-center-editorial-export.js');
   const appIndex = html.indexOf('/assets/js/update-center.js');
   const editorialUiIndex = html.indexOf('/assets/js/update-center-editorial-ui.js');
-  if (qualityIndex < 0 || exportIndex < 0 || appIndex < 0 || editorialUiIndex < 0 || qualityIndex > exportIndex || exportIndex > appIndex || appIndex > editorialUiIndex) {
-    errors.push('quality, editorial export, app and editorial UI scripts must load in safe order');
+  if (
+    qualityIndex < 0 || contractIndex < 0 || exportIndex < 0 || appIndex < 0 || editorialUiIndex < 0 ||
+    qualityIndex > contractIndex || contractIndex > exportIndex || exportIndex > appIndex || appIndex > editorialUiIndex
+  ) {
+    errors.push('quality, queue contract, editorial export, app and editorial UI scripts must load in safe order');
   }
 
   requiredRoutes.forEach((route) => {
@@ -213,6 +220,7 @@ function main() {
 
   ['fetch(', 'XMLHttpRequest', 'sendBeacon', 'WebSocket'].forEach((signal) => {
     if (quality.includes(signal)) errors.push(`quality module must stay local-only: ${signal}`);
+    if (queueContract.includes(signal)) errors.push(`queue contract must stay local-only: ${signal}`);
     if (editorialExport.includes(signal)) errors.push(`editorial export module must stay local-only: ${signal}`);
     if (editorialUi.includes(signal)) errors.push(`editorial export UI must stay local-only: ${signal}`);
   });
@@ -221,9 +229,16 @@ function main() {
     errors.push('quality module must evaluate required fields and publication confirmation');
   }
 
+  if (!queueContract.includes('QUEUE_HEADERS') || !queueContract.includes('INCOMING_ID_PATTERN') || !queueContract.includes('TARGET_FILES')) {
+    errors.push('shared publication queue contract is incomplete');
+  }
+
   const requiredExportSignals = [
+    'contract.QUEUE_HEADERS',
+    'contract.TARGET_FILES',
+    'contract.SUBMISSION_TYPES',
+    'contract.INCOMING_ID_PATTERN',
     'INTAKE_HEADERS',
-    'QUEUE_HEADERS',
     "status: 'draft'",
     "source_checked: 'нет'",
     "permission_checked: 'нет'",
@@ -236,6 +251,10 @@ function main() {
     if (!editorialExport.includes(signal)) errors.push(`editorial export contract missing ${signal}`);
   });
 
+  if (editorialExport.includes("const QUEUE_HEADERS = [")) {
+    errors.push('editorial export must not keep a private copy of queue headers');
+  }
+
   if (!editorialUi.includes('readyForEditorialExport') || !editorialUi.includes('new Blob') || !editorialUi.includes('download-intake-csv') || !editorialUi.includes('download-queue-csv')) {
     errors.push('editorial export UI must gate and download both CSV files');
   }
@@ -244,7 +263,7 @@ function main() {
     throw new Error(`Update center audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Update center OK: ${Object.keys(scenarios).length} scenarios with local quality and draft editorial export`);
+  console.log(`Update center OK: ${Object.keys(scenarios).length} scenarios with shared queue contract and draft editorial export`);
 }
 
 main();
