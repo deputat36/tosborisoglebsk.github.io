@@ -35,6 +35,37 @@ const READER = `function readApprovedManifest() {
     results: combined,
     extensions: [path.basename(BASELINE_EXTENSION_PATH)]
   };
+}
+
+function resolveApprovedPng(item, screenshotName) {
+  const directPath = path.join(BASELINE_DIR, screenshotName);
+  if (fs.existsSync(directPath)) return directPath;
+
+  const parts = Array.isArray(item.base64_parts) ? item.base64_parts : [];
+  if (!parts.length) return directPath;
+
+  const encoded = parts.map((relativePath) => {
+    const partPath = path.resolve(BASELINE_DIR, relativePath);
+    if (!partPath.startsWith(BASELINE_DIR + path.sep)) {
+      throw new Error(\`Visual baseline part escapes approved directory: \${relativePath}\`);
+    }
+    if (!fs.existsSync(partPath)) throw new Error(\`Missing visual baseline part: \${relativePath}\`);
+    return fs.readFileSync(partPath, 'utf8').trim();
+  }).join('');
+
+  const cacheDir = path.join(CURRENT_DIR, '.approved-baseline-cache');
+  fs.mkdirSync(cacheDir, { recursive: true });
+  const cachePath = path.join(cacheDir, screenshotName);
+  fs.writeFileSync(cachePath, Buffer.from(encoded, 'base64'));
+
+  if (item.sha256 && sha256(cachePath) !== item.sha256) {
+    throw new Error(\`Decoded visual baseline SHA-256 mismatch: \${item.case_id}\`);
+  }
+  if (item.bytes && fs.statSync(cachePath).size !== Number(item.bytes)) {
+    throw new Error(\`Decoded visual baseline byte size mismatch: \${item.case_id}\`);
+  }
+
+  return cachePath;
 }`;
 
 function patchSource(source) {
@@ -53,6 +84,10 @@ function patchSource(source) {
   const readCall = '  const baselineManifest = readJson(BASELINE_MANIFEST_PATH);';
   if (!content.includes(readCall)) throw new Error('compare_visual_baseline.js: baseline read call not found');
   content = content.replace(readCall, '  const baselineManifest = readApprovedManifest();');
+
+  const baselinePathCall = '      path.join(BASELINE_DIR, baselineName),';
+  if (!content.includes(baselinePathCall)) throw new Error('compare_visual_baseline.js: baseline PNG path call not found');
+  content = content.replace(baselinePathCall, '      resolveApprovedPng(baselineItem, baselineName),');
 
   return { content, changed: true };
 }
