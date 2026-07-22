@@ -34,7 +34,8 @@
         "columns": 31,
         "rows": 80,
         "data_files": [
-          "fingerprints/css-reg-015.part-01.b64",
+          "fingerprints/css-reg-015.part-01a.b64",
+          "fingerprints/css-reg-015.part-01b.b64",
           "fingerprints/css-reg-015.part-02.b64",
           "fingerprints/css-reg-015.part-03.b64",
           "fingerprints/css-reg-015.part-04.b64",
@@ -70,9 +71,11 @@
         "rows": 60,
         "data_files": [
           "fingerprints/css-reg-016.part-01.b64",
-          "fingerprints/css-reg-016.part-02.b64",
+          "fingerprints/css-reg-016.part-02a.b64",
+          "fingerprints/css-reg-016.part-02b.b64",
           "fingerprints/css-reg-016.part-03.b64",
-          "fingerprints/css-reg-016.part-04.b64"
+          "fingerprints/css-reg-016.part-04a.b64",
+          "fingerprints/css-reg-016.part-04b.b64"
         ],
         "sha256": "f9478dd1feae0c74b427bb132fd6893d73781cd3ea616a5dd17204b0c13da8c1"
       }
