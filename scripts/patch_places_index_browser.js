@@ -4,6 +4,8 @@ const path = require('path');
 const ROOT = process.cwd();
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_places_pages.js');
 const VERSION_MARKER = 'data-places-browser-version="2026-07-22"';
+const AUDIT_REQUIRE = "const { auditPlacesBrowser } = require('./audit_places_browser');";
+const AUDIT_CALL = 'auditPlacesBrowser();';
 
 const MAKE_INDEX = `function makeIndex(places) {
   const canonical = \`\${SITE_URL}/places/\`;
@@ -17,13 +19,29 @@ const MAKE_INDEX = `function makeIndex(places) {
 }`;
 
 function patchSource(source) {
-  if (source.includes(VERSION_MARKER)) return { content: source, changed: false };
-  const pattern = /function makeIndex\(places\) \{[\s\S]*?\n\}\n\nfunction makePlacePage/;
-  if (!pattern.test(source)) throw new Error('generate_places_pages.js: makeIndex block not found');
-  return {
-    content: source.replace(pattern, `${MAKE_INDEX}\n\nfunction makePlacePage`),
-    changed: true
-  };
+  let content = source;
+  let changed = false;
+
+  if (!content.includes(VERSION_MARKER)) {
+    const pattern = /function makeIndex\(places\) \{[\s\S]*?\n\}\n\nfunction makePlacePage/;
+    if (!pattern.test(content)) throw new Error('generate_places_pages.js: makeIndex block not found');
+    content = content.replace(pattern, `${MAKE_INDEX}\n\nfunction makePlacePage`);
+    changed = true;
+  }
+
+  if (!content.includes(AUDIT_REQUIRE)) {
+    content = content.replace("const path = require('path');", `const path = require('path');\n${AUDIT_REQUIRE}`);
+    changed = true;
+  }
+
+  if (!content.includes(AUDIT_CALL)) {
+    const mainPattern = /\nmain\(\);\s*$/;
+    if (!mainPattern.test(content)) throw new Error('generate_places_pages.js: final main() call not found');
+    content = content.replace(mainPattern, `\nmain();\n${AUDIT_CALL}\n`);
+    changed = true;
+  }
+
+  return { content, changed };
 }
 
 function patchPlacesIndexBrowser() {
