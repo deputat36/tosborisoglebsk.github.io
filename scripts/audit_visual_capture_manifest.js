@@ -49,6 +49,11 @@ function auditFocusCapture(errors, label, expected, item) {
   if (!Number.isFinite(Number(focus.scrollY)) || Number(focus.scrollY) <= 0) errors.push(`${label}: focused capture did not scroll below the page top`);
   if (!Number.isFinite(Number(focus.width)) || Number(focus.width) <= 0) errors.push(`${label}: focused section width is invalid`);
   if (!Number.isFinite(Number(focus.height)) || Number(focus.height) <= 0) errors.push(`${label}: focused section height is invalid`);
+  if (!Number.isFinite(Number(focus.header_offset)) || Number(focus.header_offset) <= 0) errors.push(`${label}: header_offset is invalid`);
+  if (!Number.isFinite(Number(focus.top))) errors.push(`${label}: focused section top is invalid`);
+  if (Number.isFinite(Number(focus.top)) && Number.isFinite(Number(focus.header_offset)) && Number(focus.top) < Number(focus.header_offset) - 2) {
+    errors.push(`${label}: focused section is covered by the sticky header`);
+  }
 }
 
 function main() {
