@@ -15,6 +15,7 @@ on:
       - 'index.html'
       - 'tos/index.html'
       - 'tos/mirolyubie/index.html'
+      - 'places/index.html'
       - 'news/index.html'
       - 'news/vk-community-channel-2026/index.html'
       - 'workbench/index.html'
@@ -35,6 +36,7 @@ on:
       - 'scripts/audit_visual_capture_manifest.js'
       - 'scripts/audit_visual_capture_tooling.js'
       - 'scripts/audit_visual_overflow_fixes.js'
+      - 'scripts/patch_visual_focus_capture.js'
       - 'scripts/patch_tos_detail_responsive_styles.js'
       - 'scripts/lib/csv.js'
       - '.github/workflows/visual-baseline.yml'
@@ -73,6 +75,9 @@ jobs:
 
       - name: Apply TOS detail responsive stylesheet
         run: node scripts/patch_tos_detail_responsive_styles.js
+
+      - name: Check patched visual capture syntax
+        run: node --check scripts/capture_visual_baseline.js
 
       - name: Audit visual overflow fixes
         run: node scripts/audit_visual_overflow_fixes.js
