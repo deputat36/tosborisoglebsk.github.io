@@ -79,6 +79,10 @@ jobs:
         run: node scripts/migrate_content_origins.js
       - name: Generate content origin metrics
         run: node scripts/generate_content_origin_report.js
+      - name: Patch places index browser
+        run: node scripts/patch_places_index_browser.js
+      - name: Check patched places generator syntax
+        run: node --check scripts/generate_places_pages.js
       - name: Generate place pages
         run: node scripts/generate_places_pages.js
       - name: Generate RSS feed
