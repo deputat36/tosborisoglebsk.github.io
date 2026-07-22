@@ -62,9 +62,9 @@ function patchSource(source) {
   if (source.includes(MARKER)) return { content: source, changed: false };
 
   let content = source;
-  const baseUrlLine = "const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');";
-  if (!content.includes(baseUrlLine)) throw new Error('capture_visual_baseline.js: BASE_URL marker not found');
-  content = content.replace(baseUrlLine, `${baseUrlLine}\n\n${FOCUS_CONSTANTS}`);
+  const baseUrlMatch = content.match(/^const BASE_URL = .*$/m);
+  if (!baseUrlMatch) throw new Error('capture_visual_baseline.js: BASE_URL marker not found');
+  content = content.replace(baseUrlMatch[0], `${baseUrlMatch[0]}\n\n${FOCUS_CONSTANTS}`);
 
   const interactionPattern = /(async function applyThemeAndInteraction\(page, item\) \{[\s\S]*?\n\})\n\nfunction buildTechnicalViolations/;
   const interactionMatch = content.match(interactionPattern);
