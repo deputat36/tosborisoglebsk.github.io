@@ -19,18 +19,8 @@ const APPROVED_MANIFEST_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'manif
 const FOCUS_MANIFEST_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'manifest-focus.json');
 
 const REQUIRED_MATRIX_HEADERS = [
-  'case_id',
-  'area',
-  'route',
-  'viewport_width',
-  'viewport_height',
-  'theme',
-  'interaction',
-  'mode',
-  'expected_check',
-  'status',
-  'evidence_ref',
-  'notes'
+  'case_id', 'area', 'route', 'viewport_width', 'viewport_height', 'theme',
+  'interaction', 'mode', 'expected_check', 'status', 'evidence_ref', 'notes'
 ];
 
 function normalize(value) {
@@ -62,7 +52,7 @@ function auditFocusBaseline(errors, expectedFocusIds) {
   }
 
   if (manifest.schema_version !== 1) errors.push(`focus manifest schema must be 1, received ${manifest.schema_version}`);
-  if (manifest.base_manifest !== 'manifest.json') errors.push(`focus manifest must extend manifest.json`);
+  if (manifest.base_manifest !== 'manifest.json') errors.push('focus manifest must extend manifest.json');
   const results = Array.isArray(manifest.results) ? manifest.results : [];
   const ids = results.map((item) => item.case_id);
   expectedFocusIds.forEach((id) => {
@@ -75,49 +65,29 @@ function auditFocusBaseline(errors, expectedFocusIds) {
 
   results.forEach((item) => {
     const label = item.case_id || 'focus baseline result';
-    const parts = Array.isArray(item.base64_parts) ? item.base64_parts : [];
-    if (!parts.length) {
-      errors.push(`${label}: base64_parts are missing`);
+    const fingerprint = item.visual_fingerprint || {};
+    if (fingerprint.scheme !== 'rgb-grid-v1') errors.push(`${label}: unsupported fingerprint scheme ${fingerprint.scheme}`);
+    const columns = Number(fingerprint.columns);
+    const rows = Number(fingerprint.rows);
+    if (!Number.isInteger(columns) || columns < 1 || !Number.isInteger(rows) || rows < 1) {
+      errors.push(`${label}: invalid fingerprint grid`);
       return;
     }
-
-    let encoded = '';
-    parts.forEach((relativePath) => {
-      const partPath = path.resolve(path.dirname(FOCUS_MANIFEST_PATH), relativePath);
-      if (!partPath.startsWith(path.dirname(FOCUS_MANIFEST_PATH) + path.sep)) {
-        errors.push(`${label}: part escapes baseline directory ${relativePath}`);
-        return;
-      }
-      if (!fs.existsSync(partPath)) {
-        errors.push(`${label}: missing part ${relativePath}`);
-        return;
-      }
-      encoded += fs.readFileSync(partPath, 'utf8').trim();
-    });
-    if (!encoded) return;
-
-    const decoded = Buffer.from(encoded, 'base64');
-    if (decoded.length !== Number(item.bytes)) errors.push(`${label}: decoded byte size ${decoded.length} does not match ${item.bytes}`);
-    if (sha256(decoded) !== item.sha256) errors.push(`${label}: decoded SHA-256 does not match manifest`);
-    if (decoded.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') errors.push(`${label}: decoded content is not a PNG`);
+    const decoded = Buffer.from(String(fingerprint.data_base64 || ''), 'base64');
+    if (decoded.length !== columns * rows * 3) errors.push(`${label}: fingerprint byte length is invalid`);
+    if (fingerprint.sha256 && sha256(decoded) !== fingerprint.sha256) errors.push(`${label}: fingerprint SHA-256 does not match`);
+    if (!/^[a-f0-9]{64}$/.test(String(item.screenshot_sha256 || ''))) errors.push(`${label}: screenshot_sha256 is invalid`);
+    if (!Number.isInteger(Number(item.bytes)) || Number(item.bytes) < 1) errors.push(`${label}: screenshot byte size is invalid`);
+    if (Number(item.viewport?.width) < 1 || Number(item.viewport?.height) < 1) errors.push(`${label}: viewport is invalid`);
   });
 }
 
 function main() {
   const errors = [];
   const requiredFiles = [
-    WORKFLOW_PATH,
-    CAPTURE_PATH,
-    COMPARE_PATH,
-    MANIFEST_AUDIT_PATH,
-    OVERFLOW_AUDIT_PATH,
-    RESPONSIVE_PATCH_PATH,
-    FOCUS_PATCH_PATH,
-    EXTENSION_PATCH_PATH,
-    DOC_PATH,
-    MATRIX_PATH
+    WORKFLOW_PATH, CAPTURE_PATH, COMPARE_PATH, MANIFEST_AUDIT_PATH, OVERFLOW_AUDIT_PATH,
+    RESPONSIVE_PATCH_PATH, FOCUS_PATCH_PATH, EXTENSION_PATCH_PATH, DOC_PATH, MATRIX_PATH
   ];
-
   requiredFiles.forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${path.relative(ROOT, filePath)}`);
   });
@@ -132,9 +102,7 @@ function main() {
   const headers = (rows[0] || []).map(normalize);
   const records = rows.slice(1).map((row) => Object.fromEntries(headers.map((header, index) => [header, normalize(row[index])])));
 
-  if (headers.join('|') !== REQUIRED_MATRIX_HEADERS.join('|')) {
-    errors.push(`unexpected matrix headers: ${headers.join(', ')}`);
-  }
+  if (headers.join('|') !== REQUIRED_MATRIX_HEADERS.join('|')) errors.push(`unexpected matrix headers: ${headers.join(', ')}`);
   if (records.length !== 16) errors.push(`matrix must contain 16 cases, received ${records.length}`);
   if (new Set(records.map((item) => item.case_id)).size !== records.length) errors.push('matrix case_id values must be unique');
 
@@ -145,89 +113,47 @@ function main() {
   });
 
   requireFragments(errors, 'visual workflow', workflow, [
-    'workflow_dispatch:',
-    'pull_request:',
-    'contents: read',
-    'node-version: \'24\'',
-    'node scripts/patch_tos_detail_responsive_styles.js',
-    'Check patched visual capture syntax',
-    'Check patched visual comparator syntax',
-    'node scripts/audit_visual_overflow_fixes.js',
-    'continue-on-error: true',
-    "VISUAL_CAPTURE_STRICT_QUALITY: 'false'",
-    "VISUAL_CAPTURE_STRICT_QUALITY: 'true'",
-    'Audit capture manifest in measurement mode',
-    'Audit capture manifest in strict mode',
-    'Detect approved baseline',
-    'node scripts/compare_visual_baseline.js',
-    'actions/upload-artifact@v4',
-    'retention-days: 30'
+    'workflow_dispatch:', 'pull_request:', 'contents: read', "node-version: '24'",
+    'node scripts/patch_tos_detail_responsive_styles.js', 'Check patched visual capture syntax',
+    'Check patched visual comparator syntax', 'node scripts/audit_visual_overflow_fixes.js',
+    'continue-on-error: true', "VISUAL_CAPTURE_STRICT_QUALITY: 'false'",
+    "VISUAL_CAPTURE_STRICT_QUALITY: 'true'", 'Audit capture manifest in measurement mode',
+    'Audit capture manifest in strict mode', 'Detect approved baseline',
+    'node scripts/compare_visual_baseline.js', 'actions/upload-artifact@v4', 'retention-days: 30'
   ]);
-
   if (/contents:\s*write|pull-requests:\s*write|git\s+(commit|push)|git-auto-commit|create-pull-request/i.test(workflow)) {
     errors.push('visual workflow must be read-only and must not commit or push');
   }
-  if (!workflow.includes("steps.approved.outputs.available == 'true'")) {
-    errors.push('visual comparison and strict quality audit must be gated by an approved baseline check');
-  }
+  if (!workflow.includes("steps.approved.outputs.available == 'true'")) errors.push('visual comparison and strict audit must be gated by approved baseline');
 
   requireFragments(errors, 'capture script', capture, [
-    "require('playwright')",
-    'data/css_regression_matrix.csv',
-    'FOCUS_TARGETS',
-    'positionPageForCapture',
-    'focus_capture',
-    'ready_count',
-    'header_offset',
-    'technical_violations',
-    'failed_requests',
-    'manifest.json',
-    'schema_version: 3'
+    "require('playwright')", 'data/css_regression_matrix.csv', 'FOCUS_TARGETS',
+    'positionPageForCapture', 'focus_capture', 'ready_count', 'header_offset',
+    'technical_violations', 'failed_requests', 'manifest.json', 'schema_version: 3'
   ]);
   requireFragments(errors, 'comparison script', compare, [
-    "require('pngjs')",
-    'BASELINE_EXTENSION_PATH',
-    'readApprovedManifest',
-    'resolveApprovedPng',
-    'base64_parts',
-    'VISUAL_MAX_CHANNEL_DELTA',
-    'VISUAL_MAX_LOW_DELTA_RATIO',
-    'pixel_equivalent',
-    'significant_changed_pixels',
-    'comparison.json'
+    "require('pngjs')", 'BASELINE_EXTENSION_PATH', 'readApprovedManifest',
+    'compareVisualFingerprint', 'buildRgbGrid', 'visual_fingerprint', 'rgb-grid-v1',
+    'VISUAL_MAX_CHANNEL_DELTA', 'VISUAL_MAX_LOW_DELTA_RATIO', 'pixel_equivalent',
+    'significant_changed_pixels', 'comparison.json'
   ]);
   requireFragments(errors, 'capture manifest audit', manifestAudit, [
-    'VISUAL_CAPTURE_STRICT_QUALITY',
-    "STRICT_QUALITY ? 'strict' : 'measurement'",
-    'focus_capture',
-    'ready_count',
-    'header_offset',
-    'qualityFindings',
-    'failed requests are present',
-    'horizontal overflow is present',
+    'VISUAL_CAPTURE_STRICT_QUALITY', "STRICT_QUALITY ? 'strict' : 'measurement'",
+    'focus_capture', 'ready_count', 'header_offset', 'qualityFindings',
+    'failed requests are present', 'horizontal overflow is present',
     'sha256 does not match screenshot',
     'Quality findings are recorded but do not block until an approved baseline exists.'
   ]);
   requireFragments(errors, 'visual capture documentation', doc, [
-    'baseline_required',
-    'GitHub Actions artifact',
-    'не коммитит',
-    'compare_approved',
-    'измерительный режим',
-    'строгий режим',
-    'manifest-focus.json',
-    'base64_parts',
-    'focus-catalog',
-    'focus-places',
-    'отдельный визуальный review'
+    'baseline_required', 'GitHub Actions artifact', 'не коммитит', 'compare_approved',
+    'измерительный режим', 'строгий режим', 'manifest-focus.json', 'rgb-grid-v1',
+    'focus-catalog', 'focus-places', 'отдельный визуальный review'
   ]);
 
   const approvedExists = fs.existsSync(APPROVED_MANIFEST_PATH);
   if (!approvedExists) {
     records.forEach((item) => {
-      if (item.status !== 'baseline_required') {
-        errors.push(`${item.case_id}: status must remain baseline_required before approved manifest exists`);
-      }
+      if (item.status !== 'baseline_required') errors.push(`${item.case_id}: status must remain baseline_required before approved manifest exists`);
       if (item.evidence_ref) errors.push(`${item.case_id}: evidence_ref must be empty before approved manifest exists`);
     });
   } else {
@@ -239,15 +165,9 @@ function main() {
     auditFocusBaseline(errors, focusRecords.map((item) => item.case_id));
   }
 
-  if (errors.length) {
-    throw new Error(`Visual capture tooling audit failed:\n${errors.join('\n')}`);
-  }
+  if (errors.length) throw new Error(`Visual capture tooling audit failed:\n${errors.join('\n')}`);
 
-  execFileSync(process.execPath, [OVERFLOW_AUDIT_PATH], {
-    cwd: ROOT,
-    stdio: 'inherit'
-  });
-
+  execFileSync(process.execPath, [OVERFLOW_AUDIT_PATH], { cwd: ROOT, stdio: 'inherit' });
   console.log(`Visual capture tooling OK: ${records.length} cases, ${focusInteractions.size} focused interactions, approved baseline ${approvedExists ? 'present' : 'not yet present'}, workflow read-only`);
 }
 
