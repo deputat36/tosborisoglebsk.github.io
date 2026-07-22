@@ -9,6 +9,11 @@ const MATRIX_PATH = path.resolve(ROOT, process.env.VISUAL_BASELINE_MATRIX || 'da
 const OUTPUT_DIR = path.resolve(ROOT, process.env.VISUAL_BASELINE_OUTPUT || '.artifacts/visual-baseline');
 const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
 
+const FOCUS_TARGETS = Object.freeze({
+  'focus-catalog': Object.freeze({ selector: '#catalog', readySelector: '#tos-list .card' }),
+  'focus-places': Object.freeze({ selector: '#places-browser', readySelector: '#places-grid .card' })
+});
+
 const HEADERS = [
   'case_id',
   'area',
@@ -85,6 +90,54 @@ async function applyThemeAndInteraction(page, item) {
     await page.emulateMedia({ media: 'print' });
     await page.waitForTimeout(150);
   }
+}
+
+async function positionPageForCapture(page, item) {
+  const target = FOCUS_TARGETS[item.interaction];
+  if (!target) {
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.waitForTimeout(100);
+    return null;
+  }
+
+  const focusElement = page.locator(target.selector);
+  await focusElement.waitFor({ state: 'visible', timeout: 5000 });
+  await page.locator(target.readySelector).first().waitFor({ state: 'visible', timeout: 5000 });
+  const readyCount = await page.locator(target.readySelector).count();
+
+  await focusElement.evaluate((element) => {
+    element.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' });
+  });
+  const headerOffset = await page.evaluate(() => {
+    const headerHeight = document.querySelector('.header')?.getBoundingClientRect().height || 0;
+    return Math.ceil(headerHeight) + 16;
+  });
+  await page.evaluate((offset) => window.scrollBy(0, -offset), headerOffset);
+  await page.waitForTimeout(200);
+
+  const metrics = await focusElement.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    return {
+      top: Math.round(rect.top),
+      bottom: Math.round(rect.bottom),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+      visible: rect.width > 0 && rect.height > 0 && rect.bottom > 0 && rect.top < window.innerHeight,
+      scrollY: Math.round(window.scrollY)
+    };
+  });
+
+  if (!metrics.visible) throw new Error(`Focus target is outside viewport: ${target.selector}`);
+  if (readyCount < 1) throw new Error(`Dynamic content did not load: ${target.readySelector}`);
+  if (metrics.top < headerOffset - 2) throw new Error(`Focus target is covered by the sticky header: ${target.selector}`);
+
+  return {
+    selector: target.selector,
+    ready_selector: target.readySelector,
+    ready_count: readyCount,
+    header_offset: headerOffset,
+    ...metrics
+  };
 }
 
 function buildTechnicalViolations(item, diagnostics, consoleErrors, pageErrors) {
@@ -165,8 +218,7 @@ async function captureCase(browser, item) {
     `
   });
 
-  await page.evaluate(() => window.scrollTo(0, 0));
-  await page.waitForTimeout(100);
+  const focusCapture = await positionPageForCapture(page, item);
 
   const fileName = `${item.case_id}.png`;
   const filePath = path.join(OUTPUT_DIR, fileName);
@@ -271,6 +323,7 @@ async function captureCase(browser, item) {
     interaction: item.interaction,
     mode: item.mode,
     expected_check: item.expected_check,
+    focus_capture: focusCapture,
     screenshot: fileName,
     sha256: sha256(filePath),
     bytes: fs.statSync(filePath).size,

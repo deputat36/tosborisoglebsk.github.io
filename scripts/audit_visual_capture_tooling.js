@@ -74,23 +74,35 @@ function auditFocusBaseline(errors, expectedFocusIds) {
       return;
     }
 
-    const dataPath = path.resolve(path.dirname(FOCUS_MANIFEST_PATH), String(fingerprint.data_file || ''));
-    if (!fingerprint.data_file) {
-      errors.push(`${label}: fingerprint data_file is missing`);
-      return;
-    }
-    if (!dataPath.startsWith(path.dirname(FOCUS_MANIFEST_PATH) + path.sep)) {
-      errors.push(`${label}: fingerprint data escapes baseline directory`);
-      return;
-    }
-    if (!fs.existsSync(dataPath)) {
-      errors.push(`${label}: fingerprint data file is missing`);
+    const dataFiles = Array.isArray(fingerprint.data_files)
+      ? fingerprint.data_files.filter(Boolean)
+      : [];
+    if (!dataFiles.length) {
+      errors.push(`${label}: fingerprint data_files are missing`);
       return;
     }
 
-    const decoded = Buffer.from(fs.readFileSync(dataPath, 'utf8').trim(), 'base64');
-    if (decoded.length !== columns * rows * 3) errors.push(`${label}: fingerprint byte length is invalid`);
-    if (fingerprint.sha256 && sha256(decoded) !== fingerprint.sha256) errors.push(`${label}: fingerprint SHA-256 does not match`);
+    let encoded = '';
+    const partLengths = [];
+    dataFiles.forEach((relativePath) => {
+      const dataPath = path.resolve(path.dirname(FOCUS_MANIFEST_PATH), relativePath);
+      if (!dataPath.startsWith(path.dirname(FOCUS_MANIFEST_PATH) + path.sep)) {
+        errors.push(`${label}: fingerprint data escapes baseline directory: ${relativePath}`);
+        return;
+      }
+      if (!fs.existsSync(dataPath)) {
+        errors.push(`${label}: fingerprint data file is missing: ${relativePath}`);
+        return;
+      }
+      const part = fs.readFileSync(dataPath, 'utf8').trim();
+      partLengths.push(`${relativePath}:${part.length}`);
+      encoded += part;
+    });
+    if (!encoded) return;
+
+    const decoded = Buffer.from(encoded, 'base64');
+    if (decoded.length !== columns * rows * 3) errors.push(`${label}: fingerprint byte length ${decoded.length} does not match ${columns * rows * 3}; encoded=${encoded.length}; parts=${partLengths.join(',')}`);
+    if (fingerprint.sha256 && sha256(decoded) !== fingerprint.sha256) errors.push(`${label}: fingerprint SHA-256 ${sha256(decoded)} does not match ${fingerprint.sha256}; encoded=${encoded.length}; parts=${partLengths.join(',')}`);
     if (!/^[a-f0-9]{64}$/.test(String(item.screenshot_sha256 || ''))) errors.push(`${label}: screenshot_sha256 is invalid`);
     if (!Number.isInteger(Number(item.bytes)) || Number(item.bytes) < 1) errors.push(`${label}: screenshot byte size is invalid`);
     if (Number(item.viewport?.width) < 1 || Number(item.viewport?.height) < 1) errors.push(`${label}: viewport is invalid`);
@@ -148,7 +160,7 @@ function main() {
   ]);
   requireFragments(errors, 'comparison script', compare, [
     "require('pngjs')", 'BASELINE_EXTENSION_PATH', 'readApprovedManifest',
-    'compareVisualFingerprint', 'buildRgbGrid', 'readFingerprintData', 'data_file',
+    'compareVisualFingerprint', 'buildRgbGrid', 'readFingerprintData', 'data_files',
     'visual_fingerprint', 'rgb-grid-v1', 'VISUAL_MAX_CHANNEL_DELTA',
     'VISUAL_MAX_LOW_DELTA_RATIO', 'pixel_equivalent', 'significant_changed_pixels', 'comparison.json'
   ]);
@@ -162,7 +174,7 @@ function main() {
   requireFragments(errors, 'visual capture documentation', doc, [
     'baseline_required', 'GitHub Actions artifact', 'не коммитит', 'compare_approved',
     'измерительный режим', 'строгий режим', 'manifest-focus.json', 'rgb-grid-v1',
-    'data_file', 'focus-catalog', 'focus-places', 'отдельный визуальный review'
+    'data_files', 'focus-catalog', 'focus-places', 'отдельный визуальный review'
   ]);
 
   const approvedExists = fs.existsSync(APPROVED_MANIFEST_PATH);
