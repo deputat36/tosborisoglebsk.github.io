@@ -167,8 +167,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((data) => {
       pages = Array.isArray(data?.pages) ? data.pages : [];
       Object.assign(groupLabels, data?.search_groups || {});
-      applyInitialState();
       populateTypes();
+      applyInitialState();
       apply({ sync: false });
     })
     .catch(() => {

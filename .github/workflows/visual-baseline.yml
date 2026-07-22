@@ -16,7 +16,11 @@ on:
       - 'tos/index.html'
       - 'tos/mirolyubie/index.html'
       - 'places/index.html'
+      - 'search/index.html'
       - 'news/index.html'
+      - 'projects/index.html'
+      - 'done/index.html'
+      - 'needs/index.html'
       - 'news/vk-community-channel-2026/index.html'
       - 'workbench/index.html'
       - 'site-health/index.html'
@@ -33,8 +37,10 @@ on:
       - 'docs/visual-baseline/**'
       - 'scripts/capture_visual_baseline.js'
       - 'scripts/compare_visual_baseline.js'
+      - 'scripts/test_public_browser_interactions.js'
       - 'scripts/audit_visual_capture_manifest.js'
       - 'scripts/audit_visual_capture_tooling.js'
+      - 'scripts/audit_public_browser_interaction_tooling.js'
       - 'scripts/audit_visual_overflow_fixes.js'
       - 'scripts/patch_visual_focus_capture.js'
       - 'scripts/patch_visual_baseline_extensions.js'
@@ -84,6 +90,9 @@ jobs:
       - name: Check patched visual comparator syntax
         run: node --check scripts/compare_visual_baseline.js
 
+      - name: Check public browser interaction syntax
+        run: node --check scripts/test_public_browser_interactions.js
+
       - name: Audit visual overflow fixes
         run: node scripts/audit_visual_overflow_fixes.js
 
@@ -100,6 +109,11 @@ jobs:
           done
           cat .artifacts/visual-baseline/server.log
           exit 1
+
+      - name: Test public browser interactions
+        env:
+          PUBLIC_BROWSER_REPORT: .artifacts/visual-baseline/browser-interactions.json
+        run: node scripts/test_public_browser_interactions.js
 
       - name: Capture matrix screenshots
         id: capture
