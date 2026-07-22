@@ -26,6 +26,11 @@ const POSITION_FUNCTION = `async function positionPageForCapture(page, item) {
   await focusElement.evaluate((element) => {
     element.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' });
   });
+  const headerOffset = await page.evaluate(() => {
+    const headerHeight = document.querySelector('.header')?.getBoundingClientRect().height || 0;
+    return Math.ceil(headerHeight) + 16;
+  });
+  await page.evaluate((offset) => window.scrollBy(0, -offset), headerOffset);
   await page.waitForTimeout(200);
 
   const metrics = await focusElement.evaluate((element) => {
@@ -42,11 +47,13 @@ const POSITION_FUNCTION = `async function positionPageForCapture(page, item) {
 
   if (!metrics.visible) throw new Error(\`Focus target is outside viewport: \${target.selector}\`);
   if (readyCount < 1) throw new Error(\`Dynamic content did not load: \${target.readySelector}\`);
+  if (metrics.top < headerOffset - 2) throw new Error(\`Focus target is covered by the sticky header: \${target.selector}\`);
 
   return {
     selector: target.selector,
     ready_selector: target.readySelector,
     ready_count: readyCount,
+    header_offset: headerOffset,
     ...metrics
   };
 }`;
@@ -55,7 +62,7 @@ function patchSource(source) {
   if (source.includes(MARKER)) return { content: source, changed: false };
 
   let content = source;
-  const baseUrlLine = "const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\\\/$/, '');";
+  const baseUrlLine = "const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');";
   if (!content.includes(baseUrlLine)) throw new Error('capture_visual_baseline.js: BASE_URL marker not found');
   content = content.replace(baseUrlLine, `${baseUrlLine}\n\n${FOCUS_CONSTANTS}`);
 
