@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "base_manifest": "manifest.json",
+  "captured_at": "2026-07-22T05:54:20.846Z",
+  "repository": "deputat36/tosborisoglebsk.github.io",
+  "commit_sha": "9a739a852aaedfc231b0fa74f54d15f3ff0057c7",
+  "workflow_run_id": "29895054138",
+  "workflow_run_attempt": "1",
+  "capture_artifact": "visual-baseline-198-1",
+  "results": [
+    {
+      "case_id": "css-reg-015",
+      "area": "Каталог ТОС — фильтры и карточки",
+      "route": "/tos/",
+      "viewport": {
+        "width": 620,
+        "height": 1600
+      },
+      "theme": "light",
+      "interaction": "focus-catalog",
+      "mode": "screen",
+      "expected_check": "Сфокусированный каталог показывает фильтры, сводку и загруженные карточки без переполнения",
+      "focus_capture": {
+        "selector": "#catalog",
+        "ready_selector": "#tos-list .card",
+        "ready_count": 24,
+        "header_offset": 97,
+        "top": 97,
+        "scrollY": 1428,
+        "visible": true
+      },
+      "screenshot": "css-reg-015.png",
+      "screenshot_sha256": "c0de0fbd75d3ae0bc0e2609b296bebcba882a2ab068d102b326f804dcda704d6",
+      "bytes": 135991,
+      "visual_fingerprint": {
+        "scheme": "rgb-grid-v1",
+        "columns": 31,
+        "rows": 80,
+        "data_file": "fingerprints/css-reg-015.rgb.b64",
+        "sha256": "8e5e56d580abe5e5fb3ad06dbd0fc2984cfc2c164cf29bef06a6d40f7de33cc5"
+      }
+    },
+    {
+      "case_id": "css-reg-016",
+      "area": "Справочник территорий — фильтры и карточки",
+      "route": "/places/",
+      "viewport": {
+        "width": 620,
+        "height": 1200
+      },
+      "theme": "dark",
+      "interaction": "focus-places",
+      "mode": "screen",
+      "expected_check": "Поиск, фильтры и карточки территорий видны после загрузки и не выходят за мобильный экран",
+      "focus_capture": {
+        "selector": "#places-browser",
+        "ready_selector": "#places-grid .card",
+        "ready_count": 13,
+        "header_offset": 97,
+        "top": 97,
+        "scrollY": 511,
+        "visible": true
+      },
+      "screenshot": "css-reg-016.png",
+      "screenshot_sha256": "a304af0e44e3c9639fb26d0b23d8b031a2612d9cc10c18db0efe992ba8543622",
+      "bytes": 119450,
+      "visual_fingerprint": {
+        "scheme": "rgb-grid-v1",
+        "columns": 31,
+        "rows": 60,
+        "data_file": "fingerprints/css-reg-016.rgb.b64",
+        "sha256": "f9478dd1feae0c74b427bb132fd6893d73781cd3ea616a5dd17204b0c13da8c1"
+      }
+    }
+  ]
+}
