@@ -1,4 +1,11 @@
 const { runChecks } = require('./lib/run_checks');
+const { patchCollectionBrowsers } = require('./patch_collection_browsers');
+const { patchCollectionSearchContract } = require('./patch_collection_search_contract');
+
+// Full project-mode audits must inspect the same materialized collection pages
+// in every workflow, not only after the main generation pipeline.
+patchCollectionBrowsers();
+patchCollectionSearchContract();
 
 const checks = [
   ['CSV parser self-test', 'scripts/test_csv_parser.js'],

@@ -1,3 +1,5 @@
+const needsCore = window.CollectionBrowserCore;
+
 const needsEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
   '&': '&amp;',
   '<': '&lt;',
@@ -8,7 +10,7 @@ const needsEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
 
 const needsFmtDate = (value) => {
   if (!value) return 'Дата уточняется';
-  const date = new Date(value + 'T00:00:00');
+  const date = new Date(`${value}T00:00:00`);
   if (Number.isNaN(date.getTime())) return value;
   return date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
 };
@@ -16,6 +18,7 @@ const needsFmtDate = (value) => {
 const needsPublished = (item) => item.status !== 'draft';
 const isClosedNeed = (item) => ['closed', 'done', 'archived'].includes(String(item.status || '').toLowerCase());
 const isPartnerNeed = (item) => [item.need_type, item.description, item.how_to_help, item.help].join(' ').toLowerCase().includes('партн');
+const needsFields = ['q', 'type', 'tos', 'priority', 'status', 'origin'];
 
 function needsOrigin(item) {
   if (['verified', 'editorial', 'starter', 'request'].includes(item.content_origin)) return item.content_origin;
@@ -50,10 +53,7 @@ function needsTosName(slug, toses) {
 }
 
 function priorityClass(priority) {
-  const text = String(priority || '').toLowerCase();
-  if (text.includes('выс')) return 'warn';
-  if (text.includes('низ')) return '';
-  return '';
+  return String(priority || '').toLowerCase().includes('выс') ? 'warn' : '';
 }
 
 function statusLabel(status) {
@@ -70,15 +70,14 @@ function statusClass(status) {
   return '';
 }
 
-function renderNeedsSummary(items) {
+function renderNeedsSummary(items, total) {
   const root = document.querySelector('#needs-summary');
   if (!root) return;
+  const counts = needsCore.countOrigins(items, needsOrigin);
   const open = items.filter((item) => !isClosedNeed(item)).length;
   const closed = items.filter(isClosedNeed).length;
-  const high = items.filter((item) => String(item.priority || '').toLowerCase().includes('выс')).length;
   const partner = items.filter(isPartnerNeed).length;
-  const requests = items.filter((item) => needsOrigin(item) === 'request').length;
-  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>записей найдено</span></div><div class="summary-tile"><b>${open}</b><span>незакрытые записи</span></div><div class="summary-tile"><b>${high}</b><span>высокий приоритет</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div><div class="summary-tile"><b>${requests}</b><span>запросы данных</span></div></div>`;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>показано из ${total}</span></div><div class="summary-tile"><b>${open}</b><span>незакрытые записи</span></div><div class="summary-tile"><b>${closed}</b><span>закрытые и архивные</span></div><div class="summary-tile"><b>${counts.editorial}</b><span>редакционные материалы</span></div><div class="summary-tile"><b>${counts.request}</b><span>запросы данных</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div></div>`;
 }
 
 function needCard(item, toses) {
@@ -89,7 +88,7 @@ function needCard(item, toses) {
     : 'Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.';
   const helpText = item.how_to_help || item.help || defaultHelp;
   const resultText = item.result || item.closed_result || '';
-  return `<article class="list-item need-card">
+  return `<article class="list-item need-card" data-content-origin="${needsEsc(origin)}">
     <div class="meta">
       ${needsOriginTag(item)}
       <span class="tag ${statusClass(item.status)}">${needsEsc(statusLabel(item.status))}</span>
@@ -116,12 +115,18 @@ function needCard(item, toses) {
 
 async function renderNeeds() {
   const root = document.querySelector('#needs-list');
-  if (!root) return;
-  const search = document.querySelector('#needs-search');
-  const type = document.querySelector('#needs-type-filter');
-  const tos = document.querySelector('#needs-tos-filter');
-  const priority = document.querySelector('#needs-priority-filter');
-  const status = document.querySelector('#needs-status-filter');
+  if (!root || !needsCore) return;
+
+  const controls = {
+    q: document.querySelector('#needs-search'),
+    type: document.querySelector('#needs-type-filter'),
+    tos: document.querySelector('#needs-tos-filter'),
+    priority: document.querySelector('#needs-priority-filter'),
+    status: document.querySelector('#needs-status-filter'),
+    origin: document.querySelector('#needs-origin-filter')
+  };
+  const reset = document.querySelector('#needs-reset-filters');
+  const statusText = document.querySelector('#needs-filter-status');
 
   try {
     const { needs, toses } = await loadNeedsData();
@@ -129,26 +134,26 @@ async function renderNeeds() {
     const priorities = [...new Set(needs.map((item) => item.priority).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
     const usedTos = [...new Set(needs.map((item) => item.tos_slug).filter(Boolean))];
 
-    if (type) type.innerHTML = '<option value="">Все типы помощи</option>' + types.map((value) => `<option>${needsEsc(value)}</option>`).join('');
-    if (priority) priority.innerHTML = '<option value="">Любой приоритет</option>' + priorities.map((value) => `<option>${needsEsc(value)}</option>`).join('');
-    if (tos) tos.innerHTML = '<option value="">Все ТОС</option>' + usedTos.map((slug) => `<option value="${needsEsc(slug)}">${needsEsc(needsTosName(slug, toses))}</option>`).join('');
+    if (controls.type) controls.type.innerHTML = '<option value="">Все типы помощи</option>' + types.map((value) => `<option>${needsEsc(value)}</option>`).join('');
+    if (controls.priority) controls.priority.innerHTML = '<option value="">Любой приоритет</option>' + priorities.map((value) => `<option>${needsEsc(value)}</option>`).join('');
+    if (controls.tos) controls.tos.innerHTML = '<option value="">Все ТОС</option>' + usedTos.map((slug) => `<option value="${needsEsc(slug)}">${needsEsc(needsTosName(slug, toses))}</option>`).join('');
 
-    function apply() {
-      const query = (search?.value || '').toLowerCase().trim().replace(/ё/g, 'е');
-      const selectedType = type?.value || '';
-      const selectedPriority = priority?.value || '';
-      const selectedTos = tos?.value || '';
-      const selectedStatus = status?.value || '';
+    needsCore.applyControls(needsCore.parseState(window.location.search, needsFields), controls);
+
+    function apply(sync = true) {
+      const state = needsCore.readControls(controls);
+      const query = needsCore.normalizeText(state.q);
       const filtered = needs
-        .filter((item) => !selectedType || item.need_type === selectedType)
-        .filter((item) => !selectedPriority || item.priority === selectedPriority)
-        .filter((item) => !selectedTos || item.tos_slug === selectedTos)
-        .filter((item) => selectedStatus !== 'active' || !isClosedNeed(item))
-        .filter((item) => selectedStatus !== 'closed' || isClosedNeed(item))
-        .filter((item) => selectedStatus !== 'partner' || isPartnerNeed(item))
+        .filter((item) => !state.type || item.need_type === state.type)
+        .filter((item) => !state.priority || item.priority === state.priority)
+        .filter((item) => !state.tos || item.tos_slug === state.tos)
+        .filter((item) => !state.origin || needsOrigin(item) === state.origin)
+        .filter((item) => state.status !== 'active' || !isClosedNeed(item))
+        .filter((item) => state.status !== 'closed' || isClosedNeed(item))
+        .filter((item) => state.status !== 'partner' || isPartnerNeed(item))
         .filter((item) => {
           const tosName = needsTosName(item.tos_slug, toses);
-          const hay = [item.title, item.description, item.need_type, item.priority, item.contact, item.source, item.how_to_help, item.result, tosName, needsOrigin(item)].join(' ').toLowerCase().replace(/ё/g, 'е');
+          const hay = needsCore.normalizeText([item.title, item.description, item.need_type, item.priority, item.contact, item.source, item.how_to_help, item.result, tosName, needsOrigin(item)].join(' '));
           return !query || hay.includes(query);
         })
         .sort((a, b) => {
@@ -157,14 +162,29 @@ async function renderNeeds() {
           if (statusA !== statusB) return statusA - statusB;
           return String(b.date || '').localeCompare(String(a.date || ''));
         });
-      root.innerHTML = filtered.length ? filtered.map((item) => needCard(item, toses)).join('') : '<div class="empty">Потребности не найдены.</div>';
-      renderNeedsSummary(filtered);
+
+      root.innerHTML = filtered.length ? filtered.map((item) => needCard(item, toses)).join('') : '<div class="empty">По выбранным фильтрам потребности и запросы не найдены. Сбросьте фильтры или измените запрос.</div>';
+      renderNeedsSummary(filtered, needs.length);
+      needsCore.setStatus(statusText, filtered.length, needs.length, needsCore.activeFilterCount(state));
+      if (sync) needsCore.syncUrl(state, needsFields);
     }
 
-    [search, type, tos, priority, status].forEach((element) => element?.addEventListener('input', apply));
-    apply();
+    needsCore.bindControls(controls, () => apply(true));
+    reset?.addEventListener('click', () => {
+      needsCore.resetControls(controls);
+      apply(true);
+      controls.q?.focus();
+    });
+    controls.q?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && controls.q.value) {
+        controls.q.value = '';
+        apply(true);
+      }
+    });
+    apply(true);
   } catch (error) {
     root.innerHTML = '<div class="empty">Раздел не загрузился. Проверьте файл data/needs.json</div>';
+    if (statusText) statusText.textContent = 'Ошибка загрузки потребностей.';
   }
 }
 

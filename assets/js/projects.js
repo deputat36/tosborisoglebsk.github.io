@@ -1,3 +1,5 @@
+const projectCore = window.CollectionBrowserCore;
+
 const projectEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
   '&': '&amp;',
   '<': '&lt;',
@@ -7,6 +9,7 @@ const projectEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => 
 }[char]));
 
 const projectPublished = (item) => item && item.status !== 'draft';
+const projectFields = ['q', 'type', 'tos', 'origin'];
 
 function projectOrigin(item) {
   if (['verified', 'editorial', 'starter', 'request'].includes(item.content_origin)) return item.content_origin;
@@ -49,7 +52,7 @@ function projectCard(item, toses) {
   const tosName = projectTosName(item.tos_slug, toses);
   const detailUrl = item.id ? `/projects/${projectEsc(item.id)}/` : '/projects/';
   const steps = Array.isArray(item.steps) ? item.steps.slice(0, 3) : [];
-  return `<article class="list-item project-card">
+  return `<article class="list-item project-card" data-content-origin="${projectEsc(projectOrigin(item))}">
     <div class="meta">
       ${projectOriginTag(item)}
       <span class="tag">${projectEsc(item.type || 'Проект')}</span>
@@ -71,16 +74,73 @@ function projectCard(item, toses) {
   </article>`;
 }
 
+function renderProjectsSummary(items, total) {
+  const root = document.querySelector('#projects-summary');
+  if (!root) return;
+  const counts = projectCore.countOrigins(items, projectOrigin);
+  const withTos = items.filter((item) => item.tos_slug).length;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>показано из ${total}</span></div><div class="summary-tile"><b>${counts.verified}</b><span>подтверждено источником</span></div><div class="summary-tile"><b>${counts.editorial}</b><span>редакционные проекты</span></div><div class="summary-tile"><b>${counts.starter}</b><span>стартовые идеи</span></div><div class="summary-tile"><b>${withTos}</b><span>привязаны к ТОС</span></div></div>`;
+}
+
 async function renderProjects() {
   const root = document.querySelector('#projects-list');
-  if (!root) return;
+  if (!root || !projectCore) return;
+
+  const controls = {
+    q: document.querySelector('#projects-search'),
+    type: document.querySelector('#projects-type-filter'),
+    tos: document.querySelector('#projects-tos-filter'),
+    origin: document.querySelector('#projects-origin-filter')
+  };
+  const reset = document.querySelector('#projects-reset-filters');
+  const status = document.querySelector('#projects-filter-status');
 
   try {
     const { projects, toses } = await loadProjectsData();
-    const sorted = projects.sort((a, b) => String(a.title || '').localeCompare(String(b.title || ''), 'ru'));
-    root.innerHTML = sorted.length ? sorted.map((item) => projectCard(item, toses)).join('') : '<div class="empty">Проекты пока не добавлены.</div>';
-  } catch {
+    const types = [...new Set(projects.map((item) => item.type).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
+    const usedTos = [...new Set(projects.map((item) => item.tos_slug).filter(Boolean))];
+
+    if (controls.type) controls.type.innerHTML = '<option value="">Все типы проектов</option>' + types.map((value) => `<option>${projectEsc(value)}</option>`).join('');
+    if (controls.tos) controls.tos.innerHTML = '<option value="">Все ТОС</option>' + usedTos.map((slug) => `<option value="${projectEsc(slug)}">${projectEsc(projectTosName(slug, toses))}</option>`).join('');
+
+    projectCore.applyControls(projectCore.parseState(window.location.search, projectFields), controls);
+
+    function apply(sync = true) {
+      const state = projectCore.readControls(controls);
+      const query = projectCore.normalizeText(state.q);
+      const filtered = projects
+        .filter((item) => !state.type || item.type === state.type)
+        .filter((item) => !state.tos || item.tos_slug === state.tos)
+        .filter((item) => !state.origin || projectOrigin(item) === state.origin)
+        .filter((item) => {
+          const tosName = projectTosName(item.tos_slug, toses);
+          const hay = projectCore.normalizeText([item.title, item.description, item.type, item.grant_logic, item.based_on, item.tos_slug, tosName, projectOrigin(item), ...(item.steps || [])].join(' '));
+          return !query || hay.includes(query);
+        })
+        .sort((a, b) => String(a.title || '').localeCompare(String(b.title || ''), 'ru'));
+
+      root.innerHTML = filtered.length ? filtered.map((item) => projectCard(item, toses)).join('') : '<div class="empty">По выбранным фильтрам проекты и идеи не найдены. Сбросьте фильтры или измените запрос.</div>';
+      renderProjectsSummary(filtered, projects.length);
+      projectCore.setStatus(status, filtered.length, projects.length, projectCore.activeFilterCount(state));
+      if (sync) projectCore.syncUrl(state, projectFields);
+    }
+
+    projectCore.bindControls(controls, () => apply(true));
+    reset?.addEventListener('click', () => {
+      projectCore.resetControls(controls);
+      apply(true);
+      controls.q?.focus();
+    });
+    controls.q?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && controls.q.value) {
+        controls.q.value = '';
+        apply(true);
+      }
+    });
+    apply(true);
+  } catch (error) {
     root.innerHTML = '<div class="empty">Банк проектов не загрузился. Проверьте файл data/projects.json</div>';
+    if (status) status.textContent = 'Ошибка загрузки банка проектов.';
   }
 }
 

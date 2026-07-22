@@ -5,6 +5,8 @@ const { patchCalendarCurrentState } = require('./patch_calendar_current_state');
 const { patchVisualFocusCapture } = require('./patch_visual_focus_capture');
 const { patchVisualBaselineExtensions } = require('./patch_visual_baseline_extensions');
 const { patchVisualFingerprintParts } = require('./patch_visual_fingerprint_parts');
+const { patchCollectionBrowsers } = require('./patch_collection_browsers');
+const { patchCollectionSearchContract } = require('./patch_collection_search_contract');
 
 const ROOT = process.cwd();
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
@@ -51,6 +53,8 @@ function main() {
   patchVisualFocusCapture();
   patchVisualBaselineExtensions();
   patchVisualFingerprintParts();
+  patchCollectionBrowsers();
+  patchCollectionSearchContract();
 
   let changed = 0;
   if (patchFile(GENERATOR_PATH, 'TOS page generator')) changed += 1;
