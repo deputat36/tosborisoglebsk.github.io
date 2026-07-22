@@ -43,6 +43,7 @@ const AUDIT_MULTI_FILE_BLOCK = `    const dataFiles = Array.isArray(fingerprint.
     }
 
     let encoded = '';
+    const partLengths = [];
     dataFiles.forEach((relativePath) => {
       const dataPath = path.resolve(path.dirname(FOCUS_MANIFEST_PATH), relativePath);
       if (!dataPath.startsWith(path.dirname(FOCUS_MANIFEST_PATH) + path.sep)) {
@@ -53,7 +54,9 @@ const AUDIT_MULTI_FILE_BLOCK = `    const dataFiles = Array.isArray(fingerprint.
         errors.push(\`\${label}: fingerprint data file is missing: \${relativePath}\`);
         return;
       }
-      encoded += fs.readFileSync(dataPath, 'utf8').trim();
+      const part = fs.readFileSync(dataPath, 'utf8').trim();
+      partLengths.push(\`\${relativePath}:\${part.length}\`);
+      encoded += part;
     });
     if (!encoded) return;
 
@@ -75,6 +78,14 @@ function patchToolingAudit(source) {
   if (!pattern.test(source)) throw new Error('audit_visual_capture_tooling.js: single fingerprint data block not found');
   const content = source
     .replace(pattern, AUDIT_MULTI_FILE_BLOCK)
+    .replace(
+      "if (decoded.length !== columns * rows * 3) errors.push(`${label}: fingerprint byte length is invalid`);",
+      "if (decoded.length !== columns * rows * 3) errors.push(`${label}: fingerprint byte length ${decoded.length} does not match ${columns * rows * 3}; encoded=${encoded.length}; parts=${partLengths.join(',')}`);"
+    )
+    .replace(
+      "if (fingerprint.sha256 && sha256(decoded) !== fingerprint.sha256) errors.push(`${label}: fingerprint SHA-256 does not match`);",
+      "if (fingerprint.sha256 && sha256(decoded) !== fingerprint.sha256) errors.push(`${label}: fingerprint SHA-256 ${sha256(decoded)} does not match ${fingerprint.sha256}; encoded=${encoded.length}; parts=${partLengths.join(',')}`);"
+    )
     .replaceAll("'data_file'", "'data_files'");
   return { content, changed: true };
 }
