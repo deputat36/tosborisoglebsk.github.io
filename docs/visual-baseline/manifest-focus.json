@@ -31,17 +31,12 @@
       "bytes": 135991,
       "visual_fingerprint": {
         "scheme": "rgb-grid-v1",
-        "columns": 31,
-        "rows": 80,
+        "columns": 10,
+        "rows": 20,
         "data_files": [
-          "fingerprints/css-reg-015.part-01a.b64",
-          "fingerprints/css-reg-015.part-01b.b64",
-          "fingerprints/css-reg-015.part-02.b64",
-          "fingerprints/css-reg-015.part-03.b64",
-          "fingerprints/css-reg-015.part-04.b64",
-          "fingerprints/css-reg-015.part-05.b64"
+          "fingerprints/css-reg-015.compact.b64"
         ],
-        "sha256": "8e5e56d580abe5e5fb3ad06dbd0fc2984cfc2c164cf29bef06a6d40f7de33cc5"
+        "sha256": "85b78b7fc1683a9cccf6180a1cb9f601e591168979d8b8104a1007d1a3cbe5a1"
       }
     },
     {
@@ -67,12 +62,12 @@
       "bytes": 119450,
       "visual_fingerprint": {
         "scheme": "rgb-grid-v1",
-        "columns": 31,
-        "rows": 60,
+        "columns": 10,
+        "rows": 20,
         "data_files": [
-          "fingerprints/css-reg-016.full.b64"
+          "fingerprints/css-reg-016.compact.b64"
         ],
-        "sha256": "f9478dd1feae0c74b427bb132fd6893d73781cd3ea616a5dd17204b0c13da8c1"
+        "sha256": "6a7edec57a41bbfbcaea26096e74bdcad5d0bfb21a528db3bfe1f06006e98a71"
       }
     }
   ]
