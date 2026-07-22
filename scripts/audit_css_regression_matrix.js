@@ -24,7 +24,14 @@ const expectedHeaders = [
 ];
 
 const allowedThemes = new Set(['light', 'dark']);
-const allowedInteractions = new Set(['none', 'toggle-theme', 'open-menu', 'print-preview']);
+const allowedInteractions = new Set([
+  'none',
+  'toggle-theme',
+  'open-menu',
+  'print-preview',
+  'focus-catalog',
+  'focus-places'
+]);
 const allowedModes = new Set(['screen', 'print']);
 const allowedStatuses = new Set(['baseline_required', 'baseline_captured', 'passed', 'failed', 'blocked']);
 const requiredWidths = new Set([360, 620, 900, 1180]);
@@ -32,6 +39,7 @@ const requiredRoutes = new Set([
   '/',
   '/tos/',
   '/tos/mirolyubie/',
+  '/places/',
   '/news/',
   '/news/vk-community-channel-2026/',
   '/workbench/',
@@ -71,6 +79,7 @@ function main() {
   const seenModes = new Set();
   let mobileMenuCases = 0;
   let printCases = 0;
+  let focusedDynamicCases = 0;
 
   rows.slice(1).forEach((row, index) => {
     const line = `CSS regression row ${index + 2}`;
@@ -128,6 +137,13 @@ function main() {
       if (mode !== 'screen') errors.push(`${line}: open-menu case must use screen mode`);
     }
 
+    if (interaction.startsWith('focus-')) {
+      focusedDynamicCases += 1;
+      if (mode !== 'screen') errors.push(`${line}: focused dynamic case must use screen mode`);
+      if (viewportWidth > 620) errors.push(`${line}: focused dynamic case must verify compact layout at viewport_width <= 620`);
+      if (viewportHeight < 1000) errors.push(`${line}: focused dynamic case must provide enough height for controls and cards`);
+    }
+
     if (mode === 'print' || interaction === 'print-preview') {
       printCases += 1;
       if (mode !== 'print' || interaction !== 'print-preview') {
@@ -152,6 +168,7 @@ function main() {
   });
   if (mobileMenuCases < 1) errors.push('matrix must contain a mobile menu case');
   if (printCases < 1) errors.push('matrix must contain a print preview case');
+  if (focusedDynamicCases < 2) errors.push('matrix must contain focused cases for both dynamic catalogs');
 
   if (!pageHtml.includes('/data/css_regression_matrix.csv')) {
     errors.push('css-maintenance page must link to /data/css_regression_matrix.csv');
@@ -164,7 +181,7 @@ function main() {
     throw new Error(`CSS regression matrix audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`CSS regression matrix OK: ${rows.length - 1} cases, ${seenRoutes.size} routes, ${seenWidths.size} viewport widths`);
+  console.log(`CSS regression matrix OK: ${rows.length - 1} cases, ${seenRoutes.size} routes, ${seenWidths.size} viewport widths, ${focusedDynamicCases} focused dynamic cases`);
 }
 
 main();
