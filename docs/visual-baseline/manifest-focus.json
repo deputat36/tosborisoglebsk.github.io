@@ -12,10 +12,7 @@
       "case_id": "css-reg-015",
       "area": "Каталог ТОС — фильтры и карточки",
       "route": "/tos/",
-      "viewport": {
-        "width": 620,
-        "height": 1600
-      },
+      "viewport": { "width": 620, "height": 1600 },
       "theme": "light",
       "interaction": "focus-catalog",
       "mode": "screen",
@@ -36,7 +33,13 @@
         "scheme": "rgb-grid-v1",
         "columns": 31,
         "rows": 80,
-        "data_file": "fingerprints/css-reg-015.rgb.b64",
+        "data_files": [
+          "fingerprints/css-reg-015.part-01.b64",
+          "fingerprints/css-reg-015.part-02.b64",
+          "fingerprints/css-reg-015.part-03.b64",
+          "fingerprints/css-reg-015.part-04.b64",
+          "fingerprints/css-reg-015.part-05.b64"
+        ],
         "sha256": "8e5e56d580abe5e5fb3ad06dbd0fc2984cfc2c164cf29bef06a6d40f7de33cc5"
       }
     },
@@ -44,10 +47,7 @@
       "case_id": "css-reg-016",
       "area": "Справочник территорий — фильтры и карточки",
       "route": "/places/",
-      "viewport": {
-        "width": 620,
-        "height": 1200
-      },
+      "viewport": { "width": 620, "height": 1200 },
       "theme": "dark",
       "interaction": "focus-places",
       "mode": "screen",
@@ -68,7 +68,12 @@
         "scheme": "rgb-grid-v1",
         "columns": 31,
         "rows": 60,
-        "data_file": "fingerprints/css-reg-016.rgb.b64",
+        "data_files": [
+          "fingerprints/css-reg-016.part-01.b64",
+          "fingerprints/css-reg-016.part-02.b64",
+          "fingerprints/css-reg-016.part-03.b64",
+          "fingerprints/css-reg-016.part-04.b64"
+        ],
         "sha256": "f9478dd1feae0c74b427bb132fd6893d73781cd3ea616a5dd17204b0c13da8c1"
       }
     }
