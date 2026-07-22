@@ -71,7 +71,9 @@ function main() {
 
   const scenarioMatches = [...test.matchAll(/\['(?:global-search|tos-catalog|places-browser|news-browser|projects-browser|done-browser|needs-browser)'/g)];
   if (scenarioMatches.length !== 7) errors.push(`browser interaction test must declare 7 scenarios, received ${scenarioMatches.length}`);
-  if (!test.includes("origin: 'verified'")) errors.push('search scenario must verify a confirmed result');
+  if (!test.includes('origin=verified') || !test.includes("item.origin === 'verified'")) {
+    errors.push('search scenario must request and assert a confirmed result');
+  }
   if (!test.includes("origin: 'starter'")) errors.push('collection scenarios must verify starter material filtering');
   if ((test.match(/origin: 'request'/g) || []).length < 3) errors.push('collection scenarios must verify request filtering across public sections');
 
