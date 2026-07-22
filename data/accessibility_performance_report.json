@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T18:46:05.448Z",
+  "generated_at": "2026-07-22T19:46:36.429Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 109,
+    "asset_files": 110,
     "over_budget_assets": 0,
     "total_css_bytes": 45337,
-    "total_js_bytes": 637446,
+    "total_js_bytes": 646503,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -218,6 +218,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/search-create-tos.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8532,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/personal-data-decisions.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8293,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/news.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8290,
       "over_budget": false
     }
   ],
