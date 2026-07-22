@@ -1,1 +1,57 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Поиск по сайту ТОС БГО</title><meta name="description" content="Поиск по каталогу ТОС, новостям, материалам, документам, конкурсам и проектам."/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="https://tosborisoglebsk.ru/search/"/><meta property="og:title" content="Поиск по сайту ТОС БГО"/><meta property="og:description" content="Поиск по каталогу ТОС, новостям, материалам, документам, конкурсам и проектам."/><meta property="og:type" content="website"/><meta property="og:url" content="https://tosborisoglebsk.ru/search/"/><meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><link rel="stylesheet" href="/assets/css/design-upgrades.css"/></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><div class="eyebrow">Поиск</div><h1>Поиск по сайту</h1><p class="lead">Ищите ТОСы, председателей, населённые пункты, новости, материалы, документы, конкурсы, проекты и инструкции по созданию ТОС.</p></div></section><section class="section"><div class="container"><input class="input" id="site-search" placeholder="Введите запрос..." aria-label="Поиск по сайту"/></div></section><section class="section"><div class="container list" id="search-results"></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru.</div></div><div class="tiny">Поиск по рабочим материалам портала.</div></div></footer><script src="/assets/js/site.js"></script><script src="/assets/js/search-create-tos.js"></script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Поиск по сайту ТОС БГО</title>
+  <meta name="description" content="Поиск по каталогу ТОС, новостям, материалам, документам, конкурсам и проектам с фильтрами по типу страницы и происхождению материала."/>
+  <meta name="theme-color" content="#2f7d5a"/>
+  <link rel="canonical" href="https://tosborisoglebsk.ru/search/"/>
+  <meta property="og:title" content="Поиск по сайту ТОС БГО"/>
+  <meta property="og:description" content="Поиск по каталогу ТОС, новостям, материалам, документам, конкурсам и проектам."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://tosborisoglebsk.ru/search/"/>
+  <meta property="og:image" content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"/>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <link rel="stylesheet" href="/assets/css/design-upgrades.css"/>
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+  <main id="main">
+    <section class="hero"><div class="container hero-card"><div class="eyebrow">Поиск</div><h1>Поиск по сайту</h1><p class="lead">Ищите ТОСы, председателей, населённые пункты, новости, материалы, документы, конкурсы, проекты и инструкции по созданию ТОС. Метки помогают отличить справочную страницу от подтверждённого, редакционного или ещё не проверенного материала.</p></div></section>
+    <section class="section tight"><div class="container notice"><b>Как читать результаты:</b> «Подтверждено источником» означает наличие проверяемого основания основного факта. «Редакционный материал» подготовлен порталом. «Стартовый материал» и «Запрос материалов» нельзя использовать как подтверждение события, проекта, потребности или результата.</div></section>
+    <section class="section" data-search-browser-version="2026-07-22">
+      <div class="container section-head"><div><h2>Найти страницу или материал</h2><p>Фильтры сохраняются в адресе страницы — готовой подборкой можно поделиться.</p></div></div>
+      <div class="container toolbar">
+        <input class="input" id="site-search" placeholder="Введите запрос..." aria-label="Поиск по сайту"/>
+        <select class="select" id="search-type-filter" aria-label="Фильтр поиска по типу страницы"><option value="">Все типы страниц</option></select>
+        <select class="select" id="search-origin-filter" aria-label="Фильтр поиска по происхождению материала">
+          <option value="">Любое происхождение</option>
+          <option value="reference">Справочные страницы</option>
+          <option value="verified">Подтверждено источником</option>
+          <option value="editorial">Редакционные материалы</option>
+          <option value="starter">Стартовые материалы</option>
+          <option value="request">Запросы материалов</option>
+        </select>
+        <select class="select" id="search-sort" aria-label="Сортировка результатов поиска">
+          <option value="relevance">По релевантности</option>
+          <option value="title">По названию</option>
+          <option value="section">По разделу</option>
+        </select>
+        <button class="btn" id="search-reset-filters" type="button">Сбросить фильтры</button>
+      </div>
+      <div class="container tos-summary" id="search-summary"></div>
+      <div class="container tiny" id="search-filter-status" role="status" aria-live="polite"></div>
+    </section>
+    <section class="section"><div class="container list" id="search-results"><div class="empty">Загрузка поискового индекса...</div></div></section>
+  </main>
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru.</div></div><div class="tiny">Поиск по рабочим и справочным материалам портала.</div></div></footer>
+  <script src="/assets/js/site.js"></script>
+  <script src="/assets/js/collection-browser-core.js"></script>
+  <script src="/assets/js/search-browser-core.js"></script>
+  <script src="/assets/js/search-create-tos.js"></script>
+</body>
+</html>
