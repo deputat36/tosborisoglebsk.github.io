@@ -70,6 +70,18 @@ function buildRgbGrid(png, columns, rows) {
   return values;
 }
 
+function readFingerprintData(fingerprint, caseId) {
+  if (fingerprint.data_file) {
+    const dataPath = path.resolve(BASELINE_DIR, fingerprint.data_file);
+    if (!dataPath.startsWith(BASELINE_DIR + path.sep)) {
+      throw new Error(\`Visual fingerprint escapes baseline directory for \${caseId}\`);
+    }
+    if (!fs.existsSync(dataPath)) throw new Error(\`Missing visual fingerprint data for \${caseId}\`);
+    return fs.readFileSync(dataPath, 'utf8').trim();
+  }
+  return String(fingerprint.data_base64 || '');
+}
+
 function compareVisualFingerprint(item, currentPath) {
   const fingerprint = item.visual_fingerprint || {};
   if (fingerprint.scheme !== 'rgb-grid-v1') {
@@ -82,7 +94,7 @@ function compareVisualFingerprint(item, currentPath) {
     throw new Error(\`Invalid visual fingerprint grid for \${item.case_id}\`);
   }
 
-  const expected = Buffer.from(String(fingerprint.data_base64 || ''), 'base64');
+  const expected = Buffer.from(readFingerprintData(fingerprint, item.case_id), 'base64');
   if (expected.length !== columns * rows * 3) {
     throw new Error(\`Visual fingerprint length mismatch for \${item.case_id}\`);
   }
