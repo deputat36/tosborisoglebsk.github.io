@@ -10,6 +10,7 @@ const COMPARE_PATH = path.join(ROOT, 'scripts', 'compare_visual_baseline.js');
 const MANIFEST_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_visual_capture_manifest.js');
 const OVERFLOW_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_visual_overflow_fixes.js');
 const RESPONSIVE_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_tos_detail_responsive_styles.js');
+const FOCUS_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_visual_focus_capture.js');
 const DOC_PATH = path.join(ROOT, 'docs', 'VISUAL-BASELINE-CAPTURE.md');
 const MATRIX_PATH = path.join(ROOT, 'data', 'css_regression_matrix.csv');
 const APPROVED_MANIFEST_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'manifest.json');
@@ -48,6 +49,7 @@ function main() {
     MANIFEST_AUDIT_PATH,
     OVERFLOW_AUDIT_PATH,
     RESPONSIVE_PATCH_PATH,
+    FOCUS_PATCH_PATH,
     DOC_PATH,
     MATRIX_PATH
   ];
@@ -69,8 +71,13 @@ function main() {
   if (headers.join('|') !== REQUIRED_MATRIX_HEADERS.join('|')) {
     errors.push(`unexpected matrix headers: ${headers.join(', ')}`);
   }
-  if (records.length !== 14) errors.push(`matrix must contain 14 cases, received ${records.length}`);
+  if (records.length !== 16) errors.push(`matrix must contain 16 cases, received ${records.length}`);
   if (new Set(records.map((item) => item.case_id)).size !== records.length) errors.push('matrix case_id values must be unique');
+
+  const focusInteractions = new Set(records.filter((item) => item.interaction.startsWith('focus-')).map((item) => item.interaction));
+  ['focus-catalog', 'focus-places'].forEach((interaction) => {
+    if (!focusInteractions.has(interaction)) errors.push(`matrix is missing ${interaction}`);
+  });
 
   requireFragments(errors, 'visual workflow', workflow, [
     'workflow_dispatch:',
@@ -100,6 +107,10 @@ function main() {
   requireFragments(errors, 'capture script', capture, [
     "require('playwright')",
     'data/css_regression_matrix.csv',
+    'FOCUS_TARGETS',
+    'positionPageForCapture',
+    'focus_capture',
+    'ready_count',
     'technical_violations',
     'failed_requests',
     'manifest.json',
@@ -116,6 +127,8 @@ function main() {
   requireFragments(errors, 'capture manifest audit', manifestAudit, [
     'VISUAL_CAPTURE_STRICT_QUALITY',
     "STRICT_QUALITY ? 'strict' : 'measurement'",
+    'focus_capture',
+    'ready_count',
     'qualityFindings',
     'failed requests are present',
     'horizontal overflow is present',
@@ -129,6 +142,8 @@ function main() {
     'compare_approved',
     'измерительный режим',
     'строгий режим',
+    'focus-catalog',
+    'focus-places',
     'отдельный визуальный review'
   ]);
 
@@ -157,7 +172,7 @@ function main() {
     stdio: 'inherit'
   });
 
-  console.log(`Visual capture tooling OK: ${records.length} cases, approved baseline ${approvedExists ? 'present' : 'not yet present'}, workflow read-only`);
+  console.log(`Visual capture tooling OK: ${records.length} cases, ${focusInteractions.size} focused interactions, approved baseline ${approvedExists ? 'present' : 'not yet present'}, workflow read-only`);
 }
 
 main();
