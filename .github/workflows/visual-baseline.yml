@@ -38,6 +38,7 @@ on:
       - 'scripts/audit_visual_overflow_fixes.js'
       - 'scripts/patch_visual_focus_capture.js'
       - 'scripts/patch_visual_baseline_extensions.js'
+      - 'scripts/patch_visual_fingerprint_parts.js'
       - 'scripts/patch_tos_detail_responsive_styles.js'
       - 'scripts/lib/csv.js'
       - '.github/workflows/visual-baseline.yml'
