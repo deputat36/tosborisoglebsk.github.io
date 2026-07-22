@@ -37,35 +37,127 @@ const READER = `function readApprovedManifest() {
   };
 }
 
-function resolveApprovedPng(item, screenshotName) {
-  const directPath = path.join(BASELINE_DIR, screenshotName);
-  if (fs.existsSync(directPath)) return directPath;
+function buildRgbGrid(png, columns, rows) {
+  const values = Buffer.alloc(columns * rows * 3);
+  let cursor = 0;
 
-  const parts = Array.isArray(item.base64_parts) ? item.base64_parts : [];
-  if (!parts.length) return directPath;
+  for (let gridY = 0; gridY < rows; gridY += 1) {
+    const yStart = Math.floor((gridY * png.height) / rows);
+    const yEnd = Math.floor(((gridY + 1) * png.height) / rows);
+    for (let gridX = 0; gridX < columns; gridX += 1) {
+      const xStart = Math.floor((gridX * png.width) / columns);
+      const xEnd = Math.floor(((gridX + 1) * png.width) / columns);
+      const sums = [0, 0, 0];
+      let count = 0;
 
-  const encoded = parts.map((relativePath) => {
-    const partPath = path.resolve(BASELINE_DIR, relativePath);
-    if (!partPath.startsWith(BASELINE_DIR + path.sep)) {
-      throw new Error(\`Visual baseline part escapes approved directory: \${relativePath}\`);
+      for (let y = yStart; y < yEnd; y += 1) {
+        for (let x = xStart; x < xEnd; x += 1) {
+          const offset = (y * png.width + x) * 4;
+          sums[0] += png.data[offset];
+          sums[1] += png.data[offset + 1];
+          sums[2] += png.data[offset + 2];
+          count += 1;
+        }
+      }
+
+      values[cursor] = Math.round(sums[0] / count);
+      values[cursor + 1] = Math.round(sums[1] / count);
+      values[cursor + 2] = Math.round(sums[2] / count);
+      cursor += 3;
     }
-    if (!fs.existsSync(partPath)) throw new Error(\`Missing visual baseline part: \${relativePath}\`);
-    return fs.readFileSync(partPath, 'utf8').trim();
-  }).join('');
-
-  const cacheDir = path.join(CURRENT_DIR, '.approved-baseline-cache');
-  fs.mkdirSync(cacheDir, { recursive: true });
-  const cachePath = path.join(cacheDir, screenshotName);
-  fs.writeFileSync(cachePath, Buffer.from(encoded, 'base64'));
-
-  if (item.sha256 && sha256(cachePath) !== item.sha256) {
-    throw new Error(\`Decoded visual baseline SHA-256 mismatch: \${item.case_id}\`);
-  }
-  if (item.bytes && fs.statSync(cachePath).size !== Number(item.bytes)) {
-    throw new Error(\`Decoded visual baseline byte size mismatch: \${item.case_id}\`);
   }
 
-  return cachePath;
+  return values;
+}
+
+function compareVisualFingerprint(item, currentPath) {
+  const fingerprint = item.visual_fingerprint || {};
+  if (fingerprint.scheme !== 'rgb-grid-v1') {
+    throw new Error(\`Unsupported visual fingerprint scheme for \${item.case_id}: \${fingerprint.scheme}\`);
+  }
+
+  const columns = Number(fingerprint.columns);
+  const rows = Number(fingerprint.rows);
+  if (!Number.isInteger(columns) || columns < 1 || !Number.isInteger(rows) || rows < 1) {
+    throw new Error(\`Invalid visual fingerprint grid for \${item.case_id}\`);
+  }
+
+  const expected = Buffer.from(String(fingerprint.data_base64 || ''), 'base64');
+  if (expected.length !== columns * rows * 3) {
+    throw new Error(\`Visual fingerprint length mismatch for \${item.case_id}\`);
+  }
+  const expectedHash = crypto.createHash('sha256').update(expected).digest('hex');
+  if (fingerprint.sha256 && expectedHash !== fingerprint.sha256) {
+    throw new Error(\`Visual fingerprint SHA-256 mismatch for \${item.case_id}\`);
+  }
+
+  const currentBytes = fs.readFileSync(currentPath);
+  const currentPng = PNG.sync.read(currentBytes);
+  const baselineWidth = Number(item.viewport?.width);
+  const baselineHeight = Number(item.viewport?.height);
+  const sizeEqual = currentPng.width === baselineWidth && currentPng.height === baselineHeight;
+  const totalSamples = columns * rows;
+  let changedSamples = null;
+  let significantChangedSamples = null;
+  let maxChannelDelta = null;
+
+  if (sizeEqual) {
+    const current = buildRgbGrid(currentPng, columns, rows);
+    changedSamples = 0;
+    significantChangedSamples = 0;
+    maxChannelDelta = 0;
+
+    for (let offset = 0; offset < expected.length; offset += 3) {
+      let sampleChanged = false;
+      let sampleSignificant = false;
+      for (let channel = 0; channel < 3; channel += 1) {
+        const delta = Math.abs(expected[offset + channel] - current[offset + channel]);
+        if (delta > 0) sampleChanged = true;
+        if (delta > MAX_CHANNEL_DELTA) sampleSignificant = true;
+        if (delta > maxChannelDelta) maxChannelDelta = delta;
+      }
+      if (sampleChanged) changedSamples += 1;
+      if (sampleSignificant) significantChangedSamples += 1;
+    }
+  }
+
+  const changedRatio = sizeEqual && totalSamples ? changedSamples / totalSamples : null;
+  const equivalence = classifyVisualEquivalence({
+    sizeEqual,
+    significantChangedPixels: significantChangedSamples,
+    changedPixelRatio: changedRatio,
+    maxChannelDelta
+  }, {
+    maxLowDeltaRatio: MAX_LOW_DELTA_RATIO,
+    maxSubpixelChannelDelta: MAX_SUBPIXEL_CHANNEL_DELTA,
+    maxSubpixelRatio: MAX_SUBPIXEL_RATIO,
+    maxBroadSubpixelChannelDelta: 3,
+    maxBroadSubpixelRatio: 0.3
+  });
+
+  return {
+    comparison_mode: 'rgb_grid_fingerprint',
+    size_equal: sizeEqual,
+    baseline_size: { width: baselineWidth, height: baselineHeight },
+    current_size: { width: currentPng.width, height: currentPng.height },
+    total_pixels: totalSamples,
+    pixel_identical: sizeEqual && changedSamples === 0,
+    pixel_equivalent: equivalence.equivalent,
+    equivalence_reason: equivalence.reason,
+    changed_pixels: changedSamples,
+    changed_pixel_ratio: changedRatio,
+    significant_changed_pixels: significantChangedSamples,
+    max_channel_delta: maxChannelDelta,
+    thresholds: {
+      max_channel_delta: MAX_CHANNEL_DELTA,
+      max_low_delta_ratio: MAX_LOW_DELTA_RATIO,
+      max_subpixel_channel_delta: MAX_SUBPIXEL_CHANNEL_DELTA,
+      max_subpixel_ratio: MAX_SUBPIXEL_RATIO
+    },
+    bytes_identical: Boolean(item.screenshot_sha256) && sha256(currentPath) === item.screenshot_sha256,
+    baseline_sha256: item.screenshot_sha256 || fingerprint.sha256,
+    current_sha256: sha256(currentPath)
+  };
 }`;
 
 function patchSource(source) {
@@ -85,9 +177,15 @@ function patchSource(source) {
   if (!content.includes(readCall)) throw new Error('compare_visual_baseline.js: baseline read call not found');
   content = content.replace(readCall, '  const baselineManifest = readApprovedManifest();');
 
-  const baselinePathCall = '      path.join(BASELINE_DIR, baselineName),';
-  if (!content.includes(baselinePathCall)) throw new Error('compare_visual_baseline.js: baseline PNG path call not found');
-  content = content.replace(baselinePathCall, '      resolveApprovedPng(baselineItem, baselineName),');
+  const comparisonCall = `    const imageComparison = comparePngs(
+      path.join(BASELINE_DIR, baselineName),
+      path.join(CURRENT_DIR, currentName)
+    );`;
+  if (!content.includes(comparisonCall)) throw new Error('compare_visual_baseline.js: comparison call not found');
+  content = content.replace(comparisonCall, `    const currentPath = path.join(CURRENT_DIR, currentName);
+    const imageComparison = baselineItem.visual_fingerprint
+      ? compareVisualFingerprint(baselineItem, currentPath)
+      : comparePngs(path.join(BASELINE_DIR, baselineName), currentPath);`);
 
   return { content, changed: true };
 }
