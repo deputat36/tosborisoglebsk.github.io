@@ -5,6 +5,7 @@ const { execFileSync } = require('child_process');
 const ROOT = process.cwd();
 const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'visual-baseline.yml');
 const TEST_PATH = path.join(ROOT, 'scripts', 'test_public_browser_interactions.js');
+const SEARCH_SCRIPT_PATH = path.join(ROOT, 'assets', 'js', 'search-create-tos.js');
 
 function requireFragments(errors, label, content, fragments) {
   fragments.forEach((fragment) => {
@@ -14,13 +15,14 @@ function requireFragments(errors, label, content, fragments) {
 
 function main() {
   const errors = [];
-  [WORKFLOW_PATH, TEST_PATH].forEach((filePath) => {
+  [WORKFLOW_PATH, TEST_PATH, SEARCH_SCRIPT_PATH].forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${path.relative(ROOT, filePath)}`);
   });
   if (errors.length) throw new Error(`Public browser interaction tooling audit failed:\n${errors.join('\n')}`);
 
   const workflow = fs.readFileSync(WORKFLOW_PATH, 'utf8');
   const test = fs.readFileSync(TEST_PATH, 'utf8');
+  const searchScript = fs.readFileSync(SEARCH_SCRIPT_PATH, 'utf8');
 
   requireFragments(errors, 'visual workflow', workflow, [
     "scripts/test_public_browser_interactions.js",
@@ -61,6 +63,12 @@ function main() {
     "Public browser interactions OK"
   ]);
 
+  const populatePosition = searchScript.indexOf('populateTypes();');
+  const restorePosition = searchScript.indexOf('applyInitialState();');
+  if (populatePosition < 0 || restorePosition < 0 || populatePosition > restorePosition) {
+    errors.push('global search must populate type options before restoring URL state');
+  }
+
   const scenarioMatches = [...test.matchAll(/\['(?:global-search|tos-catalog|places-browser|news-browser|projects-browser|done-browser|needs-browser)'/g)];
   if (scenarioMatches.length !== 7) errors.push(`browser interaction test must declare 7 scenarios, received ${scenarioMatches.length}`);
   if (!test.includes("origin: 'verified'")) errors.push('search scenario must verify a confirmed result');
@@ -74,12 +82,13 @@ function main() {
 
   try {
     execFileSync(process.execPath, ['--check', TEST_PATH], { cwd: ROOT, stdio: 'pipe' });
+    execFileSync(process.execPath, ['--check', SEARCH_SCRIPT_PATH], { cwd: ROOT, stdio: 'pipe' });
   } catch (error) {
-    errors.push(`browser interaction test syntax failed: ${String(error.stderr || error.message).trim()}`);
+    errors.push(`browser interaction syntax failed: ${String(error.stderr || error.message).trim()}`);
   }
 
   if (errors.length) throw new Error(`Public browser interaction tooling audit failed:\n${errors.join('\n')}`);
-  console.log('Public browser interaction tooling OK: 7 scenarios, URL state, filters, reset, Escape and technical error capture');
+  console.log('Public browser interaction tooling OK: 7 scenarios, URL state, filters, reset, Escape and search option restoration');
 }
 
 main();
