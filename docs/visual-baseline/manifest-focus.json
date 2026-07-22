@@ -70,15 +70,7 @@
         "columns": 31,
         "rows": 60,
         "data_files": [
-          "fingerprints/css-reg-016.part-01.b64",
-          "fingerprints/css-reg-016.part-02a1.b64",
-          "fingerprints/css-reg-016.part-02a2.b64",
-          "fingerprints/css-reg-016.part-02b1.b64",
-          "fingerprints/css-reg-016.part-02b2.b64",
-          "fingerprints/css-reg-016.part-03.b64",
-          "fingerprints/css-reg-016.part-04a1.b64",
-          "fingerprints/css-reg-016.part-04a2.b64",
-          "fingerprints/css-reg-016.part-04b.b64"
+          "fingerprints/css-reg-016.full.b64"
         ],
         "sha256": "f9478dd1feae0c74b427bb132fd6893d73781cd3ea616a5dd17204b0c13da8c1"
       }
