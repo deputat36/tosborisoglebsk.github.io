@@ -1,4 +1,5 @@
 const newsCore = window.CollectionBrowserCore;
+// Search normalization is centralized in CollectionBrowserCore.normalizeText: replace(/ё/g, 'е').
 
 const newsEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
   '&': '&amp;',

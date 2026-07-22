@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-22T07:07:16.757Z",
+  "generated_at": "2026-07-22T18:46:05.448Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 108,
+    "asset_files": 109,
     "over_budget_assets": 0,
     "total_css_bytes": 45337,
-    "total_js_bytes": 625903,
+    "total_js_bytes": 637446,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -148,6 +148,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/needs.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10804,
+      "over_budget": false
+    },
+    {
       "path": "assets/css/design-upgrades.css",
       "group": "css",
       "extension": ".css",
@@ -197,10 +204,10 @@
       "over_budget": false
     },
     {
-      "path": "assets/js/needs.js",
+      "path": "assets/js/done.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 9678,
+      "size_bytes": 9389,
       "over_budget": false
     },
     {
@@ -225,17 +232,10 @@
       "over_budget": false
     },
     {
-      "path": "assets/js/done.js",
+      "path": "assets/js/news.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 8242,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/publication-basis-register.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 7814,
+      "size_bytes": 8290,
       "over_budget": false
     }
   ],
