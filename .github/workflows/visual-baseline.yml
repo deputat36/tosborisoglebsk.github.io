@@ -41,6 +41,7 @@ on:
       - 'scripts/test_visual_case_delta_policy.js'
       - 'scripts/lib/visual_case_delta_policy.js'
       - 'scripts/test_public_browser_interactions.js'
+      - 'scripts/test_public_card_navigation.js'
       - 'scripts/test_places_tos_navigation.js'
       - 'scripts/test_tos_activity_summary.js'
       - 'scripts/audit_visual_capture_manifest.js'
@@ -122,8 +123,10 @@ jobs:
       - name: Check patched visual comparator syntax
         run: node --check scripts/compare_visual_baseline.js
 
-      - name: Check public browser interaction syntax
-        run: node --check scripts/test_public_browser_interactions.js
+      - name: Check public browser test syntax
+        run: |
+          node --check scripts/test_public_browser_interactions.js
+          node --check scripts/test_public_card_navigation.js
 
       - name: Check place-to-TOS navigation syntax
         run: node --check scripts/test_places_tos_navigation.js
@@ -152,6 +155,11 @@ jobs:
         env:
           PUBLIC_BROWSER_REPORT: .artifacts/visual-baseline/browser-interactions.json
         run: node scripts/test_public_browser_interactions.js
+
+      - name: Test public card navigation
+        env:
+          PUBLIC_CARD_NAVIGATION_REPORT: .artifacts/visual-baseline/public-card-navigation.json
+        run: node scripts/test_public_card_navigation.js
 
       - name: Test place-to-TOS navigation
         env:
