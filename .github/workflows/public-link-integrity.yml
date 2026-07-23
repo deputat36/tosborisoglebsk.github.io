@@ -1,0 +1,79 @@
+name: Audit public link integrity
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - release-2025-12-22
+    paths:
+      - 'index.html'
+      - '**/*.html'
+      - 'data/page_index.json'
+      - 'scripts/test_public_link_integrity.js'
+      - 'scripts/audit_public_link_integrity_tooling.js'
+      - '.github/workflows/public-link-integrity.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-link-integrity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      PUBLIC_LINK_BASE_URL: http://127.0.0.1:4173
+      PUBLIC_LINK_REPORT: .artifacts/public-link-integrity/report.json
+      PUBLIC_LINK_CONCURRENCY: '8'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check link audit syntax
+        run: node --check scripts/test_public_link_integrity.js
+
+      - name: Audit link tooling contract
+        run: node scripts/audit_public_link_integrity_tooling.js
+
+      - name: Start local static server
+        run: |
+          mkdir -p .artifacts/public-link-integrity
+          python3 -m http.server 4173 --bind 127.0.0.1 > .artifacts/public-link-integrity/server.log 2>&1 &
+          echo $! > .artifacts/public-link-integrity/server.pid
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat .artifacts/public-link-integrity/server.log
+          exit 1
+
+      - name: Test public link integrity
+        run: node scripts/test_public_link_integrity.js
+
+      - name: Stop local static server
+        if: always()
+        run: |
+          if [ -f .artifacts/public-link-integrity/server.pid ]; then
+            kill "$(cat .artifacts/public-link-integrity/server.pid)" 2>/dev/null || true
+            rm -f .artifacts/public-link-integrity/server.pid
+          fi
+
+      - name: Upload link audit artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-link-integrity-${{ github.run_number }}-${{ github.run_attempt }}
+          path: .artifacts/public-link-integrity
+          if-no-files-found: error
+          retention-days: 30
