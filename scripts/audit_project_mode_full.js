@@ -103,6 +103,7 @@ const checks = [
   ['Public deployment smoke contract', 'scripts/audit_public_deployment_smoke_contract.js'],
   ['Visual capture tooling audit', 'scripts/audit_visual_capture_tooling.js'],
   ['Public browser interaction tooling audit', 'scripts/audit_public_browser_interaction_tooling.js'],
+  ['Places to TOS navigation audit', 'scripts/audit_places_tos_navigation.js'],
   ['Technical diagnostics audit', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links audit', 'scripts/audit_open_data_links.js'],
   ['Autonomous improvement plan self-test', 'scripts/test_autonomous_improvement_plan.js'],
