@@ -269,6 +269,11 @@ function initCommonUi() {
 
   const nav = $('#site-nav');
   const menuButton = $('[data-action=menu]');
+  const menuFocusOrder = () => {
+    const links = [...(nav?.querySelectorAll('a[href]') || [])]
+      .filter((link) => link.getAttribute('aria-hidden') !== 'true' && !link.hasAttribute('disabled'));
+    return menuButton ? [menuButton, ...links] : links;
+  };
   const closeMenu = ({ restoreFocus = false } = {}) => {
     const wasOpen = Boolean(nav?.classList.contains('open'));
     nav?.classList.remove('open');
@@ -288,9 +293,37 @@ function initCommonUi() {
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && nav?.classList.contains('open')) {
+    if (!nav?.classList.contains('open')) return;
+
+    if (event.key === 'Escape') {
       event.preventDefault();
       closeMenu({ restoreFocus: true });
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+    const focusOrder = menuFocusOrder();
+    if (focusOrder.length < 2) return;
+
+    const trigger = menuButton;
+    const firstLink = focusOrder[1] || focusOrder[0];
+    const lastLink = focusOrder[focusOrder.length - 1];
+    const active = document.activeElement;
+    let target = null;
+
+    if (event.shiftKey) {
+      if (active === firstLink) target = trigger;
+      else if (active === trigger) target = lastLink;
+      else if (!focusOrder.includes(active)) target = lastLink;
+    } else {
+      if (active === lastLink) target = trigger;
+      else if (active === trigger) target = firstLink;
+      else if (!focusOrder.includes(active)) target = firstLink;
+    }
+
+    if (target) {
+      event.preventDefault();
+      target.focus();
     }
   });
 
