@@ -4,6 +4,7 @@ const { execFileSync } = require('child_process');
 
 const ROOT = process.cwd();
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
+const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const MARKER = "const TOS_ACTIVITY_SUMMARY_VERSION = '2026-07-23';";
 
 function replaceOrFail(source, pattern, replacement, label) {
@@ -92,15 +93,27 @@ function actionCard`,
   return { content: source, changed: true };
 }
 
+function regeneratePagesWithoutChangingSitemap() {
+  const hadSitemap = fs.existsSync(SITEMAP_PATH);
+  const sitemapBefore = hadSitemap ? fs.readFileSync(SITEMAP_PATH, 'utf8') : '';
+
+  try {
+    execFileSync(process.execPath, [GENERATOR_PATH], { cwd: ROOT, stdio: 'inherit' });
+  } finally {
+    if (hadSitemap) fs.writeFileSync(SITEMAP_PATH, sitemapBefore, 'utf8');
+    else fs.rmSync(SITEMAP_PATH, { force: true });
+  }
+}
+
 function patchTosActivitySummary({ regenerate = true } = {}) {
   if (!fs.existsSync(GENERATOR_PATH)) throw new Error(`Missing generator: ${GENERATOR_PATH}`);
   const current = fs.readFileSync(GENERATOR_PATH, 'utf8');
   const result = patchSource(current);
   if (result.changed) fs.writeFileSync(GENERATOR_PATH, result.content, 'utf8');
 
-  if (regenerate) execFileSync(process.execPath, [GENERATOR_PATH], { cwd: ROOT, stdio: 'inherit' });
+  if (regenerate) regeneratePagesWithoutChangingSitemap();
 
-  console.log(`TOS activity summary patch ${result.changed ? 'applied' : 'already current'}${regenerate ? '; pages regenerated' : ''}`);
+  console.log(`TOS activity summary patch ${result.changed ? 'applied' : 'already current'}${regenerate ? '; pages regenerated, sitemap preserved' : ''}`);
   return result.changed;
 }
 
