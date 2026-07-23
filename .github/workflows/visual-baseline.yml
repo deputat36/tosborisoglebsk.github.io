@@ -15,6 +15,7 @@ on:
       - 'index.html'
       - 'tos/index.html'
       - 'tos/mirolyubie/index.html'
+      - 'contacts/index.html'
       - 'places/**'
       - 'search/index.html'
       - 'news/index.html'
@@ -45,6 +46,9 @@ on:
       - 'scripts/patch_keyboard_accessibility.js'
       - 'scripts/test_keyboard_accessibility.js'
       - 'scripts/audit_keyboard_accessibility_tooling.js'
+      - 'scripts/patch_tos_contact_fallback.js'
+      - 'scripts/audit_tos_contact_fallback.js'
+      - 'scripts/test_tos_contact_fallback.js'
       - 'scripts/test_places_tos_navigation.js'
       - 'scripts/test_tos_activity_summary.js'
       - 'scripts/audit_visual_capture_manifest.js'
@@ -140,6 +144,19 @@ jobs:
       - name: Apply keyboard accessibility behavior
         run: node scripts/patch_keyboard_accessibility.js
 
+      - name: Check TOS contact fallback tooling syntax
+        run: |
+          node --check assets/js/contact-relay.js
+          node --check scripts/patch_tos_contact_fallback.js
+          node --check scripts/audit_tos_contact_fallback.js
+          node --check scripts/test_tos_contact_fallback.js
+
+      - name: Apply TOS contact fallback
+        run: node scripts/patch_tos_contact_fallback.js
+
+      - name: Audit TOS contact fallback
+        run: node scripts/audit_tos_contact_fallback.js
+
       - name: Check place-to-TOS navigation syntax
         run: node --check scripts/test_places_tos_navigation.js
 
@@ -177,6 +194,11 @@ jobs:
         env:
           KEYBOARD_ACCESSIBILITY_REPORT: .artifacts/visual-baseline/keyboard-accessibility.json
         run: node scripts/test_keyboard_accessibility.js
+
+      - name: Test TOS contact fallback
+        env:
+          TOS_CONTACT_FALLBACK_REPORT: .artifacts/visual-baseline/tos-contact-fallback.json
+        run: node scripts/test_tos_contact_fallback.js
 
       - name: Test place-to-TOS navigation
         env:
