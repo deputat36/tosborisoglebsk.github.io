@@ -144,6 +144,10 @@ jobs:
         run: node scripts/refine_site_audit_actions.js
       - name: Patch TOS detail generator trust
         run: node scripts/patch_tos_detail_generator_trust.js
+      - name: Apply TOS contact fallback
+        run: node scripts/patch_tos_contact_fallback.js
+      - name: Audit TOS contact fallback
+        run: node scripts/audit_tos_contact_fallback.js
       - name: Patch TOS detail responsive stylesheet
         run: node scripts/patch_tos_detail_responsive_styles.js
       - name: Check patched TOS generator syntax
