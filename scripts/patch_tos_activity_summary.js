@@ -30,9 +30,10 @@ function patchSource(current) {
 }
 function activityTile(key, label, count, anchor) {
   const body = \`<b>\${esc(count)}</b><span>\${esc(label)}</span>\`;
+  const ariaLabel = \`\${label}: \${count}\`;
   return count > 0
-    ? \`<a class="tile" data-activity-key="\${esc(key)}" href="#\${esc(anchor)}" aria-label="\${esc(\`${label}: ${count}\`)}">\${body}</a>\`
-    : \`<div class="tile" data-activity-key="\${esc(key)}" aria-label="\${esc(\`${label}: ${count}\`)}">\${body}</div>\`;
+    ? \`<a class="tile" data-activity-key="\${esc(key)}" href="#\${esc(anchor)}" aria-label="\${esc(ariaLabel)}">\${body}</a>\`
+    : \`<div class="tile" data-activity-key="\${esc(key)}" aria-label="\${esc(ariaLabel)}">\${body}</div>\`;
 }
 function activitySummary(tos, data) {
   const counts = {
