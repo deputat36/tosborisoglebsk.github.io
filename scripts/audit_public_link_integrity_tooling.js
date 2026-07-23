@@ -23,7 +23,7 @@ function main() {
   const workflow = fs.readFileSync(WORKFLOW_PATH, 'utf8');
 
   requireFragments(errors, 'link test', test, [
-    "data/page_index.json",
+    "page_index.json",
     "PUBLIC_LINK_BASE_URL",
     "PUBLIC_LINK_REPORT",
     "redirect: 'follow'",
@@ -40,6 +40,7 @@ function main() {
     'permissions:',
     'contents: read',
     'node-version: \'24\'',
+    'mkdir -p .artifacts/public-link-integrity',
     'node --check scripts/test_public_link_integrity.js',
     'node scripts/audit_public_link_integrity_tooling.js',
     'python3 -m http.server 4173 --bind 127.0.0.1',
