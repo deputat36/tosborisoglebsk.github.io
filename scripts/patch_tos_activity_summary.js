@@ -93,6 +93,7 @@ function actionCard`,
   return { content: source, changed: true };
 }
 
+// The post-merge workflow calls this idempotent path to materialize all published TOS pages.
 function regeneratePagesWithoutChangingSitemap() {
   const hadSitemap = fs.existsSync(SITEMAP_PATH);
   const sitemapBefore = hadSitemap ? fs.readFileSync(SITEMAP_PATH, 'utf8') : '';
