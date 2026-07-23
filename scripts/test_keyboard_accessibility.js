@@ -29,6 +29,15 @@ async function activeElement(page) {
   });
 }
 
+async function openMobileMenu(page) {
+  const menuButton = page.locator('[data-action="menu"]');
+  await menuButton.focus();
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => document.querySelector('[data-action="menu"]')?.getAttribute('aria-expanded') === 'true');
+  await page.waitForFunction(() => document.activeElement?.closest?.('#site-nav'));
+  return menuButton;
+}
+
 async function testSkipLink(page) {
   await openRoute(page, '/');
   await page.keyboard.press('Tab');
@@ -48,12 +57,7 @@ async function testMobileMenu(page) {
   await page.setViewportSize({ width: 390, height: 844 });
   await openRoute(page, '/');
 
-  const menuButton = page.locator('[data-action="menu"]');
-  await menuButton.focus();
-  await page.keyboard.press('Enter');
-  await page.waitForFunction(() => document.querySelector('[data-action="menu"]')?.getAttribute('aria-expanded') === 'true');
-  await page.waitForFunction(() => document.activeElement?.closest?.('#site-nav'));
-
+  await openMobileMenu(page);
   const openedFocus = await activeElement(page);
   assert(openedFocus.href === '/tos/', `mobile menu: expected first navigation link, received ${openedFocus.href || openedFocus.text}`);
   assert(await page.locator('#site-nav').evaluate((node) => node.classList.contains('open')), 'mobile menu: nav is not open');
@@ -68,6 +72,59 @@ async function testMobileMenu(page) {
   assert(await page.locator('body').evaluate((node) => node.style.overflow) === '', 'mobile menu: body overflow was not restored');
 
   return { focused_when_open: openedFocus, focused_after_escape: closedFocus };
+}
+
+async function testMobileMenuFocusTrap(page) {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openRoute(page, '/');
+  await openMobileMenu(page);
+
+  const links = page.locator('#site-nav a');
+  const linkCount = await links.count();
+  assert(linkCount >= 2, `mobile menu focus trap: expected at least 2 links, received ${linkCount}`);
+  const firstHref = await links.first().getAttribute('href');
+  const lastHref = await links.last().getAttribute('href');
+
+  await page.keyboard.press('Shift+Tab');
+  const firstReverse = await activeElement(page);
+  assert(firstReverse.action === 'menu', `mobile menu focus trap: Shift+Tab from first link reached ${firstReverse.href || firstReverse.action || firstReverse.text}`);
+
+  await page.keyboard.press('Tab');
+  const triggerForward = await activeElement(page);
+  assert(triggerForward.href === firstHref, `mobile menu focus trap: Tab from trigger reached ${triggerForward.href || triggerForward.text}`);
+
+  await links.last().focus();
+  await page.keyboard.press('Tab');
+  const lastForward = await activeElement(page);
+  assert(lastForward.action === 'menu', `mobile menu focus trap: Tab from last link reached ${lastForward.href || lastForward.action || lastForward.text}`);
+
+  await page.keyboard.press('Shift+Tab');
+  const triggerReverse = await activeElement(page);
+  assert(triggerReverse.href === lastHref, `mobile menu focus trap: Shift+Tab from trigger reached ${triggerReverse.href || triggerReverse.text}`);
+
+  await page.locator('.brand').focus();
+  const backgroundFocus = await activeElement(page);
+  assert(backgroundFocus.href === '/', `mobile menu focus trap: visible background link did not receive setup focus, received ${backgroundFocus.href || backgroundFocus.text}`);
+  await page.keyboard.press('Tab');
+  const recoveredFocus = await activeElement(page);
+  assert(recoveredFocus.href === firstHref, `mobile menu focus trap: background focus was not recovered, received ${recoveredFocus.href || recoveredFocus.action || recoveredFocus.text}`);
+
+  await page.keyboard.press('Escape');
+  const afterEscape = await activeElement(page);
+  assert(afterEscape.action === 'menu', 'mobile menu focus trap: Escape did not return focus to trigger');
+
+  return {
+    link_count: linkCount,
+    first_link: firstHref,
+    last_link: lastHref,
+    shift_tab_from_first: firstReverse,
+    tab_from_trigger: triggerForward,
+    tab_from_last: lastForward,
+    shift_tab_from_trigger: triggerReverse,
+    background_before_recovery: backgroundFocus,
+    recovered_from_background: recoveredFocus,
+    focused_after_escape: afterEscape
+  };
 }
 
 async function testThemeKeyboard(page) {
@@ -121,6 +178,7 @@ async function main() {
   const scenarios = [
     ['skip-link-focus', { width: 1280, height: 900 }, testSkipLink],
     ['mobile-menu-focus', { width: 390, height: 844 }, testMobileMenu],
+    ['mobile-menu-focus-trap', { width: 390, height: 844 }, testMobileMenuFocusTrap],
     ['theme-keyboard-toggle', { width: 1280, height: 900 }, testThemeKeyboard],
     ['catalog-tab-order', { width: 1280, height: 900 }, testCatalogTabOrder]
   ];
@@ -154,7 +212,7 @@ async function main() {
   }
 
   const report = {
-    schema_version: 1,
+    schema_version: 2,
     generated_at: new Date().toISOString(),
     base_url: BASE_URL,
     total: results.length,
