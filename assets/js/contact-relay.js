@@ -33,11 +33,23 @@
     ].join('\n');
   }
 
+  function hideCardLink() {
+    cardLink.hidden = true;
+    cardLink.style.display = 'none';
+    cardLink.removeAttribute('href');
+  }
+
+  function showCardLink(item) {
+    cardLink.href = `/tos/${item.slug}/`;
+    cardLink.textContent = `Вернуться к карточке ТОС «${item.name}»`;
+    cardLink.hidden = false;
+    cardLink.style.removeProperty('display');
+  }
+
   function showGeneric(message = 'Укажите название ТОС или территорию в сообщении. Редакция проверит, есть ли доступный канал для передачи.') {
     context.textContent = message;
     template.value = genericTemplate();
-    cardLink.hidden = true;
-    cardLink.removeAttribute('href');
+    hideCardLink();
   }
 
   async function loadContext() {
@@ -58,9 +70,7 @@
 
       context.textContent = `Сообщение будет подготовлено для ТОС «${item.name}» (${item.location || 'территория уточняется'}). Редакция не гарантирует передачу или ответ и не заменяет официальную приёмную.`;
       template.value = tosTemplate(item);
-      cardLink.href = `/tos/${item.slug}/`;
-      cardLink.textContent = `Вернуться к карточке ТОС «${item.name}»`;
-      cardLink.hidden = false;
+      showCardLink(item);
     } catch {
       showGeneric('Каталог временно не загрузился. Укажите название ТОС или территорию вручную.');
     }
@@ -85,5 +95,6 @@
 
   copyButton.addEventListener('click', copyTemplate);
   template.value = genericTemplate();
+  hideCardLink();
   loadContext();
 })();
