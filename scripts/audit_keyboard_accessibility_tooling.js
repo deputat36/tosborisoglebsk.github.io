@@ -37,12 +37,21 @@ function main() {
     'main.focus({ preventScroll: true })',
     'enhanceKeyboardAccessibility();',
     'restoreFocus = false',
+    'const menuFocusOrder = () =>',
+    "nav?.querySelectorAll('a[href]')",
     "nav?.querySelector('a')?.focus()",
+    "if (event.key !== 'Tab') return;",
+    'focusOrder.includes(active)',
+    'active === firstLink',
+    'active === lastLink',
+    'active === trigger',
     'closeMenu({ restoreFocus: true })'
   ]);
 
   requireFragments(errors, 'keyboard patcher', patcher, [
     'function patchKeyboardAccessibility()',
+    'function replaceAnyMarker(',
+    'const KEYBOARD_MENU_TRAP =',
     'Keyboard accessibility patch OK',
     "module.exports = { patchKeyboardAccessibility }"
   ]);
@@ -53,12 +62,15 @@ function main() {
     'KEYBOARD_ACCESSIBILITY_REPORT',
     "['skip-link-focus'",
     "['mobile-menu-focus'",
+    "['mobile-menu-focus-trap'",
     "['theme-keyboard-toggle'",
     "['catalog-tab-order'",
     "page.keyboard.press('Tab')",
     "page.keyboard.press('Enter')",
     "page.keyboard.press('Escape')",
     "page.keyboard.press('Shift+Tab')",
+    "page.locator('[data-action=\"theme\"]').focus()",
+    'schema_version: 2',
     'Keyboard accessibility OK'
   ]);
 
@@ -86,8 +98,11 @@ function main() {
     errors.push('keyboard accessibility workflow must remain read-only');
   }
 
-  const scenarioMatches = [...test.matchAll(/\['(?:skip-link-focus|mobile-menu-focus|theme-keyboard-toggle|catalog-tab-order)'/g)];
-  if (scenarioMatches.length !== 4) errors.push(`keyboard browser test must declare 4 scenarios, received ${scenarioMatches.length}`);
+  const scenarioMatches = [...test.matchAll(/\['(?:skip-link-focus|mobile-menu-focus|mobile-menu-focus-trap|theme-keyboard-toggle|catalog-tab-order)'/g)];
+  if (scenarioMatches.length !== 5) errors.push(`keyboard browser test must declare 5 scenarios, received ${scenarioMatches.length}`);
+  if ((test.match(/page\.keyboard\.press\('Shift\+Tab'\)/g) || []).length < 3) {
+    errors.push('mobile menu focus trap must verify reverse traversal at both menu boundaries');
+  }
 
   try {
     [PATCHER_PATH, TEST_PATH, __filename].forEach((filePath) => {
@@ -98,7 +113,7 @@ function main() {
   }
 
   if (errors.length) throw new Error(`Keyboard accessibility tooling audit failed:\n${errors.join('\n')}`);
-  console.log('Keyboard accessibility tooling OK: skip-link focus, mobile menu focus restoration, theme keyboard toggle and catalog tab order');
+  console.log('Keyboard accessibility tooling OK: skip-link focus, mobile menu focus trap and restoration, theme keyboard toggle and catalog tab order');
 }
 
 main();
