@@ -15,7 +15,7 @@ on:
       - 'index.html'
       - 'tos/index.html'
       - 'tos/mirolyubie/index.html'
-      - 'places/index.html'
+      - 'places/**'
       - 'search/index.html'
       - 'news/index.html'
       - 'projects/index.html'
@@ -38,10 +38,14 @@ on:
       - 'scripts/capture_visual_baseline.js'
       - 'scripts/compare_visual_baseline.js'
       - 'scripts/test_public_browser_interactions.js'
+      - 'scripts/test_places_tos_navigation.js'
       - 'scripts/audit_visual_capture_manifest.js'
       - 'scripts/audit_visual_capture_tooling.js'
       - 'scripts/audit_public_browser_interaction_tooling.js'
+      - 'scripts/audit_places_tos_navigation.js'
       - 'scripts/audit_visual_overflow_fixes.js'
+      - 'scripts/patch_places_tos_links.js'
+      - 'scripts/generate_places_pages.js'
       - 'scripts/patch_visual_focus_capture.js'
       - 'scripts/patch_visual_baseline_extensions.js'
       - 'scripts/patch_visual_fingerprint_parts.js'
@@ -84,6 +88,9 @@ jobs:
       - name: Apply TOS detail responsive stylesheet
         run: node scripts/patch_tos_detail_responsive_styles.js
 
+      - name: Patch place-to-TOS direct links
+        run: node scripts/patch_places_tos_links.js
+
       - name: Check patched visual capture syntax
         run: node --check scripts/capture_visual_baseline.js
 
@@ -92,6 +99,12 @@ jobs:
 
       - name: Check public browser interaction syntax
         run: node --check scripts/test_public_browser_interactions.js
+
+      - name: Check place-to-TOS navigation syntax
+        run: node --check scripts/test_places_tos_navigation.js
+
+      - name: Audit place-to-TOS navigation
+        run: node scripts/audit_places_tos_navigation.js
 
       - name: Audit visual overflow fixes
         run: node scripts/audit_visual_overflow_fixes.js
@@ -114,6 +127,11 @@ jobs:
         env:
           PUBLIC_BROWSER_REPORT: .artifacts/visual-baseline/browser-interactions.json
         run: node scripts/test_public_browser_interactions.js
+
+      - name: Test place-to-TOS navigation
+        env:
+          PLACES_TOS_REPORT: .artifacts/visual-baseline/places-tos-navigation.json
+        run: node scripts/test_places_tos_navigation.js
 
       - name: Capture matrix screenshots
         id: capture
