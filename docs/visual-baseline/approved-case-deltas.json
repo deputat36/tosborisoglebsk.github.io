@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "approved_at": "2026-07-23",
+  "cases": {
+    "css-reg-006": {
+      "baseline_sha256": "0d87808fb0dd2bddf6eadd6c9aa6684d1bac34d7574a1c17d68bbb99d1aa6f53",
+      "route": "/tos/mirolyubie/",
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "max_significant_changed_pixels": 0,
+      "max_changed_pixel_ratio": 0.1,
+      "max_channel_delta": 7,
+      "reason": "Подтверждён низкоамплитудный дрейф рендеринга текста Chromium без изменения размеров, структуры, цветов или значимых пикселей."
+    },
+    "css-reg-007": {
+      "baseline_sha256": "74a893efa328d6f4ed824e0678f963bf1de721d62f02447b235b3c01cced87f4",
+      "route": "/tos/mirolyubie/",
+      "theme": "dark",
+      "interaction": "toggle-theme",
+      "mode": "screen",
+      "max_significant_changed_pixels": 0,
+      "max_changed_pixel_ratio": 0.36,
+      "max_channel_delta": 7,
+      "reason": "Подтверждён низкоамплитудный дрейф рендеринга текста Chromium без изменения размеров, структуры, цветов или значимых пикселей."
+    }
+  }
+}
