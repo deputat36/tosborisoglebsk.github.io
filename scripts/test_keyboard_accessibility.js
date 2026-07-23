@@ -102,7 +102,9 @@ async function testMobileMenuFocusTrap(page) {
   const triggerReverse = await activeElement(page);
   assert(triggerReverse.href === lastHref, `mobile menu focus trap: Shift+Tab from trigger reached ${triggerReverse.href || triggerReverse.text}`);
 
-  await page.locator('[data-action="theme"]').focus();
+  await page.locator('.brand').focus();
+  const backgroundFocus = await activeElement(page);
+  assert(backgroundFocus.href === '/', `mobile menu focus trap: visible background link did not receive setup focus, received ${backgroundFocus.href || backgroundFocus.text}`);
   await page.keyboard.press('Tab');
   const recoveredFocus = await activeElement(page);
   assert(recoveredFocus.href === firstHref, `mobile menu focus trap: background focus was not recovered, received ${recoveredFocus.href || recoveredFocus.action || recoveredFocus.text}`);
@@ -119,6 +121,7 @@ async function testMobileMenuFocusTrap(page) {
     tab_from_trigger: triggerForward,
     tab_from_last: lastForward,
     shift_tab_from_trigger: triggerReverse,
+    background_before_recovery: backgroundFocus,
     recovered_from_background: recoveredFocus,
     focused_after_escape: afterEscape
   };
