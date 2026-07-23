@@ -69,7 +69,8 @@ function main() {
     "page.keyboard.press('Enter')",
     "page.keyboard.press('Escape')",
     "page.keyboard.press('Shift+Tab')",
-    "page.locator('[data-action=\"theme\"]').focus()",
+    "page.locator('.brand').focus()",
+    'background_before_recovery',
     'schema_version: 2',
     'Keyboard accessibility OK'
   ]);
