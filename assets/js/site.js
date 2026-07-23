@@ -233,6 +233,17 @@ function patchTosDetailRuntime() {
   patchTosDetailStatus(slug);
 }
 
+function enhanceKeyboardAccessibility() {
+  const skipLink = $('.skip-link');
+  const main = $('#main');
+  if (!skipLink || !main) return;
+
+  if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+  skipLink.addEventListener('click', () => {
+    window.requestAnimationFrame(() => main.focus({ preventScroll: true }));
+  });
+}
+
 function initCommonUi() {
   compactNav();
   ensureFooterLinks();
@@ -240,6 +251,7 @@ function initCommonUi() {
   injectHomePortalStatus();
   patchLegacyUpdateLinks();
   patchTosDetailRuntime();
+  enhanceKeyboardAccessibility();
 
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') document.documentElement.dataset.theme = 'dark';
@@ -257,11 +269,13 @@ function initCommonUi() {
 
   const nav = $('#site-nav');
   const menuButton = $('[data-action=menu]');
-  const closeMenu = () => {
+  const closeMenu = ({ restoreFocus = false } = {}) => {
+    const wasOpen = Boolean(nav?.classList.contains('open'));
     nav?.classList.remove('open');
     menuButton?.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('menu-open');
     document.body.style.overflow = '';
+    if (restoreFocus && wasOpen) menuButton?.focus();
   };
 
   menuButton?.addEventListener('click', (event) => {
@@ -270,10 +284,14 @@ function initCommonUi() {
     event.currentTarget.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     document.body.classList.toggle('menu-open', Boolean(isOpen));
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    if (isOpen) window.requestAnimationFrame(() => nav?.querySelector('a')?.focus());
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') closeMenu();
+    if (event.key === 'Escape' && nav?.classList.contains('open')) {
+      event.preventDefault();
+      closeMenu({ restoreFocus: true });
+    }
   });
 
   document.addEventListener('click', (event) => {
