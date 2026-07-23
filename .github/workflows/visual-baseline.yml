@@ -39,12 +39,15 @@ on:
       - 'scripts/compare_visual_baseline.js'
       - 'scripts/test_public_browser_interactions.js'
       - 'scripts/test_places_tos_navigation.js'
+      - 'scripts/test_tos_activity_summary.js'
       - 'scripts/audit_visual_capture_manifest.js'
       - 'scripts/audit_visual_capture_tooling.js'
       - 'scripts/audit_public_browser_interaction_tooling.js'
       - 'scripts/audit_places_tos_navigation.js'
+      - 'scripts/audit_tos_activity_summary.js'
       - 'scripts/audit_visual_overflow_fixes.js'
       - 'scripts/patch_places_tos_links.js'
+      - 'scripts/patch_tos_activity_summary.js'
       - 'scripts/generate_places_pages.js'
       - 'scripts/patch_visual_focus_capture.js'
       - 'scripts/patch_visual_baseline_extensions.js'
@@ -85,8 +88,17 @@ jobs:
           npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0
           npx playwright install --with-deps chromium
 
+      - name: Check TOS activity summary tooling syntax
+        run: |
+          node --check scripts/patch_tos_activity_summary.js
+          node --check scripts/audit_tos_activity_summary.js
+          node --check scripts/test_tos_activity_summary.js
+
       - name: Apply TOS detail responsive stylesheet
         run: node scripts/patch_tos_detail_responsive_styles.js
+
+      - name: Audit TOS activity summaries
+        run: node scripts/audit_tos_activity_summary.js
 
       - name: Patch place-to-TOS direct links
         run: node scripts/patch_places_tos_links.js
@@ -132,6 +144,11 @@ jobs:
         env:
           PLACES_TOS_REPORT: .artifacts/visual-baseline/places-tos-navigation.json
         run: node scripts/test_places_tos_navigation.js
+
+      - name: Test TOS activity summaries
+        env:
+          TOS_ACTIVITY_REPORT: .artifacts/visual-baseline/tos-activity-summary.json
+        run: node scripts/test_tos_activity_summary.js
 
       - name: Capture matrix screenshots
         id: capture
