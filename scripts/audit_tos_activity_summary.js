@@ -74,7 +74,7 @@ function auditTosActivitySummary() {
     requireIncludes(errors, html, `data-done-count="${counts.done}"`, `${tos.slug} done count`);
     requireIncludes(errors, html, `data-needs-count="${counts.needs}"`, `${tos.slug} needs count`);
     requireIncludes(errors, html, `data-total-count="${total}"`, `${tos.slug} total count`);
-    requireIncludes(errors, html, 'Количество показывает только опубликованные и привязанные к карточке материалы в базе портала.', `${tos.slug} scope notice`);
+    requireIncludes(errors, html, 'количество показывает только опубликованные и привязанные к карточке материалы в базе портала.', `${tos.slug} scope notice`);
     requireIncludes(errors, html, 'Ноль не означает отсутствие работы ТОС', `${tos.slug} zero notice`);
 
     const summaryPosition = html.indexOf('id="tos-activity-summary"');
