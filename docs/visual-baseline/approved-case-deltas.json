@@ -1,6 +1,8 @@
 {
   "schema_version": 1,
   "approved_at": "2026-07-23",
+  "reviewed_run_id": "29980874835",
+  "reviewed_artifact": "visual-baseline-267-1",
   "cases": {
     "css-reg-006": {
       "baseline_sha256": "0d87808fb0dd2bddf6eadd6c9aa6684d1bac34d7574a1c17d68bbb99d1aa6f53",
@@ -11,6 +13,9 @@
       "max_significant_changed_pixels": 0,
       "max_changed_pixel_ratio": 0.1,
       "max_channel_delta": 7,
+      "observed_significant_changed_pixels": 0,
+      "observed_changed_pixel_ratio": 0.09331544256120528,
+      "observed_max_channel_delta": 6,
       "reason": "Подтверждён низкоамплитудный дрейф рендеринга текста Chromium без изменения размеров, структуры, цветов или значимых пикселей."
     },
     "css-reg-007": {
@@ -22,6 +27,9 @@
       "max_significant_changed_pixels": 0,
       "max_changed_pixel_ratio": 0.36,
       "max_channel_delta": 7,
+      "observed_significant_changed_pixels": 0,
+      "observed_changed_pixel_ratio": 0.34828472222222223,
+      "observed_max_channel_delta": 7,
       "reason": "Подтверждён низкоамплитудный дрейф рендеринга текста Chromium без изменения размеров, структуры, цветов или значимых пикселей."
     }
   }
