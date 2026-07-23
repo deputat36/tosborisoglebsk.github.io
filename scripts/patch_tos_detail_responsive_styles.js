@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { patchTosRelatedContentTrust } = require('./patch_tos_related_content_trust');
+const { patchTosActivitySummary } = require('./patch_tos_activity_summary');
 const { patchCalendarCurrentState } = require('./patch_calendar_current_state');
 const { patchVisualFocusCapture } = require('./patch_visual_focus_capture');
 const { patchVisualBaselineExtensions } = require('./patch_visual_baseline_extensions');
@@ -49,6 +50,7 @@ function main() {
   if (!fs.existsSync(GENERATOR_PATH)) throw new Error(`Missing generator: ${GENERATOR_PATH}`);
 
   patchTosRelatedContentTrust();
+  patchTosActivitySummary();
   patchCalendarCurrentState();
   patchVisualFocusCapture();
   patchVisualBaselineExtensions();
