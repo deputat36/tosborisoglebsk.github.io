@@ -13,6 +13,10 @@ const OVERFLOW_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_visual_overflow_fi
 const RESPONSIVE_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_tos_detail_responsive_styles.js');
 const FOCUS_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_visual_focus_capture.js');
 const EXTENSION_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_visual_baseline_extensions.js');
+const CASE_DELTA_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_visual_case_deltas.js');
+const CASE_DELTA_POLICY_PATH = path.join(ROOT, 'scripts', 'lib', 'visual_case_delta_policy.js');
+const CASE_DELTA_TEST_PATH = path.join(ROOT, 'scripts', 'test_visual_case_delta_policy.js');
+const CASE_DELTA_REGISTRY_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'approved-case-deltas.json');
 const DOC_PATH = path.join(ROOT, 'docs', 'VISUAL-BASELINE-CAPTURE.md');
 const MATRIX_PATH = path.join(ROOT, 'data', 'css_regression_matrix.csv');
 const APPROVED_MANIFEST_PATH = path.join(ROOT, 'docs', 'visual-baseline', 'manifest.json');
@@ -113,12 +117,16 @@ function main() {
   const errors = [];
   const requiredFiles = [
     WORKFLOW_PATH, CAPTURE_PATH, COMPARE_PATH, MANIFEST_AUDIT_PATH, OVERFLOW_AUDIT_PATH,
-    RESPONSIVE_PATCH_PATH, FOCUS_PATCH_PATH, EXTENSION_PATCH_PATH, DOC_PATH, MATRIX_PATH
+    RESPONSIVE_PATCH_PATH, FOCUS_PATCH_PATH, EXTENSION_PATCH_PATH,
+    CASE_DELTA_PATCH_PATH, CASE_DELTA_POLICY_PATH, CASE_DELTA_TEST_PATH, CASE_DELTA_REGISTRY_PATH,
+    DOC_PATH, MATRIX_PATH
   ];
   requiredFiles.forEach((filePath) => {
     if (!fs.existsSync(filePath)) errors.push(`missing file ${path.relative(ROOT, filePath)}`);
   });
   if (errors.length) throw new Error(`Visual capture tooling audit failed:\n${errors.join('\n')}`);
+
+  execFileSync(process.execPath, [CASE_DELTA_PATCH_PATH], { cwd: ROOT, stdio: 'inherit' });
 
   const workflow = fs.readFileSync(WORKFLOW_PATH, 'utf8');
   const capture = fs.readFileSync(CAPTURE_PATH, 'utf8');
@@ -141,7 +149,8 @@ function main() {
 
   requireFragments(errors, 'visual workflow', workflow, [
     'workflow_dispatch:', 'pull_request:', 'contents: read', "node-version: '24'",
-    'node scripts/patch_tos_detail_responsive_styles.js', 'Check patched visual capture syntax',
+    'node scripts/patch_tos_detail_responsive_styles.js', 'node scripts/patch_visual_case_deltas.js',
+    'node scripts/test_visual_case_delta_policy.js', 'Check patched visual capture syntax',
     'Check patched visual comparator syntax', 'node scripts/audit_visual_overflow_fixes.js',
     'continue-on-error: true', "VISUAL_CAPTURE_STRICT_QUALITY: 'false'",
     "VISUAL_CAPTURE_STRICT_QUALITY: 'true'", 'Audit capture manifest in measurement mode',
@@ -159,9 +168,10 @@ function main() {
     'technical_violations', 'failed_requests', 'manifest.json', 'schema_version: 3'
   ]);
   requireFragments(errors, 'comparison script', compare, [
-    "require('pngjs')", 'BASELINE_EXTENSION_PATH', 'readApprovedManifest',
-    'compareVisualFingerprint', 'buildRgbGrid', 'readFingerprintData', 'data_files',
-    'visual_fingerprint', 'rgb-grid-v1', 'VISUAL_MAX_CHANNEL_DELTA',
+    "require('pngjs')", 'BASELINE_EXTENSION_PATH', 'APPROVED_CASE_DELTAS_PATH',
+    'readApprovedManifest', 'readApprovedCaseDeltas', 'applyApprovedCaseDelta',
+    'approved_case_delta', 'compareVisualFingerprint', 'buildRgbGrid', 'readFingerprintData',
+    'data_files', 'visual_fingerprint', 'rgb-grid-v1', 'VISUAL_MAX_CHANNEL_DELTA',
     'VISUAL_MAX_LOW_DELTA_RATIO', 'pixel_equivalent', 'significant_changed_pixels', 'comparison.json'
   ]);
   requireFragments(errors, 'capture manifest audit', manifestAudit, [
@@ -194,6 +204,7 @@ function main() {
 
   if (errors.length) throw new Error(`Visual capture tooling audit failed:\n${errors.join('\n')}`);
 
+  execFileSync(process.execPath, [CASE_DELTA_TEST_PATH], { cwd: ROOT, stdio: 'inherit' });
   execFileSync(process.execPath, [OVERFLOW_AUDIT_PATH], { cwd: ROOT, stdio: 'inherit' });
   console.log(`Visual capture tooling OK: ${records.length} cases, ${focusInteractions.size} focused interactions, approved baseline ${approvedExists ? 'present' : 'not yet present'}, workflow read-only`);
 }
