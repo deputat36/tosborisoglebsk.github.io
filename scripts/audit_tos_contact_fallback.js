@@ -10,6 +10,8 @@ const RELAY_SCRIPT_PATH = path.join(ROOT, 'assets', 'js', 'contact-relay.js');
 const PATCHER_PATH = path.join(ROOT, 'scripts', 'patch_tos_contact_fallback.js');
 const TEST_PATH = path.join(ROOT, 'scripts', 'test_tos_contact_fallback.js');
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
+const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'visual-baseline.yml');
+const FULL_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_project_mode_full.js');
 
 function requireFragments(errors, label, content, fragments) {
   fragments.forEach((fragment) => {
@@ -32,6 +34,8 @@ function main() {
   const relayScript = fs.readFileSync(RELAY_SCRIPT_PATH, 'utf8');
   const patcher = fs.readFileSync(PATCHER_PATH, 'utf8');
   const test = fs.readFileSync(TEST_PATH, 'utf8');
+  const workflow = fs.readFileSync(WORKFLOW_PATH, 'utf8');
+  const fullAudit = fs.readFileSync(FULL_AUDIT_PATH, 'utf8');
 
   if (JSON.stringify(withoutDirectContact) !== JSON.stringify(patchResult.fallbackSlugs)) {
     errors.push(`patcher fallback set differs from data: ${patchResult.fallbackSlugs.join(', ')} vs ${withoutDirectContact.join(', ')}`);
@@ -86,6 +90,23 @@ function main() {
     'TOS contact fallback browser OK'
   ]);
 
+  requireFragments(errors, 'visual workflow', workflow, [
+    "- 'scripts/patch_tos_contact_fallback.js'",
+    "- 'scripts/audit_tos_contact_fallback.js'",
+    "- 'scripts/test_tos_contact_fallback.js'",
+    'Check TOS contact fallback tooling syntax',
+    'Apply TOS contact fallback',
+    'Audit TOS contact fallback',
+    'Test TOS contact fallback',
+    'TOS_CONTACT_FALLBACK_REPORT: .artifacts/visual-baseline/tos-contact-fallback.json'
+  ]);
+
+  requireFragments(errors, 'full project-mode', fullAudit, [
+    "require('./patch_tos_contact_fallback')",
+    'patchTosContactFallback();',
+    "['TOS contact fallback audit', 'scripts/audit_tos_contact_fallback.js']"
+  ]);
+
   for (const tos of toses) {
     const html = fs.readFileSync(path.join(ROOT, 'tos', tos.slug, 'index.html'), 'utf8');
     const fallbackCount = (html.match(/data-tos-contact-fallback=/g) || []).length;
@@ -106,6 +127,9 @@ function main() {
   }
   if (/localStorage|sessionStorage/.test(relayScript)) {
     errors.push('relay browser script must not store message or personal data');
+  }
+  if (/contents:\s*write|pull-requests:\s*write|git\s+(commit|push)|git-auto-commit|create-pull-request/i.test(workflow)) {
+    errors.push('contact fallback visual workflow must remain read-only');
   }
 
   try {
