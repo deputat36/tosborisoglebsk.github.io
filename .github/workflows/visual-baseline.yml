@@ -37,6 +37,9 @@ on:
       - 'docs/visual-baseline/**'
       - 'scripts/capture_visual_baseline.js'
       - 'scripts/compare_visual_baseline.js'
+      - 'scripts/patch_visual_case_deltas.js'
+      - 'scripts/test_visual_case_delta_policy.js'
+      - 'scripts/lib/visual_case_delta_policy.js'
       - 'scripts/test_public_browser_interactions.js'
       - 'scripts/test_places_tos_navigation.js'
       - 'scripts/test_tos_activity_summary.js'
@@ -94,6 +97,13 @@ jobs:
           node --check scripts/audit_tos_activity_summary.js
           node --check scripts/test_tos_activity_summary.js
 
+      - name: Check visual case-delta policy
+        run: |
+          node --check scripts/lib/visual_case_delta_policy.js
+          node --check scripts/test_visual_case_delta_policy.js
+          node --check scripts/patch_visual_case_deltas.js
+          node scripts/test_visual_case_delta_policy.js
+
       - name: Apply TOS detail responsive stylesheet
         run: node scripts/patch_tos_detail_responsive_styles.js
 
@@ -102,6 +112,9 @@ jobs:
 
       - name: Patch place-to-TOS direct links
         run: node scripts/patch_places_tos_links.js
+
+      - name: Apply approved visual case deltas
+        run: node scripts/patch_visual_case_deltas.js
 
       - name: Check patched visual capture syntax
         run: node --check scripts/capture_visual_baseline.js
