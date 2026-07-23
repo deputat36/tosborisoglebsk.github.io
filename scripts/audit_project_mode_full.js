@@ -1,11 +1,13 @@
 const { runChecks } = require('./lib/run_checks');
 const { patchCollectionBrowsers } = require('./patch_collection_browsers');
 const { patchCollectionSearchContract } = require('./patch_collection_search_contract');
+const { patchKeyboardAccessibility } = require('./patch_keyboard_accessibility');
 
 // Full project-mode audits must inspect the same materialized collection pages
 // in every workflow, not only after the main generation pipeline.
 patchCollectionBrowsers();
 patchCollectionSearchContract();
+patchKeyboardAccessibility();
 
 const checks = [
   ['CSV parser self-test', 'scripts/test_csv_parser.js'],
@@ -104,6 +106,7 @@ const checks = [
   ['Public deployment smoke contract', 'scripts/audit_public_deployment_smoke_contract.js'],
   ['Visual capture tooling audit', 'scripts/audit_visual_capture_tooling.js'],
   ['Public browser interaction tooling audit', 'scripts/audit_public_browser_interaction_tooling.js'],
+  ['Keyboard accessibility tooling audit', 'scripts/audit_keyboard_accessibility_tooling.js'],
   ['Places to TOS navigation audit', 'scripts/audit_places_tos_navigation.js'],
   ['Technical diagnostics audit', 'scripts/audit_technical_diagnostics.js'],
   ['Open data links audit', 'scripts/audit_open_data_links.js'],
