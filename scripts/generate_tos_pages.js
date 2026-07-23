@@ -13,6 +13,7 @@ const NEEDS_PATH = path.join(ROOT, 'data', 'needs.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const DETAIL_TRUST_VERSION = '2026-07-12';
 const RELATED_CONTENT_TRUST_VERSION = '2026-07-21';
+const TOS_ACTIVITY_SUMMARY_VERSION = '2026-07-23';
 
 function esc(value) {
   return String(value ?? '')
@@ -219,9 +220,38 @@ function needCard(n) {
   const trust = relatedTrust(n, 'needs');
   return `<article class="list-item" ${relatedAttributes(n, 'needs', trust.origin)}><div class="meta"><span class="tag">${esc(n.need_type || 'Помощь')}</span><span class="tag ${n.priority === 'Высокий' ? 'warn' : ''}">${esc(n.priority || 'Приоритет уточняется')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span></div><h3>${esc(n.title || 'Потребность')}</h3><p>${esc(n.description || '')}</p>${relatedOriginNotice(n, 'needs', trust)}<p class="tiny" data-related-contact-policy="${esc(n.id || '')}">Контакт и способ помощи доступны в основной записи после проверки статуса материала.</p><div class="card-actions"><a class="btn" href="/needs/${esc(n.id)}/">Открыть запись</a><a class="btn" href="/contacts/">Предложить помощь</a></div></article>`;
 }
-function block(title, subtitle, linkText, linkUrl, content, layout = 'list') {
+function publishedCount(items, slug) {
+  return arr(items).filter(item => isPublished(item) && item.tos_slug === slug).length;
+}
+function activityTile(key, label, count, anchor) {
+  const body = `<b>${esc(count)}</b><span>${esc(label)}</span>`;
+  const ariaLabel = `${label}: ${count}`;
+  return count > 0
+    ? `<a class="tile" data-activity-key="${esc(key)}" href="#${esc(anchor)}" aria-label="${esc(ariaLabel)}">${body}</a>`
+    : `<div class="tile" data-activity-key="${esc(key)}" aria-label="${esc(ariaLabel)}">${body}</div>`;
+}
+function activitySummary(tos, data) {
+  const counts = {
+    news: publishedCount(data.news, tos.slug),
+    events: publishedCount(data.events, tos.slug),
+    projects: publishedCount(data.projects, tos.slug),
+    done: publishedCount(data.done, tos.slug),
+    needs: publishedCount(data.needs, tos.slug)
+  };
+  const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
+  const tiles = [
+    activityTile('news', 'новостей и материалов', counts.news, 'tos-news'),
+    activityTile('events', 'событий и дат', counts.events, 'tos-events'),
+    activityTile('projects', 'проектов и идей', counts.projects, 'tos-projects'),
+    activityTile('done', 'результатов и историй', counts.done, 'tos-done'),
+    activityTile('needs', 'потребностей и запросов', counts.needs, 'tos-needs')
+  ].join('');
+  return `<section class="section tight" id="tos-activity-summary" data-tos-activity-summary data-tos-slug="${esc(tos.slug)}" data-news-count="${counts.news}" data-events-count="${counts.events}" data-projects-count="${counts.projects}" data-done-count="${counts.done}" data-needs-count="${counts.needs}" data-total-count="${total}"><div class="container section-head"><div><h2>Материалы ТОС на портале</h2><p>Сводка опубликованных записей, привязанных к этой карточке.</p></div></div><div class="container kpi">${tiles}</div><div class="container notice" data-activity-summary-notice><b>Как читать счётчики:</b> количество показывает только опубликованные и привязанные к карточке материалы в базе портала. Ноль не означает отсутствие работы ТОС — это означает, что на портале пока нет соответствующих опубликованных записей.</div></section>`;
+}
+function block(title, subtitle, linkText, linkUrl, content, layout = 'list', sectionId = '') {
   if (!content) return '';
-  return `<section class="section"><div class="container section-head"><div><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div>${linkUrl ? `<a class="btn" href="${esc(linkUrl)}">${esc(linkText || 'Открыть')}</a>` : ''}</div><div class="container ${layout}">${content}</div></section>`;
+  const idAttribute = sectionId ? ` id="${esc(sectionId)}"` : '';
+  return `<section class="section"${idAttribute}><div class="container section-head"><div><h2>${esc(title)}</h2><p>${esc(subtitle)}</p></div>${linkUrl ? `<a class="btn" href="${esc(linkUrl)}">${esc(linkText || 'Открыть')}</a>` : ''}</div><div class="container ${layout}">${content}</div></section>`;
 }
 function actionCard(title, text, url, primary = false) {
   return `<article class="card"><div class="card-inner"><h3>${esc(title)}</h3><p>${esc(text)}</p><a class="btn ${primary ? 'primary' : ''}" href="${esc(url)}">Открыть</a></div></article>`;
@@ -248,6 +278,7 @@ function makePage(tos, data) {
   const relProjects = related(data.projects, tos.slug, 6).map(projectCard).join('');
   const relDone = related(data.done, tos.slug, 4).map(doneCard).join('');
   const relNeeds = related(data.needs, tos.slug, 6).map(needCard).join('');
+  const activitySummaryHtml = activitySummary(tos, data);
   const qualityScore = calcQuality(tos);
   const verification = verificationInfo(tos);
   const territoryScope = scopeInfo(tos, ['location', 'boundaries']);
@@ -310,15 +341,17 @@ function makePage(tos, data) {
 
     ${clarifyBlock(tos, qualityScore, verification)}
 
+    ${activitySummaryHtml}
+
 
     <section class="section" id="help-this-tos"><div class="container section-head"><div><h2>Передать сведения или инициативу</h2><p>Выберите один подходящий сценарий и не отправляйте закрытые персональные данные.</p></div><a class="btn" href="/partners/">Партнёрам</a></div><div class="container grid">${actions}</div></section>
 
 
-    ${block('Новости и материалы этого ТОС', 'Публикации, связанные с территорией по данным портала.', 'Все новости', '/news/', relNews, 'list')}
-    ${block('События и даты этого ТОС', 'Записи календаря, связанные с территорией; перед участием проверяйте источник и дату.', 'Календарь', '/calendar/', relEvents, 'list')}
-    ${block('Проекты и идеи этого ТОС', 'Карточки могут быть подтверждёнными материалами, редакционными описаниями или стартовыми идеями.', 'Все проекты', '/projects/', relProjects, 'grid')}
-    ${block('Результаты и запросы этого ТОС', 'Истории и запросы материалов; подтверждённость указана в самой записи.', 'Все истории', '/done/', relDone, 'list')}
-    ${block('Потребности и запросы этого ТОС', 'Перед передачей помощи проверьте статус, получателя и актуальность записи.', 'Все потребности', '/needs/', relNeeds, 'list')}
+    ${block('Новости и материалы этого ТОС', 'Публикации, связанные с территорией по данным портала.', 'Все новости', '/news/', relNews, 'list', 'tos-news') }
+    ${block('События и даты этого ТОС', 'Записи календаря, связанные с территорией; перед участием проверяйте источник и дату.', 'Календарь', '/calendar/', relEvents, 'list', 'tos-events') }
+    ${block('Проекты и идеи этого ТОС', 'Карточки могут быть подтверждёнными материалами, редакционными описаниями или стартовыми идеями.', 'Все проекты', '/projects/', relProjects, 'grid', 'tos-projects') }
+    ${block('Результаты и запросы этого ТОС', 'Истории и запросы материалов; подтверждённость указана в самой записи.', 'Все истории', '/done/', relDone, 'list', 'tos-done') }
+    ${block('Потребности и запросы этого ТОС', 'Перед передачей помощи проверьте статус, получателя и актуальность записи.', 'Все потребности', '/needs/', relNeeds, 'list', 'tos-needs') }
   </main>
   <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Данные страницы обновляются автоматически из JSON-файлов сайта.</div></div></footer>
   <script src="/assets/js/site.js"></script><script src="/assets/js/tos-logos.js"></script>

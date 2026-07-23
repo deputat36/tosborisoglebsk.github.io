@@ -3,12 +3,15 @@ const path = require('path');
 const crypto = require('crypto');
 const { PNG } = require('pngjs');
 const { classifyVisualEquivalence } = require('./lib/visual_comparison_policy');
+const { validateApprovalDocument, applyApprovedCaseDelta } = require('./lib/visual_case_delta_policy');
 
 const ROOT = process.cwd();
 const BASELINE_DIR = path.resolve(ROOT, process.env.VISUAL_BASELINE_APPROVED || 'docs/visual-baseline');
 const CURRENT_DIR = path.resolve(ROOT, process.env.VISUAL_BASELINE_OUTPUT || '.artifacts/visual-baseline');
 const BASELINE_MANIFEST_PATH = path.join(BASELINE_DIR, 'manifest.json');
 const BASELINE_EXTENSION_PATH = path.join(BASELINE_DIR, 'manifest-focus.json');
+const APPROVED_CASE_DELTAS_PATH = path.join(BASELINE_DIR, 'approved-case-deltas.json');
+const APPROVED_CASE_DELTAS_VERSION = '2026-07-23';
 const CURRENT_MANIFEST_PATH = path.join(CURRENT_DIR, 'manifest.json');
 const OUTPUT_JSON_PATH = path.join(CURRENT_DIR, 'comparison.json');
 const OUTPUT_MD_PATH = path.join(CURRENT_DIR, 'comparison.md');
@@ -58,6 +61,13 @@ function readApprovedManifest() {
     results: combined,
     extensions: [path.basename(BASELINE_EXTENSION_PATH)]
   };
+}
+
+function readApprovedCaseDeltas(baselineManifest) {
+  if (!fs.existsSync(APPROVED_CASE_DELTAS_PATH)) return new Map();
+  const document = readJson(APPROVED_CASE_DELTAS_PATH);
+  const caseIds = (Array.isArray(baselineManifest.results) ? baselineManifest.results : []).map((item) => item.case_id);
+  return validateApprovalDocument(document, caseIds);
 }
 
 function buildRgbGrid(png, columns, rows) {
@@ -332,6 +342,7 @@ function main() {
   const currentManifest = readJson(CURRENT_MANIFEST_PATH);
   validateManifest(baselineManifest, 'Baseline');
   validateManifest(currentManifest, 'Current');
+  const approvedCaseDeltas = readApprovedCaseDeltas(baselineManifest);
 
   const baselineById = new Map(baselineManifest.results.map((item) => [item.case_id, item]));
   const comparisons = currentManifest.results.map((currentItem) => {
@@ -345,7 +356,7 @@ function main() {
       ? compareVisualFingerprint(baselineItem, currentPath)
       : comparePngs(path.join(BASELINE_DIR, baselineName), currentPath);
 
-    return {
+    const comparison = {
       case_id: currentItem.case_id,
       route: currentItem.route,
       theme: currentItem.theme,
@@ -353,6 +364,7 @@ function main() {
       mode: currentItem.mode,
       ...imageComparison
     };
+    return applyApprovedCaseDelta(comparison, approvedCaseDeltas.get(currentItem.case_id));
   });
 
   const missingCurrentCases = baselineManifest.results
@@ -363,6 +375,7 @@ function main() {
   const antialiasEquivalentCases = comparisons.filter((item) => item.equivalence_reason === 'bounded_antialias');
   const subpixelEquivalentCases = comparisons.filter((item) => item.equivalence_reason === 'subpixel_rendering');
   const broadSubpixelEquivalentCases = comparisons.filter((item) => item.equivalence_reason === 'broad_subpixel_rendering');
+  const approvedCaseDeltaCases = comparisons.filter((item) => item.equivalence_reason === 'approved_case_delta');
   const byteDifferentButPixelIdentical = comparisons.filter((item) => item.pixel_identical && !item.bytes_identical);
 
   const report = {
@@ -393,6 +406,7 @@ function main() {
       antialias_equivalent: antialiasEquivalentCases.length,
       subpixel_equivalent: subpixelEquivalentCases.length,
       broad_subpixel_equivalent: broadSubpixelEquivalentCases.length,
+      approved_case_delta: approvedCaseDeltaCases.length,
       bytes_identical: comparisons.filter((item) => item.bytes_identical).length,
       byte_different_but_pixel_identical: byteDifferentButPixelIdentical.length,
       changed_cases: changedCases.length,
@@ -403,6 +417,7 @@ function main() {
     antialias_equivalent_cases: antialiasEquivalentCases.map((item) => item.case_id),
     subpixel_equivalent_cases: subpixelEquivalentCases.map((item) => item.case_id),
     broad_subpixel_equivalent_cases: broadSubpixelEquivalentCases.map((item) => item.case_id),
+    approved_case_delta_cases: approvedCaseDeltaCases.map((item) => item.case_id),
     comparisons
   };
 
@@ -419,6 +434,7 @@ function main() {
     `- Antialias-equivalent: ${report.summary.antialias_equivalent}`,
     `- Subpixel-equivalent: ${report.summary.subpixel_equivalent}`,
     `- Broad-subpixel-equivalent: ${report.summary.broad_subpixel_equivalent}`,
+    `- Approved case deltas: ${report.summary.approved_case_delta}`,
     `- Byte-identical: ${report.summary.bytes_identical}`,
     `- Changed cases: ${report.summary.changed_cases}`,
     `- Maximum accepted channel delta: ${MAX_CHANNEL_DELTA}`,
@@ -435,6 +451,9 @@ function main() {
     ...(broadSubpixelEquivalentCases.length
       ? [`Broad low-amplitude rendering differences: ${broadSubpixelEquivalentCases.map((item) => item.case_id).join(', ')}`, '']
       : []),
+    ...(approvedCaseDeltaCases.length
+      ? [`Explicitly approved case deltas: ${approvedCaseDeltaCases.map((item) => item.case_id).join(', ')}`, '']
+      : []),
     ...(byteDifferentButPixelIdentical.length
       ? [`Encoding-only differences: ${byteDifferentButPixelIdentical.map((item) => item.case_id).join(', ')}`, '']
       : []),
@@ -444,7 +463,7 @@ function main() {
   ].join('\n');
   fs.writeFileSync(OUTPUT_MD_PATH, `${markdown}\n`);
 
-  console.log(`Visual comparison: ${report.summary.pixel_equivalent}/${report.summary.cases_compared} equivalent, ${report.summary.pixel_identical} exact, ${report.summary.subpixel_equivalent} subpixel, ${report.summary.broad_subpixel_equivalent} broad-subpixel`);
+  console.log(`Visual comparison: ${report.summary.pixel_equivalent}/${report.summary.cases_compared} equivalent, ${report.summary.pixel_identical} exact, ${report.summary.subpixel_equivalent} subpixel, ${report.summary.broad_subpixel_equivalent} broad-subpixel, ${report.summary.approved_case_delta} approved-case`);
 
   if (missingCurrentCases.length || changedCases.length || comparisons.length !== baselineManifest.results.length) {
     throw new Error(`Visual regression detected: changed=${changedCases.length}, missing=${missingCurrentCases.length}`);
