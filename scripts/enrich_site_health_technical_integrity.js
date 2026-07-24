@@ -46,6 +46,12 @@ function main() {
     throw new Error(`Link report page count ${linkReport.pages_indexed} does not match page index ${indexedPages}`);
   }
 
+  const indexPatchStep = visualWorkflow.indexOf('node scripts/patch_page_index_labels.js');
+  const indexGenerateStep = visualWorkflow.indexOf('node scripts/generate_page_index.js');
+  if (indexPatchStep < 0 || indexGenerateStep < 0 || indexPatchStep > indexGenerateStep) {
+    throw new Error('Visual workflow must patch page-index labels before generating the public index');
+  }
+
   const browserSuites = BROWSER_SUITES.map((suite) => {
     const exists = fs.existsSync(path.join(ROOT, suite.file));
     const referenced = visualWorkflow.includes(suite.file);
