@@ -128,6 +128,7 @@ const checks = [
   ['Outreach register content audit', 'scripts/audit_outreach_register_content.js'],
   ['Outreach source index self-test', 'scripts/test_outreach_source_index.js'],
   ['Site health audit', 'scripts/audit_site_health.js'],
+  ['Site health technical integrity audit', 'scripts/audit_site_health_technical_integrity.js'],
   ['Status document metrics updater self-test', 'scripts/test_status_document_metrics_update.js'],
   ['Status document audit self-test', 'scripts/test_status_document_audit.js'],
   ['Homepage content audit', 'scripts/audit_homepage_content.js'],

@@ -232,6 +232,37 @@ jobs:
         run: node scripts/audit_priority_tos_readiness.js
       - name: Generate public index
         run: node scripts/generate_page_index.js
+      - name: Prepare current-build HTTP audit directory
+        run: mkdir -p .artifacts/current-build-link-integrity
+      - name: Start current-build HTTP audit server
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > .artifacts/current-build-link-integrity/server.log 2>&1 &
+          echo $! > .artifacts/current-build-link-integrity/server.pid
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat .artifacts/current-build-link-integrity/server.log
+          exit 1
+      - name: Generate current-build public link integrity report
+        env:
+          PUBLIC_LINK_BASE_URL: http://127.0.0.1:4173
+          PUBLIC_LINK_REPORT: data/public_link_integrity.json
+          PUBLIC_LINK_CONCURRENCY: '8'
+        run: node scripts/test_public_link_integrity.js
+      - name: Stop current-build HTTP audit server
+        if: always()
+        run: |
+          if [ -f .artifacts/current-build-link-integrity/server.pid ]; then
+            kill "$(cat .artifacts/current-build-link-integrity/server.pid)" 2>/dev/null || true
+            rm -f .artifacts/current-build-link-integrity/server.pid
+          fi
+      - name: Enrich site health with technical integrity
+        run: node scripts/enrich_site_health_technical_integrity.js
+      - name: Audit site health technical integrity
+        run: node scripts/audit_site_health_technical_integrity.js
       - name: Generate extended sitemap
         run: node scripts/generate_sitemap.js
       - name: Run manual audit extensions

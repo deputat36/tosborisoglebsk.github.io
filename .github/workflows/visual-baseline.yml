@@ -51,6 +51,14 @@ on:
       - 'scripts/test_tos_contact_fallback.js'
       - 'scripts/test_places_tos_navigation.js'
       - 'scripts/test_tos_activity_summary.js'
+      - 'scripts/test_public_link_integrity.js'
+      - 'scripts/patch_page_index_labels.js'
+      - 'scripts/generate_page_index.js'
+      - 'scripts/generate_site_health_report.js'
+      - 'scripts/enrich_site_health_readiness.js'
+      - 'scripts/enrich_site_health_technical_integrity.js'
+      - 'scripts/audit_site_health_technical_integrity.js'
+      - 'scripts/test_site_health_technical_integrity.js'
       - 'scripts/audit_visual_capture_manifest.js'
       - 'scripts/audit_visual_capture_tooling.js'
       - 'scripts/audit_public_browser_interaction_tooling.js'
@@ -157,6 +165,14 @@ jobs:
       - name: Audit TOS contact fallback
         run: node scripts/audit_tos_contact_fallback.js
 
+      - name: Check site health technical integrity tooling syntax
+        run: |
+          node --check assets/js/site-health-integrity.js
+          node --check scripts/enrich_site_health_technical_integrity.js
+          node --check scripts/audit_site_health_technical_integrity.js
+          node --check scripts/test_site_health_technical_integrity.js
+          node --check scripts/test_public_link_integrity.js
+
       - name: Check place-to-TOS navigation syntax
         run: node --check scripts/test_places_tos_navigation.js
 
@@ -165,6 +181,12 @@ jobs:
 
       - name: Audit visual overflow fixes
         run: node scripts/audit_visual_overflow_fixes.js
+
+      - name: Patch visual-run page index labels
+        run: node scripts/patch_page_index_labels.js
+
+      - name: Generate visual-run public index
+        run: node scripts/generate_page_index.js
 
       - name: Start local static server
         run: |
@@ -180,6 +202,25 @@ jobs:
           cat .artifacts/visual-baseline/server.log
           exit 1
 
+      - name: Generate visual-run public link integrity report
+        env:
+          PUBLIC_LINK_BASE_URL: http://127.0.0.1:4173
+          PUBLIC_LINK_REPORT: data/public_link_integrity.json
+          PUBLIC_LINK_CONCURRENCY: '8'
+        run: node scripts/test_public_link_integrity.js
+
+      - name: Generate visual-run site health report
+        run: node scripts/generate_site_health_report.js
+
+      - name: Enrich visual-run site health priority readiness
+        run: node scripts/enrich_site_health_readiness.js
+
+      - name: Enrich visual-run site health technical integrity
+        run: node scripts/enrich_site_health_technical_integrity.js
+
+      - name: Audit visual-run site health technical integrity
+        run: node scripts/audit_site_health_technical_integrity.js
+
       - name: Test public browser interactions
         env:
           PUBLIC_BROWSER_REPORT: .artifacts/visual-baseline/browser-interactions.json
@@ -194,6 +235,11 @@ jobs:
         env:
           KEYBOARD_ACCESSIBILITY_REPORT: .artifacts/visual-baseline/keyboard-accessibility.json
         run: node scripts/test_keyboard_accessibility.js
+
+      - name: Test site health technical integrity
+        env:
+          SITE_HEALTH_INTEGRITY_REPORT: .artifacts/visual-baseline/site-health-integrity.json
+        run: node scripts/test_site_health_technical_integrity.js
 
       - name: Test TOS contact fallback
         env:

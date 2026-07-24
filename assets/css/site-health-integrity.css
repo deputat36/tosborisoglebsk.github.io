@@ -1,0 +1,38 @@
+#site-health-integrity,
+#site-health-integrity .grid,
+#site-health-integrity .card,
+#site-health-integrity .card-inner,
+#site-health-integrity details {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#site-health-integrity .notice,
+#site-health-integrity p,
+#site-health-integrity li,
+#site-health-integrity .tiny,
+#site-health-integrity summary,
+#site-health-integrity a {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+#site-health-integrity .card-actions {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+#site-health-integrity .btn {
+  max-width: 100%;
+  white-space: normal;
+}
+
+@media (max-width: 640px) {
+  #site-health-integrity .card-actions {
+    align-items: stretch;
+  }
+
+  #site-health-integrity .card-actions .btn {
+    width: 100%;
+  }
+}
