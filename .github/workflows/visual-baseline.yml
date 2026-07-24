@@ -52,6 +52,7 @@ on:
       - 'scripts/test_places_tos_navigation.js'
       - 'scripts/test_tos_activity_summary.js'
       - 'scripts/test_public_link_integrity.js'
+      - 'scripts/patch_page_index_labels.js'
       - 'scripts/generate_page_index.js'
       - 'scripts/generate_site_health_report.js'
       - 'scripts/enrich_site_health_readiness.js'
@@ -180,6 +181,9 @@ jobs:
 
       - name: Audit visual overflow fixes
         run: node scripts/audit_visual_overflow_fixes.js
+
+      - name: Patch visual-run page index labels
+        run: node scripts/patch_page_index_labels.js
 
       - name: Generate visual-run public index
         run: node scripts/generate_page_index.js
