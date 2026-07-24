@@ -8,7 +8,7 @@ const scriptPath=path.join(root,'assets','js','tos-catalog.js');
 const corePath=path.join(root,'assets','js','tos-catalog-core.js');
 const stylePath=path.join(root,'assets','css','tos-catalog.css');
 const tosesPath=path.join(root,'data','toses.json');
-const requiredControls=['catalog','catalog-contact-policy','tos-count','search','location-filter','type-filter','trust-filter','sort-filter','reset-filters','catalog-filter-status','tos-summary','tos-list'];
+const requiredControls=['catalog','catalog-contact-policy','tos-count','search','location-filter','type-filter','trust-filter','sort-filter','reset-filters','catalog-filter-status','find-tos-guidance','tos-summary','tos-list'];
 const removedControls=['contact-filter','activity-filter','fill-filter'];
 const requiredRoutes=['/update-tos/','/contacts/','/sections/','/verification-guide/'];
 const requiredCopy=['Каталог ТОС','Найдите свой ТОС','Каталог пополняется и уточняется','Не знаете, к какому ТОСу относитесь?','Поиск использует только опубликованные описательные сведения','Различайте даты','Требуют проверки','Сначала требующие внимания','контакты и сведения о председателе не дублируются в списке результатов','вместе со статусом проверки'];
@@ -35,15 +35,16 @@ function main(){
   if(html.includes('href="/map/"'))errors.push('empty map must not be promoted');
   const hero=html.match(/<div class="hero-actions">([\s\S]*?)<\/div>/);
   const heroLinks=hero?Array.from(hero[1].matchAll(/href="([^"]+)"/g),match=>match[1]):[];
-  if(heroLinks.length!==2||heroLinks[0]!=='#catalog'||heroLinks[1]!=='/contacts/')errors.push(`unexpected hero links: ${heroLinks.join(', ')}`);
+  if(heroLinks.length!==2||heroLinks[0]!=='#catalog'||heroLinks[1]!=='/contacts/?request=find-tos#relay-tos')errors.push(`unexpected hero links: ${heroLinks.join(', ')}`);
+  need(errors,html,'catalog page','id="find-tos-guidance" role="status" aria-live="polite" data-resolution="start" hidden');
   const staticCount=Number(textMatch(html,/<b id="tos-count">(\d+)<\/b>/));
   if(staticCount!==published.length)errors.push(`static count mismatch: ${staticCount} !== ${published.length}`);
   fallbackSlugs.forEach(slug=>{if(!repoPathExists(`/tos/${slug}/`))errors.push(`missing route /tos/${slug}/`);need(errors,html,'noscript fallback',`/tos/${slug}/`);});
   need(errors,script,'catalog UI',"fetch('/data/toses.json'");
   ['/data/news.json','/data/projects.json','/data/done.json','/data/needs.json'].forEach(dataPath=>{if(script.includes(`fetch('${dataPath}'`))errors.push(`unrelated fetch found: ${dataPath}`);});
-  ['TosCatalogCore','stateFromSearch','stateToSearch','filterAndSort','activeFilterCount','history.replaceState','updated_desc','attention','encodeURIComponent(t.slug)','?tos=${encodeURIComponent(t.slug)}&type=card#message-builder','Изменено на сайте','Проверено по источнику','data-catalog-contact-policy="detail-only"','Контакты и сведения о председателе','контакты в карточке'].forEach(token=>need(errors,script,'catalog UI',token));
+  ['TosCatalogCore','stateFromSearch','stateToSearch','filterAndSort','activeFilterCount','resolutionState','renderResolution','history.replaceState','updated_desc','attention','encodeURIComponent(t.slug)','?tos=${encodeURIComponent(t.slug)}&type=card#message-builder','/contacts/?request=find-tos#relay-tos','data-find-tos-request','data-find-tos-card','box.hidden=resolution.kind===\'start\'','Изменено на сайте','Проверено по источнику','data-catalog-contact-policy="detail-only"','Контакты и сведения о председателе','контакты в карточке'].forEach(token=>need(errors,script,'catalog UI',token));
   if(/contacts_raw|emails\|\||phones\|\|/.test(core))errors.push('catalog core must not index contact values');
-  ['searchText','stateFromSearch','stateToSearch','filterAndSort','attentionRank','formatDateRu','item.chairperson'].forEach(token=>need(errors,core,'catalog core',token));
+  ['searchText','stateFromSearch','stateToSearch','filterAndSort','attentionRank','formatDateRu','resolutionState','hasIdentityCriteria','item.chairperson'].forEach(token=>need(errors,core,'catalog core',token));
   ['verified','partial','needs_review','stale'].forEach(status=>{need(errors,html,'trust filter',`value="${status}"`);need(errors,core,'catalog core',`'${status}'`);});
   if(!script.includes('Проверка источника: дата, основание и объём не зафиксированы.'))errors.push('missing verification disclosure');
   if(script.includes('activityFor')||script.includes('activityBadges'))errors.push('unverified activity must not drive catalog cards');
@@ -53,6 +54,6 @@ function main(){
   ['tos-toolbar','catalog-shortcuts','catalog-filter-status','improved-tos-card','tos-dates','feature-row','summary-grid'].forEach(selector=>need(errors,css,'catalog CSS',selector));
   if(!html.includes('data-action="menu"')||!html.includes('data-action="theme"'))errors.push('menu or theme control missing');
   if(errors.length)throw new Error(`TOS catalog content audit failed:\n${errors.join('\n')}`);
-  console.log(`TOS catalog content OK: ${published.length} searchable cards, contact values are detail-only`);
+  console.log(`TOS catalog content OK: ${published.length} searchable cards, resident resolution route guarded, contact values are detail-only`);
 }
 main();

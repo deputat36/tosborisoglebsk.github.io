@@ -58,6 +58,28 @@ async function renderImprovedTosCatalog(){
     const attention=items.filter(t=>['needs_review','stale'].includes(core.verificationStatus(t))).length;
     box.innerHTML=`<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>карточек найдено</span></div><div class="summary-tile"><b>${city}/${rural}</b><span>городских / сельских</span></div><div class="summary-tile"><b>${verified}</b><span>подтверждено</span></div><div class="summary-tile"><b>${partial}</b><span>проверено частично</span></div><div class="summary-tile"><b>${attention}</b><span>требуют внимания</span></div></div>`;
   }
+  function renderResolution(items,value){
+    const box=document.querySelector('#find-tos-guidance');
+    if(!box)return;
+    const resolution=core.resolutionState(items,value);
+    box.dataset.resolution=resolution.kind;
+    box.hidden=resolution.kind==='start';
+    if(resolution.kind==='start'){
+      box.innerHTML='<b>Как найти свой ТОС:</b> введите улицу, микрорайон, село или выберите территорию. Каталог покажет возможные карточки, но опубликованные сведения не заменяют официальный документ о границах.';
+      return;
+    }
+    if(resolution.kind==='none'){
+      box.innerHTML='<b>По опубликованным сведениям совпадений нет.</b> Попробуйте другое написание улицы или населённого пункта. Если результат не появился, передайте территорию редакции — она проверит каталог без публикации непроверенных данных.<div class="card-actions"><a class="btn primary" data-find-tos-request href="/contacts/?request=find-tos#relay-tos">Передать территорию редакции</a><button class="btn" type="button" data-find-tos-reset>Очистить поиск</button></div>';
+      box.querySelector('[data-find-tos-reset]')?.addEventListener('click',()=>document.querySelector('#reset-filters')?.click());
+      return;
+    }
+    if(resolution.kind==='single'){
+      const item=items[0];
+      box.innerHTML=`<b>Найдена одна возможная карточка: ТОС «${esc(item.name)}».</b> Откройте её и сверьте территорию, опубликованные границы, статус проверки и контакты. Совпадение поиска само по себе не подтверждает официальную принадлежность адреса.<div class="card-actions"><a class="btn primary" data-find-tos-card href="/tos/${esc(item.slug)}/">Открыть карточку</a><a class="btn" href="/contacts/?request=find-tos#relay-tos">Нужна помощь редакции</a></div>`;
+      return;
+    }
+    box.innerHTML=`<b>Найдено возможных карточек: ${items.length}.</b> Сравните опубликованные границы и описания ниже. Если адрес остаётся неоднозначным, передайте территорию редакции для ручной проверки.<div class="card-actions"><a class="btn primary" href="#tos-list">Сравнить карточки</a><a class="btn" data-find-tos-request href="/contacts/?request=find-tos#relay-tos">Уточнить через редакцию</a></div>`;
+  }
   try{
     const toses=await fetch('/data/toses.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]);
     const published=toses.filter(item=>item&&item.status!=='draft');
@@ -82,9 +104,10 @@ async function renderImprovedTosCatalog(){
     function apply(){
       const value=state();
       const items=core.filterAndSort(published,value,item=>normalizedLocation(item.location));
-      root.innerHTML=items.length?items.map(card).join(''):'<div class="empty">По опубликованным сведениям ничего не найдено. Сбросьте фильтры, попробуйте другой вариант названия или передайте уточнение.</div>';
+      root.innerHTML=items.length?items.map(card).join(''):'<div class="empty">По опубликованным сведениям ничего не найдено. Сбросьте фильтры, попробуйте другой вариант названия или передайте территорию редакции.</div>';
       if(count)count.textContent=items.length;
       renderSummary(items);
+      renderResolution(items,value);
       syncUrl(value);
       updateShortcuts(value);
       const active=core.activeFilterCount(value);
