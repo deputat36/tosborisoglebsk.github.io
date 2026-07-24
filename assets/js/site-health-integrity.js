@@ -3,6 +3,8 @@
 
   const root = document.querySelector('#site-health-integrity');
   if (!root) return;
+  const viewportRoot = document.documentElement;
+  root.dataset.viewport = viewportRoot.clientWidth < 640 ? 'mobile' : 'desktop';
 
   const esc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
     '&': '&amp;',
