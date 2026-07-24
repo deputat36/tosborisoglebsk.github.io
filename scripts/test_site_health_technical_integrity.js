@@ -16,6 +16,27 @@ async function openPage(page, route) {
   assert(response && response.ok(), `${route}: HTTP ${response ? response.status() : 'no response'}`);
 }
 
+async function overflowDiagnostics(page) {
+  return page.evaluate(() => {
+    const viewportWidth = document.documentElement.clientWidth;
+    return Array.from(document.querySelectorAll('body *'))
+      .map((element) => {
+        const rect = element.getBoundingClientRect();
+        return {
+          tag: element.tagName.toLowerCase(),
+          id: element.id || '',
+          className: typeof element.className === 'string' ? element.className : '',
+          left: Math.round(rect.left),
+          right: Math.round(rect.right),
+          width: Math.round(rect.width),
+          text: String(element.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80)
+        };
+      })
+      .filter((item) => item.width > 0 && (item.left < -1 || item.right > viewportWidth + 1))
+      .slice(0, 12);
+  });
+}
+
 async function main() {
   assert(fs.existsSync(SITE_HEALTH_PATH), `Missing ${SITE_HEALTH_PATH}`);
   const report = JSON.parse(fs.readFileSync(SITE_HEALTH_PATH, 'utf8'));
@@ -56,8 +77,8 @@ async function main() {
 
         const reportLink = section.getByRole('link', { name: 'Открыть JSON проверки' });
         assert(await reportLink.getAttribute('href') === '/data/public_link_integrity.json', `${viewport.name}: report link is incorrect`);
-        const horizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
-        assert(!horizontalOverflow, `${viewport.name}: page has horizontal overflow`);
+        const overflow = await overflowDiagnostics(page);
+        assert(overflow.length === 0, `${viewport.name}: page has horizontal overflow: ${JSON.stringify(overflow)}`);
         assert(technicalErrors.length === 0, `${viewport.name}: technical errors: ${technicalErrors.join(' | ')}`);
 
         results.push({
@@ -71,11 +92,13 @@ async function main() {
             browser_suites_enabled: integrity.automation?.browser_suites_enabled,
             visual_cases: integrity.automation?.visual_cases
           },
+          overflow: [],
           technical_errors: []
         });
         console.log(`PASS site-health-integrity-${viewport.name}`);
       } catch (error) {
-        results.push({ viewport: viewport.name, status: 'failed', duration_ms: Date.now() - startedAt, error: error.message, technical_errors: technicalErrors });
+        const overflow = await overflowDiagnostics(page).catch(() => []);
+        results.push({ viewport: viewport.name, status: 'failed', duration_ms: Date.now() - startedAt, error: error.message, overflow, technical_errors: technicalErrors });
         console.error(`FAIL site-health-integrity-${viewport.name}: ${error.message}`);
       } finally {
         await page.close();
