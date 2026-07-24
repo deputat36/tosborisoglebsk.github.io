@@ -77,21 +77,48 @@ async function testTosCatalog(page) {
   const texts = await initialCards.allTextContents();
   texts.forEach((text) => assert(normalize(text).includes('миролюбие'), 'tos catalog: card does not match query'));
   assert(await page.locator('#find-tos-guidance [data-find-tos-card]').getAttribute('href') === '/tos/mirolyubie/', 'tos catalog: single match does not expose the direct card route');
+  const singleHelpHref = await page.locator('#find-tos-guidance [data-find-tos-request]').getAttribute('href');
+  const singleHelpUrl = new URL(singleHelpHref, BASE_URL);
+  assert(singleHelpUrl.searchParams.get('request') === 'find-tos', 'tos catalog: single-result help route is missing request mode');
+  assert(singleHelpUrl.searchParams.get('query') === 'Миролюбие', 'tos catalog: single-result help route lost the search query');
 
   await page.locator('#search').fill(IMPOSSIBLE_QUERY);
   await page.waitForSelector('#tos-list .empty');
   await page.waitForSelector('#find-tos-guidance[data-resolution="none"] [data-find-tos-request]');
-  assert(await page.locator('#find-tos-guidance [data-find-tos-request]').getAttribute('href') === '/contacts/?request=find-tos#relay-tos', 'tos catalog: no-result route does not point to the editorial relay');
+  const relayLink = page.locator('#find-tos-guidance [data-find-tos-request]');
+  const relayHref = await relayLink.getAttribute('href');
+  const relayUrl = new URL(relayHref, BASE_URL);
+  assert(relayUrl.pathname === '/contacts/', 'tos catalog: no-result route does not point to contacts');
+  assert(relayUrl.searchParams.get('request') === 'find-tos', 'tos catalog: no-result route is missing request mode');
+  assert(relayUrl.searchParams.get('query') === IMPOSSIBLE_QUERY, 'tos catalog: no-result route lost the search query');
+  assert(relayUrl.hash === '#relay-tos', 'tos catalog: no-result route is missing relay anchor');
 
   await Promise.all([
-    page.waitForURL('**/contacts/?request=find-tos#relay-tos'),
-    page.locator('#find-tos-guidance [data-find-tos-request]').click()
+    page.waitForURL((url) => url.pathname === '/contacts/' && url.searchParams.get('request') === 'find-tos' && url.searchParams.get('query') === IMPOSSIBLE_QUERY && url.hash === '#relay-tos'),
+    relayLink.click()
   ]);
-  await page.waitForSelector('#relay-tos-template');
+  await page.waitForFunction((query) => {
+    const context = document.querySelector('#relay-tos-context');
+    const template = document.querySelector('#relay-tos-template');
+    return Boolean(context && template && context.textContent.includes('не отправлен автоматически') && template.value.includes(`Поисковый запрос: ${query}`));
+  }, IMPOSSIBLE_QUERY);
   assert(await page.locator('#relay-tos').count() === 1, 'tos catalog: editorial relay destination is missing');
+  const relayContext = (await page.locator('#relay-tos-context').textContent() || '').trim();
+  const relayTemplate = await page.locator('#relay-tos-template').inputValue();
+  assert(relayContext.includes('номер квартиры'), 'tos catalog: relay context lacks personal-data warning');
+  assert(relayTemplate.includes(`Поисковый запрос: ${IMPOSSIBLE_QUERY}`), 'tos catalog: relay template did not preserve the query');
+  assert(relayTemplate.includes('Что нужно уточнить: к какому ТОС относится указанная территория'), 'tos catalog: relay template lacks the intended question');
 
-  await openRoute(page, mirolyubieRoute);
-  await page.waitForSelector('#find-tos-guidance[data-resolution="single"]');
+  const returnLink = page.locator('#relay-tos-card-link');
+  assert(!await returnLink.isHidden(), 'tos catalog: return-to-search link is hidden');
+  assert(await returnLink.textContent() === 'Вернуться к результатам поиска ТОС', 'tos catalog: return-to-search label is wrong');
+  await Promise.all([
+    page.waitForURL((url) => url.pathname === '/tos/' && url.searchParams.get('q') === IMPOSSIBLE_QUERY),
+    returnLink.click()
+  ]);
+  await page.waitForSelector('#find-tos-guidance[data-resolution="none"]');
+  assert(await page.locator('#search').inputValue() === IMPOSSIBLE_QUERY, 'tos catalog: return link did not restore query');
+
   await page.locator('#search').press('Escape');
   await page.waitForSelector('#tos-list .improved-tos-card');
   await page.waitForFunction(() => {
