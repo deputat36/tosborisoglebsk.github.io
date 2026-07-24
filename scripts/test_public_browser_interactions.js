@@ -94,7 +94,10 @@ async function testTosCatalog(page) {
   await page.waitForSelector('#find-tos-guidance[data-resolution="single"]');
   await page.locator('#search').press('Escape');
   await page.waitForSelector('#tos-list .improved-tos-card');
-  await page.waitForSelector('#find-tos-guidance[data-resolution="start"]');
+  await page.waitForFunction(() => {
+    const node = document.querySelector('#find-tos-guidance');
+    return Boolean(node && node.dataset.resolution === 'start' && node.hidden);
+  });
   assert(await page.locator('#search').inputValue() === '', 'tos catalog: Escape did not clear query');
 
   const typeOptions = await page.locator('#type-filter option').evaluateAll((options) => options.map((option) => option.value).filter(Boolean));
