@@ -66,19 +66,35 @@ async function testSearch(page) {
 }
 
 async function testTosCatalog(page) {
-  await openRoute(page, '/tos/?q=%D0%9C%D0%B8%D1%80%D0%BE%D0%BB%D1%8E%D0%B1%D0%B8%D0%B5');
+  const mirolyubieRoute = '/tos/?q=%D0%9C%D0%B8%D1%80%D0%BE%D0%BB%D1%8E%D0%B1%D0%B8%D0%B5';
+  await openRoute(page, mirolyubieRoute);
   await page.waitForSelector('#tos-list .improved-tos-card');
   await waitForStatus(page, '#catalog-filter-status');
+  await page.waitForSelector('#find-tos-guidance[data-resolution="single"]');
 
   const initialCards = page.locator('#tos-list .improved-tos-card');
   assert(await initialCards.count() > 0, 'tos catalog: query returned no cards');
   const texts = await initialCards.allTextContents();
   texts.forEach((text) => assert(normalize(text).includes('миролюбие'), 'tos catalog: card does not match query'));
+  assert(await page.locator('#find-tos-guidance [data-find-tos-card]').getAttribute('href') === '/tos/mirolyubie/', 'tos catalog: single match does not expose the direct card route');
 
   await page.locator('#search').fill(IMPOSSIBLE_QUERY);
   await page.waitForSelector('#tos-list .empty');
+  await page.waitForSelector('#find-tos-guidance[data-resolution="none"] [data-find-tos-request]');
+  assert(await page.locator('#find-tos-guidance [data-find-tos-request]').getAttribute('href') === '/contacts/?request=find-tos#relay-tos', 'tos catalog: no-result route does not point to the editorial relay');
+
+  await Promise.all([
+    page.waitForURL('**/contacts/?request=find-tos#relay-tos'),
+    page.locator('#find-tos-guidance [data-find-tos-request]').click()
+  ]);
+  await page.waitForSelector('#relay-tos-template');
+  assert(await page.locator('#relay-tos').count() === 1, 'tos catalog: editorial relay destination is missing');
+
+  await openRoute(page, mirolyubieRoute);
+  await page.waitForSelector('#find-tos-guidance[data-resolution="single"]');
   await page.locator('#search').press('Escape');
   await page.waitForSelector('#tos-list .improved-tos-card');
+  await page.waitForSelector('#find-tos-guidance[data-resolution="start"]');
   assert(await page.locator('#search').inputValue() === '', 'tos catalog: Escape did not clear query');
 
   const typeOptions = await page.locator('#type-filter option').evaluateAll((options) => options.map((option) => option.value).filter(Boolean));
