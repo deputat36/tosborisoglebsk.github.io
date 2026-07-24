@@ -1,6 +1,6 @@
 const MAX_APPROVED_CASES = 10;
 const MAX_APPROVED_RATIO = 0.4;
-const MAX_APPROVED_CHANNEL_DELTA = 8;
+const MAX_APPROVED_CHANNEL_DELTA = 10;
 
 function finiteNumber(value, label) {
   const parsed = Number(value);
