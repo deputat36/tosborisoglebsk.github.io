@@ -8,6 +8,8 @@ async function renderImprovedTosCatalog(){
   const initials=n=>(n||'ТОС').replace(/ТОС|«|»|"/gi,'').trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'ТОС';
   const socialName=u=>!u?'Ссылка':u.includes('vk.com')||u.includes('vk.ru')?'ВКонтакте':u.includes('ok.ru')?'Одноклассники':u.includes('t.me')?'Telegram':'Ссылка';
   const hasGoodDescription=t=>t.description&&t.description.trim()&&t.description.trim()!=='Описание пока уточняется.';
+  const directPublicChannels=t=>['phones','emails','chairperson_links','social_links'].flatMap(key=>Array.isArray(t[key])?t[key].filter(Boolean):[]);
+  const hasDirectPublicContact=t=>directPublicChannels(t).length>0;
   const requestValue=value=>String(value||'').replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
   const editorialRequestUrl=value=>{
     const params=new URLSearchParams({request:'find-tos'});
@@ -17,6 +19,7 @@ async function renderImprovedTosCatalog(){
     if(selectedLocation)params.set('location',selectedLocation);
     return `/contacts/?${params.toString()}#relay-tos`;
   };
+  const tosRelayUrl=t=>`/contacts/?tos=${encodeURIComponent(t.slug)}#relay-tos`;
   const cleanText=core.normalize;
   const normalizedLocation=raw=>{
     const s=cleanText(raw);
@@ -50,12 +53,15 @@ async function renderImprovedTosCatalog(){
   };
   const feature=(ok,text)=>`<span class="feature ${ok?'ok':'muted'}">${ok?'✓':'—'} ${esc(text)}</span>`;
   const logo=t=>t.logo?`<img class="tos-logo-img" src="${esc(t.logo)}" alt="Логотип ТОС «${esc(t.name)}»" loading="lazy" onerror="this.outerHTML='<div class=&quot;avatar&quot;>${esc(initials(t.name))}</div>'">`:`<div class="avatar">${esc(initials(t.name))}</div>`;
+  const contactRelay=t=>hasDirectPublicContact(t)?'':`<div class="notice compact" data-catalog-contact-relay="${esc(t.slug)}"><b>Прямой контакт не опубликован.</b> Сообщение можно передать через редакцию портала. Передача и ответ не гарантируются; это не официальный канал обращения.<div class="card-actions"><a class="btn" href="${esc(tosRelayUrl(t))}">Передать через редакцию</a></div></div>`;
   function card(t){
     const verification=verificationInfo(t);
     const typeClass=t.type==='Городской'?'badge-city':'badge-village';
     const links=(t.social_links||[]).map(u=>`<a class="tag" target="_blank" rel="noopener" href="${esc(u)}">${socialName(u)}</a>`).join('');
     const correction=`/update-tos/?tos=${encodeURIComponent(t.slug)}&type=card#message-builder`;
-    return `<article class="card tos-card improved-tos-card" data-verification="${core.verificationStatus(t)}" data-catalog-contact-policy="detail-only"><div class="card-inner"><div class="tos-top">${logo(t)}<div><h3>ТОС «${esc(fmt(t.name,''))}»</h3><p>${esc(normalizedLocation(t.location))} · <span class="tag ${typeClass}">${esc(fmt(t.type))}</span></p><span class="status-pill ${verification.className}"><span class="status-dot"></span>${esc(verification.label)}</span></div></div><p class="tos-description">${esc(fmt(t.description,'Описание пока уточняется.'))}</p><div class="tos-dates"><p><b>Изменено на сайте:</b> ${esc(core.formatDateRu(t.updated_at))}</p><p><b>${esc(verificationNote(t))}</b></p></div><div class="feature-row">${feature((t.phones||[]).length,'контакты в карточке')}${feature((t.social_links||[]).length,'соцсети')}${feature(hasGoodDescription(t),'описание')}${feature(Boolean(t.boundaries),'границы')}</div><div class="meta">${links||'<span class="tag warn">Публичные ссылки уточняются</span>'}</div><hr class="sep"/><p class="tiny"><b>Границы:</b> ${esc(fmt(t.boundaries))}</p><p class="tiny catalog-contact-policy"><b>Контакты и сведения о председателе:</b> доступны в основной карточке вместе со статусом проверки и пояснением источника.</p><div class="card-actions"><a class="btn primary" href="/tos/${esc(t.slug)}/">Открыть карточку</a><a class="btn" href="${correction}">Исправить эту карточку</a></div></div></article>`;
+    const contactPolicy=hasDirectPublicContact(t)?'direct':'editorial-relay';
+    const relayAction=hasDirectPublicContact(t)?'':`<a class="btn" data-catalog-relay-action href="${esc(tosRelayUrl(t))}">Передать сообщение</a>`;
+    return `<article class="card tos-card improved-tos-card" data-verification="${core.verificationStatus(t)}" data-catalog-contact-policy="${contactPolicy}"><div class="card-inner"><div class="tos-top">${logo(t)}<div><h3>ТОС «${esc(fmt(t.name,''))}»</h3><p>${esc(normalizedLocation(t.location))} · <span class="tag ${typeClass}">${esc(fmt(t.type))}</span></p><span class="status-pill ${verification.className}"><span class="status-dot"></span>${esc(verification.label)}</span></div></div><p class="tos-description">${esc(fmt(t.description,'Описание пока уточняется.'))}</p><div class="tos-dates"><p><b>Изменено на сайте:</b> ${esc(core.formatDateRu(t.updated_at))}</p><p><b>${esc(verificationNote(t))}</b></p></div><div class="feature-row">${feature(hasDirectPublicContact(t),'прямой канал')}${feature((t.social_links||[]).length,'соцсети')}${feature(hasGoodDescription(t),'описание')}${feature(Boolean(t.boundaries),'границы')}</div><div class="meta">${links||'<span class="tag warn">Публичные ссылки уточняются</span>'}</div>${contactRelay(t)}<hr class="sep"/><p class="tiny"><b>Границы:</b> ${esc(fmt(t.boundaries))}</p><p class="tiny catalog-contact-policy"><b>Контакты и сведения о председателе:</b> доступны в основной карточке вместе со статусом проверки и пояснением источника.</p><div class="card-actions"><a class="btn primary" href="/tos/${esc(t.slug)}/">Открыть карточку</a>${relayAction}<a class="btn" href="${correction}">Исправить эту карточку</a></div></div></article>`;
   }
   function renderSummary(items){
     const box=document.querySelector('#tos-summary');
@@ -85,7 +91,10 @@ async function renderImprovedTosCatalog(){
     }
     if(resolution.kind==='single'){
       const item=items[0];
-      box.innerHTML=`<b>Найдена одна возможная карточка: ТОС «${esc(item.name)}».</b> Откройте её и сверьте территорию, опубликованные границы, статус проверки и контакты. Совпадение поиска само по себе не подтверждает официальную принадлежность адреса.<div class="card-actions"><a class="btn primary" data-find-tos-card href="/tos/${esc(item.slug)}/">Открыть карточку</a><a class="btn" data-find-tos-request href="${esc(relayUrl)}">Нужна помощь редакции</a></div>`;
+      const secondary=hasDirectPublicContact(item)
+        ?`<a class="btn" data-find-tos-request href="${esc(relayUrl)}">Нужна помощь редакции</a>`
+        :`<a class="btn" data-find-tos-contact-relay href="${esc(tosRelayUrl(item))}">Передать сообщение через редакцию</a>`;
+      box.innerHTML=`<b>Найдена одна возможная карточка: ТОС «${esc(item.name)}».</b> Откройте её и сверьте территорию, опубликованные границы, статус проверки и контакты. Совпадение поиска само по себе не подтверждает официальную принадлежность адреса.<div class="card-actions"><a class="btn primary" data-find-tos-card href="/tos/${esc(item.slug)}/">Открыть карточку</a>${secondary}</div>`;
       return;
     }
     box.innerHTML=`<b>Найдено возможных карточек: ${items.length}.</b> Сравните опубликованные границы и описания ниже. Если адрес остаётся неоднозначным, передайте территорию редакции — запрос из каталога сохранится в шаблоне.<div class="card-actions"><a class="btn primary" href="#tos-list">Сравнить карточки</a><a class="btn" data-find-tos-request href="${esc(relayUrl)}">Уточнить через редакцию</a></div>`;
