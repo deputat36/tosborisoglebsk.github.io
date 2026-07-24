@@ -79,14 +79,18 @@ async function testCatalogSearchPrefilledRelay(page) {
   assert(template.includes('Что нужно уточнить: к какому ТОС относится указанная территория'), 'catalog relay: purpose line is missing');
   assert(!await returnLink.isHidden(), 'catalog relay: return link should be visible');
   assert(await returnLink.textContent() === 'Вернуться к результатам поиска ТОС', 'catalog relay: return link label is wrong');
-  assert(await returnLink.getAttribute('href') === `/tos/?q=${encodeURIComponent(query)}&location=${encodeURIComponent(selectedLocation)}`, 'catalog relay: return link does not restore catalog state');
+  const returnHref = await returnLink.getAttribute('href');
+  const returnUrl = new URL(returnHref, BASE_URL);
+  assert(returnUrl.pathname === '/tos/', 'catalog relay: return link points outside the catalog');
+  assert(returnUrl.searchParams.get('q') === query, 'catalog relay: return link lost the query');
+  assert(returnUrl.searchParams.get('location') === selectedLocation, 'catalog relay: return link lost the selected location');
 
   return {
     source_route: `/tos/?q=${encodeURIComponent(query)}&location=${encodeURIComponent(selectedLocation)}`,
     target_route: route,
     context,
     template_lines: template.split('\n').length,
-    return_href: await returnLink.getAttribute('href')
+    return_href: returnHref
   };
 }
 
