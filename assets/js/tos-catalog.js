@@ -8,6 +8,15 @@ async function renderImprovedTosCatalog(){
   const initials=n=>(n||'ТОС').replace(/ТОС|«|»|"/gi,'').trim().split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'ТОС';
   const socialName=u=>!u?'Ссылка':u.includes('vk.com')||u.includes('vk.ru')?'ВКонтакте':u.includes('ok.ru')?'Одноклассники':u.includes('t.me')?'Telegram':'Ссылка';
   const hasGoodDescription=t=>t.description&&t.description.trim()&&t.description.trim()!=='Описание пока уточняется.';
+  const requestValue=value=>String(value||'').replace(/[\u0000-\u001f\u007f]/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
+  const editorialRequestUrl=value=>{
+    const params=new URLSearchParams({request:'find-tos'});
+    const query=requestValue(value.q);
+    const selectedLocation=requestValue(value.location);
+    if(query)params.set('query',query);
+    if(selectedLocation)params.set('location',selectedLocation);
+    return `/contacts/?${params.toString()}#relay-tos`;
+  };
   const cleanText=core.normalize;
   const normalizedLocation=raw=>{
     const s=cleanText(raw);
@@ -62,6 +71,7 @@ async function renderImprovedTosCatalog(){
     const box=document.querySelector('#find-tos-guidance');
     if(!box)return;
     const resolution=core.resolutionState(items,value);
+    const relayUrl=editorialRequestUrl(value);
     box.dataset.resolution=resolution.kind;
     box.hidden=resolution.kind==='start';
     if(resolution.kind==='start'){
@@ -69,16 +79,16 @@ async function renderImprovedTosCatalog(){
       return;
     }
     if(resolution.kind==='none'){
-      box.innerHTML='<b>По опубликованным сведениям совпадений нет.</b> Попробуйте другое написание улицы или населённого пункта. Если результат не появился, передайте территорию редакции — она проверит каталог без публикации непроверенных данных.<div class="card-actions"><a class="btn primary" data-find-tos-request href="/contacts/?request=find-tos#relay-tos">Передать территорию редакции</a><button class="btn" type="button" data-find-tos-reset>Очистить поиск</button></div>';
+      box.innerHTML=`<b>По опубликованным сведениям совпадений нет.</b> Попробуйте другое написание улицы или населённого пункта. Если результат не появился, передайте территорию редакции — введённый запрос будет подставлен в шаблон автоматически.<div class="card-actions"><a class="btn primary" data-find-tos-request href="${esc(relayUrl)}">Передать территорию редакции</a><button class="btn" type="button" data-find-tos-reset>Очистить поиск</button></div>`;
       box.querySelector('[data-find-tos-reset]')?.addEventListener('click',()=>document.querySelector('#reset-filters')?.click());
       return;
     }
     if(resolution.kind==='single'){
       const item=items[0];
-      box.innerHTML=`<b>Найдена одна возможная карточка: ТОС «${esc(item.name)}».</b> Откройте её и сверьте территорию, опубликованные границы, статус проверки и контакты. Совпадение поиска само по себе не подтверждает официальную принадлежность адреса.<div class="card-actions"><a class="btn primary" data-find-tos-card href="/tos/${esc(item.slug)}/">Открыть карточку</a><a class="btn" href="/contacts/?request=find-tos#relay-tos">Нужна помощь редакции</a></div>`;
+      box.innerHTML=`<b>Найдена одна возможная карточка: ТОС «${esc(item.name)}».</b> Откройте её и сверьте территорию, опубликованные границы, статус проверки и контакты. Совпадение поиска само по себе не подтверждает официальную принадлежность адреса.<div class="card-actions"><a class="btn primary" data-find-tos-card href="/tos/${esc(item.slug)}/">Открыть карточку</a><a class="btn" data-find-tos-request href="${esc(relayUrl)}">Нужна помощь редакции</a></div>`;
       return;
     }
-    box.innerHTML=`<b>Найдено возможных карточек: ${items.length}.</b> Сравните опубликованные границы и описания ниже. Если адрес остаётся неоднозначным, передайте территорию редакции для ручной проверки.<div class="card-actions"><a class="btn primary" href="#tos-list">Сравнить карточки</a><a class="btn" data-find-tos-request href="/contacts/?request=find-tos#relay-tos">Уточнить через редакцию</a></div>`;
+    box.innerHTML=`<b>Найдено возможных карточек: ${items.length}.</b> Сравните опубликованные границы и описания ниже. Если адрес остаётся неоднозначным, передайте территорию редакции — запрос из каталога сохранится в шаблоне.<div class="card-actions"><a class="btn primary" href="#tos-list">Сравнить карточки</a><a class="btn" data-find-tos-request href="${esc(relayUrl)}">Уточнить через редакцию</a></div>`;
   }
   try{
     const toses=await fetch('/data/toses.json',{cache:'no-store'}).then(r=>r.ok?r.json():[]);

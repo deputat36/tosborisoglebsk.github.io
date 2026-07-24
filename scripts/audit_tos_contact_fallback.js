@@ -67,11 +67,19 @@ function main() {
   requireFragments(errors, 'relay browser script', relayScript, [
     "new URLSearchParams(window.location.search)",
     "fetch('/data/toses.json'",
+    'cleanParam',
+    'requestMode',
+    'requestedQuery',
+    'requestedLocation',
     'genericTemplate()',
+    'findTosTemplate()',
     'tosTemplate(item)',
+    'showFindTosRequest()',
+    'showCatalogReturnLink()',
     'navigator.clipboard',
     'Редакция не гарантирует передачу или ответ',
-    'не передавайте лишние персональные данные'
+    'Он не отправлен автоматически',
+    'лишних персональных данных'
   ]);
 
   requireFragments(errors, 'contact fallback patcher', patcher, [
@@ -85,8 +93,11 @@ function main() {
     "require('./patch_tos_contact_fallback')",
     'TOS_CONTACT_FALLBACK_REPORT',
     "['addressed-editorial-relay'",
+    "['catalog-search-prefilled-relay'",
     "['direct-contact-without-fallback'",
     "['unknown-tos-generic-relay'",
+    'Поисковый запрос:',
+    'Вернуться к результатам поиска ТОС',
     'TOS contact fallback browser OK'
   ]);
 
@@ -128,6 +139,9 @@ function main() {
   if (/localStorage|sessionStorage/.test(relayScript)) {
     errors.push('relay browser script must not store message or personal data');
   }
+  if (!relayScript.includes('.slice(0, limit)')) {
+    errors.push('relay browser script must bound URL-provided context length');
+  }
   if (/contents:\s*write|pull-requests:\s*write|git\s+(commit|push)|git-auto-commit|create-pull-request/i.test(workflow)) {
     errors.push('contact fallback visual workflow must remain read-only');
   }
@@ -141,7 +155,7 @@ function main() {
   }
 
   if (errors.length) throw new Error(`TOS contact fallback audit failed:\n${errors.join('\n')}`);
-  console.log(`TOS contact fallback OK: ${withoutDirectContact.length} addressed fallback pages (${withoutDirectContact.join(', ')}), ${toses.length - withoutDirectContact.length} direct-contact pages`);
+  console.log(`TOS contact fallback OK: ${withoutDirectContact.length} addressed fallback pages, catalog search prefill guarded, ${toses.length - withoutDirectContact.length} direct-contact pages`);
 }
 
 main();

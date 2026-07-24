@@ -42,7 +42,7 @@ function main(){
   fallbackSlugs.forEach(slug=>{if(!repoPathExists(`/tos/${slug}/`))errors.push(`missing route /tos/${slug}/`);need(errors,html,'noscript fallback',`/tos/${slug}/`);});
   need(errors,script,'catalog UI',"fetch('/data/toses.json'");
   ['/data/news.json','/data/projects.json','/data/done.json','/data/needs.json'].forEach(dataPath=>{if(script.includes(`fetch('${dataPath}'`))errors.push(`unrelated fetch found: ${dataPath}`);});
-  ['TosCatalogCore','stateFromSearch','stateToSearch','filterAndSort','activeFilterCount','resolutionState','renderResolution','history.replaceState','updated_desc','attention','encodeURIComponent(t.slug)','?tos=${encodeURIComponent(t.slug)}&type=card#message-builder','/contacts/?request=find-tos#relay-tos','data-find-tos-request','data-find-tos-card','box.hidden=resolution.kind===\'start\'','Изменено на сайте','Проверено по источнику','data-catalog-contact-policy="detail-only"','Контакты и сведения о председателе','контакты в карточке'].forEach(token=>need(errors,script,'catalog UI',token));
+  ['TosCatalogCore','stateFromSearch','stateToSearch','filterAndSort','activeFilterCount','resolutionState','renderResolution','editorialRequestUrl','requestValue','new URLSearchParams({request:\'find-tos\'})','params.set(\'query\'','params.set(\'location\'','slice(0,160)','history.replaceState','updated_desc','attention','encodeURIComponent(t.slug)','?tos=${encodeURIComponent(t.slug)}&type=card#message-builder','data-find-tos-request','data-find-tos-card','box.hidden=resolution.kind===\'start\'','введённый запрос будет подставлен в шаблон автоматически','Изменено на сайте','Проверено по источнику','data-catalog-contact-policy="detail-only"','Контакты и сведения о председателе','контакты в карточке'].forEach(token=>need(errors,script,'catalog UI',token));
   if(/contacts_raw|emails\|\||phones\|\|/.test(core))errors.push('catalog core must not index contact values');
   ['searchText','stateFromSearch','stateToSearch','filterAndSort','attentionRank','formatDateRu','resolutionState','hasIdentityCriteria','item.chairperson'].forEach(token=>need(errors,core,'catalog core',token));
   ['verified','partial','needs_review','stale'].forEach(status=>{need(errors,html,'trust filter',`value="${status}"`);need(errors,core,'catalog core',`'${status}'`);});
@@ -51,9 +51,10 @@ function main(){
   if(script.includes('t.chairperson'))errors.push('catalog cards must not render chairperson values');
   if(/\(t\.phones\|\|\[\]\)\.join|t\.phones\.join/.test(script))errors.push('catalog cards must not render phone values');
   ['<b>Председатель:</b>','<b>Телефон:</b>','tel:','mailto:'].forEach(token=>{if(script.includes(token))errors.push(`catalog UI must not expose contact token: ${token}`);});
+  ['localStorage','sessionStorage','sendBeacon','XMLHttpRequest','WebSocket'].forEach(signal=>{if(script.includes(signal))errors.push(`catalog UI must not persist or send search context: ${signal}`);});
   ['tos-toolbar','catalog-shortcuts','catalog-filter-status','improved-tos-card','tos-dates','feature-row','summary-grid'].forEach(selector=>need(errors,css,'catalog CSS',selector));
   if(!html.includes('data-action="menu"')||!html.includes('data-action="theme"'))errors.push('menu or theme control missing');
   if(errors.length)throw new Error(`TOS catalog content audit failed:\n${errors.join('\n')}`);
-  console.log(`TOS catalog content OK: ${published.length} searchable cards, resident resolution route guarded, contact values are detail-only`);
+  console.log(`TOS catalog content OK: ${published.length} searchable cards, search context handoff guarded, contact values are detail-only`);
 }
 main();

@@ -56,6 +56,44 @@ async function testAddressedRelay(page) {
   };
 }
 
+async function testCatalogSearchPrefilledRelay(page) {
+  const query = 'улица Советская';
+  const selectedLocation = 'г. Борисоглебск';
+  const route = `/contacts/?request=find-tos&query=${encodeURIComponent(query)}&location=${encodeURIComponent(selectedLocation)}#relay-tos`;
+  await openRoute(page, route);
+  await page.waitForFunction(() => {
+    const context = document.querySelector('#relay-tos-context');
+    const template = document.querySelector('#relay-tos-template');
+    return Boolean(context && template && context.textContent.includes('не отправлен автоматически') && template.value.includes('Поисковый запрос:'));
+  });
+
+  const context = (await page.locator('#relay-tos-context').textContent() || '').trim();
+  const template = await page.locator('#relay-tos-template').inputValue();
+  const returnLink = page.locator('#relay-tos-card-link');
+  assert(context.includes(query), 'catalog relay: query is missing from context');
+  assert(context.includes(selectedLocation), 'catalog relay: selected location is missing from context');
+  assert(context.includes('не отправлен автоматически'), 'catalog relay: automatic-send boundary is missing');
+  assert(context.includes('номер квартиры'), 'catalog relay: personal-data warning is missing');
+  assert(template.includes(`Поисковый запрос: ${query}`), 'catalog relay: query was not prefilled');
+  assert(template.includes(`Выбранная территория: ${selectedLocation}`), 'catalog relay: selected location was not prefilled');
+  assert(template.includes('Что нужно уточнить: к какому ТОС относится указанная территория'), 'catalog relay: purpose line is missing');
+  assert(!await returnLink.isHidden(), 'catalog relay: return link should be visible');
+  assert(await returnLink.textContent() === 'Вернуться к результатам поиска ТОС', 'catalog relay: return link label is wrong');
+  const returnHref = await returnLink.getAttribute('href');
+  const returnUrl = new URL(returnHref, BASE_URL);
+  assert(returnUrl.pathname === '/tos/', 'catalog relay: return link points outside the catalog');
+  assert(returnUrl.searchParams.get('q') === query, 'catalog relay: return link lost the query');
+  assert(returnUrl.searchParams.get('location') === selectedLocation, 'catalog relay: return link lost the selected location');
+
+  return {
+    source_route: `/tos/?q=${encodeURIComponent(query)}&location=${encodeURIComponent(selectedLocation)}`,
+    target_route: route,
+    context,
+    template_lines: template.split('\n').length,
+    return_href: returnHref
+  };
+}
+
 async function testDirectContactNoFallback(page) {
   const item = WITH_DIRECT_CONTACT[0];
   assert(item, 'direct contact: no TOS with direct contact found');
@@ -88,6 +126,7 @@ async function main() {
   const browser = await chromium.launch({ headless: true });
   const scenarios = [
     ['addressed-editorial-relay', testAddressedRelay],
+    ['catalog-search-prefilled-relay', testCatalogSearchPrefilledRelay],
     ['direct-contact-without-fallback', testDirectContactNoFallback],
     ['unknown-tos-generic-relay', testUnknownTosGenericRelay]
   ];
