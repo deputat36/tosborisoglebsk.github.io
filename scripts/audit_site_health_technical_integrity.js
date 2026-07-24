@@ -18,7 +18,9 @@ const paths = {
 
 const contractPathKeys = ['html', 'browser', 'enrichment', 'browserTest', 'mainWorkflow', 'visualWorkflow', 'linkWorkflow'];
 const dataPathKeys = ['siteHealth', 'linkReport', 'pageIndex'];
-const strict = process.env.SITE_HEALTH_TECHNICAL_INTEGRITY_STRICT === 'true';
+const strictWorkflowNames = new Set(['Generate TOS pages', 'Capture visual baseline candidates']);
+const strict = process.env.SITE_HEALTH_TECHNICAL_INTEGRITY_STRICT === 'true'
+  || strictWorkflowNames.has(process.env.GITHUB_WORKFLOW || '');
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -169,7 +171,6 @@ function main() {
   }
   requireFragments(errors, 'main workflow', mainWorkflow, [
     'PUBLIC_LINK_REPORT: data/public_link_integrity.json',
-    'SITE_HEALTH_TECHNICAL_INTEGRITY_STRICT: \'true\'',
     'python3 -m http.server 4173 --bind 127.0.0.1',
     'node scripts/test_public_link_integrity.js',
     'node scripts/enrich_site_health_technical_integrity.js',
@@ -184,7 +185,6 @@ function main() {
     "- 'scripts/test_site_health_technical_integrity.js'",
     'Generate visual-run public link integrity report',
     'Enrich visual-run site health technical integrity',
-    'SITE_HEALTH_TECHNICAL_INTEGRITY_STRICT: \'true\'',
     'Test site health technical integrity',
     'SITE_HEALTH_INTEGRITY_REPORT: .artifacts/visual-baseline/site-health-integrity.json'
   ]);
