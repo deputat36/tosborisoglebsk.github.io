@@ -10,13 +10,12 @@ const VISUAL_WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'visual-bas
 const LINK_WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'public-link-integrity.yml');
 
 const BROWSER_SUITES = [
-  { id: 'public-interactions', label: 'Основные интерактивные сценарии', file: 'scripts/test_public_browser_interactions.js' },
+  { id: 'public-interactions', label: 'Основные интерактивные сценарии, включая поиск своего ТОС', file: 'scripts/test_public_browser_interactions.js' },
   { id: 'card-navigation', label: 'Переходы из публичных карточек', file: 'scripts/test_public_card_navigation.js' },
   { id: 'keyboard-accessibility', label: 'Клавиатурная доступность', file: 'scripts/test_keyboard_accessibility.js' },
   { id: 'places-tos-navigation', label: 'Переходы территория ↔ ТОС', file: 'scripts/test_places_tos_navigation.js' },
   { id: 'tos-activity-summary', label: 'Сводки материалов в карточках ТОС', file: 'scripts/test_tos_activity_summary.js' },
-  { id: 'tos-contact-fallback', label: 'Связь через редакцию при отсутствии контакта', file: 'scripts/test_tos_contact_fallback.js' },
-  { id: 'find-tos-journey', label: 'Поиск своего ТОС по территории', file: 'scripts/test_find_tos_journey.js' }
+  { id: 'tos-contact-fallback', label: 'Связь через редакцию при отсутствии контакта', file: 'scripts/test_tos_contact_fallback.js' }
 ];
 
 function readJson(filePath) {
