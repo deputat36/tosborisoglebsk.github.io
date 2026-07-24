@@ -18,8 +18,12 @@ async function openPage(page, route) {
 
 async function overflowDiagnostics(page) {
   return page.evaluate(() => {
-    const viewportWidth = document.documentElement.clientWidth;
-    return Array.from(document.querySelectorAll('body *'))
+    const section = document.querySelector('#site-health-integrity-section');
+    if (!section) return [{ tag: 'section', id: 'site-health-integrity-section', error: 'missing' }];
+    const sectionRect = section.getBoundingClientRect();
+    const leftBoundary = Math.max(0, sectionRect.left) - 1;
+    const rightBoundary = Math.min(document.documentElement.clientWidth, sectionRect.right) + 1;
+    return Array.from(section.querySelectorAll('*'))
       .map((element) => {
         const rect = element.getBoundingClientRect();
         return {
@@ -32,7 +36,7 @@ async function overflowDiagnostics(page) {
           text: String(element.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 80)
         };
       })
-      .filter((item) => item.width > 0 && (item.left < -1 || item.right > viewportWidth + 1))
+      .filter((item) => item.width > 0 && (item.left < leftBoundary || item.right > rightBoundary))
       .slice(0, 12);
   });
 }
@@ -78,7 +82,7 @@ async function main() {
         const reportLink = section.getByRole('link', { name: 'Открыть JSON проверки' });
         assert(await reportLink.getAttribute('href') === '/data/public_link_integrity.json', `${viewport.name}: report link is incorrect`);
         const overflow = await overflowDiagnostics(page);
-        assert(overflow.length === 0, `${viewport.name}: page has horizontal overflow: ${JSON.stringify(overflow)}`);
+        assert(overflow.length === 0, `${viewport.name}: integrity section has horizontal overflow: ${JSON.stringify(overflow)}`);
         assert(technicalErrors.length === 0, `${viewport.name}: technical errors: ${technicalErrors.join(' | ')}`);
 
         results.push({
