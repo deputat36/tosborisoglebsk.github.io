@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T11:54:25.550Z",
+  "generated_at": "2026-07-24T12:26:22.499Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 72,
   "score_breakdown": {
@@ -19,10 +19,12 @@
     "внутренние ссылки и якоря",
     "состояние каталога ТОС",
     "заполненность контактов, соцсетей, логотипов и статусов проверки",
-    "приоритеты автономной работы и блокировки по неподтверждённым данным"
+    "приоритеты автономной работы и блокировки по неподтверждённым данным",
+    "локальный HTTP-обход индексируемых страниц, внутренних ссылок и якорей",
+    "контракт браузерных и визуальных проверок pull request"
   ],
   "catalog": {
-    "generated_at": "2026-07-24T11:54:22.744Z",
+    "generated_at": "2026-07-24T12:26:19.672Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -180,6 +182,11 @@
     },
     {
       "level": "good",
+      "area": "Навигационная целостность",
+      "finding": "HTTP-проверка прошла: 295 страниц, 4881 внутренних переходов, 706 уникальных целей, ошибок — 0."
+    },
+    {
+      "level": "good",
       "area": "Внутренние ссылки",
       "finding": "Битых внутренних ссылок в текущем отчёте не найдено."
     },
@@ -265,7 +272,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-07-24T11:54:22.888Z",
+    "generated_at": "2026-07-24T12:26:19.817Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -311,5 +318,83 @@
       "ready_for_card_update": 0,
       "waiting_external_action": 4
     }
+  },
+  "technical_integrity": {
+    "generated_at": "2026-07-24T12:26:24.711Z",
+    "status": "passed",
+    "status_label": "Проверка пройдена",
+    "method": "Локальный HTTP-обход текущей сгенерированной версии",
+    "report_url": "/data/public_link_integrity.json",
+    "pages_indexed": 295,
+    "pages_checked": 295,
+    "links_discovered": 6715,
+    "internal_links_checked": 4881,
+    "unique_internal_targets": 706,
+    "external_links_ignored": 168,
+    "protocol_links_ignored": 34,
+    "failed": 0,
+    "automation": {
+      "http_link_workflow_enabled": true,
+      "browser_suites_enabled": 6,
+      "browser_suites": [
+        {
+          "id": "public-interactions",
+          "label": "Основные интерактивные сценарии, включая поиск своего ТОС",
+          "file": "scripts/test_public_browser_interactions.js",
+          "enabled": true
+        },
+        {
+          "id": "card-navigation",
+          "label": "Переходы из публичных карточек",
+          "file": "scripts/test_public_card_navigation.js",
+          "enabled": true
+        },
+        {
+          "id": "keyboard-accessibility",
+          "label": "Клавиатурная доступность",
+          "file": "scripts/test_keyboard_accessibility.js",
+          "enabled": true
+        },
+        {
+          "id": "places-tos-navigation",
+          "label": "Переходы территория ↔ ТОС",
+          "file": "scripts/test_places_tos_navigation.js",
+          "enabled": true
+        },
+        {
+          "id": "tos-activity-summary",
+          "label": "Сводки материалов в карточках ТОС",
+          "file": "scripts/test_tos_activity_summary.js",
+          "enabled": true
+        },
+        {
+          "id": "tos-contact-fallback",
+          "label": "Связь через редакцию при отсутствии контакта",
+          "file": "scripts/test_tos_contact_fallback.js",
+          "enabled": true
+        }
+      ],
+      "visual_cases": 16,
+      "visual_baseline_scope": "Проверяется в pull request; результат конкретного запуска хранится в GitHub Actions artifact."
+    },
+    "validation_context": {
+      "source": "github_actions",
+      "workflow": "Generate TOS pages",
+      "run_id": "30093057364",
+      "run_number": "1687",
+      "commit_sha": "5cc001c8116d349df516b89c19199f6f075dc32c"
+    },
+    "confirms": [
+      "индексируемые страницы текущей сборки открываются по локальному HTTP",
+      "внутренние ссылки ведут на существующие цели",
+      "указанные якоря присутствуют на целевых HTML-страницах",
+      "опасные javascript-ссылки и некорректные URL не обнаружены"
+    ],
+    "does_not_confirm": [
+      "актуальность председателей, телефонов, границ и других сведений о ТОС",
+      "официальный статус документов, проектов, мероприятий и результатов",
+      "доступность внешних сайтов, телефонов, email и социальных сетей",
+      "ручные настройки GitHub Pages в интерфейсе Settings → Pages"
+    ]
   }
 }

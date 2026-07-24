@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-24T12:26:24.711Z",
+  "base_url": "http://127.0.0.1:4173",
+  "concurrency": 8,
+  "pages_indexed": 295,
+  "pages_checked": 295,
+  "links_discovered": 6715,
+  "internal_links_checked": 4881,
+  "unique_internal_targets": 706,
+  "external_links_ignored": 168,
+  "protocol_links_ignored": 34,
+  "failed": 0,
+  "failures": [],
+  "slowest_pages": [
+    {
+      "route": "/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 67,
+      "bytes": 8695
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 36,
+      "bytes": 7931
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 35,
+      "bytes": 11768
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 34,
+      "bytes": 15978
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 33,
+      "bytes": 8158
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 32,
+      "bytes": 9430
+    },
+    {
+      "route": "/calendar/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 31,
+      "bytes": 15879
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 31,
+      "bytes": 23099
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 21,
+      "bytes": 8176
+    },
+    {
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 21,
+      "bytes": 5404
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 15409
+    },
+    {
+      "route": "/done/result-archive-needed-kalinka/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 8317
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 10450
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 23597
+    },
+    {
+      "route": "/communication-kit/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 24905
+    },
+    {
+      "route": "/create-tos/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 12658
+    },
+    {
+      "route": "/done/chigorak-tos-cultural-work/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 8067
+    },
+    {
+      "route": "/documents/templates/project-schedule/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 5606
+    },
+    {
+      "route": "/done/result-archive-needed-petrovskoe/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 8338
+    },
+    {
+      "route": "/done/chkalovec-many-projects/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 8473
+    }
+  ]
+}
