@@ -63,6 +63,7 @@ async function renderImprovedTosCatalog(){
     if(!box)return;
     const resolution=core.resolutionState(items,value);
     box.dataset.resolution=resolution.kind;
+    box.hidden=resolution.kind==='start';
     if(resolution.kind==='start'){
       box.innerHTML='<b>Как найти свой ТОС:</b> введите улицу, микрорайон, село или выберите территорию. Каталог покажет возможные карточки, но опубликованные сведения не заменяют официальный документ о границах.';
       return;
