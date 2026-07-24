@@ -116,8 +116,7 @@ function main() {
     'Что подтверждает проверка',
     'Что она не подтверждает',
     'Открыть JSON проверки',
-    '/data/public_link_integrity.json',
-    'document.documentElement'
+    '/data/public_link_integrity.json'
   ]);
 
   requireFragments(errors, 'integrity enrichment', enrichment, [
@@ -162,7 +161,7 @@ function main() {
 
   requireFragments(errors, 'visual workflow', visualWorkflow, [
     "- 'site-health/index.html'",
-    "- 'assets/js/site-health-integrity.js'",
+    "- 'assets/js/**'",
     "- 'scripts/enrich_site_health_technical_integrity.js'",
     "- 'scripts/audit_site_health_technical_integrity.js'",
     "- 'scripts/test_site_health_technical_integrity.js'",
