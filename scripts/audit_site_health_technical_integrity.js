@@ -107,6 +107,7 @@ function main() {
     'id="site-health-integrity"',
     'Целостность страниц и переходов',
     'Техническая проверка ссылок подтверждает работоспособность переходов, но не достоверность',
+    '/assets/css/site-health-integrity.css',
     '/assets/js/site-health-integrity.js'
   ]);
 
@@ -135,7 +136,7 @@ function main() {
     'SITE_HEALTH_INTEGRITY_REPORT',
     'site-health-integrity-section',
     'Что она не подтверждает',
-    'horizontalOverflow',
+    'overflowDiagnostics',
     'Site health technical integrity browser OK'
   ]);
 
