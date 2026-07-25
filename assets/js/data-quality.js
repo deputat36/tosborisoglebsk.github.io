@@ -28,8 +28,10 @@ function renderQualitySummary(summary) {
     qualityStat(summary.needs_review_count || 0, 'требует проверки'),
     qualityStat(summary.without_phone || 0, 'без телефона'),
     qualityStat(summary.without_social || 0, 'без соцсетей'),
-    qualityStat(summary.without_news || 0, 'без новостей'),
-    qualityStat(summary.without_done || 0, 'без историй результата')
+    qualityStat(summary.without_news || 0, 'без содержательной публикации'),
+    qualityStat(summary.request_only_news || 0, 'только с запросом новости'),
+    qualityStat(summary.without_done || 0, 'без истории результата'),
+    qualityStat(summary.request_only_done || 0, 'только с запросом результата')
   ].join('');
 }
 
@@ -60,6 +62,17 @@ function cardUpdateUrl(slug) {
   return `/update-tos/?tos=${encodeURIComponent(slug || '')}&type=card#message-builder`;
 }
 
+function contentMaturityTags(item) {
+  const linked = item.linked || {};
+  const requests = item.linked_requests || {};
+  const tags = [];
+  if (!linked.news && requests.news) tags.push('<span class="tag warn">запрос вместо новости</span>');
+  if (!linked.done && requests.done) tags.push('<span class="tag warn">запрос вместо результата</span>');
+  if (!linked.needs && requests.needs) tags.push('<span class="tag warn">запрос вместо потребности</span>');
+  if (!linked.projects && requests.projects) tags.push('<span class="tag warn">запрос вместо проекта</span>');
+  return tags.join('');
+}
+
 function renderQualityList(items) {
   const root = document.querySelector('#quality-list');
   if (!root) return;
@@ -79,9 +92,10 @@ function renderQualityList(items) {
 
   root.innerHTML = important.map((item) => {
     const missing = (item.missing || []).map((value) => `<span class="tag warn">${qualityEsc(value)}</span>`).join('');
+    const maturity = contentMaturityTags(item);
     const recommendations = (item.recommendations || []).map((value) => `<li>${qualityEsc(value)}</li>`).join('');
-    const status = item.verification_status || item.data_status || 'unknown';
-    return `<article class="list-item"><div class="meta"><span class="tag ${priorityClass(item.priority)}">${qualityEsc(item.priority)} приоритет</span><span class="tag">${qualityEsc(item.score)}%</span><span class="tag ${statusClass(status)}">${qualityEsc(statusLabel(status))}</span><span class="tag">${qualityEsc(item.location || 'территория уточняется')}</span></div><h3>ТОС «${qualityEsc(item.name || item.slug)}»</h3><p><b>Председатель:</b> ${qualityEsc(item.chairperson || 'уточняется')}</p><div class="audit-missing">${missing || '<span class="tag ok">Основные поля заполнены</span>'}</div>${recommendations ? `<ul class="tiny">${recommendations}</ul>` : ''}<div class="card-actions"><a class="btn" href="/tos/${qualityEsc(item.slug)}/">Открыть карточку</a><a class="btn" href="/verification-tasks/">Задачи проверки</a><a class="btn" href="/collection-board/">Доска сбора</a><a class="btn primary" href="${cardUpdateUrl(item.slug)}">Прислать уточнение</a></div></article>`;
+    const status = item.verification_status || item.data_status || item.verification?.status || 'unknown';
+    return `<article class="list-item"><div class="meta"><span class="tag ${priorityClass(item.priority)}">${qualityEsc(item.priority)} приоритет</span><span class="tag">${qualityEsc(item.score)}%</span><span class="tag ${statusClass(status)}">${qualityEsc(statusLabel(status))}</span><span class="tag">${qualityEsc(item.location || 'территория уточняется')}</span></div><h3>ТОС «${qualityEsc(item.name || item.slug)}»</h3><p><b>Председатель:</b> ${qualityEsc(item.chairperson || 'уточняется')}</p><div class="audit-missing">${missing || '<span class="tag ok">Основные поля заполнены</span>'}${maturity}</div>${recommendations ? `<ul class="tiny">${recommendations}</ul>` : ''}<div class="card-actions"><a class="btn" href="/tos/${qualityEsc(item.slug)}/">Открыть карточку</a><a class="btn" href="/verification-tasks/">Задачи проверки</a><a class="btn" href="/collection-board/">Доска сбора</a><a class="btn primary" href="${cardUpdateUrl(item.slug)}">Прислать уточнение</a></div></article>`;
   }).join('');
 }
 
