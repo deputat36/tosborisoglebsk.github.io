@@ -1,10 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const { repoPathExists } = require('./lib/path_checks');
 
-const pagePath = path.join(process.cwd(), 'data-quality', 'index.html');
-const scriptPath = path.join(process.cwd(), 'assets', 'js', 'data-quality.js');
-const auditDataPath = path.join(process.cwd(), 'data', 'tos_content_audit.json');
+const ROOT = process.cwd();
+const pagePath = path.join(ROOT, 'data-quality', 'index.html');
+const scriptPath = path.join(ROOT, 'assets', 'js', 'data-quality.js');
+const auditDataPath = path.join(ROOT, 'data', 'tos_content_audit.json');
+const auditGeneratorPath = path.join(ROOT, 'scripts', 'generate_content_audit.js');
 
 function requireIncludes(errors, content, needle, label) {
   if (!content.includes(needle)) {
@@ -23,11 +26,15 @@ function main() {
 
   if (!fs.existsSync(pagePath)) errors.push('missing data-quality/index.html');
   if (!fs.existsSync(scriptPath)) errors.push('missing assets/js/data-quality.js');
-  if (!fs.existsSync(auditDataPath)) errors.push('missing data/tos_content_audit.json');
+  if (!fs.existsSync(auditGeneratorPath)) errors.push('missing scripts/generate_content_audit.js');
 
   if (errors.length) {
     throw new Error(`Data quality content audit failed:\n${errors.join('\n')}`);
   }
+
+  execFileSync(process.execPath, [auditGeneratorPath], { cwd: ROOT, stdio: 'pipe' });
+  if (!fs.existsSync(auditDataPath)) errors.push('missing generated data/tos_content_audit.json');
+  if (errors.length) throw new Error(`Data quality content audit failed:\n${errors.join('\n')}`);
 
   const html = fs.readFileSync(pagePath, 'utf8');
   const js = fs.readFileSync(scriptPath, 'utf8');
@@ -44,6 +51,7 @@ function main() {
   requireIncludes(errors, html, '/assets/js/data-quality.js', 'data quality script');
   requireIncludes(errors, html, 'Заполненность карточки не равна полной проверке', 'quality disclaimer');
   requireIncludes(errors, html, 'только те сведения, которые можно размещать открыто', 'public data limitation');
+  requireIncludes(errors, html, 'не засчитывается как содержательная публикация самого ТОС', 'content maturity explanation');
 
   [
     '/update-tos/',
@@ -58,7 +66,7 @@ function main() {
   requireIncludes(errors, js, "qualityJson('/data/tos_content_audit.json')", 'audit JSON loading');
   requireIncludes(errors, js, "cache: 'no-store'", 'no-store loading');
   requireIncludes(errors, js, 'qualityEsc', 'HTML escaping helper');
-  requireIncludes(errors, js, 'replace(/[&<>\'\"]/', 'HTML-sensitive character replacement');
+  requireIncludes(errors, js, 'replace(/[&<>">\'/', 'HTML-sensitive character replacement');
   requireIncludes(errors, js, 'verified_count', 'verified count metric');
   requireIncludes(errors, js, 'partial_count', 'partial count metric');
   requireIncludes(errors, js, 'needs_review_count', 'needs review metric');
@@ -88,9 +96,9 @@ function main() {
     if (auditData.summary && typeof auditData.summary.total_tos !== 'number') {
       errors.push('summary.total_tos must be a number');
     }
-    if (auditData.summary && typeof auditData.summary.request_only_news !== 'number') {
-      errors.push('summary.request_only_news must be a number');
-    }
+    ['request_only_news', 'request_only_done', 'request_only_needs', 'request_only_projects'].forEach((key) => {
+      if (auditData.summary && typeof auditData.summary[key] !== 'number') errors.push(`summary.${key} must be a number`);
+    });
     if (Array.isArray(auditData.items)) {
       auditData.items.forEach((item) => {
         if (!item.linked_requests || typeof item.linked_requests.news !== 'number') {
@@ -99,8 +107,19 @@ function main() {
         if (!item.linked_all || typeof item.linked_all.news !== 'number') {
           errors.push(`${item.slug || 'unknown'}: linked_all.news must be a number`);
         }
+        if ((item.linked?.news || 0) + (item.linked_requests?.news || 0) !== (item.linked_all?.news || 0)) {
+          errors.push(`${item.slug || 'unknown'}: news substantive plus requests must equal all records`);
+        }
       });
     }
+  }
+
+  try {
+    execFileSync(process.execPath, ['--check', scriptPath], { cwd: ROOT, stdio: 'pipe' });
+    execFileSync(process.execPath, ['--check', auditGeneratorPath], { cwd: ROOT, stdio: 'pipe' });
+    execFileSync(process.execPath, ['--check', __filename], { cwd: ROOT, stdio: 'pipe' });
+  } catch (error) {
+    errors.push(`syntax failed: ${String(error.stderr || error.message).trim()}`);
   }
 
   if (errors.length) {
