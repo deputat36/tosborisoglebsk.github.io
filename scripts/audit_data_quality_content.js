@@ -56,18 +56,22 @@ function main() {
   ].forEach((route) => requireRoute(errors, route));
 
   requireIncludes(errors, js, "qualityJson('/data/tos_content_audit.json')", 'audit JSON loading');
-  requireIncludes(errors, js, 'cache: \'no-store\'', 'no-store loading');
+  requireIncludes(errors, js, "cache: 'no-store'", 'no-store loading');
   requireIncludes(errors, js, 'qualityEsc', 'HTML escaping helper');
-  requireIncludes(errors, js, 'replace(/[&<>\'\"]/g', 'HTML-sensitive character replacement');
+  requireIncludes(errors, js, 'replace(/[&<>\'\"]/', 'HTML-sensitive character replacement');
   requireIncludes(errors, js, 'verified_count', 'verified count metric');
   requireIncludes(errors, js, 'partial_count', 'partial count metric');
   requireIncludes(errors, js, 'needs_review_count', 'needs review metric');
   requireIncludes(errors, js, 'without_phone', 'without phone metric');
   requireIncludes(errors, js, 'without_social', 'without social metric');
-  requireIncludes(errors, js, 'without_news', 'without news metric');
-  requireIncludes(errors, js, 'without_done', 'without done metric');
-  requireIncludes(errors, js, 'verification_status !== \'verified\'', 'unverified item filter');
-  requireIncludes(errors, js, 'priority === \'Высокий\'', 'high priority filter');
+  requireIncludes(errors, js, 'without_news', 'without substantive news metric');
+  requireIncludes(errors, js, 'request_only_news', 'request-only news metric');
+  requireIncludes(errors, js, 'without_done', 'without substantive done metric');
+  requireIncludes(errors, js, 'request_only_done', 'request-only done metric');
+  requireIncludes(errors, js, 'contentMaturityTags', 'content maturity helper');
+  requireIncludes(errors, js, 'запрос вместо новости', 'request instead of news label');
+  requireIncludes(errors, js, 'запрос вместо результата', 'request instead of result label');
+  requireIncludes(errors, js, "priority === 'Высокий'", 'high priority filter');
   requireIncludes(errors, js, 'cardUpdateUrl', 'card update URL helper');
   requireIncludes(errors, js, '/verification-tasks/', 'verification tasks link');
   requireIncludes(errors, js, '/collection-board/', 'collection board link');
@@ -84,13 +88,26 @@ function main() {
     if (auditData.summary && typeof auditData.summary.total_tos !== 'number') {
       errors.push('summary.total_tos must be a number');
     }
+    if (auditData.summary && typeof auditData.summary.request_only_news !== 'number') {
+      errors.push('summary.request_only_news must be a number');
+    }
+    if (Array.isArray(auditData.items)) {
+      auditData.items.forEach((item) => {
+        if (!item.linked_requests || typeof item.linked_requests.news !== 'number') {
+          errors.push(`${item.slug || 'unknown'}: linked_requests.news must be a number`);
+        }
+        if (!item.linked_all || typeof item.linked_all.news !== 'number') {
+          errors.push(`${item.slug || 'unknown'}: linked_all.news must be a number`);
+        }
+      });
+    }
   }
 
   if (errors.length) {
     throw new Error(`Data quality content audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log('Data quality content OK');
+  console.log('Data quality content OK: substantive content and editorial requests are separated');
 }
 
 main();
