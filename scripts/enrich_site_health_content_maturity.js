@@ -18,6 +18,31 @@ function unique(values) {
   return [...new Set(values.filter(Boolean))];
 }
 
+function syncScore(health, summary) {
+  if (!health.score_breakdown?.penalties) return;
+  health.score_breakdown.penalties.high_priority_tos = Number(summary.high_priority || 0) * 3;
+  health.score_breakdown.penalties.needs_review_tos = Number(summary.needs_review_count || 0) * 4;
+  health.score_breakdown.penalties.missing_public_phone = Number(summary.without_phone || 0) * 2;
+  const totalPenalty = Object.values(health.score_breakdown.penalties)
+    .reduce((sum, value) => sum + Number(value || 0), 0);
+  health.health_score = Math.max(0, Math.min(100, Number(health.score_breakdown.base || 100) - totalPenalty));
+}
+
+function syncPriorityTos(health, auditItems) {
+  const existing = new Map((health.priority_tos || []).map((item) => [item.slug, item]));
+  health.priority_tos = (auditItems || [])
+    .filter((item) => item.priority === 'Высокий')
+    .map((item) => ({
+      slug: item.slug,
+      name: item.name,
+      location: item.location,
+      score: item.score,
+      missing: item.missing,
+      verification: item.verification?.label || item.verification?.status || '',
+      ...(existing.get(item.slug)?.readiness ? { readiness: existing.get(item.slug).readiness } : {})
+    }));
+}
+
 function main() {
   if (!fs.existsSync(HEALTH_PATH)) throw new Error('Missing data/site_health.json');
   if (!fs.existsSync(ORIGIN_PATH)) throw new Error('Missing data/content_origin_report.json');
@@ -39,12 +64,16 @@ function main() {
   const requestOnlyNeeds = Number(summary.request_only_needs || 0);
   const requestOnlyProjects = Number(summary.request_only_projects || 0);
 
+  health.catalog = summary;
+  syncScore(health, summary);
+  syncPriorityTos(health, audit.items);
   health.audit_scope = unique([
     ...(health.audit_scope || []),
     'происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов'
   ]);
 
   health.content_maturity = {
+    generated_at: summary.generated_at || origin.generated_at || new Date().toISOString(),
     total_tos: totalTos,
     with_substantive_content: withSubstantive,
     with_verified_content: withVerified,
@@ -61,7 +90,7 @@ function main() {
     definitions: origin.definitions || {}
   };
 
-  health.findings = (health.findings || []).filter((item) => item.area !== 'Контент');
+  health.findings = (health.findings || []).filter((item) => !['Контент', 'Зрелость контента', 'Редакционные запросы'].includes(item.area));
   health.findings.push({
     level: requestOrStarterOnly || withoutAny ? 'risk' : 'good',
     area: 'Зрелость контента',
@@ -74,7 +103,7 @@ function main() {
   });
 
   const actions = (health.recommended_actions || [])
-    .filter((item) => !/превращать рабочие заготовки|замене стартовых заготовок/i.test(item));
+    .filter((item) => !/превращать рабочие заготовки|замене стартовых заготовок|Заменить редакционные запросы|Собрать подтверждённые истории результата вместо заготовок|Проверить и оформить реальные актуальные потребности|Оформить проектные идеи с понятным статусом|Собрать первые содержательные материалы/i.test(item));
   if (requestOnlyNews) actions.push(`Заменить редакционные запросы содержательными новостями или фотоотчётами для ${requestOnlyNews} ТОС.`);
   if (requestOnlyDone) actions.push(`Собрать подтверждённые истории результата вместо заготовок для ${requestOnlyDone} ТОС.`);
   if (requestOnlyNeeds) actions.push(`Проверить и оформить реальные актуальные потребности для ${requestOnlyNeeds} ТОС, где пока есть только запрос сведений.`);
