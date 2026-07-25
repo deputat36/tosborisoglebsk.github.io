@@ -236,7 +236,7 @@ async function main() {
       const technicalErrors = [];
       page.on('pageerror', (error) => technicalErrors.push(`pageerror: ${error.message}`));
       page.on('console', (message) => {
-        if (message.type() === 'error') technicalErrors.push(`console: ${message.text()}`));
+        if (message.type() === 'error') technicalErrors.push(`console: ${message.text()}`);
       });
       page.on('requestfailed', (request) => technicalErrors.push(`requestfailed: ${request.url()} ${request.failure()?.errorText || ''}`));
 
