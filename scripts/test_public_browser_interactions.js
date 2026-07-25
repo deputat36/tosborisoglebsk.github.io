@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
+const { inferContentOrigin } = require('./lib/content_origin');
 
+const ROOT = process.cwd();
 const BASE_URL = String(process.env.PUBLIC_BROWSER_BASE_URL || process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
 const REPORT_PATH = path.resolve(process.env.PUBLIC_BROWSER_REPORT || '.artifacts/public-browser-interactions.json');
 const IMPOSSIBLE_QUERY = 'zzzz-public-browser-no-result-2026';
@@ -12,6 +14,28 @@ function assert(condition, message) {
 
 function normalize(value) {
   return String(value || '').toLowerCase().replace(/ё/g, 'е').trim();
+}
+
+function readJson(relativePath) {
+  return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
+}
+
+function searchFixture() {
+  const news = readJson('data/news.json')
+    .filter((item) => item && item.status !== 'draft' && String(item.title || '').trim())
+    .map((item) => ({
+      item,
+      origin: inferContentOrigin(item, 'news')
+    }));
+  const originRank = { verified: 0, editorial: 1, starter: 2, request: 3 };
+  news.sort((a, b) => (originRank[a.origin] ?? 9) - (originRank[b.origin] ?? 9)
+    || String(a.item.title).localeCompare(String(b.item.title), 'ru'));
+  const selected = news[0];
+  assert(selected, 'search fixture: no published news records');
+  return {
+    query: String(selected.item.title).trim(),
+    origin: selected.origin
+  };
 }
 
 async function openRoute(page, route) {
@@ -31,17 +55,24 @@ async function urlParams(page) {
 }
 
 async function testSearch(page) {
-  await openRoute(page, '/search/?q=%D0%9C%D0%B8%D1%80%D0%BE%D0%BB%D1%8E%D0%B1%D0%B8%D0%B5&type=news&origin=verified&sort=title');
-  await page.waitForSelector('#search-results .search-result[data-search-group="news"][data-content-origin="verified"]');
+  const fixture = searchFixture();
+  const params = new URLSearchParams({
+    q: fixture.query,
+    type: 'news',
+    origin: fixture.origin,
+    sort: 'title'
+  });
+  await openRoute(page, `/search/?${params.toString()}`);
+  await page.waitForSelector(`#search-results .search-result[data-search-group="news"][data-content-origin="${fixture.origin}"]`);
   await waitForStatus(page, '#search-filter-status');
 
-  assert(await page.locator('#site-search').inputValue() === 'Миролюбие', 'search: query was not restored from URL');
+  assert(await page.locator('#site-search').inputValue() === fixture.query, 'search: query was not restored from URL');
   assert(await page.locator('#search-type-filter').inputValue() === 'news', 'search: type filter was not restored');
-  assert(await page.locator('#search-origin-filter').inputValue() === 'verified', 'search: origin filter was not restored');
+  assert(await page.locator('#search-origin-filter').inputValue() === fixture.origin, 'search: origin filter was not restored');
   assert(await page.locator('#search-sort').inputValue() === 'title', 'search: sort was not restored');
 
   const cards = page.locator('#search-results .search-result[data-search-group]');
-  assert(await cards.count() > 0, 'search: verified news query returned no cards');
+  assert(await cards.count() > 0, 'search: current news fixture returned no cards');
   const metadata = await cards.evaluateAll((nodes) => nodes.map((node) => ({
     group: node.dataset.searchGroup,
     origin: node.dataset.contentOrigin,
@@ -49,8 +80,8 @@ async function testSearch(page) {
   })));
   metadata.forEach((item) => {
     assert(item.group === 'news', `search: unexpected group ${item.group}`);
-    assert(item.origin === 'verified', `search: unexpected origin ${item.origin}`);
-    assert(normalize(item.text).includes('миролюбие'), 'search: result does not match query');
+    assert(item.origin === fixture.origin, `search: unexpected origin ${item.origin}`);
+    assert(normalize(item.text).includes(normalize(fixture.query)), 'search: result does not match current news fixture');
   });
 
   await page.locator('#site-search').press('Escape');
@@ -59,9 +90,9 @@ async function testSearch(page) {
 
   await page.locator('#search-reset-filters').click();
   await page.waitForSelector('#search-results .section-head');
-  const params = await urlParams(page);
-  assert(!params.q && !params.type && !params.origin, 'search: reset left active query filters in URL');
-  assert(params.sort === 'relevance', 'search: reset did not restore relevance sort');
+  const restoredParams = await urlParams(page);
+  assert(!restoredParams.q && !restoredParams.type && !restoredParams.origin, 'search: reset left active query filters in URL');
+  assert(restoredParams.sort === 'relevance', 'search: reset did not restore relevance sort');
   assert(await page.locator('#search-results .search-result').count() === 4, 'search: quick links were not restored after reset');
 }
 
@@ -205,7 +236,7 @@ async function main() {
       const technicalErrors = [];
       page.on('pageerror', (error) => technicalErrors.push(`pageerror: ${error.message}`));
       page.on('console', (message) => {
-        if (message.type() === 'error') technicalErrors.push(`console: ${message.text()}`);
+        if (message.type() === 'error') technicalErrors.push(`console: ${message.text()}`));
       });
       page.on('requestfailed', (request) => technicalErrors.push(`requestfailed: ${request.url()} ${request.failure()?.errorText || ''}`));
 
@@ -213,7 +244,7 @@ async function main() {
       try {
         await run(page);
         assert(technicalErrors.length === 0, `${name}: technical errors: ${technicalErrors.join(' | ')}`);
-        results.push({ name, status: 'passed', duration_ms: Date.now() - startedAt, url: page.url() });
+        results.push({ name, status: 'passed', duration_ms: Date.now() - startedAt, url: page.url(), technical_errors: [] });
         console.log(`PASS ${name}`);
       } catch (error) {
         results.push({ name, status: 'failed', duration_ms: Date.now() - startedAt, url: page.url(), error: error.message, technical_errors: technicalErrors });
