@@ -44,6 +44,7 @@ function main() {
 
   requireFragments(errors, 'browser interaction test', test, [
     "require('playwright')",
+    "require('./lib/content_origin')",
     "PUBLIC_BROWSER_BASE_URL",
     "browser-interactions.json",
     "['global-search', testSearch]",
@@ -53,7 +54,12 @@ function main() {
     "['projects-browser'",
     "['done-browser'",
     "['needs-browser'",
-    "'/search/?q=",
+    "readJson('data/news.json')",
+    'function searchFixture()',
+    'inferContentOrigin(item, \'news\')',
+    'new URLSearchParams({',
+    'q: fixture.query',
+    'origin: fixture.origin',
     "'/tos/?q=",
     "'/places/?q=",
     "route: '/news/'",
@@ -107,8 +113,20 @@ function main() {
   if (scenarioMatches.length !== 7) errors.push(`browser interaction test must declare 7 scenarios, received ${scenarioMatches.length}`);
   const navigationScenarioMatches = [...cardNavigationTest.matchAll(/name: '(?:global-search-result|tos-catalog-card|news-card|project-card|done-card|need-card)'/g)];
   if (navigationScenarioMatches.length !== 6) errors.push(`public card navigation test must declare 6 scenarios, received ${navigationScenarioMatches.length}`);
-  if (!test.includes('origin=verified') || !test.includes("item.origin === 'verified'")) {
-    errors.push('search scenario must request and assert a confirmed result');
+
+  const dynamicSearchSignals = [
+    "readJson('data/news.json')",
+    "inferContentOrigin(item, 'news')",
+    'fixture.query',
+    'fixture.origin',
+    'item.origin === fixture.origin',
+    'normalize(fixture.query)'
+  ];
+  dynamicSearchSignals.forEach((signal) => {
+    if (!test.includes(signal)) errors.push(`search scenario must derive and assert a current published result: missing ${signal}`);
+  });
+  if (test.includes("origin=verified") || test.includes("item.origin === 'verified'")) {
+    errors.push('search interaction test must not hard-code a content origin that can change with current data');
   }
   if (!test.includes("origin: 'starter'")) errors.push('collection scenarios must verify starter material filtering');
   if ((test.match(/origin: 'request'/g) || []).length < 3) errors.push('collection scenarios must verify request filtering across public sections');
@@ -132,7 +150,7 @@ function main() {
   }
 
   if (errors.length) throw new Error(`Public browser interaction tooling audit failed:\n${errors.join('\n')}`);
-  console.log('Public browser interaction tooling OK: 7 state scenarios and 6 real card-navigation scenarios; workflow read-only');
+  console.log('Public browser interaction tooling OK: 7 state scenarios use current data and 6 real card-navigation scenarios; workflow read-only');
 }
 
 main();
