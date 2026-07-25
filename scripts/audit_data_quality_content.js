@@ -66,7 +66,7 @@ function main() {
   requireIncludes(errors, js, "qualityJson('/data/tos_content_audit.json')", 'audit JSON loading');
   requireIncludes(errors, js, "cache: 'no-store'", 'no-store loading');
   requireIncludes(errors, js, 'qualityEsc', 'HTML escaping helper');
-  requireIncludes(errors, js, 'replace(/[&<>">\'/', 'HTML-sensitive character replacement');
+  requireIncludes(errors, js, "replace(/[&<>'\"]/g", 'HTML-sensitive character replacement');
   requireIncludes(errors, js, 'verified_count', 'verified count metric');
   requireIncludes(errors, js, 'partial_count', 'partial count metric');
   requireIncludes(errors, js, 'needs_review_count', 'needs review metric');
