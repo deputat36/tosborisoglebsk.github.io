@@ -1,9 +1,23 @@
 {
   "schema_version": 1,
   "approved_at": "2026-07-25",
-  "reviewed_run_id": "30151043980",
-  "reviewed_artifact": "visual-baseline-296-1",
+  "reviewed_run_id": "30151579271",
+  "reviewed_artifact": "visual-baseline-300-1",
   "cases": {
+    "css-reg-003": {
+      "baseline_sha256": "2114e7716781e854b39fd24b5e9dd01d3a8ae579621636c89c3b05ee07072fd8",
+      "route": "/",
+      "theme": "light",
+      "interaction": "open-menu",
+      "mode": "screen",
+      "max_significant_changed_pixels": 0,
+      "max_changed_pixel_ratio": 0.022,
+      "max_channel_delta": 15,
+      "observed_significant_changed_pixels": 0,
+      "observed_changed_pixel_ratio": 0.020864583333333332,
+      "observed_max_channel_delta": 15,
+      "reason": "Сравнение с предыдущим проходившим run показало дрейф только в области кнопки «Меню» 96×96: 730 дополнительных низкоамплитудных пикселей сглаживания, без изменения размеров, компоновки и значимых пикселей. Допуск действует только для этого mobile open-menu case."
+    },
     "css-reg-006": {
       "baseline_sha256": "0d87808fb0dd2bddf6eadd6c9aa6684d1bac34d7574a1c17d68bbb99d1aa6f53",
       "route": "/tos/mirolyubie/",
