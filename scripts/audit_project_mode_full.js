@@ -2,6 +2,7 @@ const { runChecks } = require('./lib/run_checks');
 const { patchCollectionBrowsers } = require('./patch_collection_browsers');
 const { patchCollectionSearchContract } = require('./patch_collection_search_contract');
 const { patchKeyboardAccessibility } = require('./patch_keyboard_accessibility');
+const { patchTosActivitySummary } = require('./patch_tos_activity_summary');
 const { patchTosContactFallback } = require('./patch_tos_contact_fallback');
 
 // Full project-mode audits must inspect the same materialized collection pages
@@ -9,6 +10,7 @@ const { patchTosContactFallback } = require('./patch_tos_contact_fallback');
 patchCollectionBrowsers();
 patchCollectionSearchContract();
 patchKeyboardAccessibility();
+patchTosActivitySummary({ regenerate: false });
 patchTosContactFallback();
 
 const checks = [
@@ -18,6 +20,7 @@ const checks = [
   ['ID checks self-test', 'scripts/test_id_checks.js'],
   ['Path checks self-test', 'scripts/test_path_checks.js'],
   ['Status sets self-test', 'scripts/test_status_sets.js'],
+  ['Content coverage self-test', 'scripts/test_content_coverage.js'],
   ['Autonomous P0 plan status self-test', 'scripts/test_autonomous_p0_plan_status.js'],
   ['Autonomous P0 plan status audit', 'scripts/audit_autonomous_p0_plan_status.js'],
   ['Content origins audit', 'scripts/audit_content_origins.js'],
@@ -43,6 +46,7 @@ const checks = [
   ['TOS detail pages content audit', 'scripts/audit_tos_detail_pages_content.js'],
   ['TOS activity summary audit', 'scripts/audit_tos_activity_summary.js'],
   ['TOS contact fallback audit', 'scripts/audit_tos_contact_fallback.js'],
+  ['Data quality content audit', 'scripts/audit_data_quality_content.js'],
   ['Projects integrity audit', 'scripts/audit_projects_integrity.js'],
   ['Project pages content audit', 'scripts/audit_project_pages_content.js'],
   ['Projects action routes content audit', 'scripts/audit_projects_action_routes_content.js'],
@@ -129,6 +133,7 @@ const checks = [
   ['Outreach source index self-test', 'scripts/test_outreach_source_index.js'],
   ['Site health audit', 'scripts/audit_site_health.js'],
   ['Site health technical integrity audit', 'scripts/audit_site_health_technical_integrity.js'],
+  ['Site health content maturity audit', 'scripts/audit_site_health_content_maturity.js'],
   ['Status document metrics updater self-test', 'scripts/test_status_document_metrics_update.js'],
   ['Status document audit self-test', 'scripts/test_status_document_audit.js'],
   ['Homepage content audit', 'scripts/audit_homepage_content.js'],
