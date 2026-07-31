@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-07-31T19:37:45.506Z",
+  "generated_at": "2026-07-31T20:42:10.216Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 295,
   "pages_checked": 295,
-  "links_discovered": 6683,
-  "internal_links_checked": 4848,
-  "unique_internal_targets": 706,
+  "links_discovered": 6731,
+  "internal_links_checked": 4888,
+  "unique_internal_targets": 722,
   "external_links_ignored": 168,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
+      "route": "/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 218,
+      "bytes": 8695
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 123,
+      "bytes": 8158
+    },
+    {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1017,
+      "duration_ms": 123,
       "bytes": 7931
     },
     {
-      "route": "/action-routes/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 48,
-      "bytes": 8695
+      "duration_ms": 122,
+      "bytes": 15978
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 120,
+      "bytes": 11768
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 119,
+      "bytes": 9430
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 28,
+      "duration_ms": 118,
       "bytes": 23099
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 117,
       "bytes": 15879
     },
     {
-      "route": "/chairperson/action-routes/index.html",
+      "route": "/faq/index.html",
       "status": 200,
-      "duration_ms": 23,
-      "bytes": 15978
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 22,
-      "bytes": 9430
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 22,
-      "bytes": 8158
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 11768
-    },
-    {
-      "route": "/chairperson/verify-card/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 10450
-    },
-    {
-      "route": "/content-standards/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 13193
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 23597
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 15409
-    },
-    {
-      "route": "/contacts/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 22241
+      "duration_ms": 25,
+      "bytes": 18664
     },
     {
       "route": "/create-tos/action-routes/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 19,
       "bytes": 12658
+    },
+    {
+      "route": "/improvement-plan/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 7932
+    },
+    {
+      "route": "/documents/templates/project-checklist/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 5559
+    },
+    {
+      "route": "/data-quality/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 7786
+    },
+    {
+      "route": "/documents/templates/project-budget/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 6397
+    },
+    {
+      "route": "/done/vostochnyy-cleanups-holidays/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 7728
     },
     {
       "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 16,
       "bytes": 8176
     },
     {
       "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 16,
       "bytes": 5404
     },
     {
       "route": "/check-tos/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 16,
       "bytes": 5818
     },
     {
-      "route": "/documents/templates/project-photo-report/index.html",
+      "route": "/contacts/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 10995
+      "duration_ms": 15,
+      "bytes": 22241
     },
     {
-      "route": "/needs/materials-for-small-repairs/index.html",
+      "route": "/create-tos/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 7644
-    },
-    {
-      "route": "/needs/photo-and-media-help/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 7658
+      "duration_ms": 15,
+      "bytes": 19408
     }
   ]
 }

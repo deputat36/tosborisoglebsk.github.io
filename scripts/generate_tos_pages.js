@@ -16,6 +16,7 @@ const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const DETAIL_TRUST_VERSION = '2026-07-12';
 const RELATED_CONTENT_TRUST_VERSION = '2026-07-21';
 const TOS_ACTIVITY_SUMMARY_VERSION = '2026-07-25';
+const TOS_CONTENT_ACTIONS_VERSION = '2026-07-31';
 
 function esc(value) {
   return String(value ?? '')
@@ -268,6 +269,72 @@ function activitySummary(tos, data) {
   ].join('');
   return `<section class="section tight" id="tos-activity-summary" data-tos-activity-summary data-tos-slug="${esc(tos.slug)}" data-news-count="${counts.news}" data-events-count="${counts.events}" data-projects-count="${counts.projects}" data-done-count="${counts.done}" data-needs-count="${counts.needs}" data-request-count="${requests}" data-total-count="${total}" data-all-records-count="${allRecords}"><div class="container section-head"><div><h2>Материалы ТОС на портале</h2><p>Содержательные публикации учитываются отдельно от редакционных запросов на сбор и уточнение сведений.</p></div></div><div class="container kpi">${tiles}</div><div class="container notice" data-activity-summary-notice><b>Как читать счётчики:</b> новости, результаты и потребности не засчитываются, если запись является только просьбой редакции прислать или уточнить материал. Таких запросов в карточке: ${requests}. Ноль не означает отсутствие работы ТОС — он означает, что на портале пока нет соответствующей содержательной публикации.</div></section>`;
 }
+function contentActionCard(key, title, text, url, button, secondary = '') {
+  return `<article class="card" data-content-action="${esc(key)}"><div class="card-inner"><span class="tag warn">Нужен материал</span><h3>${esc(title)}</h3><p>${esc(text)}</p><div class="card-actions"><a class="btn primary" href="${esc(url)}">${esc(button)}</a>${secondary}</div></div></article>`;
+}
+function contentActionPlan(tos, data) {
+  const states = {
+    news: coverageFor(data.news, tos.slug, 'news'),
+    done: coverageFor(data.done, tos.slug, 'done'),
+    needs: coverageFor(data.needs, tos.slug, 'needs')
+  };
+  const cards = [];
+  const missing = [];
+
+  if (states.news.substantive === 0) {
+    missing.push('news');
+    cards.push(contentActionCard(
+      'news',
+      'Прислать содержательную новость',
+      'Подойдёт конкретное событие, выполненная работа или важное объявление с датой, местом, участниками и источником сведений.',
+      updateUrl(tos, 'news'),
+      'Подготовить новость',
+      `<a class="btn" href="${esc(updateUrl(tos, 'photo'))}">Фотоотчёт</a>`
+    ));
+  }
+
+  if (states.done.substantive === 0) {
+    missing.push('done');
+    cards.push(contentActionCard(
+      'done',
+      'Показать завершённый результат',
+      'Опишите исходную проблему, что сделали, кто участвовал и что изменилось. Для благоустройства особенно полезны фотографии до, в процессе и после.',
+      updateUrl(tos, 'photo'),
+      'Оформить результат'
+    ));
+  }
+
+  if (states.needs.substantive === 0) {
+    missing.push('needs');
+    cards.push(contentActionCard(
+      'needs',
+      'Уточнить актуальную потребность',
+      'Укажите, что действительно нужно территории сейчас, для чего, в каком объёме, до какого срока, кто отвечает и откуда получена информация.',
+      updateUrl(tos, 'need'),
+      'Оформить потребность'
+    ));
+  }
+
+  const requests = states.news.requests + states.done.requests + states.needs.requests;
+  const stateAttributes = [
+    `data-news-needed="${states.news.substantive === 0}"`,
+    `data-done-needed="${states.done.substantive === 0}"`,
+    `data-needs-needed="${states.needs.substantive === 0}"`,
+    `data-request-count="${requests}"`,
+    `data-action-count="${missing.length}"`
+  ].join(' ');
+
+  if (!cards.length) {
+    return `<section class="section tight" id="tos-content-actions" data-tos-content-action-plan data-tos-slug="${esc(tos.slug)}" ${stateAttributes}><div class="container notice"><b>Основные виды материалов уже представлены.</b> Поддерживайте карточку актуальной и присылайте новые новости, события, результаты или проекты по мере появления.</div></section>`;
+  }
+
+  const requestNote = requests > 0
+    ? ` В карточке уже есть редакционных запросов: ${requests}; они помогают собрать сведения, но не заменяют конкретную публикацию.`
+    : '';
+
+  return `<section class="section" id="tos-content-actions" data-tos-content-action-plan data-tos-slug="${esc(tos.slug)}" ${stateAttributes}><div class="container section-head"><div><h2>Что полезно прислать следующим</h2><p>Персональный план сформирован по содержательным публикациям, уже связанным с этой карточкой.</p></div><a class="btn" href="/submit-materials/">Как подготовить материал</a></div><div class="container grid">${cards.join('')}</div><div class="container notice" data-content-action-boundary><b>Граница вывода:</b> отсутствие записи на портале не означает, что ТОС не ведёт такую работу. План показывает только пробелы в опубликованных материалах. После появления конкретной проверенной публикации соответствующий пункт исчезнет автоматически.${esc(requestNote)}</div></section>`;
+}
+
 function block(title, subtitle, linkText, linkUrl, content, layout = 'list', sectionId = '') {
   if (!content) return '';
   const idAttribute = sectionId ? ` id="${esc(sectionId)}"` : '';
@@ -299,6 +366,7 @@ function makePage(tos, data) {
   const relDone = related(data.done, tos.slug, 4).map(doneCard).join('');
   const relNeeds = related(data.needs, tos.slug, 6).map(needCard).join('');
   const activitySummaryHtml = activitySummary(tos, data);
+  const contentActionPlanHtml = contentActionPlan(tos, data);
   const qualityScore = calcQuality(tos);
   const verification = verificationInfo(tos);
   const territoryScope = scopeInfo(tos, ['location', 'boundaries']);
@@ -330,7 +398,7 @@ function makePage(tos, data) {
     ]
   };
 
-  const actions = `<article class="card"><div class="card-inner"><h3>Уточнить карточку</h3><p>Исправьте председателя, контакты, границы или описание и укажите источник сведений.</p><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Передать уточнение</a></div></article><article class="card"><div class="card-inner"><h3>Рассказать о работе ТОС</h3><p>Передайте новость о событии или фотоотчёт о результате.</p><a class="btn" href="${esc(updateUrl(tos, 'news'))}">Прислать новость</a><p class="tiny"><a href="${esc(updateUrl(tos, 'photo'))}">Передать фотоотчёт</a></p></div></article><article class="card"><div class="card-inner"><h3>Предложить действие</h3><p>Опишите идею проекта или подтверждённую потребность территории.</p><a class="btn" href="${esc(updateUrl(tos, 'project'))}">Предложить проект</a><p class="tiny"><a href="${esc(updateUrl(tos, 'need'))}">Оформить потребность</a></p></div></article>`;
+  const actions = `<article class="card"><div class="card-inner"><h3>Уточнить паспорт и контакты</h3><p>Исправьте председателя, открытые контакты, границы или описание и обязательно укажите источник сведений.</p><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Передать уточнение</a></div></article><article class="card"><div class="card-inner"><h3>Предложить проект или событие</h3><p>Опишите новую инициативу либо добавьте точные дату, место и организатора предстоящего события.</p><a class="btn" href="${esc(updateUrl(tos, 'project'))}">Предложить проект</a><p class="tiny"><a href="${esc(updateUrl(tos, 'event'))}">Добавить событие</a></p></div></article>`;
 
   return `<!doctype html>
 <html lang="ru">
@@ -364,8 +432,9 @@ function makePage(tos, data) {
 
     ${activitySummaryHtml}
 
+    ${contentActionPlanHtml}
 
-    <section class="section" id="help-this-tos"><div class="container section-head"><div><h2>Передать сведения или инициативу</h2><p>Выберите один подходящий сценарий и не отправляйте закрытые персональные данные.</p></div><a class="btn" href="/partners/">Партнёрам</a></div><div class="container grid">${actions}</div></section>
+    <section class="section" id="help-this-tos"><div class="container section-head"><div><h2>Другие способы участия</h2><p>Уточните паспорт ТОС, предложите проект или добавьте событие. Не отправляйте закрытые персональные данные.</p></div><a class="btn" href="/partners/">Партнёрам</a></div><div class="container grid">${actions}</div></section>
 
 
     ${block('Новости и материалы этого ТОС', 'Публикации, связанные с территорией по данным портала.', 'Все новости', '/news/', relNews, 'list', 'tos-news') }

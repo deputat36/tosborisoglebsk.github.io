@@ -8,11 +8,14 @@ const tosesPath = path.join(ROOT, 'data', 'toses.json');
 const generatorPath = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
 const relatedPatcherPath = path.join(ROOT, 'scripts', 'patch_tos_related_content_trust.js');
 const responsivePatcherPath = path.join(ROOT, 'scripts', 'patch_tos_detail_responsive_styles.js');
-const requiredUpdateTypes = ['news', 'card', 'project', 'need', 'photo'];
+const TOS_CONTENT_ACTION_DETAIL_AUDIT_VERSION = '2026-07-31';
+const requiredUpdateTypes = ['card', 'project', 'event'];
 const requiredSections = [
   'Паспорт ТОС',
   'Что нужно уточнить',
-  'Передать сведения или инициативу'
+  'Материалы ТОС на портале',
+  'Что полезно прислать следующим',
+  'Другие способы участия'
 ];
 const requiredRoutes = ['/tos/', '/update-tos/', '/data-quality/', '/sources/', '/partners/'];
 const relatedConfigs = {
@@ -196,7 +199,7 @@ function main() {
   if (!generator.includes('data-related-contact-policy=')) {
     errors.push('generator: related needs contact boundary marker is missing');
   }
-  const needRenderer = (generator.match(/function needCard\(n\) \{[\s\S]*?\n\}\nfunction block/) || [])[0] || '';
+  const needRenderer = (generator.match(/function needCard\(n\) \{[\s\S]*?\n\}\nfunction (?:contentActionCard|block)/) || [])[0] || '';
   if (!needRenderer) {
     errors.push('generator: needCard renderer cannot be located');
   } else {
