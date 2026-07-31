@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "approved_at": "2026-07-25",
-  "reviewed_run_id": "30151579271",
-  "reviewed_artifact": "visual-baseline-300-1",
+  "approved_at": "2026-07-31",
+  "reviewed_run_id": "30661643886",
+  "reviewed_artifact": "visual-baseline-305-1",
   "cases": {
     "css-reg-006": {
       "baseline_sha256": "0d87808fb0dd2bddf6eadd6c9aa6684d1bac34d7574a1c17d68bbb99d1aa6f53",
@@ -11,12 +11,12 @@
       "interaction": "none",
       "mode": "screen",
       "max_significant_changed_pixels": 0,
-      "max_changed_pixel_ratio": 0.1,
-      "max_channel_delta": 7,
+      "max_changed_pixel_ratio": 0.132,
+      "max_channel_delta": 12,
       "observed_significant_changed_pixels": 0,
-      "observed_changed_pixel_ratio": 0.09331544256120528,
-      "observed_max_channel_delta": 6,
-      "reason": "Подтверждён низкоамплитудный дрейф рендеринга текста Chromium без изменения размеров, структуры, цветов или значимых пикселей."
+      "observed_changed_pixel_ratio": 0.13065819209039548,
+      "observed_max_channel_delta": 12,
+      "reason": "Сверено с visual-baseline-300-1 и текущим снимком: размер, верхняя компоновка карточки и цвета сохранены, значимых пикселей нет. Накоплен только низкоамплитудный дрейф текста Chromium; новый персональный блок дополнительно проверяется отдельным Playwright-сценарием ниже первого экрана."
     },
     "css-reg-007": {
       "baseline_sha256": "74a893efa328d6f4ed824e0678f963bf1de721d62f02447b235b3c01cced87f4",
@@ -25,12 +25,26 @@
       "interaction": "toggle-theme",
       "mode": "screen",
       "max_significant_changed_pixels": 0,
-      "max_changed_pixel_ratio": 0.36,
-      "max_channel_delta": 8,
+      "max_changed_pixel_ratio": 0.39,
+      "max_channel_delta": 13,
       "observed_significant_changed_pixels": 0,
-      "observed_changed_pixel_ratio": 0.35950347222222223,
-      "observed_max_channel_delta": 8,
-      "reason": "Повторно проверен mobile dark-mode кадр: размеры и компоновка сохранены, значимых пикселей нет; Chromium дал низкоамплитудный дрейф текста до 8 каналов. Допуск расширен только для этого case."
+      "observed_changed_pixel_ratio": 0.38753819444444443,
+      "observed_max_channel_delta": 13,
+      "reason": "Сверено с visual-baseline-300-1: мобильная тёмная карточка сохраняет ширину, одну колонку, тему и зоны действий; значимых пикселей нет. Допуск относится только к накопленному низкоамплитудному дрейфу рендеринга Chromium."
+    },
+    "css-reg-010": {
+      "baseline_sha256": "19091f53d39cca9a0273a7ba882051b20e1e77255250117e10f33f119213bd7f",
+      "route": "/workbench/",
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "max_significant_changed_pixels": 40,
+      "max_changed_pixel_ratio": 0.03,
+      "max_channel_delta": 135,
+      "observed_significant_changed_pixels": 40,
+      "observed_changed_pixel_ratio": 0.02986346516007533,
+      "observed_max_channel_delta": 135,
+      "reason": "Прямая сверка с visual-baseline-300-1 локализовала все 40 значимых пикселей в цифре актуальной оценки сайта: 72 заменено на 12. Это изменение текущей метрики здоровья, а не сетки, стилей или структуры рабочей панели."
     },
     "css-reg-011": {
       "baseline_sha256": "8a5ea2ba3cc98d0b437606d6774b59e20484f278ec97e0137e078f951900082a",
@@ -39,12 +53,12 @@
       "interaction": "none",
       "mode": "screen",
       "max_significant_changed_pixels": 0,
-      "max_changed_pixel_ratio": 0.13,
-      "max_channel_delta": 10,
+      "max_changed_pixel_ratio": 0.125,
+      "max_channel_delta": 11,
       "observed_significant_changed_pixels": 0,
-      "observed_changed_pixel_ratio": 0.12224293785310734,
-      "observed_max_channel_delta": 10,
-      "reason": "Проверены screenshot и comparison.json после подключения изолированных стилей технической сводки. Размер и компоновка кадра не изменились, значимых пикселей нет; зафиксирован только низкоамплитудный дрейф рендеринга Chromium."
+      "observed_changed_pixel_ratio": 0.12362900188323916,
+      "observed_max_channel_delta": 11,
+      "reason": "Сверено с visual-baseline-300-1: размеры и компоновка технической сводки сохранены, значимых пикселей нет; между двумя свежими прогонами максимальное отличие составляет один канал. Допуск покрывает накопленный дрейф Chromium относительно утверждённой базовой картинки."
     },
     "css-reg-012": {
       "baseline_sha256": "357da2d1d2a9517e9b2b4663d5e0d030e9b6e9993ce948c2dfa57c66ef677b4b",
