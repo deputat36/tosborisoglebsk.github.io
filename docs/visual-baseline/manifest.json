@@ -1,9 +1,9 @@
 {
   "schema_version": 3,
-  "captured_at": "2026-07-18T15:01:21.052Z",
+  "captured_at": "2026-07-31T20:16:26.998Z",
   "repository": "deputat36/tosborisoglebsk.github.io",
-  "commit_sha": "cf3644a1cdd5575796a20069a11949abec3f08c5",
-  "workflow_run_id": "29649128665",
+  "commit_sha": "8a336b2bc7ff342fca6a618701fe0b399dd4357e",
+  "workflow_run_id": "30662143264",
   "workflow_run_attempt": "1",
   "base_url": "http://127.0.0.1:4173",
   "matrix_path": "data/css_regression_matrix.csv",
@@ -312,9 +312,10 @@
       "interaction": "none",
       "mode": "screen",
       "expected_check": "Hero, паспорт, связанные блоки и действия отображаются без смещений",
+      "focus_capture": null,
       "screenshot": "css-reg-006.png",
-      "sha256": "0d87808fb0dd2bddf6eadd6c9aa6684d1bac34d7574a1c17d68bbb99d1aa6f53",
-      "bytes": 132785,
+      "sha256": "713ef8463781248268359e358f6496f6239a6a5f3137bf37aed1e594b990062d",
+      "bytes": 130520,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "light",
@@ -369,9 +370,10 @@
       "interaction": "toggle-theme",
       "mode": "screen",
       "expected_check": "Карточки складываются в одну колонку, текст и действия читаемы",
+      "focus_capture": null,
       "screenshot": "css-reg-007.png",
-      "sha256": "74a893efa328d6f4ed824e0678f963bf1de721d62f02447b235b3c01cced87f4",
-      "bytes": 105737,
+      "sha256": "237d87d52d74ba896643fa42b00b3fd773c96d479259dfee065a0ff38a85d548",
+      "bytes": 104369,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "dark",
@@ -540,9 +542,10 @@
       "interaction": "none",
       "mode": "screen",
       "expected_check": "Сводки, карточки и рабочие действия сохраняют сетку",
+      "focus_capture": null,
       "screenshot": "css-reg-010.png",
-      "sha256": "19091f53d39cca9a0273a7ba882051b20e1e77255250117e10f33f119213bd7f",
-      "bytes": 201509,
+      "sha256": "6d3d860e10ade3caccad489084a3e9b1a12d0044eab67de4e0a79c8f4a00465b",
+      "bytes": 201619,
       "diagnostics": {
         "title": "Рабочая панель портала ТОС БГО",
         "htmlTheme": "light",
@@ -597,9 +600,10 @@
       "interaction": "none",
       "mode": "screen",
       "expected_check": "Таблицы, метрики и уведомления не обрезаются",
+      "focus_capture": null,
       "screenshot": "css-reg-011.png",
-      "sha256": "8a5ea2ba3cc98d0b437606d6774b59e20484f278ec97e0137e078f951900082a",
-      "bytes": 201562,
+      "sha256": "8aee674e5b6b264ee150fdc8638744361cf50643dc06980a5a5bdf19bd6beb90",
+      "bytes": 208337,
       "diagnostics": {
         "title": "Аудит и здоровье сайта ТОС БГО",
         "htmlTheme": "light",
@@ -952,5 +956,18 @@
       "page_errors": [],
       "failed_requests": []
     }
-  ]
+  ],
+  "baseline_refresh": {
+    "type": "incremental",
+    "approved_at": "2026-07-31",
+    "reviewed_run_id": "30662143264",
+    "reviewed_artifact": "visual-baseline-306-1",
+    "refreshed_cases": [
+      "css-reg-006",
+      "css-reg-007",
+      "css-reg-010",
+      "css-reg-011"
+    ],
+    "reason": "Обновлены только проверенные кадры карточки ТОС и динамических рабочих метрик; остальные утверждённые эталоны сохранены."
+  }
 }

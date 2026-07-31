@@ -1,51 +1,9 @@
 {
   "schema_version": 1,
-  "approved_at": "2026-07-25",
-  "reviewed_run_id": "30151579271",
-  "reviewed_artifact": "visual-baseline-300-1",
+  "approved_at": "2026-07-31",
+  "reviewed_run_id": "30662143264",
+  "reviewed_artifact": "visual-baseline-306-1",
   "cases": {
-    "css-reg-006": {
-      "baseline_sha256": "0d87808fb0dd2bddf6eadd6c9aa6684d1bac34d7574a1c17d68bbb99d1aa6f53",
-      "route": "/tos/mirolyubie/",
-      "theme": "light",
-      "interaction": "none",
-      "mode": "screen",
-      "max_significant_changed_pixels": 0,
-      "max_changed_pixel_ratio": 0.1,
-      "max_channel_delta": 7,
-      "observed_significant_changed_pixels": 0,
-      "observed_changed_pixel_ratio": 0.09331544256120528,
-      "observed_max_channel_delta": 6,
-      "reason": "Подтверждён низкоамплитудный дрейф рендеринга текста Chromium без изменения размеров, структуры, цветов или значимых пикселей."
-    },
-    "css-reg-007": {
-      "baseline_sha256": "74a893efa328d6f4ed824e0678f963bf1de721d62f02447b235b3c01cced87f4",
-      "route": "/tos/mirolyubie/",
-      "theme": "dark",
-      "interaction": "toggle-theme",
-      "mode": "screen",
-      "max_significant_changed_pixels": 0,
-      "max_changed_pixel_ratio": 0.36,
-      "max_channel_delta": 8,
-      "observed_significant_changed_pixels": 0,
-      "observed_changed_pixel_ratio": 0.35950347222222223,
-      "observed_max_channel_delta": 8,
-      "reason": "Повторно проверен mobile dark-mode кадр: размеры и компоновка сохранены, значимых пикселей нет; Chromium дал низкоамплитудный дрейф текста до 8 каналов. Допуск расширен только для этого case."
-    },
-    "css-reg-011": {
-      "baseline_sha256": "8a5ea2ba3cc98d0b437606d6774b59e20484f278ec97e0137e078f951900082a",
-      "route": "/site-health/",
-      "theme": "light",
-      "interaction": "none",
-      "mode": "screen",
-      "max_significant_changed_pixels": 0,
-      "max_changed_pixel_ratio": 0.13,
-      "max_channel_delta": 10,
-      "observed_significant_changed_pixels": 0,
-      "observed_changed_pixel_ratio": 0.12224293785310734,
-      "observed_max_channel_delta": 10,
-      "reason": "Проверены screenshot и comparison.json после подключения изолированных стилей технической сводки. Размер и компоновка кадра не изменились, значимых пикселей нет; зафиксирован только низкоамплитудный дрейф рендеринга Chromium."
-    },
     "css-reg-012": {
       "baseline_sha256": "357da2d1d2a9517e9b2b4663d5e0d030e9b6e9993ce948c2dfa57c66ef677b4b",
       "route": "/site-health/",
@@ -58,7 +16,7 @@
       "observed_significant_changed_pixels": 0,
       "observed_changed_pixel_ratio": 0.1163279569892473,
       "observed_max_channel_delta": 10,
-      "reason": "Проверены screenshot и comparison.json после подключения изолированных мобильных стилей технической сводки. Размер, тема и компоновка кадра сохранены, значимых пикселей нет; зафиксирован только низкоамплитудный дрейф рендеринга Chromium."
+      "reason": "Сохранён ранее проверенный узкий допуск мобильной тёмной технической сводки: размеры, тема и компоновка не меняются, значимых пикселей нет."
     }
   }
 }

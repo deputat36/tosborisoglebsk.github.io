@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
+const { patchTosContentActions } = require('./patch_tos_content_actions');
+const { patchTosDetailAuditContentActions } = require('./patch_tos_detail_audit_content_actions');
 
 const ROOT = process.cwd();
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
@@ -99,9 +101,11 @@ function patchTosActivitySummary({ regenerate = true } = {}) {
   const result = patchSource(current);
   if (result.changed) fs.writeFileSync(GENERATOR_PATH, result.content, 'utf8');
 
+  patchTosDetailAuditContentActions();
+  patchTosContentActions({ regenerate: false });
   if (regenerate) regeneratePagesWithoutChangingSitemap();
 
-  console.log(`TOS activity summary patch ${result.changed ? 'applied' : 'already current'}${regenerate ? '; pages regenerated, sitemap preserved' : ''}`);
+  console.log(`TOS activity summary patch ${result.changed ? 'applied' : 'already current'}; detail audit and personalized content actions ensured${regenerate ? '; pages regenerated, sitemap preserved' : ''}`);
   return result.changed;
 }
 

@@ -44,7 +44,6 @@ function main() {
 
   requireFragments(errors, 'browser interaction test', test, [
     "require('playwright')",
-    "require('./lib/content_origin')",
     "PUBLIC_BROWSER_BASE_URL",
     "browser-interactions.json",
     "['global-search', testSearch]",
@@ -54,9 +53,11 @@ function main() {
     "['projects-browser'",
     "['done-browser'",
     "['needs-browser'",
-    "readJson('data/news.json')",
+    "readJson('data/page_index.json')",
     'function searchFixture()',
-    'inferContentOrigin(item, \'news\')',
+    "page.search_group === 'news'",
+    'selected.content_origin',
+    'fixture.path',
     'new URLSearchParams({',
     'q: fixture.query',
     'origin: fixture.origin',
@@ -115,18 +116,23 @@ function main() {
   if (navigationScenarioMatches.length !== 6) errors.push(`public card navigation test must declare 6 scenarios, received ${navigationScenarioMatches.length}`);
 
   const dynamicSearchSignals = [
-    "readJson('data/news.json')",
-    "inferContentOrigin(item, 'news')",
+    "readJson('data/page_index.json')",
+    "page.search_group === 'news'",
+    'selected.content_origin',
     'fixture.query',
     'fixture.origin',
+    'fixture.path',
     'item.origin === fixture.origin',
     'normalize(fixture.query)'
   ];
   dynamicSearchSignals.forEach((signal) => {
-    if (!test.includes(signal)) errors.push(`search scenario must derive and assert a current published result: missing ${signal}`);
+    if (!test.includes(signal)) errors.push(`search scenario must derive and assert a current indexed result: missing ${signal}`);
   });
   if (test.includes("origin=verified") || test.includes("item.origin === 'verified'")) {
-    errors.push('search interaction test must not hard-code a content origin that can change with current data');
+    errors.push('search interaction test must not hard-code a content origin that can change with current index data');
+  }
+  if (test.includes("readJson('data/news.json')") || test.includes('inferContentOrigin(')) {
+    errors.push('search interaction fixture must use the public page index, not a parallel collection calculation');
   }
   if (!test.includes("origin: 'starter'")) errors.push('collection scenarios must verify starter material filtering');
   if ((test.match(/origin: 'request'/g) || []).length < 3) errors.push('collection scenarios must verify request filtering across public sections');
@@ -150,7 +156,7 @@ function main() {
   }
 
   if (errors.length) throw new Error(`Public browser interaction tooling audit failed:\n${errors.join('\n')}`);
-  console.log('Public browser interaction tooling OK: 7 state scenarios use current data and 6 real card-navigation scenarios; workflow read-only');
+  console.log('Public browser interaction tooling OK: 7 state scenarios use the current public index and 6 real card-navigation scenarios; workflow read-only');
 }
 
 main();

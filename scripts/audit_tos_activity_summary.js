@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { patchTosActivitySummary, MARKER } = require('./patch_tos_activity_summary');
+const { auditTosContentActions } = require('./audit_tos_content_actions');
 const { coverageFor } = require('./lib/content_coverage');
 
 const ROOT = process.cwd();
@@ -91,9 +92,10 @@ function auditTosActivitySummary() {
     requireIncludes(errors, html, 'Ноль не означает отсутствие работы ТОС', `${tos.slug} zero notice`);
 
     const summaryPosition = html.indexOf('id="tos-activity-summary"');
+    const contentPlanPosition = html.indexOf('id="tos-content-actions"');
     const helpPosition = html.indexOf('id="help-this-tos"');
-    if (summaryPosition < 0 || helpPosition < 0 || summaryPosition > helpPosition) {
-      errors.push(`${tos.slug}: activity summary must appear before contribution actions`);
+    if (summaryPosition < 0 || contentPlanPosition < 0 || helpPosition < 0 || summaryPosition > contentPlanPosition || contentPlanPosition > helpPosition) {
+      errors.push(`${tos.slug}: activity summary, personalized plan and secondary actions must keep their intended order`);
     }
 
     Object.entries(COLLECTIONS).forEach(([key, config]) => {
@@ -128,7 +130,9 @@ function auditTosActivitySummary() {
   if (!requestRecords) errors.push('expected editorial requests to exercise separate request counters');
 
   if (errors.length) throw new Error(`TOS activity summary audit failed:\n${errors.join('\n')}`);
-  console.log(`TOS activity summaries OK: ${toses.length} pages, ${substantiveRecords} substantive records, ${requestRecords} editorial requests, ${linkedTiles} linked tiles, ${zeroTiles} zero tiles`);
+  const contentActions = auditTosContentActions();
+  console.log(`TOS activity summaries OK: ${toses.length} pages, ${substantiveRecords} substantive records, ${requestRecords} editorial requests, ${linkedTiles} linked tiles, ${zeroTiles} zero tiles; personalized plans ${contentActions.total}`);
+  return { total: toses.length, substantiveRecords, requestRecords, contentActions };
 }
 
 if (require.main === module) auditTosActivitySummary();

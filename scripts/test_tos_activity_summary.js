@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
 const { coverageFor } = require('./lib/content_coverage');
+const { testTosContentActions } = require('./test_tos_content_actions');
 
 const ROOT = process.cwd();
 const BASE_URL = String(process.env.TOS_ACTIVITY_BASE_URL || process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
@@ -175,6 +176,7 @@ async function main() {
 
   if (report.failed) throw new Error(`TOS activity summary browser test failed: ${report.failed} of ${report.total}. See ${REPORT_PATH}`);
   console.log(`TOS activity summary browser test OK: ${report.passed}/${report.total}`);
+  await testTosContentActions();
 }
 
 main().catch((error) => {
