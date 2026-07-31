@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { coverageMap, coverageFromMap } = require('./lib/content_coverage');
 
 const ROOT = process.cwd();
 const STALE_DAYS = 180;
@@ -21,19 +22,6 @@ const goodDescription = (value) => {
   const text = String(value || '').trim();
   return text.length >= 80 && text !== 'Описание пока уточняется.';
 };
-
-function mapByTos(items) {
-  const map = new Map();
-  items.filter(published).forEach((item) => {
-    if (!item.tos_slug) return;
-    map.set(item.tos_slug, (map.get(item.tos_slug) || 0) + 1);
-  });
-  return map;
-}
-
-function getCount(map, slug) {
-  return map.get(slug) || 0;
-}
 
 function daysSince(value) {
   if (!value) return null;
@@ -82,14 +70,21 @@ function registryGroup(priority, verification, missing, linked) {
   return 'Проверить частично';
 }
 
+function collectionState(maps, key, slug) {
+  return coverageFromMap(maps[key], slug);
+}
+
 function buildAuditItem(tos, maps) {
-  const linked = {
-    news: getCount(maps.news, tos.slug),
-    done: getCount(maps.done, tos.slug),
-    needs: getCount(maps.needs, tos.slug),
-    projects: getCount(maps.projects, tos.slug),
-    events: getCount(maps.events, tos.slug)
-  };
+  const news = collectionState(maps, 'news', tos.slug);
+  const done = collectionState(maps, 'done', tos.slug);
+  const needs = collectionState(maps, 'needs', tos.slug);
+  const projects = collectionState(maps, 'projects', tos.slug);
+  const events = collectionState(maps, 'events', tos.slug);
+  const states = { news, done, needs, projects, events };
+  const linked = Object.fromEntries(Object.entries(states).map(([key, value]) => [key, value.substantive]));
+  const linkedAll = Object.fromEntries(Object.entries(states).map(([key, value]) => [key, value.all]));
+  const linkedRequests = Object.fromEntries(Object.entries(states).map(([key, value]) => [key, value.requests]));
+  const linkedOrigins = Object.fromEntries(Object.entries(states).map(([key, value]) => [key, value.origins]));
 
   const checks = [
     ['Название', has(tos.name)],
@@ -126,10 +121,10 @@ function buildAuditItem(tos, maps) {
   if (missing.includes('Соцсети')) recommendations.push('добавить группу или страницу в соцсетях');
   if (missing.includes('Логотип')) recommendations.push('подготовить логотип или временный знак ТОС');
   if (missing.includes('Описание')) recommendations.push('написать живое описание территории и активности');
-  if (linked.news === 0) recommendations.push('добавить хотя бы одну новость или объявление');
-  if (linked.done === 0) recommendations.push('собрать минимум одну историю результата');
-  if (linked.needs === 0) recommendations.push('уточнить актуальную потребность территории');
-  if (linked.projects === 0) recommendations.push('добавить проектную идею или инициативу');
+  if (linked.news === 0) recommendations.push(linkedRequests.news > 0 ? 'заменить запрос материалов содержательной новостью или фотоотчётом' : 'добавить хотя бы одну содержательную новость или фотоотчёт');
+  if (linked.done === 0) recommendations.push(linkedRequests.done > 0 ? 'заменить заготовку подтверждённой историей результата' : 'собрать минимум одну историю результата');
+  if (linked.needs === 0) recommendations.push(linkedRequests.needs > 0 ? 'уточнить и подтвердить реальную актуальную потребность территории' : 'уточнить актуальную потребность территории');
+  if (linked.projects === 0) recommendations.push(linkedRequests.projects > 0 ? 'оформить запрос как проектную идею с понятным статусом' : 'добавить проектную идею или инициативу');
   if (verification.status === 'unknown') recommendations.unshift('указать дату и источник проверки данных');
   if (verification.status === 'stale') recommendations.unshift('повторно подтвердить сведения у председателя или ответственного');
 
@@ -144,6 +139,9 @@ function buildAuditItem(tos, maps) {
     priority,
     missing,
     linked,
+    linked_all: linkedAll,
+    linked_requests: linkedRequests,
+    linked_origins: linkedOrigins,
     verification,
     registry_group: registryGroup(priority, verification, missing, linked),
     contact_ready: (tos.phones || []).length > 0 || (tos.emails || []).length > 0 || (tos.social_links || []).length > 0,
@@ -151,14 +149,22 @@ function buildAuditItem(tos, maps) {
   };
 }
 
+function requestOnly(items, key) {
+  return items.filter((item) => item.linked[key] === 0 && item.linked_requests[key] > 0).length;
+}
+
+function totalRequests(items, key) {
+  return items.reduce((sum, item) => sum + (item.linked_requests[key] || 0), 0);
+}
+
 function main() {
   const toses = readJson('data/toses.json').filter(published);
   const maps = {
-    news: mapByTos(readJson('data/news.json')),
-    done: mapByTos(readJson('data/done.json')),
-    needs: mapByTos(readJson('data/needs.json')),
-    projects: mapByTos(readJson('data/projects.json')),
-    events: mapByTos(readJson('data/events.json'))
+    news: coverageMap(readJson('data/news.json'), 'news'),
+    done: coverageMap(readJson('data/done.json'), 'done'),
+    needs: coverageMap(readJson('data/needs.json'), 'needs'),
+    projects: coverageMap(readJson('data/projects.json'), 'projects'),
+    events: coverageMap(readJson('data/events.json'), 'events')
   };
 
   const priorityRank = { 'Высокий': 0, 'Средний': 1, 'Низкий': 2 };
@@ -187,6 +193,16 @@ function main() {
     without_done: items.filter((item) => item.linked.done === 0).length,
     without_needs: items.filter((item) => item.linked.needs === 0).length,
     without_projects: items.filter((item) => item.linked.projects === 0).length,
+    request_only_news: requestOnly(items, 'news'),
+    request_only_done: requestOnly(items, 'done'),
+    request_only_needs: requestOnly(items, 'needs'),
+    request_only_projects: requestOnly(items, 'projects'),
+    editorial_requests: {
+      news: totalRequests(items, 'news'),
+      done: totalRequests(items, 'done'),
+      needs: totalRequests(items, 'needs'),
+      projects: totalRequests(items, 'projects')
+    },
     average_score: Math.round(items.reduce((sum, item) => sum + item.score, 0) / Math.max(items.length, 1))
   };
 
@@ -197,14 +213,14 @@ function main() {
     next_actions: [
       'повторно проверить карточки с устаревшей датой',
       'уточнить контакты ТОСов с высоким приоритетом',
-      'добавить новости для ТОСов без публикаций',
-      'собрать истории результата для ТОСов без раздела «Сделано»',
+      'заменить редакционные запросы содержательными новостями и фотоотчётами',
+      'собрать подтверждённые истории результата',
       'подготовить актуальные потребности и проектные идеи',
       'указать источник и дату проверки сведений'
     ]
   });
 
-  console.log(`Content audit generated: ${items.length} TOS records.`);
+  console.log(`Content audit generated: ${items.length} TOS records; request-only news ${summary.request_only_news}.`);
 }
 
 main();
