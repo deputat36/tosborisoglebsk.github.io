@@ -7,8 +7,9 @@ const { patchSource, patchTosContentActions, MARKER } = require('./patch_tos_con
 const ROOT = process.cwd();
 const GENERATOR_PATH = path.join(ROOT, 'scripts', 'generate_tos_pages.js');
 const TEST_PATH = path.join(ROOT, 'scripts', 'test_tos_content_actions.js');
-const WORKFLOW_PATH = path.join(ROOT, '.github', 'workflows', 'visual-baseline.yml');
-const FULL_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_project_mode_full.js');
+const ACTIVITY_PATCH_PATH = path.join(ROOT, 'scripts', 'patch_tos_activity_summary.js');
+const ACTIVITY_AUDIT_PATH = path.join(ROOT, 'scripts', 'audit_tos_activity_summary.js');
+const ACTIVITY_TEST_PATH = path.join(ROOT, 'scripts', 'test_tos_activity_summary.js');
 const DATA_FILES = {
   toses: 'toses.json',
   news: 'news.json',
@@ -45,7 +46,7 @@ function markerCount(content, marker) {
   return (content.match(new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
 }
 
-function main() {
+function auditTosContentActions() {
   const errors = [];
   patchTosContentActions();
 
@@ -53,8 +54,9 @@ function main() {
   const toses = data.toses.filter((item) => item && item.slug && item.status !== 'draft');
   const generator = fs.readFileSync(GENERATOR_PATH, 'utf8');
   const test = fs.readFileSync(TEST_PATH, 'utf8');
-  const workflow = fs.readFileSync(WORKFLOW_PATH, 'utf8');
-  const fullAudit = fs.readFileSync(FULL_AUDIT_PATH, 'utf8');
+  const activityPatch = fs.readFileSync(ACTIVITY_PATCH_PATH, 'utf8');
+  const activityAudit = fs.readFileSync(ACTIVITY_AUDIT_PATH, 'utf8');
+  const activityTest = fs.readFileSync(ACTIVITY_TEST_PATH, 'utf8');
 
   requireFragments(errors, 'generator', generator, [
     MARKER,
@@ -130,23 +132,21 @@ function main() {
     'multi-gap-plan',
     'focused-plan',
     'addressed-content-action',
-    'TOS content actions browser OK'
+    'TOS content actions browser OK',
+    'module.exports = { testTosContentActions }'
   ]);
 
-  requireFragments(errors, 'visual workflow', workflow, [
-    "- 'scripts/patch_tos_content_actions.js'",
-    "- 'scripts/audit_tos_content_actions.js'",
-    "- 'scripts/test_tos_content_actions.js'",
-    'Apply TOS content actions',
-    'Audit TOS content actions',
-    'Test TOS content actions',
-    'TOS_CONTENT_ACTIONS_REPORT: .artifacts/visual-baseline/tos-content-actions.json'
-  ]);
-
-  requireFragments(errors, 'full project-mode', fullAudit, [
+  requireFragments(errors, 'activity patch integration', activityPatch, [
     "require('./patch_tos_content_actions')",
-    'patchTosContentActions();',
-    "['TOS content actions audit', 'scripts/audit_tos_content_actions.js']"
+    'patchTosContentActions({ regenerate: false });'
+  ]);
+  requireFragments(errors, 'activity audit integration', activityAudit, [
+    "require('./audit_tos_content_actions')",
+    'auditTosContentActions();'
+  ]);
+  requireFragments(errors, 'activity browser integration', activityTest, [
+    "require('./test_tos_content_actions')",
+    'await testTosContentActions();'
   ]);
 
   try {
@@ -159,6 +159,9 @@ function main() {
 
   if (errors.length) throw new Error(`TOS content actions audit failed:\n${errors.join('\n')}`);
   console.log(`TOS content actions OK: ${toses.length} plans; max ${maxActions.slug}=${maxActions.actionCount}, min ${minActions.slug}=${minActions.actionCount}`);
+  return { total: toses.length, maxActions, minActions };
 }
 
-main();
+if (require.main === module) auditTosContentActions();
+
+module.exports = { auditTosContentActions };
