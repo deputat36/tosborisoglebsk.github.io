@@ -5,8 +5,12 @@ const { coverageFor } = require('./lib/content_coverage');
 const { patchTosContentActions } = require('./patch_tos_content_actions');
 
 const ROOT = process.cwd();
-const BASE_URL = String(process.env.PUBLIC_BROWSER_BASE_URL || process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
-const REPORT_PATH = path.resolve(process.env.TOS_CONTENT_ACTIONS_REPORT || '.artifacts/tos-content-actions.json');
+const BASE_URL = String(process.env.PUBLIC_BROWSER_BASE_URL || process.env.TOS_ACTIVITY_BASE_URL || process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
+const activityReport = process.env.TOS_ACTIVITY_REPORT ? path.resolve(process.env.TOS_ACTIVITY_REPORT) : '';
+const defaultReport = activityReport
+  ? path.join(path.dirname(activityReport), 'tos-content-actions.json')
+  : path.resolve('.artifacts/tos-content-actions.json');
+const REPORT_PATH = path.resolve(process.env.TOS_CONTENT_ACTIONS_REPORT || defaultReport);
 
 function readJson(name) {
   return JSON.parse(fs.readFileSync(path.join(ROOT, 'data', name), 'utf8'));
@@ -62,7 +66,9 @@ async function inspectPlan(page, sample) {
     assert(count === (sample.needed[key] ? 1 : 0), `${sample.tos.slug}: ${key} action mismatch`);
   }
 
-  const boundary = (await plan.locator('[data-content-action-boundary]').textContent() || '').trim();
+  const boundary = sample.actionCount > 0
+    ? (await plan.locator('[data-content-action-boundary]').textContent() || '').trim()
+    : '';
   if (sample.actionCount > 0) {
     assert(boundary.includes('не означает, что ТОС не ведёт такую работу'), `${sample.tos.slug}: trust boundary is missing`);
   }
@@ -130,7 +136,7 @@ async function testAddressedContentAction(page) {
   };
 }
 
-async function main() {
+async function testTosContentActions() {
   patchTosContentActions();
   fs.mkdirSync(path.dirname(REPORT_PATH), { recursive: true });
 
@@ -185,9 +191,14 @@ async function main() {
 
   if (report.failed) throw new Error(`TOS content actions browser failed: ${report.failed} of ${report.total}. See ${REPORT_PATH}`);
   console.log(`TOS content actions browser OK: ${report.passed}/${report.total}; multi ${report.multi_gap_slug}, focused ${report.focused_slug}`);
+  return report;
 }
 
-main().catch((error) => {
-  console.error(error.stack || error.message);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  testTosContentActions().catch((error) => {
+    console.error(error.stack || error.message);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = { testTosContentActions };
