@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
-const { inferContentOrigin } = require('./lib/content_origin');
 
 const ROOT = process.cwd();
 const BASE_URL = String(process.env.PUBLIC_BROWSER_BASE_URL || process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
@@ -21,20 +20,19 @@ function readJson(relativePath) {
 }
 
 function searchFixture() {
-  const news = readJson('data/news.json')
-    .filter((item) => item && item.status !== 'draft' && String(item.title || '').trim())
-    .map((item) => ({
-      item,
-      origin: inferContentOrigin(item, 'news')
-    }));
+  const index = readJson('data/page_index.json');
+  const pages = (Array.isArray(index?.pages) ? index.pages : [])
+    .filter((page) => page && page.search_group === 'news' && String(page.title || '').trim())
+    .filter((page) => ['verified', 'editorial', 'starter', 'request'].includes(page.content_origin));
   const originRank = { verified: 0, editorial: 1, starter: 2, request: 3 };
-  news.sort((a, b) => (originRank[a.origin] ?? 9) - (originRank[b.origin] ?? 9)
-    || String(a.item.title).localeCompare(String(b.item.title), 'ru'));
-  const selected = news[0];
-  assert(selected, 'search fixture: no published news records');
+  pages.sort((a, b) => (originRank[a.content_origin] ?? 9) - (originRank[b.content_origin] ?? 9)
+    || String(a.title).localeCompare(String(b.title), 'ru'));
+  const selected = pages[0];
+  assert(selected, 'search fixture: current page index has no published news result');
   return {
-    query: String(selected.item.title).trim(),
-    origin: selected.origin
+    query: String(selected.title).trim(),
+    origin: selected.content_origin,
+    path: selected.path
   };
 }
 
@@ -63,8 +61,8 @@ async function testSearch(page) {
     sort: 'title'
   });
   await openRoute(page, `/search/?${params.toString()}`);
-  await page.waitForSelector(`#search-results .search-result[data-search-group="news"][data-content-origin="${fixture.origin}"]`);
   await waitForStatus(page, '#search-filter-status');
+  await page.waitForSelector(`#search-results .search-result[data-search-group="news"][data-content-origin="${fixture.origin}"]`);
 
   assert(await page.locator('#site-search').inputValue() === fixture.query, 'search: query was not restored from URL');
   assert(await page.locator('#search-type-filter').inputValue() === 'news', 'search: type filter was not restored');
@@ -72,17 +70,19 @@ async function testSearch(page) {
   assert(await page.locator('#search-sort').inputValue() === 'title', 'search: sort was not restored');
 
   const cards = page.locator('#search-results .search-result[data-search-group]');
-  assert(await cards.count() > 0, 'search: current news fixture returned no cards');
+  assert(await cards.count() > 0, 'search: current page-index fixture returned no cards');
   const metadata = await cards.evaluateAll((nodes) => nodes.map((node) => ({
     group: node.dataset.searchGroup,
     origin: node.dataset.contentOrigin,
-    text: node.textContent || ''
+    text: node.textContent || '',
+    href: node.querySelector('a.btn')?.getAttribute('href') || ''
   })));
   metadata.forEach((item) => {
     assert(item.group === 'news', `search: unexpected group ${item.group}`);
     assert(item.origin === fixture.origin, `search: unexpected origin ${item.origin}`);
-    assert(normalize(item.text).includes(normalize(fixture.query)), 'search: result does not match current news fixture');
+    assert(normalize(item.text).includes(normalize(fixture.query)), 'search: result does not match current page-index fixture');
   });
+  assert(metadata.some((item) => item.href === `/${fixture.path.replace(/index\.html$/, '')}`), 'search: selected page-index route is missing from rendered results');
 
   await page.locator('#site-search').press('Escape');
   await page.waitForFunction(() => !new URLSearchParams(location.search).has('q'));
