@@ -1,31 +1,41 @@
 {
-  "generated_at": "2026-07-24T12:26:19.672Z",
+  "generated_at": "2026-07-31T19:37:55.091Z",
   "summary": {
-    "generated_at": "2026-07-24T12:26:19.672Z",
+    "generated_at": "2026-07-31T19:37:55.091Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
-    "medium_priority": 0,
-    "low_priority": 20,
+    "medium_priority": 13,
+    "low_priority": 7,
     "verified_count": 0,
-    "partial_count": 22,
-    "needs_review_count": 2,
+    "partial_count": 7,
+    "needs_review_count": 17,
     "unknown_count": 0,
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
-    "without_news": 0,
-    "without_done": 0,
-    "without_needs": 0,
+    "without_news": 16,
+    "without_done": 16,
+    "without_needs": 24,
     "without_projects": 0,
-    "average_score": 88
+    "request_only_news": 16,
+    "request_only_done": 16,
+    "request_only_needs": 24,
+    "request_only_projects": 0,
+    "editorial_requests": {
+      "news": 17,
+      "done": 16,
+      "needs": 24,
+      "projects": 0
+    },
+    "average_score": 73
   },
   "next_actions": [
-    "уточнить контакты и ключевые сведения ТОСов с высоким приоритетом",
-    "получить телефоны для публикации у карточек без контакта",
-    "добавить группы, страницы или чаты ТОСов, где они есть",
-    "указать источник и дату проверки сведений по карточкам ТОС",
-    "загрузить реальные логотипы ТОСов и фотографии территорий по мере поступления",
-    "заменять стартовые заготовки на подтверждённые новости, проекты и фотоотчёты"
+    "повторно проверить карточки с устаревшей датой",
+    "уточнить контакты ТОСов с высоким приоритетом",
+    "заменить редакционные запросы содержательными новостями и фотоотчётами",
+    "собрать подтверждённые истории результата",
+    "подготовить актуальные потребности и проектные идеи",
+    "указать источник и дату проверки сведений"
   ]
 }
