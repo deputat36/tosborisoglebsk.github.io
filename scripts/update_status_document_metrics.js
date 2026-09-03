@@ -112,7 +112,7 @@ function updateStatusDocument({ documentText, siteHealth, technicalReport, conte
     [/- `request`: \d+;/, `- \`request\`: ${totals.request};`, 'request content'],
     [/- подтверждённый контент есть у .+?;/, `- подтверждённый контент есть у ${coverage.with_verified_content} из ${coverage.total_tos} ТОСов;`, 'verified TOS coverage'],
     [/- у \d+ из \d+ ТОСов есть только стартовые идеи или запросы;/, `- у ${coverage.with_only_starter_or_request} из ${coverage.total_tos} ТОСов есть только стартовые идеи или запросы;`, 'starter/request TOS coverage'],
-    [/- карточек без какого-либо контента (?:нет|[^;]+);/, `- карточек без какого-либо контента: ${coverage.without_any_content}.`, 'empty TOS coverage']
+    [/- карточек без какого-либо контента(?:: \d+\.| (?:нет|[^;]+);)/, `- карточек без какого-либо контента: ${coverage.without_any_content}.`, 'empty TOS coverage']
   ];
   for (const [pattern, replacement, label] of contentReplacements) {
     updated = replaceInRange(updated, contentStart, contentEnd, pattern, replacement, label);
