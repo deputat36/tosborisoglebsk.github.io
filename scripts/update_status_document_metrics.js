@@ -41,8 +41,13 @@ function updateStatusDocument({ documentText, siteHealth, technicalReport, conte
   let updated = documentText;
   const technical = technicalReport.summary;
   const totals = contentOrigin.totals;
+  const coverage = contentOrigin.tos_coverage;
   const decisions = Array.isArray(personalData.decisions) ? personalData.decisions : [];
   const pending = decisions.filter((item) => item.status === 'pending').length;
+
+  if (!coverage || typeof coverage !== 'object') {
+    throw new Error('Content-origin TOS coverage is missing.');
+  }
 
   const generatedDates = [
     siteHealth.generated_at,
@@ -104,7 +109,10 @@ function updateStatusDocument({ documentText, siteHealth, technicalReport, conte
     [/- `verified`: \d+;/, `- \`verified\`: ${totals.verified};`, 'verified content'],
     [/- `editorial`: \d+;/, `- \`editorial\`: ${totals.editorial};`, 'editorial content'],
     [/- `starter`: \d+;/, `- \`starter\`: ${totals.starter};`, 'starter content'],
-    [/- `request`: \d+;/, `- \`request\`: ${totals.request};`, 'request content']
+    [/- `request`: \d+;/, `- \`request\`: ${totals.request};`, 'request content'],
+    [/- подтверждённый контент есть у .+?;/, `- подтверждённый контент есть у ${coverage.with_verified_content} из ${coverage.total_tos} ТОСов;`, 'verified TOS coverage'],
+    [/- у \d+ из \d+ ТОСов есть только стартовые идеи или запросы;/, `- у ${coverage.with_only_starter_or_request} из ${coverage.total_tos} ТОСов есть только стартовые идеи или запросы;`, 'starter/request TOS coverage'],
+    [/- карточек без какого-либо контента (?:нет|[^;]+);/, `- карточек без какого-либо контента: ${coverage.without_any_content}.`, 'empty TOS coverage']
   ];
   for (const [pattern, replacement, label] of contentReplacements) {
     updated = replaceInRange(updated, contentStart, contentEnd, pattern, replacement, label);
