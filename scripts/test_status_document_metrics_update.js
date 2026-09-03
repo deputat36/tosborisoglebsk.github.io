@@ -29,7 +29,14 @@ const technicalReport = {
 };
 const contentOrigin = {
   generated_at: '2026-07-15T11:24:32.111Z',
-  totals: { total: 146, verified: 1, editorial: 64, starter: 24, request: 57 }
+  totals: { total: 146, verified: 1, editorial: 64, starter: 24, request: 57 },
+  tos_coverage: {
+    total_tos: 24,
+    with_verified_content: 3,
+    with_editorial_content: 6,
+    with_only_starter_or_request: 15,
+    without_any_content: 0
+  }
 };
 const personalData = {
   updated_at: '2026-07-14',
@@ -81,6 +88,9 @@ const stale = `# Состояние проекта
 - \`editorial\`: 60;
 - \`starter\`: 20;
 - \`request\`: 60;
+- подтверждённый контент есть у одного ТОС;
+- у 18 из 24 ТОСов есть только стартовые идеи или запросы;
+- карточек без какого-либо контента нет.
 
 ### Доступность и производительность
 
@@ -102,6 +112,9 @@ assert(updated.includes('публичных runtime-ресурсов: 68;'), 'Ru
 assert(updated.includes('ресурсов сверх бюджета: 0;'), 'Budget count must be updated.');
 assert(updated.includes('общий JavaScript: 355 440 байт.'), 'JavaScript byte count must be updated.');
 assert(updated.includes('всего материалов: 146;'), 'Content total must be updated.');
+assert(updated.includes('подтверждённый контент есть у 3 из 24 ТОСов;'), 'Verified TOS coverage must be updated.');
+assert(updated.includes('у 15 из 24 ТОСов есть только стартовые идеи или запросы;'), 'Starter/request coverage must be updated.');
+assert(updated.includes('карточек без какого-либо контента: 0.'), 'Empty coverage must be updated.');
 assert(updated.includes('режиме `pre_legal_readiness`.'), 'Personal-data status must be updated.');
 assert(updated.includes('восемь обязательных решений'), 'Decision count must be updated.');
 

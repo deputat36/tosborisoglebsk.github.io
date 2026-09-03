@@ -70,10 +70,11 @@ jobs:
       - name: Audit rebuilt status document
         run: npm run audit:status-document
 
-      - name: Run full project mode audits
-        run: |
-          set -o pipefail
-          node scripts/audit_project_mode_full.js 2>&1 | tee status-document-project-audit.log
+      # Full project-mode validation intentionally remains in generate-tos-pages.yml.
+      # That workflow first materializes deterministic data and generated pages, so its
+      # full audit sees the same state that can actually be committed/deployed. Running
+      # the same audit here on a raw checkout creates false failures when a PR changes
+      # a generator/classifier and STATUS governance together.
 
       - name: Upload diagnostics
         if: always()
@@ -88,6 +89,5 @@ jobs:
             data/personal_data_readiness.json
             status-updater-test.log
             status-audit-test.log
-            status-document-project-audit.log
           if-no-files-found: warn
           retention-days: 14

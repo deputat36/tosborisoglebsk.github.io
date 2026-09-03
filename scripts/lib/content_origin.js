@@ -3,7 +3,10 @@ const CONTENT_ORIGINS = new Set(['verified', 'editorial', 'starter', 'request'])
 const VERIFIED_NEWS_IDS = new Set([
   'mirolyubie-project-winner-2026',
   'gubari-beautiful-village-2026',
-  'chkalovec-neighborhood-projects-2026'
+  'chkalovec-neighborhood-projects-2026',
+  'tretyaki-seven-projects-news-2026',
+  'tancyrey-improvement-news-2026',
+  'kalinka-playground-2024'
 ]);
 
 const ORIGIN_LABELS = {

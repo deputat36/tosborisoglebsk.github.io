@@ -34,7 +34,14 @@ const technicalReport = {
 };
 
 const contentOrigin = {
-  totals: { total: 146, verified: 1, editorial: 64, starter: 24, request: 57 }
+  totals: { total: 146, verified: 1, editorial: 64, starter: 24, request: 57 },
+  tos_coverage: {
+    total_tos: 24,
+    with_verified_content: 3,
+    with_editorial_content: 6,
+    with_only_starter_or_request: 15,
+    without_any_content: 0
+  }
 };
 
 const personalData = {
@@ -82,6 +89,9 @@ PR #220 закрыт без слияния.
 - \`editorial\`: 64;
 - \`starter\`: 24;
 - \`request\`: 57;
+- подтверждённый контент есть у 3 из 24 ТОСов;
+- у 15 из 24 ТОСов есть только стартовые идеи или запросы;
+- карточек без какого-либо контента: 0.
 
 Портал работает в режиме \`pre_legal_readiness\`.
 Реестр фиксирует восемь обязательных решений; все они остаются \`pending\`.
@@ -105,6 +115,16 @@ const staleRuntimeErrors = auditStatusDocument({
   personalData
 });
 assert(staleRuntimeErrors.some((error) => error.includes('runtime assets')), 'Stale runtime count must be rejected.');
+
+const staleCoverage = validDocument.replace('подтверждённый контент есть у 3 из 24 ТОСов;', 'подтверждённый контент есть у 1 из 24 ТОСов;');
+const staleCoverageErrors = auditStatusDocument({
+  documentText: staleCoverage,
+  siteHealth,
+  technicalReport,
+  contentOrigin,
+  personalData
+});
+assert(staleCoverageErrors.some((error) => error.includes('verified TOS coverage')), 'Stale content coverage must be rejected.');
 
 const stalePr = `${validDocument}\nРабочий draft PR: #220\n`;
 const stalePrErrors = auditStatusDocument({

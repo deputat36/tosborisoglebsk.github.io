@@ -16,6 +16,7 @@ on:
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
+      - 'package.json'
       - '.github/workflows/*.yml'
   push:
     branches:
@@ -31,6 +32,7 @@ on:
       - 'assets/js/*.js'
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
+      - 'package.json'
       - '.github/workflows/*.yml'
 
 permissions:
