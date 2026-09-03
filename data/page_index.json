@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T14:51:17.445Z",
-  "total": 297,
+  "generated_at": "2026-09-03T15:08:41.983Z",
+  "total": 298,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1401,6 +1401,15 @@
       "content_origin": "request"
     },
     {
+      "path": "news/kalinka-playground-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/news/kalinka-playground-2024/",
+      "title": "ТОС «Калинка» обустроил первую детскую площадку в посёлке Калинино | ТОС БГО",
+      "description": "РИА «Воронеж» сообщило о реализации проекта «Территория детского здоровья» на средства областного гранта и собственный вклад жителей.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/send-news-kalinka-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/send-news-kalinka-2026/",
       "title": "ТОС «Калинка» приглашает присылать новости и фото | ТОС БГО",
@@ -1520,20 +1529,20 @@
     {
       "path": "news/tancyrey-improvement-news-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/tancyrey-improvement-news-2026/",
-      "title": "ТОС «Танцырей» развивает благоустройство, озеленение и места отдыха | ТОС БГО",
-      "description": "По данным карточки ТОС, актив территории занимается благоустройством, озеленением, установкой детских площадок и созданием мест отдыха.",
+      "title": "ТОС «Танцырей» реализовал проект въездной стелы с символами села | ТОС БГО",
+      "description": "РИА «Воронеж» подтверждает завершение проекта въездной стелы: на инициативу получили областной грант, а жители и спонсоры добавили собственные средства.",
       "section": "Новости",
       "search_group": "news",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "news/tretyaki-seven-projects-news-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/tretyaki-seven-projects-news-2026/",
-      "title": "ТОС «Третьяки» реализовал 7 проектов и ведёт социальную работу | ТОС БГО",
-      "description": "В карточке ТОС указано, что «Третьяки» реализовал 7 проектов по линии Ассоциации муниципальных образований Воронежской области и помогает семьям участников СВО.",
+      "title": "ТОС «Третьяки»: семь областных грантов и новая водонапорная башня | ТОС БГО",
+      "description": "РИА «Воронеж» в сентябре 2024 года подтвердило установку новой водонапорной башни и перечислило семь выигранных ТОС областных грантов.",
       "section": "Новости",
       "search_group": "news",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "news/send-news-ulyanovka-2026/index.html",
