@@ -130,6 +130,20 @@ function main() {
       expectIncludes(errors, line, html, `"citation":"${absoluteCitation}`, 'JSON-LD citation is missing');
     }
 
+    if (item.implementation_source || item.implementation_source_url) {
+      expectIncludes(errors, line, html, '<b>Подтверждение реализации:</b>', 'implementation source heading is missing');
+      if (item.implementation_source) {
+        expectIncludes(errors, line, html, item.implementation_source, 'implementation source label is missing');
+      }
+      if (item.implementation_source_url) {
+        const implementationUrl = String(item.implementation_source_url);
+        expectIncludes(errors, line, html, `href="${htmlEntityAmp(implementationUrl)}"`, 'implementation source URL is missing');
+        if (/^https?:\/\//.test(implementationUrl)) {
+          expectIncludes(errors, line, html, 'target="_blank" rel="noopener noreferrer"', 'implementation source URL must open safely');
+        }
+      }
+    }
+
     const contextLinks = contextLinksFromHtml(html);
     if (!contextLinks) {
       errors.push(`${line}: context navigation block could not be parsed`);
@@ -171,7 +185,12 @@ function main() {
 
     if (id === 'mirolyubie-project-winner-2026') {
       expectIncludes(errors, line, html, '1 489 360 рублей', 'confirmed grant amount is missing');
-      expectIncludes(errors, line, html, 'До получения подтверждения портал не утверждает, что работы уже начались или завершены.', 'implementation caution is missing');
+      expectIncludes(errors, line, html, '960 кв. м', 'confirmed implementation area is missing');
+      expectIncludes(errors, line, html, 'работы заняли около полутора месяцев', 'confirmed implementation duration is missing');
+      expectIncludes(errors, line, html, 'РИА «Воронеж», 20 августа 2026 года', 'implementation evidence attribution is missing');
+      if (html.includes('До получения подтверждения портал не утверждает, что работы уже начались или завершены.')) {
+        errors.push(`${line}: stale implementation caution must not remain after implementation confirmation`);
+      }
     }
   });
 
