@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T20:42:21.026Z",
+  "generated_at": "2026-09-03T14:36:42.702Z",
   "total": 295,
   "search_groups": {
     "tos": "Каталог ТОС",
@@ -1320,15 +1320,6 @@
       "content_origin": "editorial"
     },
     {
-      "path": "news/mirolyubie-project-winner-2026/index.html",
-      "url": "https://tosborisoglebsk.ru/news/mirolyubie-project-winner-2026/",
-      "title": "Проект ТОС «Миролюбие» победил в конкурсе ТОС 2026 года | ТОС БГО",
-      "description": "Официальный протокол подтверждает победу проекта «Играй и побеждай» и грант 1 489 360 рублей.",
-      "section": "Новости",
-      "search_group": "news",
-      "content_origin": "verified"
-    },
-    {
       "path": "news/send-news-bogana-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/send-news-bogana-2026/",
       "title": "ТОС «Богана» приглашает присылать новости и фото | ТОС БГО",
@@ -1435,6 +1426,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "request"
+    },
+    {
+      "path": "news/mirolyubie-project-winner-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/mirolyubie-project-winner-2026/",
+      "title": "ТОС «Миролюбие» реализовал проект «Играй и побеждай» в 2026 году | ТОС БГО",
+      "description": "Официальный протокол подтверждает грант 1 489 360 рублей, а публикация РИА «Воронеж» от 20 августа 2026 года — завершение площадки площадью 960 кв. м.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/send-news-pervomayskiy-2026/index.html",
