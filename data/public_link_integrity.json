@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-03T15:08:29.813Z",
+  "generated_at": "2026-09-03T15:14:55.675Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 298,
-  "pages_checked": 298,
-  "links_discovered": 6789,
-  "internal_links_checked": 4938,
-  "unique_internal_targets": 727,
-  "external_links_ignored": 179,
+  "pages_indexed": 299,
+  "pages_checked": 299,
+  "links_discovered": 6808,
+  "internal_links_checked": 4955,
+  "unique_internal_targets": 728,
+  "external_links_ignored": 181,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
@@ -16,122 +16,122 @@
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 63,
+      "duration_ms": 315,
       "bytes": 8695
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 31,
-      "bytes": 15978
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 31,
+      "duration_ms": 188,
       "bytes": 7931
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 187,
       "bytes": 11768
     },
     {
-      "route": "/campaign/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 28,
-      "bytes": 9430
+      "duration_ms": 186,
+      "bytes": 15978
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 28,
+      "duration_ms": 184,
       "bytes": 8158
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 183,
       "bytes": 23099
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 183,
+      "bytes": 9430
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 26,
+      "duration_ms": 182,
       "bytes": 15879
+    },
+    {
+      "route": "/documents/templates/tos-founding-announcement/index.html",
+      "status": 200,
+      "duration_ms": 22,
+      "bytes": 3198
+    },
+    {
+      "route": "/documents/templates/project-problem/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 4779
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 21,
+      "duration_ms": 18,
       "bytes": 23597
     },
     {
-      "route": "/data-dictionary/index.html",
+      "route": "/needs/update-data-dzerzhinskogo-2026/index.html",
       "status": 200,
-      "duration_ms": 20,
-      "bytes": 10644
+      "duration_ms": 18,
+      "bytes": 8240
     },
     {
-      "route": "/projects/tos-cultural-life-program/index.html",
+      "route": "/documents/templates/tos-start-list/index.html",
       "status": 200,
-      "duration_ms": 19,
-      "bytes": 8750
+      "duration_ms": 17,
+      "bytes": 2632
     },
     {
-      "route": "/check-tos/index.html",
+      "route": "/documents/templates/tos-founding-protocol/index.html",
       "status": 200,
       "duration_ms": 16,
-      "bytes": 5818
+      "bytes": 4570
     },
     {
-      "route": "/communication-kit/index.html",
+      "route": "/done/action-routes/index.html",
       "status": 200,
       "duration_ms": 16,
-      "bytes": 24905
+      "bytes": 12188
     },
     {
-      "route": "/documents/templates/project-final-report/index.html",
+      "route": "/documents/templates/project-passport/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 10876
+      "duration_ms": 15,
+      "bytes": 6335
     },
     {
-      "route": "/projects/public-stand-and-ideas-ivanovka/index.html",
+      "route": "/documents/templates/project-support/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 10069
+      "duration_ms": 15,
+      "bytes": 4644
+    },
+    {
+      "route": "/documents/templates/tos-founding-decisions/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 3490
     },
     {
       "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 14,
       "bytes": 5404
     },
     {
       "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 14,
       "bytes": 15409
-    },
-    {
-      "route": "/create-tos/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 19408
-    },
-    {
-      "route": "/data-update/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 8520
-    },
-    {
-      "route": "/materials/tos-bgo-in-numbers/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 10758
     }
   ]
 }

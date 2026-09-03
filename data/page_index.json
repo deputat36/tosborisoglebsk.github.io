@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T15:08:41.983Z",
-  "total": 298,
+  "generated_at": "2026-09-03T15:15:06.508Z",
+  "total": 299,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1345,6 +1345,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "request"
+    },
+    {
+      "path": "news/bogana-sports-ground-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/news/bogana-sports-ground-2023/",
+      "title": "ТОС «Богана» реализовал проект универсальной спортивной площадки | ТОС БГО",
+      "description": "РИА «Воронеж» подтвердило открытие универсальной спортплощадки площадью более 900 кв. м, созданной при поддержке областного гранта, жителей и спонсоров.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/vostochnyy-cleanups-news-2026/index.html",

@@ -1,23 +1,23 @@
 {
   "summary": {
-    "generated_at": "2026-09-03T15:08:41.586Z",
+    "generated_at": "2026-09-03T15:15:06.155Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
-    "medium_priority": 13,
-    "low_priority": 7,
+    "medium_priority": 12,
+    "low_priority": 8,
     "verified_count": 0,
-    "partial_count": 7,
-    "needs_review_count": 17,
+    "partial_count": 8,
+    "needs_review_count": 16,
     "unknown_count": 0,
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
-    "without_news": 15,
+    "without_news": 14,
     "without_done": 16,
     "without_needs": 24,
     "without_projects": 0,
-    "request_only_news": 15,
+    "request_only_news": 14,
     "request_only_done": 16,
     "request_only_needs": 24,
     "request_only_projects": 0,
@@ -27,7 +27,7 @@
       "needs": 24,
       "projects": 0
     },
-    "average_score": 73
+    "average_score": 74
   },
   "items": [
     {
@@ -1265,92 +1265,6 @@
       ]
     },
     {
-      "slug": "bogana",
-      "name": "Богана",
-      "type": "Сельский",
-      "location": "с. Богана",
-      "chairperson": "Лопатина Мария Владимировна",
-      "updated_at": "2026-05-24",
-      "score": 75,
-      "priority": "Средний",
-      "missing": [
-        "Логотип",
-        "Новости",
-        "Истории результата",
-        "Потребности"
-      ],
-      "linked": {
-        "news": 0,
-        "done": 0,
-        "needs": 0,
-        "projects": 1,
-        "events": 0
-      },
-      "linked_all": {
-        "news": 1,
-        "done": 1,
-        "needs": 1,
-        "projects": 1,
-        "events": 0
-      },
-      "linked_requests": {
-        "news": 1,
-        "done": 1,
-        "needs": 1,
-        "projects": 0,
-        "events": 0
-      },
-      "linked_origins": {
-        "news": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "done": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "needs": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "projects": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 1,
-          "request": 0
-        },
-        "events": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        }
-      },
-      "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
-        "date": "2026-05-24",
-        "age_days": 102,
-        "stale": false,
-        "source": "",
-        "note": ""
-      },
-      "registry_group": "Запросить данные",
-      "contact_ready": true,
-      "recommendations": [
-        "подготовить логотип или временный знак ТОС",
-        "заменить запрос материалов содержательной новостью или фотоотчётом",
-        "заменить заготовку подтверждённой историей результата",
-        "уточнить и подтвердить реальную актуальную потребность территории"
-      ]
-    },
-    {
       "slug": "pobeda",
       "name": "Победа",
       "type": "Городской",
@@ -1689,6 +1603,90 @@
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
+        "подготовить логотип или временный знак ТОС",
+        "заменить заготовку подтверждённой историей результата",
+        "уточнить и подтвердить реальную актуальную потребность территории"
+      ]
+    },
+    {
+      "slug": "bogana",
+      "name": "Богана",
+      "type": "Сельский",
+      "location": "с. Богана",
+      "chairperson": "Лопатина Мария Владимировна",
+      "updated_at": "2026-05-24",
+      "score": 81,
+      "priority": "Низкий",
+      "missing": [
+        "Логотип",
+        "Истории результата",
+        "Потребности"
+      ],
+      "linked": {
+        "news": 1,
+        "done": 0,
+        "needs": 0,
+        "projects": 1,
+        "events": 0
+      },
+      "linked_all": {
+        "news": 2,
+        "done": 1,
+        "needs": 1,
+        "projects": 1,
+        "events": 0
+      },
+      "linked_requests": {
+        "news": 1,
+        "done": 1,
+        "needs": 1,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_origins": {
+        "news": {
+          "verified": 1,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "done": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "needs": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "projects": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 1,
+          "request": 0
+        },
+        "events": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        }
+      },
+      "verification": {
+        "status": "partial",
+        "label": "Проверено частично",
+        "date": "2026-05-24",
+        "age_days": 102,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Добавить материалы",
+      "contact_ready": true,
+      "recommendations": [
         "подготовить логотип или временный знак ТОС",
         "заменить заготовку подтверждённой историей результата",
         "уточнить и подтвердить реальную актуальную потребность территории"

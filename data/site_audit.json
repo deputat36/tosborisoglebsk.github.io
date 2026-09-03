@@ -1,24 +1,24 @@
 {
-  "generated_at": "2026-09-03T15:08:41.586Z",
+  "generated_at": "2026-09-03T15:15:06.155Z",
   "summary": {
-    "generated_at": "2026-09-03T15:08:41.586Z",
+    "generated_at": "2026-09-03T15:15:06.155Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
-    "medium_priority": 13,
-    "low_priority": 7,
+    "medium_priority": 12,
+    "low_priority": 8,
     "verified_count": 0,
-    "partial_count": 7,
-    "needs_review_count": 17,
+    "partial_count": 8,
+    "needs_review_count": 16,
     "unknown_count": 0,
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
-    "without_news": 15,
+    "without_news": 14,
     "without_done": 16,
     "without_needs": 24,
     "without_projects": 0,
-    "request_only_news": 15,
+    "request_only_news": 14,
     "request_only_done": 16,
     "request_only_needs": 24,
     "request_only_projects": 0,
@@ -28,7 +28,7 @@
       "needs": 24,
       "projects": 0
     },
-    "average_score": 73
+    "average_score": 74
   },
   "next_actions": [
     "повторно проверить карточки с устаревшей датой",
