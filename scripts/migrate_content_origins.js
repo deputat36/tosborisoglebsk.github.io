@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { inferContentOrigin } = require('./lib/content_origin');
+require('./generate_tos_starter_news');
 
 const ROOT = process.cwd();
 const COLLECTIONS = ['news', 'projects', 'needs', 'done', 'articles'];

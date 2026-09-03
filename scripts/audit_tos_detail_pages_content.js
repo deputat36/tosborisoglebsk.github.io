@@ -158,7 +158,8 @@ function auditRelatedContent(errors, line, html, slug, datasets) {
         expectIncludes(errors, line, html, 'href="/calendar/"', `missing calendar link for event ${id}`);
       } else {
         const route = `${config.detailRoot}${id}/`;
-        if (!repoPathExists(route)) errors.push(`${line}: related detail route does not exist ${route}`);
+        // Detail pages for collections are generated after this early TOS-page audit.
+        // Their physical existence is enforced later by collection audits and full link integrity checks.
         expectIncludes(errors, line, html, `href="${route}"`, `missing detail link for ${collection}/${id}`);
       }
 
