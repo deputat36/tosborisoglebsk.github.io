@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+require('./generate_tos_starter_news');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
