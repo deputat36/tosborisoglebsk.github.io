@@ -13,7 +13,8 @@ const requiredNewsIds = [
   'chkalovec-neighborhood-projects-2026',
   'tretyaki-seven-projects-news-2026',
   'tancyrey-improvement-news-2026',
-  'kalinka-playground-2024'
+  'kalinka-playground-2024',
+  'bogana-sports-ground-2023'
 ];
 
 function isObject(value) {
