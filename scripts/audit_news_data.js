@@ -8,7 +8,9 @@ const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 const siteUrl = 'https://tosborisoglebsk.ru';
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const requiredNewsIds = [
-  'mirolyubie-project-winner-2026'
+  'mirolyubie-project-winner-2026',
+  'gubari-beautiful-village-2026',
+  'chkalovec-neighborhood-projects-2026'
 ];
 
 function isObject(value) {
