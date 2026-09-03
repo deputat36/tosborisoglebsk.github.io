@@ -39,7 +39,7 @@ function paragraphs(value, fallback) {
 function main() {
   const news = readJson(NEWS_PATH)
     .filter((item) => item && item.id && item.status !== 'draft')
-    .sort((a, b) => String(b.updated_at || b.date || '').localeCompare(String(a.updated_at || a.date || '')))
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
     .slice(0, 50);
 
   const items = news.map((item) => {
@@ -50,7 +50,7 @@ function main() {
       <title>${esc(title)}</title>
       <link>${esc(link)}</link>
       <guid isPermaLink="true">${esc(link)}</guid>
-      <pubDate>${pubDate(item.updated_at || item.date)}</pubDate>
+      <pubDate>${pubDate(item.date)}</pubDate>
       <description>${esc(description)}</description>
     </item>`;
   }).join('\n');
