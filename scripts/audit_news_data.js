@@ -10,7 +10,10 @@ const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const requiredNewsIds = [
   'mirolyubie-project-winner-2026',
   'gubari-beautiful-village-2026',
-  'chkalovec-neighborhood-projects-2026'
+  'chkalovec-neighborhood-projects-2026',
+  'tretyaki-seven-projects-news-2026',
+  'tancyrey-improvement-news-2026',
+  'kalinka-playground-2024'
 ];
 
 function isObject(value) {
