@@ -106,6 +106,7 @@ function auditStatusDocument({ documentText, siteHealth, technicalReport, conten
   }
 
   const totals = contentOrigin.totals;
+  const coverage = contentOrigin.tos_coverage;
   const contentExpectations = [
     [`всего материалов: ${totals.total};`, 'content total'],
     [`\`verified\`: ${totals.verified};`, 'verified content'],
@@ -114,6 +115,17 @@ function auditStatusDocument({ documentText, siteHealth, technicalReport, conten
     [`\`request\`: ${totals.request};`, 'request content']
   ];
   for (const [token, label] of contentExpectations) requireToken(documentText, token, label);
+
+  if (!coverage || typeof coverage !== 'object') {
+    errors.push('Content-origin TOS coverage is missing.');
+  } else {
+    const coverageExpectations = [
+      [`подтверждённый контент есть у ${coverage.with_verified_content} из ${coverage.total_tos} ТОСов;`, 'verified TOS coverage'],
+      [`у ${coverage.with_only_starter_or_request} из ${coverage.total_tos} ТОСов есть только стартовые идеи или запросы;`, 'starter/request TOS coverage'],
+      [`карточек без какого-либо контента: ${coverage.without_any_content}.`, 'empty TOS coverage']
+    ];
+    for (const [token, label] of coverageExpectations) requireToken(documentText, token, label);
+  }
 
   requireToken(documentText, `Портал работает в режиме \`${personalData.portal_status}\`.`, 'personal-data portal status');
   const decisions = Array.isArray(personalData.decisions) ? personalData.decisions : [];
