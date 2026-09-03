@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-03T14:36:42.702Z",
-  "total": 295,
+  "generated_at": "2026-09-03T14:51:17.445Z",
+  "total": 297,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1158,6 +1158,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "news/chkalovec-neighborhood-projects-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/chkalovec-neighborhood-projects-2026/",
+      "title": "«Чкаловец» продолжает развивать дворовую среду и общественные пространства | ТОС БГО",
+      "description": "В сюжете «Вести Воронеж» от 21 августа 2026 года показаны действующие объекты ТОС «Чкаловец» и названы объёмы привлечённых и собственных средств.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/tos-grants-2026-voronezh/index.html",
       "url": "https://tosborisoglebsk.ru/news/tos-grants-2026-voronezh/",
       "title": "В Воронежской области стартовал конкурс проектов ТОС 2026 | ТОС БГО",
@@ -1174,6 +1183,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "editorial"
+    },
+    {
+      "path": "news/gubari-beautiful-village-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/gubari-beautiful-village-2026/",
+      "title": "Губари вошли в топ-20 конкурса «Самое красивое село Воронежской области – 2026» | ТОС БГО",
+      "description": "РИА «Воронеж» сообщило о выходе Губарей в двадцатку участников регионального конкурса и подвело итоги нескольких проектов благоустройства села.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/tos-catalog-data-updated-2026-05-23/index.html",
