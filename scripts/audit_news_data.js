@@ -18,7 +18,8 @@ const requiredNewsIds = [
   'mahrovka-project-experience-news-2026',
   'mayak-chigorak-projects-2025',
   'petrovskoe-water-well-2023',
-  'vostochnyy-cleanups-news-2026'
+  'vostochnyy-cleanups-news-2026',
+  'severnyy-39-playground-2021'
 ];
 
 function isObject(value) {
