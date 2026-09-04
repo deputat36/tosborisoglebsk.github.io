@@ -23,13 +23,10 @@ const requiredNewsIds = [
   'ulyanovka-sports-projects-2020',
   'ivanovka-lighting-competition-2021',
   'podstepki-cemetery-fence-competition-2021',
-  'chigorak-pedestrian-bridge-2019',
   'port-artur-cemetery-competition-2021',
   'pervomayskiy-stage-competition-2021',
-  'khoperskiy-bereg-sports-ground-competition-2021',
   'znamenie-created-2024',
   'uyutny-cultural-festival-2025',
-  'severnyy-41-territory-competition-2021',
   'ipas-playground-application-2023'
 ];
 
