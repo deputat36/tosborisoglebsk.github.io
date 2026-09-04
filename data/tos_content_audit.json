@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-09-04T06:09:40.879Z",
+    "generated_at": "2026-09-04T06:48:19.385Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -1892,8 +1892,8 @@
       },
       "linked_origins": {
         "news": {
-          "verified": 0,
-          "editorial": 1,
+          "verified": 1,
+          "editorial": 0,
           "starter": 0,
           "request": 0
         },

@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-04T06:09:29.620Z",
+  "generated_at": "2026-09-04T06:48:09.289Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 301,
   "pages_checked": 301,
   "links_discovered": 6845,
-  "internal_links_checked": 4986,
+  "internal_links_checked": 4985,
   "unique_internal_targets": 730,
-  "external_links_ignored": 187,
+  "external_links_ignored": 190,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/done/result-archive-needed-pobeda/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1035,
-      "bytes": 8326
+      "duration_ms": 1060,
+      "bytes": 7931
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 346,
+      "duration_ms": 97,
       "bytes": 8695
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 241,
-      "bytes": 11768
-    },
-    {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 239,
-      "bytes": 7931
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 238,
-      "bytes": 8158
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 237,
+      "duration_ms": 31,
       "bytes": 15978
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 236,
+      "duration_ms": 29,
       "bytes": 9430
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 235,
-      "bytes": 23099
+      "duration_ms": 29,
+      "bytes": 11768
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 27,
+      "bytes": 8158
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 234,
+      "duration_ms": 26,
       "bytes": 15879
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 26,
+      "bytes": 23099
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 15,
       "bytes": 23597
     },
     {
-      "route": "/check-tos/index.html",
+      "route": "/documents/templates/project-passport/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 5818
+      "duration_ms": 15,
+      "bytes": 6335
     },
     {
       "route": "/documents/templates/project-photo-report/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 13,
       "bytes": 10995
     },
     {
-      "route": "/done/index.html",
+      "route": "/documents/templates/tos-creation-kit/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 17466
+      "duration_ms": 13,
+      "bytes": 6200
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/materials/tos-bgo-in-numbers/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 5404
+      "duration_ms": 13,
+      "bytes": 10758
     },
     {
-      "route": "/communication-kit/index.html",
+      "route": "/needs/update-data-dzerzhinskogo-2026/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 24905
+      "duration_ms": 13,
+      "bytes": 8240
     },
     {
-      "route": "/contacts/index.html",
+      "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 22241
+      "duration_ms": 12,
+      "bytes": 15409
     },
     {
-      "route": "/content-standards/index.html",
+      "route": "/documents/templates/project-problem/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 13193
+      "duration_ms": 12,
+      "bytes": 4779
+    },
+    {
+      "route": "/documents/templates/tos-start-list/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 2632
+    },
+    {
+      "route": "/needs/update-data-ipas-2026/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 7952
+    },
+    {
+      "route": "/needs/update-data-mahrovka-2026/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 7995
     },
     {
       "route": "/create-tos/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 11,
       "bytes": 19408
-    },
-    {
-      "route": "/data-dictionary/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 10644
-    },
-    {
-      "route": "/data-quality/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 7786
     }
   ]
 }
