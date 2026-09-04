@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-04T06:56:19.127Z",
+  "generated_at": "2026-09-04T07:06:32.339Z",
   "site_url": "https://tosborisoglebsk.ru",
-  "health_score": 20,
+  "health_score": 24,
   "score_breakdown": {
     "base": 100,
     "penalties": {
       "high_priority_tos": 12,
-      "needs_review_tos": 60,
+      "needs_review_tos": 56,
       "missing_public_phone": 8,
       "seo_warnings": 0,
       "broken_internal_links": 0
@@ -25,24 +25,24 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-09-04T06:56:34.392Z",
+    "generated_at": "2026-09-04T07:06:45.875Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
-    "medium_priority": 11,
-    "low_priority": 9,
+    "medium_priority": 10,
+    "low_priority": 10,
     "verified_count": 0,
-    "partial_count": 9,
-    "needs_review_count": 15,
+    "partial_count": 10,
+    "needs_review_count": 14,
     "unknown_count": 0,
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
-    "without_news": 12,
+    "without_news": 11,
     "without_done": 16,
     "without_needs": 24,
     "without_projects": 0,
-    "request_only_news": 12,
+    "request_only_news": 11,
     "request_only_done": 16,
     "request_only_needs": 24,
     "request_only_projects": 0,
@@ -55,8 +55,8 @@
     "average_score": 74
   },
   "pages": {
-    "total": 371,
-    "public": 312,
+    "total": 372,
+    "public": 313,
     "noindex": 59,
     "seo_warnings_count": 0,
     "broken_internal_links_count": 0
@@ -197,12 +197,12 @@
     {
       "level": "good",
       "area": "Техническая база",
-      "finding": "Собрано 371 HTML-страниц, из них 312 публичных и 59 служебных."
+      "finding": "Собрано 372 HTML-страниц, из них 313 публичных и 59 служебных."
     },
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 302 страниц, 5002 внутренних переходов, 732 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 303 страниц, 5019 внутренних переходов, 733 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -232,12 +232,12 @@
     {
       "level": "risk",
       "area": "Зрелость контента",
-      "finding": "Содержательные материалы есть у 12 из 24 ТОС; только стартовые заготовки или запросы — у 12; без материалов — у 0."
+      "finding": "Содержательные материалы есть у 13 из 24 ТОС; только стартовые заготовки или запросы — у 11; без материалов — у 0."
     },
     {
       "level": "next",
       "area": "Редакционные запросы",
-      "finding": "Запрос вместо содержательной записи: новости — 12, результаты — 16, потребности — 24, проекты — 0."
+      "finding": "Запрос вместо содержательной записи: новости — 11, результаты — 16, потребности — 24, проекты — 0."
     }
   ],
   "seo_warnings": [],
@@ -246,7 +246,7 @@
     "Найти рабочий канал связи: ТОС «Ивановка» и ТОС «Подстёпки».",
     "После разрешения пользователя вручную отправить подготовленные запросы: ТОС «Губари» и ТОС «Танцырей».",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей.",
-    "Заменить редакционные запросы содержательными новостями или фотоотчётами для 12 ТОС.",
+    "Заменить редакционные запросы содержательными новостями или фотоотчётами для 11 ТОС.",
     "Собрать подтверждённые истории результата вместо заготовок для 16 ТОС.",
     "Проверить и оформить реальные актуальные потребности для 24 ТОС, где пока есть только запрос сведений."
   ],
@@ -298,7 +298,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-09-04T06:56:16.281Z",
+    "generated_at": "2026-09-04T07:06:29.648Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -346,17 +346,17 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-09-04T06:56:22.822Z",
+    "generated_at": "2026-09-04T07:06:35.217Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
-    "pages_indexed": 302,
-    "pages_checked": 302,
-    "links_discovered": 6865,
-    "internal_links_checked": 5002,
-    "unique_internal_targets": 732,
-    "external_links_ignored": 192,
+    "pages_indexed": 303,
+    "pages_checked": 303,
+    "links_discovered": 6885,
+    "internal_links_checked": 5019,
+    "unique_internal_targets": 733,
+    "external_links_ignored": 195,
     "protocol_links_ignored": 34,
     "failed": 0,
     "automation": {
@@ -406,9 +406,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Generate TOS pages",
-      "run_id": "33846436062",
-      "run_number": "1740",
-      "commit_sha": "8c3efebb07fc11e28fa234f2fa4005e7471ff7c4"
+      "run_id": "33847203854",
+      "run_number": "1743",
+      "commit_sha": "675d4bfb9119c171d276450f6f0bbfc5d3e72fdc"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -424,15 +424,15 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-09-04T06:56:34.392Z",
+    "generated_at": "2026-09-04T07:06:45.875Z",
     "total_tos": 24,
-    "with_substantive_content": 12,
-    "with_verified_content": 12,
+    "with_substantive_content": 13,
+    "with_verified_content": 13,
     "with_editorial_content": 0,
-    "with_only_starter_or_request": 12,
+    "with_only_starter_or_request": 11,
     "without_any_content": 0,
     "request_only_by_section": {
-      "news": 12,
+      "news": 11,
       "done": 16,
       "needs": 24,
       "projects": 0

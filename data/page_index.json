@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-04T06:56:34.764Z",
-  "total": 302,
+  "generated_at": "2026-09-04T07:06:46.229Z",
+  "total": 303,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1588,6 +1588,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "request"
+    },
+    {
+      "path": "news/ulyanovka-sports-projects-2020/index.html",
+      "url": "https://tosborisoglebsk.ru/news/ulyanovka-sports-projects-2020/",
+      "title": "ТОС «Ульяновка»: спортплощадка и клуб здорового образа жизни «Импульс» | ТОС БГО",
+      "description": "РИА «Воронеж» подтверждает строительство спортплощадки площадью 800 кв. м и всероссийское признание проекта клуба ЗОЖ «Импульс».",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/send-news-uyutnyy-2026/index.html",
