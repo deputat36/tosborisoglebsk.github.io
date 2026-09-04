@@ -7,7 +7,8 @@ const VERIFIED_NEWS_IDS = new Set([
   'tretyaki-seven-projects-news-2026',
   'tancyrey-improvement-news-2026',
   'kalinka-playground-2024',
-  'bogana-sports-ground-2023'
+  'bogana-sports-ground-2023',
+  'mahrovka-project-experience-news-2026'
 ]);
 
 const ORIGIN_LABELS = {
