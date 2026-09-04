@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-09-03T15:15:06.155Z",
+    "generated_at": "2026-09-04T05:53:17.731Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -105,7 +105,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -197,7 +197,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -285,7 +285,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -369,7 +369,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -456,7 +456,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -545,7 +545,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -633,7 +633,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -721,7 +721,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -809,7 +809,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -897,7 +897,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -985,7 +985,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1073,7 +1073,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1161,7 +1161,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1249,7 +1249,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1336,7 +1336,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1422,7 +1422,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1508,7 +1508,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1594,7 +1594,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1679,7 +1679,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-24",
-        "age_days": 102,
+        "age_days": 103,
         "stale": false,
         "source": "",
         "note": ""
@@ -1763,7 +1763,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1847,7 +1847,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1930,7 +1930,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -1978,8 +1978,8 @@
       },
       "linked_origins": {
         "news": {
-          "verified": 0,
-          "editorial": 1,
+          "verified": 1,
+          "editorial": 0,
           "starter": 0,
           "request": 0
         },
@@ -2012,7 +2012,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
@@ -2094,7 +2094,7 @@
         "status": "partial",
         "label": "Проверено частично",
         "date": "2026-05-23",
-        "age_days": 103,
+        "age_days": 104,
         "stale": false,
         "source": "",
         "note": ""
