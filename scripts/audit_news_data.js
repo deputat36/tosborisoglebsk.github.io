@@ -16,7 +16,8 @@ const requiredNewsIds = [
   'kalinka-playground-2024',
   'bogana-sports-ground-2023',
   'mahrovka-project-experience-news-2026',
-  'mayak-chigorak-projects-2025'
+  'mayak-chigorak-projects-2025',
+  'petrovskoe-water-well-2023'
 ];
 
 function isObject(value) {
