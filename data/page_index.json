@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-04T06:48:19.739Z",
-  "total": 301,
+  "generated_at": "2026-09-04T06:56:34.764Z",
+  "total": 302,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1552,6 +1552,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "editorial"
+    },
+    {
+      "path": "news/severnyy-39-playground-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/news/severnyy-39-playground-2021/",
+      "title": "ТОС «Северный 39»: два гранта на благоустройство детской площадки | ТОС БГО",
+      "description": "РИА «Воронеж» подтверждает два этапа благоустройства площадки у дома №39 в Северном микрорайоне за счёт грантов 2018 и 2021 годов.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/tancyrey-improvement-news-2026/index.html",

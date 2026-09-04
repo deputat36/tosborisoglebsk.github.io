@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-09-04T06:48:19.385Z",
+    "generated_at": "2026-09-04T06:56:34.392Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -2034,14 +2034,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
+        "news": 2,
         "done": 1,
         "needs": 0,
         "projects": 1,
         "events": 0
       },
       "linked_all": {
-        "news": 1,
+        "news": 2,
         "done": 1,
         "needs": 1,
         "projects": 1,
@@ -2056,7 +2056,7 @@
       },
       "linked_origins": {
         "news": {
-          "verified": 0,
+          "verified": 1,
           "editorial": 1,
           "starter": 0,
           "request": 0
