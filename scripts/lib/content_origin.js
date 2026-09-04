@@ -13,7 +13,9 @@ const VERIFIED_NEWS_IDS = new Set([
   'petrovskoe-water-well-2023',
   'vostochnyy-cleanups-news-2026',
   'severnyy-39-playground-2021',
-  'ulyanovka-sports-projects-2020'
+  'ulyanovka-sports-projects-2020',
+  'ivanovka-lighting-competition-2021',
+  'podstepki-cemetery-fence-competition-2021'
 ]);
 
 const ORIGIN_LABELS = {
