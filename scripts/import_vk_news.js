@@ -3,7 +3,8 @@
   Работает через GitHub Actions без сервера и без платного хостинга.
 
   Требуемые переменные окружения:
-  - VK_TOKEN — токен ВК с доступом к wall.get
+  - VK_TOKEN — пользовательский или сервисный токен ВК с доступом к wall.get.
+    Group/community access token для wall.get не поддерживается.
 
   Источник сообщества:
   - VK_OWNER_ID — необязательный ID сообщества со знаком минус;
@@ -12,7 +13,7 @@
   Дополнительные переменные:
   - VK_HASHTAGS — хештеги для отбора через запятую. По умолчанию: #наСайтТОСБГО,#новостьТОСБГО,#новостиТОСБГО
   - VK_COUNT — сколько последних постов проверять. По умолчанию: 50
-  - NEWS_LIMIT — сколько новостей хранить в data/news.json. По умолчанию: 100
+  - NEWS_LIMIT — сколько импортированных из VK новостей хранить. Канонические материалы портала этим лимитом не обрезаются. По умолчанию: 100
 */
 
 const fs = require('fs');
@@ -153,6 +154,27 @@ function writeJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 }
 
+function mergeImportedNews(existing, imported, vkLimit = NEWS_LIMIT) {
+  const existingItems = Array.isArray(existing) ? existing.filter((item) => item && item.id) : [];
+  const importedItems = Array.isArray(imported) ? imported.filter((item) => item && item.id) : [];
+  const byId = new Map(existingItems.map((item) => [item.id, item]));
+
+  for (const item of importedItems) {
+    byId.set(item.id, { ...(byId.get(item.id) || {}), ...item });
+  }
+
+  const records = Array.from(byId.values());
+  const canonical = records.filter((item) => item.imported_from !== 'vk');
+  const effectiveLimit = Number.isFinite(Number(vkLimit)) ? Math.max(0, Math.floor(Number(vkLimit))) : 100;
+  const vkItems = records
+    .filter((item) => item.imported_from === 'vk')
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+    .slice(0, effectiveLimit);
+
+  return [...canonical, ...vkItems]
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+}
+
 async function callVkWallGet() {
   if (!VK_TOKEN) throw new Error('Не задан VK_TOKEN в GitHub Secrets.');
   if (!VK_OWNER_ID && !VK_DOMAIN) throw new Error('Не задан VK_OWNER_ID или VK_DOMAIN в переменных GitHub Actions.');
@@ -163,7 +185,12 @@ async function callVkWallGet() {
 
   const res = await fetch(`https://api.vk.com/method/wall.get?${params.toString()}`);
   const data = await res.json();
-  if (data.error) throw new Error(`VK API error ${data.error.error_code}: ${data.error.error_msg}`);
+  if (data.error) {
+    if (Number(data.error.error_code) === 27) {
+      throw new Error('VK API error 27: wall.get недоступен с group/community access token. Замените GitHub Secret VK_TOKEN на совместимый пользовательский или сервисный токен; см. docs/VK-IMPORT-OWNERSHIP-2026-07-14.md.');
+    }
+    throw new Error(`VK API error ${data.error.error_code}: ${data.error.error_msg}`);
+  }
   return data.response?.items || [];
 }
 
@@ -221,17 +248,9 @@ function updateSitemap(newsList) {
 async function main() {
   const tagMap = loadTosHashtagMap();
   const existing = readJson(NEWS_PATH, []);
-  const existingById = new Map(existing.map((item) => [item.id, item]));
   const posts = await callVkWallGet();
   const imported = posts.filter((post) => !post.is_pinned).filter((post) => hasAllowedHashtag(post.text)).map((post) => convertVkPost(post, tagMap));
-
-  for (const item of imported) {
-    existingById.set(item.id, { ...(existingById.get(item.id) || {}), ...item });
-  }
-
-  const merged = Array.from(existingById.values())
-    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
-    .slice(0, NEWS_LIMIT);
+  const merged = mergeImportedNews(existing, imported, NEWS_LIMIT);
 
   writeJson(NEWS_PATH, merged);
   for (const item of merged.filter((item) => item.status !== 'draft')) generateNewsPage(item);
@@ -240,10 +259,17 @@ async function main() {
   console.log(`Проверено постов ВК: ${posts.length}`);
   console.log(`Импортировано/обновлено постов по хештегам: ${imported.length}`);
   console.log(`Привязано к ТОСам: ${imported.filter((item) => item.tos_slug).length}`);
+  console.log(`VK-новостей после применения лимита: ${merged.filter((item) => item.imported_from === 'vk').length}`);
   console.log(`Всего новостей в data/news.json: ${merged.length}`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  mergeImportedNews
+};
