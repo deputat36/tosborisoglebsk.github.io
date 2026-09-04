@@ -1,64 +1,70 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-04T05:53:06.237Z",
+  "generated_at": "2026-09-04T06:00:41.447Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 299,
-  "pages_checked": 299,
-  "links_discovered": 6807,
-  "internal_links_checked": 4953,
-  "unique_internal_targets": 728,
-  "external_links_ignored": 183,
+  "pages_indexed": 300,
+  "pages_checked": 300,
+  "links_discovered": 6826,
+  "internal_links_checked": 4969,
+  "unique_internal_targets": 729,
+  "external_links_ignored": 185,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/needs/update-data-mayak-2026/index.html",
       "status": 200,
-      "duration_ms": 1050,
-      "bytes": 7931
+      "duration_ms": 1058,
+      "bytes": 7957
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 66,
+      "duration_ms": 63,
       "bytes": 8695
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 37,
-      "bytes": 11768
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 32,
-      "bytes": 15978
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 32,
-      "bytes": 8158
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 34,
       "bytes": 23099
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 34,
+      "bytes": 15978
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 30,
+      "bytes": 11768
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 29,
+      "bytes": 8158
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 29,
+      "bytes": 7931
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 28,
       "bytes": 9430
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 29,
+      "duration_ms": 27,
       "bytes": 15879
     },
     {
@@ -68,70 +74,64 @@
       "bytes": 5818
     },
     {
-      "route": "/documents/templates/project-kit/index.html",
+      "route": "/documents/templates/project-schedule/index.html",
       "status": 200,
       "duration_ms": 18,
-      "bytes": 6632
+      "bytes": 5606
     },
     {
-      "route": "/legal/federal-law-33/index.html",
+      "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 8380
+      "duration_ms": 17,
+      "bytes": 23597
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 10450
+    },
+    {
+      "route": "/documents/templates/project-problem/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 4779
+    },
+    {
+      "route": "/done/chkalovec-many-projects/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 8473
+    },
+    {
+      "route": "/contacts/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 22241
+    },
+    {
+      "route": "/documents/templates/tos-charter-draft/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 5626
+    },
+    {
+      "route": "/documents/templates/tos-start-list/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 2632
+    },
+    {
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 5404
     },
     {
       "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 14,
       "bytes": 15409
-    },
-    {
-      "route": "/documents/templates/tos-founding-announcement/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 3198
-    },
-    {
-      "route": "/documents/templates/tos-founding-decisions/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 3490
-    },
-    {
-      "route": "/documents/templates/tos-founding-protocol/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 4570
-    },
-    {
-      "route": "/done/gubari-projects-archive/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 8415
-    },
-    {
-      "route": "/needs/seedlings-for-greening/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 7879
-    },
-    {
-      "route": "/needs/update-data-bogana-2026/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 7941
-    },
-    {
-      "route": "/needs/update-data-dzerzhinskogo-2026/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 8240
-    },
-    {
-      "route": "/documents/templates/project-photo-report/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 10995
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-04T05:53:18.117Z",
-  "total": 299,
+  "generated_at": "2026-09-04T06:00:52.811Z",
+  "total": 300,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1432,6 +1432,15 @@
       "url": "https://tosborisoglebsk.ru/news/mahrovka-project-experience-news-2026/",
       "title": "ТОС «Махровка» установил въездную стелу и развивает проектный опыт села | ТОС БГО",
       "description": "РИА «Воронеж» подтвердило установку въездной стелы в Махровке и назвало источники финансирования проекта, а также перечислило ряд более ранних инициатив ТОС.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
+      "path": "news/mayak-chigorak-projects-2025/index.html",
+      "url": "https://tosborisoglebsk.ru/news/mayak-chigorak-projects-2025/",
+      "title": "ТОС «Маяк» благоустроил детскую площадку и площадки для сбора отходов в Чигораке | ТОС БГО",
+      "description": "РИА «Воронеж» подтвердило два результата ТОС «Маяк»: детскую площадку «Дворик детства» и благоустройство четырех площадок для сбора отходов.",
       "section": "Новости",
       "search_group": "news",
       "content_origin": "verified"
