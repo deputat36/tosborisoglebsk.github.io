@@ -37,10 +37,12 @@ function paragraphs(value, fallback) {
 }
 
 function main() {
+  // RSS является полным публичным представлением опубликованных news-записей.
+  // Не ограничиваем число элементов: audit_rss_feed_content.js проверяет
+  // соответствие feed ↔ data/news.json и защищает новые материалы от потери.
   const news = readJson(NEWS_PATH)
     .filter((item) => item && item.id && item.status !== 'draft')
-    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
-    .slice(0, 50);
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
   const items = news.map((item) => {
     const link = `${SITE_URL}/news/${item.id}/`;

@@ -12,7 +12,8 @@ const VERIFIED_NEWS_IDS = new Set([
   'mayak-chigorak-projects-2025',
   'petrovskoe-water-well-2023',
   'vostochnyy-cleanups-news-2026',
-  'severnyy-39-playground-2021'
+  'severnyy-39-playground-2021',
+  'ulyanovka-sports-projects-2020'
 ]);
 
 const ORIGIN_LABELS = {
