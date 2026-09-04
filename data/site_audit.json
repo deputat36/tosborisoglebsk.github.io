@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-04T07:06:45.875Z",
+  "generated_at": "2026-09-04T11:02:05.526Z",
   "summary": {
-    "generated_at": "2026-09-04T07:06:45.875Z",
+    "generated_at": "2026-09-04T11:02:05.526Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -14,11 +14,11 @@
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
-    "without_news": 11,
+    "without_news": 9,
     "without_done": 16,
     "without_needs": 24,
     "without_projects": 0,
-    "request_only_news": 11,
+    "request_only_news": 9,
     "request_only_done": 16,
     "request_only_needs": 24,
     "request_only_projects": 0,
@@ -28,7 +28,7 @@
       "needs": 24,
       "projects": 0
     },
-    "average_score": 74
+    "average_score": 75
   },
   "next_actions": [
     "повторно проверить карточки с устаревшей датой",

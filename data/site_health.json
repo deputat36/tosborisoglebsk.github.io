@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-04T07:06:32.339Z",
+  "generated_at": "2026-09-04T11:01:50.172Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 24,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-09-04T07:06:45.875Z",
+    "generated_at": "2026-09-04T11:02:05.526Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -38,11 +38,11 @@
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
-    "without_news": 11,
+    "without_news": 9,
     "without_done": 16,
     "without_needs": 24,
     "without_projects": 0,
-    "request_only_news": 11,
+    "request_only_news": 9,
     "request_only_done": 16,
     "request_only_needs": 24,
     "request_only_projects": 0,
@@ -52,11 +52,11 @@
       "needs": 24,
       "projects": 0
     },
-    "average_score": 74
+    "average_score": 75
   },
   "pages": {
-    "total": 372,
-    "public": 313,
+    "total": 374,
+    "public": 315,
     "noindex": 59,
     "seo_warnings_count": 0,
     "broken_internal_links_count": 0
@@ -66,13 +66,12 @@
       "slug": "ivanovka",
       "name": "Ивановка",
       "location": "п. Ивановка",
-      "score": 56,
+      "score": 63,
       "missing": [
         "Телефон",
         "Email",
         "Соцсети",
         "Логотип",
-        "Новости",
         "Истории результата",
         "Потребности"
       ],
@@ -101,13 +100,12 @@
       "slug": "podstepki",
       "name": "Подстёпки",
       "location": "п. Подстёпки",
-      "score": 56,
+      "score": 63,
       "missing": [
         "Телефон",
         "Email",
         "Соцсети",
         "Логотип",
-        "Новости",
         "Истории результата",
         "Потребности"
       ],
@@ -197,12 +195,12 @@
     {
       "level": "good",
       "area": "Техническая база",
-      "finding": "Собрано 372 HTML-страниц, из них 313 публичных и 59 служебных."
+      "finding": "Собрано 374 HTML-страниц, из них 315 публичных и 59 служебных."
     },
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 303 страниц, 5019 внутренних переходов, 733 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 305 страниц, 5053 внутренних переходов, 735 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -232,12 +230,12 @@
     {
       "level": "risk",
       "area": "Зрелость контента",
-      "finding": "Содержательные материалы есть у 13 из 24 ТОС; только стартовые заготовки или запросы — у 11; без материалов — у 0."
+      "finding": "Содержательные материалы есть у 15 из 24 ТОС; только стартовые заготовки или запросы — у 9; без материалов — у 0."
     },
     {
       "level": "next",
       "area": "Редакционные запросы",
-      "finding": "Запрос вместо содержательной записи: новости — 11, результаты — 16, потребности — 24, проекты — 0."
+      "finding": "Запрос вместо содержательной записи: новости — 9, результаты — 16, потребности — 24, проекты — 0."
     }
   ],
   "seo_warnings": [],
@@ -246,7 +244,7 @@
     "Найти рабочий канал связи: ТОС «Ивановка» и ТОС «Подстёпки».",
     "После разрешения пользователя вручную отправить подготовленные запросы: ТОС «Губари» и ТОС «Танцырей».",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей.",
-    "Заменить редакционные запросы содержательными новостями или фотоотчётами для 11 ТОС.",
+    "Заменить редакционные запросы содержательными новостями или фотоотчётами для 9 ТОС.",
     "Собрать подтверждённые истории результата вместо заготовок для 16 ТОС.",
     "Проверить и оформить реальные актуальные потребности для 24 ТОС, где пока есть только запрос сведений."
   ],
@@ -298,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-09-04T07:06:29.648Z",
+    "generated_at": "2026-09-04T11:01:47.362Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -346,17 +344,17 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-09-04T07:06:35.217Z",
+    "generated_at": "2026-09-04T11:01:53.852Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
-    "pages_indexed": 303,
-    "pages_checked": 303,
-    "links_discovered": 6885,
-    "internal_links_checked": 5019,
-    "unique_internal_targets": 733,
-    "external_links_ignored": 195,
+    "pages_indexed": 305,
+    "pages_checked": 305,
+    "links_discovered": 6923,
+    "internal_links_checked": 5053,
+    "unique_internal_targets": 735,
+    "external_links_ignored": 199,
     "protocol_links_ignored": 34,
     "failed": 0,
     "automation": {
@@ -406,9 +404,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Generate TOS pages",
-      "run_id": "33847203854",
-      "run_number": "1743",
-      "commit_sha": "675d4bfb9119c171d276450f6f0bbfc5d3e72fdc"
+      "run_id": "33865972037",
+      "run_number": "1745",
+      "commit_sha": "3817c9427082394358cc6d37ebf94b4fd7c9c9e2"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -424,15 +422,15 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-09-04T07:06:45.875Z",
+    "generated_at": "2026-09-04T11:02:05.526Z",
     "total_tos": 24,
-    "with_substantive_content": 13,
-    "with_verified_content": 13,
+    "with_substantive_content": 15,
+    "with_verified_content": 15,
     "with_editorial_content": 0,
-    "with_only_starter_or_request": 11,
+    "with_only_starter_or_request": 9,
     "without_any_content": 0,
     "request_only_by_section": {
-      "news": 11,
+      "news": 9,
       "done": 16,
       "needs": 24,
       "projects": 0

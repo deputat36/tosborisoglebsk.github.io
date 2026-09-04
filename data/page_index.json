@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-04T07:06:46.229Z",
-  "total": 303,
+  "generated_at": "2026-09-04T11:02:05.914Z",
+  "total": 305,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1410,6 +1410,15 @@
       "content_origin": "request"
     },
     {
+      "path": "news/ivanovka-lighting-competition-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/news/ivanovka-lighting-competition-2021/",
+      "title": "ТОС «Ивановка»: проект уличного освещения победил в конкурсе 2021 года | ТОС БГО",
+      "description": "«Блокнот Борисоглебск» включил ТОС «Ивановка» в перечень победителей областного конкурса общественно полезных инициатив 2021 года с проектом уличного освещения.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/send-news-ipas-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/send-news-ipas-2026/",
       "title": "ТОС «Ипас» приглашает присылать новости и фото | ТОС БГО",
@@ -1525,6 +1534,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "request"
+    },
+    {
+      "path": "news/podstepki-cemetery-fence-competition-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/news/podstepki-cemetery-fence-competition-2021/",
+      "title": "ТОС «Подстёпки»: проект ограждения кладбища победил в конкурсе 2021 года | ТОС БГО",
+      "description": "«Блокнот Борисоглебск» включил ТОС «Подстёпки» в перечень победителей областного конкурса общественно полезных инициатив 2021 года с проектом ограждения кладбища.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/send-news-port-artur-2026/index.html",
