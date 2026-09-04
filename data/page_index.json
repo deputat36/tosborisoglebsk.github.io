@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-04T06:00:52.811Z",
-  "total": 300,
+  "generated_at": "2026-09-04T06:09:41.243Z",
+  "total": 301,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1174,6 +1174,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "editorial"
+    },
+    {
+      "path": "news/petrovskoe-water-well-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/news/petrovskoe-water-well-2023/",
+      "title": "В Петровском по проекту ТОС отремонтировали водозаборную скважину | ТОС БГО",
+      "description": "РИА «Воронеж» подтвердило полную реконструкцию одной из водозаборных скважин Петровского по грантовому проекту ТОС.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/nko-grants-2026/index.html",
