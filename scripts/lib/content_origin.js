@@ -10,7 +10,8 @@ const VERIFIED_NEWS_IDS = new Set([
   'bogana-sports-ground-2023',
   'mahrovka-project-experience-news-2026',
   'mayak-chigorak-projects-2025',
-  'petrovskoe-water-well-2023'
+  'petrovskoe-water-well-2023',
+  'vostochnyy-cleanups-news-2026'
 ]);
 
 const ORIGIN_LABELS = {
