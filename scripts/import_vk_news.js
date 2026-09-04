@@ -4,7 +4,10 @@
 
   Требуемые переменные окружения:
   - VK_TOKEN — токен ВК с доступом к wall.get
-  - VK_OWNER_ID или VK_DOMAIN — ID сообщества со знаком минус или короткое имя сообщества
+
+  Источник сообщества:
+  - VK_OWNER_ID — необязательный ID сообщества со знаком минус;
+  - VK_DOMAIN — необязательное короткое имя сообщества; по умолчанию используется публичный домен портала tosbgo.
 
   Дополнительные переменные:
   - VK_HASHTAGS — хештеги для отбора через запятую. По умолчанию: #наСайтТОСБГО,#новостьТОСБГО,#новостиТОСБГО
@@ -21,10 +24,11 @@ const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
 const ARTICLES_PATH = path.join(ROOT, 'data', 'articles.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const SITE_URL = 'https://tosborisoglebsk.ru';
+const DEFAULT_VK_DOMAIN = 'tosbgo';
 
 const VK_TOKEN = process.env.VK_TOKEN || '';
 const VK_OWNER_ID = process.env.VK_OWNER_ID || '';
-const VK_DOMAIN = process.env.VK_DOMAIN || '';
+const VK_DOMAIN = process.env.VK_DOMAIN || DEFAULT_VK_DOMAIN;
 const VK_COUNT = Number(process.env.VK_COUNT || 50);
 const NEWS_LIMIT = Number(process.env.NEWS_LIMIT || 100);
 const VK_API_VERSION = process.env.VK_API_VERSION || '5.199';
