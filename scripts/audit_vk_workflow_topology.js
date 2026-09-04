@@ -100,17 +100,27 @@ function validateImporter(text) {
     "const VK_API_VERSION = process.env.VK_API_VERSION || '5.199';",
     'hasAllowedHashtag(post.text)',
     '.filter((post) => !post.is_pinned)',
-    'existingById.set(item.id',
+    'function mergeImportedNews(existing, imported, vkLimit = NEWS_LIMIT)',
+    "item.imported_from !== 'vk'",
+    "item.imported_from === 'vk'",
+    '.slice(0, effectiveLimit)',
+    'const merged = mergeImportedNews(existing, imported, NEWS_LIMIT);',
     "status: 'published'",
     "source: 'ВКонтакте'",
     'source_url:',
     'writeJson(NEWS_PATH, merged)',
     'generateNewsPage(item)',
-    'updateSitemap(merged)'
+    'updateSitemap(merged)',
+    'group/community access token',
+    'if (require.main === module)',
+    'mergeImportedNews\n};'
   ], errors, 'scripts/import_vk_news.js');
 
   if (text.includes('vk_posts.json')) errors.push('scripts/import_vk_news.js: legacy data target is forbidden');
   if (!text.includes('HASHTAGS.some')) errors.push('scripts/import_vk_news.js: service hashtag allowlist is required');
+  if (/Array\.from\([^\n]*\)\s*\n?\s*\.sort\([\s\S]{0,250}?\.slice\(0,\s*NEWS_LIMIT\)/.test(text)) {
+    errors.push('scripts/import_vk_news.js: NEWS_LIMIT must not truncate the whole canonical news collection');
+  }
   return errors;
 }
 
@@ -169,6 +179,27 @@ function runSelfTest() {
   if (!importerErrors.some((error) => error.includes("DEFAULT_VK_DOMAIN = 'tosbgo'"))) {
     throw new Error('importer without public VK domain fallback was not rejected');
   }
+  if (!importerErrors.some((error) => error.includes('function mergeImportedNews'))) {
+    throw new Error('importer without VK-only retention contract was not rejected');
+  }
+
+  const unsafeRetention = `
+const NEWS_PATH = path.join(ROOT, 'data', 'news.json');
+const DEFAULT_VK_DOMAIN = 'tosbgo';
+const VK_TOKEN = process.env.VK_TOKEN || '';
+const VK_DOMAIN = process.env.VK_DOMAIN || DEFAULT_VK_DOMAIN;
+const VK_API_VERSION = process.env.VK_API_VERSION || '5.199';
+const merged = Array.from(existingById.values())
+  .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+  .slice(0, NEWS_LIMIT);
+HASHTAGS.some(() => true);
+hasAllowedHashtag(post.text);
+.filter((post) => !post.is_pinned);
+`;
+  const unsafeErrors = validateImporter(unsafeRetention);
+  if (!unsafeErrors.some((error) => error.includes('must not truncate the whole canonical news collection'))) {
+    throw new Error('unsafe whole-collection NEWS_LIMIT was not rejected');
+  }
 
   console.log('VK workflow topology self-test OK');
 }
@@ -199,6 +230,9 @@ function runRepositoryAudit() {
       '`data/news.json`',
       '`data/vk_posts.json` не используется',
       'Хештег является редакционным разрешением на импорт',
+      '`NEWS_LIMIT` ограничивает только',
+      'error 27',
+      '#350',
       'Успешный PR-CI не доказывает'
     ], errors, 'VK import ownership documentation');
   }
