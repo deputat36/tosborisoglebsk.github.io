@@ -60,7 +60,7 @@ const VERIFIED_NEWS_WAVE12 = [
       'Публикация не используется для подтверждения актуального председателя, контактов, численности жителей, границ или иных паспортных полей карточки ТОС. Текст и фотографии источника на портал не копируются.'
     ],
     source: '«Блокнот Борисоглебск», 27 октября 2021 года',
-    source_url: 'https://bloknotborisoglebsk.ru/news/v-sele-pod-borisoglebsk-postavili-novyy-vezdnoy--1407840'
+    source_url: 'https://bloknotborisoglebsk.ru/news/v-sele-pod-borisoglebskom-postavili-novyy-vezdnoy--1407840'
   },
   {
     id: 'khoperskiy-bereg-sports-ground-competition-2021',
@@ -79,7 +79,7 @@ const VERIFIED_NEWS_WAVE12 = [
       'Публикация не используется для подтверждения актуального председателя, контактов, численности жителей, границ или иных паспортных полей карточки ТОС. Текст и фотографии источника на портал не копируются.'
     ],
     source: '«Блокнот Борисоглебск», 27 октября 2021 года',
-    source_url: 'https://bloknotborisoglebsk.ru/news/v-sele-pod-borisoglebsk-postavili-novyy-vezdnoy--1407840'
+    source_url: 'https://bloknotborisoglebsk.ru/news/v-sele-pod-borisoglebskom-postavili-novyy-vezdnoy--1407840'
   },
   {
     id: 'znamenie-created-2024',
@@ -136,7 +136,7 @@ const VERIFIED_NEWS_WAVE12 = [
       'Публикация не используется для подтверждения актуального председателя, контактов, численности жителей, границ или иных паспортных полей карточки ТОС. Текст и фотографии источника на портал не копируются.'
     ],
     source: '«Блокнот Борисоглебск», 27 октября 2021 года',
-    source_url: 'https://bloknotborisoglebsk.ru/news/v-sele-pod-borisoglebsk-postavili-novyy-vezdnoy--1407840'
+    source_url: 'https://bloknotborisoglebsk.ru/news/v-sele-pod-borisoglebskom-postavili-novyy-vezdnoy--1407840'
   },
   {
     id: 'ipas-playground-application-2023',
