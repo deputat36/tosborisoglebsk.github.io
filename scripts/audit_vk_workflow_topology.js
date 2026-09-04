@@ -94,7 +94,9 @@ function validateImporter(text) {
   const errors = [];
   requireTokens(text, [
     "const NEWS_PATH = path.join(ROOT, 'data', 'news.json');",
+    "const DEFAULT_VK_DOMAIN = 'tosbgo';",
     "const VK_TOKEN = process.env.VK_TOKEN || '';",
+    "const VK_DOMAIN = process.env.VK_DOMAIN || DEFAULT_VK_DOMAIN;",
     "const VK_API_VERSION = process.env.VK_API_VERSION || '5.199';",
     'hasAllowedHashtag(post.text)',
     '.filter((post) => !post.is_pinned)',
@@ -163,6 +165,9 @@ function runSelfTest() {
   const importerErrors = validateImporter("const NEWS_PATH = path.join(ROOT, 'data', 'news.json');");
   if (!importerErrors.some((error) => error.includes('service hashtag allowlist is required'))) {
     throw new Error('importer without hashtag allowlist was not rejected');
+  }
+  if (!importerErrors.some((error) => error.includes("DEFAULT_VK_DOMAIN = 'tosbgo'"))) {
+    throw new Error('importer without public VK domain fallback was not rejected');
   }
 
   console.log('VK workflow topology self-test OK');
