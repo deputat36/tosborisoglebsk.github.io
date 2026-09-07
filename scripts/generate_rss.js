@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 require('./generate_tos_starter_news');
 require('./generate_verified_news_wave12');
+require('./generate_verified_news_wave13');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
