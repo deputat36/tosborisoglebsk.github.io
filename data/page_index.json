@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T14:07:58.616Z",
+  "generated_at": "2026-09-07T14:15:48.473Z",
   "total": 312,
   "search_groups": {
     "tos": "Каталог ТОС",
@@ -1182,7 +1182,7 @@
       "description": "Для ТОСов региона заявлен конкурс общественно полезных проектов: до 1,5 млн рублей на проект, 14 направлений, общий объём поддержки — 90 млн рублей.",
       "section": "Новости",
       "search_group": "news",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "news/petrovskoe-water-well-2023/index.html",
@@ -1200,7 +1200,7 @@
       "description": "Для зарегистрированных НКО Воронежской области заявлялся конкурс с поддержкой до 3 млн рублей.",
       "section": "Новости",
       "search_group": "news",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "news/gubari-beautiful-village-2026/index.html",
@@ -1317,7 +1317,7 @@
       "description": "Сайт конкурса сообщает, что приём заявок 2026 года завершён, а на конкурс представлено 87 проектов.",
       "section": "Новости",
       "search_group": "news",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "news/index.html",
