@@ -29,7 +29,10 @@ const requiredNewsIds = [
   'uyutny-cultural-festival-2025',
   'ipas-playground-application-2023',
   'mechta-spring-competition-2021',
-  'prostornyy-cultural-festival-2025'
+  'prostornyy-cultural-festival-2025',
+  'tos-grants-2026-voronezh',
+  'nko-grants-2026',
+  'obraz-buduschego-2026'
 ];
 
 function isObject(value) {
