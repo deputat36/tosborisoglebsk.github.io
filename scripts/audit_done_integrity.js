@@ -14,7 +14,15 @@ const requiredVerifiedDoneIds = [
   'result-archive-needed-petrovskoe',
   'result-archive-needed-ulyanovka',
   'result-archive-needed-prostornyy',
-  'result-archive-needed-uyutnyy'
+  'result-archive-needed-uyutnyy',
+  'gubari-projects-archive',
+  'severnyy-39-playground',
+  'chkalovec-many-projects',
+  'tretyaki-seven-projects',
+  'tancyrey-playgrounds-rest-places',
+  'mahrovka-project-experience',
+  'vostochnyy-cleanups-holidays',
+  'chigorak-tos-cultural-work'
 ];
 
 function isObject(value) {
