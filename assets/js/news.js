@@ -102,6 +102,7 @@ async function renderNewsPage() {
     tos: document.querySelector('#news-tos-filter'),
     origin: document.querySelector('#news-origin-filter')
   };
+  if (controls.origin?.options?.[0]) controls.origin.options[0].textContent = 'Содержательные публикации';
   const reset = document.querySelector('#news-reset-filters');
   const status = document.querySelector('#news-filter-status');
 
