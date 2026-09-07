@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T12:35:28.573Z",
+  "generated_at": "2026-09-07T13:08:39.719Z",
   "total": 312,
   "search_groups": {
     "tos": "Каталог ТОС",
@@ -2483,20 +2483,20 @@
     {
       "path": "done/vostochnyy-cleanups-holidays/index.html",
       "url": "https://tosborisoglebsk.ru/done/vostochnyy-cleanups-holidays/",
-      "title": "ТОС «Восточный»: субботники, праздники и объединение… | Сделано ТОСами БГО",
-      "description": "В карточке ТОС указано, что жители объединяются для благоустройства, организуют субботники и праздники, чтобы создать комфортную и дружелюбную среду на…",
+      "title": "ТОС «Восточный»: жители благоустроили общественную зону… | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» подтвердило серию субботников и благоустройство общественной зоны между улицами Весенней и Объездной силами активистов ТОС «Восточный».",
       "section": "Сделано",
       "search_group": "done",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "done/gubari-projects-archive/index.html",
       "url": "https://tosborisoglebsk.ru/done/gubari-projects-archive/",
-      "title": "ТОС «Губари»: детская площадка, памятники, водоснабжени… | Сделано ТОСами БГО",
-      "description": "В карточке ТОС указано, что активистами ТОС «Губари» реализованы проекты по установке детской площадки, благоустройству памятника «За власть Советов»…",
+      "title": "ТОС «Губари»: водонапорная башня и ремонт десяти колодц… | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» сообщило о восьми реализованных за пять лет проектах в Губарях и отдельно указало результаты в сфере водоснабжения: замену водонапорной…",
       "section": "Сделано",
       "search_group": "done",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "done/result-archive-needed-dzerzhinskogo/index.html",
@@ -2546,11 +2546,20 @@
     {
       "path": "done/mahrovka-project-experience/index.html",
       "url": "https://tosborisoglebsk.ru/done/mahrovka-project-experience/",
-      "title": "ТОС «Махровка»: опыт побед в проектах и активное развит… | Сделано ТОСами БГО",
-      "description": "В карточке ТОС указано, что «Махровка» — дружный и активный ТОС, жители активно участвуют в жизни села, уже выиграли несколько проектов и планируют…",
+      "title": "ТОС «Махровка»: после трёх попыток реализован проект… | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» подтвердило установку въездной стелы в Махровке после того, как доработанный проект получил грантовую поддержку с третьей попытки.",
       "section": "Сделано",
       "search_group": "done",
-      "content_origin": "editorial"
+      "content_origin": "verified"
+    },
+    {
+      "path": "done/chigorak-tos-cultural-work/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chigorak-tos-cultural-work/",
+      "title": "ТОС «Маяк»: детская площадка и площадки для сбора отход… | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» подтвердило два направления реализованной работы ТОС «Маяк» в Чигораке: детскую площадку «Дворик детства» и благоустройство площадок для…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
     },
     {
       "path": "done/result-archive-needed-mechta/index.html",
@@ -2627,29 +2636,29 @@
     {
       "path": "done/severnyy-39-playground/index.html",
       "url": "https://tosborisoglebsk.ru/done/severnyy-39-playground/",
-      "title": "ТОС «Северный 39»: два гранта и благоустройство детской… | Сделано ТОСами БГО",
-      "description": "По данным карточки ТОС, жители объединились для благоустройства придомовой территории. За время существования ТОС выиграл два гранта и благоустроил…",
+      "title": "ТОС «Северный 39»: два этапа благоустройства детской… | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» подтвердило установку нового игрового оборудования на детской площадке и сообщило о двух грантовых этапах её благоустройства.",
       "section": "Сделано",
       "search_group": "done",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "done/tancyrey-playgrounds-rest-places/index.html",
       "url": "https://tosborisoglebsk.ru/done/tancyrey-playgrounds-rest-places/",
-      "title": "ТОС «Танцырей»: благоустройство, озеленение, детские… | Сделано ТОСами БГО",
-      "description": "В карточке ТОС указано, что «Танцырей» занимается благоустройством территории, созданием комфортных условий для проживания, озеленением, установкой…",
+      "title": "ТОС «Танцырей»: установлена въездная стела с символами… | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» подтвердило установку в Танцырее новой въездной стелы, созданной по проекту местных общественников.",
       "section": "Сделано",
       "search_group": "done",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "done/tretyaki-seven-projects/index.html",
       "url": "https://tosborisoglebsk.ru/done/tretyaki-seven-projects/",
-      "title": "ТОС «Третьяки»: 7 проектов и помощь семьям участников… | Сделано ТОСами БГО",
-      "description": "По данным карточки ТОС, «Третьяки» оказывает помощь семьям участников СВО, участники активно занимаются художественной самодеятельностью, а за период…",
+      "title": "ТОС «Третьяки»: установлена новая водонапорная башня | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» подтвердило установку новой водонапорной башни в Третьяках и сообщило о многолетнем грантовом опыте местного ТОС.",
       "section": "Сделано",
       "search_group": "done",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "done/result-archive-needed-ulyanovka/index.html",
@@ -2672,20 +2681,11 @@
     {
       "path": "done/chkalovec-many-projects/index.html",
       "url": "https://tosborisoglebsk.ru/done/chkalovec-many-projects/",
-      "title": "ТОС «Чкаловец»: площадки, экоплощадка и центр притяжени… | Сделано ТОСами БГО",
-      "description": "В карточке ТОС указано, что «Чкаловец» — один из самых известных и успешных ТОСов, многократный победитель областных грантов. Среди реализованных…",
+      "title": "ТОС «Чкаловец»: девять лет развития двора и общественны… | Сделано ТОСами БГО",
+      "description": "«Вести Воронеж» описали результаты девятилетней работы ТОС «Чкаловец»: зоны отдыха, парковку, видеонаблюдение, беседку, площадку для раздельного сбора…",
       "section": "Сделано",
       "search_group": "done",
-      "content_origin": "editorial"
-    },
-    {
-      "path": "done/chigorak-tos-cultural-work/index.html",
-      "url": "https://tosborisoglebsk.ru/done/chigorak-tos-cultural-work/",
-      "title": "ТОСы села Чигорак: благоустройство, культура и досуговы… | Сделано ТОСами БГО",
-      "description": "В каталоге есть несколько ТОСов села Чигорак: «Ипас», «Маяк», «Мечта», «Первомайский», «Порт Артур». В их карточках повторяются направления…",
-      "section": "Сделано",
-      "search_group": "done",
-      "content_origin": "editorial"
+      "content_origin": "verified"
     },
     {
       "path": "places/borisoglebsk/index.html",
