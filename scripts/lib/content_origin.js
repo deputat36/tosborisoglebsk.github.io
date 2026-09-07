@@ -20,7 +20,9 @@ const VERIFIED_NEWS_IDS = new Set([
   'pervomayskiy-stage-competition-2021',
   'znamenie-created-2024',
   'uyutny-cultural-festival-2025',
-  'ipas-playground-application-2023'
+  'ipas-playground-application-2023',
+  'mechta-spring-competition-2021',
+  'prostornyy-cultural-festival-2025'
 ]);
 
 const ORIGIN_LABELS = {
