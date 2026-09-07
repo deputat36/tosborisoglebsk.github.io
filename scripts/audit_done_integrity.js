@@ -7,6 +7,13 @@ const donePath = path.join(process.cwd(), 'data', 'done.json');
 const tosesPath = path.join(process.cwd(), 'data', 'toses.json');
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const allowedStatuses = new Set(['published', 'draft', 'archived']);
+const requiredVerifiedDoneIds = [
+  'result-archive-needed-bogana',
+  'result-archive-needed-kalinka',
+  'result-archive-needed-mirolyubie',
+  'result-archive-needed-petrovskoe',
+  'result-archive-needed-ulyanovka'
+];
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -110,11 +117,22 @@ function main() {
     }
   });
 
+  requiredVerifiedDoneIds.forEach((id) => {
+    const item = doneItems.find((entry) => entry && entry.id === id);
+    if (!item) {
+      errors.push(`missing required verified done id ${id}`);
+      return;
+    }
+    if (item.content_origin !== 'verified') errors.push(`${id}: content_origin must be verified`);
+    if (!isHttpUrl(item.source_url)) errors.push(`${id}: verified result requires external source_url`);
+    if (!repoPathExists(`/done/${id}/`)) errors.push(`${id}: missing generated page /done/${id}/`);
+  });
+
   if (errors.length) {
     throw new Error(`Done integrity audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Done integrity OK: ${doneItems.length} items`);
+  console.log(`Done integrity OK: ${doneItems.length} items, ${requiredVerifiedDoneIds.length} required verified results`);
 }
 
 main();

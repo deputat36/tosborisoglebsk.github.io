@@ -25,6 +25,14 @@ const VERIFIED_NEWS_IDS = new Set([
   'prostornyy-cultural-festival-2025'
 ]);
 
+const VERIFIED_DONE_IDS = new Set([
+  'result-archive-needed-bogana',
+  'result-archive-needed-kalinka',
+  'result-archive-needed-mirolyubie',
+  'result-archive-needed-petrovskoe',
+  'result-archive-needed-ulyanovka'
+]);
+
 const ORIGIN_LABELS = {
   verified: 'Подтверждено источником',
   editorial: 'Редакционный материал',
@@ -42,6 +50,7 @@ const ORIGIN_CLASSES = {
 function classifyContentOrigin(item, collection = '') {
   const id = String(item?.id || '');
   if (collection === 'news' && VERIFIED_NEWS_IDS.has(id)) return 'verified';
+  if (collection === 'done' && VERIFIED_DONE_IDS.has(id)) return 'verified';
   if (collection === 'news' && id.startsWith('send-news-')) return 'request';
   if (collection === 'needs' && id.startsWith('update-data-')) return 'request';
   if (collection === 'projects' && id.startsWith('public-stand-and-ideas-')) return 'starter';
@@ -94,6 +103,7 @@ function contentOriginNotice(origin, collection = '') {
 module.exports = {
   CONTENT_ORIGINS,
   VERIFIED_NEWS_IDS,
+  VERIFIED_DONE_IDS,
   classifyContentOrigin,
   inferContentOrigin,
   contentOriginLabel,
