@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-09-07T10:18:53.714Z",
+  "generated_at": "2026-09-07T12:25:25.867Z",
   "site_url": "https://tosborisoglebsk.ru",
-  "health_score": 24,
+  "health_score": 32,
   "score_breakdown": {
     "base": 100,
     "penalties": {
       "high_priority_tos": 12,
-      "needs_review_tos": 56,
+      "needs_review_tos": 48,
       "missing_public_phone": 8,
       "seo_warnings": 0,
       "broken_internal_links": 0
@@ -25,34 +25,34 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-09-07T10:19:05.606Z",
+    "generated_at": "2026-09-07T12:25:40.559Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
-    "medium_priority": 3,
-    "low_priority": 17,
+    "medium_priority": 2,
+    "low_priority": 18,
     "verified_count": 0,
-    "partial_count": 10,
-    "needs_review_count": 14,
+    "partial_count": 12,
+    "needs_review_count": 12,
     "unknown_count": 0,
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 4,
     "without_news": 2,
-    "without_done": 16,
+    "without_done": 11,
     "without_needs": 24,
     "without_projects": 0,
     "request_only_news": 2,
-    "request_only_done": 16,
+    "request_only_done": 11,
     "request_only_needs": 24,
     "request_only_projects": 0,
     "editorial_requests": {
       "news": 17,
-      "done": 16,
+      "done": 11,
       "needs": 24,
       "projects": 0
     },
-    "average_score": 77
+    "average_score": 78
   },
   "pages": {
     "total": 381,
@@ -235,7 +235,7 @@
     {
       "level": "next",
       "area": "Редакционные запросы",
-      "finding": "Запрос вместо содержательной записи: новости — 2, результаты — 16, потребности — 24, проекты — 0."
+      "finding": "Запрос вместо содержательной записи: новости — 2, результаты — 11, потребности — 24, проекты — 0."
     }
   ],
   "seo_warnings": [],
@@ -245,7 +245,7 @@
     "После разрешения пользователя вручную отправить подготовленные запросы: ТОС «Губари» и ТОС «Танцырей».",
     "Подключить реальные фото территорий и логотипы ТОСов по мере поступления от председателей.",
     "Заменить редакционные запросы содержательными новостями или фотоотчётами для 2 ТОС.",
-    "Собрать подтверждённые истории результата вместо заготовок для 16 ТОС.",
+    "Собрать подтверждённые истории результата вместо заготовок для 11 ТОС.",
     "Проверить и оформить реальные актуальные потребности для 24 ТОС, где пока есть только запрос сведений."
   ],
   "self_work_plan": [
@@ -296,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-09-07T10:18:51.761Z",
+    "generated_at": "2026-09-07T12:25:22.983Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -344,7 +344,7 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-09-07T10:18:57.488Z",
+    "generated_at": "2026-09-07T12:25:28.782Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
@@ -354,7 +354,7 @@
     "links_discovered": 7057,
     "internal_links_checked": 5171,
     "unique_internal_targets": 742,
-    "external_links_ignored": 214,
+    "external_links_ignored": 219,
     "protocol_links_ignored": 34,
     "failed": 0,
     "automation": {
@@ -404,9 +404,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Generate TOS pages",
-      "run_id": "34110760197",
-      "run_number": "1764",
-      "commit_sha": "ba9ea28dc7586cb85ba8763bbe92f406f487fd25"
+      "run_id": "34121741943",
+      "run_number": "1766",
+      "commit_sha": "12535b19a9b5531ff0d4dc802ba5897c2bee3a9a"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-09-07T10:19:05.606Z",
+    "generated_at": "2026-09-07T12:25:40.559Z",
     "total_tos": 24,
     "with_substantive_content": 22,
     "with_verified_content": 22,
@@ -431,13 +431,13 @@
     "without_any_content": 0,
     "request_only_by_section": {
       "news": 2,
-      "done": 16,
+      "done": 11,
       "needs": 24,
       "projects": 0
     },
     "editorial_request_records": {
       "news": 17,
-      "done": 16,
+      "done": 11,
       "needs": 24,
       "projects": 0
     },
