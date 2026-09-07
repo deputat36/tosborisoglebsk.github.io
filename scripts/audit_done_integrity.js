@@ -12,7 +12,9 @@ const requiredVerifiedDoneIds = [
   'result-archive-needed-kalinka',
   'result-archive-needed-mirolyubie',
   'result-archive-needed-petrovskoe',
-  'result-archive-needed-ulyanovka'
+  'result-archive-needed-ulyanovka',
+  'result-archive-needed-prostornyy',
+  'result-archive-needed-uyutnyy'
 ];
 
 function isObject(value) {

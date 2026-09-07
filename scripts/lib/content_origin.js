@@ -30,7 +30,9 @@ const VERIFIED_DONE_IDS = new Set([
   'result-archive-needed-kalinka',
   'result-archive-needed-mirolyubie',
   'result-archive-needed-petrovskoe',
-  'result-archive-needed-ulyanovka'
+  'result-archive-needed-ulyanovka',
+  'result-archive-needed-prostornyy',
+  'result-archive-needed-uyutnyy'
 ]);
 
 const ORIGIN_LABELS = {

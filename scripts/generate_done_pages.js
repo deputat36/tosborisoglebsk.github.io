@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 require('./generate_verified_done_wave1');
+require('./generate_verified_done_wave2');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
 const { buildCollectionContextLinks, collectionContextSectionId } = require('./lib/collection_context_navigation');
 
