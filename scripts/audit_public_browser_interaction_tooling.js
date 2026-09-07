@@ -44,8 +44,8 @@ function main() {
 
   requireFragments(errors, 'browser interaction test', test, [
     "require('playwright')",
-    "PUBLIC_BROWSER_BASE_URL",
-    "browser-interactions.json",
+    'PUBLIC_BROWSER_BASE_URL',
+    'browser-interactions.json',
     "['global-search', testSearch]",
     "['tos-catalog', testTosCatalog]",
     "['places-browser', testPlaces]",
@@ -68,18 +68,25 @@ function main() {
     "route: '/done/'",
     "route: '/needs/'",
     "press('Escape')",
-    "new URLSearchParams(location.search)",
-    "data-content-origin",
-    "requestfailed",
-    "technical_errors",
-    "schema_version: 1",
-    "Public browser interactions OK"
+    'new URLSearchParams(location.search)',
+    'data-content-origin',
+    'requestfailed',
+    'technical_errors',
+    'schema_version: 1',
+    'Public browser interactions OK'
   ]);
 
   requireFragments(errors, 'public card navigation test', cardNavigationTest, [
     "require('playwright')",
     'PUBLIC_CARD_NAVIGATION_REPORT',
     '.artifacts/public-card-navigation.json',
+    "readJson('data/page_index.json')",
+    'function globalSearchFixture()',
+    "page.search_group === 'news'",
+    "page.content_origin === 'verified'",
+    'searchFixture.route',
+    'searchFixture.expectedPath',
+    'config.expectedPath',
     "name: 'global-search-result'",
     "name: 'tos-catalog-card'",
     "name: 'news-card'",
@@ -128,15 +135,26 @@ function main() {
   dynamicSearchSignals.forEach((signal) => {
     if (!test.includes(signal)) errors.push(`search scenario must derive and assert a current indexed result: missing ${signal}`);
   });
-  if (test.includes("origin=verified") || test.includes("item.origin === 'verified'")) {
+  if (test.includes('origin=verified') || test.includes("item.origin === 'verified'")) {
     errors.push('search interaction test must not hard-code a content origin that can change with current index data');
   }
   if (test.includes("readJson('data/news.json')") || test.includes('inferContentOrigin(')) {
     errors.push('search interaction fixture must use the public page index, not a parallel collection calculation');
   }
+
+  if (cardNavigationTest.includes("route: '/search/?q=%D0%9C%D0%B8%D1%80%D0%BE%D0%BB%D1%8E%D0%B1%D0%B8%D0%B5")) {
+    errors.push('public card navigation must not hard-code a named verified-news search fixture');
+  }
+  if (!cardNavigationTest.includes("page.content_origin === 'verified'")) {
+    errors.push('public card navigation must derive its verified-news fixture from the current public page index');
+  }
+  if (cardNavigationTest.includes("readJson('data/news.json')") || cardNavigationTest.includes('inferContentOrigin(')) {
+    errors.push('public card navigation search fixture must use the public page index, not a parallel collection calculation');
+  }
+
   if (!test.includes("origin: 'starter'")) errors.push('collection scenarios must verify starter material filtering');
   if ((test.match(/origin: 'request'/g) || []).length < 3) errors.push('collection scenarios must verify request filtering across public sections');
-  if (!cardNavigationTest.includes('origin=verified') || !cardNavigationTest.includes('origin=starter') || (cardNavigationTest.match(/origin=request/g) || []).length < 2) {
+  if (!cardNavigationTest.includes("origin: 'verified'") || !cardNavigationTest.includes('origin=starter') || (cardNavigationTest.match(/origin=request/g) || []).length < 2) {
     errors.push('public card navigation must cover verified, starter and request material destinations');
   }
 
