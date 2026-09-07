@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-04T12:33:42.428Z",
-  "total": 305,
+  "generated_at": "2026-09-07T10:05:48.086Z",
+  "total": 310,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1167,6 +1167,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "news/znamenie-created-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/news/znamenie-created-2024/",
+      "title": "Борисоглебская городская Дума поддержала создание ТОС «Знамение» | ТОС БГО",
+      "description": "«Мой Борисоглебск» сообщил о решении депутатов по инициативе жителей домов №74 и №74А на улице 40 лет Октября создать ТОС «Знамение».",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/tos-grants-2026-voronezh/index.html",
       "url": "https://tosborisoglebsk.ru/news/tos-grants-2026-voronezh/",
       "title": "В Воронежской области стартовал конкурс проектов ТОС 2026 | ТОС БГО",
@@ -1347,6 +1356,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "news/uyutny-cultural-festival-2025/index.html",
+      "url": "https://tosborisoglebsk.ru/news/uyutny-cultural-festival-2025/",
+      "title": "Представители ТОС «Уютный» участвовали в межрегиональном фестивале ТОС | ТОС БГО",
+      "description": "РИА «Воронеж» подтвердило участие представителей ТОС «Уютный» в творческой команде Борисоглебского округа на фестивале «Культурный ТОС, объединяющий соседей».",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/send-news-bogana-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/send-news-bogana-2026/",
       "title": "ТОС «Богана» приглашает присылать новости и фото | ТОС БГО",
@@ -1426,6 +1444,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "request"
+    },
+    {
+      "path": "news/ipas-playground-application-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/news/ipas-playground-application-2023/",
+      "title": "ТОС «Ипас»: подтверждена заявка на благоустройство детской площадки | ТОС БГО",
+      "description": "РИА «Воронеж» в 2025 году подтвердило работу ТОС «Ипас» в Чигораке, а официальный список АНО «Образ Будущего» — допуск его проекта детской площадки к экспертной оценке конкурса 2023 года.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/kalinka-playground-2024/index.html",
@@ -1509,6 +1536,15 @@
       "content_origin": "request"
     },
     {
+      "path": "news/pervomayskiy-stage-competition-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/news/pervomayskiy-stage-competition-2021/",
+      "title": "ТОС «Первомайский»: проект уличной сцены победил в конкурсе 2021 года | ТОС БГО",
+      "description": "«Блокнот Борисоглебск» включил ТОС «Первомайский» в перечень победителей областного конкурса общественно полезных инициатив 2021 года.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/send-news-petrovskoe-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/send-news-petrovskoe-2026/",
       "title": "ТОС «Петровское» приглашает присылать новости и фото | ТОС БГО",
@@ -1552,6 +1588,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "request"
+    },
+    {
+      "path": "news/port-artur-cemetery-competition-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/news/port-artur-cemetery-competition-2021/",
+      "title": "ТОС «Порт-Артур»: проект благоустройства кладбища победил в конкурсе 2021 года | ТОС БГО",
+      "description": "«Блокнот Борисоглебск» включил ТОС «Порт-Артур» в перечень победителей областного конкурса общественно полезных инициатив 2021 года.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/send-news-prostornyy-2026/index.html",
