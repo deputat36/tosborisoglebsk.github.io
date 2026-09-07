@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { inferContentOrigin } = require('./lib/content_origin');
 
 const rssPath = path.join(process.cwd(), 'rss.xml');
 const newsPath = path.join(process.cwd(), 'data', 'news.json');
@@ -40,6 +41,20 @@ function newsUrl(newsItem) {
 
 function isRssDate(value) {
   return typeof value === 'string' && !Number.isNaN(Date.parse(value));
+}
+
+function isRssNews(item) {
+  return item
+    && item.id
+    && item.status !== 'draft'
+    && inferContentOrigin(item, 'news') !== 'request';
+}
+
+function isRequestNews(item) {
+  return item
+    && item.id
+    && item.status !== 'draft'
+    && inferContentOrigin(item, 'news') === 'request';
 }
 
 function main() {
@@ -99,23 +114,32 @@ function main() {
   });
 
   if (Array.isArray(news)) {
-    const newsUrls = news.map(newsUrl);
+    const substantiveUrls = news.filter(isRssNews).map(newsUrl);
+    const requestUrls = news.filter(isRequestNews).map(newsUrl);
 
-    newsUrls.forEach((url) => {
-      if (!seenLinks.has(url)) errors.push(`news item is absent in rss: ${url}`);
+    substantiveUrls.forEach((url) => {
+      if (!seenLinks.has(url)) errors.push(`substantive news item is absent in rss: ${url}`);
     });
 
-    const newsUrlSet = new Set(newsUrls);
+    requestUrls.forEach((url) => {
+      if (seenLinks.has(url)) errors.push(`request news item must be absent from rss: ${url}`);
+    });
+
+    const substantiveUrlSet = new Set(substantiveUrls);
     links.forEach((link) => {
-      if (!newsUrlSet.has(link)) errors.push(`rss item is absent in news.json: ${link}`);
+      if (!substantiveUrlSet.has(link)) errors.push(`rss item is not an eligible substantive news item: ${link}`);
     });
+
+    if (!requestUrls.length) {
+      errors.push('rss request exclusion contract is not exercised: expected at least one request item in data/news.json');
+    }
   }
 
   if (errors.length) {
     throw new Error(`RSS audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`RSS OK: ${items.length} items`);
+  console.log(`RSS OK: ${items.length} substantive items, request records excluded`);
 }
 
 main();

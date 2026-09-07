@@ -3,6 +3,7 @@ const path = require('path');
 require('./generate_tos_starter_news');
 require('./generate_verified_news_wave12');
 require('./generate_verified_news_wave13');
+const { inferContentOrigin } = require('./lib/content_origin');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
@@ -38,12 +39,19 @@ function paragraphs(value, fallback) {
   return [fallback || 'Новость портала ТОС БГО.'];
 }
 
+function isRssNews(item) {
+  return item
+    && item.id
+    && item.status !== 'draft'
+    && inferContentOrigin(item, 'news') !== 'request';
+}
+
 function main() {
-  // RSS является полным публичным представлением опубликованных news-записей.
-  // Не ограничиваем число элементов: audit_rss_feed_content.js проверяет
-  // соответствие feed ↔ data/news.json и защищает новые материалы от потери.
+  // RSS предназначен для содержательных публичных публикаций.
+  // Редакционные request-записи остаются доступны на портале как рабочие
+  // запросы сведений, но не отправляются подписчикам как новости.
   const news = readJson(NEWS_PATH)
-    .filter((item) => item && item.id && item.status !== 'draft')
+    .filter(isRssNews)
     .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
   const items = news.map((item) => {
@@ -64,7 +72,7 @@ function main() {
   <channel>
     <title>Новости ТОС БГО</title>
     <link>${SITE_URL}/news/</link>
-    <description>Новости, объявления и материалы портала ТОС Борисоглебского городского округа.</description>
+    <description>Новости, объявления и содержательные материалы портала ТОС Борисоглебского городского округа.</description>
     <language>ru</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${items}
@@ -73,7 +81,7 @@ ${items}
 `;
 
   fs.writeFileSync(RSS_PATH, xml, 'utf8');
-  console.log(`RSS generated: ${news.length} items.`);
+  console.log(`RSS generated: ${news.length} substantive items.`);
 }
 
 main();
