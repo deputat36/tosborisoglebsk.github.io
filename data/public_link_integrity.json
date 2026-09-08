@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-08T07:36:29.868Z",
+  "generated_at": "2026-09-08T07:48:28.784Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 312,
@@ -14,100 +14,94 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/done/result-archive-needed-mirolyubie/index.html",
-      "status": 200,
-      "duration_ms": 1051,
-      "bytes": 8577
-    },
-    {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 72,
+      "duration_ms": 166,
       "bytes": 8695
     },
     {
-      "route": "/chairperson/action-routes/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 39,
-      "bytes": 15978
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 38,
-      "bytes": 9430
+      "duration_ms": 91,
+      "bytes": 7931
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 38,
+      "duration_ms": 90,
       "bytes": 11768
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 35,
+      "duration_ms": 89,
       "bytes": 8158
     },
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 35,
-      "bytes": 7931
-    },
-    {
-      "route": "/calendar/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 34,
-      "bytes": 15879
+      "duration_ms": 88,
+      "bytes": 15978
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 34,
+      "duration_ms": 87,
       "bytes": 23099
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 22,
-      "bytes": 8176
+      "duration_ms": 87,
+      "bytes": 9430
+    },
+    {
+      "route": "/calendar/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 86,
+      "bytes": 15879
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 19,
+      "duration_ms": 27,
       "bytes": 23597
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 25,
+      "bytes": 8176
     },
     {
       "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 21,
       "bytes": 5404
     },
     {
       "route": "/check-tos/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 21,
       "bytes": 5818
     },
     {
-      "route": "/materials/prepare-for-tos-contest-early/index.html",
+      "route": "/create-tos/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 7032
+      "duration_ms": 19,
+      "bytes": 19408
     },
     {
-      "route": "/documents/templates/project-problem/index.html",
+      "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 4779
+      "duration_ms": 17,
+      "bytes": 15409
     },
     {
-      "route": "/documents/templates/tos-creation-kit/index.html",
+      "route": "/data-quality/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 6200
+      "duration_ms": 15,
+      "bytes": 7786
     },
     {
       "route": "/communication-kit/index.html",
@@ -122,16 +116,22 @@
       "bytes": 22241
     },
     {
-      "route": "/materials/project-bank/index.html",
+      "route": "/done/result-archive-needed-uyutnyy/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 6675
+      "bytes": 8809
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/data-dictionary/index.html",
       "status": 200,
       "duration_ms": 13,
-      "bytes": 10450
+      "bytes": 10644
+    },
+    {
+      "route": "/documents/templates/meeting-agenda/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 4424
     }
   ]
 }
