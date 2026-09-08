@@ -18,6 +18,10 @@ function projectOrigin(item) {
   return 'editorial';
 }
 
+function projectIsVerifiedActual(item) {
+  return projectOrigin(item) === 'verified' && item.project_kind === 'verified_actual';
+}
+
 function projectOriginTag(item) {
   const origin = projectOrigin(item);
   const labels = {
@@ -53,24 +57,29 @@ function projectCard(item, toses) {
   const tosName = projectTosName(item.tos_slug, toses);
   const detailUrl = item.id ? `/projects/${projectEsc(item.id)}/` : '/projects/';
   const steps = Array.isArray(item.steps) ? item.steps.slice(0, 3) : [];
+  const actual = projectIsVerifiedActual(item);
+  const factualDetails = actual
+    ? `${item.official_result ? `<p class="tiny"><b>Официальный результат:</b> ${projectEsc(item.official_result)}</p>` : ''}${item.grant_amount ? `<p class="tiny"><b>Сумма гранта:</b> ${projectEsc(item.grant_amount)}</p>` : ''}${item.implementation_status ? `<p class="tiny"><b>Реализация:</b> ${projectEsc(item.implementation_status)}</p>` : ''}${item.based_on ? `<p class="tiny"><b>Основание:</b> ${projectEsc(item.based_on)}</p>` : ''}${steps.length ? `<div class="notice"><b style="color:var(--text)">Подтверждённые этапы</b><br>${steps.map((step) => `- ${projectEsc(step)}`).join('<br>')}</div>` : ''}`
+    : `${item.grant_logic ? `<p class="tiny"><b>Подходит для заявки:</b> ${projectEsc(item.grant_logic)}</p>` : ''}${item.based_on ? `<p class="tiny"><b>Основание:</b> ${projectEsc(item.based_on)}</p>` : ''}${steps.length ? `<div class="notice"><b style="color:var(--text)">Первые шаги</b><br>${steps.map((step) => `- ${projectEsc(step)}`).join('<br>')}</div>` : ''}`;
+  const factualActions = actual
+    ? `${item.done_id ? `<a class="btn" href="/done/${projectEsc(item.done_id)}/">История результата</a>` : ''}${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.source_url)}">Официальный источник</a>` : ''}${item.implementation_source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.implementation_source_url)}">Источник реализации</a>` : ''}`
+    : `<a class="btn" href="/projects/action-routes/">Маршрут проекта</a><a class="btn" href="/update-tos/?type=project#message-builder">Предложить проект</a>${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.source_url)}">Источник</a>` : ''}`;
+
   return `<article class="list-item project-card" data-content-origin="${projectEsc(projectOrigin(item))}">
     <div class="meta">
       ${projectOriginTag(item)}
+      ${actual ? '<span class="tag ok">Фактический проект</span>' : ''}
       <span class="tag">${projectEsc(item.type || 'Проект')}</span>
       <span class="tag">${projectEsc(projectCatalogStatus(item))}</span>
       ${tosName ? `<span class="tag">${projectEsc(tosName)}</span>` : ''}
     </div>
     <h3>${projectEsc(item.title || 'Проект без названия')}</h3>
     <p>${projectEsc(item.description || '')}</p>
-    ${item.grant_logic ? `<p class="tiny"><b>Подходит для заявки:</b> ${projectEsc(item.grant_logic)}</p>` : ''}
-    ${item.based_on ? `<p class="tiny"><b>Основание:</b> ${projectEsc(item.based_on)}</p>` : ''}
-    ${steps.length ? `<div class="notice"><b style="color:var(--text)">Первые шаги</b><br>${steps.map((step) => `- ${projectEsc(step)}`).join('<br>')}</div>` : ''}
+    ${factualDetails}
     <div class="card-actions">
       <a class="btn primary" href="${detailUrl}">Подробнее</a>
       ${item.tos_slug ? `<a class="btn" href="/tos/${projectEsc(item.tos_slug)}/">Открыть ТОС</a>` : ''}
-      <a class="btn" href="/projects/action-routes/">Маршрут проекта</a>
-      <a class="btn" href="/update-tos/?type=project#message-builder">Предложить проект</a>
-      ${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.source_url)}">Источник</a>` : ''}
+      ${factualActions}
     </div>
   </article>`;
 }
@@ -115,7 +124,7 @@ async function renderProjects() {
         .filter((item) => !state.origin || projectOrigin(item) === state.origin)
         .filter((item) => {
           const tosName = projectTosName(item.tos_slug, toses);
-          const hay = projectCore.normalizeText([item.title, item.description, item.type, item.grant_logic, item.based_on, item.tos_slug, tosName, projectOrigin(item), ...(item.steps || [])].join(' '));
+          const hay = projectCore.normalizeText([item.title, item.description, item.type, item.grant_logic, item.based_on, item.official_result, item.grant_amount, item.implementation_status, item.tos_slug, tosName, projectOrigin(item), ...(item.steps || [])].join(' '));
           return !query || hay.includes(query);
         })
         .sort((a, b) => String(a.title || '').localeCompare(String(b.title || ''), 'ru'));
