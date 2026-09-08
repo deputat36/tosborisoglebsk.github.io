@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { chromium } = require('playwright');
 
+const ROOT = process.cwd();
 const BASE_URL = String(process.env.PUBLIC_BROWSER_BASE_URL || process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
 const REPORT_PATH = path.resolve(process.env.PUBLIC_CARD_NAVIGATION_REPORT || '.artifacts/public-card-navigation.json');
 
@@ -18,6 +19,30 @@ function normalize(value) {
     .trim();
 }
 
+function readJson(relativePath) {
+  return JSON.parse(fs.readFileSync(path.join(ROOT, relativePath), 'utf8'));
+}
+
+function globalSearchFixture() {
+  const index = readJson('data/page_index.json');
+  const pages = (Array.isArray(index?.pages) ? index.pages : [])
+    .filter((page) => page && page.search_group === 'news' && page.content_origin === 'verified' && String(page.title || '').trim());
+  pages.sort((a, b) => String(a.title).localeCompare(String(b.title), 'ru'));
+  const selected = pages[0];
+  assert(selected, 'global search fixture: current page index has no verified news result');
+
+  const params = new URLSearchParams({
+    q: String(selected.title).trim(),
+    type: 'news',
+    origin: 'verified',
+    sort: 'title'
+  });
+  return {
+    route: `/search/?${params.toString()}`,
+    expectedPath: `/${String(selected.path || '').replace(/^\//, '').replace(/index\.html$/, '')}`
+  };
+}
+
 async function openRoute(page, route) {
   const response = await page.goto(`${BASE_URL}${route}`, { waitUntil: 'networkidle' });
   assert(response && response.ok(), `${route}: HTTP ${response ? response.status() : 'no response'}`);
@@ -32,6 +57,9 @@ async function testCardNavigation(page, config) {
   assert(href, `${config.name}: primary card link has no href`);
   assert(href.startsWith(config.expectedPrefix), `${config.name}: unexpected destination ${href}`);
   assert(!href.includes('?') && !href.includes('#'), `${config.name}: primary detail link must use a canonical path: ${href}`);
+  if (config.expectedPath) {
+    assert(href === config.expectedPath, `${config.name}: current page-index fixture expected ${config.expectedPath}, got ${href}`);
+  }
 
   const card = link.locator('xpath=ancestor::article[1]');
   const sourceTitle = (await card.locator('h3').first().textContent() || '').trim();
@@ -61,12 +89,14 @@ async function testCardNavigation(page, config) {
 async function main() {
   fs.mkdirSync(path.dirname(REPORT_PATH), { recursive: true });
   const browser = await chromium.launch({ headless: true });
+  const searchFixture = globalSearchFixture();
   const scenarios = [
     {
       name: 'global-search-result',
-      route: '/search/?q=%D0%9C%D0%B8%D1%80%D0%BE%D0%BB%D1%8E%D0%B1%D0%B8%D0%B5&type=news&origin=verified&sort=title',
+      route: searchFixture.route,
       linkSelector: '#search-results .search-result[data-search-group="news"][data-content-origin="verified"] .btn.primary[href^="/news/"]',
-      expectedPrefix: '/news/'
+      expectedPrefix: '/news/',
+      expectedPath: searchFixture.expectedPath
     },
     {
       name: 'tos-catalog-card',

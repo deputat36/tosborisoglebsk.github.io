@@ -19,6 +19,10 @@ function newsOrigin(item) {
   return 'editorial';
 }
 
+function newsDefaultVisible(item) {
+  return newsOrigin(item) !== 'request';
+}
+
 function newsOriginTag(item) {
   const origin = newsOrigin(item);
   const labels = {
@@ -98,6 +102,7 @@ async function renderNewsPage() {
     tos: document.querySelector('#news-tos-filter'),
     origin: document.querySelector('#news-origin-filter')
   };
+  if (controls.origin?.options?.[0]) controls.origin.options[0].textContent = 'Содержательные публикации';
   const reset = document.querySelector('#news-reset-filters');
   const status = document.querySelector('#news-filter-status');
 
@@ -114,10 +119,12 @@ async function renderNewsPage() {
     function apply(sync = true) {
       const state = newsCore.readControls(controls);
       const query = newsCore.normalizeText(state.q);
-      const filtered = news
+      const originPool = state.origin
+        ? news.filter((item) => newsOrigin(item) === state.origin)
+        : news.filter(newsDefaultVisible);
+      const filtered = originPool
         .filter((item) => !state.category || item.category === state.category)
         .filter((item) => !state.tos || item.tos_slug === state.tos)
-        .filter((item) => !state.origin || newsOrigin(item) === state.origin)
         .filter((item) => {
           const tosName = newsTosName(item.tos_slug, toses);
           const hay = newsCore.normalizeText([item.title, item.lead, item.category, item.source, item.tos_slug, tosName, newsOrigin(item), ...(item.text || [])].join(' '));
@@ -126,8 +133,8 @@ async function renderNewsPage() {
         .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
       root.innerHTML = filtered.length ? filtered.map((item) => newsCard(item, toses)).join('') : '<div class="empty">По выбранным фильтрам новости и материалы не найдены. Сбросьте фильтры или измените запрос.</div>';
-      renderNewsSummary(filtered, news.length);
-      newsCore.setStatus(status, filtered.length, news.length, newsCore.activeFilterCount(state));
+      renderNewsSummary(filtered, originPool.length);
+      newsCore.setStatus(status, filtered.length, originPool.length, newsCore.activeFilterCount(state));
       if (sync) newsCore.syncUrl(state, newsFields);
     }
 

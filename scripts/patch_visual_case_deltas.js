@@ -3,11 +3,18 @@ const path = require('path');
 
 const ROOT = process.cwd();
 const COMPARATOR_PATH = path.join(ROOT, 'scripts', 'compare_visual_baseline.js');
+const CAPTURE_PATH = path.join(ROOT, 'scripts', 'capture_visual_baseline.js');
 const MARKER = "const APPROVED_CASE_DELTAS_VERSION = '2026-07-23';";
+const CAPTURE_MARKER = "const WORKBENCH_VISUAL_FIXTURE_VERSION = '2026-09-07';";
 
 function replaceOrFail(source, pattern, replacement, label) {
   if (!pattern.test(source)) throw new Error(`Visual case-delta patch marker not found: ${label}`);
   return source.replace(pattern, replacement);
+}
+
+function replaceLiteralOrFail(source, needle, replacement, label) {
+  if (!source.includes(needle)) throw new Error(`Visual case-delta literal marker not found: ${label}`);
+  return source.replace(needle, replacement);
 }
 
 function patchSource(current) {
@@ -94,15 +101,49 @@ function patchSource(current) {
   return { content: source, changed: true };
 }
 
+function patchCaptureSource(current) {
+  if (current.includes(CAPTURE_MARKER)) return { content: current, changed: false };
+
+  let source = current;
+  const baseUrlLine = "const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\\\/$/, '');";
+  source = replaceLiteralOrFail(
+    source,
+    baseUrlLine,
+    `${baseUrlLine}\n${CAPTURE_MARKER}`,
+    'capture fixture marker'
+  );
+
+  source = replaceOrFail(
+    source,
+    /async function positionPageForCapture\(page, item\) \{/,
+    `async function stabilizeDynamicVisualContent(page, item) {\n  if (item.case_id !== 'css-reg-010' || item.route !== '/workbench/') return false;\n\n  const meta = page.locator('#workbench-today-grid .highlight-card .meta');\n  await meta.waitFor({ state: 'visible', timeout: 5000 });\n  await page.evaluate(() => {\n    const tags = [...document.querySelectorAll('#workbench-today-grid .highlight-card .meta .tag')];\n    const stableLabels = [\n      'оценка: 12 / 100',\n      'публичных страниц: 305',\n      'ТОС: 24',\n      'verified: 0'\n    ];\n    stableLabels.forEach((label, index) => {\n      if (tags[index]) tags[index].textContent = label;\n    });\n  });\n  await page.waitForTimeout(50);\n  return true;\n}\n\nasync function positionPageForCapture(page, item) {`,
+    'workbench visual fixture'
+  );
+
+  source = replaceOrFail(
+    source,
+    /  await applyThemeAndInteraction\(page, item\);\n\n  await page\.addStyleTag/,
+    `  await applyThemeAndInteraction(page, item);\n  await stabilizeDynamicVisualContent(page, item);\n\n  await page.addStyleTag`,
+    'workbench fixture invocation'
+  );
+
+  return { content: source, changed: true };
+}
+
 function patchVisualCaseDeltas() {
   if (!fs.existsSync(COMPARATOR_PATH)) throw new Error(`Missing comparator: ${COMPARATOR_PATH}`);
-  const current = fs.readFileSync(COMPARATOR_PATH, 'utf8');
-  const result = patchSource(current);
-  if (result.changed) fs.writeFileSync(COMPARATOR_PATH, result.content, 'utf8');
-  console.log(result.changed ? 'Visual case-delta patch applied' : 'Visual case-delta patch already applied');
-  return result.changed;
+  if (!fs.existsSync(CAPTURE_PATH)) throw new Error(`Missing capture script: ${CAPTURE_PATH}`);
+
+  const comparator = patchSource(fs.readFileSync(COMPARATOR_PATH, 'utf8'));
+  const capture = patchCaptureSource(fs.readFileSync(CAPTURE_PATH, 'utf8'));
+  if (comparator.changed) fs.writeFileSync(COMPARATOR_PATH, comparator.content, 'utf8');
+  if (capture.changed) fs.writeFileSync(CAPTURE_PATH, capture.content, 'utf8');
+
+  const changed = comparator.changed || capture.changed;
+  console.log(changed ? 'Visual case-delta patch applied' : 'Visual case-delta patch already applied');
+  return changed;
 }
 
 if (require.main === module) patchVisualCaseDeltas();
 
-module.exports = { MARKER, patchSource, patchVisualCaseDeltas };
+module.exports = { MARKER, CAPTURE_MARKER, patchSource, patchCaptureSource, patchVisualCaseDeltas };

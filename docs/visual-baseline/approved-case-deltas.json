@@ -1,9 +1,23 @@
 {
   "schema_version": 1,
-  "approved_at": "2026-07-31",
-  "reviewed_run_id": "30662143264",
-  "reviewed_artifact": "visual-baseline-306-1",
+  "approved_at": "2026-09-07",
+  "reviewed_run_id": "34134056730",
+  "reviewed_artifact": "visual-baseline-318-1",
   "cases": {
+    "css-reg-008": {
+      "baseline_sha256": "0b2f8c13d34e110354fae92f978c99478d3706d0e2a08c9fb3fae305d544096a",
+      "route": "/news/",
+      "theme": "light",
+      "interaction": "none",
+      "mode": "screen",
+      "max_significant_changed_pixels": 0,
+      "max_changed_pixel_ratio": 0.012,
+      "max_channel_delta": 8,
+      "observed_significant_changed_pixels": 0,
+      "observed_changed_pixel_ratio": 0.011295668549905838,
+      "observed_max_channel_delta": 8,
+      "reason": "Одобрена узкая дельта фильтра новостей: по умолчанию лента показывает содержательные публикации, request-материалы остаются доступны явным фильтром; геометрия и значимые пиксели не изменились."
+    },
     "css-reg-012": {
       "baseline_sha256": "357da2d1d2a9517e9b2b4663d5e0d030e9b6e9993ce948c2dfa57c66ef677b4b",
       "route": "/site-health/",

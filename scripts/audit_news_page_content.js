@@ -144,6 +144,26 @@ function main() {
     errors.push('news script must hide draft news');
   }
 
+  if (!script.includes("return newsOrigin(item) !== 'request'")) {
+    errors.push('news default feed must exclude request-origin items');
+  }
+
+  if (!script.includes('news.filter(newsDefaultVisible)')) {
+    errors.push('news default feed must use the request-excluding visibility rule');
+  }
+
+  if (!script.includes("news.filter((item) => newsOrigin(item) === state.origin)")) {
+    errors.push('explicit origin filter must still allow request-origin items to be selected');
+  }
+
+  if (!script.includes("controls.origin.options[0].textContent = 'Содержательные публикации'")) {
+    errors.push('default origin filter label must explain that the feed contains substantive publications');
+  }
+
+  if (!script.includes('renderNewsSummary(filtered, originPool.length)') || !script.includes('newsCore.setStatus(status, filtered.length, originPool.length')) {
+    errors.push('news summary and status must count the active origin pool rather than hidden request items');
+  }
+
   if (!script.includes('localeCompare(String(a.date')) {
     errors.push('news script must sort news by date descending');
   }
