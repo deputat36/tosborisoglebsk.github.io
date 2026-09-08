@@ -69,6 +69,9 @@ function main() {
   expectIncludes(errors, 'projects script', script, 'projectEsc', 'HTML escaping helper is missing');
   expectIncludes(errors, 'projects script', script, 'projectCatalogStatus', 'catalog status helper is missing');
   expectIncludes(errors, 'projects script', script, "return 'В каталоге'", 'neutral catalog status label is missing');
+  expectIncludes(errors, 'projects script', script, 'projectIsVerifiedActual', 'verified actual project mode is missing');
+  expectIncludes(errors, 'projects script', script, 'Фактический проект', 'verified actual badge is missing');
+  expectIncludes(errors, 'projects script', script, 'Подтверждённые этапы', 'verified actual chronology is missing');
   expectIncludes(errors, 'projects script', script, 'localeCompare', 'Russian title sorting is missing');
   expectIncludes(errors, 'projects script', script, '`/projects/${projectEsc(item.id)}/`', 'detail route rendering is missing');
   expectIncludes(errors, 'projects script', script, '/projects/action-routes/', 'action route link is missing');
@@ -138,6 +141,22 @@ function main() {
           errors.push(`${line}: missing step ${stepIndex + 1}`);
         }
       });
+    }
+
+    if (item.project_kind === 'verified_actual') {
+      expectIncludes(errors, line, html, 'Подтверждено источником', 'verified origin label is missing');
+      expectIncludes(errors, line, html, 'Фактический проект', 'factual project badge is missing');
+      expectIncludes(errors, line, html, '<h2>Подтверждённый проект</h2>', 'verified actual heading is missing');
+      expectIncludes(errors, line, html, '<h2>Подтверждённые этапы</h2>', 'verified chronology heading is missing');
+      if (item.official_result) expectIncludes(errors, line, html, item.official_result, 'official result is missing');
+      if (item.grant_amount) expectIncludes(errors, line, html, item.grant_amount, 'grant amount is missing');
+      if (item.implementation_status) expectIncludes(errors, line, html, item.implementation_status, 'implementation status is missing');
+      if (item.source_url) expectIncludes(errors, line, html, `href="${htmlEntityAmp(item.source_url)}"`, 'official source URL is missing');
+      if (item.implementation_source_url) expectIncludes(errors, line, html, `href="${htmlEntityAmp(item.implementation_source_url)}"`, 'implementation source URL is missing');
+      if (item.done_id) expectIncludes(errors, line, html, `href="/done/${item.done_id}/"`, 'linked done route is missing');
+      if (html.includes('<h2>Что подготовить для заявки</h2>')) errors.push(`${line}: verified actual project must not render application-preparation checklist`);
+      if (html.includes('"accountablePerson"')) errors.push(`${line}: verified actual project must not inherit unverified chairperson into JSON-LD`);
+      if (!html.includes('"citation":[')) errors.push(`${line}: verified actual JSON-LD must cite source URLs`);
     }
 
     if (item.tos_slug) {
