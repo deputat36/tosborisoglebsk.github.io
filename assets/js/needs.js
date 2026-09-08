@@ -27,6 +27,10 @@ function needsOrigin(item) {
   return 'editorial';
 }
 
+function needsDefaultVisible(item) {
+  return needsOrigin(item) !== 'request';
+}
+
 function needsOriginTag(item) {
   const origin = needsOrigin(item);
   const labels = {
@@ -81,7 +85,7 @@ function renderNeedsSummary(items, total) {
   root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>показано из ${total}</span></div><div class="summary-tile"><b>${open}</b><span>незакрытые записи</span></div><div class="summary-tile"><b>${closed}</b><span>закрытые и архивные</span></div><div class="summary-tile"><b>${counts.editorial}</b><span>редакционные материалы</span></div><div class="summary-tile"><b>${counts.request}</b><span>запросы данных</span></div><div class="summary-tile"><b>${partner}</b><span>для партнёров</span></div></div>`;
 }
 
-function needCard(item, toses) {
+function needCard(item, toses, hidden = false) {
   const tosName = needsTosName(item.tos_slug, toses);
   const origin = needsOrigin(item);
   const defaultHelp = origin === 'request'
@@ -89,7 +93,7 @@ function needCard(item, toses) {
     : 'Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.';
   const helpText = item.how_to_help || item.help || defaultHelp;
   const resultText = item.result || item.closed_result || '';
-  return `<article class="list-item need-card" data-content-origin="${needsEsc(origin)}">
+  return `<article class="list-item need-card" data-content-origin="${needsEsc(origin)}"${hidden ? ' hidden' : ''}>
     <div class="meta">
       ${needsOriginTag(item)}
       <span class="tag ${statusClass(item.status)}">${needsEsc(statusLabel(item.status))}</span>
@@ -126,6 +130,7 @@ async function renderNeeds() {
     status: document.querySelector('#needs-status-filter'),
     origin: document.querySelector('#needs-origin-filter')
   };
+  if (controls.origin?.options?.[0]) controls.origin.options[0].textContent = 'Содержательные потребности';
   const reset = document.querySelector('#needs-reset-filters');
   const statusText = document.querySelector('#needs-filter-status');
 
@@ -144,29 +149,34 @@ async function renderNeeds() {
     function apply(sync = true) {
       const state = needsCore.readControls(controls);
       const query = needsCore.normalizeText(state.q);
-      const filtered = needs
-        .filter((item) => !state.type || item.need_type === state.type)
-        .filter((item) => !state.priority || item.priority === state.priority)
-        .filter((item) => !state.tos || item.tos_slug === state.tos)
-        .filter((item) => !state.origin || needsOrigin(item) === state.origin)
-        .filter((item) => state.status !== 'active' || !isClosedNeed(item))
-        .filter((item) => state.status !== 'closed' || isClosedNeed(item))
-        .filter((item) => state.status !== 'partner' || isPartnerNeed(item))
-        .filter((item) => {
-          const tosName = needsTosName(item.tos_slug, toses);
-          const hay = needsCore.normalizeText([item.title, item.description, item.need_type, item.priority, item.contact, item.source, item.how_to_help, item.result, tosName, needsOrigin(item)].join(' '));
-          return !query || hay.includes(query);
-        })
-        .sort((a, b) => {
-          const statusA = isClosedNeed(a) ? 1 : 0;
-          const statusB = isClosedNeed(b) ? 1 : 0;
-          if (statusA !== statusB) return statusA - statusB;
-          return String(b.date || '').localeCompare(String(a.date || ''));
-        });
+      const originPool = state.origin
+        ? needs.filter((item) => needsOrigin(item) === state.origin)
+        : needs.filter(needsDefaultVisible);
+      const matchesActiveFilters = (item) => {
+        if (state.type && item.need_type !== state.type) return false;
+        if (state.priority && item.priority !== state.priority) return false;
+        if (state.tos && item.tos_slug !== state.tos) return false;
+        if (state.status === 'active' && isClosedNeed(item)) return false;
+        if (state.status === 'closed' && !isClosedNeed(item)) return false;
+        if (state.status === 'partner' && !isPartnerNeed(item)) return false;
+        const tosName = needsTosName(item.tos_slug, toses);
+        const hay = needsCore.normalizeText([item.title, item.description, item.need_type, item.priority, item.contact, item.source, item.how_to_help, item.result, tosName, needsOrigin(item)].join(' '));
+        return !query || hay.includes(query);
+      };
+      const sortNeeds = (a, b) => {
+        const statusA = isClosedNeed(a) ? 1 : 0;
+        const statusB = isClosedNeed(b) ? 1 : 0;
+        if (statusA !== statusB) return statusA - statusB;
+        return String(b.date || '').localeCompare(String(a.date || ''));
+      };
+      const filtered = originPool.filter(matchesActiveFilters).sort(sortNeeds);
+      const renderPool = state.origin ? filtered : needs.filter(matchesActiveFilters).sort(sortNeeds);
 
-      root.innerHTML = filtered.length ? filtered.map((item) => needCard(item, toses)).join('') : '<div class="empty">По выбранным фильтрам потребности и запросы не найдены. Сбросьте фильтры или измените запрос.</div>';
-      renderNeedsSummary(filtered, needs.length);
-      needsCore.setStatus(statusText, filtered.length, needs.length, needsCore.activeFilterCount(state));
+      root.innerHTML = filtered.length
+        ? renderPool.map((item) => needCard(item, toses, !state.origin && !needsDefaultVisible(item))).join('')
+        : '<div class="empty">По выбранным фильтрам содержательные потребности не найдены. Для редакционных запросов выберите происхождение «Запрос данных».</div>';
+      renderNeedsSummary(filtered, originPool.length);
+      needsCore.setStatus(statusText, filtered.length, originPool.length, needsCore.activeFilterCount(state));
       if (sync) needsCore.syncUrl(state, needsFields);
     }
 
