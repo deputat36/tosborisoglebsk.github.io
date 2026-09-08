@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T07:48:25.549Z",
+  "generated_at": "2026-09-08T12:49:50.970Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 113,
     "over_budget_assets": 0,
     "total_css_bytes": 46075,
-    "total_js_bytes": 665781,
+    "total_js_bytes": 666411,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -134,6 +134,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/needs.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 11434,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-validation.js",
       "group": "js",
       "extension": ".js",
@@ -152,13 +159,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11185,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/needs.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10804,
       "over_budget": false
     },
     {

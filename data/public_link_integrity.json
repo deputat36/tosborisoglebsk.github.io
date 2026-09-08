@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-08T07:48:28.784Z",
+  "generated_at": "2026-09-08T12:49:53.860Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 312,
@@ -14,76 +14,76 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 166,
-      "bytes": 8695
-    },
-    {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 91,
+      "duration_ms": 1061,
       "bytes": 7931
     },
     {
-      "route": "/chairperson/documents/index.html",
+      "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 90,
-      "bytes": 11768
+      "duration_ms": 329,
+      "bytes": 8695
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 89,
+      "duration_ms": 280,
       "bytes": 8158
     },
     {
-      "route": "/chairperson/action-routes/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 88,
-      "bytes": 15978
+      "duration_ms": 280,
+      "bytes": 11768
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 87,
+      "duration_ms": 279,
       "bytes": 23099
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 87,
+      "duration_ms": 279,
       "bytes": 9430
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 86,
+      "duration_ms": 219,
       "bytes": 15879
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 217,
+      "bytes": 15978
+    },
+    {
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 87,
+      "bytes": 5404
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 77,
       "bytes": 23597
     },
     {
       "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 25,
+      "duration_ms": 77,
       "bytes": 8176
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 21,
-      "bytes": 5404
-    },
-    {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 5818
+      "duration_ms": 28,
+      "bytes": 15409
     },
     {
       "route": "/create-tos/index.html",
@@ -92,46 +92,46 @@
       "bytes": 19408
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 10450
+    },
+    {
+      "route": "/map/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 11579
+    },
+    {
+      "route": "/create-tos/action-routes/index.html",
       "status": 200,
       "duration_ms": 17,
-      "bytes": 15409
+      "bytes": 12658
     },
     {
-      "route": "/data-quality/index.html",
+      "route": "/documents/templates/project-passport/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 7786
+      "duration_ms": 17,
+      "bytes": 6335
     },
     {
-      "route": "/communication-kit/index.html",
+      "route": "/done/result-archive-needed-ivanovka/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 24905
+      "duration_ms": 17,
+      "bytes": 8337
     },
     {
-      "route": "/contacts/index.html",
+      "route": "/done/result-archive-needed-ulyanovka/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 22241
+      "duration_ms": 17,
+      "bytes": 8311
     },
     {
-      "route": "/done/result-archive-needed-uyutnyy/index.html",
+      "route": "/needs/update-data-bogana-2026/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 8809
-    },
-    {
-      "route": "/data-dictionary/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 10644
-    },
-    {
-      "route": "/documents/templates/meeting-agenda/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 4424
+      "duration_ms": 17,
+      "bytes": 7941
     }
   ]
 }
