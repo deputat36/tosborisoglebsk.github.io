@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-08T12:50:03.220Z",
-  "total": 312,
+  "generated_at": "2026-09-08T13:05:30.733Z",
+  "total": 313,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -2416,6 +2416,15 @@
       "section": "Проекты",
       "search_group": "projects",
       "content_origin": "editorial"
+    },
+    {
+      "path": "projects/mirolyubie-igray-i-pobezhday-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/mirolyubie-igray-i-pobezhday-2026/",
+      "title": "ТОС «Миролюбие»: проект «Играй и побеждай» | Проекты ТОС БГО",
+      "description": "Проект ТОС «Миролюбие» «Играй и побеждай» стал победителем конкурса общественно полезных проектов ТОС 2026 года, а к августу была благоустроена площадка для роликов, самокатов и скейтбордов площадью 960 кв. м.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
     },
     {
       "path": "projects/street-lighting-upgrade/index.html",

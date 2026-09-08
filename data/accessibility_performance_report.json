@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T12:49:50.970Z",
+  "generated_at": "2026-09-08T13:05:18.269Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 383,
-    "public_pages": 322,
+    "html_pages": 384,
+    "public_pages": 323,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -21,7 +21,7 @@
     "asset_files": 113,
     "over_budget_assets": 0,
     "total_css_bytes": 46075,
-    "total_js_bytes": 666411,
+    "total_js_bytes": 667990,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -211,6 +211,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/projects.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9518,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/news.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8532,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/personal-data-decisions.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8416,
       "over_budget": false
     }
   ],

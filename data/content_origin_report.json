@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T12:50:02.883Z",
+  "generated_at": "2026-09-08T13:05:30.409Z",
   "definitions": {
     "verified": "Материал имеет явный проверяемый источник; дополнительные детали всё равно могут требовать подтверждения.",
     "editorial": "Материал подготовлен редакцией и не считается автоматически подтверждённым.",
@@ -15,8 +15,8 @@
       "request": 17
     },
     "projects": {
-      "total": 47,
-      "verified": 0,
+      "total": 48,
+      "verified": 1,
       "editorial": 23,
       "starter": 24,
       "request": 0
@@ -44,8 +44,8 @@
     }
   },
   "totals": {
-    "total": 182,
-    "verified": 40,
+    "total": 183,
+    "verified": 41,
     "editorial": 68,
     "starter": 24,
     "request": 50
