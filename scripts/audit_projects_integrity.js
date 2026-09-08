@@ -21,6 +21,7 @@ const workflowPath = path.join(ROOT, '.github', 'workflows', 'generate-tos-pages
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const allowedStatuses = new Set(['published', 'draft', 'archived']);
 const generatedPageMarker = 'Страница проекта создана автоматически из data/projects.json.';
+const REQUIRED_VERIFIED_PROJECT_ID = 'mirolyubie-igray-i-pobezhday-2026';
 
 function isObject(value) {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -105,6 +106,21 @@ function main() {
     }
   });
 
+  const verifiedProject = projects.find((project) => project && project.id === REQUIRED_VERIFIED_PROJECT_ID);
+  if (!verifiedProject) {
+    errors.push(`missing required verified project ${REQUIRED_VERIFIED_PROJECT_ID}`);
+  } else {
+    if (verifiedProject.content_origin !== 'verified') errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: content_origin must be verified`);
+    if (verifiedProject.project_kind !== 'verified_actual') errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: project_kind must be verified_actual`);
+    if (verifiedProject.tos_slug !== 'mirolyubie') errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: tos_slug must be mirolyubie`);
+    if (!String(verifiedProject.official_result || '').includes('Победитель')) errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: official winner result is missing`);
+    if (!String(verifiedProject.grant_amount || '').includes('1 489 360')) errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: exact grant amount is missing`);
+    if (!String(verifiedProject.implementation_status || '').includes('960')) errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: implementation scope is missing`);
+    if (!String(verifiedProject.source_url || '').includes('obraz36.ru')) errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: official source URL is missing`);
+    if (!String(verifiedProject.implementation_source_url || '').includes('riavrn.ru')) errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: implementation source URL is missing`);
+    if (verifiedProject.done_id !== 'result-archive-needed-mirolyubie') errors.push(`${REQUIRED_VERIFIED_PROJECT_ID}: linked done_id is wrong`);
+  }
+
   const generatedIds = new Set(
     projects
       .filter((project) => project && project.id && project.status !== 'draft')
@@ -165,6 +181,9 @@ function main() {
 
   requireTokens(generator, [
     "require('./lib/project_legacy_redirects')",
+    "require('./generate_verified_projects_wave1')",
+    'isVerifiedActualProject(project, origin)',
+    'Подтверждённый проект',
     'removeStaleGeneratedPages(projects)',
     'html.includes(GENERATED_PAGE_MARKER)',
     'renderLegacyProjectRedirect(target)',
