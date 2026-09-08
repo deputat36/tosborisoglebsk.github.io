@@ -96,7 +96,7 @@ function makePage(project, toses){
   };
   if(tos){
     schema.spatialCoverage = tos.location || 'Борисоглебский городской округ';
-    schema.accountablePerson = tos.chairperson || undefined;
+    if (!actual && tos.chairperson) schema.accountablePerson = tos.chairperson;
   }
   if (actual) {
     schema.citation = [project.source_url, project.implementation_source_url].filter(Boolean);
