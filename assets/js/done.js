@@ -19,6 +19,10 @@ function doneOrigin(item) {
   return 'editorial';
 }
 
+function doneDefaultVisible(item) {
+  return doneOrigin(item) !== 'request';
+}
+
 function doneOriginTag(item) {
   const origin = doneOrigin(item);
   const labels = {
@@ -83,6 +87,7 @@ async function renderDone() {
     status: document.querySelector('#done-status-filter'),
     origin: document.querySelector('#done-origin-filter')
   };
+  if (controls.origin?.options?.[0]) controls.origin.options[0].textContent = 'Содержательные результаты';
   const reset = document.querySelector('#done-reset-filters');
   const statusText = document.querySelector('#done-filter-status');
 
@@ -101,11 +106,13 @@ async function renderDone() {
     function apply(sync = true) {
       const state = doneCore.readControls(controls);
       const query = doneCore.normalizeText(state.q);
-      const filtered = done
+      const originPool = state.origin
+        ? done.filter((item) => doneOrigin(item) === state.origin)
+        : done.filter(doneDefaultVisible);
+      const filtered = originPool
         .filter((item) => !state.type || item.type === state.type)
         .filter((item) => !state.tos || item.tos_slug === state.tos)
         .filter((item) => !state.year || doneYear(item.date) === state.year)
-        .filter((item) => !state.origin || doneOrigin(item) === state.origin)
         .filter((item) => state.status !== 'needs-details' || Boolean(item.needs_details))
         .filter((item) => state.status !== 'has-participants' || Boolean(item.participants))
         .filter((item) => state.status !== 'has-source' || Boolean(item.source_url))
@@ -117,8 +124,8 @@ async function renderDone() {
         .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
 
       root.innerHTML = filtered.length ? filtered.map((item) => doneCard(item, toses)).join('') : '<div class="empty">По выбранным фильтрам истории результата не найдены. Сбросьте фильтры или измените запрос.</div>';
-      renderDoneSummary(filtered, done.length);
-      doneCore.setStatus(statusText, filtered.length, done.length, doneCore.activeFilterCount(state));
+      renderDoneSummary(filtered, originPool.length);
+      doneCore.setStatus(statusText, filtered.length, originPool.length, doneCore.activeFilterCount(state));
       if (sync) doneCore.syncUrl(state, doneFields);
     }
 

@@ -64,6 +64,7 @@ function main() {
   expectIncludes(errors, 'done index', indexHtml, 'id="done-tos-filter"', 'done TOS filter is missing');
   expectIncludes(errors, 'done index', indexHtml, 'id="done-year-filter"', 'done year filter is missing');
   expectIncludes(errors, 'done index', indexHtml, 'id="done-status-filter"', 'done status filter is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'id="done-origin-filter"', 'done origin filter is missing');
   expectIncludes(errors, 'done index', indexHtml, '/assets/js/done.js', 'done.js is missing');
   expectIncludes(errors, 'done index', indexHtml, '/done/action-routes/', 'done action route is missing');
   expectIncludes(errors, 'done index', indexHtml, '/update-tos/?type=photo#message-builder', 'photo report submission link is missing');
@@ -75,6 +76,14 @@ function main() {
   expectIncludes(errors, 'done script', script, 'doneEsc', 'HTML escaping helper is missing');
   expectIncludes(errors, 'done script', script, 'doneYear', 'year helper is missing');
   expectIncludes(errors, 'done script', script, 'doneReviewTag', 'verified review-state helper is missing');
+  expectIncludes(errors, 'done script', script, 'doneDefaultVisible', 'default substantive-result visibility helper is missing');
+  expectIncludes(errors, 'done script', script, "return doneOrigin(item) !== 'request';", 'request records must be hidden from the default result feed');
+  expectIncludes(errors, 'done script', script, 'Содержательные результаты', 'default origin filter label must explain the substantive result feed');
+  expectIncludes(errors, 'done script', script, 'const originPool = state.origin', 'origin-specific result pool is missing');
+  expectIncludes(errors, 'done script', script, '? done.filter((item) => doneOrigin(item) === state.origin)', 'explicit origin selection must remain available');
+  expectIncludes(errors, 'done script', script, ': done.filter(doneDefaultVisible);', 'default result pool must exclude requests');
+  expectIncludes(errors, 'done script', script, 'renderDoneSummary(filtered, originPool.length)', 'summary denominator must use the active origin pool');
+  expectIncludes(errors, 'done script', script, 'doneCore.setStatus(statusText, filtered.length, originPool.length', 'filter status denominator must use the active origin pool');
   expectIncludes(errors, 'done script', script, "origin === 'verified' && item.source_url && !item.needs_details", 'verified result must require source and no pending details');
   expectIncludes(errors, 'done script', script, 'подтверждённый результат', 'verified result label is missing');
   expectIncludes(errors, 'done script', script, 'редакционная история', 'editorial result label is missing');
