@@ -28,6 +28,10 @@ const VERIFIED_NEWS_IDS = new Set([
   'obraz-buduschego-2026'
 ]);
 
+const VERIFIED_PROJECT_IDS = new Set([
+  'mirolyubie-igray-i-pobezhday-2026'
+]);
+
 const VERIFIED_DONE_IDS = new Set([
   'result-archive-needed-bogana',
   'result-archive-needed-kalinka',
@@ -63,6 +67,7 @@ const ORIGIN_CLASSES = {
 function classifyContentOrigin(item, collection = '') {
   const id = String(item?.id || '');
   if (collection === 'news' && VERIFIED_NEWS_IDS.has(id)) return 'verified';
+  if (collection === 'projects' && VERIFIED_PROJECT_IDS.has(id)) return 'verified';
   if (collection === 'done' && VERIFIED_DONE_IDS.has(id)) return 'verified';
   if (collection === 'news' && id.startsWith('send-news-')) return 'request';
   if (collection === 'needs' && id.startsWith('update-data-')) return 'request';
@@ -116,6 +121,7 @@ function contentOriginNotice(origin, collection = '') {
 module.exports = {
   CONTENT_ORIGINS,
   VERIFIED_NEWS_IDS,
+  VERIFIED_PROJECT_IDS,
   VERIFIED_DONE_IDS,
   classifyContentOrigin,
   inferContentOrigin,
