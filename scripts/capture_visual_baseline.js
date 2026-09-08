@@ -8,6 +8,7 @@ const ROOT = process.cwd();
 const MATRIX_PATH = path.resolve(ROOT, process.env.VISUAL_BASELINE_MATRIX || 'data/css_regression_matrix.csv');
 const OUTPUT_DIR = path.resolve(ROOT, process.env.VISUAL_BASELINE_OUTPUT || '.artifacts/visual-baseline');
 const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\/$/, '');
+const WORKBENCH_VISUAL_FIXTURE_VERSION = '2026-09-07';
 
 const FOCUS_TARGETS = Object.freeze({
   'focus-catalog': Object.freeze({ selector: '#catalog', readySelector: '#tos-list .card' }),
@@ -90,6 +91,27 @@ async function applyThemeAndInteraction(page, item) {
     await page.emulateMedia({ media: 'print' });
     await page.waitForTimeout(150);
   }
+}
+
+async function stabilizeDynamicVisualContent(page, item) {
+  if (item.case_id !== 'css-reg-010' || item.route !== '/workbench/') return false;
+
+  const meta = page.locator('#workbench-today-grid .highlight-card .meta');
+  await meta.waitFor({ state: 'visible', timeout: 5000 });
+  await page.evaluate(() => {
+    const tags = [...document.querySelectorAll('#workbench-today-grid .highlight-card .meta .tag')];
+    const stableLabels = [
+      'оценка: 12 / 100',
+      'публичных страниц: 305',
+      'ТОС: 24',
+      'verified: 0'
+    ];
+    stableLabels.forEach((label, index) => {
+      if (tags[index]) tags[index].textContent = label;
+    });
+  });
+  await page.waitForTimeout(50);
+  return true;
 }
 
 async function positionPageForCapture(page, item) {
@@ -205,6 +227,7 @@ async function captureCase(browser, item) {
 
   await settlePage(page);
   await applyThemeAndInteraction(page, item);
+  await stabilizeDynamicVisualContent(page, item);
 
   await page.addStyleTag({
     content: `

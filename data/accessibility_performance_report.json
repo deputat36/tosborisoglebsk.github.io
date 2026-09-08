@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T14:15:33.484Z",
+  "generated_at": "2026-09-08T07:36:26.564Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 113,
     "over_budget_assets": 0,
     "total_css_bytes": 46075,
-    "total_js_bytes": 665183,
+    "total_js_bytes": 665482,
     "total_image_bytes": 5067,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -211,6 +211,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/news.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8589,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/outreach-register.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 8416,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/tos-logos.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8293,
       "over_budget": false
     }
   ],
