@@ -12,6 +12,11 @@ function replaceOrFail(source, pattern, replacement, label) {
   return source.replace(pattern, replacement);
 }
 
+function replaceLiteralOrFail(source, needle, replacement, label) {
+  if (!source.includes(needle)) throw new Error(`Visual case-delta literal marker not found: ${label}`);
+  return source.replace(needle, replacement);
+}
+
 function patchSource(current) {
   if (current.includes(MARKER)) return { content: current, changed: false };
 
@@ -100,10 +105,11 @@ function patchCaptureSource(current) {
   if (current.includes(CAPTURE_MARKER)) return { content: current, changed: false };
 
   let source = current;
-  source = replaceOrFail(
+  const baseUrlLine = "const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\\\/$/, '');";
+  source = replaceLiteralOrFail(
     source,
-    /const BASE_URL = String\(process\.env\.VISUAL_BASELINE_BASE_URL \|\| 'http:\/\/127\.0\.0\.1:4173'\)\.replace\(\/\\\/$\/, ''\);/,
-    `const BASE_URL = String(process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173').replace(/\\\/$/, '');\n${CAPTURE_MARKER}`,
+    baseUrlLine,
+    `${baseUrlLine}\n${CAPTURE_MARKER}`,
     'capture fixture marker'
   );
 
