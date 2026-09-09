@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-08T13:05:30.733Z",
-  "total": 313,
+  "generated_at": "2026-09-09T10:58:23.802Z",
+  "total": 317,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -2418,10 +2418,46 @@
       "content_origin": "editorial"
     },
     {
+      "path": "projects/bogana-universalnaya-sportploshchadka-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/bogana-universalnaya-sportploshchadka-2023/",
+      "title": "ТОС «Богана»: универсальная спортивная площадка | Проекты ТОС БГО",
+      "description": "В 2023 году в селе Богана построили и открыли универсальную спортивную площадку площадью более 900 кв. м; реализацию проекта подтверждает публикация РИА «Воронеж».",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/kalinka-territoriya-detskogo-zdorovya-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/kalinka-territoriya-detskogo-zdorovya-2024/",
+      "title": "ТОС «Калинка»: «Территория детского здоровья» | Проекты ТОС БГО",
+      "description": "В посёлке Калинино ТОС «Калинка» реализовал проект «Территория детского здоровья»: на пустыре появилась первая оборудованная детская площадка.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/mirolyubie-igray-i-pobezhday-2026/index.html",
       "url": "https://tosborisoglebsk.ru/projects/mirolyubie-igray-i-pobezhday-2026/",
       "title": "ТОС «Миролюбие»: проект «Играй и побеждай» | Проекты ТОС БГО",
       "description": "Проект ТОС «Миролюбие» «Играй и побеждай» стал победителем конкурса общественно полезных проектов ТОС 2026 года, а к августу была благоустроена площадка для роликов, самокатов и скейтбордов площадью 960 кв. м.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/petrovskoe-remont-skvazhiny-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/petrovskoe-remont-skvazhiny-2023/",
+      "title": "ТОС «Петровское»: ремонт водозаборной скважины №1 | Проекты ТОС БГО",
+      "description": "В 2023 году в селе Петровское завершили ремонт водозаборной скважины №1 с заменой труб, фильтров, насоса, станции управления и защиты.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/ulyanovka-sportploshchadka-2020/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/ulyanovka-sportploshchadka-2020/",
+      "title": "ТОС «Ульяновка»: спортивная площадка площадью 800 кв. м | Проекты ТОС БГО",
+      "description": "В 2020 году в селе Ульяновка построили спортивную площадку площадью 800 кв. м общей стоимостью около 2,8 млн рублей.",
       "section": "Проекты",
       "search_group": "projects",
       "content_origin": "verified"

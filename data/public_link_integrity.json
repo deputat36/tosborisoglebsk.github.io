@@ -1,107 +1,119 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-08T13:05:21.925Z",
+  "generated_at": "2026-09-09T10:58:12.641Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 313,
-  "pages_checked": 313,
-  "links_discovered": 7090,
-  "internal_links_checked": 5179,
-  "unique_internal_targets": 743,
-  "external_links_ignored": 233,
+  "pages_indexed": 317,
+  "pages_checked": 317,
+  "links_discovered": 7214,
+  "internal_links_checked": 5259,
+  "unique_internal_targets": 751,
+  "external_links_ignored": 241,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/done/index.html",
       "status": 200,
-      "duration_ms": 1025,
-      "bytes": 7931
+      "duration_ms": 1011,
+      "bytes": 17466
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 53,
+      "duration_ms": 73,
       "bytes": 8695
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 39,
       "bytes": 15978
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 39,
+      "bytes": 11768
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 29,
+      "duration_ms": 37,
       "bytes": 8158
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 37,
+      "bytes": 7931
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 35,
       "bytes": 23099
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 35,
       "bytes": 9430
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 27,
-      "bytes": 11768
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 25,
+      "duration_ms": 34,
       "bytes": 15879
     },
     {
-      "route": "/check-tos/index.html",
+      "route": "/documents/templates/tos-founding-protocol/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 5818
+      "duration_ms": 18,
+      "bytes": 4570
     },
     {
-      "route": "/contacts/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 22241
-    },
-    {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/needs/materials-for-small-repairs/index.html",
       "status": 200,
       "duration_ms": 16,
-      "bytes": 8176
+      "bytes": 7644
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/data-quality/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 15409
+      "duration_ms": 15,
+      "bytes": 7786
+    },
+    {
+      "route": "/done/gubari-projects-archive/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 8513
+    },
+    {
+      "route": "/needs/need-tos-community-links-2026/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 7718
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 14,
       "bytes": 23597
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/data-dictionary/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 10450
+      "bytes": 10644
     },
     {
-      "route": "/documents/templates/tos-charter-draft/index.html",
+      "route": "/needs/seedlings-for-greening/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 5626
+      "bytes": 7879
     },
     {
       "route": "/chairperson/news/index.html",
@@ -110,28 +122,16 @@
       "bytes": 5404
     },
     {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 10450
+    },
+    {
       "route": "/communication-kit/index.html",
       "status": 200,
-      "duration_ms": 11,
+      "duration_ms": 13,
       "bytes": 24905
-    },
-    {
-      "route": "/create-tos/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 12658
-    },
-    {
-      "route": "/content-standards/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 13193
-    },
-    {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 3948
     }
   ]
 }
