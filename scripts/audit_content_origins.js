@@ -74,8 +74,19 @@ function main() {
 
       if (origin === 'verified') {
         const source = item.source || item.source_label;
-        if (!source) errors.push(`${label}: verified content requires source or source_label`);
-        if (!item.source_url) errors.push(`${label}: verified content requires source_url`);
+        const sourceUrl = item.source_url;
+        const implementationSource = collection === 'projects' && item.project_kind === 'verified_actual'
+          ? item.implementation_source
+          : '';
+        const implementationSourceUrl = collection === 'projects' && item.project_kind === 'verified_actual'
+          ? item.implementation_source_url
+          : '';
+        const hasPrimarySourcePair = Boolean(source && sourceUrl);
+        const hasImplementationSourcePair = Boolean(implementationSource && implementationSourceUrl);
+
+        if (!hasPrimarySourcePair && !hasImplementationSourcePair) {
+          errors.push(`${label}: verified content requires source/source_url or, for verified_actual projects, implementation_source/implementation_source_url`);
+        }
       }
 
       if (origin === 'request' && collection === 'done' && !item.needs_details) {
