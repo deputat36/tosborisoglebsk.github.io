@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-09T11:05:07.953Z",
-  "total": 321,
+  "generated_at": "2026-09-09T11:12:01.272Z",
+  "total": 324,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -2427,6 +2427,24 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/vostochnyy-obshchestvennaya-zona-2020/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/vostochnyy-obshchestvennaya-zona-2020/",
+      "title": "ТОС «Восточный»: благоустройство общественной зоны | Проекты ТОС БГО",
+      "description": "Весной 2020 года жители ТОС «Восточный» благоустроили общественную зону между улицами Весенней и Объездной после серии из четырёх субботников.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/gubari-vodonapornaya-bashnya-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/gubari-vodonapornaya-bashnya-2021/",
+      "title": "ТОС «Губари»: замена водонапорной башни | Проекты ТОС БГО",
+      "description": "В 2021 году в селе Губари заменили водонапорную башню; позднейшая публикация РИА «Воронеж» приводит этот объект среди реализованных проектов территории.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/kalinka-territoriya-detskogo-zdorovya-2024/index.html",
       "url": "https://tosborisoglebsk.ru/projects/kalinka-territoriya-detskogo-zdorovya-2024/",
       "title": "ТОС «Калинка»: «Территория детского здоровья» | Проекты ТОС БГО",
@@ -2440,6 +2458,15 @@
       "url": "https://tosborisoglebsk.ru/projects/mahrovka-vyezdnaya-stela-2023/",
       "title": "ТОС «Махровка»: въездная стела после доработки проекта | Проекты ТОС БГО",
       "description": "В 2023 году в Махровке установили новую въездную стелу после того, как доработанный проект получил поддержку с третьей конкурсной попытки.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/mayak-dvorik-detstva-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/mayak-dvorik-detstva-2024/",
+      "title": "ТОС «Маяк»: детская площадка «Дворик детства» | Проекты ТОС БГО",
+      "description": "Осенью 2024 года в селе Чигорак ТОС «Маяк» обустроил детскую площадку «Дворик детства» после победы проекта в областном конкурсе общественно полезных инициатив.",
       "section": "Проекты",
       "search_group": "projects",
       "content_origin": "verified"
