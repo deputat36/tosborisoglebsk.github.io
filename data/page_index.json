@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-09T10:58:23.802Z",
-  "total": 317,
+  "generated_at": "2026-09-09T11:05:07.953Z",
+  "total": 321,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -2436,6 +2436,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/mahrovka-vyezdnaya-stela-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/mahrovka-vyezdnaya-stela-2023/",
+      "title": "ТОС «Махровка»: въездная стела после доработки проекта | Проекты ТОС БГО",
+      "description": "В 2023 году в Махровке установили новую въездную стелу после того, как доработанный проект получил поддержку с третьей конкурсной попытки.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/mirolyubie-igray-i-pobezhday-2026/index.html",
       "url": "https://tosborisoglebsk.ru/projects/mirolyubie-igray-i-pobezhday-2026/",
       "title": "ТОС «Миролюбие»: проект «Играй и побеждай» | Проекты ТОС БГО",
@@ -2449,6 +2458,33 @@
       "url": "https://tosborisoglebsk.ru/projects/petrovskoe-remont-skvazhiny-2023/",
       "title": "ТОС «Петровское»: ремонт водозаборной скважины №1 | Проекты ТОС БГО",
       "description": "В 2023 году в селе Петровское завершили ремонт водозаборной скважины №1 с заменой труб, фильтров, насоса, станции управления и защиты.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/severnyy-39-detskaya-ploshchadka-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/severnyy-39-detskaya-ploshchadka-2021/",
+      "title": "ТОС «Северный 39»: второй этап детской площадки | Проекты ТОС БГО",
+      "description": "В 2021 году ТОС «Северный 39» продолжил благоустройство детской площадки: на ней установили новое игровое и спортивное оборудование.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/tancyrey-vyezdnaya-stela-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/tancyrey-vyezdnaya-stela-2021/",
+      "title": "ТОС «Танцырей»: въездная стела с символами села | Проекты ТОС БГО",
+      "description": "В октябре 2021 года в Танцырее установили въездную стелу высотой около 5 м, оформленную с использованием местных символов.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/tretyaki-vodonapornaya-bashnya-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/tretyaki-vodonapornaya-bashnya-2024/",
+      "title": "ТОС «Третьяки»: новая водонапорная башня | Проекты ТОС БГО",
+      "description": "В 2024 году в селе Третьяки установили новую водонапорную башню — очередной инфраструктурный проект местного ТОС.",
       "section": "Проекты",
       "search_group": "projects",
       "content_origin": "verified"
