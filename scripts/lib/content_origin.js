@@ -29,7 +29,11 @@ const VERIFIED_NEWS_IDS = new Set([
 ]);
 
 const VERIFIED_PROJECT_IDS = new Set([
-  'mirolyubie-igray-i-pobezhday-2026'
+  'mirolyubie-igray-i-pobezhday-2026',
+  'bogana-universalnaya-sportploshchadka-2023',
+  'kalinka-territoriya-detskogo-zdorovya-2024',
+  'petrovskoe-remont-skvazhiny-2023',
+  'ulyanovka-sportploshchadka-2020'
 ]);
 
 const VERIFIED_DONE_IDS = new Set([

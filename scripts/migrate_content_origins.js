@@ -5,6 +5,7 @@ require('./generate_tos_starter_news');
 require('./generate_verified_news_wave12');
 require('./generate_verified_news_wave13');
 require('./generate_verified_projects_wave1');
+require('./generate_verified_projects_wave2');
 require('./generate_verified_done_wave1');
 require('./generate_verified_done_wave2');
 require('./generate_verified_done_wave3');
