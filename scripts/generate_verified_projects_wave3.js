@@ -130,6 +130,7 @@ function main() {
   console.log(`Verified projects wave 3 synchronized: ${VERIFIED_PROJECTS_WAVE3.map((item) => item.id).join(', ')}`);
 }
 
+require('./generate_verified_projects_wave4');
 main();
 
 module.exports = { VERIFIED_PROJECTS_WAVE3 };
