@@ -37,7 +37,10 @@ const VERIFIED_PROJECT_IDS = new Set([
   'severnyy-39-detskaya-ploshchadka-2021',
   'tretyaki-vodonapornaya-bashnya-2024',
   'tancyrey-vyezdnaya-stela-2021',
-  'mahrovka-vyezdnaya-stela-2023'
+  'mahrovka-vyezdnaya-stela-2023',
+  'gubari-vodonapornaya-bashnya-2021',
+  'vostochnyy-obshchestvennaya-zona-2020',
+  'mayak-dvorik-detstva-2024'
 ]);
 
 const VERIFIED_DONE_IDS = new Set([
