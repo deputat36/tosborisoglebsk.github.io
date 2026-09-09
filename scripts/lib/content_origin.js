@@ -33,7 +33,11 @@ const VERIFIED_PROJECT_IDS = new Set([
   'bogana-universalnaya-sportploshchadka-2023',
   'kalinka-territoriya-detskogo-zdorovya-2024',
   'petrovskoe-remont-skvazhiny-2023',
-  'ulyanovka-sportploshchadka-2020'
+  'ulyanovka-sportploshchadka-2020',
+  'severnyy-39-detskaya-ploshchadka-2021',
+  'tretyaki-vodonapornaya-bashnya-2024',
+  'tancyrey-vyezdnaya-stela-2021',
+  'mahrovka-vyezdnaya-stela-2023'
 ]);
 
 const VERIFIED_DONE_IDS = new Set([
