@@ -252,14 +252,17 @@
     "population": "90",
     "description": "ТОС «Калинка» действует в посёлке Калинино на улицах Центральной и Лесной. Жители объединились, чтобы совместно заниматься вопросами благоустройства, поддерживать порядок на территории и развивать добрососедское взаимодействие. Карточка ТОС будет дополняться новостями, проектами и уточнёнными контактами.",
     "logo": "",
-    "updated_at": "2026-05-23",
+    "updated_at": "2026-09-10",
     "trust": {
-      "source_type": "",
-      "source_ref": "",
-      "checked_at": "",
-      "checked_by": "",
-      "recheck_after": "",
-      "verification_scope": [],
+      "source_type": "public_media_publication",
+      "source_ref": "https://riavrn.ru/news/v-borisoglebskom-poselke-kalinino-pochistili-3-kolodca/",
+      "checked_at": "2026-09-10",
+      "checked_by": "portal-editor:public-source-review",
+      "recheck_after": "2027-09-10",
+      "verification_scope": [
+        "location",
+        "founded"
+      ],
       "publication_consent_ref": ""
     }
   },

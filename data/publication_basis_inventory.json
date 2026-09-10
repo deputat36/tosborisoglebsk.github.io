@@ -11,11 +11,11 @@
     "cards_with_personal_profile": 11,
     "cards_with_community_channel": 14,
     "cards_with_media": 0,
-    "cards_with_source_ref": 0,
+    "cards_with_source_ref": 1,
     "cards_with_publication_consent_ref": 0,
     "basis_documented": 0,
-    "basis_review_required": 24,
-    "source_only_consent_missing": 0,
+    "basis_review_required": 23,
+    "source_only_consent_missing": 1,
     "no_personal_publication": 0,
     "personal_fields_total": 64,
     "phones_total": 20,
@@ -181,13 +181,13 @@
       "community_count": 0,
       "other_public_link_count": 0,
       "media_count": 0,
-      "has_source_ref": false,
+      "has_source_ref": true,
       "has_publication_consent_ref": false,
       "missing_verification_scope": [
         "chairperson",
         "phones"
       ],
-      "basis_status": "basis_review_required"
+      "basis_status": "source_only_consent_missing"
     },
     {
       "slug": "mahrovka",

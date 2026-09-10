@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-09-10T18:50:41.974Z",
+    "generated_at": "2026-09-10T19:18:23.671Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -732,7 +732,7 @@
       "type": "Сельский",
       "location": "п. Калинино",
       "chairperson": "Кабаргина Татьяна Викторовна",
-      "updated_at": "2026-05-23",
+      "updated_at": "2026-09-10",
       "score": 75,
       "priority": "Низкий",
       "missing": [
@@ -742,17 +742,17 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
-        "done": 1,
+        "news": 2,
+        "done": 2,
         "needs": 0,
-        "projects": 2,
+        "projects": 3,
         "events": 0
       },
       "linked_all": {
-        "news": 2,
-        "done": 1,
+        "news": 3,
+        "done": 2,
         "needs": 1,
-        "projects": 2,
+        "projects": 3,
         "events": 0
       },
       "linked_requests": {
@@ -764,13 +764,13 @@
       },
       "linked_origins": {
         "news": {
-          "verified": 1,
+          "verified": 2,
           "editorial": 0,
           "starter": 0,
           "request": 1
         },
         "done": {
-          "verified": 1,
+          "verified": 2,
           "editorial": 0,
           "starter": 0,
           "request": 0
@@ -782,7 +782,7 @@
           "request": 1
         },
         "projects": {
-          "verified": 1,
+          "verified": 2,
           "editorial": 0,
           "starter": 1,
           "request": 0
@@ -797,8 +797,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 110,
+        "date": "2026-09-10",
+        "age_days": 0,
         "stale": false,
         "source": "",
         "note": ""

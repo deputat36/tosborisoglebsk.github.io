@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-09-10T18:50:26.790Z",
+    "generated_at": "2026-09-10T19:18:03.778Z",
     "total": 24,
     "good": 20,
     "medium": 4,
@@ -9,7 +9,7 @@
     "partial": 0,
     "needs_review": 24,
     "unknown": 0,
-    "checked_with_evidence": 0,
+    "checked_with_evidence": 1,
     "without_phone": 4,
     "without_email": 16,
     "without_social": 4,
@@ -85,10 +85,13 @@
       "name": "Калинка",
       "location": "п. Калинино",
       "chairperson": "Кабаргина Татьяна Викторовна",
-      "updated_at": "2026-05-23",
-      "checked_at": "",
-      "recheck_after": "",
-      "verification_scope": [],
+      "updated_at": "2026-09-10",
+      "checked_at": "2026-09-10",
+      "recheck_after": "2027-09-10",
+      "verification_scope": [
+        "location",
+        "founded"
+      ],
       "score": 79,
       "level": "medium",
       "verification_status": "needs_review",
@@ -96,8 +99,7 @@
       "issues": [
         "нет email",
         "нет соцсетей",
-        "нет логотипа",
-        "нет даты фактической проверки"
+        "нет логотипа"
       ]
     },
     {

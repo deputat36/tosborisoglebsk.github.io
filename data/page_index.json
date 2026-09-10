@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T18:50:42.270Z",
-  "total": 343,
+  "generated_at": "2026-09-10T19:18:24.084Z",
+  "total": 346,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1545,6 +1545,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "news/kalinka-kolodec-dusha-poselka-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/news/kalinka-kolodec-dusha-poselka-2023/",
+      "title": "ТОС «Калинка» благоустроил три колодца в посёлке Калинино | ТОС БГО",
+      "description": "В рамках проекта «Колодец — душа поселка» жители очистили и благоустроили три колодца; источник подтверждает областной грант 280 тыс. рублей и 30 тыс. рублей вклада жителей.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/kalinka-playground-2024/index.html",
       "url": "https://tosborisoglebsk.ru/news/kalinka-playground-2024/",
       "title": "ТОС «Калинка» обустроил первую детскую площадку в посёлке Калинино | ТОС БГО",
@@ -2553,6 +2562,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/kalinka-kolodec-dusha-poselka-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/kalinka-kolodec-dusha-poselka-2023/",
+      "title": "ТОС «Калинка»: «Колодец — душа поселка» | Проекты ТОС БГО",
+      "description": "Реализованный проект по очистке и благоустройству трёх колодцев в посёлке Калинино: восстановлены ворота и верхние домики, забетонированы подходы, установлены лавочки.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/kalinka-territoriya-detskogo-zdorovya-2024/index.html",
       "url": "https://tosborisoglebsk.ru/projects/kalinka-territoriya-detskogo-zdorovya-2024/",
       "title": "ТОС «Калинка»: «Территория детского здоровья» | Проекты ТОС БГО",
@@ -2809,6 +2827,15 @@
       "url": "https://tosborisoglebsk.ru/done/result-archive-needed-kalinka/",
       "title": "ТОС «Калинка»: в посёлке появилась первая детская площа… | Сделано ТОСами БГО",
       "description": "РИА «Воронеж» подтвердило реализацию проекта «Территория детского здоровья»: на пустыре в посёлке Калинино появилась первая детская площадка.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
+    },
+    {
+      "path": "done/kalinka-kolodec-dusha-poselka-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/done/kalinka-kolodec-dusha-poselka-2023/",
+      "title": "ТОС «Калинка»: очищены и благоустроены три колодца | Сделано ТОСами БГО",
+      "description": "Проект «Колодец — душа поселка» помог восстановить три старых колодца и благоустроить территорию вокруг них.",
       "section": "Сделано",
       "search_group": "done",
       "content_origin": "verified"
