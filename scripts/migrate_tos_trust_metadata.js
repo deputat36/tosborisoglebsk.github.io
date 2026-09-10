@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+require('./verify_kalinka_public_profile');
 
 const filePath = path.join(process.cwd(), 'data', 'toses.json');
 
