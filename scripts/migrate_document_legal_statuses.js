@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+require('./generate_chairperson_routine_documents');
 
 const documentsPath = path.join(process.cwd(), 'data', 'documents.json');
 
