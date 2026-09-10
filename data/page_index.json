@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T04:29:35.883Z",
-  "total": 331,
+  "generated_at": "2026-09-10T08:07:57.167Z",
+  "total": 332,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -136,6 +136,15 @@
       "url": "https://tosborisoglebsk.ru/documents/templates/meeting-agenda/",
       "title": "Повестка собрания ТОС — шаблон",
       "description": "Печатный шаблон повестки собрания или конференции жителей ТОС: дата, место, форма проведения, вопросы, ответственные и материалы к обсуждению.",
+      "section": "Документы",
+      "search_group": "documents",
+      "content_origin": "reference"
+    },
+    {
+      "path": "documents/templates/resident-initiative-request/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/resident-initiative-request/",
+      "title": "Предложение инициативы жителей ТОС | Документы ТОС БГО",
+      "description": "Заполняемый и печатный шаблон предложения инициативы жителей: проблема территории, предлагаемое решение, поддержка жителей, ресурсы, результат и материалы для рассмотрения ТОС.",
       "section": "Документы",
       "search_group": "documents",
       "content_origin": "reference"
