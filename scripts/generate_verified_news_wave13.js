@@ -69,6 +69,7 @@ function main() {
   console.log(`Wave 13 verified news synchronized: ${VERIFIED_NEWS_WAVE13.map((item) => item.id).join(', ')}`);
 }
 
+require('./generate_verified_news_wave14');
 main();
 
 module.exports = { VERIFIED_NEWS_WAVE13, main, upsertById };
