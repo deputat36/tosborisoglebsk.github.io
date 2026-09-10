@@ -35,7 +35,6 @@ function main() {
   };
 
   if (!hasStrongerEvidence(current.trust)) {
-    next.verification_status = current.verification_status === 'verified' ? 'verified' : 'partial';
     next.trust = {
       ...(current.trust || {}),
       source_type: SOURCE_TYPE,
@@ -55,7 +54,7 @@ function main() {
   console.log(
     hasStrongerEvidence(current.trust)
       ? 'Kalinka profile: stronger existing trust preserved; stable source-backed fields synchronized'
-      : `Kalinka profile partially verified from public source: ${VERIFIED_SCOPE.join(', ')}`
+      : `Kalinka stable fields verified from public source: ${VERIFIED_SCOPE.join(', ')}; overall card status remains unchanged`
   );
 }
 
