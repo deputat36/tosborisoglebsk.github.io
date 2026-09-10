@@ -9,7 +9,7 @@ const SOURCE_LABEL = '«Блокнот Борисоглебск», 27 октяб
 const VERIFIED_PROJECTS_WAVE5 = [
   {
     id: 'ivanovka-ulichnoe-osveshchenie-2021',
-    title: 'ТОС «Ивановка»: проект уличного освещения — победитель конкурса 2021 года',
+    title: 'ТОС «Ивановка»: уличное освещение — победитель конкурса 2021',
     type: 'Инфраструктура и уличное освещение',
     status: 'published',
     project_kind: 'verified_competition',
@@ -30,7 +30,7 @@ const VERIFIED_PROJECTS_WAVE5 = [
   },
   {
     id: 'podstepki-ograzhdenie-kladbishcha-2021',
-    title: 'ТОС «Подстёпки»: проект ограждения кладбища — победитель конкурса 2021 года',
+    title: 'ТОС «Подстёпки»: ограждение кладбища — победитель конкурса 2021',
     type: 'Благоустройство общественной территории',
     status: 'published',
     project_kind: 'verified_competition',
@@ -51,7 +51,7 @@ const VERIFIED_PROJECTS_WAVE5 = [
   },
   {
     id: 'port-artur-blagoustroystvo-kladbishcha-2021',
-    title: 'ТОС «Порт Артур»: благоустройство кладбища — победитель конкурса 2021 года',
+    title: 'ТОС «Порт Артур»: благоустройство кладбища — победитель конкурса 2021',
     type: 'Благоустройство общественной территории',
     status: 'published',
     project_kind: 'verified_competition',
@@ -72,7 +72,7 @@ const VERIFIED_PROJECTS_WAVE5 = [
   },
   {
     id: 'pervomayskiy-ulichnaya-scena-2021',
-    title: 'ТОС «Первомайский»: уличная сцена — победитель конкурса 2021 года',
+    title: 'ТОС «Первомайский»: уличная сцена — победитель конкурса 2021',
     type: 'Культура и общественное пространство',
     status: 'published',
     project_kind: 'verified_competition',
@@ -93,7 +93,7 @@ const VERIFIED_PROJECTS_WAVE5 = [
   },
   {
     id: 'mechta-rodnik-2021',
-    title: 'ТОС «Мечта»: благоустройство родника — победитель конкурса 2021 года',
+    title: 'ТОС «Мечта»: благоустройство родника — победитель конкурса 2021',
     type: 'Экология и благоустройство',
     status: 'published',
     project_kind: 'verified_competition',
