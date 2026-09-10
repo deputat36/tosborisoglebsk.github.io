@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 require('./generate_chairperson_routine_documents');
+require('./verify_federal_law_33_document');
 
 const documentsPath = path.join(process.cwd(), 'data', 'documents.json');
 
