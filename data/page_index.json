@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T18:40:37.073Z",
-  "total": 338,
+  "generated_at": "2026-09-10T18:43:36.745Z",
+  "total": 340,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1113,6 +1113,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/tos-activists-roles/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-activists-roles/",
+      "title": "Как распределить роли в активе ТОС и не перегрузить председателя | Материалы ТОС БГО",
+      "description": "Устойчивый ТОС работает лучше, когда председатель координирует команду, а не лично ведёт каждый чат, проект, документ, субботник и фотоотчёт. Начните не…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/public-report/index.html",
       "url": "https://tosborisoglebsk.ru/materials/public-report/",
       "title": "Как сделать простой публичный отчёт ТОС | Материалы ТОС БГО",
@@ -1180,6 +1189,15 @@
       "url": "https://tosborisoglebsk.ru/materials/documents-for-tos/",
       "title": "Какие документы нужны активному ТОС | Материалы ТОС БГО",
       "description": "Активному ТОСу нужен понятный архив: устав, протоколы, решения, сметы, отчёты, фото и список ответственных лиц. Устав ТОС и документы о регистрации…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/chairperson-first-100-days/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/chairperson-first-100-days/",
+      "title": "Первые 100 дней председателя ТОС: практический план работы | Материалы ТОС БГО",
+      "description": "Первые месяцы лучше посвятить не громким обещаниям, а порядку в документах, связи с жителями, понятному списку проблем и одному достижимому результату…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
