@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T18:43:36.745Z",
-  "total": 340,
+  "generated_at": "2026-09-10T18:47:10.717Z",
+  "total": 343,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1617,6 +1617,15 @@
       "content_origin": "request"
     },
     {
+      "path": "news/mirolyubie-blagodarim-pomnim-gordimsya-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/news/mirolyubie-blagodarim-pomnim-gordimsya-2022/",
+      "title": "ТОС «Миролюбие» реализовал проект «Благодарим, помним и гордимся» | ТОС БГО",
+      "description": "РИА «Воронеж» подтвердило благоустройство общественного пространства и открытие памятника сельским труженикам в посёлке Миролюбие.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/mirolyubie-project-winner-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/mirolyubie-project-winner-2026/",
       "title": "ТОС «Миролюбие» реализовал проект «Играй и побеждай» в 2026 году | ТОС БГО",
@@ -2580,6 +2589,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/mirolyubie-blagodarim-pomnim-gordimsya-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/mirolyubie-blagodarim-pomnim-gordimsya-2022/",
+      "title": "ТОС «Миролюбие»: «Благодарим, помним и гордимся» | Проекты ТОС БГО",
+      "description": "Проект объединил благоустройство общественного пространства и установку памятника сельским труженикам. Территорию благоустроили в 2021 году, памятник открыли 26 ноября 2022 года.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/mirolyubie-igray-i-pobezhday-2026/index.html",
       "url": "https://tosborisoglebsk.ru/projects/mirolyubie-igray-i-pobezhday-2026/",
       "title": "ТОС «Миролюбие»: проект «Играй и побеждай» | Проекты ТОС БГО",
@@ -2821,6 +2839,15 @@
       "section": "Сделано",
       "search_group": "done",
       "content_origin": "request"
+    },
+    {
+      "path": "done/mirolyubie-blagodarim-pomnim-gordimsya-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/done/mirolyubie-blagodarim-pomnim-gordimsya-2022/",
+      "title": "ТОС «Миролюбие»: благоустроена территория и открыт памя… | Сделано ТОСами БГО",
+      "description": "В рамках проекта «Благодарим, помним и гордимся» активисты благоустроили общественное пространство, а в ноябре 2022 года открыли памятник сельским…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
     },
     {
       "path": "done/result-archive-needed-mirolyubie/index.html",
