@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T18:32:43.505Z",
-  "total": 335,
+  "generated_at": "2026-09-10T18:40:37.073Z",
+  "total": 338,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -15,10 +15,28 @@
   },
   "pages": [
     {
+      "path": "documents/templates/chairperson-annual-report/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/chairperson-annual-report/",
+      "title": "Годовой отчёт председателя ТОС | Документы ТОС БГО",
+      "description": "Заполняемый и печатный шаблон годового отчёта председателя ТОС: работа с жителями, собрания, проекты, партнёры, публичность, проблемы и план на следующий год.",
+      "section": "Документы",
+      "search_group": "documents",
+      "content_origin": "reference"
+    },
+    {
       "path": "documents/index.html",
       "url": "https://tosborisoglebsk.ru/documents/",
       "title": "Документы и шаблоны для ТОС БГО — библиотека председателя",
       "description": "Библиотека документов и заполняемых шаблонов для ТОС: создание, собрания, проекты, отчёты, обращения и правовая база.",
+      "section": "Документы",
+      "search_group": "documents",
+      "content_origin": "reference"
+    },
+    {
+      "path": "documents/templates/resident-appeals-register/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/resident-appeals-register/",
+      "title": "Журнал обращений жителей ТОС | Документы ТОС БГО",
+      "description": "Заполняемый и печатный журнал обращений жителей для председателя ТОС: тема, категория, ответственный, срок, статус, результат и следующий шаг.",
       "section": "Документы",
       "search_group": "documents",
       "content_origin": "reference"
@@ -541,6 +559,15 @@
       "url": "https://tosborisoglebsk.ru/legal/",
       "title": "Правовая основа ТОС простыми словами — ТОС БГО",
       "description": "Правовой навигатор ТОС БГО: актуальная федеральная основа, изменения Устава БГО 2025 года, собрания, границы, устав ТОС, инициативные проекты и статус документов.",
+      "section": "Правовая основа",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
+      "path": "legal/chairperson-practical-checklist/index.html",
+      "url": "https://tosborisoglebsk.ru/legal/chairperson-practical-checklist/",
+      "title": "Правовая памятка председателю ТОС: обращения и решения | ТОС БГО",
+      "description": "Практическая правовая памятка председателю ТОС БГО: как различать рабочее обращение, собрание граждан, решение ТОС, проект и вопрос компетенции органа власти.",
       "section": "Правовая основа",
       "search_group": "guides",
       "content_origin": "reference"

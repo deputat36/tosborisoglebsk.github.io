@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T18:32:31.091Z",
+  "generated_at": "2026-09-10T18:40:24.714Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 335,
-  "pages_checked": 335,
-  "links_discovered": 7730,
-  "internal_links_checked": 5595,
-  "unique_internal_targets": 786,
-  "external_links_ignored": 283,
+  "pages_indexed": 338,
+  "pages_checked": 338,
+  "links_discovered": 7756,
+  "internal_links_checked": 5616,
+  "unique_internal_targets": 793,
+  "external_links_ignored": 287,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 69,
-      "bytes": 8695
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 35,
-      "bytes": 15978
-    },
-    {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 35,
+      "duration_ms": 1015,
       "bytes": 7931
     },
     {
-      "route": "/chairperson/conflicts/index.html",
+      "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 33,
-      "bytes": 8158
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 32,
-      "bytes": 9430
+      "duration_ms": 232,
+      "bytes": 8695
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 32,
+      "duration_ms": 126,
       "bytes": 11768
-    },
-    {
-      "route": "/calendar/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 30,
-      "bytes": 15879
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 125,
       "bytes": 23099
     },
     {
-      "route": "/needs/update-data-bogana-2026/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 7941
+      "duration_ms": 123,
+      "bytes": 8158
     },
     {
-      "route": "/needs/update-data-chkalovec-2026/index.html",
+      "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 8065
+      "duration_ms": 121,
+      "bytes": 15879
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 121,
+      "bytes": 9430
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 121,
+      "bytes": 15978
+    },
+    {
+      "route": "/done/result-archive-needed-port-artur/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 8635
+    },
+    {
+      "route": "/done/result-archive-needed-ulyanovka/index.html",
       "status": 200,
       "duration_ms": 17,
-      "bytes": 10450
+      "bytes": 8311
     },
     {
-      "route": "/needs/update-data-gubari-2026/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 8048
-    },
-    {
-      "route": "/create-tos/action-routes/index.html",
+      "route": "/done/result-archive-needed-prostornyy/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 12658
+      "bytes": 8895
     },
     {
-      "route": "/documents/templates/resident-initiative-request/index.html",
+      "route": "/done/result-archive-needed-uyutnyy/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 8872
+      "bytes": 8809
     },
     {
-      "route": "/done/result-archive-needed-bogana/index.html",
+      "route": "/faq/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 8295
+      "bytes": 18664
     },
     {
-      "route": "/needs/seedlings-for-greening/index.html",
+      "route": "/needs/collect-tos-news-2026/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 7879
-    },
-    {
-      "route": "/needs/update-data-dzerzhinskogo-2026/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 8240
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 23597
-    },
-    {
-      "route": "/chairperson/meeting/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 8176
+      "bytes": 7846
     },
     {
       "route": "/check-tos/index.html",
       "status": 200,
       "duration_ms": 14,
       "bytes": 5818
+    },
+    {
+      "route": "/done/result-archive-needed-petrovskoe/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 8383
+    },
+    {
+      "route": "/field-checklist/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 7852
+    },
+    {
+      "route": "/legal/changes-2025-2026/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 18738
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 23597
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 15409
     }
   ]
 }
