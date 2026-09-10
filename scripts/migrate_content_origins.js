@@ -13,6 +13,7 @@ require('./generate_verified_done_wave2');
 require('./generate_verified_done_wave3');
 require('./generate_chairperson_articles_wave1');
 require('./generate_verified_mirolyubie_memory_project');
+require('./generate_verified_kalinka_wells_project');
 
 const ROOT = process.cwd();
 const COLLECTIONS = ['news', 'projects', 'needs', 'done', 'articles'];

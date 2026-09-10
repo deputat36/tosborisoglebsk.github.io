@@ -9,6 +9,7 @@ const VERIFIED_NEWS_IDS = new Set([
   'tretyaki-seven-projects-news-2026',
   'tancyrey-improvement-news-2026',
   'kalinka-playground-2024',
+  'kalinka-kolodec-dusha-poselka-2023',
   'bogana-sports-ground-2023',
   'mahrovka-project-experience-news-2026',
   'mayak-chigorak-projects-2025',
@@ -35,6 +36,7 @@ const VERIFIED_PROJECT_IDS = new Set([
   'mirolyubie-blagodarim-pomnim-gordimsya-2022',
   'bogana-universalnaya-sportploshchadka-2023',
   'kalinka-territoriya-detskogo-zdorovya-2024',
+  'kalinka-kolodec-dusha-poselka-2023',
   'petrovskoe-remont-skvazhiny-2023',
   'ulyanovka-sportploshchadka-2020',
   'severnyy-39-detskaya-ploshchadka-2021',
@@ -55,6 +57,7 @@ const VERIFIED_PROJECT_IDS = new Set([
 const VERIFIED_DONE_IDS = new Set([
   'result-archive-needed-bogana',
   'result-archive-needed-kalinka',
+  'kalinka-kolodec-dusha-poselka-2023',
   'result-archive-needed-mirolyubie',
   'mirolyubie-blagodarim-pomnim-gordimsya-2022',
   'result-archive-needed-petrovskoe',

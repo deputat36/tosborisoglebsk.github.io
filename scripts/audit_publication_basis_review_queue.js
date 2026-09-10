@@ -17,6 +17,11 @@ function read(filePath) {
   return fs.readFileSync(filePath, 'utf8');
 }
 
+function reasonMatchesMissingFlag(row, reasonCode, missingFlag) {
+  const reasons = String(row.reason_codes || '').split(';').filter(Boolean);
+  return Boolean(row[missingFlag]) === reasons.includes(reasonCode);
+}
+
 function main() {
   const errors = [];
   const inventory = JSON.parse(read(INVENTORY_PATH));
@@ -44,8 +49,12 @@ function main() {
     if (row.priority !== `P0-${row.wave}`) errors.push(`${row.slug}: priority does not match wave`);
     if (row.status !== 'pending_external_confirmation') errors.push(`${row.slug}: unsupported queue status`);
     if (!row.next_action) errors.push(`${row.slug}: missing next_action`);
-    if (!row.reason_codes.includes('publication_consent_ref_missing')) errors.push(`${row.slug}: missing publication consent reason`);
-    if (!row.reason_codes.includes('source_ref_missing')) errors.push(`${row.slug}: missing source reason`);
+    if (!reasonMatchesMissingFlag(row, 'publication_consent_ref_missing', 'missing_publication_consent_ref')) {
+      errors.push(`${row.slug}: publication consent reason does not match missing flag`);
+    }
+    if (!reasonMatchesMissingFlag(row, 'source_ref_missing', 'missing_source_ref')) {
+      errors.push(`${row.slug}: source reason does not match missing flag`);
+    }
 
     if (row.wave < previousWave) errors.push('queue waves are not sorted');
     if (row.wave === previousWave && row.score > previousScore) errors.push('queue scores are not sorted within wave');
