@@ -25,6 +25,12 @@ function main() {
   const phone = record({ slug: 'phone', personal_fields: ['chairperson', 'phones'], personal_field_count: 2, phone_count: 1 });
   const nameOnly = record({ slug: 'name-only' });
   const unknownLink = record({ slug: 'unknown-link', personal_fields: ['chairperson', 'chairperson_links'], personal_field_count: 2, other_public_link_count: 1 });
+  const sourceKnownConsentMissing = record({
+    slug: 'source-known',
+    has_source_ref: true,
+    has_publication_consent_ref: false,
+    basis_status: 'source_only_consent_missing'
+  });
 
   assert.strictEqual(waveFor(profile), 1);
   assert.strictEqual(waveFor(phoneEmail), 1);
@@ -39,9 +45,18 @@ function main() {
   assert.strictEqual(row.status, 'pending_external_confirmation');
   assert.ok(row.reason_codes.includes('personal_profile_published'));
   assert.ok(row.reason_codes.includes('publication_consent_ref_missing'));
+  assert.ok(row.reason_codes.includes('source_ref_missing'));
 
-  const queue = buildQueue({ records: [nameOnly, phone, profile, phoneEmail, unknownLink, record({ slug: 'safe', basis_status: 'basis_documented' })] });
-  assert.deepStrictEqual(queue.map((item) => item.wave), [1, 1, 1, 2, 3]);
+  const sourcedRow = rowFor(sourceKnownConsentMissing);
+  assert.strictEqual(sourcedRow.missing_source_ref, false);
+  assert.strictEqual(sourcedRow.missing_publication_consent_ref, true);
+  assert.strictEqual(sourcedRow.reason_codes.includes('source_ref_missing'), false);
+  assert.strictEqual(sourcedRow.reason_codes.includes('publication_consent_ref_missing'), true);
+
+  const queue = buildQueue({
+    records: [nameOnly, phone, profile, phoneEmail, unknownLink, sourceKnownConsentMissing, record({ slug: 'safe', basis_status: 'basis_documented' })]
+  });
+  assert.deepStrictEqual(queue.map((item) => item.wave), [1, 1, 1, 2, 3, 3]);
   assert.strictEqual(queue.some((item) => item.slug === 'safe'), false);
   assert.strictEqual(JSON.stringify(queue).includes('+7'), false);
   assert.strictEqual(JSON.stringify(queue).includes('http'), false);
