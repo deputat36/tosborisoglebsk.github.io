@@ -3,6 +3,7 @@ const CONTENT_ORIGINS = new Set(['verified', 'editorial', 'starter', 'request'])
 const VERIFIED_NEWS_IDS = new Set([
   'mirolyubie-project-winner-2026',
   'gubari-beautiful-village-2026',
+  'gubari-svecha-pamyati-2026',
   'chkalovec-neighborhood-projects-2026',
   'tretyaki-seven-projects-news-2026',
   'tancyrey-improvement-news-2026',
@@ -39,6 +40,7 @@ const VERIFIED_PROJECT_IDS = new Set([
   'tancyrey-vyezdnaya-stela-2021',
   'mahrovka-vyezdnaya-stela-2023',
   'gubari-vodonapornaya-bashnya-2021',
+  'gubari-svecha-pamyati-2026',
   'vostochnyy-obshchestvennaya-zona-2020',
   'mayak-dvorik-detstva-2024',
   'ivanovka-ulichnoe-osveshchenie-2021',
@@ -57,6 +59,7 @@ const VERIFIED_DONE_IDS = new Set([
   'result-archive-needed-prostornyy',
   'result-archive-needed-uyutnyy',
   'gubari-projects-archive',
+  'gubari-svecha-pamyati-2026',
   'severnyy-39-playground',
   'chkalovec-many-projects',
   'tretyaki-seven-projects',

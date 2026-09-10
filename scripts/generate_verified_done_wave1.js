@@ -121,6 +121,7 @@ function main() {
   console.log(`Verified done wave 1 synchronized: ${VERIFIED_DONE_WAVE1.map((item) => item.id).join(', ')}`);
 }
 
+require('./generate_verified_done_wave4');
 main();
 
 module.exports = { VERIFIED_DONE_WAVE1, main, upsertById };
