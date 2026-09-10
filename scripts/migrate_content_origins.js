@@ -11,6 +11,7 @@ require('./generate_verified_projects_wave4');
 require('./generate_verified_done_wave1');
 require('./generate_verified_done_wave2');
 require('./generate_verified_done_wave3');
+require('./generate_chairperson_articles_wave1');
 
 const ROOT = process.cwd();
 const COLLECTIONS = ['news', 'projects', 'needs', 'done', 'articles'];
