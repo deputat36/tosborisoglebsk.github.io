@@ -105,6 +105,7 @@ function main() {
   console.log(`Verified projects wave 4 synchronized: ${VERIFIED_PROJECTS_WAVE4.map((item) => item.id).join(', ')}`);
 }
 
+require('./generate_verified_projects_wave5');
 main();
 
 module.exports = { VERIFIED_PROJECTS_WAVE4 };
