@@ -2,6 +2,7 @@ const CONTENT_ORIGINS = new Set(['verified', 'editorial', 'starter', 'request'])
 
 const VERIFIED_NEWS_IDS = new Set([
   'mirolyubie-project-winner-2026',
+  'mirolyubie-blagodarim-pomnim-gordimsya-2022',
   'gubari-beautiful-village-2026',
   'gubari-svecha-pamyati-2026',
   'chkalovec-neighborhood-projects-2026',
@@ -31,6 +32,7 @@ const VERIFIED_NEWS_IDS = new Set([
 
 const VERIFIED_PROJECT_IDS = new Set([
   'mirolyubie-igray-i-pobezhday-2026',
+  'mirolyubie-blagodarim-pomnim-gordimsya-2022',
   'bogana-universalnaya-sportploshchadka-2023',
   'kalinka-territoriya-detskogo-zdorovya-2024',
   'petrovskoe-remont-skvazhiny-2023',
@@ -54,6 +56,7 @@ const VERIFIED_DONE_IDS = new Set([
   'result-archive-needed-bogana',
   'result-archive-needed-kalinka',
   'result-archive-needed-mirolyubie',
+  'mirolyubie-blagodarim-pomnim-gordimsya-2022',
   'result-archive-needed-petrovskoe',
   'result-archive-needed-ulyanovka',
   'result-archive-needed-prostornyy',
