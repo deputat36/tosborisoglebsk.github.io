@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T19:18:24.084Z",
-  "total": 346,
+  "generated_at": "2026-09-10T19:22:42.191Z",
+  "total": 352,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1797,6 +1797,24 @@
       "content_origin": "editorial"
     },
     {
+      "path": "news/chkalovec-cvetik-semicvetik-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/news/chkalovec-cvetik-semicvetik-2022/",
+      "title": "ТОС «Чкаловец» открыл первую в БГО экоплощадку для раздельного сбора отходов | ТОС БГО",
+      "description": "Во дворе дома №22 на улице Аэродромной появилась экоплощадка «Цветик-семицветик»: 150 кв. м благоустроенной территории и семь контейнеров для раздельного сбора.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
+      "path": "news/chkalovec-centr-prityazheniya-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/news/chkalovec-centr-prityazheniya-2024/",
+      "title": "ТОС «Чкаловец» создал центр «Связь поколений» для мероприятий жителей | ТОС БГО",
+      "description": "Закрытая беседка «Центр притяжения — связь поколений» стала местом для культурных, патриотических и обучающих мероприятий жителей дома на Аэродромной, 22.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/fz33-tos-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/fz33-tos-2026/",
       "title": "Что говорит ФЗ №33-ФЗ о территориальном общественном самоуправлении | ТОС БГО",
@@ -2697,6 +2715,24 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/chkalovec-centr-prityazheniya-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/chkalovec-centr-prityazheniya-2024/",
+      "title": "ТОС «Чкаловец»: «Центр притяжения — связь поколений» | Проекты ТОС БГО",
+      "description": "Закрытое некапитальное пространство для культурных, патриотических и обучающих мероприятий жителей дома №22 на улице Аэродромной.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/chkalovec-cvetik-semicvetik-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/chkalovec-cvetik-semicvetik-2022/",
+      "title": "ТОС «Чкаловец»: экоплощадка «Цветик-семицветик» | Проекты ТОС БГО",
+      "description": "Первая в Борисоглебском городском округе экоплощадка для раздельного сбора отходов: 150 кв. м территории с плиточным покрытием и семью контейнерами.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/street-lighting-upgrade/index.html",
       "url": "https://tosborisoglebsk.ru/projects/street-lighting-upgrade/",
       "title": "Уличное освещение на проблемном участке | Проекты ТОС БГО",
@@ -2989,6 +3025,24 @@
       "url": "https://tosborisoglebsk.ru/done/chkalovec-many-projects/",
       "title": "ТОС «Чкаловец»: девять лет развития двора и общественны… | Сделано ТОСами БГО",
       "description": "«Вести Воронеж» описали результаты девятилетней работы ТОС «Чкаловец»: зоны отдыха, парковку, видеонаблюдение, беседку, площадку для раздельного сбора…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
+    },
+    {
+      "path": "done/chkalovec-centr-prityazheniya-2024/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chkalovec-centr-prityazheniya-2024/",
+      "title": "ТОС «Чкаловец»: открыт «Центр притяжения — связь поколе… | Сделано ТОСами БГО",
+      "description": "У жителей появилось закрытое благоустроенное пространство для культурных, патриотических и обучающих мероприятий.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
+    },
+    {
+      "path": "done/chkalovec-cvetik-semicvetik-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chkalovec-cvetik-semicvetik-2022/",
+      "title": "ТОС «Чкаловец»: создана экоплощадка «Цветик-семицветик» | Сделано ТОСами БГО",
+      "description": "Во дворе дома на Аэродромной, 22 появилась первая в БГО площадка для раздельного сбора отходов.",
       "section": "Сделано",
       "search_group": "done",
       "content_origin": "verified"
