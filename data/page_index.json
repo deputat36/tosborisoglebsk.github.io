@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T08:07:57.167Z",
-  "total": 332,
+  "generated_at": "2026-09-10T18:32:43.505Z",
+  "total": 335,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1207,6 +1207,15 @@
       "url": "https://tosborisoglebsk.ru/news/tos-grants-2026-voronezh/",
       "title": "В Воронежской области стартовал конкурс проектов ТОС 2026 | ТОС БГО",
       "description": "Для ТОСов региона заявлен конкурс общественно полезных проектов: до 1,5 млн рублей на проект, 14 направлений, общий объём поддержки — 90 млн рублей.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
+      "path": "news/gubari-svecha-pamyati-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/gubari-svecha-pamyati-2026/",
+      "title": "В Губарях завершили проект ТОС «Свеча памяти» | ТОС БГО",
+      "description": "В селе Губари благоустроили территорию у центрального входа на кладбище и заасфальтировали подъезд в рамках проекта ТОС «Свеча памяти».",
       "section": "Новости",
       "search_group": "news",
       "content_origin": "verified"
@@ -2472,6 +2481,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/gubari-svecha-pamyati-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/gubari-svecha-pamyati-2026/",
+      "title": "ТОС «Губари»: проект «Свеча памяти» | Проекты ТОС БГО",
+      "description": "В августе 2026 года в селе Губари завершили проект ТОС «Свеча памяти»: территорию у центрального входа на кладбище благоустроили, а ранее грунтовый подъезд заасфальтировали.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/ivanovka-ulichnoe-osveshchenie-2021/index.html",
       "url": "https://tosborisoglebsk.ru/projects/ivanovka-ulichnoe-osveshchenie-2021/",
       "title": "ТОС «Ивановка»: уличное освещение — победитель конкурса 2021 | Проекты ТОС БГО",
@@ -2674,6 +2692,15 @@
       "url": "https://tosborisoglebsk.ru/done/gubari-projects-archive/",
       "title": "ТОС «Губари»: водонапорная башня и ремонт десяти колодц… | Сделано ТОСами БГО",
       "description": "РИА «Воронеж» сообщило о восьми реализованных за пять лет проектах в Губарях и отдельно указало результаты в сфере водоснабжения: замену водонапорной…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
+    },
+    {
+      "path": "done/gubari-svecha-pamyati-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gubari-svecha-pamyati-2026/",
+      "title": "ТОС «Губари»: завершён проект «Свеча памяти» | Сделано ТОСами БГО",
+      "description": "РИА «Воронеж» подтвердило завершение проекта «Свеча памяти»: у центрального входа на кладбище благоустроили территорию и заасфальтировали ранее грунтовый…",
       "section": "Сделано",
       "search_group": "done",
       "content_origin": "verified"

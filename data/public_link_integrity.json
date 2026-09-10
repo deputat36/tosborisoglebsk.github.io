@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-10T08:07:45.741Z",
+  "generated_at": "2026-09-10T18:32:31.091Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 332,
-  "pages_checked": 332,
-  "links_discovered": 7650,
-  "internal_links_checked": 5540,
-  "unique_internal_targets": 780,
-  "external_links_ignored": 276,
+  "pages_indexed": 335,
+  "pages_checked": 335,
+  "links_discovered": 7730,
+  "internal_links_checked": 5595,
+  "unique_internal_targets": 786,
+  "external_links_ignored": 283,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
@@ -16,13 +16,13 @@
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 68,
+      "duration_ms": 69,
       "bytes": 8695
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 37,
+      "duration_ms": 35,
       "bytes": 15978
     },
     {
@@ -38,88 +38,70 @@
       "bytes": 8158
     },
     {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 32,
+      "bytes": 9430
+    },
+    {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 32,
       "bytes": 11768
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 31,
+      "duration_ms": 30,
       "bytes": 15879
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 31,
+      "duration_ms": 30,
       "bytes": 23099
     },
     {
-      "route": "/campaign/index.html",
+      "route": "/needs/update-data-bogana-2026/index.html",
       "status": 200,
-      "duration_ms": 31,
-      "bytes": 9430
+      "duration_ms": 18,
+      "bytes": 7941
     },
     {
-      "route": "/documents/templates/legal-check-before-meeting/index.html",
+      "route": "/needs/update-data-chkalovec-2026/index.html",
       "status": 200,
-      "duration_ms": 24,
-      "bytes": 12859
+      "duration_ms": 18,
+      "bytes": 8065
     },
     {
-      "route": "/documents/templates/project-budget/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 6397
-    },
-    {
-      "route": "/documents/templates/project-schedule/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 5606
-    },
-    {
-      "route": "/documents/templates/meeting-agenda/index.html",
+      "route": "/chairperson/verify-card/index.html",
       "status": 200,
       "duration_ms": 17,
-      "bytes": 4424
+      "bytes": 10450
     },
     {
-      "route": "/documents/templates/project-passport/index.html",
+      "route": "/needs/update-data-gubari-2026/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 6335
+      "duration_ms": 17,
+      "bytes": 8048
     },
     {
-      "route": "/documents/templates/tos-start-list/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 2632
-    },
-    {
-      "route": "/check-tos/index.html",
+      "route": "/create-tos/action-routes/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 5818
+      "bytes": 12658
     },
     {
-      "route": "/documents/templates/project-final-report/index.html",
+      "route": "/documents/templates/resident-initiative-request/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 10876
+      "bytes": 8872
     },
     {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
+      "route": "/done/result-archive-needed-bogana/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 3948
-    },
-    {
-      "route": "/documents/templates/tos-creation-kit/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 6200
+      "bytes": 8295
     },
     {
       "route": "/needs/seedlings-for-greening/index.html",
@@ -128,10 +110,28 @@
       "bytes": 7879
     },
     {
+      "route": "/needs/update-data-dzerzhinskogo-2026/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 8240
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 23597
+    },
+    {
       "route": "/chairperson/meeting/index.html",
       "status": 200,
       "duration_ms": 14,
       "bytes": 8176
+    },
+    {
+      "route": "/check-tos/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 5818
     }
   ]
 }
