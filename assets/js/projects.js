@@ -22,6 +22,10 @@ function projectIsVerifiedActual(item) {
   return projectOrigin(item) === 'verified' && item.project_kind === 'verified_actual';
 }
 
+function projectIsVerifiedCompetition(item) {
+  return projectOrigin(item) === 'verified' && item.project_kind === 'verified_competition';
+}
+
 function projectOriginTag(item) {
   const origin = projectOrigin(item);
   const labels = {
@@ -58,17 +62,24 @@ function projectCard(item, toses) {
   const detailUrl = item.id ? `/projects/${projectEsc(item.id)}/` : '/projects/';
   const steps = Array.isArray(item.steps) ? item.steps.slice(0, 3) : [];
   const actual = projectIsVerifiedActual(item);
+  const competition = projectIsVerifiedCompetition(item);
+  const verifiedProject = actual || competition;
   const factualDetails = actual
     ? `${item.official_result ? `<p class="tiny"><b>Официальный результат:</b> ${projectEsc(item.official_result)}</p>` : ''}${item.grant_amount ? `<p class="tiny"><b>Сумма гранта:</b> ${projectEsc(item.grant_amount)}</p>` : ''}${item.implementation_status ? `<p class="tiny"><b>Реализация:</b> ${projectEsc(item.implementation_status)}</p>` : ''}${item.based_on ? `<p class="tiny"><b>Основание:</b> ${projectEsc(item.based_on)}</p>` : ''}${steps.length ? `<div class="notice"><b style="color:var(--text)">Подтверждённые этапы</b><br>${steps.map((step) => `- ${projectEsc(step)}`).join('<br>')}</div>` : ''}`
-    : `${item.grant_logic ? `<p class="tiny"><b>Подходит для заявки:</b> ${projectEsc(item.grant_logic)}</p>` : ''}${item.based_on ? `<p class="tiny"><b>Основание:</b> ${projectEsc(item.based_on)}</p>` : ''}${steps.length ? `<div class="notice"><b style="color:var(--text)">Первые шаги</b><br>${steps.map((step) => `- ${projectEsc(step)}`).join('<br>')}</div>` : ''}`;
+    : competition
+      ? `${item.official_result ? `<p class="tiny"><b>Конкурсный результат:</b> ${projectEsc(item.official_result)}</p>` : ''}${item.implementation_status ? `<p class="tiny"><b>Реализация:</b> ${projectEsc(item.implementation_status)}</p>` : ''}${item.based_on ? `<p class="tiny"><b>Основание:</b> ${projectEsc(item.based_on)}</p>` : ''}${steps.length ? `<div class="notice"><b style="color:var(--text)">Подтверждённая хронология</b><br>${steps.map((step) => `- ${projectEsc(step)}`).join('<br>')}</div>` : ''}`
+      : `${item.grant_logic ? `<p class="tiny"><b>Подходит для заявки:</b> ${projectEsc(item.grant_logic)}</p>` : ''}${item.based_on ? `<p class="tiny"><b>Основание:</b> ${projectEsc(item.based_on)}</p>` : ''}${steps.length ? `<div class="notice"><b style="color:var(--text)">Первые шаги</b><br>${steps.map((step) => `- ${projectEsc(step)}`).join('<br>')}</div>` : ''}`;
   const factualActions = actual
     ? `${item.done_id ? `<a class="btn" href="/done/${projectEsc(item.done_id)}/">История результата</a>` : ''}${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.source_url)}">Официальный источник</a>` : ''}${item.implementation_source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.implementation_source_url)}">Источник реализации</a>` : ''}`
-    : `<a class="btn" href="/projects/action-routes/">Маршрут проекта</a><a class="btn" href="/update-tos/?type=project#message-builder">Предложить проект</a>${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.source_url)}">Источник</a>` : ''}`;
+    : competition
+      ? `${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.source_url)}">Источник конкурсного результата</a>` : ''}<a class="btn" href="/update-tos/?${item.tos_slug ? `tos=${projectEsc(item.tos_slug)}&` : ''}type=project#message-builder">Уточнить реализацию</a>`
+      : `<a class="btn" href="/projects/action-routes/">Маршрут проекта</a><a class="btn" href="/update-tos/?type=project#message-builder">Предложить проект</a>${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${projectEsc(item.source_url)}">Источник</a>` : ''}`;
 
   return `<article class="list-item project-card" data-content-origin="${projectEsc(projectOrigin(item))}">
     <div class="meta">
       ${projectOriginTag(item)}
       ${actual ? '<span class="tag ok">Фактический проект</span>' : ''}
+      ${competition ? '<span class="tag warn">Победитель конкурса · реализация уточняется</span>' : ''}
       <span class="tag">${projectEsc(item.type || 'Проект')}</span>
       <span class="tag">${projectEsc(projectCatalogStatus(item))}</span>
       ${tosName ? `<span class="tag">${projectEsc(tosName)}</span>` : ''}
