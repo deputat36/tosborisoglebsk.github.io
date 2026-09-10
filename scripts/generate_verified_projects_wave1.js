@@ -68,6 +68,7 @@ function main() {
 }
 
 require('./generate_verified_projects_wave2');
+require('./generate_verified_projects_wave6');
 main();
 
 module.exports = { VERIFIED_PROJECTS };
