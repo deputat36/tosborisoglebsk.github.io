@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T04:17:50.201Z",
-  "total": 326,
+  "generated_at": "2026-09-10T04:29:35.883Z",
+  "total": 331,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -2463,6 +2463,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/ivanovka-ulichnoe-osveshchenie-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/ivanovka-ulichnoe-osveshchenie-2021/",
+      "title": "ТОС «Ивановка»: уличное освещение — победитель конкурса 2021 | Проекты ТОС БГО",
+      "description": "В 2021 году проект ТОС «Ивановка» по устройству уличного освещения вошёл в число победителей областного конкурса общественно полезных инициатив.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/kalinka-territoriya-detskogo-zdorovya-2024/index.html",
       "url": "https://tosborisoglebsk.ru/projects/kalinka-territoriya-detskogo-zdorovya-2024/",
       "title": "ТОС «Калинка»: «Территория детского здоровья» | Проекты ТОС БГО",
@@ -2490,6 +2499,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/mechta-rodnik-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/mechta-rodnik-2021/",
+      "title": "ТОС «Мечта»: благоустройство родника — победитель конкурса 2021 | Проекты ТОС БГО",
+      "description": "В 2021 году проект ТОС «Мечта» из села Чигорак по благоустройству родника вошёл в число победителей областного конкурса общественно полезных инициатив.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/mirolyubie-igray-i-pobezhday-2026/index.html",
       "url": "https://tosborisoglebsk.ru/projects/mirolyubie-igray-i-pobezhday-2026/",
       "title": "ТОС «Миролюбие»: проект «Играй и побеждай» | Проекты ТОС БГО",
@@ -2499,10 +2517,37 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/pervomayskiy-ulichnaya-scena-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/pervomayskiy-ulichnaya-scena-2021/",
+      "title": "ТОС «Первомайский»: уличная сцена — победитель конкурса 2021 | Проекты ТОС БГО",
+      "description": "В 2021 году проект ТОС «Первомайский» из села Чигорак по устройству уличной сцены вошёл в число победителей областного конкурса общественно полезных инициатив.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/petrovskoe-remont-skvazhiny-2023/index.html",
       "url": "https://tosborisoglebsk.ru/projects/petrovskoe-remont-skvazhiny-2023/",
       "title": "ТОС «Петровское»: ремонт водозаборной скважины №1 | Проекты ТОС БГО",
       "description": "В 2023 году в селе Петровское завершили ремонт водозаборной скважины №1 с заменой труб, фильтров, насоса, станции управления и защиты.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/podstepki-ograzhdenie-kladbishcha-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/podstepki-ograzhdenie-kladbishcha-2021/",
+      "title": "ТОС «Подстёпки»: ограждение кладбища — победитель конкурса 2021 | Проекты ТОС БГО",
+      "description": "В 2021 году проект ТОС «Подстёпки» по устройству ограждения кладбища вошёл в число победителей областного конкурса общественно полезных инициатив.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
+      "path": "projects/port-artur-blagoustroystvo-kladbishcha-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/port-artur-blagoustroystvo-kladbishcha-2021/",
+      "title": "ТОС «Порт Артур»: благоустройство кладбища — победитель конкурса 2021 | Проекты ТОС БГО",
+      "description": "В 2021 году проект ТОС «Порт Артур» из села Чигорак по благоустройству кладбища вошёл в число победителей областного конкурса общественно полезных инициатив.",
       "section": "Проекты",
       "search_group": "projects",
       "content_origin": "verified"

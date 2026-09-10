@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-09-10T04:17:49.851Z",
+    "generated_at": "2026-09-10T04:29:35.523Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -51,14 +51,14 @@
         "news": 1,
         "done": 0,
         "needs": 0,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_all": {
         "news": 2,
         "done": 1,
         "needs": 1,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_requests": {
@@ -88,7 +88,7 @@
           "request": 1
         },
         "projects": {
-          "verified": 0,
+          "verified": 1,
           "editorial": 0,
           "starter": 1,
           "request": 0
@@ -141,14 +141,14 @@
         "news": 1,
         "done": 0,
         "needs": 0,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_all": {
         "news": 2,
         "done": 1,
         "needs": 1,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_requests": {
@@ -178,7 +178,7 @@
           "request": 1
         },
         "projects": {
-          "verified": 0,
+          "verified": 1,
           "editorial": 0,
           "starter": 1,
           "request": 0
@@ -831,14 +831,14 @@
         "news": 1,
         "done": 0,
         "needs": 0,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_all": {
         "news": 2,
         "done": 1,
         "needs": 1,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_requests": {
@@ -868,7 +868,7 @@
           "request": 1
         },
         "projects": {
-          "verified": 0,
+          "verified": 1,
           "editorial": 0,
           "starter": 1,
           "request": 0
@@ -917,14 +917,14 @@
         "news": 1,
         "done": 0,
         "needs": 0,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_all": {
         "news": 2,
         "done": 1,
         "needs": 1,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_requests": {
@@ -954,7 +954,7 @@
           "request": 1
         },
         "projects": {
-          "verified": 0,
+          "verified": 1,
           "editorial": 0,
           "starter": 1,
           "request": 0
@@ -1003,14 +1003,14 @@
         "news": 1,
         "done": 0,
         "needs": 0,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_all": {
         "news": 2,
         "done": 1,
         "needs": 1,
-        "projects": 1,
+        "projects": 2,
         "events": 0
       },
       "linked_requests": {
@@ -1040,7 +1040,7 @@
           "request": 1
         },
         "projects": {
-          "verified": 0,
+          "verified": 1,
           "editorial": 0,
           "starter": 1,
           "request": 0
