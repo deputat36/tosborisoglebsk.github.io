@@ -40,7 +40,12 @@ const VERIFIED_PROJECT_IDS = new Set([
   'mahrovka-vyezdnaya-stela-2023',
   'gubari-vodonapornaya-bashnya-2021',
   'vostochnyy-obshchestvennaya-zona-2020',
-  'mayak-dvorik-detstva-2024'
+  'mayak-dvorik-detstva-2024',
+  'ivanovka-ulichnoe-osveshchenie-2021',
+  'podstepki-ograzhdenie-kladbishcha-2021',
+  'port-artur-blagoustroystvo-kladbishcha-2021',
+  'pervomayskiy-ulichnaya-scena-2021',
+  'mechta-rodnik-2021'
 ]);
 
 const VERIFIED_DONE_IDS = new Set([
