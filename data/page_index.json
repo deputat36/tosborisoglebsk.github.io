@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-09T11:12:01.272Z",
-  "total": 324,
+  "generated_at": "2026-09-10T04:17:50.201Z",
+  "total": 326,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -217,6 +217,15 @@
       "url": "https://tosborisoglebsk.ru/documents/templates/project-checklist/",
       "title": "Чек-лист готовности проекта ТОС",
       "description": "Печатный чек-лист проверки проекта ТОС перед подачей на конкурс или партнёру: проблема, фото, поддержка жителей, смета, сроки и отчётность.",
+      "section": "Документы",
+      "search_group": "documents",
+      "content_origin": "reference"
+    },
+    {
+      "path": "documents/templates/legal-check-before-meeting/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/legal-check-before-meeting/",
+      "title": "Чек-лист перед собранием ТОС — ТОС БГО",
+      "description": "Печатный методический чек-лист председателю ТОС: что проверить перед собранием в 2026 году — устав, границы, участники, повестка, кворум, протокол и персональные данные.",
       "section": "Документы",
       "search_group": "documents",
       "content_origin": "reference"
@@ -522,7 +531,7 @@
       "path": "legal/index.html",
       "url": "https://tosborisoglebsk.ru/legal/",
       "title": "Правовая основа ТОС простыми словами — ТОС БГО",
-      "description": "Правовой навигатор по территориальному общественному самоуправлению: федеральный закон, устав БГО, границы, собрания, устав ТОС и статус документов.",
+      "description": "Правовой навигатор ТОС БГО: актуальная федеральная основа, изменения Устава БГО 2025 года, собрания, границы, устав ТОС, инициативные проекты и статус документов.",
       "section": "Правовая основа",
       "search_group": "guides",
       "content_origin": "reference"
@@ -531,7 +540,16 @@
       "path": "legal/federal-law-33/index.html",
       "url": "https://tosborisoglebsk.ru/legal/federal-law-33/",
       "title": "ФЗ №33-ФЗ и ТОС простыми словами — ТОС БГО",
-      "description": "Понятная справка для председателей и актива ТОС БГО: что меняет ФЗ №33-ФЗ о местном самоуправлении, какие нормы важны для ТОС и что нужно проверять.",
+      "description": "Актуальная справка по статье 50 Федерального закона №33-ФЗ для ТОС БГО: границы, собрание, конференция, устав, органы ТОС, инициативные проекты и переходный период.",
+      "section": "Правовая основа",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
+      "path": "legal/changes-2025-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/legal/changes-2025-2026/",
+      "title": "Что изменилось для ТОС БГО в 2025–2026 годах",
+      "description": "Актуализация правовой базы ТОС Борисоглебского городского округа: 33-ФЗ, изменения Устава БГО 2025 года, новый порядок собраний 2026 года и практический чек-лист.",
       "section": "Правовая основа",
       "search_group": "guides",
       "content_origin": "reference"
