@@ -22,6 +22,8 @@ runChecks([
   ['outreach execution packet self-test', 'scripts/test_outreach_execution.js'],
   ['outreach execution packet', 'scripts/audit_outreach_execution.js'],
   ['publication basis execution self-test', 'scripts/test_publication_basis_execution.js'],
+  ['publication basis confirmation register sync self-test', 'scripts/test_publication_basis_confirmation_register_sync.js'],
+  ['synchronize publication basis confirmation register', 'scripts/sync_publication_basis_confirmation_register.js'],
   ['publication basis confirmation register', 'scripts/audit_publication_basis_confirmation_register.js'],
   ['publication basis review page', 'scripts/audit_publication_basis_review_page.js'],
   ['personal data decision packet self-test', 'scripts/test_personal_data_decision_packet.js'],
