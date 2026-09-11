@@ -16,6 +16,7 @@ require('./generate_chairperson_articles_wave2');
 require('./generate_verified_mirolyubie_memory_project');
 require('./generate_verified_kalinka_wells_project');
 require('./generate_verified_chkalovec_projects_wave1');
+require('./generate_verified_chkalovec_projects_wave2');
 
 const ROOT = process.cwd();
 const COLLECTIONS = ['news', 'projects', 'needs', 'done', 'articles'];
