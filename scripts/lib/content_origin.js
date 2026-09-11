@@ -6,6 +6,7 @@ const VERIFIED_NEWS_IDS = new Set([
   'gubari-beautiful-village-2026',
   'gubari-svecha-pamyati-2026',
   'chkalovec-neighborhood-projects-2026',
+  'chkalovec-parkovka-2021',
   'chkalovec-cvetik-semicvetik-2022',
   'chkalovec-centr-prityazheniya-2024',
   'tretyaki-seven-projects-news-2026',
@@ -54,6 +55,7 @@ const VERIFIED_PROJECT_IDS = new Set([
   'port-artur-blagoustroystvo-kladbishcha-2021',
   'pervomayskiy-ulichnaya-scena-2021',
   'mechta-rodnik-2021',
+  'chkalovec-parkovka-2021',
   'chkalovec-cvetik-semicvetik-2022',
   'chkalovec-centr-prityazheniya-2024'
 ]);
@@ -72,6 +74,7 @@ const VERIFIED_DONE_IDS = new Set([
   'gubari-svecha-pamyati-2026',
   'severnyy-39-playground',
   'chkalovec-many-projects',
+  'chkalovec-parkovka-2021',
   'chkalovec-cvetik-semicvetik-2022',
   'chkalovec-centr-prityazheniya-2024',
   'tretyaki-seven-projects',
