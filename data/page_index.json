@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T05:27:13.719Z",
-  "total": 353,
+  "generated_at": "2026-09-11T05:40:37.587Z",
+  "total": 354,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -577,6 +577,15 @@
       "url": "https://tosborisoglebsk.ru/legal/chairperson-practical-checklist/",
       "title": "Правовая памятка председателю ТОС: обращения и решения | ТОС БГО",
       "description": "Практическая правовая памятка председателю ТОС БГО: как различать рабочее обращение, собрание граждан, решение ТОС, проект и вопрос компетенции органа власти.",
+      "section": "Правовая основа",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
+      "path": "legal/transition-calendar-2026-2028/index.html",
+      "url": "https://tosborisoglebsk.ru/legal/transition-calendar-2026-2028/",
+      "title": "Правовой календарь ТОС: 2026–2028 — ТОС БГО",
+      "description": "Контрольные даты перехода от 131-ФЗ к 33-ФЗ для ТОС БГО: что действует в 2026 году, срок обновления муниципальных актов 1 января 2027 года и завершение переходного периода 1 января 2028 года.",
       "section": "Правовая основа",
       "search_group": "guides",
       "content_origin": "reference"
