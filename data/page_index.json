@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T05:45:12.063Z",
-  "total": 357,
+  "generated_at": "2026-09-11T08:43:39.396Z",
+  "total": 360,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1842,6 +1842,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "news/chkalovec-parkovka-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/news/chkalovec-parkovka-2021/",
+      "title": "ТОС «Чкаловец» благоустроил парковку и дорогу во дворе на Аэродромной | ТОС БГО",
+      "description": "В 2021 году активисты обустроили асфальтированную парковку на 30 автомобилей и прилегающую дорогу; площадь благоустроенной территории составила около 600 кв. м.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/chkalovec-cvetik-semicvetik-2022/index.html",
       "url": "https://tosborisoglebsk.ru/news/chkalovec-cvetik-semicvetik-2022/",
       "title": "ТОС «Чкаловец» открыл первую в БГО экоплощадку для раздельного сбора отходов | ТОС БГО",
@@ -2769,6 +2778,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/chkalovec-parkovka-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/chkalovec-parkovka-2021/",
+      "title": "ТОС «Чкаловец»: парковка и благоустройство двора — 2021 | Проекты ТОС БГО",
+      "description": "Асфальтированная парковка на 30 автомобилей, прилегающая дорога, освещение, клумба и ограждение на территории около 600 кв. м.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/chkalovec-cvetik-semicvetik-2022/index.html",
       "url": "https://tosborisoglebsk.ru/projects/chkalovec-cvetik-semicvetik-2022/",
       "title": "ТОС «Чкаловец»: экоплощадка «Цветик-семицветик» | Проекты ТОС БГО",
@@ -3070,6 +3088,15 @@
       "url": "https://tosborisoglebsk.ru/done/chkalovec-many-projects/",
       "title": "ТОС «Чкаловец»: девять лет развития двора и общественны… | Сделано ТОСами БГО",
       "description": "«Вести Воронеж» описали результаты девятилетней работы ТОС «Чкаловец»: зоны отдыха, парковку, видеонаблюдение, беседку, площадку для раздельного сбора…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
+    },
+    {
+      "path": "done/chkalovec-parkovka-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chkalovec-parkovka-2021/",
+      "title": "ТОС «Чкаловец»: обустроена парковка на 30 автомобилей | Сделано ТОСами БГО",
+      "description": "Во дворе дома на Аэродромной благоустроили около 600 кв. м: сделали парковку, дорогу, освещение, клумбу и ограждение.",
       "section": "Сделано",
       "search_group": "done",
       "content_origin": "verified"
