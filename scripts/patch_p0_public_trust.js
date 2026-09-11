@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { patchLegalTransitionContent } = require('./patch_legal_transition_content');
 
 const root = process.cwd();
 
@@ -75,5 +76,6 @@ function patchMunicipalLegalStatus() {
   console.log('Patched BGO charter legal status');
 }
 
+patchLegalTransitionContent();
 publicPages.forEach(patchPublicPage);
 patchMunicipalLegalStatus();

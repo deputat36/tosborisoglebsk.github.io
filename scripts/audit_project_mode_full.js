@@ -13,6 +13,12 @@ patchKeyboardAccessibility();
 patchTosActivitySummary({ regenerate: false });
 patchTosContactFallback();
 
+// Static routes can be added by focused PRs while some governance workflows run
+// independently from the main generation pipeline. Materialize the sitemap here
+// before comparing it with the page index so the audit checks the current tree,
+// not a stale generated artifact from the base branch.
+require('./generate_sitemap');
+
 const checks = [
   ['CSV parser self-test', 'scripts/test_csv_parser.js'],
   ['CSV schema self-test', 'scripts/test_csv_schema.js'],
