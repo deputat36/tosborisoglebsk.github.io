@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-10T19:22:42.191Z",
-  "total": 352,
+  "generated_at": "2026-09-11T05:27:13.719Z",
+  "total": 353,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -181,6 +181,15 @@
       "url": "https://tosborisoglebsk.ru/documents/templates/meeting-protocol/",
       "title": "Протокол собрания ТОС — шаблон",
       "description": "Печатный шаблон протокола собрания или конференции жителей ТОС: общие сведения, повестка, решения, голосование, ответственные и приложения.",
+      "section": "Документы",
+      "search_group": "documents",
+      "content_origin": "reference"
+    },
+    {
+      "path": "documents/templates/decision-action-register/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/decision-action-register/",
+      "title": "Реестр решений и поручений ТОС | Документы ТОС БГО",
+      "description": "Заполняемый и печатный реестр решений и поручений ТОС: основание, ответственный, срок, статус, следующий шаг и подтверждение результата.",
       "section": "Документы",
       "search_group": "documents",
       "content_origin": "reference"
