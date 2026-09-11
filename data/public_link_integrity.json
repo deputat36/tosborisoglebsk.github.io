@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-11T08:50:46.719Z",
+  "generated_at": "2026-09-11T08:53:25.146Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 363,
-  "pages_checked": 363,
-  "links_discovered": 8385,
-  "internal_links_checked": 6044,
-  "unique_internal_targets": 838,
-  "external_links_ignored": 338,
+  "pages_indexed": 364,
+  "pages_checked": 364,
+  "links_discovered": 8405,
+  "internal_links_checked": 6061,
+  "unique_internal_targets": 840,
+  "external_links_ignored": 340,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
@@ -16,80 +16,50 @@
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 69,
+      "duration_ms": 852,
       "bytes": 8695
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 36,
-      "bytes": 8158
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 36,
-      "bytes": 11768
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 33,
-      "bytes": 9430
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 807,
       "bytes": 15978
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 807,
       "bytes": 7931
     },
     {
-      "route": "/calendar/action-routes/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 31,
-      "bytes": 15879
+      "duration_ms": 805,
+      "bytes": 8158
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 804,
+      "bytes": 11768
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 803,
+      "bytes": 9430
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 31,
+      "duration_ms": 801,
       "bytes": 23099
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 22,
-      "bytes": 23597
-    },
-    {
-      "route": "/chairperson/meeting/index.html",
-      "status": 200,
-      "duration_ms": 22,
-      "bytes": 8176
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 15409
-    },
-    {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 5818
-    },
-    {
-      "route": "/materials/project-passport-template/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 7547
+      "duration_ms": 800,
+      "bytes": 15879
     },
     {
       "route": "/chairperson/news/index.html",
@@ -98,40 +68,70 @@
       "bytes": 5404
     },
     {
-      "route": "/communication-kit/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 24905
-    },
-    {
-      "route": "/data-dictionary/index.html",
+      "route": "/chairperson/index.html",
       "status": 200,
       "duration_ms": 17,
-      "bytes": 10644
+      "bytes": 23597
     },
     {
-      "route": "/documents/templates/project-problem/index.html",
+      "route": "/chairperson/meeting/index.html",
       "status": 200,
       "duration_ms": 16,
-      "bytes": 4779
-    },
-    {
-      "route": "/materials/public-report/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 6318
-    },
-    {
-      "route": "/materials/project-reporting-after-grant/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 7608
+      "bytes": 8176
     },
     {
       "route": "/chairperson/verify-card/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 16,
       "bytes": 10450
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 15409
+    },
+    {
+      "route": "/contacts/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 22241
+    },
+    {
+      "route": "/communication-kit/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 24905
+    },
+    {
+      "route": "/documents/templates/project-photo-report/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 10995
+    },
+    {
+      "route": "/materials/tos-activists-roles/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 10532
+    },
+    {
+      "route": "/meeting-kit/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 9953
+    },
+    {
+      "route": "/methodology/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 6723
+    },
+    {
+      "route": "/needs/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 12643
     }
   ]
 }

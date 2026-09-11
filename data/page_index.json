@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T08:51:02.077Z",
-  "total": 363,
+  "generated_at": "2026-09-11T08:53:40.692Z",
+  "total": 364,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1306,6 +1306,15 @@
       "url": "https://tosborisoglebsk.ru/news/gubari-svecha-pamyati-2026/",
       "title": "В Губарях завершили проект ТОС «Свеча памяти» | ТОС БГО",
       "description": "В селе Губари благоустроили территорию у центрального входа на кладбище и заасфальтировали подъезд в рамках проекта ТОС «Свеча памяти».",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
+      "path": "news/gubari-v-rabochiy-polden-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/gubari-v-rabochiy-polden-2026/",
+      "title": "В Губарях запустили еженедельный проект «В рабочий полдень» | ТОС БГО",
+      "description": "Раз в неделю через уличные колонки жители села узнают главные местные новости, слышат поздравления юбиляров и рассказы о земляках, внесших вклад в жизнь Губарей.",
       "section": "Новости",
       "search_group": "news",
       "content_origin": "verified"
