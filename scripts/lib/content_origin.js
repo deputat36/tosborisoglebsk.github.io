@@ -5,6 +5,7 @@ const VERIFIED_NEWS_IDS = new Set([
   'mirolyubie-blagodarim-pomnim-gordimsya-2022',
   'gubari-beautiful-village-2026',
   'gubari-svecha-pamyati-2026',
+  'gubari-v-rabochiy-polden-2026',
   'chkalovec-neighborhood-projects-2026',
   'chkalovec-parkovka-2021',
   'chkalovec-russkie-tradicii-2023',
