@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T05:40:37.587Z",
-  "total": 354,
+  "generated_at": "2026-09-11T05:45:12.063Z",
+  "total": 357,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1122,10 +1122,28 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/how-to-publish-tos-result/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/how-to-publish-tos-result/",
+      "title": "Как показать результат ТОС: от внутреннего подтверждения до публикации | Материалы ТОС БГО",
+      "description": "Хорошая публикация о результате начинается не с красивого текста, а с проверки: что именно сделано, когда, где, за какие ресурсы и чем это можно…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/photo-report/index.html",
       "url": "https://tosborisoglebsk.ru/materials/photo-report/",
       "title": "Как правильно делать фото для проекта ТОС | Материалы ТОС БГО",
       "description": "Фотоотчёт проекта ТОС помогает доказать проблему, показать ход работ, подтвердить результат и подготовить публикацию для жителей. Снимайте общий план…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/how-to-control-tos-decisions/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/how-to-control-tos-decisions/",
+      "title": "Как превратить решение ТОС в выполненное поручение | Материалы ТОС БГО",
+      "description": "Протокол фиксирует решение, но результат появляется только тогда, когда у задачи есть проверяемый итог, ответственный, срок, ближайший шаг и…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
@@ -1207,6 +1225,15 @@
       "url": "https://tosborisoglebsk.ru/materials/documents-for-tos/",
       "title": "Какие документы нужны активному ТОС | Материалы ТОС БГО",
       "description": "Активному ТОСу нужен понятный архив: устав, протоколы, решения, сметы, отчёты, фото и список ответственных лиц. Устав ТОС и документы о регистрации…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/resident-request-to-result/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/resident-request-to-result/",
+      "title": "От обращения жителя до результата: рабочий маршрут ТОС | Материалы ТОС БГО",
+      "description": "Обращение не должно исчезать в чате или блокноте. Его полезно провести по короткому маршруту: зафиксировать суть, определить компетенцию, назначить…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
