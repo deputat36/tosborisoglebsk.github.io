@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T08:53:40.692Z",
-  "total": 364,
+  "generated_at": "2026-09-11T08:57:20.984Z",
+  "total": 365,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -64,6 +64,15 @@
       "url": "https://tosborisoglebsk.ru/documents/templates/create-initiative-card/",
       "title": "Карточка инициативы создания ТОС",
       "description": "Заполняемая карточка инициативы создания ТОС: цель жителей, территория, первые задачи, инициативная группа и вопросы для уточнения перед собранием.",
+      "section": "Документы",
+      "search_group": "documents",
+      "content_origin": "reference"
+    },
+    {
+      "path": "documents/templates/resident-request-routing/index.html",
+      "url": "https://tosborisoglebsk.ru/documents/templates/resident-request-routing/",
+      "title": "Карточка маршрутизации обращения жителя | Документы ТОС БГО",
+      "description": "Заполняемая и печатная карточка маршрутизации обращения жителя: тема, компетенция, адресат, основание выбора, приложения, срок контроля, ответ и следующий шаг.",
       "section": "Документы",
       "search_group": "documents",
       "content_origin": "reference"
