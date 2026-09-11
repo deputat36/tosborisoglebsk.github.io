@@ -17,6 +17,7 @@ runChecks([
   ['submit materials page', 'scripts/audit_submit_materials_content.js'],
   ['verification levels page', 'scripts/audit_verification_levels_content.js'],
   ['actions check page', 'scripts/audit_actions_check_content.js'],
+  ['legal transition calendar', 'scripts/audit_legal_transition_content.js'],
   ['GitHub Pages manual check wizard self-test', 'scripts/test_github_pages_manual_check.js'],
   ['GitHub Pages manual check wizard', 'scripts/audit_github_pages_manual_check.js'],
   ['outreach execution packet self-test', 'scripts/test_outreach_execution.js'],
