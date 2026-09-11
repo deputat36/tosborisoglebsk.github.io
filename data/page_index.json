@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T08:43:39.396Z",
-  "total": 360,
+  "generated_at": "2026-09-11T08:46:29.785Z",
+  "total": 363,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1860,6 +1860,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "news/chkalovec-russkie-tradicii-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/news/chkalovec-russkie-tradicii-2023/",
+      "title": "ТОС «Чкаловец» реализовал культурный проект «Русские традиции — в каждый ТОС» | ТОС БГО",
+      "description": "РИА «Воронеж» подтверждает, что в 2023 году активисты ТОС «Чкаловец» реализовали проект «Русские традиции — в каждый ТОС» и приобрели звуковое оборудование и костюмы для мероприятий.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/chkalovec-centr-prityazheniya-2024/index.html",
       "url": "https://tosborisoglebsk.ru/news/chkalovec-centr-prityazheniya-2024/",
       "title": "ТОС «Чкаловец» создал центр «Связь поколений» для мероприятий жителей | ТОС БГО",
@@ -2769,6 +2778,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "projects/chkalovec-russkie-tradicii-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/chkalovec-russkie-tradicii-2023/",
+      "title": "ТОС «Чкаловец»: «Русские традиции — в каждый ТОС» — 2023 | Проекты ТОС БГО",
+      "description": "Культурный проект ТОС «Чкаловец», в рамках которого для проведения мероприятий приобрели звуковое оборудование и сценические костюмы.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "verified"
+    },
+    {
       "path": "projects/chkalovec-centr-prityazheniya-2024/index.html",
       "url": "https://tosborisoglebsk.ru/projects/chkalovec-centr-prityazheniya-2024/",
       "title": "ТОС «Чкаловец»: «Центр притяжения — связь поколений» | Проекты ТОС БГО",
@@ -3106,6 +3124,15 @@
       "url": "https://tosborisoglebsk.ru/done/chkalovec-centr-prityazheniya-2024/",
       "title": "ТОС «Чкаловец»: открыт «Центр притяжения — связь поколе… | Сделано ТОСами БГО",
       "description": "У жителей появилось закрытое благоустроенное пространство для культурных, патриотических и обучающих мероприятий.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "verified"
+    },
+    {
+      "path": "done/chkalovec-russkie-tradicii-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chkalovec-russkie-tradicii-2023/",
+      "title": "ТОС «Чкаловец»: реализован проект «Русские традиции —… | Сделано ТОСами БГО",
+      "description": "В 2023 году ТОС реализовал культурный проект и приобрёл звуковое оборудование и костюмы для проведения мероприятий.",
       "section": "Сделано",
       "search_group": "done",
       "content_origin": "verified"
