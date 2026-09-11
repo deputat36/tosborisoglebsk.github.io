@@ -19,6 +19,7 @@ require('./generate_verified_chkalovec_projects_wave1');
 require('./generate_verified_chkalovec_projects_wave2');
 require('./generate_verified_chkalovec_projects_wave3');
 require('./generate_verified_gubari_working_noon_2026');
+require('./generate_verified_bgo_tos_festival_2025');
 
 const ROOT = process.cwd();
 const COLLECTIONS = ['news', 'projects', 'needs', 'done', 'articles'];
