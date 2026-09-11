@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-11T09:00:34.161Z",
-  "total": 366,
+  "generated_at": "2026-09-11T09:06:35.660Z",
+  "total": 368,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1140,6 +1140,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/how-to-route-resident-request/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/how-to-route-resident-request/",
+      "title": "Как понять, куда направить обращение жителя: проверки перед отправкой | Материалы ТОС БГО",
+      "description": "Главная задача председателя — не угадать ведомство по памяти, а зафиксировать предмет вопроса, проверить актуальную компетенцию и сохранить маршрут до…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/photo-report/index.html",
       "url": "https://tosborisoglebsk.ru/materials/photo-report/",
       "title": "Как правильно делать фото для проекта ТОС | Материалы ТОС БГО",
@@ -1183,6 +1192,15 @@
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "reference"
+    },
+    {
+      "path": "materials/evidence-pack-for-resident-request/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/evidence-pack-for-resident-request/",
+      "title": "Как собрать доказательства для обращения и сохранить приватность | Материалы ТОС БГО",
+      "description": "Сильное обращение не обязано быть длинным. Обычно достаточно точно показать место, факт, дату, масштаб проблемы и приложить материалы, которые можно…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
     },
     {
       "path": "materials/resident-support-for-project/index.html",

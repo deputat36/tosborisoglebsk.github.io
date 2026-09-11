@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T09:00:14.948Z",
+  "generated_at": "2026-09-11T09:06:18.082Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 437,
-    "public_pages": 376,
+    "html_pages": 439,
+    "public_pages": 378,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
