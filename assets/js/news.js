@@ -67,6 +67,7 @@ function newsTosName(slug, toses) {
 function newsCard(item, toses) {
   const tosName = newsTosName(item.tos_slug, toses);
   return `<article class="list-item" data-content-origin="${newsEsc(newsOrigin(item))}">
+    ${window.TosNewsMedia ? window.TosNewsMedia.render(item, true) : ''}
     <div class="meta">
       ${newsOriginTag(item)}
       <span class="tag">${newsEsc(item.category || 'Новость')}</span>
