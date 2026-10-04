@@ -798,10 +798,24 @@ button.stat.active {
   .card,.wide,.half,.home-focus,.home-compact .card {
     grid-column:1/-1
   }
-  .header-inner { gap:8px; padding:10px 0 }
-  .brand { flex:1; min-width:0; max-width:140px }
-  .brand img { width:100%; height:auto; max-width:100% }
-  .actions { flex:0 0 auto; gap:5px }
+  .header-inner {
+    gap:8px;
+    padding:10px 0
+  }
+  .brand {
+    flex:1;
+    min-width:0;
+    max-width:140px
+  }
+  .brand img {
+    width:100%;
+    height:auto;
+    max-width:100%
+  }
+  .actions {
+    flex:0 0 auto;
+    gap:5px
+  }
   .btn {
     padding:9px 11px
   }
@@ -855,8 +869,7 @@ button.stat.active {
   color:#A3D5B1
 }
 
-[data-theme=dark] .tos-verification-badge[data-status=needs_review],
-[data-theme=dark] .tos-verification-badge[data-status=stale] {
+[data-theme=dark] .tos-verification-badge[data-status=needs_review],[data-theme=dark] .tos-verification-badge[data-status=stale] {
   color:#F0BE9C
 }
 
