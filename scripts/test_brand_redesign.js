@@ -10,6 +10,7 @@ async function main() {
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(base, { waitUntil: 'networkidle' });
+      assert(await page.locator('.brand img').evaluate(node => node.getBoundingClientRect().width <= node.parentElement.getBoundingClientRect().width + 1), `logo clipped at ${width}`);
       const search = page.locator('#home-tos-search');
       await search.fill('Подстепки');
       await page.locator('.home-search-result[href="/tos/podstepki/"]').waitFor();

@@ -136,7 +136,7 @@ summary:focus-visible { outline:2px solid var(--brand); outline-offset:4px; }
 @media(max-width:620px) {
   html { scroll-padding-top:90px; }
   .container { width:calc(100% - 32px); }
-  .brand img { max-width:140px; height:44px; }
+  .brand img { max-width:100%; width:100%; height:auto; }
   .actions .btn { min-height:44px; padding:10px; border-radius:10px; }
   .actions [data-action=theme] { display:inline-flex; font-size:0; width:40px; justify-content:center; padding:6px; }
   .actions [data-action=theme]:before { content:'◐'; font-size:22px; }
