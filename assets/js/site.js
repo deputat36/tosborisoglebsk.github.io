@@ -255,6 +255,16 @@ function initCommonUi() {
 
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme === 'dark') document.documentElement.dataset.theme = 'dark';
+  const syncBrandTheme = () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    const logo = $('.brand img');
+    if (logo) logo.src = dark ? '/assets/img/logo-dark.svg' : '/assets/img/logo.svg';
+    const toggle = $('[data-action=theme]');
+    toggle?.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+    toggle?.setAttribute('aria-pressed', String(dark));
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', dark ? '#191817' : '#B62D36');
+  };
+  syncBrandTheme();
 
   $('[data-action=theme]')?.addEventListener('click', () => {
     const isDark = document.documentElement.dataset.theme === 'dark';
@@ -265,6 +275,7 @@ function initCommonUi() {
       document.documentElement.dataset.theme = 'dark';
       localStorage.setItem('theme', 'dark');
     }
+    syncBrandTheme();
   });
 
   const nav = $('#site-nav');
@@ -333,6 +344,9 @@ function initCommonUi() {
   });
 
   nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  window.matchMedia('(min-width: 1121px)').addEventListener('change', (event) => {
+    if (event.matches) closeMenu();
+  });
 
   const year = $('#year');
   if (year) year.textContent = new Date().getFullYear();

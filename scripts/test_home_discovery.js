@@ -4,9 +4,19 @@ const path = require('path');
 const core = require('../assets/js/home-discovery-core.js');
 const ROOT = process.cwd();
 const toses = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'toses.json'), 'utf8'));
-const events = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'events.json'), 'utf8'));
-const news = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'news.json'), 'utf8'));
-const health = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'site_health.json'), 'utf8'));
+// Fixed editorial fixtures keep temporal assertions independent of live publications.
+const events = [
+  { date: '2026-08-01', status: 'published', title: 'Встреча' },
+  { date: '2026-07-01', status: 'published', title: 'Прошедшее' },
+  { date: '2026-07-18', status: 'draft', title: 'Черновик' }
+];
+const news = [
+  { date: '2026-06-24', status: 'published', content_origin: 'editorial' },
+  { date: '2026-07-16', status: 'published', content_origin: 'request' },
+  { date: '2026-07-15', status: 'draft', content_origin: 'editorial' },
+  { date: '2026-08-01', status: 'published', content_origin: 'editorial' }
+];
+const health = { catalog: { total_tos: 24 } };
 assert.strictEqual(core.normalize('Подстёпки'), 'подстепки');
 assert.strictEqual(core.searchToses(toses, 'п').length, 0);
 assert(core.searchToses(toses, 'Подстепки').some((item) => item.slug === 'podstepki'));

@@ -1,18 +1,22 @@
 {
   "schema_version": 1,
   "base_manifest": "manifest.json",
-  "captured_at": "2026-07-22T05:54:20.846Z",
+  "captured_at": "2026-10-04T13:56:14.727Z",
   "repository": "deputat36/tosborisoglebsk.github.io",
-  "commit_sha": "9a739a852aaedfc231b0fa74f54d15f3ff0057c7",
-  "workflow_run_id": "29895054138",
+  "commit_sha": "5bf1c9150167ed68ccf870aac5df6410593b9718",
+  "workflow_run_id": "37207304069",
   "workflow_run_attempt": "1",
-  "capture_artifact": "visual-baseline-198-1",
+  "capture_artifact": "visual-baseline-328-1",
   "results": [
     {
       "case_id": "css-reg-015",
       "area": "Каталог ТОС — фильтры и карточки",
       "route": "/tos/",
-      "viewport": { "width": 620, "height": 1600 },
+      "target_url": "http://127.0.0.1:4173/tos/",
+      "viewport": {
+        "width": 620,
+        "height": 1600
+      },
       "theme": "light",
       "interaction": "focus-catalog",
       "mode": "screen",
@@ -21,14 +25,47 @@
         "selector": "#catalog",
         "ready_selector": "#tos-list .card",
         "ready_count": 24,
-        "header_offset": 97,
-        "top": 97,
-        "scrollY": 1428,
-        "visible": true
+        "header_offset": 82,
+        "top": 182,
+        "bottom": 18293,
+        "width": 620,
+        "height": 18111,
+        "visible": true,
+        "scrollY": 1328
       },
       "screenshot": "css-reg-015.png",
-      "screenshot_sha256": "c0de0fbd75d3ae0bc0e2609b296bebcba882a2ab068d102b326f804dcda704d6",
-      "bytes": 135991,
+      "sha256": "729c50dac8e6712fdea6c143b78db60110c688281f0c395a9076133b6b841989",
+      "bytes": 131389,
+      "diagnostics": {
+        "title": "Каталог ТОС Борисоглебского городского округа",
+        "htmlTheme": "light",
+        "documentScrollWidth": 620,
+        "documentClientWidth": 620,
+        "bodyScrollWidth": 620,
+        "bodyClientWidth": 620,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "screenshot_sha256": "729c50dac8e6712fdea6c143b78db60110c688281f0c395a9076133b6b841989",
       "visual_fingerprint": {
         "scheme": "rgb-grid-v1",
         "columns": 10,
@@ -36,14 +73,18 @@
         "data_files": [
           "fingerprints/css-reg-015.compact.b64"
         ],
-        "sha256": "85b78b7fc1683a9cccf6180a1cb9f601e591168979d8b8104a1007d1a3cbe5a1"
+        "sha256": "1d239a445d6f0218e7cbb0b8d21a2cca9bf67f4a4b7309b5df26bb7942740bdf"
       }
     },
     {
       "case_id": "css-reg-016",
       "area": "Справочник территорий — фильтры и карточки",
       "route": "/places/",
-      "viewport": { "width": 620, "height": 1200 },
+      "target_url": "http://127.0.0.1:4173/places/",
+      "viewport": {
+        "width": 620,
+        "height": 1200
+      },
       "theme": "dark",
       "interaction": "focus-places",
       "mode": "screen",
@@ -52,14 +93,47 @@
         "selector": "#places-browser",
         "ready_selector": "#places-grid .card",
         "ready_count": 13,
-        "header_offset": 97,
-        "top": 97,
-        "scrollY": 511,
-        "visible": true
+        "header_offset": 82,
+        "top": 182,
+        "bottom": 834,
+        "width": 620,
+        "height": 653,
+        "visible": true,
+        "scrollY": 411
       },
       "screenshot": "css-reg-016.png",
-      "screenshot_sha256": "a304af0e44e3c9639fb26d0b23d8b031a2612d9cc10c18db0efe992ba8543622",
-      "bytes": 119450,
+      "sha256": "55e1c60f6cc394d04f2a85d3e3c698c987ded09627182e552f060ed87ea8d7ba",
+      "bytes": 119980,
+      "diagnostics": {
+        "title": "Населённые пункты и территории ТОС БГО",
+        "htmlTheme": "dark",
+        "documentScrollWidth": 620,
+        "documentClientWidth": 620,
+        "bodyScrollWidth": 620,
+        "bodyClientWidth": 620,
+        "horizontalOverflow": false,
+        "overflowElements": [
+          {
+            "selector": "a.skip-link",
+            "left": -999,
+            "right": -769,
+            "width": 230,
+            "scrollWidth": 230,
+            "clientWidth": 230,
+            "position": "absolute",
+            "overflowX": "visible"
+          }
+        ],
+        "internalOverflowElements": [],
+        "overflowIsolationCandidates": [],
+        "menuExpanded": "false",
+        "menuOpen": false
+      },
+      "technical_violations": [],
+      "console_errors": [],
+      "page_errors": [],
+      "failed_requests": [],
+      "screenshot_sha256": "55e1c60f6cc394d04f2a85d3e3c698c987ded09627182e552f060ed87ea8d7ba",
       "visual_fingerprint": {
         "scheme": "rgb-grid-v1",
         "columns": 10,
@@ -67,7 +141,7 @@
         "data_files": [
           "fingerprints/css-reg-016.compact.b64"
         ],
-        "sha256": "6a7edec57a41bbfbcaea26096e74bdcad5d0bfb21a528db3bfe1f06006e98a71"
+        "sha256": "fa99dc61a274b292e6f9cbe9c17f74e353b2519c7b1c27d30ee08ba0e7c13bbb"
       }
     }
   ]

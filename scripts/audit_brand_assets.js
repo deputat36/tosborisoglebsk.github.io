@@ -24,18 +24,18 @@ function main() {
   const guide = read('docs/BRAND-LOGO.md');
 
   for (const [label, content] of [['logo.svg', logo], ['logo-dark.svg', darkLogo]]) {
-    requireToken(errors, content, 'viewBox="0 0 244 64"', label);
-    requireToken(errors, content, 'data-brand-mark="tos-bgo-community"', label);
-    requireToken(errors, content, 'data-brand-wordmark="tos-bgo"', label);
-    requireToken(errors, content, '>ТОС БГО</text>', label);
-    requireToken(errors, content, '>Борисоглебский округ</text>', label);
-    requireToken(errors, content, '#F2C14E', label);
+    requireToken(errors, content, 'viewBox="0 0 460 142"', label);
+    requireToken(errors, content, 'data-brand-mark="tos-bgo-people-oak-v3"', label);
+    requireToken(errors, content, '<title>ТОС БГО', label);
+    requireToken(errors, content, '<path', label);
+    if (content.includes('<text')) errors.push(`${label}: wordmark must use outlined paths`);
   }
 
-  requireToken(errors, logo, 'width="242" height="56"', 'logo.svg universal surface');
-  requireToken(errors, logo, 'fill-opacity=".96"', 'logo.svg universal surface');
-  requireToken(errors, favicon, 'viewBox="0 0 64 64"', 'favicon.svg');
-  requireToken(errors, favicon, 'data-brand-mark="tos-bgo-community"', 'favicon.svg');
+  requireToken(errors, logo, '#B62D36', 'logo.svg red');
+  requireToken(errors, logo, '#D3A33D', 'logo.svg gold');
+  requireToken(errors, darkLogo, '#FFFFFF', 'logo-dark.svg white');
+  requireToken(errors, favicon, 'viewBox="0 0 32 32"', 'favicon.svg');
+  requireToken(errors, favicon, '<path', 'favicon.svg');
   if (favicon.includes('<text')) errors.push('favicon.svg must not contain text');
 
   requireToken(errors, ogCover, 'width="1200" height="630"', 'og-cover.svg');
@@ -47,7 +47,7 @@ function main() {
   requireToken(errors, home, 'src="/assets/img/logo.svg"', 'index.html');
   requireToken(errors, home, 'content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"', 'index.html');
 
-  for (const token of ['Идея знака', 'Основная версия', 'Иконка', 'Социальная обложка', '#2F9A6B', '#4D6FDB', '#F2C14E']) {
+  for (const token of ['Идея знака', 'Основная версия', 'Иконка', 'Социальная обложка', '#B62D36', '#D3A33D', '#242322']) {
     requireToken(errors, guide, token, 'BRAND-LOGO.md');
   }
 
