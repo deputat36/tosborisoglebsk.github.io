@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-04T14:01:56.578Z",
+  "generated_at": "2026-10-04T14:25:32.414Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 368,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 1063,
+      "bytes": 7931
+    },
+    {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 73,
+      "duration_ms": 157,
       "bytes": 8695
     },
     {
-      "route": "/chairperson/action-routes/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 43,
-      "bytes": 15978
+      "duration_ms": 101,
+      "bytes": 9430
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 41,
+      "duration_ms": 99,
       "bytes": 11768
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 39,
+      "duration_ms": 98,
       "bytes": 8158
     },
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 38,
-      "bytes": 7931
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 37,
-      "bytes": 23099
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 37,
-      "bytes": 9430
+      "duration_ms": 97,
+      "bytes": 15978
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 36,
+      "duration_ms": 96,
       "bytes": 15879
     },
     {
-      "route": "/documents/templates/resident-initiative-request/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 24,
-      "bytes": 8872
+      "duration_ms": 96,
+      "bytes": 23099
+    },
+    {
+      "route": "/contacts/index.html",
+      "status": 200,
+      "duration_ms": 27,
+      "bytes": 22241
+    },
+    {
+      "route": "/create-tos/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 12658
+    },
+    {
+      "route": "/data-quality/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 7786
+    },
+    {
+      "route": "/materials/project-reporting-after-grant/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 7593
+    },
+    {
+      "route": "/documents/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 13750
+    },
+    {
+      "route": "/documents/templates/create-territory/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 5292
+    },
+    {
+      "route": "/documents/templates/tos-founding-decisions/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 3490
+    },
+    {
+      "route": "/done/chkalovec-parkovka-2021/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 8068
+    },
+    {
+      "route": "/materials/project-passport-template/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 7532
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 22,
+      "duration_ms": 12,
       "bytes": 23597
     },
     {
-      "route": "/check-tos/index.html",
+      "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 5818
+      "duration_ms": 12,
+      "bytes": 5404
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/documents/templates/project-partner-letter/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 10450
-    },
-    {
-      "route": "/communication-kit/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 24905
-    },
-    {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 3948
-    },
-    {
-      "route": "/documents/templates/tos-founding-protocol/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 4570
-    },
-    {
-      "route": "/done/gubari-projects-archive/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 8513
-    },
-    {
-      "route": "/done/mirolyubie-blagodarim-pomnim-gordimsya-2022/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 8696
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 15409
-    },
-    {
-      "route": "/content-standards/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 13193
-    },
-    {
-      "route": "/done/vostochnyy-cleanups-holidays/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 8328
+      "duration_ms": 12,
+      "bytes": 5522
     }
   ]
 }
