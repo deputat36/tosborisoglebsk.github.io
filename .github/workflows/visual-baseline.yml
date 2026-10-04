@@ -202,6 +202,9 @@ jobs:
           cat .artifacts/visual-baseline/server.log
           exit 1
 
+      - name: Test brand redesign interactions
+        run: node scripts/test_brand_redesign.js
+
       - name: Generate visual-run public link integrity report
         env:
           PUBLIC_LINK_BASE_URL: http://127.0.0.1:4173

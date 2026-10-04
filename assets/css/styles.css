@@ -3,30 +3,30 @@
 /* 01. Переменные и темы */
 
 :root {
-  --bg:#f7f6f1;
+  --bg:#F5F2EA;
   --surface:#fff;
-  --surface2:#edf4ee;
-  --text:#132019;
-  --muted:#667268;
-  --line:rgba(19,32,25,.12);
-  --brand:#2f7d5a;
-  --brand2:#4d6fdb;
-  --accent:#f2c14e;
-  --shadow:0 18px 45px rgba(23,38,31,.09);
-  --radius:24px;
+  --surface2:#EEEAE1;
+  --text:#242322;
+  --muted:#65615C;
+  --line:#DFDAD1;
+  --brand:#B62D36;
+  --brand2:#286A8D;
+  --accent:#D3A33D;
+  --shadow:0 8px 24px rgba(36,35,34,.06);
+  --radius:16px;
   --max:1180px;
-  --focus:0 0 0 3px rgba(47,125,90,.25)
+  --focus:0 0 0 3px rgba(182,45,54,.24)
 }
 
 [data-theme=dark] {
-  --bg:#0e1512;
-  --surface:#151f1a;
-  --surface2:#1b2a23;
-  --text:#edf7f0;
-  --muted:#a8b8ae;
-  --line:rgba(237,247,240,.13);
-  --brand:#62d69f;
-  --brand2:#7f9fff;
+  --bg:#191817;
+  --surface:#242220;
+  --surface2:#302D29;
+  --text:#F5F2EA;
+  --muted:#C1BAB0;
+  --line:#49443D;
+  --brand:#F49AA0;
+  --brand2:#9ECDE6;
   --shadow:0 22px 55px rgba(0,0,0,.32)
 }
 
@@ -37,14 +37,15 @@
 }
 
 html {
+  scroll-padding-top:100px;
   scroll-behavior:smooth
 }
 
 body {
   margin:0;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   color:var(--text);
-  background:radial-gradient(900px 450px at 8% -10%,rgba(77,124,254,.14),transparent 60%),radial-gradient(700px 400px at 95% 5%,rgba(47,125,90,.17),transparent 55%),var(--bg);
+  background:var(--bg);
   line-height:1.55
 }
 
@@ -54,7 +55,8 @@ a {
 }
 
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
-  outline:none;
+  outline:2px solid var(--brand);
+  outline-offset:3px;
   box-shadow:var(--focus)
 }
 
@@ -85,7 +87,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
   top:0;
   z-index:20;
   background:color-mix(in srgb,var(--bg) 84%,transparent);
-  backdrop-filter:blur(18px);
+  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line)
 }
 
@@ -99,6 +101,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
 
 .brand img {
   height:52px;
+  display:block;
+  max-width:170px;
   width:auto
 }
 
@@ -109,10 +113,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
 }
 
 .nav a {
-  padding:10px 12px;
-  border-radius:999px;
+  padding:10px 8px;
+  border-radius:8px;
   color:var(--muted);
-  font-size:14px
+  font-size:13px
 }
 
 .nav a:hover,.nav a.active {
@@ -132,22 +136,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
   background:var(--surface);
   color:var(--text);
   padding:10px 14px;
-  border-radius:16px;
+  border-radius:10px;
+  min-height:44px;
   cursor:pointer;
-  font-weight:750;
+  font-weight:650;
   display:inline-flex;
   align-items:center;
   gap:8px;
-  transition:.18s
+  transition:background .18s,border-color .18s,box-shadow .18s
 }
 
 .btn:hover {
-  transform:translateY(-1px);
+  transform:none;
   box-shadow:var(--shadow)
 }
 
 .btn.primary {
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  background:#B62D36;
   color:white;
   border:0
 }
@@ -164,8 +169,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
 
 .hero-card {
   border:1px solid var(--line);
-  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 96%,transparent),color-mix(in srgb,var(--surface) 82%,transparent));
-  border-radius:32px;
+  background:var(--surface);
+  border-radius:20px;
   padding:34px;
   box-shadow:var(--shadow);
   overflow:hidden;
@@ -173,14 +178,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
 }
 
 .hero-card:after {
-  content:"";
-  position:absolute;
-  right:-70px;
-  top:-70px;
-  width:260px;
-  height:260px;
-  border-radius:999px;
-  background:radial-gradient(circle,rgba(242,193,78,.34),transparent 65%)
+  content:none
 }
 
 .hero-grid {
@@ -193,7 +191,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible {
 
 .eyebrow {
   color:var(--brand);
-  font-weight:900;
+  font-weight:700;
   letter-spacing:.08em;
   text-transform:uppercase;
   font-size:12px
@@ -234,7 +232,7 @@ h1 {
 /* 06. Секции, сетки и карточки */
 
 .section {
-  padding:26px 0
+  padding:40px 0
 }
 
 .section-head {
@@ -269,7 +267,7 @@ h1 {
   border-radius:var(--radius);
   box-shadow:0 1px 0 rgba(0,0,0,.02);
   overflow:hidden;
-  transition:.18s
+  transition:background .18s,border-color .18s,box-shadow .18s
 }
 
 .card-inner {
@@ -278,7 +276,7 @@ h1 {
 
 .card:hover {
   box-shadow:var(--shadow);
-  transform:translateY(-2px)
+  transform:none
 }
 
 .card h3 {
@@ -365,9 +363,9 @@ h1 {
   border-radius:20px;
   display:grid;
   place-items:center;
-  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  background:#B62D36;
   color:white;
-  font-weight:900;
+  font-weight:700;
   letter-spacing:.04em
 }
 
@@ -558,7 +556,7 @@ h1 {
 .stat-card span {
   display:block;
   margin-top:8px;
-  font-weight:900;
+  font-weight:700;
   color:var(--text)
 }
 
@@ -599,7 +597,7 @@ h1 {
   margin-top:7px;
   font-size:13px;
   color:var(--muted);
-  font-weight:750
+  font-weight:650
 }
 
 .stat.warn b {
@@ -612,7 +610,7 @@ button.stat {
 
 button.stat:hover {
   box-shadow:var(--shadow);
-  transform:translateY(-1px)
+  transform:none
 }
 
 button.stat.active {
@@ -681,7 +679,7 @@ button.stat.active {
   display:grid;
   place-items:center;
   background:var(--surface2);
-  font-weight:900;
+  font-weight:700;
   color:var(--brand);
   margin-bottom:12px
 }
@@ -746,13 +744,15 @@ button.stat.active {
 
 /* 12. Адаптивные правила */
 
-@media(max-width:900px) {
+@media(max-width:1120px) {
   .nav {
     display:none;
     position:absolute;
     left:16px;
     right:16px;
     top:78px;
+    max-height:calc(100dvh - 100px);
+    overflow-y:auto;
     flex-direction:column;
     align-items:stretch;
     background:var(--surface);
