@@ -59,6 +59,8 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           find scripts assets/js admin -name "*.js" -print0 | xargs -0 -n1 node --check
+      - name: Test news media rendering
+        run: node scripts/test_news_media.js
       - name: Test status document contracts
         run: npm run test:status-document
       - name: Test generated page cleanup safety
