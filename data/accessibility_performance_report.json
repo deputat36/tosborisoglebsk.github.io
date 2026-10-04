@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T09:06:18.082Z",
+  "generated_at": "2026-10-04T14:01:53.279Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,11 +18,11 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 113,
+    "asset_files": 114,
     "over_budget_assets": 0,
-    "total_css_bytes": 46075,
-    "total_js_bytes": 669347,
-    "total_image_bytes": 5067,
+    "total_css_bytes": 55162,
+    "total_js_bytes": 670086,
+    "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
@@ -39,7 +39,7 @@
       "path": "assets/js/site.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 34396,
+      "size_bytes": 35135,
       "over_budget": false
     },
     {
@@ -47,6 +47,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 25417,
+      "over_budget": false
+    },
+    {
+      "path": "assets/css/design-upgrades.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 19563,
       "over_budget": false
     },
     {
@@ -102,7 +109,7 @@
       "path": "assets/css/styles.css",
       "group": "css",
       "extension": ".css",
-      "size_bytes": 13802,
+      "size_bytes": 14001,
       "over_budget": false
     },
     {
@@ -166,13 +173,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10875,
-      "over_budget": false
-    },
-    {
-      "path": "assets/css/design-upgrades.css",
-      "group": "css",
-      "extension": ".css",
-      "size_bytes": 10675,
       "over_budget": false
     },
     {

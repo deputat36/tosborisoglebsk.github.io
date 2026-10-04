@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-11T09:06:18.269Z",
+  "generated_at": "2026-10-04T14:01:53.530Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 40,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-09-11T09:06:35.372Z",
+    "generated_at": "2026-10-04T14:02:12.504Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -296,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-09-11T09:06:16.120Z",
+    "generated_at": "2026-10-04T14:01:50.398Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -344,14 +344,14 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-09-11T09:06:21.764Z",
+    "generated_at": "2026-10-04T14:01:56.578Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
     "pages_indexed": 368,
     "pages_checked": 368,
-    "links_discovered": 8480,
+    "links_discovered": 8476,
     "internal_links_checked": 6120,
     "unique_internal_targets": 845,
     "external_links_ignored": 341,
@@ -404,9 +404,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Generate TOS pages",
-      "run_id": "34582462377",
-      "run_number": "1858",
-      "commit_sha": "dd637c6707b965c1e31d92d046760202721e8011"
+      "run_id": "37207725241",
+      "run_number": "1863",
+      "commit_sha": "c15ff192d9cbaa0f5efd00204e90e16ac471e4c9"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-09-11T09:06:35.372Z",
+    "generated_at": "2026-10-04T14:02:12.504Z",
     "total_tos": 24,
     "with_substantive_content": 22,
     "with_verified_content": 22,
