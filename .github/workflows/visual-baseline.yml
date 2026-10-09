@@ -119,6 +119,7 @@ jobs:
           node --check scripts/test_visual_case_delta_policy.js
           node --check scripts/patch_visual_case_deltas.js
           node scripts/test_visual_case_delta_policy.js
+          node scripts/test_reviewed_visual_rasters.js
 
       - name: Apply TOS detail responsive stylesheet
         run: node scripts/patch_tos_detail_responsive_styles.js

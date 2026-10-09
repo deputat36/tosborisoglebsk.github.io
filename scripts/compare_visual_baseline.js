@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { applyReviewedRaster } = require('./lib/reviewed_visual_rasters');
 const path = require('path');
 const crypto = require('crypto');
 const { PNG } = require('pngjs');
@@ -364,7 +365,7 @@ function main() {
       mode: currentItem.mode,
       ...imageComparison
     };
-    return applyApprovedCaseDelta(comparison, approvedCaseDeltas.get(currentItem.case_id));
+    return applyReviewedRaster(applyApprovedCaseDelta(comparison, approvedCaseDeltas.get(currentItem.case_id)), baselineItem);
   });
 
   const missingCurrentCases = baselineManifest.results
