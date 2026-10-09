@@ -168,6 +168,8 @@ jobs:
         run: node scripts/generate_news_pages.js
       - name: Generate material pages
         run: node scripts/generate_material_pages.js
+      - name: Generate readable collection fallbacks
+        run: node scripts/generate_collection_fallbacks.js
       - name: Generate done pages
         run: node scripts/generate_done_pages.js
       - name: Generate need pages

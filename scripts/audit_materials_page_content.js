@@ -119,7 +119,7 @@ function validateData(errors, materials) {
 
 function main() {
   const html = read(htmlPath);
-  const script = read(scriptPath);
+  const script = read(scriptPath) + read(path.join(root, 'assets', 'js', 'materials-core.js'));
   const materials = JSON.parse(read(dataPath));
   const errors = [];
 
@@ -131,16 +131,16 @@ function main() {
   checkContains(errors, html, 'materials/index.html', '/materials/tos-bgo-in-numbers/');
   checkContains(errors, html, 'materials/index.html', '/tos/');
   checkContains(errors, html, 'materials/index.html', 'id="articles-list"');
-  checkContains(errors, html, 'materials/index.html', 'Загрузка материалов...');
+  checkContains(errors, html, 'materials/index.html', '<!-- collection:articles-list:start -->');
   checkContains(errors, html, 'materials/index.html', '/assets/js/materials.js');
 
   checkContains(errors, script, 'assets/js/materials.js', "fetch('/data/materials.json')");
-  checkContains(errors, script, 'assets/js/materials.js', 'materialsEsc');
+  checkContains(errors, script, 'assets/js/materials.js', 'const esc=');
   checkContains(errors, script, 'assets/js/materials.js', "item.status !== 'draft'");
-  checkContains(errors, script, 'assets/js/materials.js', 'renderTags');
+  checkContains(errors, script, 'assets/js/materials.js', 'item.tags');
   checkContains(errors, script, 'assets/js/materials.js', 'item.audience');
   checkContains(errors, script, 'assets/js/materials.js', 'target="_blank" rel="noopener"');
-  checkContains(errors, script, 'assets/js/materials.js', 'Раздел не загрузился. Проверьте файл data/materials.json.');
+  checkContains(errors, script, 'assets/js/materials.js', 'Материалы временно недоступны.');
 
   validateData(errors, materials);
 

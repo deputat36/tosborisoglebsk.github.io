@@ -38,9 +38,9 @@ function newsOriginTag(item) {
 function newsOriginNotice(item) {
   const origin = newsOrigin(item);
   if (origin === 'verified') return '';
-  if (origin === 'request') return '<div class="notice"><b style="color:var(--text)">Это запрос материалов</b><br>Запись приглашает прислать сведения, фото или уточнение и не подтверждает, что событие уже произошло.</div>';
-  if (origin === 'starter') return '<div class="notice"><b style="color:var(--text)">Стартовая заготовка</b><br>До получения даты события, участников, результата и источника материал нельзя считать фактической новостью территории.</div>';
-  return '<div class="notice"><b style="color:var(--text)">Редакционный материал</b><br>Текст подготовлен порталом. Для утверждений о событии, результате или сроках проверьте первичный источник.</div>';
+  if (origin === 'request') return '<div class="notice"><b class="news-origin-label">Это запрос материалов</b><br>Запись приглашает прислать сведения, фото или уточнение и не подтверждает, что событие уже произошло.</div>';
+  if (origin === 'starter') return '<div class="notice"><b class="news-origin-label">Стартовая заготовка</b><br>До получения даты события, участников, результата и источника материал нельзя считать фактической новостью территории.</div>';
+  return '<div class="notice"><b class="news-origin-label">Редакционный материал</b><br>Текст подготовлен порталом. Для утверждений о событии, результате или сроках проверьте первичный источник.</div>';
 }
 
 function newsDate(value) {
@@ -52,7 +52,7 @@ function newsDate(value) {
 
 async function loadNewsPageData() {
   const [news, toses] = await Promise.all([
-    fetch('/data/news.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
+    fetch('/data/news.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : Promise.reject(new Error('News unavailable'))),
     fetch('/data/toses.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []).catch(() => [])
   ]);
   return { news: news.filter(newsPublished), toses };
@@ -109,6 +109,8 @@ async function renderNewsPage() {
 
   try {
     const { news, toses } = await loadNewsPageData();
+    Object.values(controls).forEach(control => { if (control) control.disabled = false; });
+    if (reset) reset.disabled = false;
     const categories = [...new Set(news.map((item) => item.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
     const usedTos = [...new Set(news.map((item) => item.tos_slug).filter(Boolean))];
 
@@ -153,8 +155,10 @@ async function renderNewsPage() {
     });
     apply(true);
   } catch (error) {
-    root.innerHTML = '<div class="empty">Новости не загрузились. Проверьте data/news.json</div>';
-    if (status) status.textContent = 'Ошибка загрузки ленты новостей.';
+    if (!root.querySelector('article')) root.innerHTML = '<div class="empty">Новости временно недоступны. Попробуйте позже или <a href="https://vk.ru/tosbgo">откройте наше сообщество ВК</a>.</div>';
+    Object.values(controls).forEach(control => { if (control) control.disabled = true; });
+    if (reset) reset.disabled = true;
+    if (status) status.textContent = 'Показаны сохранённые публикации. Поиск и фильтры временно недоступны.';
   }
 }
 

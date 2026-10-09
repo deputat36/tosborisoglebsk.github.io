@@ -119,6 +119,7 @@ jobs:
           node --check scripts/test_visual_case_delta_policy.js
           node --check scripts/patch_visual_case_deltas.js
           node scripts/test_visual_case_delta_policy.js
+          node scripts/test_reviewed_visual_rasters.js
 
       - name: Apply TOS detail responsive stylesheet
         run: node scripts/patch_tos_detail_responsive_styles.js
@@ -204,6 +205,9 @@ jobs:
 
       - name: Test brand redesign interactions
         run: node scripts/test_brand_redesign.js
+
+      - name: Test readable collections with and without JavaScript
+        run: node scripts/test_reader_collections.js
 
       - name: Generate visual-run public link integrity report
         env:
