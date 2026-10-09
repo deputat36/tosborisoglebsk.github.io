@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-04T14:25:32.414Z",
+  "generated_at": "2026-10-09T05:27:04.164Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 368,
   "pages_checked": 368,
-  "links_discovered": 8476,
-  "internal_links_checked": 6120,
-  "unique_internal_targets": 845,
-  "external_links_ignored": 341,
+  "links_discovered": 8610,
+  "internal_links_checked": 6197,
+  "unique_internal_targets": 864,
+  "external_links_ignored": 378,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 1063,
-      "bytes": 7931
-    },
-    {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 157,
+      "duration_ms": 75,
       "bytes": 8695
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 101,
-      "bytes": 9430
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 99,
+      "duration_ms": 42,
       "bytes": 11768
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 98,
+      "duration_ms": 40,
       "bytes": 8158
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 38,
+      "bytes": 9430
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 38,
+      "bytes": 7931
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 97,
+      "duration_ms": 36,
       "bytes": 15978
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 96,
+      "duration_ms": 35,
       "bytes": 15879
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 96,
+      "duration_ms": 35,
       "bytes": 23099
-    },
-    {
-      "route": "/contacts/index.html",
-      "status": 200,
-      "duration_ms": 27,
-      "bytes": 22241
-    },
-    {
-      "route": "/create-tos/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 12658
-    },
-    {
-      "route": "/data-quality/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 7786
-    },
-    {
-      "route": "/materials/project-reporting-after-grant/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 7593
-    },
-    {
-      "route": "/documents/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 13750
-    },
-    {
-      "route": "/documents/templates/create-territory/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 5292
-    },
-    {
-      "route": "/documents/templates/tos-founding-decisions/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 3490
-    },
-    {
-      "route": "/done/chkalovec-parkovka-2021/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 8068
-    },
-    {
-      "route": "/materials/project-passport-template/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 7532
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 22,
       "bytes": 23597
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 22,
+      "bytes": 15409
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 22,
+      "bytes": 10450
+    },
+    {
+      "route": "/documents/templates/project-passport/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 6335
+    },
+    {
+      "route": "/create-tos/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 19408
     },
     {
       "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 17,
       "bytes": 5404
     },
     {
-      "route": "/documents/templates/project-partner-letter/index.html",
+      "route": "/content-standards/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 5522
+      "duration_ms": 17,
+      "bytes": 13193
+    },
+    {
+      "route": "/data-quality/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 7786
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 8176
+    },
+    {
+      "route": "/documents/templates/meeting-agenda/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 4424
+    },
+    {
+      "route": "/documents/templates/project-checklist/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 5559
+    },
+    {
+      "route": "/documents/templates/project-photo-report/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 10995
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-04T14:25:28.472Z",
+  "generated_at": "2026-10-09T05:27:01.103Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 40,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-10-04T14:25:46.571Z",
+    "generated_at": "2026-10-09T05:27:19.321Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -200,7 +200,7 @@
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 368 страниц, 6120 внутренних переходов, 845 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 368 страниц, 6197 внутренних переходов, 864 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -296,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-10-04T14:25:25.567Z",
+    "generated_at": "2026-10-09T05:26:57.864Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -344,17 +344,17 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-10-04T14:25:32.414Z",
+    "generated_at": "2026-10-09T05:27:04.164Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
     "pages_indexed": 368,
     "pages_checked": 368,
-    "links_discovered": 8476,
-    "internal_links_checked": 6120,
-    "unique_internal_targets": 845,
-    "external_links_ignored": 341,
+    "links_discovered": 8610,
+    "internal_links_checked": 6197,
+    "unique_internal_targets": 864,
+    "external_links_ignored": 378,
     "protocol_links_ignored": 34,
     "failed": 0,
     "automation": {
@@ -404,9 +404,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Generate TOS pages",
-      "run_id": "37209181634",
-      "run_number": "1865",
-      "commit_sha": "8ef5b576166e8775c84f1ecba3d66620792999f5"
+      "run_id": "37888587040",
+      "run_number": "1870",
+      "commit_sha": "bf99d67f858774a9f5a102ee19b4d28b3b71ec2d"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-10-04T14:25:46.571Z",
+    "generated_at": "2026-10-09T05:27:19.321Z",
     "total_tos": 24,
     "with_substantive_content": 22,
     "with_verified_content": 22,
