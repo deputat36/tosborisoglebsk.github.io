@@ -452,8 +452,8 @@
       "expected_check": "Сводки, карточки и рабочие действия сохраняют сетку",
       "focus_capture": null,
       "screenshot": "css-reg-010.png",
-      "sha256": "0f362d3cb6c3facbdef7d0f924e55bf413984744196253f7e3117ccc9b6f63fd",
-      "bytes": 140384,
+      "sha256": "0e7eb7a1f499e38199f4b4d4896463ecfa6fadca9a9d57981580577f3f8d1673",
+      "bytes": 140306,
       "diagnostics": {
         "title": "Рабочая панель портала ТОС БГО",
         "htmlTheme": "light",
@@ -482,7 +482,10 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_at": "2026-10-09",
+      "capture_run_id": "37887558807",
+      "review_note": "Текст и геометрия неизменны; просмотрено отличие сглаживания 271 пикселя, из них 5 значимых. Пороги сравнения сохранены."
     },
     {
       "case_id": "css-reg-011",
