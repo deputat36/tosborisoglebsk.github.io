@@ -38,9 +38,9 @@ function newsOriginTag(item) {
 function newsOriginNotice(item) {
   const origin = newsOrigin(item);
   if (origin === 'verified') return '';
-  if (origin === 'request') return '<div class="notice"><b style="color:var(--text)">Это запрос материалов</b><br>Запись приглашает прислать сведения, фото или уточнение и не подтверждает, что событие уже произошло.</div>';
-  if (origin === 'starter') return '<div class="notice"><b style="color:var(--text)">Стартовая заготовка</b><br>До получения даты события, участников, результата и источника материал нельзя считать фактической новостью территории.</div>';
-  return '<div class="notice"><b style="color:var(--text)">Редакционный материал</b><br>Текст подготовлен порталом. Для утверждений о событии, результате или сроках проверьте первичный источник.</div>';
+  if (origin === 'request') return '<div class="notice"><b class="news-origin-label">Это запрос материалов</b><br>Запись приглашает прислать сведения, фото или уточнение и не подтверждает, что событие уже произошло.</div>';
+  if (origin === 'starter') return '<div class="notice"><b class="news-origin-label">Стартовая заготовка</b><br>До получения даты события, участников, результата и источника материал нельзя считать фактической новостью территории.</div>';
+  return '<div class="notice"><b class="news-origin-label">Редакционный материал</b><br>Текст подготовлен порталом. Для утверждений о событии, результате или сроках проверьте первичный источник.</div>';
 }
 
 function newsDate(value) {

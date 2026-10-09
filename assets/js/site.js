@@ -369,7 +369,7 @@ async function renderNews() {
 
 async function renderArticles() {
   const root = $('#articles-list');
-  if (!root) return;
+  if (!root || root.hasAttribute('data-materials-browser')) return;
   try {
     const data = (await getJSON('/data/articles.json')).filter(isPublished);
     root.innerHTML = data.length ? data.map((item) => listItem(item, '/materials/')).join('') : '<div class="empty">Материалы пока не добавлены.</div>';
