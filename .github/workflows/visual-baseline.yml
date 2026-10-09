@@ -205,6 +205,9 @@ jobs:
       - name: Test brand redesign interactions
         run: node scripts/test_brand_redesign.js
 
+      - name: Test readable collections with and without JavaScript
+        run: node scripts/test_reader_collections.js
+
       - name: Generate visual-run public link integrity report
         env:
           PUBLIC_LINK_BASE_URL: http://127.0.0.1:4173

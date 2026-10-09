@@ -46,6 +46,8 @@ jobs:
         run: node scripts/generate_news_pages.js
       - name: Regenerate dependent material pages
         run: node scripts/generate_material_pages.js
+      - name: Generate readable collection fallbacks
+        run: node scripts/generate_collection_fallbacks.js
       - name: Generate accurate sitemap
         run: node scripts/generate_sitemap.js
       - name: Audit content origins
@@ -59,4 +61,4 @@ jobs:
         with:
           commit_message: 'Auto update trusted news from VK'
           branch: release-2025-12-22
-          file_pattern: 'data/news.json data/content_origin_report.json news/*/index.html materials/*/index.html sitemap.xml'
+          file_pattern: 'data/news.json data/content_origin_report.json news/index.html news/*/index.html materials/index.html materials/*/index.html sitemap.xml'

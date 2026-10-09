@@ -52,7 +52,7 @@ function newsDate(value) {
 
 async function loadNewsPageData() {
   const [news, toses] = await Promise.all([
-    fetch('/data/news.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
+    fetch('/data/news.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : Promise.reject(new Error('News unavailable'))),
     fetch('/data/toses.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []).catch(() => [])
   ]);
   return { news: news.filter(newsPublished), toses };
@@ -109,6 +109,8 @@ async function renderNewsPage() {
 
   try {
     const { news, toses } = await loadNewsPageData();
+    Object.values(controls).forEach(control => { if (control) control.disabled = false; });
+    if (reset) reset.disabled = false;
     const categories = [...new Set(news.map((item) => item.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
     const usedTos = [...new Set(news.map((item) => item.tos_slug).filter(Boolean))];
 
@@ -153,8 +155,10 @@ async function renderNewsPage() {
     });
     apply(true);
   } catch (error) {
-    root.innerHTML = '<div class="empty">Новости не загрузились. Проверьте data/news.json</div>';
-    if (status) status.textContent = 'Ошибка загрузки ленты новостей.';
+    if (!root.querySelector('article')) root.innerHTML = '<div class="empty">Новости временно недоступны. Попробуйте позже или <a href="https://vk.ru/tosbgo">откройте наше сообщество ВК</a>.</div>';
+    Object.values(controls).forEach(control => { if (control) control.disabled = true; });
+    if (reset) reset.disabled = true;
+    if (status) status.textContent = 'Показаны сохранённые публикации. Поиск и фильтры временно недоступны.';
   }
 }
 
