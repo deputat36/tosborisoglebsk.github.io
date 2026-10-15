@@ -8,7 +8,8 @@
   try{const saved=localStorage.getItem(key);if(saved){state=core.normalize(JSON.parse(saved));say('Черновик восстановлен из этого браузера.');}}catch{storageAvailable=false;say('Не удалось восстановить черновик. Скачивайте файл сметы для сохранения.');}
   function save(){try{localStorage.setItem(key,JSON.stringify(state));storageAvailable=true;say('Черновик сохранён в этом браузере.');}catch{storageAvailable=false;say('Автосохранение недоступно. Скачайте файл сметы.');}}
   const cell=(tr,label)=>{const td=document.createElement('td');td.dataset.label=label;tr.append(td);return td;};
-  function control(parent,group,index,field,value,label,numeric=false){const input=document.createElement('input');input.type='text';input.value=value;input.className='budget-input';input.dataset.group=group;input.dataset.field=field;if(index!==null)input.dataset.index=index;input.setAttribute('aria-label',label);input.maxLength=numeric?40:1000;if(numeric)input.inputMode='decimal';parent.append(input);return input;}
+  function control(parent,group,index,field,value,label,numeric=false){const input=document.createElement(numeric?'input':'textarea');if(numeric)input.type='text';else input.rows=2;input.value=value;input.className='budget-input';input.dataset.group=group;input.dataset.field=field;if(index!==null)input.dataset.index=index;input.setAttribute('aria-label',label);input.maxLength=numeric?40:1000;if(numeric)input.inputMode='decimal';parent.append(input);return input;}
+  function resizeText(el){if(el.tagName==='TEXTAREA'){el.style.height='auto';el.style.height=`${Math.max(42,el.scrollHeight)}px`;}}
   function removeButton(parent,group,index){const b=document.createElement('button');b.type='button';b.className='btn budget-remove';b.textContent='Удалить';b.setAttribute('aria-label',`Удалить ${group==='expenses'?'расход':'вклад'} ${index+1}`);b.dataset.remove=group;b.dataset.index=index;parent.append(b);}
   function render(){
     for(const group of ['expenses','contributions']){
@@ -25,6 +26,7 @@
     root.querySelectorAll('[data-meta]').forEach(el=>el.value=state.meta[el.dataset.meta]);
     root.querySelectorAll('[data-funding]').forEach(el=>el.value=state[el.dataset.funding]);
     root.querySelector('#budget-notes').value=state.notes;
+    root.querySelectorAll('textarea').forEach(resizeText);
     update();
   }
   function update(){
@@ -39,7 +41,7 @@
     root.querySelector('[data-download="csv"]').disabled=!totals.valid;
     root.querySelector('#budget-undo').hidden=!undo;
   }
-  root.addEventListener('input',event=>{const el=event.target;if(el.dataset.group)state[el.dataset.group][Number(el.dataset.index)][el.dataset.field]=el.value;else if(el.dataset.meta)state.meta[el.dataset.meta]=el.value;else if(el.dataset.funding)state[el.dataset.funding]=el.value;else if(el.id==='budget-notes')state.notes=el.value;else return;update();clearTimeout(timer);timer=setTimeout(save,350);});
+  root.addEventListener('input',event=>{const el=event.target;if(el.dataset.group)state[el.dataset.group][Number(el.dataset.index)][el.dataset.field]=el.value;else if(el.dataset.meta)state.meta[el.dataset.meta]=el.value;else if(el.dataset.funding)state[el.dataset.funding]=el.value;else if(el.id==='budget-notes')state.notes=el.value;else return;resizeText(el);update();clearTimeout(timer);timer=setTimeout(save,350);});
   function download(text,name,type){const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   root.addEventListener('click',async event=>{
     const b=event.target.closest('button');if(!b)return;
