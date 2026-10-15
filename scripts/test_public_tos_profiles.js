@@ -13,6 +13,7 @@ async function main() {
   try {
     for (const mode of ['desktop', 'mobile', 'without-js']) {
       const context = await browser.newContext({ viewport: { width: mode === 'desktop' ? 1280 : 375, height: 900 }, javaScriptEnabled: mode !== 'without-js' });
+      context.setDefaultTimeout(5000);
       const page = await context.newPage();
       for (const profile of data.profiles) {
         const errors = [];
@@ -39,7 +40,10 @@ async function main() {
           results.push({ mode, slug: profile.tos_slug, passed: true, facts: profile.facts.length });
         } catch (error) {
           results.push({ mode, slug: profile.tos_slug, passed: false, error: error.message });
+          console.error(`FAIL ${mode} ${profile.tos_slug}: ${error.message}`);
         } finally { page.off('pageerror', onError); }
+        fs.mkdirSync(path.dirname(reportPath), { recursive: true });
+        fs.writeFileSync(reportPath, JSON.stringify({ checked_at: new Date().toISOString(), results }, null, 2) + '\n');
       }
       await context.close();
       console.log(`TOS profiles browser: ${mode} complete`);
