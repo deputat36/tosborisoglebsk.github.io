@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-10-15T19:01:25.833Z",
+    "generated_at": "2026-10-15T19:03:49.640Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -200,7 +200,7 @@
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 370 страниц, 6251 внутренних переходов, 890 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 370 страниц, 6275 внутренних переходов, 890 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -344,17 +344,17 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-10-15T14:14:14.363Z",
+    "generated_at": "2026-10-15T19:06:43.374Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
     "pages_indexed": 370,
     "pages_checked": 370,
-    "links_discovered": 8697,
-    "internal_links_checked": 6251,
+    "links_discovered": 8830,
+    "internal_links_checked": 6275,
     "unique_internal_targets": 890,
-    "external_links_ignored": 384,
+    "external_links_ignored": 445,
     "protocol_links_ignored": 34,
     "failed": 0,
     "automation": {
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-10-15T19:01:25.833Z",
+    "generated_at": "2026-10-15T19:03:49.640Z",
     "total_tos": 24,
     "with_substantive_content": 22,
     "with_verified_content": 22,

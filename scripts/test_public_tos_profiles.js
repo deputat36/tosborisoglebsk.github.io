@@ -31,7 +31,8 @@ async function main() {
           assert.deepEqual(links.map(link => link.href), ids.map(id => new URL(data.sources.find(source => source.id === id).url).href));
           assert(links.every(link => link.label?.startsWith('Источник:')), 'source links need descriptive labels');
           const summary = section.locator('summary');
-          await summary.click();
+          if (mode === 'without-js') await summary.press('Enter');
+          else await summary.click();
           assert.equal(await section.locator('details').getAttribute('open'), '', 'clarifications open without custom JavaScript');
           const href = await section.getByRole('link', { name: 'Передать уточнение', exact: true }).getAttribute('href');
           assert.equal(new URL(href, base).searchParams.get('tos'), profile.tos_slug, 'correction must keep its TOC');
