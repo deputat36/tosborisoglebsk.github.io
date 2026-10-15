@@ -20,6 +20,7 @@ patchTosContactFallback();
 require('./generate_sitemap');
 
 const checks = [
+  ['Dated TOS profiles and sources', 'scripts/test_tos_profiles.js'],
   ['Project budget calculations and file safety', 'scripts/test_project_budget.js'],
   ['Runtime cache coherence', 'scripts/audit_runtime_cache_coherence.js'],
   ['Public search ownership and trust consistency', 'scripts/test_public_search_and_trust.js'],

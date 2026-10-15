@@ -1,5 +1,6 @@
 const fs = require('fs');
 const CatalogTrust = require('../assets/js/tos-catalog-core');
+const { renderTosProfile } = require('./lib/tos_profiles');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
 const { coverageFor } = require('./lib/content_coverage');
@@ -13,6 +14,7 @@ const PROJECTS_PATH = path.join(ROOT, 'data', 'projects.json');
 const DONE_PATH = path.join(ROOT, 'data', 'done.json');
 const EVENTS_PATH = path.join(ROOT, 'data', 'events.json');
 const NEEDS_PATH = path.join(ROOT, 'data', 'needs.json');
+const PROFILES_PATH = path.join(ROOT, 'data', 'tos_profiles.json');
 const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const DETAIL_TRUST_VERSION = '2026-07-12';
 const RELATED_CONTENT_TRUST_VERSION = '2026-07-21';
@@ -395,6 +397,7 @@ function makePage(tos, data) {
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>${esc(title)}</title>
+  <link rel="stylesheet" href="/assets/css/tos-profiles.css"/>
   <meta name="description" content="${esc(seoDesc)}"/>
   <meta name="theme-color" content="#2f7d5a"/>
   <link rel="canonical" href="${esc(canonical)}"/>
@@ -413,10 +416,12 @@ function makePage(tos, data) {
   <a class="skip-link" href="#main">Перейти к содержимому</a>
   <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
   <main id="main">
-    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><button class="btn" type="button" onclick="window.print()">Распечатать</button></div></div></section>
+    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><a class="btn" href="#tos-profile">История и дела</a><button class="btn" type="button" onclick="window.print()">Распечатать</button></div></div></section>
     ${verificationStrip(tos, verification)}
 
     <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div><div class="tile"><b>${esc(verification.label)}</b><span>статус сведений</span></div></div><hr class="sep"/><div class="grid"><article class="card"><div class="card-inner"><h3>Территория</h3>${scopeBlock('territory', territoryScope)}<p><b>Населённый пункт:</b> <a data-tos-place-link href="${esc(territoryUrl)}">${esc(tos.location || 'уточняется')}</a></p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p><div class="card-actions"><a class="btn" data-tos-place-action href="${esc(territoryUrl)}">Открыть страницу территории</a></div></div></article><article class="card"><div class="card-inner"><h3>Председатель и контакты</h3>${scopeBlock('contacts', contactsScope)}<p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p><p><b>Телефон:</b></p><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '<li>Телефон уточняется</li>')}</ul><p><b>Email:</b></p><ul>${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '<li>Email уточняется</li>')}</ul><p><b>Публичная ссылка председателя:</b></p><ul>${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Открыть ссылку</a></li>`, '<li>Ссылка уточняется</li>')}</ul>${contactFallback(tos)}</div></article><article class="card"><div class="card-inner"><h3>Публичные ссылки</h3>${scopeBlock('public-links', publicScope)}<ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))}</a></li>`, '<li>Соцсети уточняются</li>')}</ul><p class="tiny"><b>Технически обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}. Эта дата не является проверкой сведений.</p></div></article></div>${verificationBlock(tos, verification)}<div class="notice"><b style="color:var(--text)">О территории</b><br>${esc(tos.description || 'Описание пока уточняется.')}</div></div></article></div></section>
+
+    ${renderTosProfile(tos, data.profiles)}
 
     ${clarifyBlock(tos, qualityScore, verification)}
 
@@ -433,7 +438,7 @@ function makePage(tos, data) {
     ${block('Результаты и запросы этого ТОС', 'Истории и запросы материалов; подтверждённость указана в самой записи.', 'Все истории', '/done/', relDone, 'list', 'tos-done') }
     ${block('Потребности и запросы этого ТОС', 'Перед передачей помощи проверьте статус, получателя и актуальность записи.', 'Все потребности', '/needs/', relNeeds, 'list', 'tos-needs') }
   </main>
-  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Данные страницы обновляются автоматически из JSON-файлов сайта.</div></div></footer>
+  <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><!-- Данные страницы обновляются автоматически из JSON-файлов сайта. --></div></footer>
   <script src="/assets/js/site.js"></script><script src="/assets/js/tos-logos.js"></script>
 </body></html>`;
 }
@@ -448,7 +453,7 @@ function updateSitemap(toses) {
 }
 function main() {
   const toses = readJson(TOSES_PATH).filter(t => t.slug && t.status !== 'draft');
-  const data = { news: readJson(NEWS_PATH), projects: readJson(PROJECTS_PATH), done: readJson(DONE_PATH), events: readJson(EVENTS_PATH), needs: readJson(NEEDS_PATH) };
+  const data = { news: readJson(NEWS_PATH), projects: readJson(PROJECTS_PATH), done: readJson(DONE_PATH), events: readJson(EVENTS_PATH), needs: readJson(NEEDS_PATH), profiles: readJson(PROFILES_PATH) };
   for (const tos of toses) writeFile(path.join(ROOT, 'tos', tos.slug, 'index.html'), makePage(tos, data));
   updateSitemap(toses);
   console.log(`Generated TOS pages: ${toses.length}`);

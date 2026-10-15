@@ -297,8 +297,8 @@ function main() {
     const hero = extractHero(html);
     const heroLinks = Array.from(hero.matchAll(/href="([^"]+)"/g), (match) => match[1]);
     const heroButtons = (hero.match(/<button\b/g) || []).length;
-    if (heroLinks.length !== 2 || heroLinks[0] !== '/tos/' || !heroLinks[1].includes('type=card#message-builder') || heroButtons !== 1) {
-      errors.push(`${line}: hero must contain catalog backlink, one correction CTA and one print button`);
+    if (heroLinks.length !== 3 || heroLinks[0] !== '/tos/' || !heroLinks[1].includes('type=card#message-builder') || heroLinks[2] !== '#tos-profile' || heroButtons !== 1) {
+      errors.push(`${line}: hero must contain catalog backlink, one correction CTA, history jump and one print button`);
     }
     if (!hero.includes('type="button"')) errors.push(`${line}: print button must declare type=button`);
 

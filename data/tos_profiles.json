@@ -1,0 +1,1387 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-15",
+  "policy": "Краткий пересказ публичных фактов с датами и ссылками. Архивные публикации не подтверждают текущие контакты, состав, границы или состояние объектов. Тексты и фотографии источников не перепубликуются.",
+  "sources": [
+    {
+      "id": "bogana-2023",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2023-09-04",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-sele-bogana-postroili-universalnuyu-sportploshadku/",
+      "title": "Спортивная площадка в Богане",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "vostochnyy-2020",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2020-05-18",
+      "url": "https://riavrn.ru/news/v-borisoglebske-aktivisty-svoimi-silami-blagoustroili-territoriyu-mikrorayona/",
+      "title": "Благоустройство ТОС «Восточный»",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "gubari-2026",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2026-07-03",
+      "url": "https://borisoglebsk.riavrn.ru/news/komissiya-konkursa-samoe-krasivoe-selo-voronezhskoj-oblasti-posetila-borisoglebskoe-selo-gubari/",
+      "title": "Проекты и инфраструктура Губарей",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "gubari-memory",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2026-08-20",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-sele-gubari-blagoustroili-territoriyu-u-kladbisha/",
+      "title": "Подъезд к кладбищу в Губарях",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "gubari-radio",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2026-06-26",
+      "url": "https://borisoglebsk.riavrn.ru/news/proekt-v-rabochij-polden-zapustili-v-borisoglebskom-sele-gubari/",
+      "title": "Сельское радио «В рабочий полдень»",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "znamenie-2024",
+      "publisher": "Мой Борисоглебск",
+      "published_at": "2024-12-25",
+      "url": "https://mybsk.ru/borisoglebskaya-gorodskaya-duma-podvela-itogi-2024-goda/",
+      "title": "Заседание городской Думы 24 декабря 2024 года",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "mayak-2025",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2025-05-20",
+      "url": "https://riavrn.ru/news/edinstvo-i-polza-mayaka-kak-aktivisty-voronezhskogo-tosa-blagoustraivayut-svoe-selo/",
+      "title": "Благоустройство и история ТОС Чигорака",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "kalinka-play",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2024-12-19",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-poselke-kalinino-na-pustyre-poyavilas-pervaya-detskaya-ploshadka/",
+      "title": "Первая детская площадка в Калинино",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "kalinka-wells",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2023-11-21",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-poselke-kalinino-pochistili-3-kolodca/",
+      "title": "Восстановление трёх колодцев в Калинино",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "mahrovka-2023",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2023-11-07",
+      "url": "https://riavrn.ru/news/vuezdnuyu-stelu-ustanovili-v-borisoglebskom-sele-mahrovka/",
+      "title": "Стела и предыдущие проекты Махровки",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "mirolyubie-memory",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2022-11-28",
+      "url": "https://riavrn.ru/news/pamyatnik-selskim-truzhenikam-otkryli-v-borisoglebskom-poselke-mirolyubie/",
+      "title": "Памятник и общественные пространства Миролюбия",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "mirolyubie-play",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2026-08-20",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-poselke-mirolyubie-blagoustroili-ploshadku-dlya-kataniya-na-rolikah/",
+      "title": "Завершение проекта «Играй и побеждай»",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "winners-2026",
+      "publisher": "АНО «Образ Будущего»",
+      "published_at": null,
+      "url": "https://obraz36.ru/site_data/s273/2026/2026/%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D0%B8%20%D0%A2%D0%9E%D0%A1%202026.pdf",
+      "title": "Перечень победителей конкурса ТОС 2026 года",
+      "kind": "official",
+      "date_note": "Конкурс 2026 года; дата публикации перечня не указана",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "petrovskoe-water",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2023-08-24",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-sele-petrovskoe-otremontirovali-vodozabornuyu-skvazhinu/",
+      "title": "Обновление скважины в Петровском",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "winners-2021",
+      "publisher": "Блокнот Борисоглебск",
+      "published_at": "2021-10-27",
+      "url": "https://bloknotborisoglebsk.ru/news/v-sele-pod-borisoglebskom-postavili-novyy-vezdnoy--1407840",
+      "title": "Перечень проектов ТОС БГО 2021 года",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "prostornyy-origin",
+      "publisher": "Блокнот Борисоглебск",
+      "published_at": "2024-12-02",
+      "url": "https://bloknotborisoglebsk.ru/news/eshche-odin-tos-poyavilsya-v-borisoglebske-1800542",
+      "title": "Сообщество ТОС «Просторный»",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "festival-2025",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2025-12-15",
+      "url": "https://riavrn.ru/news/komanda-tos-iz-borisoglebska-pobedila-v-mezhregionalnom-tvorcheskom-festivale/",
+      "title": "Творческий фестиваль ТОС 12 декабря 2025 года",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "severnyy-play",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2021-09-21",
+      "url": "https://riavrn.ru/news/na-detskoj-ploshadke-v-mikrorajone-borisoglebska-ustanovili-novoe-igrovoe-oborudovanie/",
+      "title": "Два этапа детской площадки Северного, 39",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "tancyrey-sign",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2021-10-28",
+      "url": "https://riavrn.ru/news/vuezdnuyu-stelu-ustanovili-obshestvenniki-v-borisoglebskom-sele-tancyrej/",
+      "title": "Въездная стела Танцырея",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "tretyaki-water",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2024-09-09",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-sele-tretyaki-ustanovili-vodonapornuyu-bashnyu/",
+      "title": "Водоснабжение и история проектов Третьяков",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "ulyanovka-sport",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2020-09-21",
+      "url": "https://riavrn.ru/news/v-borisoglebskom-sele-ulyanovka-postroili-sportploshchadku-za-2-8-mln-rubley/",
+      "title": "Спортивная площадка Ульяновки",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "ulyanovka-practice",
+      "publisher": "Блокнот Борисоглебск",
+      "published_at": "2020-08-10",
+      "url": "https://bloknotborisoglebsk.ru/news/borisoglebskaya-ulyanovka-pretenduet-na-zvanie-sam-1252654",
+      "title": "Спортклуб «Импульс» и сквер «Ульяна»",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "chkalovec-history",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2024-11-08",
+      "url": "https://riavrn.ru/news/u-nas-vse-poluchaetsya-potomu-chto-my-vmeste-kak-voronezhskij-tos-kardinalno-uluchshil-pridomovuyu-territoriyu/",
+      "title": "История проектов ТОС «Чкаловец»",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "chkalovec-parking",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2021-07-23",
+      "url": "https://riavrn.ru/news/v-borisoglebske-aktivisty-mnogoetazhki-sdelali-asfaltirovannuyu-parkovku-na-30-avtomobilej/",
+      "title": "Парковка на 30 автомобилей",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "chkalovec-center",
+      "publisher": "РИА «Воронеж»",
+      "published_at": "2024-09-04",
+      "url": "https://borisoglebsk.riavrn.ru/news/v-borisoglebske-obshestvenniki-blagoustroili-mesto-dlya-kulturnogo-dosuga/",
+      "title": "Центр для соседских мероприятий",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "chkalovec-mentor",
+      "publisher": "Мой Борисоглебск",
+      "published_at": "2026-10-06",
+      "url": "https://mybsk.ru/predsedatel-borisoglebskogo-tos-chkalovets-irina-sotnichenko-priznana-luchshim-nastavnikom/",
+      "title": "Награда Ирине Сотниченко за наставничество",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "eco-2026",
+      "publisher": "Общероссийская ассамблея ТОС (ОАТОС)",
+      "published_at": "2026-08-19",
+      "url": "https://oatos.ru/news/tematicheskiy-daydzhest-tos-ekoaktsii",
+      "title": "Экологическая акция ТОС Чигорака",
+      "kind": "association",
+      "checked_at": "2026-10-15"
+    },
+    {
+      "id": "chkalovec-mentoring-2026",
+      "publisher": "РИА «Глас-Медиа»",
+      "published_at": "2026-10-05",
+      "url": "https://ria-glas.ru/2026/novosti/snova-s-nagradoj-snova-s-dengami-na-blagoustrojstvo-dvora/",
+      "title": "Наставническая работа Ирины Сотниченко",
+      "kind": "reporting",
+      "checked_at": "2026-10-15"
+    }
+  ],
+  "profiles": [
+    {
+      "tos_slug": "bogana",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Спорт",
+        "Водоснабжение",
+        "Память и благоустройство"
+      ],
+      "facts": [
+        {
+          "id": "bogana-school",
+          "period": "2023",
+          "kind": "completed",
+          "title": "Универсальная спортивная площадка",
+          "text": "1 сентября 2023 года открыли площадку при школе: более 900 м² для футбола, баскетбола и волейбола. Областной грант превысил 940 тыс. ₽; жители собрали 156 тыс. ₽, спонсоры добавили около 400 тыс. ₽.",
+          "source_ids": [
+            "bogana-2023"
+          ]
+        },
+        {
+          "id": "bogana-history",
+          "period": "До сентября 2023",
+          "kind": "reported",
+          "title": "Другие проекты, описанные в прессе",
+          "text": "В обзоре перечислены сцена у ДК, тренажёры, тротуар, благоустройство памятника фронтовикам и работы по водоснабжению. Это архив результатов, а не оценка их сегодняшнего состояния.",
+          "source_ids": [
+            "bogana-2023"
+          ]
+        },
+        {
+          "id": "bogana-festival",
+          "period": "Декабрь 2025",
+          "kind": "participation",
+          "title": "Творческий фестиваль ТОС",
+          "text": "Представители ТОС участвовали в сценке и в сборной, занявшей первое место в номинации народного творчества 12 декабря 2025 года.",
+          "source_ids": [
+            "festival-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "В публикации 2023 года председателем названа Полина Рыбалкина; в паспорте портала — Мария Лопатина. Нужны актуальные сведения об избрании и публичном контакте."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "bogana-2023",
+          "festival-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "vostochnyy",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Субботники",
+        "Детский отдых",
+        "Соседское участие"
+      ],
+      "facts": [
+        {
+          "id": "vostochnyy-work",
+          "period": "2020",
+          "kind": "completed",
+          "title": "Четыре субботника и общая площадка",
+          "text": "Жители за свои средства расчистили аллею между Весенней и Объездной, скосили траву, установили лавочки, урну, спортивный комплекс и песочницу.",
+          "source_ids": [
+            "vostochnyy-2020"
+          ]
+        },
+        {
+          "id": "vostochnyy-origin",
+          "period": "2019–2020",
+          "kind": "historical",
+          "title": "Начало работы сообщества",
+          "text": "По публикации от 18 мая 2020 года ТОС образован в ноябре 2019-го и тогда объединял 15 активистов. Это число активистов на дату статьи, а не численность всех жителей территории.",
+          "source_ids": [
+            "vostochnyy-2020"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Требуются сведения о проектах после 2020 года, действующем совете и актуальных публичных каналах связи."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "vostochnyy-2020"
+        ]
+      }
+    },
+    {
+      "tos_slug": "gubari",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Водоснабжение",
+        "Спорт",
+        "Память",
+        "Сельские коммуникации"
+      ],
+      "facts": [
+        {
+          "id": "gubari-memory",
+          "period": "2026",
+          "kind": "completed",
+          "title": "Удобный подъезд к кладбищу",
+          "text": "В августе завершили проект «Свеча памяти»: грунтовый подъезд к центральному входу заасфальтировали. В публикации указана грантовая поддержка 1 млн 456 тыс. ₽.",
+          "source_ids": [
+            "gubari-memory"
+          ]
+        },
+        {
+          "id": "gubari-water",
+          "period": "2021–2024",
+          "kind": "completed",
+          "title": "Башня и ремонт водопроводных колодцев",
+          "text": "Обзор 2026 года подтверждает замену водонапорной башни в 2021-м и ремонт десяти колодцев системы водоснабжения в 2022 и 2024 годах. Установлены задвижки и устройства для спуска воды.",
+          "source_ids": [
+            "gubari-2026"
+          ]
+        },
+        {
+          "id": "gubari-sport",
+          "period": "2023",
+          "kind": "completed",
+          "title": "Тренажёры у администрации",
+          "text": "После победы в конкурсе активисты ТОС установили спортивную площадку с тренажёрами возле здания сельской администрации.",
+          "source_ids": [
+            "gubari-2026"
+          ]
+        },
+        {
+          "id": "gubari-radio",
+          "period": "2026",
+          "kind": "territory",
+          "title": "Новости села через уличные колонки",
+          "text": "В июне в селе начал работу проект «В рабочий полдень»: по пятницам передают местные новости и поздравления. Выпуски готовит художественный руководитель ДК. Источник описывает жизнь села, не называет эту инициативу отдельным грантом ТОС.",
+          "source_ids": [
+            "gubari-radio"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Нужны актуальные границы ТОС и разрешённый канал связи. Численность жителей в публикации июля 2026 года — 795; это датированная оценка, а не автоматическая замена паспорта."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "gubari-memory",
+          "gubari-2026",
+          "gubari-radio"
+        ]
+      }
+    },
+    {
+      "tos_slug": "dzerzhinskogo",
+      "checked_at": "2026-10-15",
+      "topics": [],
+      "facts": [],
+      "clarifications": [
+        "По состоянию на 15 октября 2026 года независимые публикации о конкретных проектах этого ТОС не найдены. Это пробел открытых источников, а не вывод об отсутствии работы.",
+        "Нужны выписка из реестра или решение о границах, подтверждение действующего совета, публичная группа и хотя бы один датированный отчёт о работе."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "no_independent_source",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": []
+      }
+    },
+    {
+      "tos_slug": "znamenie",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Создание ТОС",
+        "Соседское участие"
+      ],
+      "facts": [
+        {
+          "id": "znamenie-origin",
+          "period": "Декабрь 2024",
+          "kind": "historical",
+          "title": "Инициатива жителей двух домов",
+          "text": "По сообщению о заседании городской Думы 24 декабря, инициативная группа домов 74 и 74А на улице 40 лет Октября обратилась по вопросу границ ТОС. Депутаты поддержали инициативу «Знамение».",
+          "source_ids": [
+            "znamenie-2024"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Для точной даты учреждения и границ нужен текст муниципального решения и запись реестра. Подтверждённых публикаций о завершённых проектах пока не найдено."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "znamenie-2024"
+        ]
+      }
+    },
+    {
+      "tos_slug": "ivanovka",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Освещение"
+      ],
+      "facts": [
+        {
+          "id": "ivanovka-competition",
+          "period": "2021",
+          "kind": "award",
+          "title": "Уличное освещение",
+          "text": "Проект указан среди победителей областного конкурса. Публикация подтверждает отбор; завершение работ отдельно не установлено.",
+          "source_ids": [
+            "winners-2021"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Не найдены подтверждение завершения проекта 2021 года и действующий открытый канал связи. Нужны фото результата, точное место и актуальный контакт."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "winners-2021"
+        ]
+      }
+    },
+    {
+      "tos_slug": "ipas",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "История Чигорака"
+      ],
+      "facts": [
+        {
+          "id": "ipas-chigorak",
+          "period": "На май 2025",
+          "kind": "historical",
+          "title": "История объединений Чигорака",
+          "text": "Обзор мая 2025 года связывает историю этого ТОС с общим ТОС «Чигорак».",
+          "source_ids": [
+            "mayak-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "В перечне заявок ассоциации обнаружено упоминание «Ипас» и площадки «Островок детства», но полное содержимое и год записи недоступны для сверки. Победа и реализация не подтверждены; эта запись не включена в результаты.",
+        "Нужны отдельная публичная группа, актуальные контакты и подтверждённая история собственных проектов."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "blocked_sources": [
+          "https://smovrn.ru/post/spisok-tosov-podavshih-zayavki-2"
+        ],
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "mayak-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "kalinka",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Водоснабжение",
+        "Детский отдых",
+        "Спорт"
+      ],
+      "facts": [
+        {
+          "id": "kalinka-play",
+          "period": "2024",
+          "kind": "completed",
+          "title": "«Территория детского здоровья»",
+          "text": "В Калинино появилась первая детская площадка: песочница, качели, горка, три тренажёра и лавочки. Указаны областной грант более 800 тыс. ₽ и вклад жителей 50 тыс. ₽.",
+          "source_ids": [
+            "kalinka-play"
+          ]
+        },
+        {
+          "id": "kalinka-wells",
+          "period": "2023",
+          "kind": "completed",
+          "title": "«Колодец — душа посёлка»",
+          "text": "Очищены и благоустроены три колодца: восстановлены ворота, сделаны домики, забетонированы подходы и поставлены лавочки. Грант — 280 тыс. ₽, вклад жителей — 30 тыс. ₽.",
+          "source_ids": [
+            "kalinka-wells"
+          ]
+        },
+        {
+          "id": "kalinka-origin",
+          "period": "2020",
+          "kind": "historical",
+          "title": "Начало работы ТОС",
+          "text": "Обе публикации называют 2020 годом создания. Очистка колодцев описана как первый областной грантовый проект, площадка — как второй.",
+          "source_ids": [
+            "kalinka-play",
+            "kalinka-wells"
+          ]
+        }
+      ],
+      "clarifications": [
+        "В публикациях 2023 и 2024 годов приведена разная численность населения и участников. Нужны дата и метод актуального подсчёта, открытый канал связи, сведения о выполнении планов ограждения и освещения площадки."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "kalinka-play",
+          "kalinka-wells"
+        ]
+      }
+    },
+    {
+      "tos_slug": "mahrovka",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Благоустройство",
+        "Спорт",
+        "Идентичность села"
+      ],
+      "facts": [
+        {
+          "id": "mahrovka-sign",
+          "period": "2023",
+          "kind": "completed",
+          "title": "Въездная стела",
+          "text": "Активисты добились поддержки после доработки заявки. В публикации указаны грант 499 тыс. ₽, спонсорский вклад 150 тыс. ₽ и 50 тыс. ₽ жителей. Стела показывает название села и год 1771.",
+          "source_ids": [
+            "mahrovka-2023"
+          ]
+        },
+        {
+          "id": "mahrovka-health",
+          "period": "2016–2020",
+          "kind": "reported",
+          "title": "Кладбище и «Уголок здоровья»",
+          "text": "Историческая справка упоминает ограждение кладбища в 2016-м, детскую площадку в 2017-м и её дополнение спортивными снарядами в 2020-м.",
+          "source_ids": [
+            "mahrovka-2023"
+          ]
+        },
+        {
+          "id": "mahrovka-festival",
+          "period": "Декабрь 2025",
+          "kind": "participation",
+          "title": "Творческий фестиваль ТОС",
+          "text": "Представители ТОС участвовали в сценке и в сборной, занявшей первое место в номинации народного творчества 12 декабря 2025 года.",
+          "source_ids": [
+            "festival-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Статья 2023 года относит создание ТОС к 2004 году, паспорт портала — к 2015-му. Нужно установить, относятся ли даты к одному составу или разным этапам регистрации."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "mahrovka-2023",
+          "festival-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "mayak",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Детские площадки",
+        "Отходы",
+        "Экология"
+      ],
+      "facts": [
+        {
+          "id": "mayak-play",
+          "period": "2024",
+          "kind": "completed",
+          "title": "«Дворик детства» на Пионерской",
+          "text": "На расчищенном пустыре обустроили детскую площадку: песочницу, качели, игровой и спортивный комплексы, лавочки. В интервью мая 2025 года открытие отнесено к предыдущей осени.",
+          "source_ids": [
+            "mayak-2025"
+          ]
+        },
+        {
+          "id": "mayak-waste",
+          "period": "2022",
+          "kind": "completed",
+          "title": "Четыре площадки сбора отходов",
+          "text": "По обзору РИА, на трёх улицах благоустроили четыре контейнерные площадки: асфальт, ограждение и ёмкости для пластиковых бутылок.",
+          "source_ids": [
+            "mayak-2025"
+          ]
+        },
+        {
+          "id": "mayak-shore",
+          "period": "2024",
+          "kind": "completed",
+          "title": "Уборка берега Вороны",
+          "text": "По интервью 2025 года, годом ранее проведена экологическая акция «Родные берега»: жители убирали берег семьями, участвовали в играх и общем чаепитии.",
+          "source_ids": [
+            "mayak-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "В обзорной статье история ТОС отсчитывается иначе, чем год в паспорте. Точную дату учреждения нужно сверить с реестром. Планы дальнейшего озеленения не считаются выполненными."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "mayak-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "mechta",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Родник",
+        "Экология",
+        "Совместные акции"
+      ],
+      "facts": [
+        {
+          "id": "mechta-competition",
+          "period": "2021",
+          "kind": "award",
+          "title": "Благоустройство родника",
+          "text": "Проект указан среди победителей областного конкурса. Публикация подтверждает отбор; завершение работ отдельно не установлено.",
+          "source_ids": [
+            "winners-2021"
+          ]
+        },
+        {
+          "id": "mechta-chigorak",
+          "period": "На май 2025",
+          "kind": "historical",
+          "title": "История объединений Чигорака",
+          "text": "Обзор мая 2025 года связывает историю этого ТОС с общим ТОС «Чигорак».",
+          "source_ids": [
+            "mayak-2025"
+          ]
+        },
+        {
+          "id": "mechta-eco",
+          "period": "Август 2026",
+          "kind": "completed",
+          "title": "Уборка и обустройство берега",
+          "text": "Дайджест ОАТОС подтверждает совместное участие «Мечты» и «Первомайского» в акции «Экоэкипаж: штурм берега». Более 100 участников убрали отходы; прибрежную зону дополнили свежим песком. Указана поддержка АНО «Образ будущего».",
+          "source_ids": [
+            "eco-2026"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Нужны подтверждение завершения проекта родника 2021 года, самостоятельный канал ТОС и сведения о нынешнем совете."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "winners-2021",
+          "mayak-2025",
+          "eco-2026"
+        ]
+      }
+    },
+    {
+      "tos_slug": "mirolyubie",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Спорт",
+        "Общественные пространства",
+        "Водоснабжение",
+        "Память"
+      ],
+      "facts": [
+        {
+          "id": "mirolyubie-play",
+          "period": "2026",
+          "kind": "completed",
+          "title": "«Играй и побеждай»",
+          "text": "В центре посёлка обустроена асфальтовая площадка 960 м² для роликов, самокатов и скейтбордов. Публикация 20 августа подтверждает завершение. В официальном перечне победителей указана запрашиваемая сумма — 1 489 360 ₽.",
+          "source_ids": [
+            "mirolyubie-play",
+            "winners-2026"
+          ]
+        },
+        {
+          "id": "mirolyubie-memory",
+          "period": "2021–2022",
+          "kind": "completed",
+          "title": "«Благодарим, помним и гордимся»",
+          "text": "Сквер благоустроили в 2021 году, памятник сельским труженикам на Ленинской, 2 открыли 26 ноября 2022-го. В источнике: грант 251,2 тыс. ₽, спонсоры 254,2 тыс. ₽, жители 30 тыс. ₽.",
+          "source_ids": [
+            "mirolyubie-memory"
+          ]
+        },
+        {
+          "id": "mirolyubie-earlier",
+          "period": "2016–2022",
+          "kind": "reported",
+          "title": "Площадки, дорога и водопровод",
+          "text": "Архив перечисляет «Уголок детства» (2016), сквер «Надежда» (2017), спортивную площадку (2018), щебёночный участок между Свободы и Лесной (2019) и ремонт 500 м водопровода (2022).",
+          "source_ids": [
+            "mirolyubie-memory"
+          ]
+        },
+        {
+          "id": "mirolyubie-festival",
+          "period": "Декабрь 2025",
+          "kind": "participation",
+          "title": "Творческий фестиваль ТОС",
+          "text": "Представители ТОС участвовали в сценке и в сборной, занявшей первое место в номинации народного творчества 12 декабря 2025 года.",
+          "source_ids": [
+            "festival-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Архив 2022 года называет председателем Надежду Харитонову, статья 2026 года — Татьяну Власову. Сведения о текущем составе совета и публичных контактах нужно закрепить актуальным подтверждением."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "mirolyubie-play",
+          "winners-2026",
+          "mirolyubie-memory",
+          "festival-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "pervomayskiy",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Культура",
+        "Экология",
+        "Совместные акции"
+      ],
+      "facts": [
+        {
+          "id": "pervomayskiy-competition",
+          "period": "2021",
+          "kind": "award",
+          "title": "Уличная сцена",
+          "text": "Проект указан среди победителей областного конкурса. Публикация подтверждает отбор; завершение работ отдельно не установлено.",
+          "source_ids": [
+            "winners-2021"
+          ]
+        },
+        {
+          "id": "pervomayskiy-chigorak",
+          "period": "На май 2025",
+          "kind": "historical",
+          "title": "История объединений Чигорака",
+          "text": "Обзор мая 2025 года связывает историю этого ТОС с общим ТОС «Чигорак».",
+          "source_ids": [
+            "mayak-2025"
+          ]
+        },
+        {
+          "id": "pervomayskiy-eco",
+          "period": "Август 2026",
+          "kind": "completed",
+          "title": "Уборка и обустройство берега",
+          "text": "Дайджест ОАТОС подтверждает совместное участие «Мечты» и «Первомайского» в акции «Экоэкипаж: штурм берега». Более 100 участников убрали отходы; прибрежную зону дополнили свежим песком. Указана поддержка АНО «Образ будущего».",
+          "source_ids": [
+            "eco-2026"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Нужны подтверждение реализации сцены, сведения о последующих проектах и самостоятельный публичный канал ТОС."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "winners-2021",
+          "mayak-2025",
+          "eco-2026"
+        ]
+      }
+    },
+    {
+      "tos_slug": "petrovskoe",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Водоснабжение",
+        "Освещение",
+        "Память"
+      ],
+      "facts": [
+        {
+          "id": "petrovskoe-water",
+          "period": "2023",
+          "kind": "completed",
+          "title": "Обновление скважины № 1",
+          "text": "На Краснопетровской заменили 36 м труб, фильтры, насос и станцию управления и защиты. Указаны грант более 460 тыс. ₽ и общий вклад жителей со спонсорами 56 тыс. ₽. Идею выбрали голосованием сельчан.",
+          "source_ids": [
+            "petrovskoe-water"
+          ]
+        },
+        {
+          "id": "petrovskoe-history",
+          "period": "До августа 2023",
+          "kind": "reported",
+          "title": "Другие поддержанные инициативы",
+          "text": "Обзор сообщает о пяти победах в областном конкурсе; среди результатов — детская площадка, освещение Советской, ограждение сквера и обновление мемориала участникам войны.",
+          "source_ids": [
+            "petrovskoe-water"
+          ]
+        }
+      ],
+      "clarifications": [
+        "В статье встречаются названия «Петровское» и «Петровский». Требуются точное реестровое наименование, актуальная численность и публичный канал связи."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "petrovskoe-water"
+        ]
+      }
+    },
+    {
+      "tos_slug": "pobeda",
+      "checked_at": "2026-10-15",
+      "topics": [],
+      "facts": [],
+      "clarifications": [
+        "По состоянию на 15 октября 2026 года независимые публикации о конкретных проектах этого ТОС не найдены. Это пробел открытых источников, а не вывод об отсутствии работы.",
+        "Нужно подтвердить действующий совет и актуальность группы, указанной в паспорте, получить решение о границах и хотя бы один датированный отчёт о работе."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "no_independent_source",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": []
+      }
+    },
+    {
+      "tos_slug": "podstepki",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Содержание кладбища"
+      ],
+      "facts": [
+        {
+          "id": "podstepki-competition",
+          "period": "2021",
+          "kind": "award",
+          "title": "Ограждение кладбища",
+          "text": "Проект указан среди победителей областного конкурса. Публикация подтверждает отбор; завершение работ отдельно не установлено.",
+          "source_ids": [
+            "winners-2021"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Нужны подтверждение завершения ограждения, точные границы ТОС и действующий публичный контакт. Общий поиск не дал надёжного нового канала связи."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "winners-2021"
+        ]
+      }
+    },
+    {
+      "tos_slug": "port-artur",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Содержание кладбища",
+        "История Чигорака"
+      ],
+      "facts": [
+        {
+          "id": "port-artur-competition",
+          "period": "2021",
+          "kind": "award",
+          "title": "Благоустройство кладбища",
+          "text": "Проект указан среди победителей областного конкурса. Публикация подтверждает отбор; завершение работ отдельно не установлено.",
+          "source_ids": [
+            "winners-2021"
+          ]
+        },
+        {
+          "id": "port-artur-chigorak",
+          "period": "На май 2025",
+          "kind": "historical",
+          "title": "История объединений Чигорака",
+          "text": "Обзор мая 2025 года связывает историю этого ТОС с общим ТОС «Чигорак».",
+          "source_ids": [
+            "mayak-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Нужны самостоятельный публичный канал ТОС, сведения о завершении проекта и последующих инициативах. Ссылка на личный профиль не подтверждает существование официальной группы."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "winners-2021",
+          "mayak-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "prostornyy",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Соседское участие",
+        "Культура"
+      ],
+      "facts": [
+        {
+          "id": "prostornyy-origin",
+          "period": "2024",
+          "kind": "historical",
+          "title": "Создание соседского сообщества",
+          "text": "Публикация от 2 декабря сообщает о создании ТОС жителями Просторной и запуске страниц 1 декабря 2024 года. В статье даны ссылки на существующие страницы ВКонтакте и Одноклассников.",
+          "source_ids": [
+            "prostornyy-origin"
+          ]
+        },
+        {
+          "id": "prostornyy-festival",
+          "period": "Декабрь 2025",
+          "kind": "participation",
+          "title": "Творческий фестиваль ТОС",
+          "text": "ТОС участвовал в общей сценке о чистоте на фестивале в Борисоглебске 12 декабря 2025 года.",
+          "source_ids": [
+            "festival-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "В паспорте перечислены дома 2 и 4 без названия улицы. Для изменения границ нужен муниципальный документ; публикация о Просторной не заменяет решение о границах. Нужны подтверждённые проекты благоустройства."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "prostornyy-origin",
+          "festival-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "severnyy-39",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Детский отдых",
+        "Спорт",
+        "Двор"
+      ],
+      "facts": [
+        {
+          "id": "severnyy-39-second",
+          "period": "2021",
+          "kind": "completed",
+          "title": "Второй этап детской площадки",
+          "text": "Грант 414 тыс. ₽ направили на полосу препятствий, спортивный комплекс, качели-гнездо, песочницу и дополнительные лавочки перед домом 39.",
+          "source_ids": [
+            "severnyy-play"
+          ]
+        },
+        {
+          "id": "severnyy-39-first",
+          "period": "2018",
+          "kind": "completed",
+          "title": "Первое игровое оборудование",
+          "text": "По обзору 2021 года, грант 400 тыс. ₽ позволил установить игровой городок, баскетбольный щит, качели, карусели и лавочки.",
+          "source_ids": [
+            "severnyy-play"
+          ]
+        },
+        {
+          "id": "severnyy-39-origin",
+          "period": "2017",
+          "kind": "historical",
+          "title": "Объединение жителей многоэтажки",
+          "text": "Источник относит создание ТОС к 2017 году. Общественное пространство начали менять из заросшей территории со старым оборудованием.",
+          "source_ids": [
+            "severnyy-play"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Нужны сведения о работах после 2021 года и актуальном состоянии оборудования. Число семей в статье не является числом жителей."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "severnyy-play"
+        ]
+      }
+    },
+    {
+      "tos_slug": "tancyrey",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Идентичность села",
+        "Память",
+        "Детский отдых"
+      ],
+      "facts": [
+        {
+          "id": "tancyrey-sign",
+          "period": "2021",
+          "kind": "completed",
+          "title": "Стела с символами села",
+          "text": "Работы завершены 25 октября. Стела высотой 5 м создана по эскизу активистов: грант 173 тыс. ₽, жители и спонсоры — около 50 тыс. ₽. В оформлении использованы купола, колосья и аист.",
+          "source_ids": [
+            "tancyrey-sign"
+          ]
+        },
+        {
+          "id": "tancyrey-history",
+          "period": "2015–2017",
+          "kind": "reported",
+          "title": "Более ранние инициативы",
+          "text": "Архивная справка упоминает детскую площадку 2015 года и мемориальную доску земляку-подводнику Владимиру Кильдюшкину, установленную в 2017-м.",
+          "source_ids": [
+            "tancyrey-sign"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Статья называет 2014 год создания и председателя Татьяну Чернышову; в паспорте указаны 2018 год и О. Г. Чернышова. Эти сведения требуют сверки с актуальным документом, без автоматической замены."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "tancyrey-sign"
+        ]
+      }
+    },
+    {
+      "tos_slug": "tretyaki",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Водоснабжение",
+        "Память",
+        "Детский отдых"
+      ],
+      "facts": [
+        {
+          "id": "tretyaki-water",
+          "period": "2024",
+          "kind": "completed",
+          "title": "Новая водонапорная башня",
+          "text": "В сентябре установлена башня высотой 12 м для трети села и центральных социальных объектов. Областной грант — 820 тыс. ₽; жители и спонсоры добавили более 100 тыс. ₽.",
+          "source_ids": [
+            "tretyaki-water"
+          ]
+        },
+        {
+          "id": "tretyaki-earlier-water",
+          "period": "2021–2022",
+          "kind": "completed",
+          "title": "Предыдущие проекты водоснабжения",
+          "text": "В обзоре подтверждены башня в Третьяках (2021) и башня в Старовоскресеновке (2022).",
+          "source_ids": [
+            "tretyaki-water"
+          ]
+        },
+        {
+          "id": "tretyaki-history",
+          "period": "2015–2019",
+          "kind": "reported",
+          "title": "Площадка, кладбища и мемориал",
+          "text": "Историческая справка перечисляет игровую площадку (2015), благоустройство кладбища в Третьяках (2017), кладбища в Старовоскресеновке (2018) и мемориала там же (2019).",
+          "source_ids": [
+            "tretyaki-water"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Публикация 2024 года называет помощника главы администрации Сергея Хмырова; в паспорте председателем записан Сергей Хмаров. Различаются написание и обозначенная роль. Нужны документ о действующем председателе, точное написание ФИО и актуальный контакт. Проекты в соседнем селе не устанавливают границы ТОС."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "tretyaki-water"
+        ]
+      }
+    },
+    {
+      "tos_slug": "ulyanovka",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Спорт",
+        "Общественные пространства",
+        "Память"
+      ],
+      "facts": [
+        {
+          "id": "ulyanovka-sport",
+          "period": "2020",
+          "kind": "completed",
+          "title": "Универсальная площадка при школе",
+          "text": "Создана огороженная площадка 800 м² с прорезиненным покрытием для нескольких видов спорта. Указаны грант около 900 тыс. ₽, местный бюджет 1,6 млн ₽, 300 тыс. ₽ премии за практику ТОС и около 50 тыс. ₽ жителей.",
+          "source_ids": [
+            "ulyanovka-sport"
+          ]
+        },
+        {
+          "id": "ulyanovka-history",
+          "period": "2016–2019",
+          "kind": "reported",
+          "title": "Детская площадка, клуб и памятник",
+          "text": "Архив подтверждает детскую площадку (2016), спортклуб «Импульс» (2017), ремонт дороги (2018) и реставрацию памятника погибшим землякам (2019).",
+          "source_ids": [
+            "ulyanovka-sport"
+          ]
+        },
+        {
+          "id": "ulyanovka-practice",
+          "period": "2019",
+          "kind": "award",
+          "title": "Признание спортклуба «Импульс»",
+          "text": "По публикации 2020 года спортклуб занял второе место во всероссийском конкурсе «Лучшая практика ТОС» в номинации физической культуры и спорта.",
+          "source_ids": [
+            "ulyanovka-practice"
+          ]
+        },
+        {
+          "id": "ulyanovka-square",
+          "period": "2019",
+          "kind": "completed",
+          "title": "Сквер «Ульяна»",
+          "text": "Публикация описывает сцену, беседки, лавочки, высаженные деревья и цветы в сквере. Благоустройство связано с совместной работой местной власти и активистов ТОС.",
+          "source_ids": [
+            "ulyanovka-practice"
+          ]
+        }
+      ],
+      "clarifications": [
+        "В статье создание ТОС отнесено к 2016 году, в паспорте — к 2014-му. Нужны реестровая дата, актуальный состав совета и контакты."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "ulyanovka-sport",
+          "ulyanovka-practice"
+        ]
+      }
+    },
+    {
+      "tos_slug": "uyutnyy",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Соседское участие",
+        "Культура"
+      ],
+      "facts": [
+        {
+          "id": "uyutnyy-festival",
+          "period": "Декабрь 2025",
+          "kind": "participation",
+          "title": "Творческий фестиваль ТОС",
+          "text": "ТОС участвовал в общей сценке о чистоте на фестивале в Борисоглебске 12 декабря 2025 года.",
+          "source_ids": [
+            "festival-2025"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Открытая пресса подтверждает участие в фестивале, но отдельные завершённые проекты благоустройства и их бюджеты не установлены. Нужны отчёты, фотографии с разрешением на публикацию и действующие публичные контакты."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "festival-2025"
+        ]
+      }
+    },
+    {
+      "tos_slug": "chkalovec",
+      "checked_at": "2026-10-15",
+      "topics": [
+        "Двор",
+        "Экология",
+        "Соседская культура",
+        "Наставничество"
+      ],
+      "facts": [
+        {
+          "id": "chkalovec-festival",
+          "period": "Декабрь 2025",
+          "kind": "participation",
+          "title": "Творческий фестиваль ТОС",
+          "text": "ТОС участвовал в общей сценке о чистоте на фестивале в Борисоглебске 12 декабря 2025 года.",
+          "source_ids": [
+            "festival-2025"
+          ]
+        },
+        {
+          "id": "chkalovec-mentoring",
+          "period": "На октябрь 2026",
+          "kind": "reported",
+          "title": "Помощь другим ТОС округа",
+          "text": "По публикации 5 октября, при участии Ирины Сотниченко реализовали 20 проектов в соседних ТОС; ещё 7 инициатив борисоглебцев получили поддержку конкурса «Родные берега». Это сведения о наставнической работе за пределами собственного двора.",
+          "source_ids": [
+            "chkalovec-mentoring-2026"
+          ]
+        },
+        {
+          "id": "chkalovec-mentor",
+          "period": "Октябрь 2026",
+          "kind": "award",
+          "title": "Первое место за наставничество",
+          "text": "На встрече 2 октября в областной Думе Ирина Сотниченко отмечена в номинации «Лучший наставник ТОС Воронежской области». Публикация вышла 6 октября.",
+          "source_ids": [
+            "chkalovec-mentor"
+          ]
+        },
+        {
+          "id": "chkalovec-center",
+          "period": "2024",
+          "kind": "completed",
+          "title": "«Центр притяжения — связь поколений»",
+          "text": "Обустроено помещение для соседских мероприятий: звук, освещение, мебель и видеонаблюдение. Источник сентября 2024 года указывает грант 1 млн ₽, около 165 тыс. ₽ жителей и 22 хвойных дерева рядом.",
+          "source_ids": [
+            "chkalovec-center"
+          ]
+        },
+        {
+          "id": "chkalovec-traditions",
+          "period": "2023",
+          "kind": "completed",
+          "title": "«Русские традиции — в каждый ТОС»",
+          "text": "По историческому обзору, приобретены звуковое оборудование и костюмы для общих мероприятий.",
+          "source_ids": [
+            "chkalovec-history"
+          ]
+        },
+        {
+          "id": "chkalovec-eco",
+          "period": "2022",
+          "kind": "completed",
+          "title": "Раздельный сбор отходов",
+          "text": "Во дворе появилась экоплощадка «Цветик-семицветик». Обзор описывает сортировку пластика и бумаги и использование выручки от вторсырья для соседских мероприятий.",
+          "source_ids": [
+            "chkalovec-history"
+          ]
+        },
+        {
+          "id": "chkalovec-parking",
+          "period": "2021",
+          "kind": "completed",
+          "title": "Парковка и проезд",
+          "text": "Сделана парковка на 30 автомобилей; около 600 м² территории дополнены асфальтом, освещением, клумбой и ограждением. Указаны грант около 790 тыс. ₽ и почти 180 тыс. ₽, собранных жителями.",
+          "source_ids": [
+            "chkalovec-parking"
+          ]
+        },
+        {
+          "id": "chkalovec-yard",
+          "period": "2018–2020",
+          "kind": "reported",
+          "title": "Постепенное обустройство двора",
+          "text": "Архив описывает дорожки и освещение 2018 года, затем детскую, спортивную, досуговую и хозяйственную зоны, озеленение, скамейки и урны.",
+          "source_ids": [
+            "chkalovec-history"
+          ]
+        }
+      ],
+      "clarifications": [
+        "Площадь территории в паспорте записана как «4,5 кв. м» и требует документальной сверки единиц измерения. Числа жильцов и членов ТОС в разных публикациях не совпадают; актуальный состав и границы нельзя выводить из архивов."
+      ],
+      "research": {
+        "method": "Поиск по названию ТОС и территории; проверка публикаций СМИ, конкурсных документов и доступных публичных ссылок.",
+        "result": "sources_found",
+        "official_registry_access": "Официальный раздел https://borisoglebsk.gosuslugi.ru/spravochnik/tos/ возвращает 403; реестровые сведения не подтверждены.",
+        "reviewed_source_ids": [
+          "festival-2025",
+          "chkalovec-mentoring-2026",
+          "chkalovec-mentor",
+          "chkalovec-center",
+          "chkalovec-history",
+          "chkalovec-parking"
+        ]
+      }
+    }
+  ]
+}
