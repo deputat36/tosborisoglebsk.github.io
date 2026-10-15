@@ -1,0 +1,34 @@
+const assert = require('node:assert/strict');
+const budget = require('../assets/js/project-budget-core');
+const state = budget.fresh();
+assert.equal(budget.calculate(state).valid, true, 'blank template is printable');
+state.expenses[0] = { category: 'Материалы', item: 'Краска', quantity: '1,5', price: '100,50', source: 'Счёт поставщика' };
+state.expenses[1] = { category: 'Работы', item: 'Монтаж', quantity: '3', price: '0,10', source: '' };
+state.own = '50';
+state.partners = '10';
+state.contributions[0] = { who: 'Жители', resource: 'Добровольная работа', value: '1 000,25' };
+assert.deepEqual(Object.fromEntries(Object.entries(budget.calculate(state)).filter(([key]) => ['cash', 'inkind', 'total', 'request', 'excess'].includes(key))), {cash: 15105, inkind: 100025, total: 115130, request: 9105, excess: 0});
+assert.equal(budget.calculate(state).valid, true);
+state.expenses[0].quantity = '0,001'; state.expenses[0].price = '5';
+assert.equal(budget.calculate(state).lineTotals[0], 1, 'half kopeck rounds once per line');
+state.own = '1000';
+assert.equal(budget.calculate(state).request, 0);
+assert.equal(budget.calculate(state).excess, 100969);
+for (const value of ['-1', '1e3', '1,234', 'NaN', '100000000000000000']) {
+  state.expenses[0].price = value;
+  assert.equal(budget.calculate(state).valid, false, `reject invalid price ${value}`);
+  assert.throws(() => budget.toCsv(state));
+}
+state.expenses[0].price = '5'; state.expenses[0].item = '';
+assert.equal(budget.calculate(state).valid, false, 'expense needs a name');
+state.expenses[0].item = '=HYPERLINK("x")';
+assert.match(budget.toCsv(state), /"'=HYPERLINK\(""x""\)"/, 'protect spreadsheet formulas');
+assert.match(budget.toText(state), /0,001 × 5/);
+assert.match(budget.toText(state), /Неденежный вклад/);
+const restored = budget.normalize(JSON.parse(JSON.stringify(state)));
+assert.deepEqual(restored, state, 'portable file roundtrip');
+assert.throws(() => budget.normalize({ kind: 'other', expenses: [] }));
+assert.throws(() => budget.normalize({ ...state, expenses: Array(101).fill({}) }));
+assert.equal(budget.decimal('1\u202f234,56 ₽', 2).value, 123456);
+assert.equal(budget.decimal('0', 2).value, 0);
+console.log('Project budget: arithmetic, precision, financing, invalid values, file roundtrip and CSV safety OK');

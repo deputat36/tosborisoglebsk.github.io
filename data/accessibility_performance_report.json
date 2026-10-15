@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T14:14:10.362Z",
+  "generated_at": "2026-10-15T15:02:14.695Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 117,
+    "asset_files": 120,
     "over_budget_assets": 0,
-    "total_css_bytes": 55854,
-    "total_js_bytes": 675872,
+    "total_css_bytes": 59680,
+    "total_js_bytes": 692038,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -225,17 +225,17 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/project-budget.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 8665,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/outreach-register.js",
       "group": "js",
       "extension": ".js",
       "size_bytes": 8581,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/search-create-tos.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8532,
       "over_budget": false
     }
   ],

@@ -3,7 +3,7 @@ const path = require('path');
 const { createHash } = require('crypto');
 
 // Avoid combining new HTML with an older cached module after deployment.
-const pages = ['grants/index.html', 'update-tos/index.html'];
+const pages = ['grants/index.html', 'update-tos/index.html', 'documents/templates/project-budget/index.html'];
 const write = process.argv.includes('--write');
 const errors = [];
 let assets = 0;

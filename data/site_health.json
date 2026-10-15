@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T14:14:10.618Z",
+  "generated_at": "2026-10-15T15:02:17.077Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -402,11 +402,11 @@
       "visual_baseline_scope": "Проверяется в pull request; результат конкретного запуска хранится в GitHub Actions artifact."
     },
     "validation_context": {
-      "source": "github_actions",
-      "workflow": "Generate TOS pages",
-      "run_id": "38749514559",
-      "run_number": "1880",
-      "commit_sha": "88bd1211f3641a0fac4729712500604146119597"
+      "source": "local",
+      "workflow": "",
+      "run_id": "",
+      "run_number": "",
+      "commit_sha": ""
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
