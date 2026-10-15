@@ -9,6 +9,8 @@ state.partners = '10';
 state.contributions[0] = { who: 'Жители', resource: 'Добровольная работа', value: '1 000,25' };
 assert.deepEqual(Object.fromEntries(Object.entries(budget.calculate(state)).filter(([key]) => ['cash', 'inkind', 'total', 'request', 'excess'].includes(key))), {cash: 15105, inkind: 100025, total: 115130, request: 9105, excess: 0});
 assert.equal(budget.calculate(state).valid, true);
+assert.match(budget.toCsv(state), /"Денежные расходы, ₽";"151,05"/, 'Russian spreadsheet totals retain decimal commas');
+assert.match(budget.toCsv(state), /"Требуется финансирование, ₽";"91,05"/);
 state.expenses[0].quantity = '0,001'; state.expenses[0].price = '5';
 assert.equal(budget.calculate(state).lineTotals[0], 1, 'half kopeck rounds once per line');
 state.own = '1000';
