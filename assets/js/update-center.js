@@ -125,18 +125,19 @@
       lines.push(`ТОС / территория: ${data.tos_custom}`);
     }
 
-    scenario.fields.forEach((field) => {
+    quality.fieldsFor(scenario, data).forEach((field) => {
       const value = data[field.name];
-      if (value) lines.push(`${labels[field.name] || field.label}: ${value}`);
+      const label = field.status_overrides?.[data.material_status]?.label || labels[field.name] || field.label;
+      if (value) lines.push(`${label}: ${value}`);
     });
 
     if (data.contact) lines.push(`Контакт для уточнения: ${data.contact}`);
-    lines.push('', 'Материал передан для проверки редакцией портала ТОС БГО. Публикация и статус подтверждения определяются отдельно после проверки.');
+    lines.push('', 'Черновик для передачи в редакцию портала ТОС БГО. Отправьте это сообщение через выбранный канал связи. Публикация и статус подтверждения определяются отдельно после проверки.');
     return lines.join('\n');
   }
 
   function missingRequired() {
-    return scenarios[currentScenario].fields.filter((field) => field.required && !clean(form.elements[field.name]?.value));
+    return quality.fieldsFor(scenarios[currentScenario], formValues()).filter((field) => field.required && !clean(form.elements[field.name]?.value));
   }
 
   function qualityResult() {
@@ -184,6 +185,16 @@
   }
 
   function updatePreview() {
+    quality.fieldsFor(scenarios[currentScenario], formValues()).forEach((field) => {
+      const control = form.elements[field.name];
+      if (!control) return;
+      control.required = Boolean(field.required);
+      const group = control.closest('.field-group');
+      group?.classList.toggle('field-required', control.required);
+      if (group?.firstElementChild) group.firstElementChild.textContent = field.label;
+      if ('placeholder' in control) control.placeholder = field.placeholder || '';
+      if (!control.required) control.classList.remove('field-error');
+    });
     preview.value = buildMessage();
     const result = qualityResult();
     const missing = missingRequired();

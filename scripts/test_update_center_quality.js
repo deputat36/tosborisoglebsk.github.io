@@ -49,6 +49,14 @@ assert.strictEqual(ready.passed, ready.total, 'complete material must pass all c
 // Scenario fields originate in a vm realm; compare their values in this realm.
 assert.deepStrictEqual(Array.from(ready.missingRequired), []);
 
+const announcement = quality.evaluate({ scenario: news, data: { ...validData, material_status: 'Анонс', result: '' }, tosSelected: true, confirmed: true, publicationChecked: true });
+assert.strictEqual(announcement.ready, true, 'an announcement must not require an achieved result');
+const completed = quality.evaluate({ scenario: news, data: { ...validData, material_status: 'Событие состоялось', result: '' }, tosSelected: true, confirmed: true, publicationChecked: true });
+assert.strictEqual(completed.ready, false, 'a report must still describe its result');
+assert(completed.missingRequired.includes('Какой получен результат'));
+assert.strictEqual(quality.fieldsFor(news, {material_status:'Анонс'}).find(field => field.name === 'what_happened').label, 'Что планируется');
+assert.strictEqual(quality.fieldsFor(news, {material_status:'Событие состоялось'}).find(field => field.name === 'what_happened').label, 'Что произошло');
+
 const incompleteData = { ...validData, material_status: '', source: '' };
 const incomplete = quality.evaluate({
   scenario: news,
