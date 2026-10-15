@@ -20,6 +20,7 @@ patchTosContactFallback();
 require('./generate_sitemap');
 
 const checks = [
+  ['Runtime cache coherence', 'scripts/audit_runtime_cache_coherence.js'],
   ['Public search ownership and trust consistency', 'scripts/test_public_search_and_trust.js'],
   ['Current opportunity deadlines', 'scripts/test_current_opportunities.js'],
   ['CSV parser self-test', 'scripts/test_csv_parser.js'],
