@@ -29,7 +29,7 @@ function grantPrepareList(item) {
 function grantCard(item) {
   const source = item.source ? `<a class="btn" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Источник</a>` : '';
   const conditions = item.conditions_url ? `<a class="btn" href="${grantsEsc(item.conditions_url)}" target="_blank" rel="noopener">Условия и документы</a>` : '';
-  return `<article class="list-item grant-card" data-grant-id="${grantsEsc(item.id)}" data-call-state="${core.state(item)}">
+  return `<article class="list-item grant-card" id="grant-${grantsEsc(item.id)}" data-grant-id="${grantsEsc(item.id)}" data-call-state="${core.state(item)}">
     <div class="meta">
       <span class="tag warn">${grantsEsc(item.category || 'Возможность')}</span>
       <span class="tag">${grantsEsc(item.difficulty || 'Сложность уточняется')}</span>
@@ -56,6 +56,16 @@ function grantCard(item) {
   </article>`;
 }
 
+function grantSummary(item) {
+  return `<article class="list-item" data-grant-id="${grantsEsc(item.id)}" data-call-state="${core.state(item)}">
+    <div class="meta"><span class="tag">${grantsEsc(item.deadline)}</span><span class="tag">${grantsEsc(item.amount)}</span></div>
+    <h3>${grantsEsc(item.title)}</h3>
+    <p><b>Кому подходит:</b> ${grantsEsc(item.who)}</p>
+    <p class="tiny">${grantsEsc(item.note)}</p>
+    <div class="card-actions"><a class="btn primary" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Объявление организатора</a><a class="btn" href="#grant-${grantsEsc(item.id)}">Что подготовить</a></div>
+  </article>`;
+}
+
 async function renderGrants() {
   const root = document.querySelector('#grants-list');
   if (!root) return;
@@ -66,12 +76,16 @@ async function renderGrants() {
     const grants = await response.json();
     if (!Array.isArray(grants)) throw new Error('invalid opportunities');
     const items = Array.isArray(grants) ? grants.filter(grantsPublished) : [];
+    let previousStates = null;
     const render = () => {
+      const states = items.map(item => core.state(item)).join('|');
+      if (states === previousStates) return;
+      previousStates = states;
       root.innerHTML = items.length ? items.map(grantCard).join('') : '<div class="empty">Возможности поддержки пока не добавлены.</div>';
       const currentRoot = document.querySelector('#current-grants');
       if (currentRoot) {
         const current = core.current(items);
-        currentRoot.innerHTML = current.length ? current.map(grantCard).join('') : '<div class="notice">Ближайших сроков с недавно проверенными объявлениями нет. Ниже доступны направления поддержки и ссылки для подготовки.</div>';
+        currentRoot.innerHTML = current.length ? current.map(grantSummary).join('') : '<div class="notice">Ближайших сроков с недавно проверенными объявлениями нет. Ниже доступны направления поддержки и ссылки для подготовки.</div>';
       }
     };
     render();
