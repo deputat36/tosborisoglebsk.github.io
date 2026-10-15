@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T14:14:10.618Z",
+  "generated_at": "2026-10-15T18:51:14.037Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-10-15T14:14:30.160Z",
+    "generated_at": "2026-10-15T18:49:22.802Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -296,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-10-15T14:14:07.459Z",
+    "generated_at": "2026-10-15T18:49:01.120Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -402,11 +402,11 @@
       "visual_baseline_scope": "Проверяется в pull request; результат конкретного запуска хранится в GitHub Actions artifact."
     },
     "validation_context": {
-      "source": "github_actions",
-      "workflow": "Generate TOS pages",
-      "run_id": "38749514559",
-      "run_number": "1880",
-      "commit_sha": "88bd1211f3641a0fac4729712500604146119597"
+      "source": "local",
+      "workflow": "",
+      "run_id": "",
+      "run_number": "",
+      "commit_sha": ""
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-10-15T14:14:30.160Z",
+    "generated_at": "2026-10-15T18:49:22.802Z",
     "total_tos": 24,
     "with_substantive_content": 22,
     "with_verified_content": 22,

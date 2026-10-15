@@ -262,6 +262,48 @@ async function testGrants(page) {
   assert(!overflow, 'grants: horizontal overflow');
 }
 
+async function testProjectBudget(page) {
+  await openRoute(page, '/documents/templates/project-budget/');
+  const field = (name) => page.locator(`[data-group="expenses"][data-index="0"][data-field="${name}"]`);
+  await field('item').fill('Краска для скамейки');
+  await field('quantity').fill('1,5');
+  await field('price').fill('100,50');
+  await page.locator('[data-funding="own"]').fill('50');
+  await page.locator('[data-group="contributions"][data-field="value"]').fill('1000');
+  const amount = async (name) => (await page.locator(`[data-budget-total="${name}"]`).textContent()).replace(/[^0-9,]/g, '');
+  assert(await amount('cash') === '150,75', 'budget: fractional cash calculation');
+  assert(await amount('request') === '100,75', 'budget: noncash contribution must not reduce cash request');
+  assert(await amount('total') === '1150,75', 'budget: overall cost includes noncash contribution');
+  await page.waitForFunction(() => JSON.parse(localStorage.getItem('tos-project-budget-v1') || '{}').expenses?.[0]?.price === '100,50');
+  await page.reload({ waitUntil: 'networkidle' });
+  assert(await field('item').inputValue() === 'Краска для скамейки', 'budget: draft restoration');
+  await field('price').fill('-1');
+  assert(await page.locator('[data-download="csv"]').isDisabled(), 'budget: invalid totals must not be exported');
+  assert(await field('price').getAttribute('aria-invalid') === 'true', 'budget: invalid price needs accessible error');
+  await field('price').fill('100,50');
+  const csvReady = page.waitForEvent('download');
+  await page.locator('[data-download="csv"]').click();
+  const csv = await csvReady;
+  assert(csv.suggestedFilename().endsWith('.csv'), 'budget: CSV download');
+  const csvText = fs.readFileSync(await csv.path(), 'utf8');
+  assert(csvText.includes('Краска для скамейки') && csvText.includes('150,75'), 'budget: exported values must come from inputs');
+  const jsonReady = page.waitForEvent('download');
+  await page.locator('[data-download="json"]').click();
+  const json = await jsonReady;
+  const saved = fs.readFileSync(await json.path());
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.locator('#budget-clear').click();
+  assert(await field('item').inputValue() === '', 'budget: clear');
+  await page.locator('#budget-undo').click();
+  assert(await field('item').inputValue() === 'Краска для скамейки', 'budget: undo');
+  await page.locator('#budget-file').setInputFiles({ name: 'smeta.json', mimeType: 'application/json', buffer: saved });
+  await page.waitForFunction(() => document.querySelector('#budget-save-status').textContent.includes('Файл сметы открыт'));
+  await page.locator('#budget-file').setInputFiles({ name: 'wrong.json', mimeType: 'application/json', buffer: Buffer.from('{"kind":"other"}') });
+  await page.waitForFunction(() => document.querySelector('#budget-save-status').textContent.includes('Не удалось открыть файл'));
+  assert(await field('item').inputValue() === 'Краска для скамейки', 'budget: invalid import must preserve work');
+  assert(!await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1), 'budget: horizontal overflow');
+}
+
 async function main() {
   fs.mkdirSync(path.dirname(REPORT_PATH), { recursive: true });
   const browser = await chromium.launch({ headless: true });
@@ -273,6 +315,8 @@ async function main() {
     ['announcement-mobile', testAnnouncement],
     ['grants', testGrants],
     ['grants-mobile', testGrants],
+    ['project-budget', testProjectBudget],
+    ['project-budget-mobile', testProjectBudget],
     ['tos-catalog', testTosCatalog],
     ['places-browser', testPlaces],
     ['news-browser', (page) => testCollection(page, { name: 'news', route: '/news/', root: '#news-feed', status: '#news-filter-status', search: '#news-search', originControl: '#news-origin-filter', reset: '#news-reset-filters', origin: 'request' })],
@@ -295,8 +339,8 @@ async function main() {
       try {
         await run(page);
         assert(technicalErrors.length === 0, `${name}: technical errors: ${technicalErrors.join(' | ')}`);
-        if (name.startsWith('announcement') || name.startsWith('grants')) {
-          const target = name.startsWith('announcement') ? '[name="result"]' : '#current-grants [data-grant-id]';
+        if (name.startsWith('announcement') || name.startsWith('grants') || name.startsWith('project-budget')) {
+          const target = name.startsWith('announcement') ? '[name="result"]' : name.startsWith('project-budget') ? '.budget-expenses' : '#current-grants [data-grant-id]';
           await page.locator(target).first().scrollIntoViewIfNeeded();
           await page.screenshot({ path: path.join(path.dirname(REPORT_PATH), `${name}.png`) });
         }

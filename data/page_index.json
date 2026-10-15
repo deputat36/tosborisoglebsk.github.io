@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T14:14:30.543Z",
+  "generated_at": "2026-10-15T15:01:04.471Z",
   "total": 370,
   "search_groups": {
     "tos": "Каталог ТОС",
@@ -216,7 +216,7 @@
       "path": "documents/templates/project-budget/index.html",
       "url": "https://tosborisoglebsk.ru/documents/templates/project-budget/",
       "title": "Смета проекта ТОС — шаблон расходов и вклада жителей",
-      "description": "Заполняемая смета проекта ТОС: материалы, оборудование, работы, доставка, расходники, источники цен, вклад жителей и партнёров.",
+      "description": "Смета проекта ТОС с автоматическим расчётом, сохранением черновика, выгрузкой CSV и печатью. Денежные расходы и вклад жителей учитываются отдельно.",
       "section": "Документы",
       "search_group": "documents",
       "content_origin": "reference"
