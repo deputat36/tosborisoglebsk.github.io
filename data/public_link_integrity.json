@@ -1,65 +1,71 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-09T05:27:04.164Z",
+  "generated_at": "2026-10-15T13:43:59.482Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 368,
   "pages_checked": 368,
-  "links_discovered": 8610,
-  "internal_links_checked": 6197,
-  "unique_internal_targets": 864,
+  "links_discovered": 8658,
+  "internal_links_checked": 6219,
+  "unique_internal_targets": 886,
   "external_links_ignored": 378,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/action-routes/index.html",
+      "route": "/done/result-archive-needed-mirolyubie/index.html",
       "status": 200,
-      "duration_ms": 75,
-      "bytes": 8695
+      "duration_ms": 1055,
+      "bytes": 8562
     },
     {
-      "route": "/chairperson/documents/index.html",
+      "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 42,
-      "bytes": 11768
+      "duration_ms": 70,
+      "bytes": 8695
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 40,
+      "duration_ms": 38,
       "bytes": 8158
     },
     {
-      "route": "/campaign/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 38,
-      "bytes": 9430
-    },
-    {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 38,
-      "bytes": 7931
+      "duration_ms": 37,
+      "bytes": 11768
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 36,
+      "duration_ms": 35,
       "bytes": 15978
     },
     {
-      "route": "/calendar/action-routes/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
       "duration_ms": 35,
-      "bytes": 15879
+      "bytes": 7931
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 35,
+      "duration_ms": 34,
       "bytes": 23099
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 34,
+      "bytes": 9430
+    },
+    {
+      "route": "/calendar/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 32,
+      "bytes": 15879
     },
     {
       "route": "/chairperson/index.html",
@@ -68,70 +74,64 @@
       "bytes": 23597
     },
     {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 8176
+    },
+    {
       "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 22,
+      "duration_ms": 18,
       "bytes": 15409
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/done/chkalovec-many-projects/index.html",
       "status": 200,
-      "duration_ms": 22,
-      "bytes": 10450
-    },
-    {
-      "route": "/documents/templates/project-passport/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 6335
-    },
-    {
-      "route": "/create-tos/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 19408
+      "duration_ms": 17,
+      "bytes": 8508
     },
     {
       "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 15,
       "bytes": 5404
     },
     {
-      "route": "/content-standards/index.html",
+      "route": "/documents/templates/tos-charter-draft/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 13193
+      "duration_ms": 15,
+      "bytes": 5626
     },
     {
-      "route": "/data-quality/index.html",
+      "route": "/documents/templates/tos-creation-checklist/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 7786
+      "duration_ms": 14,
+      "bytes": 3948
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/documents/templates/tos-founding-decisions/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 8176
+      "duration_ms": 14,
+      "bytes": 3490
     },
     {
-      "route": "/documents/templates/meeting-agenda/index.html",
+      "route": "/done/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 4424
+      "duration_ms": 14,
+      "bytes": 17466
     },
     {
-      "route": "/documents/templates/project-checklist/index.html",
+      "route": "/materials/documents-for-tos/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 5559
+      "duration_ms": 14,
+      "bytes": 6292
     },
     {
-      "route": "/documents/templates/project-photo-report/index.html",
+      "route": "/check-tos/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 10995
+      "duration_ms": 13,
+      "bytes": 5818
     }
   ]
 }
