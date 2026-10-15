@@ -228,6 +228,40 @@ async function testCollection(page, config) {
   assert(await page.locator(`${config.root} [data-content-origin]`).count() >= origins.length, `${config.name}: reset did not restore cards`);
 }
 
+async function testAnnouncement(page) {
+  await openRoute(page, '/update-tos/?type=news');
+  await page.locator('[name="material_status"]').selectOption('Анонс');
+  for (const [name, value] of Object.entries({subject:'Встреча жителей', date:'2026-11-01', place:'Общественное пространство', what_happened:'Обсудим проект территории', source:'Организатор встречи'})) {
+    await page.locator(`[name="${name}"]`).fill(value);
+  }
+  await page.locator('#confirmed').check();
+  await page.locator('#publication-checked').check();
+  assert(!await page.locator('[name="result"]').evaluate(node => node.required), 'announcement: achieved result must be optional');
+  assert(await page.locator('#required-status').textContent() === 'Сообщение готово', 'announcement: complete draft must be ready without an achieved result');
+  let text = await page.locator('#message-preview').inputValue();
+  assert(text.includes('Что планируется: Обсудим проект территории'), 'announcement: preview must describe future actions');
+  assert(text.includes('Черновик для передачи') && !text.includes('Материал передан'), 'announcement: draft must not claim it has been sent');
+  await page.locator('[name="material_status"]').selectOption('Событие состоялось');
+  assert(await page.locator('[name="result"]').evaluate(node => node.required), 'report: achieved result must become required again');
+  assert((await page.locator('#required-status').textContent()).startsWith('Не заполнено:'), 'report: missing result must block readiness');
+  await page.locator('[name="material_status"]').selectOption('Анонс');
+  await page.reload({waitUntil:'networkidle'});
+  assert(await page.locator('[name="material_status"]').inputValue() === 'Анонс', 'announcement: draft status must survive reload');
+  assert(!await page.locator('[name="result"]').evaluate(node => node.required), 'announcement: restored draft must retain conditional requirements');
+}
+
+async function testGrants(page) {
+  await openRoute(page, '/grants/');
+  await page.waitForSelector('#grants-list [data-grant-id]');
+  const items = readJson('data/grants.json').filter(item => item.status !== 'draft');
+  assert(await page.locator('#grants-list [data-grant-id]').count() === items.length, 'grants: dedicated list must not be replaced by the legacy renderer');
+  const now = Date.now();
+  const expected = require('../assets/js/grants-core').current(items, now);
+  assert(await page.locator('#current-grants [data-call-state="announced"]').count() === expected.length, 'grants: nearest deadlines must match the current clock');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
+  assert(!overflow, 'grants: horizontal overflow');
+}
+
 async function main() {
   fs.mkdirSync(path.dirname(REPORT_PATH), { recursive: true });
   const browser = await chromium.launch({ headless: true });
@@ -235,6 +269,10 @@ async function main() {
   const scenarios = [
     ['global-search', testSearch],
     ['global-search-mobile', testSearch],
+    ['announcement', testAnnouncement],
+    ['announcement-mobile', testAnnouncement],
+    ['grants', testGrants],
+    ['grants-mobile', testGrants],
     ['tos-catalog', testTosCatalog],
     ['places-browser', testPlaces],
     ['news-browser', (page) => testCollection(page, { name: 'news', route: '/news/', root: '#news-feed', status: '#news-filter-status', search: '#news-search', originControl: '#news-origin-filter', reset: '#news-reset-filters', origin: 'request' })],
@@ -257,6 +295,11 @@ async function main() {
       try {
         await run(page);
         assert(technicalErrors.length === 0, `${name}: technical errors: ${technicalErrors.join(' | ')}`);
+        if (name.startsWith('announcement') || name.startsWith('grants')) {
+          const target = name.startsWith('announcement') ? '[name="result"]' : '#current-grants [data-grant-id]';
+          await page.locator(target).first().scrollIntoViewIfNeeded();
+          await page.screenshot({ path: path.join(path.dirname(REPORT_PATH), `${name}.png`) });
+        }
         results.push({ name, status: 'passed', duration_ms: Date.now() - startedAt, url: page.url(), technical_errors: [] });
         console.log(`PASS ${name}`);
       } catch (error) {

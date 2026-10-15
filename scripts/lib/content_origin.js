@@ -1,6 +1,9 @@
 const CONTENT_ORIGINS = new Set(['verified', 'editorial', 'starter', 'request']);
 
 const VERIFIED_NEWS_IDS = new Set([
+  // Official Obraz Budushchego deadline announcements, checked 2026-10-15.
+  'obraz-tos-mini-deadline-2026-10',
+  'obraz-individual-deadline-2026-10',
   'mirolyubie-project-winner-2026',
   'mirolyubie-blagodarim-pomnim-gordimsya-2022',
   'gubari-beautiful-village-2026',

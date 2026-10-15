@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T13:43:55.380Z",
+  "generated_at": "2026-10-15T13:59:20.869Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 439,
-    "public_pages": 378,
+    "html_pages": 441,
+    "public_pages": 380,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 116,
+    "asset_files": 117,
     "over_budget_assets": 0,
     "total_css_bytes": 55854,
-    "total_js_bytes": 670183,
+    "total_js_bytes": 675872,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -39,7 +39,7 @@
       "path": "assets/js/site.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 35406,
+      "size_bytes": 35462,
       "over_budget": false
     },
     {
@@ -92,17 +92,17 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/update-center.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 15348,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-execution-ui.js",
       "group": "js",
       "extension": ".js",
       "size_bytes": 14674,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/update-center.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 14555,
       "over_budget": false
     },
     {
@@ -137,7 +137,7 @@
       "path": "assets/js/update-center-data.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 11490,
+      "size_bytes": 11884,
       "over_budget": false
     },
     {

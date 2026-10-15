@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-15T13:44:14.614Z",
-  "total": 368,
+  "generated_at": "2026-10-15T13:48:03.455Z",
+  "total": 370,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1410,6 +1410,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "news/obraz-individual-deadline-2026-10/index.html",
+      "url": "https://tosborisoglebsk.ru/news/obraz-individual-deadline-2026-10/",
+      "title": "Инициативы жителей: конкурс физических лиц завершается 18 октября | ТОС БГО",
+      "description": "«Образ Будущего» напоминает о конкурсе с поддержкой до 200 тысяч рублей для инициатив в культуре, образовании, спорте и социальной помощи.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/data-update-rules/index.html",
       "url": "https://tosborisoglebsk.ru/news/data-update-rules/",
       "title": "Как председателям обновлять карточки своих ТОСов | ТОС БГО",
@@ -1471,6 +1480,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "editorial"
+    },
+    {
+      "path": "news/obraz-tos-mini-deadline-2026-10/index.html",
+      "url": "https://tosborisoglebsk.ru/news/obraz-tos-mini-deadline-2026-10/",
+      "title": "Мини-гранты ТОС: срок подачи продлён до 19 октября | ТОС БГО",
+      "description": "Организатор объявил поддержку до 200 тысяч рублей. Перед подачей нужно проверить допуск своего ТОС и документы.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
     },
     {
       "path": "news/obraz-buduschego-2026/index.html",

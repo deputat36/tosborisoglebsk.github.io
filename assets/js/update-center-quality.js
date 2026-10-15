@@ -6,10 +6,16 @@
 
   const clean = (value) => String(value ?? '').trim();
 
+  function fieldsFor(scenario, data = {}) {
+    return (scenario.fields || []).map((field) => ({
+      ...field, ...(field.status_overrides?.[data.material_status] || {})
+    }));
+  }
+
   function evaluate(input = {}) {
     const scenario = input.scenario || { fields: [] };
     const data = input.data || {};
-    const requiredFields = (scenario.fields || []).filter((field) => field.required);
+    const requiredFields = fieldsFor(scenario, data).filter((field) => field.required);
     const missingRequired = requiredFields
       .filter((field) => !clean(data[field.name]))
       .map((field) => field.label || field.name);
@@ -82,5 +88,5 @@
     };
   }
 
-  return { evaluate };
+  return { evaluate, fieldsFor };
 }));

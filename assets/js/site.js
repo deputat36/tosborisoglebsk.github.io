@@ -403,6 +403,7 @@ function grantCard(grant) {
 async function renderGrants() {
   const root = $('#grants-list');
   if (!root) return;
+  if (root.hasAttribute('data-grants-browser')) return;
   try {
     const data = await getJSON('/data/grants.json');
     root.innerHTML = data.length ? data.map(grantCard).join('') : '<div class="empty">Возможности пока не добавлены.</div>';

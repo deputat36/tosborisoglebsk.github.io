@@ -75,7 +75,7 @@ function main() {
   expectIncludes(errors, 'grants script', script, '/projects/${grantsEsc(slug)}/', 'project route rendering is missing');
   expectIncludes(errors, 'grants script', script, 'target="_blank" rel="noopener"', 'external source links must open safely');
   expectIncludes(errors, 'grants script', script, '/update-tos/?type=project#message-builder', 'project submission link is missing');
-  expectIncludes(errors, 'grants script', script, 'Раздел не загрузился. Проверьте файл data/grants.json', 'load error message is missing');
+  expectIncludes(errors, 'grants script', script, 'Не удалось обновить список.', 'reader-facing recovery message is missing');
 
   const requiredIds = new Set([
     'tos-voronezh-projects-2026',
