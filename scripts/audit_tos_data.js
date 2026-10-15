@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
+const { verificationStatus } = require('../assets/js/tos-catalog-core');
 const ROOT = process.cwd();
 const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
 const AUDIT_PATH = path.join(ROOT, 'data', 'tos_audit.json');
@@ -54,18 +55,6 @@ function issuesFor(tos) {
   return issues;
 }
 
-function verificationStatus(tos, score) {
-  const explicit = tos.verification_status || tos.verification?.status || '';
-  const trust = tos.trust || {};
-  const checkedAt = trust.checked_at || tos.verified_at || tos.verification?.date || '';
-  const sourceRef = trust.source_ref || tos.verification_source || tos.verification?.source || '';
-  const scope = Array.isArray(trust.verification_scope) ? trust.verification_scope : [];
-
-  if (explicit) return explicit;
-  if (checkedAt && sourceRef && scope.length) return score >= 80 ? 'partial' : 'needs_review';
-  return 'needs_review';
-}
-
 function verificationLabel(status) {
   return ({
     verified: 'Сведения подтверждены',
@@ -90,7 +79,7 @@ function main() {
   const items = toses.map((tos) => {
     const score = scoreTos(tos);
     const issues = issuesFor(tos);
-    const verification_status = verificationStatus(tos, score);
+    const verification_status = verificationStatus(tos);
     return {
       slug: tos.slug || '',
       name: tos.name || '',

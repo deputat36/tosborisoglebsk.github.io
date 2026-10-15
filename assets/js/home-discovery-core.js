@@ -1,8 +1,8 @@
-(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.HomeDiscoveryCore=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+(function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('./tos-catalog-core.js'):root.TosCatalogCore);if(typeof module==='object'&&module.exports)module.exports=api;else root.HomeDiscoveryCore=api;})(typeof globalThis!=='undefined'?globalThis:this,function(catalog){
   const allowedStatuses=['verified','partial','stale','needs_review'];
   function normalize(value){return String(value||'').toLowerCase().replace(/ё/g,'е').replace(/[«»"'.,;:()]/g,' ').replace(/\s+/g,' ').trim();}
   function isPublished(item){return Boolean(item)&&item.status!=='draft';}
-  function verificationStatus(item){return allowedStatuses.includes(item&&item.verification_status)?item.verification_status:'needs_review';}
+  function verificationStatus(item){return catalog.verificationStatus(item);}
   function searchToses(rows,query,limit=6){
     const q=normalize(query);if(q.length<2)return[];
     return(Array.isArray(rows)?rows:[]).filter(isPublished).map(item=>{

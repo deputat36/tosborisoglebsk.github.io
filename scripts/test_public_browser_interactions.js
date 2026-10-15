@@ -94,6 +94,18 @@ async function testSearch(page) {
   assert(!restoredParams.q && !restoredParams.type && !restoredParams.origin, 'search: reset left active query filters in URL');
   assert(restoredParams.sort === 'relevance', 'search: reset did not restore relevance sort');
   assert(await page.locator('#search-results .search-result').count() === 4, 'search: quick links were not restored after reset');
+
+  // This query used to be rendered by two search engines: eight indexed
+  // results in the summary, then seventeen unrelated legacy cards below.
+  await page.locator('#site-search').fill('смета');
+  await page.waitForFunction(() => {
+    const count = document.querySelectorAll('#search-results .search-result[data-search-group]').length;
+    const total = Number(document.querySelector('#search-summary .summary-tile b')?.textContent);
+    const shown = document.querySelector('#search-filter-status')?.textContent.match(/Показано (\d+) из (\d+)/);
+    return count > 0 && shown && count === Number(shown[1]) && total === Number(shown[2]);
+  });
+  const allCards = await page.locator('#search-results .search-result').count();
+  assert(allCards === await page.locator('#search-results .search-result[data-search-group]').count(), 'search: legacy results replaced the indexed cards');
 }
 
 async function testTosCatalog(page) {
@@ -222,6 +234,7 @@ async function main() {
   const results = [];
   const scenarios = [
     ['global-search', testSearch],
+    ['global-search-mobile', testSearch],
     ['tos-catalog', testTosCatalog],
     ['places-browser', testPlaces],
     ['news-browser', (page) => testCollection(page, { name: 'news', route: '/news/', root: '#news-feed', status: '#news-filter-status', search: '#news-search', originControl: '#news-origin-filter', reset: '#news-reset-filters', origin: 'request' })],
@@ -232,7 +245,7 @@ async function main() {
 
   try {
     for (const [name, run] of scenarios) {
-      const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+      const page = await browser.newPage({ viewport: name.endsWith('-mobile') ? { width: 375, height: 812 } : { width: 1280, height: 900 } });
       const technicalErrors = [];
       page.on('pageerror', (error) => technicalErrors.push(`pageerror: ${error.message}`));
       page.on('console', (message) => {

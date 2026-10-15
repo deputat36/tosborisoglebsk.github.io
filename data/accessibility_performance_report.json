@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T05:27:00.846Z",
+  "generated_at": "2026-10-15T13:21:52.337Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 116,
     "over_budget_assets": 0,
     "total_css_bytes": 55162,
-    "total_js_bytes": 672888,
+    "total_js_bytes": 670183,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -39,7 +39,7 @@
       "path": "assets/js/site.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 35182,
+      "size_bytes": 35406,
       "over_budget": false
     },
     {

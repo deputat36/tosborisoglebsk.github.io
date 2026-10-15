@@ -1,4 +1,5 @@
 const fs = require('fs');
+const CatalogTrust = require('../assets/js/tos-catalog-core');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
 const { coverageFor } = require('./lib/content_coverage');
@@ -135,24 +136,7 @@ function trustData(tos) {
   };
 }
 function verificationInfo(tos) {
-  const trust = trustData(tos);
-  const allowed = ['verified', 'partial', 'needs_review', 'stale'];
-  let status = allowed.includes(tos.verification_status) ? tos.verification_status : 'needs_review';
-  if (trust.recheckAfter && status !== 'needs_review') {
-    const recheck = new Date(`${trust.recheckAfter}T00:00:00`);
-    if (!Number.isNaN(recheck.getTime()) && recheck.getTime() < Date.now()) status = 'stale';
-  }
-  return {
-    status,
-    label: verificationLabels[status] || verificationLabels.needs_review,
-    date: trust.checkedAt,
-    source: trust.sourceRef,
-    sourceType: trust.sourceType,
-    checkedBy: trust.checkedBy,
-    recheckAfter: trust.recheckAfter,
-    scope: trust.scope,
-    consentRef: trust.consentRef
-  };
+  return CatalogTrust.verificationInfo(tos);
 }
 function verificationClass(status) {
   if (status === 'verified') return 'ok';

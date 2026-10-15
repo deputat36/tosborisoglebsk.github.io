@@ -431,6 +431,9 @@ async function renderSearch() {
   const root = $('#search-results');
   const input = $('#site-search');
   if (!root || !input) return;
+  // The indexed browser owns both the result list and its filter counters.
+  // Do not register a second input handler or fetch the legacy collections.
+  if (document.querySelector('[data-search-browser-version]')) return;
   try {
     const [toses, news, articles, docs, grants, projects, done, events, needs] = await Promise.all([
       getJSON('/data/toses.json').catch(() => []),

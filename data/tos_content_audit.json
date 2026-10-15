@@ -1,14 +1,14 @@
 {
   "summary": {
-    "generated_at": "2026-10-09T05:27:19.321Z",
+    "generated_at": "2026-10-15T13:27:05.640Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
     "medium_priority": 2,
     "low_priority": 18,
     "verified_count": 0,
-    "partial_count": 14,
-    "needs_review_count": 10,
+    "partial_count": 0,
+    "needs_review_count": 24,
     "unknown_count": 0,
     "stale_count": 0,
     "without_phone": 4,
@@ -103,8 +103,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -193,8 +193,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -278,10 +278,10 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -362,10 +362,10 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -451,8 +451,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -539,8 +539,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -625,8 +625,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -711,8 +711,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -798,9 +798,9 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-09-10",
-        "age_days": 29,
+        "age_days": 35,
         "stale": false,
-        "source": "",
+        "source": "https://riavrn.ru/news/v-borisoglebskom-poselke-kalinino-pochistili-3-kolodca/",
         "note": ""
       },
       "registry_group": "Запросить данные",
@@ -883,8 +883,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -969,8 +969,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -1055,8 +1055,8 @@
       "verification": {
         "status": "needs_review",
         "label": "Требует проверки",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
@@ -1138,15 +1138,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
@@ -1222,15 +1222,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
@@ -1306,15 +1306,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
@@ -1390,15 +1390,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
@@ -1474,15 +1474,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
@@ -1558,15 +1558,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
@@ -1642,15 +1642,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "добавить email для связи",
@@ -1725,15 +1725,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-24",
-        "age_days": 138,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
@@ -1807,15 +1807,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
@@ -1889,15 +1889,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
@@ -1971,15 +1971,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
@@ -2053,15 +2053,15 @@
         }
       },
       "verification": {
-        "status": "partial",
-        "label": "Проверено частично",
-        "date": "2026-05-23",
-        "age_days": 139,
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
         "stale": false,
         "source": "",
         "note": ""
       },
-      "registry_group": "Добавить материалы",
+      "registry_group": "Запросить данные",
       "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",

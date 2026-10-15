@@ -4,6 +4,7 @@ const { coverageMap, coverageFromMap } = require('./lib/content_coverage');
 
 const ROOT = process.cwd();
 const STALE_DAYS = 180;
+const CatalogTrust = require('../assets/js/tos-catalog-core');
 
 function readJson(file, fallback = []) {
   try { return JSON.parse(fs.readFileSync(path.join(ROOT, file), 'utf8')); }
@@ -23,43 +24,9 @@ const goodDescription = (value) => {
   return text.length >= 80 && text !== 'Описание пока уточняется.';
 };
 
-function daysSince(value) {
-  if (!value) return null;
-  const time = new Date(`${String(value).slice(0, 10)}T00:00:00`).getTime();
-  if (Number.isNaN(time)) return null;
-  return Math.floor((Date.now() - time) / 86400000);
-}
-
-function verificationInfo(tos, score) {
-  const allowed = new Set(['verified', 'partial', 'needs_review', 'unknown']);
-  let status = allowed.has(tos.verification_status) ? tos.verification_status : '';
-  const date = tos.verified_at || tos.updated_at || '';
-  const ageDays = daysSince(date);
-  const stale = ageDays !== null && ageDays > STALE_DAYS;
-
-  if (!status) {
-    if (!date) status = 'unknown';
-    else status = score >= 80 ? 'partial' : 'needs_review';
-  }
-  if (stale && status !== 'unknown') status = 'stale';
-
-  const labels = {
-    verified: 'Данные проверены',
-    partial: 'Проверено частично',
-    needs_review: 'Требует проверки',
-    unknown: 'Данные уточняются',
-    stale: 'Проверка устарела'
-  };
-
-  return {
-    status,
-    label: labels[status] || labels.unknown,
-    date,
-    age_days: ageDays,
-    stale,
-    source: tos.verification_source || '',
-    note: tos.verification_note || ''
-  };
+function verificationInfo(tos) {
+  const {status, label, date, age_days, stale, source, note} = CatalogTrust.verificationInfo(tos);
+  return {status, label, date, age_days, stale, source, note};
 }
 
 function registryGroup(priority, verification, missing, linked) {
@@ -112,7 +79,7 @@ function buildAuditItem(tos, maps) {
   if (score < 45 || missing.includes('Телефон') || missing.includes('Председатель')) priority = 'Высокий';
   else if (score < 70 || (linked.news === 0 && linked.done === 0)) priority = 'Средний';
 
-  const verification = verificationInfo(tos, score);
+  const verification = verificationInfo(tos);
   if (verification.status === 'stale' && priority === 'Низкий') priority = 'Средний';
 
   const recommendations = [];

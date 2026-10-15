@@ -46,7 +46,8 @@ const ready = quality.evaluate({
 });
 assert.strictEqual(ready.ready, true, 'complete material must be ready');
 assert.strictEqual(ready.passed, ready.total, 'complete material must pass all checks');
-assert.deepStrictEqual(ready.missingRequired, []);
+// Scenario fields originate in a vm realm; compare their values in this realm.
+assert.deepStrictEqual(Array.from(ready.missingRequired), []);
 
 const incompleteData = { ...validData, material_status: '', source: '' };
 const incomplete = quality.evaluate({

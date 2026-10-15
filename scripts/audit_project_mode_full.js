@@ -20,6 +20,7 @@ patchTosContactFallback();
 require('./generate_sitemap');
 
 const checks = [
+  ['Public search ownership and trust consistency', 'scripts/test_public_search_and_trust.js'],
   ['CSV parser self-test', 'scripts/test_csv_parser.js'],
   ['CSV schema self-test', 'scripts/test_csv_schema.js'],
   ['Date checks self-test', 'scripts/test_date_checks.js'],

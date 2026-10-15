@@ -13,6 +13,9 @@ const rows=[
   {slug:'draft',name:'Черновик',location:'с. Три',status:'draft',verification_status:'needs_review',updated_at:'2026-01-01'}
 ];
 const locationFor=item=>item.location;
+for(const item of rows.filter(item=>['verified','partial'].includes(item.verification_status))){
+  item.trust={source_ref:'https://example.test/source',checked_at:'2026-07-01',recheck_after:'2099-01-01',verification_scope:['location']};
+}
 assert.deepStrictEqual(core.filterAndSort(rows,{q:'Садовая',sort:'name'},locationFor).map(item=>item.slug),['verified']);
 assert.strictEqual(core.filterAndSort(rows,{q:'12345',sort:'name'},locationFor).length,0,'phone values must not be searchable');
 assert.strictEqual(core.filterAndSort(rows,{q:'example.test',sort:'name'},locationFor).length,0,'email values must not be searchable');
