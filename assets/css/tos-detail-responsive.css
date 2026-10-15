@@ -1,4 +1,11 @@
+.tos-verification-strip { padding: 10px 0 0; }
+.tos-verification-box { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 16px; border:1px solid var(--line); border-radius:18px; background:var(--card); }
+.tos-verification-main { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.tos-verification-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.tos-verification-badge { display:inline-flex; align-items:center; padding:7px 10px; border-radius:999px; font-size:12px; font-weight:800; background:var(--soft); color:var(--text); }
 @media (max-width: 620px) {
+  .tos-verification-box { display:grid; }
+  .tos-verification-actions .btn { flex:1; justify-content:center; }
   .header-inner {
     gap: 6px;
     min-width: 0;

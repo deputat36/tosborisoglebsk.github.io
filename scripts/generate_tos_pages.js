@@ -1,4 +1,5 @@
 const fs = require('fs');
+const CatalogTrust = require('../assets/js/tos-catalog-core');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
 const { coverageFor } = require('./lib/content_coverage');
@@ -135,24 +136,12 @@ function trustData(tos) {
   };
 }
 function verificationInfo(tos) {
-  const trust = trustData(tos);
-  const allowed = ['verified', 'partial', 'needs_review', 'stale'];
-  let status = allowed.includes(tos.verification_status) ? tos.verification_status : 'needs_review';
-  if (trust.recheckAfter && status !== 'needs_review') {
-    const recheck = new Date(`${trust.recheckAfter}T00:00:00`);
-    if (!Number.isNaN(recheck.getTime()) && recheck.getTime() < Date.now()) status = 'stale';
-  }
-  return {
-    status,
-    label: verificationLabels[status] || verificationLabels.needs_review,
-    date: trust.checkedAt,
-    source: trust.sourceRef,
-    sourceType: trust.sourceType,
-    checkedBy: trust.checkedBy,
-    recheckAfter: trust.recheckAfter,
-    scope: trust.scope,
-    consentRef: trust.consentRef
-  };
+  return CatalogTrust.verificationInfo(tos);
+}
+function verificationStrip(tos, info) {
+  const checked = info.source && info.scope.length && info.date && info.date <= new Date().toISOString().slice(0, 10);
+  const date = checked ? `Проверка отдельных сведений: ${info.date}` : 'Дата проверки не указана';
+  return `<section class="tos-verification-strip"><div class="container"><div class="tos-verification-box"><div class="tos-verification-main"><span class="tos-verification-badge" data-status="${esc(info.status)}">${esc(info.label)}</span><span class="tiny">${esc(date)}</span></div><div class="tos-verification-actions"><a class="btn" href="${esc(updateUrl(tos, 'card'))}">Уточнить данные</a><a class="btn" href="${esc(updateUrl(tos, 'news'))}">Прислать новость</a></div></div></div></section>`;
 }
 function verificationClass(status) {
   if (status === 'verified') return 'ok';
@@ -425,6 +414,7 @@ function makePage(tos, data) {
   <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
   <main id="main">
     <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><button class="btn" type="button" onclick="window.print()">Распечатать</button></div></div></section>
+    ${verificationStrip(tos, verification)}
 
     <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div><div class="tile"><b>${esc(verification.label)}</b><span>статус сведений</span></div></div><hr class="sep"/><div class="grid"><article class="card"><div class="card-inner"><h3>Территория</h3>${scopeBlock('territory', territoryScope)}<p><b>Населённый пункт:</b> <a data-tos-place-link href="${esc(territoryUrl)}">${esc(tos.location || 'уточняется')}</a></p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p><div class="card-actions"><a class="btn" data-tos-place-action href="${esc(territoryUrl)}">Открыть страницу территории</a></div></div></article><article class="card"><div class="card-inner"><h3>Председатель и контакты</h3>${scopeBlock('contacts', contactsScope)}<p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p><p><b>Телефон:</b></p><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '<li>Телефон уточняется</li>')}</ul><p><b>Email:</b></p><ul>${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '<li>Email уточняется</li>')}</ul><p><b>Публичная ссылка председателя:</b></p><ul>${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Открыть ссылку</a></li>`, '<li>Ссылка уточняется</li>')}</ul>${contactFallback(tos)}</div></article><article class="card"><div class="card-inner"><h3>Публичные ссылки</h3>${scopeBlock('public-links', publicScope)}<ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))}</a></li>`, '<li>Соцсети уточняются</li>')}</ul><p class="tiny"><b>Технически обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}. Эта дата не является проверкой сведений.</p></div></article></div>${verificationBlock(tos, verification)}<div class="notice"><b style="color:var(--text)">О территории</b><br>${esc(tos.description || 'Описание пока уточняется.')}</div></div></article></div></section>
 
