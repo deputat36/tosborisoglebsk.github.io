@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T15:09:31.912Z",
+  "generated_at": "2026-10-15T18:51:13.427Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -20,8 +20,8 @@
     },
     "asset_files": 120,
     "over_budget_assets": 0,
-    "total_css_bytes": 60093,
-    "total_js_bytes": 692292,
+    "total_css_bytes": 60151,
+    "total_js_bytes": 692690,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -228,7 +228,7 @@
       "path": "assets/js/project-budget.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 8919,
+      "size_bytes": 9099,
       "over_budget": false
     },
     {
