@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-15T13:49:10.371Z",
+  "generated_at": "2026-10-15T13:59:49.045Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 370,
   "pages_checked": 370,
-  "links_discovered": 8702,
-  "internal_links_checked": 6253,
+  "links_discovered": 8697,
+  "internal_links_checked": 6251,
   "unique_internal_targets": 890,
   "external_links_ignored": 384,
   "protocol_links_ignored": 34,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/news/send-news-bogana-2026/index.html",
-      "status": 200,
-      "duration_ms": 1036,
-      "bytes": 6666
-    },
-    {
-      "route": "/news/chkalovec-cvetik-semicvetik-2022/index.html",
-      "status": 200,
-      "duration_ms": 1012,
-      "bytes": 7711
-    },
-    {
-      "route": "/news/send-news-znamenie-2026/index.html",
-      "status": 200,
-      "duration_ms": 173,
-      "bytes": 6726
-    },
-    {
-      "route": "/news/severnyy-39-playground-2021/index.html",
-      "status": 200,
-      "duration_ms": 170,
-      "bytes": 7545
-    },
-    {
-      "route": "/news/send-news-uyutnyy-2026/index.html",
-      "status": 200,
-      "duration_ms": 166,
-      "bytes": 6682
-    },
-    {
-      "route": "/news/send-news-podstepki-2026/index.html",
-      "status": 200,
-      "duration_ms": 164,
-      "bytes": 6744
-    },
-    {
       "route": "/news/send-news-prostornyy-2026/index.html",
       "status": 200,
-      "duration_ms": 163,
+      "duration_ms": 1194,
       "bytes": 6774
     },
     {
-      "route": "/news/send-news-ulyanovka-2026/index.html",
+      "route": "/documents/templates/project-problem/index.html",
       "status": 200,
-      "duration_ms": 163,
-      "bytes": 6744
+      "duration_ms": 1078,
+      "bytes": 4779
     },
     {
-      "route": "/news/bogana-sports-ground-2023/index.html",
+      "route": "/projects/local-road-or-driveway-repair/index.html",
       "status": 200,
-      "duration_ms": 97,
-      "bytes": 8121
+      "duration_ms": 1027,
+      "bytes": 8639
     },
     {
-      "route": "/news/catalog-unified-2026/index.html",
+      "route": "/documents/templates/project-passport/index.html",
       "status": 200,
-      "duration_ms": 95,
-      "bytes": 5753
+      "duration_ms": 1025,
+      "bytes": 6335
     },
     {
-      "route": "/news/chkalovec-centr-prityazheniya-2024/index.html",
+      "route": "/projects/chkalovec-centr-prityazheniya-2024/index.html",
       "status": 200,
-      "duration_ms": 93,
-      "bytes": 7687
+      "duration_ms": 780,
+      "bytes": 10553
     },
     {
-      "route": "/news/chkalovec-neighborhood-projects-2026/index.html",
+      "route": "/project-passport/index.html",
       "status": 200,
-      "duration_ms": 89,
-      "bytes": 7842
+      "duration_ms": 731,
+      "bytes": 10002
     },
     {
-      "route": "/needs/update-data-pervomayskiy-2026/index.html",
+      "route": "/projects/action-routes/index.html",
       "status": 200,
-      "duration_ms": 88,
-      "bytes": 8096
+      "duration_ms": 729,
+      "bytes": 13283
     },
     {
-      "route": "/action-routes/index.html",
+      "route": "/projects/bogana-universalnaya-sportploshchadka-2023/index.html",
       "status": 200,
-      "duration_ms": 87,
-      "bytes": 8695
-    },
-    {
-      "route": "/news/chkalovec-projects-news-2026/index.html",
-      "status": 200,
-      "duration_ms": 87,
-      "bytes": 6991
-    },
-    {
-      "route": "/news/chkalovec-parkovka-2021/index.html",
-      "status": 200,
-      "duration_ms": 85,
-      "bytes": 7752
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 82,
-      "bytes": 23099
-    },
-    {
-      "route": "/news/chkalovec-russkie-tradicii-2023/index.html",
-      "status": 200,
-      "duration_ms": 81,
-      "bytes": 8038
+      "duration_ms": 717,
+      "bytes": 9351
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 80,
+      "duration_ms": 581,
       "bytes": 15879
+    },
+    {
+      "route": "/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 576,
+      "bytes": 8695
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 78,
+      "duration_ms": 567,
       "bytes": 9430
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 566,
+      "bytes": 11768
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 555,
+      "bytes": 7931
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 552,
+      "bytes": 23099
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 551,
+      "bytes": 8158
+    },
+    {
+      "route": "/projects/chkalovec-cvetik-semicvetik-2022/index.html",
+      "status": 200,
+      "duration_ms": 551,
+      "bytes": 10176
+    },
+    {
+      "route": "/projects/chkalovec-parkovka-2021/index.html",
+      "status": 200,
+      "duration_ms": 545,
+      "bytes": 10093
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 539,
+      "bytes": 15978
+    },
+    {
+      "route": "/projects/chkalovec-russkie-tradicii-2023/index.html",
+      "status": 200,
+      "duration_ms": 537,
+      "bytes": 10423
+    },
+    {
+      "route": "/materials/chairperson-first-100-days/index.html",
+      "status": 200,
+      "duration_ms": 371,
+      "bytes": 11100
     }
   ]
 }

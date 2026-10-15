@@ -200,7 +200,7 @@
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 370 страниц, 6253 внутренних переходов, 890 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 370 страниц, 6251 внутренних переходов, 890 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -344,15 +344,15 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-10-15T13:49:10.371Z",
+    "generated_at": "2026-10-15T13:59:49.045Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
     "pages_indexed": 370,
     "pages_checked": 370,
-    "links_discovered": 8702,
-    "internal_links_checked": 6253,
+    "links_discovered": 8697,
+    "internal_links_checked": 6251,
     "unique_internal_targets": 890,
     "external_links_ignored": 384,
     "protocol_links_ignored": 34,

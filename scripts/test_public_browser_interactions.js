@@ -296,7 +296,8 @@ async function main() {
         await run(page);
         assert(technicalErrors.length === 0, `${name}: technical errors: ${technicalErrors.join(' | ')}`);
         if (name.startsWith('announcement') || name.startsWith('grants')) {
-          await page.locator(name.startsWith('announcement') ? '[name="result"]' : '#current-opportunities h2').scrollIntoViewIfNeeded();
+          const target = name.startsWith('announcement') ? '[name="result"]' : '#current-grants [data-grant-id]';
+          await page.locator(target).first().scrollIntoViewIfNeeded();
           await page.screenshot({ path: path.join(path.dirname(REPORT_PATH), `${name}.png`) });
         }
         results.push({ name, status: 'passed', duration_ms: Date.now() - startedAt, url: page.url(), technical_errors: [] });
