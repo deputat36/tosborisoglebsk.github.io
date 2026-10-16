@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T19:20:42.172Z",
+  "generated_at": "2026-10-16T04:47:28.117Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 121,
+    "asset_files": 124,
     "over_budget_assets": 0,
-    "total_css_bytes": 61841,
-    "total_js_bytes": 692690,
+    "total_css_bytes": 65504,
+    "total_js_bytes": 710838,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -39,7 +39,7 @@
       "path": "assets/js/site.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 35462,
+      "size_bytes": 35471,
       "over_budget": false
     },
     {
@@ -117,6 +117,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 13752,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/project-workspace.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 13659,
       "over_budget": false
     },
     {
@@ -218,24 +225,17 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/project-budget.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 9443,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/news.js",
       "group": "js",
       "extension": ".js",
       "size_bytes": 9175,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/project-budget.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9099,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/outreach-register.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 8581,
       "over_budget": false
     }
   ],
