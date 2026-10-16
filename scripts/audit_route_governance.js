@@ -322,9 +322,11 @@ function validateProjectKitsCleanup(errors) {
   ]);
 
   assertPageMarkers(errors, 'project-kits cleanup', '/documents/templates/project-kit/', [
-    'Заполняемые формы',
-    'Роль страницы:',
-    'библиотека заполняемых и печатных форм',
+    'Рабочие документы',
+    'data-project-workspace="kit"',
+    'data-project-common="project"',
+    'data-project-action="export"',
+    'data-project-action="import"',
     'href="/project-passport/"',
     'href="/grant-application-kit/"',
     'href="/meeting-kit/"',

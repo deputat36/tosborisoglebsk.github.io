@@ -1,0 +1,31 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const core = require('../assets/js/project-workspace-core');
+const budget = require('../assets/js/project-budget-core');
+const project = core.fresh();
+project.common = {project:'Место встреч',territory:'Тестовая территория',goal:'Обустроить место отдыха',start:'01.05.2027',end:'30.06.2027'};
+project.documents.passport = {f7:'Согласовать площадку',f8:'Письменное согласование',f32:'Уточнить поставщика'};
+project.documents['final-report'] = {f6:'',f20:'Ручная плановая сумма'};
+project.budget = budget.fresh();
+project.budget.expenses[0] = {category:'Материалы',item:'Краска',quantity:'2',price:'350,25',source:'Предложение поставщика'};
+project.budget.own = '100';
+project.budget.partners = '50';
+project.budget.contributions[0] = {who:'Жители',resource:'Добровольная работа',value:'1200'};
+const imported = core.normalize(JSON.parse(JSON.stringify(project)));
+assert.deepEqual(imported,project,'whole project survives a portable-file roundtrip');
+assert.deepEqual(core.budgetValues(imported),{cash:'700,50 ₽',total:'1 900,50 ₽',request:'550,50 ₽',inkind:'1 200,00 ₽',own:'100,00 ₽',partners:'50,00 ₽',funding:'150,00 ₽'});
+assert.equal(imported.documents['final-report'].f6,'','planned results never become an actual outcome');
+imported.budget.expenses[0].quantity='ошибка';
+assert.equal(core.budgetValues(imported),null,'invalid totals cannot populate other documents');
+assert.equal(core.budgetValues(core.fresh()),null,'a missing budget does not invent zero totals');
+for(const raw of [null,[],{}, {...project,version:2},{...project,common:{__unsafe:'x'}},{...project,common:{project:[]}}, {...project,common:{project:'x'.repeat(301)}}, {...project,documents:{wrong:{f1:'x'}}},{...project,documents:{passport:{__proto__x:'unsafe'}}},{...project,documents:{passport:{f1:42}}}]) assert.throws(()=>core.normalize(raw));
+const hostile=core.normalize(JSON.parse(JSON.stringify({...project,common:{project:'<img src=x onerror=alert(1)>'}})));
+assert.equal(hostile.common.project,'<img src=x onerror=alert(1)>','import keeps text and never interprets markup');
+for(const form of core.FORMS.filter(slug=>slug!=='budget')) {
+  const html=fs.readFileSync(`documents/templates/project-${form}/index.html`,'utf8');
+  const paper=html.split('id="template-content"')[1].split('</article>')[0];
+  const editable=[...paper.matchAll(/<\w+\b[^>]*contenteditable="true"[^>]*>/g)];
+  assert(editable.length,`${form} has editable document fields`);
+  for(const field of editable) assert.match(field[0],/data-project-field="f\d+"/,`${form}: every edit is included in the file`);
+}
+console.log('Project workspace: complete roundtrip, strict file validation, planned/actual separation, budget amounts and all editable fields OK');
