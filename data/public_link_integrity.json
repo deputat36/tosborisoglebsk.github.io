@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T04:47:31.086Z",
+  "generated_at": "2026-10-16T09:45:44.311Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 370,
-  "pages_checked": 370,
-  "links_discovered": 8854,
-  "internal_links_checked": 6300,
-  "unique_internal_targets": 890,
-  "external_links_ignored": 445,
+  "pages_indexed": 372,
+  "pages_checked": 372,
+  "links_discovered": 8925,
+  "internal_links_checked": 6355,
+  "unique_internal_targets": 898,
+  "external_links_ignored": 451,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/projects/memorial-to-countrymen-frontline/index.html",
       "status": 200,
-      "duration_ms": 1048,
-      "bytes": 7931
+      "duration_ms": 1028,
+      "bytes": 8909
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 48,
+      "duration_ms": 62,
       "bytes": 8695
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 25,
+      "duration_ms": 53,
       "bytes": 11768
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 24,
-      "bytes": 15978
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 23,
-      "bytes": 9430
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 21,
+      "duration_ms": 52,
       "bytes": 15879
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 21,
-      "bytes": 23099
+      "duration_ms": 52,
+      "bytes": 15978
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 21,
+      "duration_ms": 49,
       "bytes": 8158
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 15409
+      "duration_ms": 48,
+      "bytes": 23099
     },
     {
-      "route": "/documents/templates/project-budget/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 12746
+      "duration_ms": 47,
+      "bytes": 9430
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 10450
-    },
-    {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 5818
-    },
-    {
-      "route": "/communication-kit/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 24905
+      "duration_ms": 40,
+      "bytes": 7931
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 10,
+      "duration_ms": 22,
       "bytes": 23597
     },
     {
       "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 10,
+      "duration_ms": 21,
       "bytes": 8176
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/legal/federal-law-33/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 5404
+      "duration_ms": 18,
+      "bytes": 17227
     },
     {
-      "route": "/create-tos/action-routes/index.html",
+      "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 12658
+      "duration_ms": 17,
+      "bytes": 15409
     },
     {
-      "route": "/documents/templates/project-kit/index.html",
+      "route": "/check-tos/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 11032
+      "duration_ms": 17,
+      "bytes": 5818
     },
     {
-      "route": "/index.html",
+      "route": "/news/send-news-dzerzhinskogo-2026/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 16385
+      "duration_ms": 16,
+      "bytes": 6826
     },
     {
-      "route": "/legal/chairperson-practical-checklist/index.html",
+      "route": "/materials/documents-for-tos/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 15143
+      "duration_ms": 15,
+      "bytes": 6292
+    },
+    {
+      "route": "/materials/evidence-pack-for-resident-request/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 11114
+    },
+    {
+      "route": "/materials/choose-tos-project/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 7779
+    },
+    {
+      "route": "/materials/community-resource-map/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 11100
+    },
+    {
+      "route": "/news/send-news-bogana-2026/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 6666
     }
   ]
 }
