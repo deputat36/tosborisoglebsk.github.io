@@ -170,6 +170,12 @@
   });
   window.addEventListener('storage',event => {
     if(event.key!==core.KEY)return;
+    // A queued event from the previous document can arrive after navigation.
+    // Only a different current stored revision is a real concurrent edit.
+    try {
+      const raw=localStorage.getItem(core.KEY);
+      if(raw && core.normalize(JSON.parse(raw)).revision===state.revision)return;
+    } catch { /* An unreadable replacement must not overwrite the current draft. */ }
     blocked=true;reload.hidden=false;warn('Проект изменён в другой вкладке. Обновите данные или скачайте свои изменения.');
   });
   window.addEventListener('project-budget-change',event => {

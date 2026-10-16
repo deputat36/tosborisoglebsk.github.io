@@ -19,7 +19,7 @@ async function open(page,form) {
 async function width(page,label) {
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),`${label}: horizontal overflow`);
 }
-async function screenshot(page,name) { await width(page,name);await page.screenshot({path:path.join(OUT,`${name}.png`),fullPage:true}); }
+async function screenshot(page,name) { await page.evaluate(()=>{document.activeElement?.blur();window.scrollTo(0,0);});await width(page,name);await page.screenshot({path:path.join(OUT,`${name}.png`),fullPage:true}); }
 async function downloadProject(page) {
   const wait=page.waitForEvent('download');await page.locator('[data-project-action="export"]').click();
   const file=await wait;return JSON.parse(fs.readFileSync(await file.path(),'utf8'));
@@ -105,8 +105,9 @@ async function scenario(browser,mobile) {
   assert.match(await page.locator('[data-project-notice]').innerText(),/Файл не открыт/);
   assert.equal(await page.locator('[data-meta="project"]').inputValue(),'Соседский сквер','invalid import preserves project');
   await open(page,'passport');
+  await page.evaluate(()=>dispatchEvent(new StorageEvent('storage',{key:'tos-project-workspace-v1',newValue:localStorage.getItem('tos-project-workspace-v1')})));
+  assert.equal(await page.locator('[data-project-reload]').isVisible(),false,'queued event for the current revision is not a conflict');
   await common(page,'project').fill('');
-  console.log('Clear field diagnostic',JSON.stringify(await page.evaluate(()=>({stored:JSON.parse(localStorage.getItem('tos-project-workspace-v1')).common.project,display:document.querySelector('[data-project-common="project"]').innerText,status:document.querySelector('[data-project-status]').textContent,notice:document.querySelector('[data-project-notice]').textContent}))));
   await page.reload({waitUntil:'networkidle'});assert.equal(await common(page,'project').innerText(),'','cleared shared fields stay empty');
   const literal='<img src=x onerror=alert(1)>';
   await common(page,'project').fill(literal);await page.reload({waitUntil:'networkidle'});
