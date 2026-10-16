@@ -144,7 +144,7 @@
         {"route": "/grant-application-kit/", "role": "Онлайн-инструкция по конкурсной заявке"},
         {"route": "/meeting-kit/", "role": "Онлайн-инструкция для собрания жителей"},
         {"route": "/documents/templates/project-passport/", "role": "Заполняемая и печатная форма паспорта"},
-        {"route": "/documents/templates/project-kit/", "role": "Библиотека заполняемых форм проекта"}
+        {"route": "/documents/templates/project-kit/", "role": "Связанные формы проекта с локальным черновиком"}
       ],
       "status": "review",
       "decision": "Сохранить рабочие инструкции отдельно от документов для заполнения.",

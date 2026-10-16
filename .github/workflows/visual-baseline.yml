@@ -12,6 +12,9 @@ on:
     branches:
       - release-2025-12-22
     paths:
+      - 'documents/templates/**'
+      - 'scripts/test_public_project_workspace.js'
+      - 'scripts/test_project_workspace.js'
       - 'index.html'
       - 'tos/index.html'
       - 'tos/mirolyubie/index.html'
@@ -234,6 +237,9 @@ jobs:
         env:
           PUBLIC_BROWSER_REPORT: .artifacts/visual-baseline/browser-interactions.json
         run: node scripts/test_public_browser_interactions.js
+
+      - name: Test linked project documents and portable drafts
+        run: node scripts/test_public_project_workspace.js
 
       - name: Test public card navigation
         env:

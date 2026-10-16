@@ -6,7 +6,7 @@
   let state=core.fresh(),timer,undo=null,storageAvailable=true;
   const say=text=>{if(status.textContent!==text)status.textContent=text;};
   try{const saved=localStorage.getItem(key);if(saved){state=core.normalize(JSON.parse(saved));say('Черновик восстановлен из этого браузера.');}}catch{storageAvailable=false;say('Не удалось восстановить черновик. Скачивайте файл сметы для сохранения.');}
-  function save(){try{localStorage.setItem(key,JSON.stringify(state));storageAvailable=true;say('Черновик сохранён в этом браузере.');return true;}catch{storageAvailable=false;say('Автосохранение недоступно. Скачайте файл сметы.');return false;}}
+  function save(){window.dispatchEvent(new CustomEvent('project-budget-change',{detail:JSON.parse(JSON.stringify(state))}));try{localStorage.setItem(key,JSON.stringify(state));storageAvailable=true;say('Черновик сохранён в этом браузере.');return true;}catch{storageAvailable=false;say('Автосохранение недоступно. Скачайте файл сметы.');return false;}}
   const cell=(tr,label)=>{const td=document.createElement('td');td.dataset.label=label;tr.append(td);return td;};
   function control(parent,group,index,field,value,label,numeric=false){const input=document.createElement(numeric?'input':'textarea');if(numeric)input.type='text';else input.rows=2;input.value=value;input.className='budget-input';input.dataset.group=group;input.dataset.field=field;if(index!==null)input.dataset.index=index;input.setAttribute('aria-label',label);input.maxLength=numeric?40:1000;if(numeric)input.inputMode='decimal';parent.append(input);return input;}
   function resizeText(el){if(el.tagName==='TEXTAREA'){el.style.height='auto';el.style.height=`${Math.max(42,el.scrollHeight)}px`;}}
@@ -48,7 +48,7 @@
     if(b.dataset.add){const group=b.dataset.add;if(state[group].length>=core.MAX_ROWS){say('Можно добавить не более 100 строк в таблицу.');return;}state[group].push(group==='expenses'?{category:'Другое',item:'',quantity:'',price:'',source:''}:{who:'',resource:'',value:''});render();save();root.querySelector(`[data-group="${group}"][data-index="${state[group].length-1}"]`)?.focus();}
     if(b.dataset.remove){undo=JSON.parse(JSON.stringify(state));state[b.dataset.remove].splice(Number(b.dataset.index),1);render();save();root.querySelector(`[data-add="${b.dataset.remove}"]`)?.focus();}
     if(b.id==='budget-undo'&&undo){state=undo;undo=null;render();save();}
-    if(b.id==='budget-clear'&&confirm('Очистить текущую смету? После очистки можно отменить это действие или открыть скачанный файл.')){undo=JSON.parse(JSON.stringify(state));state=core.fresh();render();save();}
+    if(b.id==='budget-clear'&&confirm('Очистить текущую смету? После очистки можно отменить это действие или открыть скачанный файл.')){undo=JSON.parse(JSON.stringify(state));const meta={...state.meta};state=core.fresh();if(root.dataset.projectWorkspace)state.meta=meta;render();save();}
     if(b.dataset.download){clearTimeout(timer);save();try{const csv=b.dataset.download==='csv';download(csv?core.toCsv(state):JSON.stringify(state,null,2),`smeta-tos-${new Date().toISOString().slice(0,10)}.${csv?'csv':'json'}`,csv?'text/csv;charset=utf-8':'application/json');}catch(error){say(error.message);}}
     if(b.id==='budget-import')root.querySelector('#budget-file').click();
   });
@@ -56,5 +56,6 @@
   root.querySelector('[data-print-template]').addEventListener('click',event=>{if(!core.calculate(state).valid){event.stopImmediatePropagation();say('Исправьте ошибки в числах перед печатью.');root.querySelector('[aria-invalid="true"]')?.focus();}},true);
   root.querySelector('[data-copy-template]').addEventListener('click',async event=>{event.stopImmediatePropagation();try{await navigator.clipboard.writeText(core.toText(state));say('Текст сметы скопирован со значениями полей.');}catch{say('Копирование недоступно. Скачайте CSV или файл сметы.');}},true);
   window.addEventListener('pagehide',()=>{clearTimeout(timer);save();});
+  window.ProjectBudgetEditor={getState:()=>JSON.parse(JSON.stringify(state)),replace:next=>{clearTimeout(timer);state=core.normalize(next);undo=null;render();}};
   render();if(!status.textContent)say(storageAvailable?'Смета сохраняется только в этом браузере. Для переноса скачайте файл.':'Скачайте файл сметы, чтобы сохранить работу.');
 })();
