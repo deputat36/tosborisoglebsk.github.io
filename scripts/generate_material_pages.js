@@ -40,6 +40,26 @@ function desc(article){
 function relatedLinks(article){
   return arr(article.related_links).filter((link) => link && typeof link === 'object' && String(link.label || '').trim() && String(link.href || '').trim());
 }
+function articleBody(article){
+  const paragraphs = (values) => arr(values).map(text => `<p>${esc(text)}</p>`).join('');
+  const introduction = paragraphs(article.content);
+  const sections = arr(article.sections).map(section => {
+    const items = arr(section.items);
+    const tag = section.ordered ? 'ol' : 'ul';
+    return `${section.title ? `<h2>${esc(section.title)}</h2>` : ''}${paragraphs(section.paragraphs)}${items.length ? `<${tag}>${items.map(item => `<li>${esc(item)}</li>`).join('')}</${tag}>` : ''}`;
+  }).join('');
+  return introduction + sections || '<p>Материал готовится к публикации.</p>';
+}
+function sourceReferences(article){
+  const references = arr(article.references).filter(source => source && source.title);
+  if (!references.length) return '';
+  return `<hr class="sep"/><h2>Источники и границы применения</h2><p>Практические шаги подготовлены редакцией по мотивам указанных материалов. Это адаптация для работы ТОС, а не выдержка из нормативного акта.</p><ul>${references.map(source => {
+    let href = '';
+    try { const url = new URL(source.url); if (url.protocol === 'https:') href = url.href; } catch {}
+    const title = href ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(source.title)}</a>` : esc(source.title);
+    return `<li>${title}${source.locator ? `. ${esc(source.locator)}` : ''}${source.note ? `<p class="tiny">${esc(source.note)}</p>` : ''}</li>`;
+  }).join('')}</ul>`;
+}
 function makePage(article){
   const id = article.id;
   const title = article.title || 'Материал ТОС БГО';
@@ -47,7 +67,8 @@ function makePage(article){
   const description = desc(article);
   const visibleLead = lead(article);
   const canonical = `${SITE_URL}/materials/${id}/`;
-  const content = arr(article.content);
+  const body = articleBody(article);
+  const references = sourceReferences(article);
   const tools = relatedLinks(article);
   const origin = inferContentOrigin(article, 'articles');
   const originLabel = contentOriginLabel(origin);
@@ -68,7 +89,8 @@ function makePage(article){
   const toolsMarkup = tools.length
     ? `<hr class="sep"/><h2>Связанные инструменты</h2><div class="card-actions">${tools.map((link) => `<a class="btn" href="${esc(link.href)}">${esc(link.label)}</a>`).join('')}</div>`
     : '';
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${esc(title)} | Материалы ТОС БГО</title><meta name="description" content="${esc(description)}"/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="${esc(canonical)}"/><meta property="og:title" content="${esc(title)}"/><meta property="og:description" content="${esc(description)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${esc(canonical)}"/><meta property="og:image" content="${SITE_URL}/assets/img/og-cover.svg"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><script type="application/ld+json">${JSON.stringify(schema)}</script></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/calendar/">Календарь</a><a href="/needs/">Нужна помощь</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/materials/">← Материалы</a><div class="eyebrow">${esc(category)}</div><div class="meta"><span class="tag ${esc(originClass)}">${esc(originLabel)}</span></div><h1>${esc(title)}</h1><p class="lead">${esc(visibleLead)}</p></div></section><section class="section tight"><div class="container notice"><b>Статус материала:</b> ${esc(originNotice)}</div></section><section class="section"><div class="container prose">${content.length ? content.map(p => `<p>${esc(p)}</p>`).join('') : '<p>Материал готовится к публикации.</p>'}${toolsMarkup}<hr class="sep"/><div class="card-actions"><a class="btn" href="/materials/">Все материалы</a><a class="btn" href="/documents/">Документы</a><a class="btn" href="/create-tos/">Как создать ТОС</a></div></div></section><section class="section tight" id="${esc(contextSectionId)}" aria-labelledby="${esc(contextSectionId)}-title"><div class="container prose"><h2 id="${esc(contextSectionId)}-title">Что делать дальше</h2><ul>${contextLinks.map((link) => `<li><a href="${esc(link.href)}">${esc(link.label)}</a></li>`).join('')}</ul><p class="tiny">Ссылки подобраны по теме инструкции и ведут к действующим рабочим разделам портала.</p></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><!-- Страница материала создана автоматически из data/articles.json. --></div></footer><script src="/assets/js/site.js"></script></body></html>`;
+  const schemaJson = JSON.stringify(schema).replace(/</g, '\\u003c');
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${esc(title)} | Материалы ТОС БГО</title><meta name="description" content="${esc(description)}"/><meta name="theme-color" content="#2f7d5a"/><link rel="canonical" href="${esc(canonical)}"/><meta property="og:title" content="${esc(title)}"/><meta property="og:description" content="${esc(description)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${esc(canonical)}"/><meta property="og:image" content="${SITE_URL}/assets/img/og-cover.svg"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="manifest" href="/site.webmanifest"/><link rel="stylesheet" href="/assets/css/styles.css"/><script type="application/ld+json">${schemaJson}</script></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/calendar/">Календарь</a><a href="/needs/">Нужна помощь</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/materials/">← Материалы</a><div class="eyebrow">${esc(category)}</div><div class="meta"><span class="tag ${esc(originClass)}">${esc(originLabel)}</span></div><h1>${esc(title)}</h1><p class="lead">${esc(visibleLead)}</p></div></section><section class="section tight"><div class="container notice"><b>Статус материала:</b> ${esc(originNotice)}</div></section><section class="section"><div class="container prose">${body}${toolsMarkup}${references}<hr class="sep"/><div class="card-actions"><a class="btn" href="/materials/">Все материалы</a><a class="btn" href="/documents/">Документы</a><a class="btn" href="/create-tos/">Как создать ТОС</a></div></div></section><section class="section tight" id="${esc(contextSectionId)}" aria-labelledby="${esc(contextSectionId)}-title"><div class="container prose"><h2 id="${esc(contextSectionId)}-title">Что делать дальше</h2><ul>${contextLinks.map((link) => `<li><a href="${esc(link.href)}">${esc(link.label)}</a></li>`).join('')}</ul><p class="tiny">Ссылки подобраны по теме инструкции и ведут к действующим рабочим разделам портала.</p></div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><!-- Страница материала создана автоматически из data/articles.json. --></div></footer><script src="/assets/js/site.js"></script></body></html>`;
 }
 function updateSitemap(articles){
   const staticUrls = ['/', '/tos/', '/news/', '/grants/', '/projects/', '/calendar/', '/needs/', '/materials/', '/documents/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/search/'].map(u => SITE_URL + u);
@@ -86,6 +108,6 @@ function main(){
   updateSitemap(articles);
   console.log(`Generated material pages: ${articles.length}`);
 }
-main();
+if (require.main === module) main();
 
-module.exports = { relatedLinks, makePage };
+module.exports = { relatedLinks, makePage, articleBody, sourceReferences };

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-16T04:47:44.683Z",
-  "total": 370,
+  "generated_at": "2026-10-16T09:47:34.641Z",
+  "total": 372,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -369,7 +369,7 @@
       "path": "meeting-kit/index.html",
       "url": "https://tosborisoglebsk.ru/meeting-kit/",
       "title": "Набор для собрания ТОС БГО",
-      "description": "Онлайн-инструкция для подготовки собрания ТОС: объявление, повестка, список участников, протокол, решения, фотоотчёт и публикация итогов.",
+      "description": "Как подготовить собрание ТОС: цель, интересы жителей, приглашение, правила обсуждения, решения и обратная связь. Рабочий лист и формы документов.",
       "section": "meeting-kit",
       "search_group": "other",
       "content_origin": "reference"
@@ -1062,7 +1062,7 @@
       "path": "materials/how-to-involve-residents/index.html",
       "url": "https://tosborisoglebsk.ru/materials/how-to-involve-residents/",
       "title": "Как вовлекать жителей, если «никому ничего не надо» | Материалы ТОС БГО",
-      "description": "Жители чаще включаются, когда задача маленькая, понятная и даёт быстрый результат. Начните не с просьбы прийти на собрание, а с вопроса: что на…",
+      "description": "Выясните, что важно разным соседям, предложите посильное участие и покажите, как их мнение повлияло на результат. Фраза «никому ничего не надо» редко…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
@@ -1242,7 +1242,7 @@
       "path": "materials/partnerships/index.html",
       "url": "https://tosborisoglebsk.ru/materials/partnerships/",
       "title": "Как ТОСу работать с партнёрами | Материалы ТОС БГО",
-      "description": "Партнёры помогают ресурсами, экспертизой, техникой, материалами и информационной поддержкой. Составьте список потенциальных партнёров: предприниматели…",
+      "description": "Договоритесь о конкретном вкладе, условиях его использования и результате, который нужен жителям и партнёру. Начните с общей задачи и нехватки ресурсов…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
@@ -1252,6 +1252,24 @@
       "url": "https://tosborisoglebsk.ru/materials/documents-for-tos/",
       "title": "Какие документы нужны активному ТОС | Материалы ТОС БГО",
       "description": "Активному ТОСу нужен понятный архив: устав, протоколы, решения, сметы, отчёты, фото и список ответственных лиц. Устав ТОС и документы о регистрации…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/community-resource-map/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/community-resource-map/",
+      "title": "Карта ресурсов: чем сообщество может помочь проекту | Материалы ТОС БГО",
+      "description": "Учтите людей, время, места, знания, материалы и деньги. Отделите подтверждённую помощь от возможностей, которые ещё нужно согласовать. Карта ресурсов…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/territory-future-workshop/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/territory-future-workshop/",
+      "title": "От образа будущего к первому делу: встреча на 60 минут | Материалы ТОС БГО",
+      "description": "Обсудите, какой жители хотят видеть свою территорию, и выберите небольшой проверяемый шаг с ответственным и датой. В рассказе Артема Зубкова «ТОС —…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
