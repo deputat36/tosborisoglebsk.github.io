@@ -48,7 +48,7 @@
     if(b.dataset.add){const group=b.dataset.add;if(state[group].length>=core.MAX_ROWS){say('Можно добавить не более 100 строк в таблицу.');return;}state[group].push(group==='expenses'?{category:'Другое',item:'',quantity:'',price:'',source:''}:{who:'',resource:'',value:''});render();save();root.querySelector(`[data-group="${group}"][data-index="${state[group].length-1}"]`)?.focus();}
     if(b.dataset.remove){undo=JSON.parse(JSON.stringify(state));state[b.dataset.remove].splice(Number(b.dataset.index),1);render();save();root.querySelector(`[data-add="${b.dataset.remove}"]`)?.focus();}
     if(b.id==='budget-undo'&&undo){state=undo;undo=null;render();save();}
-    if(b.id==='budget-clear'&&confirm('Очистить текущую смету? После очистки можно отменить это действие или открыть скачанный файл.')){undo=JSON.parse(JSON.stringify(state));state=core.fresh();render();save();}
+    if(b.id==='budget-clear'&&confirm('Очистить текущую смету? После очистки можно отменить это действие или открыть скачанный файл.')){undo=JSON.parse(JSON.stringify(state));const meta={...state.meta};state=core.fresh();if(root.dataset.projectWorkspace)state.meta=meta;render();save();}
     if(b.dataset.download){clearTimeout(timer);save();try{const csv=b.dataset.download==='csv';download(csv?core.toCsv(state):JSON.stringify(state,null,2),`smeta-tos-${new Date().toISOString().slice(0,10)}.${csv?'csv':'json'}`,csv?'text/csv;charset=utf-8':'application/json');}catch(error){say(error.message);}}
     if(b.id==='budget-import')root.querySelector('#budget-file').click();
   });

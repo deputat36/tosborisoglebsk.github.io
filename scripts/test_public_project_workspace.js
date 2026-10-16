@@ -55,6 +55,16 @@ async function scenario(browser,mobile) {
   await page.locator('[data-funding="own"]').fill('100');await page.locator('[data-funding="partners"]').fill('50');
   await page.waitForFunction(()=>JSON.parse(localStorage.getItem('tos-project-workspace-v1')).budget?.partners==='50');
   await screenshot(page,`${label}-project-budget`);
+  // Clearing only the calculator keeps the identity of the current project.
+  await page.locator('#budget-clear').click();
+  assert.equal(await page.locator('[data-meta="project"]').inputValue(),'Соседский сквер');
+  await page.locator('#budget-undo').click();
+  await page.reload({waitUntil:'networkidle'});
+  // A new project started from an already restored budget must also start empty.
+  await page.locator('[data-project-action="new"]').click();
+  assert.equal(await page.locator('[data-meta="project"]').inputValue(),'');
+  await page.locator('[data-project-action="undo"]').click();
+  assert.equal(await page.locator('[data-meta="project"]').inputValue(),'Соседский сквер');
   await open(page,'passport');
   assert.equal(plain(await field(page,'f27').innerText()),'700,50 ₽');
   assert.equal(plain(await field(page,'f28').innerText()),'550,50 ₽');

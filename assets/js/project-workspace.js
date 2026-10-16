@@ -11,7 +11,7 @@
   const reload = root.querySelector('[data-project-reload]');
   const undoButton = root.querySelector('[data-project-undo]');
   let state = core.fresh(), undo = null, blocked = false, corrupt = false, hadProject = false;
-  const defaults = new Map(nodes.map(el => [el, el.isContentEditable ? el.textContent : el.value]));
+  const defaults = new Map(nodes.map(el => [el, el.isContentEditable ? el.textContent : form === 'budget' ? '' : el.value]));
   const say = message => { status.textContent = message; };
   function warn(message) { notice.textContent = message; notice.hidden = !message; }
   try {
