@@ -98,10 +98,13 @@ async function scenario(browser,mobile) {
   await open(page,'budget');assert.equal(await page.locator('[data-meta="project"]').inputValue(),'');
   assert.equal(await page.locator('[data-group="expenses"][data-index="0"][data-field="price"]').inputValue(),'','new project cannot resurrect previous budget');
   await page.locator('[data-project-file]').setInputFiles({name:'proekt.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))});
+  await page.waitForFunction(()=>document.querySelector('[data-project-file]').files.length===0);
   assert.equal(await page.locator('[data-meta="project"]').inputValue(),'Соседский сквер');
   await page.locator('[data-project-action="undo"]').click();assert.equal(await page.locator('[data-meta="project"]').inputValue(),'');
   await page.locator('[data-project-file]').setInputFiles({name:'proekt.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(exported))});
+  await page.waitForFunction(()=>document.querySelector('[data-project-file]').files.length===0);
   await page.locator('[data-project-file]').setInputFiles({name:'wrong.json',mimeType:'application/json',buffer:Buffer.from('{"kind":"wrong"}')});
+  await page.waitForFunction(()=>document.querySelector('[data-project-file]').files.length===0);
   assert.match(await page.locator('[data-project-notice]').innerText(),/Файл не открыт/);
   assert.equal(await page.locator('[data-meta="project"]').inputValue(),'Соседский сквер','invalid import preserves project');
   await open(page,'passport');
@@ -130,7 +133,9 @@ async function scenario(browser,mobile) {
 (async()=>{
   const browser=await chromium.launch({headless:true});
   try {
-    await scenario(browser,false);await scenario(browser,true);
+    const modes=await Promise.allSettled([scenario(browser,false),scenario(browser,true)]);
+    const failures=modes.filter(mode=>mode.status==='rejected');
+    if(failures.length)throw new AggregateError(failures.map(mode=>mode.reason),'Project document scenarios failed');
     // Existing standalone calculator drafts migrate without data loss.
     const context=await browser.newContext();const page=await context.newPage();const legacy=budgetCore.fresh();legacy.meta.project='Старая смета';legacy.expenses[0]={category:'Материалы',item:'Краска',quantity:'2',price:'350',source:''};
     await context.addInitScript(value=>{if(!sessionStorage.getItem('seeded')){localStorage.setItem('tos-project-budget-v1',JSON.stringify(value));sessionStorage.setItem('seeded','1');}},legacy);
