@@ -107,7 +107,7 @@ function injectBreadcrumbs() {
     return last ? `<span>${esc(item.name)}</span>` : `<a href="${esc(item.url)}">${esc(item.name)}</a><span aria-hidden="true"> → </span>`;
   }).join('');
 
-  const firstSection = main.querySelector('section');
+  const firstSection = main.querySelector(':scope > section');
   if (firstSection) main.insertBefore(nav, firstSection);
   else main.prepend(nav);
 

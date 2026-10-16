@@ -86,6 +86,11 @@ async function scenario(browser,mobile) {
     await page.reload({waitUntil:'networkidle'});assert.equal(await field(page,key).innerText(),`Черновик: ${form}`);
     await width(page,`${label}-${form}`);
   }
+  await open(page,'support');
+  await field(page,'f100').fill('Участник проекта');
+  await page.reload({waitUntil:'networkidle'});
+  assert.equal(await field(page,'f100').innerText(),'Участник проекта');
+  await screenshot(page,`${label}-project-support`);
   const exported=await downloadProject(page);
   assert.equal(exported.common.project,'Соседский сквер');assert.equal(exported.budget.expenses[0].price,'350,25');
   assert(Object.keys(exported.documents).length>=8);

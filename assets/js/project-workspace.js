@@ -91,7 +91,6 @@
     if (root.matches('[data-project-budget]') && el.dataset.meta && window.ProjectBudgetEditor) {
       const budget = window.ProjectBudgetEditor.getState();
       budget.meta[el.dataset.meta] = value;
-      window.ProjectBudgetEditor.replace(budget);
       state.budget = budget;
     }
     save();
