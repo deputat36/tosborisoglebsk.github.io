@@ -13,6 +13,8 @@
   let state = core.fresh(), undo = null, blocked = false, corrupt = false, hadProject = false;
   const defaults = new Map(nodes.map(el => [el, el.isContentEditable ? el.textContent : form === 'budget' ? '' : el.value]));
   const say = message => { status.textContent = message; };
+  const readValue = el => el.type === 'checkbox' ? (el.checked ? '1':'0') : el.isContentEditable ? el.innerText.replace(/\r/g,'') : el.value;
+  const observed = new Map();
   function warn(message) { notice.textContent = message; notice.hidden = !message; }
   try {
     const raw = localStorage.getItem(core.KEY);
@@ -70,6 +72,7 @@
     }
     root.querySelectorAll('[data-project-budget-value]').forEach(el => { el.textContent = sums ? sums[el.dataset.projectBudgetValue] : 'Откройте и заполните смету'; });
     root.querySelectorAll('[data-project-budget-notice]').forEach(el => { el.hidden = !sums; });
+    nodes.forEach(el=>observed.set(el,readValue(el)));
     undoButton.hidden = !undo;
     root.querySelectorAll('[data-project-progress]').forEach(el => {
       const slug = el.dataset.projectProgress;
@@ -78,7 +81,7 @@
     });
   }
   function updateField(el) {
-    let value = el.type === 'checkbox' ? (el.checked ? '1':'0') : el.isContentEditable ? el.innerText.replace(/\r/g,'') : el.value;
+    let value = readValue(el);
     const limit = el.dataset.projectCommon && !['summary','problem','goal','beneficiaries','maintenance','publicity'].includes(el.dataset.projectCommon) ? 300 : 12000;
     if (value.length > limit) { value = value.slice(0,limit); setValue(el,value); warn(`Поле сокращено до ${limit} символов.`); }
     if (el.dataset.projectCommon) {
@@ -93,8 +96,14 @@
       budget.meta[el.dataset.meta] = value;
       state.budget = budget;
     }
+    nodes.forEach(node=>{if(node===el || (el.dataset.projectCommon && node.dataset.projectCommon===el.dataset.projectCommon))observed.set(node,readValue(node));});
     save();
   }
+  function flushFields(){
+    for(const el of nodes)if(el.isConnected && readValue(el)!==observed.get(el))updateField(el);
+  }
+  root.addEventListener('focusout',event=>{if(nodes.includes(event.target)&&readValue(event.target)!==observed.get(event.target))updateField(event.target);});
+  window.addEventListener('pagehide',flushFields);
   root.addEventListener('input',event => { if (nodes.includes(event.target)) updateField(event.target); });
   root.addEventListener('change',event => { if (event.target.type === 'checkbox' && nodes.includes(event.target)) updateField(event.target); });
   root.addEventListener('paste',event => {
@@ -120,6 +129,7 @@
     if (corrupt) { corrupt=false; try { localStorage.removeItem(core.KEY); } catch { /* Export remains available. */ } }
     next.revision = state.revision;
     state = next;
+    if(!blocked)warn('');
     syncBudgetMeta();
     if (window.ProjectBudgetEditor) window.ProjectBudgetEditor.replace(state.budget || window.ProjectBudgetCore.fresh());
     apply(); save();

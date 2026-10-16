@@ -105,7 +105,9 @@ async function scenario(browser,mobile) {
   assert.match(await page.locator('[data-project-notice]').innerText(),/Файл не открыт/);
   assert.equal(await page.locator('[data-meta="project"]').inputValue(),'Соседский сквер','invalid import preserves project');
   await open(page,'passport');
-  await common(page,'project').fill('');await page.reload({waitUntil:'networkidle'});assert.equal(await common(page,'project').innerText(),'','cleared shared fields stay empty');
+  await common(page,'project').fill('');
+  console.log('Clear field diagnostic',JSON.stringify(await page.evaluate(()=>({stored:JSON.parse(localStorage.getItem('tos-project-workspace-v1')).common.project,display:document.querySelector('[data-project-common="project"]').innerText,status:document.querySelector('[data-project-status]').textContent,notice:document.querySelector('[data-project-notice]').textContent}))));
+  await page.reload({waitUntil:'networkidle'});assert.equal(await common(page,'project').innerText(),'','cleared shared fields stay empty');
   const literal='<img src=x onerror=alert(1)>';
   await common(page,'project').fill(literal);await page.reload({waitUntil:'networkidle'});
   assert.equal(await common(page,'project').innerText(),literal);assert.equal(await common(page,'project').locator('img').count(),0,'restored text cannot become HTML');
