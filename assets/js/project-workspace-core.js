@@ -33,6 +33,10 @@
     result.budget = raw.budget == null ? null : budgetCore.normalize(raw.budget);
     return result;
   }
+  function signature(state) {
+    const stable = value => Array.isArray(value) ? value.map(stable) : object(value) ? Object.fromEntries(Object.keys(value).sort().map(key=>[key,stable(value[key])])) : value;
+    return JSON.stringify(stable({common:state.common,documents:state.documents,budget:state.budget}));
+  }
   function budgetValues(state) {
     if (!state.budget) return null;
     const sums = budgetCore.calculate(state.budget);
@@ -40,5 +44,5 @@
     if (!active || !sums.valid) return null;
     return {cash:budgetCore.money(sums.cash),total:budgetCore.money(sums.total),request:budgetCore.money(sums.request),inkind:budgetCore.money(sums.inkind),own:budgetCore.money(budgetCore.decimal(state.budget.own,2).value),partners:budgetCore.money(budgetCore.decimal(state.budget.partners,2).value),funding:budgetCore.money(budgetCore.decimal(state.budget.own,2).value+budgetCore.decimal(state.budget.partners,2).value)};
   }
-  return {KEY,FORMS,LABELS,fresh,normalize,budgetValues};
+  return {KEY,FORMS,LABELS,fresh,normalize,budgetValues,signature};
 });

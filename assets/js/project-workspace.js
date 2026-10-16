@@ -29,6 +29,7 @@
       }
     } catch { warn('Старая смета не перенесена. Откройте её сохранённый файл в калькуляторе.'); }
   }
+  let baseline = core.signature(state);
   function syncBudgetMeta() {
     if (!state.budget) return;
     for (const key of ['project','territory','responsible']) if (Object.hasOwn(state.common,key)) state.budget.meta[key] = state.common[key];
@@ -38,7 +39,8 @@
     if (blocked || corrupt) { say('Изменения пока только на странице. Скачайте проект, чтобы сохранить их.'); return false; }
     try {
       const raw = localStorage.getItem(core.KEY);
-      if (raw && core.normalize(JSON.parse(raw)).revision !== state.revision) {
+      const stored = raw ? core.normalize(JSON.parse(raw)) : null;
+      if (stored && stored.revision !== state.revision && core.signature(stored) !== baseline) {
         blocked = true; reload.hidden = false;
         warn('Проект изменён в другой вкладке. Скачайте свои изменения или обновите данные, прежде чем продолжить.');
         return false;
@@ -47,6 +49,7 @@
       const next = {...state,revision,updated_at:new Date().toISOString()};
       localStorage.setItem(core.KEY,JSON.stringify(next));
       state = next;
+      baseline = core.signature(state);
       // Keep the existing standalone budget tool and its saved files compatible.
       try { if (state.budget) localStorage.setItem('tos-project-budget-v1',JSON.stringify(state.budget)); else localStorage.removeItem('tos-project-budget-v1'); } catch { /* The complete project remains saved. */ }
       say('Проект сохранён в этом браузере.');
@@ -144,7 +147,7 @@
     if (action === 'undo' && undo) { const previous=undo; replace(previous); undo=null; undoButton.hidden=true; }
     if (action === 'reload') {
       if (!confirm('Загрузить сохранённую версию? Несохранённые изменения этой страницы будут заменены.')) return;
-      try { state=core.normalize(JSON.parse(localStorage.getItem(core.KEY))); blocked=false;corrupt=false;reload.hidden=true;warn('');syncBudgetMeta();apply();if(window.ProjectBudgetEditor)window.ProjectBudgetEditor.replace(state.budget||window.ProjectBudgetCore.fresh());say('Открыта сохранённая версия.'); }
+      try { state=core.normalize(JSON.parse(localStorage.getItem(core.KEY)));baseline=core.signature(state); blocked=false;corrupt=false;reload.hidden=true;warn('');syncBudgetMeta();apply();if(window.ProjectBudgetEditor)window.ProjectBudgetEditor.replace(state.budget||window.ProjectBudgetCore.fresh());say('Открыта сохранённая версия.'); }
       catch { warn('Не удалось загрузить сохранённую версию. Откройте скачанный файл проекта.'); }
     }
     if (action === 'budget') {
@@ -174,7 +177,11 @@
     // Only a different current stored revision is a real concurrent edit.
     try {
       const raw=localStorage.getItem(core.KEY);
-      if(raw && core.normalize(JSON.parse(raw)).revision===state.revision)return;
+      if(raw){
+        const stored=core.normalize(JSON.parse(raw));
+        if(stored.revision===state.revision)return;
+        if(core.signature(stored)===baseline){state.revision=stored.revision;state.updated_at=stored.updated_at;return;}
+      }
     } catch { /* An unreadable replacement must not overwrite the current draft. */ }
     blocked=true;reload.hidden=false;warn('Проект изменён в другой вкладке. Обновите данные или скачайте свои изменения.');
   });

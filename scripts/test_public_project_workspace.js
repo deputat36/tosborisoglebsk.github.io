@@ -105,8 +105,8 @@ async function scenario(browser,mobile) {
   assert.match(await page.locator('[data-project-notice]').innerText(),/Файл не открыт/);
   assert.equal(await page.locator('[data-meta="project"]').inputValue(),'Соседский сквер','invalid import preserves project');
   await open(page,'passport');
-  await page.evaluate(()=>dispatchEvent(new StorageEvent('storage',{key:'tos-project-workspace-v1',newValue:localStorage.getItem('tos-project-workspace-v1')})));
-  assert.equal(await page.locator('[data-project-reload]').isVisible(),false,'queued event for the current revision is not a conflict');
+  await page.evaluate(()=>{const key='tos-project-workspace-v1';const saved=JSON.parse(localStorage.getItem(key));saved.revision+='-queued';localStorage.setItem(key,JSON.stringify(saved));dispatchEvent(new StorageEvent('storage',{key,newValue:JSON.stringify(saved)}));});
+  assert.equal(await page.locator('[data-project-reload]').isVisible(),false,'a metadata-only autosave from a previous document is not a conflict');
   await common(page,'project').fill('');
   await page.reload({waitUntil:'networkidle'});assert.equal(await common(page,'project').innerText(),'','cleared shared fields stay empty');
   const literal='<img src=x onerror=alert(1)>';

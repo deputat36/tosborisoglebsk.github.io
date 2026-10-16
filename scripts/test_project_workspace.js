@@ -11,6 +11,9 @@ project.budget.expenses[0] = {category:'Материалы',item:'Краска',
 project.budget.own = '100';
 project.budget.partners = '50';
 project.budget.contributions[0] = {who:'Жители',resource:'Добровольная работа',value:'1200'};
+const same = {...project,revision:'new-revision',updated_at:'later'};
+assert.equal(core.signature(project),core.signature(same),'a timestamp-only autosave is not a competing edit');
+assert.notEqual(core.signature(project),core.signature({...same,common:{...project.common,project:'Другой проект'}}),'changed content is a competing edit');
 const imported = core.normalize(JSON.parse(JSON.stringify(project)));
 assert.deepEqual(imported,project,'whole project survives a portable-file roundtrip');
 assert.deepEqual(core.budgetValues(imported),{cash:'700,50 ₽',total:'1 900,50 ₽',request:'550,50 ₽',inkind:'1 200,00 ₽',own:'100,00 ₽',partners:'50,00 ₽',funding:'150,00 ₽'});
