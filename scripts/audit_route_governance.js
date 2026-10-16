@@ -302,9 +302,11 @@ function validateProjectKitsCleanup(errors) {
   ]);
 
   assertPageMarkers(errors, 'project-kits cleanup', '/meeting-kit/', [
-    'Онлайн-инструкция для собрания',
-    'Роль страницы:',
-    'пошаговая онлайн-инструкция для подготовки и фиксации собрания',
+    'Набор для собрания ТОС',
+    'id="discussion"',
+    'id="decisions"',
+    'href="/documents/templates/meeting-protocol/"',
+    'href="/legal/"',
     'href="/project-passport/"',
     'href="/documents/templates/project-kit/"',
     'id="meeting-guide"'
