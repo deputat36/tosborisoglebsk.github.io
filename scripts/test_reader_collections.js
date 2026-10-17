@@ -1,6 +1,6 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('fs');
 const expectedNews=JSON.parse(fs.readFileSync('data/news.json')).filter(x=>x.status!=='draft'&&x.content_origin!=='request'&&!String(x.id).startsWith('send-news-')).length;
-const expectedMaterials=JSON.parse(fs.readFileSync('data/materials.json')).filter(x=>x.status!=='draft').length;
+const expectedMaterials=require('../assets/js/materials-core').buildCatalog(JSON.parse(fs.readFileSync('data/materials.json')),JSON.parse(fs.readFileSync('data/articles.json'))).length;
 (async()=>{const b=await chromium.launch();for(const width of [390,1440])for(const mode of ['normal','no-js','failed-data']){
  const c=await b.newContext({viewport:{width,height:900},javaScriptEnabled:mode!=='no-js'});
  if(mode==='failed-data')await c.route('**/data/*.json',r=>r.fulfill({status:503,body:'unavailable'}));

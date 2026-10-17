@@ -6,6 +6,7 @@ const root = process.cwd();
 const htmlPath = path.join(root, 'materials', 'index.html');
 const scriptPath = path.join(root, 'assets', 'js', 'materials.js');
 const dataPath = path.join(root, 'data', 'materials.json');
+const catalog = require('../assets/js/materials-core');
 const idPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const requiredIds = new Set([
   'tos-bgo-in-numbers',
@@ -119,7 +120,6 @@ function validateData(errors, materials) {
 
 function main() {
   const html = read(htmlPath);
-  const script = read(scriptPath) + read(path.join(root, 'assets', 'js', 'materials-core.js'));
   const materials = JSON.parse(read(dataPath));
   const errors = [];
 
@@ -134,13 +134,17 @@ function main() {
   checkContains(errors, html, 'materials/index.html', '<!-- collection:articles-list:start -->');
   checkContains(errors, html, 'materials/index.html', '/assets/js/materials.js');
 
-  checkContains(errors, script, 'assets/js/materials.js', "fetch('/data/materials.json')");
-  checkContains(errors, script, 'assets/js/materials.js', 'const esc=');
-  checkContains(errors, script, 'assets/js/materials.js', "item.status !== 'draft'");
-  checkContains(errors, script, 'assets/js/materials.js', 'item.tags');
-  checkContains(errors, script, 'assets/js/materials.js', 'item.audience');
-  checkContains(errors, script, 'assets/js/materials.js', 'target="_blank" rel="noopener"');
-  checkContains(errors, script, 'assets/js/materials.js', 'Материалы временно недоступны.');
+  for (const marker of ['id="materials-filters"', 'id="materials-search"', 'id="materials-topic"', 'id="materials-filter-status"', 'id="materials-empty"', 'data-materials-reset']) {
+    checkContains(errors, html, 'materials/index.html', marker);
+  }
+  if (/fetch\s*\(/.test(read(scriptPath))) errors.push('Materials filtering must work from the complete static catalog without a data request');
+  const items = catalog.buildCatalog(materials, JSON.parse(read(path.join(root, 'data', 'articles.json'))));
+  if (new Set(items.map(item => item.url)).size !== items.length) errors.push('Duplicate catalog destinations');
+  if ((html.match(/data-material-id=/g) || []).length !== items.length) errors.push('Static catalog is incomplete');
+  for (const item of items) {
+    if (!html.includes(catalog.render(item))) errors.push(`Missing or stale catalog item: ${item.id}`);
+  }
+  if ((html.match(/href="\/materials\/tos-bgo-in-numbers\/"/g) || []).length !== 1) errors.push('Reference card must appear only once in the complete catalog');
 
   validateData(errors, materials);
 
@@ -148,7 +152,7 @@ function main() {
     throw new Error(`Materials page content audit failed:\n${errors.join('\n')}`);
   }
 
-  console.log(`Materials page content OK: ${materials.length} materials`);
+  console.log(`Materials page content OK: ${items.length} unique destinations from ${materials.length} curated entries and the articles`);
 }
 
 main();

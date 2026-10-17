@@ -10,9 +10,15 @@ function replaceMount(file,id,content){
  fs.writeFileSync(file,html);
 }
 function main(){
- const materialItems=JSON.parse(fs.readFileSync('data/materials.json')).filter(x=>x.status!=='draft');
+ const materialItems=materials.buildCatalog(JSON.parse(fs.readFileSync('data/materials.json')),JSON.parse(fs.readFileSync('data/articles.json')));
  replaceMount('materials/index.html','articles-list',materialItems.map(materials.render).join(''));
- let html=fs.readFileSync('materials/index.html','utf8').replace('class="container list" id="articles-list"','class="container grid" id="articles-list"');fs.writeFileSync('materials/index.html',html);
+ let html=fs.readFileSync('materials/index.html','utf8').replace('class="container list" id="articles-list"','class="container grid" id="articles-list"');
+ const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const available=new Set(materialItems.map(item=>item.topic));
+ const options='<option value="">Все темы</option>'+Object.entries(materials.TOPICS).filter(([id])=>available.has(id)).map(([id,label])=>`<option value="${esc(id)}">${esc(label)}</option>`).join('');
+ html=html.replace(/<!-- materials:topics:start -->[\s\S]*?<!-- materials:topics:end -->/,'<!-- materials:topics:start -->'+options+'<!-- materials:topics:end -->');
+ html=html.replace(/<!-- materials:count:start -->[\s\S]*?<!-- materials:count:end -->/,'<!-- materials:count:start -->Показано: '+materialItems.length+' из '+materialItems.length+'.<!-- materials:count:end -->');
+ fs.writeFileSync('materials/index.html',html);
  const summary={innerHTML:''};
  const context=vm.createContext({window:{CollectionBrowserCore:core,TosNewsMedia:newsMedia},document:{querySelector:selector=>selector==='#news-summary'?summary:null},URLSearchParams});
  vm.runInContext(fs.readFileSync('assets/js/news.js','utf8'),context);
