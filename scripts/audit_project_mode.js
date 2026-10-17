@@ -1,6 +1,7 @@
 const { runChecks } = require('./lib/run_checks');
 
 const checks = [
+  ['Discoverable materials and search', 'scripts/test_materials_catalog.js'],
   ['CSV parser', 'scripts/test_csv_parser.js'],
   ['CSV schema', 'scripts/test_csv_schema.js'],
   ['Date checks', 'scripts/test_date_checks.js'],

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T10:00:17.611Z",
+  "generated_at": "2026-10-17T09:28:55.900Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 372,
   "pages_checked": 372,
-  "links_discovered": 8925,
-  "internal_links_checked": 6355,
-  "unique_internal_targets": 898,
+  "links_discovered": 8949,
+  "internal_links_checked": 6381,
+  "unique_internal_targets": 921,
   "external_links_ignored": 451,
   "protocol_links_ignored": 34,
   "failed": 0,
@@ -16,98 +16,68 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1032,
+      "duration_ms": 1002,
       "bytes": 7931
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 51,
+      "duration_ms": 47,
       "bytes": 8695
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 42,
       "bytes": 9430
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 26,
-      "bytes": 15978
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 25,
-      "bytes": 8158
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 23,
+      "duration_ms": 41,
       "bytes": 15879
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 23,
-      "bytes": 23099
+      "duration_ms": 41,
+      "bytes": 8158
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 37,
+      "bytes": 15978
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 23,
+      "duration_ms": 37,
       "bytes": 11768
     },
     {
-      "route": "/documents/templates/project-support/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 13611
+      "duration_ms": 35,
+      "bytes": 23099
     },
     {
-      "route": "/communication-kit/index.html",
+      "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 24905
+      "duration_ms": 13,
+      "bytes": 23597
     },
     {
-      "route": "/done/chkalovec-cvetik-semicvetik-2022/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 7798
-    },
-    {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/chairperson/project/index.html",
       "status": 200,
       "duration_ms": 12,
-      "bytes": 10450
+      "bytes": 15409
     },
     {
-      "route": "/documents/templates/project-kit/index.html",
+      "route": "/needs/update-data-mechta-2026/index.html",
       "status": 200,
       "duration_ms": 12,
-      "bytes": 11032
-    },
-    {
-      "route": "/documents/templates/tos-founding-decisions/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 3490
-    },
-    {
-      "route": "/done/chkalovec-parkovka-2021/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 8068
-    },
-    {
-      "route": "/materials/photo-report/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 6298
+      "bytes": 7969
     },
     {
       "route": "/chairperson/meeting/index.html",
@@ -122,16 +92,46 @@
       "bytes": 5404
     },
     {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 15409
-    },
-    {
       "route": "/check-tos/index.html",
       "status": 200,
       "duration_ms": 11,
       "bytes": 5818
+    },
+    {
+      "route": "/communication-kit/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 24905
+    },
+    {
+      "route": "/needs/update-data-petrovskoe-2026/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 8090
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 10450
+    },
+    {
+      "route": "/needs/update-data-kalinka-2026/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 8136
+    },
+    {
+      "route": "/needs/update-data-pervomayskiy-2026/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 8096
+    },
+    {
+      "route": "/needs/update-tos-cards-contacts-2026/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 7848
     }
   ]
 }
