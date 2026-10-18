@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-16T10:00:13.991Z",
+  "generated_at": "2026-10-17T09:33:09.730Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-10-16T10:00:30.879Z",
+    "generated_at": "2026-10-17T09:33:24.983Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -200,7 +200,7 @@
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 372 страниц, 6355 внутренних переходов, 898 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 372 страниц, 6381 внутренних переходов, 921 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -344,16 +344,16 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-10-16T10:00:17.611Z",
+    "generated_at": "2026-10-17T09:28:55.900Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
     "pages_indexed": 372,
     "pages_checked": 372,
-    "links_discovered": 8925,
-    "internal_links_checked": 6355,
-    "unique_internal_targets": 898,
+    "links_discovered": 8949,
+    "internal_links_checked": 6381,
+    "unique_internal_targets": 921,
     "external_links_ignored": 451,
     "protocol_links_ignored": 34,
     "failed": 0,
@@ -402,11 +402,11 @@
       "visual_baseline_scope": "Проверяется в pull request; результат конкретного запуска хранится в GitHub Actions artifact."
     },
     "validation_context": {
-      "source": "github_actions",
-      "workflow": "Generate TOS pages",
-      "run_id": "38884247632",
-      "run_number": "1903",
-      "commit_sha": "67930c008cb821ec5b2c63c0d4089798fc65aced"
+      "source": "local",
+      "workflow": "",
+      "run_id": "",
+      "run_number": "",
+      "commit_sha": ""
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-10-16T10:00:30.879Z",
+    "generated_at": "2026-10-17T09:33:24.983Z",
     "total_tos": 24,
     "with_substantive_content": 22,
     "with_verified_content": 22,
