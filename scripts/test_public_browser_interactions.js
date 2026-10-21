@@ -258,6 +258,7 @@ async function testGrants(page) {
   const now = Date.now();
   const expected = require('../assets/js/grants-core').current(items, now);
   assert(await page.locator('#current-grants [data-call-state="announced"]').count() === expected.length, 'grants: nearest deadlines must match the current clock');
+  if (!expected.length) assert((await page.locator('#current-grants').innerText()).includes('Ближайших сроков с недавно проверенными объявлениями нет'), 'grants: show the empty state after all deadlines have expired');
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
   assert(!overflow, 'grants: horizontal overflow');
 }
@@ -340,7 +341,7 @@ async function main() {
         await run(page);
         assert(technicalErrors.length === 0, `${name}: technical errors: ${technicalErrors.join(' | ')}`);
         if (name.startsWith('announcement') || name.startsWith('grants') || name.startsWith('project-budget')) {
-          const target = name.startsWith('announcement') ? '[name="result"]' : name.startsWith('project-budget') ? '.budget-expenses' : '#current-grants [data-grant-id]';
+          const target = name.startsWith('announcement') ? '[name="result"]' : name.startsWith('project-budget') ? '.budget-expenses' : '#current-grants';
           await page.locator(target).first().scrollIntoViewIfNeeded();
           await page.screenshot({ path: path.join(path.dirname(REPORT_PATH), `${name}.png`) });
         }

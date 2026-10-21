@@ -107,8 +107,12 @@ function main() {
     errors.push('quality check limitations must be explicit');
   }
 
-  if (!html.includes('оба CSV создаются локально') || !html.includes('не добавляются в очередь автоматически')) {
+  if (!html.includes('Оба файла создаются на этом устройстве как черновики') || !html.includes('не добавляются в очередь автоматически')) {
     errors.push('editorial export boundary must be explicit');
+  }
+  const editorialTools = html.match(/<details\b[^>]*id="editorial-tools"[^>]*>[\s\S]*?<\/details>/)?.[0] || '';
+  if (!editorialTools.includes('download-intake-csv') || !editorialTools.includes('download-queue-csv') || /<details[^>]*\bopen\b/.test(editorialTools)) {
+    errors.push('editorial CSV controls must stay in a closed editor-only disclosure');
   }
 
   requiredControls.forEach((id) => {

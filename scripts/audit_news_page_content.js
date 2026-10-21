@@ -23,7 +23,7 @@ const requiredCopy = [
   'Прислать новость ТОС',
   'Можно ли публиковать имена и контакты'
 ];
-const requiredRoutes = ['/news/', '/project-check-2026/', '/tos/mirolyubie/', '/content-intake/', '/contacts/', '/done/', '/content-standards/', '/publication-templates/', '/update-tos/'];
+const requiredRoutes = ['/news/', '/tos/mirolyubie/', '/content-intake/', '/contacts/', '/done/', '/content-standards/', '/publication-templates/', '/update-tos/'];
 const requiredDataFetches = ['/data/news.json', '/data/toses.json'];
 const requiredCategories = ['Портал', 'Инструкция', 'Конкурсы', 'Гранты', 'Правовая база'];
 
@@ -95,12 +95,15 @@ function main() {
     errors.push('news page must link to VK community');
   }
 
-  if (!html.includes('1 489 360') || !html.includes('ТОС «Миролюбие»')) {
-    errors.push('verified featured news block must preserve the confirmed Mirlyubie grant result');
+  const featuredId = html.match(/data-news-featured="([^"]+)"/)?.[1];
+  const featuredItem = publishedNews.find((item) => item.id === featuredId);
+  const featuredHtml = html.match(/<!-- collection:news-featured:start -->([\s\S]*?)<!-- collection:news-featured:end -->/)?.[1] || '';
+  const escape = (value) => String(value || '').replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+  if (!featuredItem || featuredItem.content_origin !== 'verified' || !featuredHtml.includes(escape(featuredItem.title)) || !featuredHtml.includes(escape(featuredItem.lead))) {
+    errors.push('highlighted news must match the current published verified article, including its implementation status');
   }
-
-  if (!html.includes('Начало, ход и завершение работ будут указаны только после отдельного подтверждения ТОС')) {
-    errors.push('verified news block must not imply project implementation without confirmation');
+  if (!html.includes('конкурсная победа сама по себе его не подтверждает')) {
+    errors.push('news guidance must distinguish a competition result from evidence of implementation');
   }
 
   if (!html.includes('Не каждая запись в ленте является подтверждённой новостью')) {

@@ -86,6 +86,18 @@ function newsCard(item, toses) {
   </article>`;
 }
 
+// The highlighted story uses the same record as its article and feed card.
+function newsFeatured(item, toses) {
+  if (!item || !newsPublished(item) || newsOrigin(item) !== 'verified') return '';
+  const tosName = newsTosName(item.tos_slug, toses);
+  return `<article class="card full" data-news-id="${newsEsc(item.id)}"><div class="card-inner">
+    ${window.TosNewsMedia ? window.TosNewsMedia.render(item, true) : ''}
+    <div class="meta">${newsOriginTag(item)}${tosName ? `<span class="tag">${newsEsc(tosName)}</span>` : ''}${item.updated_at ? `<span class="tag">Обновлено ${newsEsc(newsDate(item.updated_at))}</span>` : ''}</div>
+    <h2>${newsEsc(item.title)}</h2><p>${newsEsc(item.lead || '')}</p>
+    <div class="card-actions"><a class="btn primary" href="/news/${newsEsc(item.id)}/">Читать новость</a>${item.tos_slug ? `<a class="btn" href="/tos/${newsEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}</div>
+  </div></article>`;
+}
+
 function renderNewsSummary(items, total) {
   const root = document.querySelector('#news-summary');
   if (!root) return;
@@ -109,6 +121,11 @@ async function renderNewsPage() {
 
   try {
     const { news, toses } = await loadNewsPageData();
+    const featured = document.querySelector('[data-news-featured]');
+    if (featured) {
+      const item = news.find((entry) => entry.id === featured.dataset.newsFeatured);
+      featured.innerHTML = newsFeatured(item, toses);
+    }
     Object.values(controls).forEach(control => { if (control) control.disabled = false; });
     if (reset) reset.disabled = false;
     const categories = [...new Set(news.map((item) => item.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));

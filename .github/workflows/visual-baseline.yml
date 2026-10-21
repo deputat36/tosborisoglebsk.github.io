@@ -17,6 +17,11 @@ on:
       - 'docs/templates/podgotovka-sobraniya-tos.txt'
       - 'scripts/test_public_learning_materials.js'
       - 'scripts/test_public_materials_catalog.js'
+      - 'map/index.html'
+      - 'update-tos/index.html'
+      - 'scripts/test_public_visitor_cleanup.js'
+      - 'scripts/test_visitor_collections.js'
+      - 'scripts/generate_collection_fallbacks.js'
       - 'documents/templates/**'
       - 'scripts/test_public_project_workspace.js'
       - 'scripts/test_project_workspace.js'
@@ -218,6 +223,9 @@ jobs:
 
       - name: Test readable collections with and without JavaScript
         run: node scripts/test_reader_collections.js
+
+      - name: Check reader-first results, current highlights and visitor actions
+        run: node scripts/test_public_visitor_cleanup.js
 
       - name: Test complete materials library, search, saved selection and resilient reading
         run: node scripts/test_public_materials_catalog.js

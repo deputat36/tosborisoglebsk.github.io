@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "approved_at": "2026-10-04",
-  "reviewed_run_id": "37207304069",
-  "reviewed_artifact": "visual-baseline-328-1",
+  "approved_at": "2026-10-21",
+  "reviewed_run_id": "39545749577",
+  "reviewed_artifact": "visual-baseline-369-1",
   "cases": {
     "css-reg-008": {
-      "baseline_sha256": "168c0a712357214aa6d00c891db23a6b333a51fb2e4b2af30c73201f4b890aba",
+      "baseline_sha256": "69432ad3b2ee1096d135a27a1886482fbece27768b7d20f366c853035f89b81c",
       "route": "/news/",
       "theme": "light",
       "interaction": "none",
@@ -16,7 +16,7 @@
       "observed_significant_changed_pixels": 0,
       "observed_changed_pixel_ratio": 0,
       "observed_max_channel_delta": 0,
-      "reason": "Обновлён контрольный снимок после запрошенного редизайна 2.0; дополнительные отклонения не разрешены."
+      "reason": "Просмотрено изменение ленты в PR #398: актуальная выделенная новость и сокращённый вводный блок. Дополнительные отклонения не разрешены."
     },
     "css-reg-012": {
       "baseline_sha256": "306a56164da2e4315db1a5375eb3f8c9a5a47b7ff5222988315119825225d2b3",

@@ -50,7 +50,8 @@ const labelsBlock = `const SECTION_LABELS = {
   faq: 'Вопросы и ответы',
   'editorial-policy': 'О портале',
   'create-tos': 'Как создать ТОС',
-  map: 'Состояние геоданных'
+  map: 'Карта ТОС',
+  'update-tos': 'Передать материал'
 };`;
 
 const compactNavBlock = `function compactNav() {

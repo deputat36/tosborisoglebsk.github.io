@@ -21,25 +21,14 @@ const forbiddenPropertyKeys = new Set([
 
 const requiredPagePhrases = [
   'Карта территорий и ориентиров ТОС',
-  'подтверждённые геометрии не опубликованы',
-  'пустая карта честнее предположительных координат',
-  'Как читать будущую карту',
+  'проверенные точки и границы пока не опубликованы',
+  'Найти свой ТОС',
+  'Найти по адресу',
+  'Уточнить границы',
+  'Передать схему территории',
   'Точка-ориентир',
   'Не является границей',
-  'Полигон границы',
-  'Нужен подтверждённый источник',
-  'Черновик',
-  'Не публикуется в GeoJSON',
-  'Что можно и нельзя публиковать',
-  'Карта показывает территорию, а не персональные данные жителей',
-  'Порядок добавления геоданных',
-  'Сначала источник и проверка, затем публичный GeoJSON',
-  'verification_status: verified',
-  'geometry_role',
-  'reference_point',
-  'boundary',
-  'checked_at',
-  'public_note',
+  'совпадение',
   'только проверенные геоданные без персональных сведений'
 ];
 
@@ -146,11 +135,12 @@ function main() {
   check(errors, html, 'https://tosborisoglebsk.ru/map/', 'canonical or Open Graph URL');
   check(errors, html, '<main id="main">', 'main landmark');
   check(errors, html, '/assets/js/site.js', 'site script');
-  check(errors, html, 'data/toses.geojson', 'GeoJSON reference');
-  check(errors, html, '<code>slug</code>', 'slug reference');
-  check(errors, html, 'координаты полигона или точки', 'geometry note');
-
-  requiredPagePhrases.forEach((phrase) => check(errors, html, phrase, 'map guidance'));
+  requiredPagePhrases.forEach((phrase) => check(errors, html.toLowerCase(), phrase.toLowerCase(), 'map guidance'));
+  const technicalGuide = fs.readFileSync(path.join(process.cwd(), 'docs', 'MAP-GEODATA.md'), 'utf8');
+  ['data/toses.geojson', 'slug', 'verification_status: verified', 'geometry_role', 'reference_point', 'boundary', 'checked_at', 'public_note', 'Polygon', 'MultiPolygon'].forEach((field) => check(errors, technicalGuide, field, 'editor geodata contract'));
+  ['data/toses.geojson', '<code>slug</code>', 'GeoJSON', 'Leaflet', 'verification_status', 'geometry_role'].forEach((field) => {
+    if (html.includes(field)) errors.push(`technical implementation detail must stay in the editor guide: ${field}`);
+  });
 
   requiredLinks.forEach((link) => {
     check(errors, html, `href="${link}`, 'required link');
