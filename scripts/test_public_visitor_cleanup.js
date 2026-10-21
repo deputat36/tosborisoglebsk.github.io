@@ -17,8 +17,17 @@ const report = [];
           const page = await context.newPage();
           await page.goto(`http://127.0.0.1:4173/${route}/`);
           if (mode === 'normal' && ['news', 'done'].includes(route)) await page.locator(`#${route}-search:enabled`).waitFor();
-          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${route}: page fits screen`);
-          if (mode === 'normal') await page.screenshot({ path: path.join(output, `${route}-${width}.png`) });
+          await page.screenshot({ path: path.join(output, `${route}-${width}-${mode}.png`) });
+          const layout = await page.evaluate(() => ({
+            width: innerWidth,
+            scrollWidth: document.documentElement.scrollWidth,
+            overflow: [...document.querySelectorAll('body *')].filter((element) => {
+              const box = element.getBoundingClientRect();
+              return box.width > 0 && box.right > innerWidth + 1 && getComputedStyle(element).position !== 'absolute';
+            }).slice(0, 12).map((element) => ({ tag: element.tagName, id: element.id, class: element.className, width: element.getBoundingClientRect().width, right: element.getBoundingClientRect().right }))
+          }));
+          fs.writeFileSync(path.join(output, `${route}-${width}-${mode}-layout.json`), JSON.stringify(layout, null, 2));
+          assert.equal(layout.scrollWidth > width + 1, false, `${route} ${width} ${mode}: ${JSON.stringify(layout)}`);
           if (route === 'map') {
             const body = await page.locator('main').innerText();
             assert.ok(!/GeoJSON|Leaflet|data\/toses|geometry_role|\bslug\b/.test(body));
