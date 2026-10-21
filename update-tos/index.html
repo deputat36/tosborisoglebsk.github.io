@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Обновить данные ТОС или прислать материал — ТОС БГО</title>
   <meta name="description" content="Удобный конструктор сообщения с проверкой готовности и локальным экспортом в редакционную очередь для обновления карточки ТОС, новости, фотоотчёта, события, проекта или потребности."/>
-  <meta name="theme-color" content="#2f7d5a"/>
+  <meta name="theme-color" content="#B62D36"/>
   <link rel="canonical" href="https://tosborisoglebsk.ru/update-tos/"/>
   <meta property="og:title" content="Обновить данные ТОС или прислать материал"/>
   <meta property="og:description" content="Заполните короткую форму, проверьте статус и источник и получите сообщение и черновой редакционный пакет для портала ТОС БГО."/>
@@ -38,11 +38,11 @@
     <div class="container hero-card home-hero">
       <div class="eyebrow">Передача материалов</div>
       <h1>Обновить данные ТОС или прислать материал</h1>
-      <p class="lead">Выберите задачу, укажите фактический статус и источник, пройдите короткую проверку и получите готовое сообщение и черновой пакет для редакционной очереди.</p>
+      <p class="lead">Выберите, что хотите передать, и заполните короткую форму. Скопируйте подготовленный текст и отправьте его редакции через ВКонтакте вместе с фотографиями.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#message-builder">Составить сообщение</a>
-        <a class="btn" href="/content-intake/">Правила приёма</a>
-        <a class="btn" href="/publication-queue/">Очередь публикаций</a>
+
+
         <a class="btn" href="/tos/">Каталог ТОС</a>
         <a class="btn" href="/contacts/">Контакты</a>
       </div>
@@ -120,19 +120,20 @@
 
       <section class="update-panel update-preview" aria-labelledby="preview-title">
         <div class="update-panel-head">
-          <div><h3 id="preview-title">4. Готовое сообщение и редакционный пакет</h3><p class="tiny">Пустые необязательные поля в сообщение и CSV не попадут</p></div>
+          <div><h3 id="preview-title">4. Скопируйте и передайте сообщение</h3><p class="tiny">Пустые необязательные поля в сообщение не попадут</p></div>
           <span class="tag" id="required-status">Заполните обязательные поля</span>
         </div>
         <textarea class="input preview-text" id="message-preview" rows="16" readonly aria-label="Готовое сообщение"></textarea>
         <div class="preview-actions">
           <button class="btn primary" id="copy-message" type="button">Скопировать сообщение</button>
-          <button class="btn" id="download-message" type="button">Скачать TXT</button>
-          <button class="btn" id="download-intake-csv" type="button">Карточка приёма CSV</button>
-          <button class="btn" id="download-queue-csv" type="button">Строка очереди CSV</button>
+          <button class="btn" id="download-message" type="button">Скачать текст</button>
+
+
           <a class="btn" id="open-vk" href="https://vk.ru/tosbgo" target="_blank" rel="noopener">Открыть ВК</a>
           <button class="btn" id="reset-form" type="button">Очистить</button>
         </div>
-        <div class="notice compact editorial-export-note"><b>Важно:</b> оба CSV создаются локально со статусом <code>draft</code>. Они не добавляются в очередь автоматически, не подтверждают источник или разрешения и могут содержать контакт для редакции. Перед добавлением в публичный репозиторий контактные и закрытые сведения нужно удалить или перенести в закрытое хранилище.</div>
+        <p class="tiny">Скопируйте текст, откройте ВКонтакте и вставьте его в сообщение редакции. Фотографии приложите там же. Копирование и скачивание не отправляют материал.</p>
+        <details id="editorial-tools"><summary>Инструменты редакции</summary><div class="preview-actions"><button class="btn" id="download-intake-csv" type="button">Карточка приёма CSV</button><button class="btn" id="download-queue-csv" type="button">Строка очереди CSV</button></div><p class="tiny editorial-export-note">Оба файла создаются на этом устройстве как черновики и не добавляются в очередь автоматически. Они могут содержать контакт для уточнения. Перед публикацией редактор должен проверить сведения и убрать закрытые данные.</p><div class="card-actions"><a class="btn" href="/content-intake/">Приём материалов</a><a class="btn" href="/publication-queue/">Очередь публикаций</a><a class="btn" href="/audit/">Рабочий аудит</a></div></details>
         <div class="copy-status" id="copy-status" aria-live="polite"></div>
       </section>
     </div>
@@ -149,7 +150,7 @@
 
   <section class="section">
     <div class="container grid">
-      <article class="card full highlight-card"><div class="card-inner"><h2>Нужна помощь с заполнением?</h2><p>Откройте карточку своего ТОС, посмотрите, какие сведения уже размещены, и передайте только изменения или дополнения.</p><div class="card-actions"><a class="btn primary" href="/tos/">Найти свой ТОС</a><a class="btn" href="/audit/">Рабочий аудит</a><a class="btn" href="/contacts/">Связаться с редакцией</a></div></div></article>
+      <article class="card full highlight-card"><div class="card-inner"><h2>Нужна помощь с заполнением?</h2><p>Откройте карточку своего ТОС, посмотрите, какие сведения уже размещены, и передайте только изменения или дополнения.</p><div class="card-actions"><a class="btn primary" href="/tos/">Найти свой ТОС</a><a class="btn" href="/chairperson/">Помощь председателю</a><a class="btn" href="/contacts/">Связаться с редакцией</a></div></div></article>
     </div>
   </section>
 </main>

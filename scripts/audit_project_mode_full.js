@@ -21,6 +21,7 @@ require('./generate_sitemap');
 
 const checks = [
   ['Discoverable materials and search', 'scripts/test_materials_catalog.js'],
+  ['Readable results and synchronized highlighted news', 'scripts/test_visitor_collections.js'],
   ['Dated TOS profiles and sources', 'scripts/test_tos_profiles.js'],
   ['Public route roles and document boundaries', 'scripts/audit_route_governance.js'],
   ['Project budget calculations and file safety', 'scripts/test_project_budget.js'],

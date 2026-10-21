@@ -22,12 +22,23 @@ function main(){
  const summary={innerHTML:''};
  const context=vm.createContext({window:{CollectionBrowserCore:core,TosNewsMedia:newsMedia},document:{querySelector:selector=>selector==='#news-summary'?summary:null},URLSearchParams});
  vm.runInContext(fs.readFileSync('assets/js/news.js','utf8'),context);
- const api=vm.runInContext('({newsCard,newsDefaultVisible,renderNewsSummary})',context);
+ const api=vm.runInContext('({newsCard,newsFeatured,newsDefaultVisible,renderNewsSummary})',context);
  const news=JSON.parse(fs.readFileSync('data/news.json')).filter(x=>x.status!=='draft').filter(api.newsDefaultVisible).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
  const toses=JSON.parse(fs.readFileSync('data/toses.json'));
  replaceMount('news/index.html','news-feed',news.map(x=>api.newsCard(x,toses)).join(''));
  api.renderNewsSummary(news,news.length);replaceMount('news/index.html','news-summary',summary.innerHTML);
- console.log(`Readable fallback: ${news.length} news, ${materialItems.length} materials`);
+ const featuredId=fs.readFileSync('news/index.html','utf8').match(/data-news-featured="([^"]+)"/)?.[1];
+ const featured=news.find(item=>item.id===featuredId);
+ if(!featured||!api.newsFeatured(featured,toses))throw new Error('Highlighted news must refer to a published, verified record');
+ replaceMount('news/index.html','news-featured',api.newsFeatured(featured,toses));
+ const doneSummary={innerHTML:''};
+ const doneContext=vm.createContext({window:{CollectionBrowserCore:core},document:{querySelector:selector=>selector==='#done-summary'?doneSummary:null},URLSearchParams});
+ vm.runInContext(fs.readFileSync('assets/js/done.js','utf8'),doneContext);
+ const doneApi=vm.runInContext('({doneCard,donePublished,doneDefaultVisible,renderDoneSummary})',doneContext);
+ const done=JSON.parse(fs.readFileSync('data/done.json')).filter(doneApi.donePublished).filter(doneApi.doneDefaultVisible).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+ replaceMount('done/index.html','done-list',done.map(item=>doneApi.doneCard(item,toses)).join(''));
+ doneApi.renderDoneSummary(done,done.length);replaceMount('done/index.html','done-summary',doneSummary.innerHTML);
+ console.log(`Readable fallback: ${news.length} news, ${done.length} results, ${materialItems.length} materials; highlighted news synchronized`);
 }
 if(require.main===module)main();
 module.exports={main};

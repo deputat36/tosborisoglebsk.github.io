@@ -46,7 +46,7 @@ function doneReviewTag(item) {
 
 async function loadDoneData() {
   const [done, toses] = await Promise.all([
-    fetch('/data/done.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
+    fetch('/data/done.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : Promise.reject(new Error('Stories unavailable'))),
     fetch('/data/toses.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []).catch(() => [])
   ]);
   return { done: done.filter(donePublished), toses };
@@ -62,8 +62,14 @@ function renderDoneSummary(items, total) {
   const root = document.querySelector('#done-summary');
   if (!root) return;
   const counts = doneCore.countOrigins(items, doneOrigin);
-  const withSource = items.filter((item) => item.source_url).length;
-  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>показано из ${total}</span></div><div class="summary-tile"><b>${counts.verified}</b><span>подтверждённые результаты</span></div><div class="summary-tile"><b>${counts.editorial}</b><span>редакционные истории</span></div><div class="summary-tile"><b>${counts.starter}</b><span>стартовые материалы</span></div><div class="summary-tile"><b>${counts.request}</b><span>запросы историй</span></div><div class="summary-tile"><b>${withSource}</b><span>имеют источник</span></div></div>`;
+  const metrics = [
+    [items.length, `показано из ${total}`],
+    [counts.verified, 'подтверждённые результаты'],
+    [counts.editorial, 'редакционные истории'],
+    [counts.starter, 'стартовые материалы'],
+    [counts.request, 'запросы историй']
+  ];
+  root.innerHTML = `<div class="summary-grid">${metrics.filter(([count], index) => index === 0 || count > 0).map(([count, label]) => `<div class="summary-tile"><b>${count}</b><span>${doneEsc(label)}</span></div>`).join('')}</div>`;
 }
 
 function doneCard(item, toses) {
@@ -72,7 +78,17 @@ function doneCard(item, toses) {
   const sourceLink = item.source_url
     ? `<a class="btn"${/^https?:\/\//i.test(item.source_url) ? ' target="_blank" rel="noopener"' : ''} href="${doneEsc(item.source_url)}">${doneEsc(item.source_label || 'Источник')}</a>`
     : '';
-  return `<article class="list-item done-story" data-content-origin="${doneEsc(doneOrigin(item))}"><div class="meta">${doneOriginTag(item)}<span class="tag">${doneEsc(item.type || 'История')}</span>${tosName ? `<span class="tag">${doneEsc(tosName)}</span>` : ''}<span class="tag">${doneEsc(year)}</span>${doneReviewTag(item)}</div><h3>${doneEsc(item.title || 'История ТОС')}</h3><p>${doneEsc(item.summary || '')}</p><div class="done-steps"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${doneEsc(item.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${doneEsc(item.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Стало</span><p>${doneEsc(item.result || 'Информация уточняется.')}</p></div></article></div>${item.participants ? `<p class="tiny"><b>Кто участвовал:</b> ${doneEsc(item.participants)}</p>` : ''}${item.needs_details ? `<div class="notice"><b style="color:var(--text)">Что нужно уточнить для полной истории</b><br>${doneEsc(item.needs_details)}</div>` : ''}<div class="card-actions"><a class="btn primary" href="/done/${doneEsc(item.id)}/">Подробнее</a>${sourceLink}${item.tos_slug ? `<a class="btn" href="/tos/${doneEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}<a class="btn" href="/partners/">Партнёрам</a><a class="btn" href="/contacts/">Прислать фото или детали</a></div></article>`;
+  return `<article class="list-item done-story" data-content-origin="${doneEsc(doneOrigin(item))}">
+    <div class="meta">${doneOriginTag(item)}<span class="tag">${doneEsc(item.type || 'История')}</span>${tosName ? `<span class="tag">${doneEsc(tosName)}</span>` : ''}<span class="tag">${doneEsc(year)}</span>${doneReviewTag(item)}</div>
+    <h3>${doneEsc(item.title || 'История ТОС')}</h3><p>${doneEsc(item.summary || '')}</p>
+    <details><summary>Что сделали и что изменилось</summary>
+      <div class="done-steps"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${doneEsc(item.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${doneEsc(item.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Стало</span><p>${doneEsc(item.result || 'Информация уточняется.')}</p></div></article></div>
+      ${item.participants ? `<p class="tiny"><b>Кто участвовал:</b> ${doneEsc(item.participants)}</p>` : ''}
+      ${item.needs_details ? `<div class="notice"><b>Что нужно уточнить для полной истории</b><br>${doneEsc(item.needs_details)}</div>` : ''}
+      <div class="card-actions"><a class="btn" href="/partners/">Партнёрам</a><a class="btn" href="/contacts/">Прислать фото или детали</a></div>
+    </details>
+    <div class="card-actions"><a class="btn primary" href="/done/${doneEsc(item.id)}/">Подробнее</a>${sourceLink}${item.tos_slug ? `<a class="btn" href="/tos/${doneEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}</div>
+  </article>`;
 }
 
 async function renderDone() {
@@ -102,6 +118,8 @@ async function renderDone() {
     if (controls.year) controls.year.innerHTML = '<option value="">Все годы</option>' + years.map((value) => `<option>${doneEsc(value)}</option>`).join('');
 
     doneCore.applyControls(doneCore.parseState(window.location.search, doneFields), controls);
+    Object.values(controls).forEach((control) => { if (control) control.disabled = false; });
+    if (reset) reset.disabled = false;
 
     function apply(sync = true) {
       const state = doneCore.readControls(controls);
@@ -143,8 +161,10 @@ async function renderDone() {
     });
     apply(true);
   } catch (error) {
-    root.innerHTML = '<div class="empty">Раздел не загрузился. Проверьте data/done.json</div>';
-    if (statusText) statusText.textContent = 'Ошибка загрузки историй результата.';
+    if (!root.querySelector('article')) root.innerHTML = '<div class="empty">Истории временно недоступны. Попробуйте позже или <a href="/tos/">откройте каталог ТОС</a>.</div>';
+    Object.values(controls).forEach((control) => { if (control) control.disabled = true; });
+    if (reset) reset.disabled = true;
+    if (statusText) statusText.textContent = 'Показаны сохранённые истории. Поиск и фильтры временно недоступны.';
   }
 }
 
