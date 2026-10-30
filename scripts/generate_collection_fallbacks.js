@@ -27,7 +27,26 @@ function main(){
  const toses=JSON.parse(fs.readFileSync('data/toses.json'));
  replaceMount('news/index.html','news-feed',news.map(x=>api.newsCard(x,toses)).join(''));
  api.renderNewsSummary(news,news.length);replaceMount('news/index.html','news-summary',summary.innerHTML);
- console.log(`Readable fallback: ${news.length} news, ${materialItems.length} materials`);
+ // Keep the needs page usable without JavaScript or a working JSON endpoint.
+ // Only substantive entries belong to the default needs list; editorial
+ // data-collection requests remain discoverable through ?origin=request.
+ const needsSummary={innerHTML:''};
+ const needsContext=vm.createContext({
+   window:{CollectionBrowserCore:core},
+   document:{querySelector:selector=>selector==='#needs-summary'?needsSummary:null},
+   URLSearchParams
+ });
+ vm.runInContext(fs.readFileSync('assets/js/needs.js','utf8'),needsContext);
+ const needsApi=vm.runInContext('({needsPublished,needsDefaultVisible,needCard,renderNeedsSummary})',needsContext);
+ const allNeeds=JSON.parse(fs.readFileSync('data/needs.json','utf8')).filter(needsApi.needsPublished);
+ const visibleNeeds=allNeeds.filter(needsApi.needsDefaultVisible).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+ const needsFallback=visibleNeeds.length
+   ?visibleNeeds.map(item=>needsApi.needCard(item,toses)).join('')
+   :'<div class="empty">Проверенных актуальных потребностей пока нет. Передайте подтверждённую просьбу через страницу контактов.</div>';
+ replaceMount('needs/index.html','needs-list',needsFallback);
+ needsApi.renderNeedsSummary(visibleNeeds,visibleNeeds.length);
+ replaceMount('needs/index.html','needs-summary',needsSummary.innerHTML);
+ console.log(`Readable fallback: ${news.length} news, ${materialItems.length} materials, ${visibleNeeds.length} substantive needs (${allNeeds.length-visibleNeeds.length} editorial requests excluded)`);
 }
 if(require.main===module)main();
 module.exports={main};
