@@ -225,7 +225,16 @@ async function testCollection(page, config) {
   await page.locator(config.reset).click();
   await page.waitForFunction(() => !new URLSearchParams(location.search).has('origin'));
   assert(await page.locator(config.originControl).inputValue() === '', `${config.name}: reset did not clear origin`);
-  assert(await page.locator(`${config.root} [data-content-origin]`).count() >= origins.length, `${config.name}: reset did not restore cards`);
+  const restored = await page.locator(`${config.root} [data-content-origin]`).evaluateAll(
+    (nodes) => nodes.map((node) => node.dataset.contentOrigin || '')
+  );
+  assert(restored.length > 0, `${config.name}: reset returned an empty default list`);
+  if (config.defaultExcludeOrigin) {
+    assert(restored.every((origin) => origin !== config.defaultExcludeOrigin),
+      `${config.name}: reset must exclude editorial request cards from the default list`);
+  } else {
+    assert(restored.length >= origins.length, `${config.name}: reset did not restore cards`);
+  }
 }
 
 async function testAnnouncement(page) {
@@ -322,7 +331,7 @@ async function main() {
     ['news-browser', (page) => testCollection(page, { name: 'news', route: '/news/', root: '#news-feed', status: '#news-filter-status', search: '#news-search', originControl: '#news-origin-filter', reset: '#news-reset-filters', origin: 'request' })],
     ['projects-browser', (page) => testCollection(page, { name: 'projects', route: '/projects/', root: '#projects-list', status: '#projects-filter-status', search: '#projects-search', originControl: '#projects-origin-filter', reset: '#projects-reset-filters', origin: 'starter' })],
     ['done-browser', (page) => testCollection(page, { name: 'done', route: '/done/', root: '#done-list', status: '#done-filter-status', search: '#done-search', originControl: '#done-origin-filter', reset: '#done-reset-filters', origin: 'request' })],
-    ['needs-browser', (page) => testCollection(page, { name: 'needs', route: '/needs/', root: '#needs-list', status: '#needs-filter-status', search: '#needs-search', originControl: '#needs-origin-filter', reset: '#needs-reset-filters', origin: 'request' })]
+    ['needs-browser', (page) => testCollection(page, { name: 'needs', route: '/needs/', root: '#needs-list', status: '#needs-filter-status', search: '#needs-search', originControl: '#needs-origin-filter', reset: '#needs-reset-filters', origin: 'request', defaultExcludeOrigin: 'request' })]
   ];
 
   try {
