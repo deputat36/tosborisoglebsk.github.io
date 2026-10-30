@@ -85,34 +85,41 @@ function loadTosHashtagMap() {
   return map;
 }
 
+// Match entire hashtags, not fragments: #богана must not match #боганасобытия.
+function extractHashtags(text) {
+  return new Set(
+    [...String(text || '').toLowerCase().matchAll(/#[\p{L}\p{N}_]+/gu)]
+      .map((match) => match[0])
+  );
+}
+
 function detectTosSlug(text, tagMap) {
-  const lower = String(text || '').toLowerCase();
+  const tags = extractHashtags(text);
   for (const [tag, slug] of tagMap.entries()) {
-    if (lower.includes(tag)) return slug;
+    if (tags.has(tag)) return slug;
   }
   return '';
 }
 
 function stripServiceHashtags(text, tagMap = new Map()) {
-  let result = String(text || '');
-  const allTags = [...HASHTAGS, ...tagMap.keys()];
-  for (const tag of allTags) {
-    const escaped = tag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    result = result.replace(new RegExp(escaped, 'ig'), '');
-  }
-  return result.replace(/\n{3,}/g, '\n\n').trim();
+  const serviceTags = new Set([...HASHTAGS, ...tagMap.keys()]);
+  return String(text || '')
+    .replace(/#[\p{L}\p{N}_]+/gu, (tag) => serviceTags.has(tag.toLowerCase()) ? '' : tag)
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
 }
 
 function hasAllowedHashtag(text) {
-  const lower = String(text || '').toLowerCase();
-  return HASHTAGS.some((tag) => lower.includes(tag));
+  const tags = extractHashtags(text);
+  return HASHTAGS.some((tag) => tags.has(tag));
 }
 
 function makeTitle(text, tagMap) {
   const clear = stripServiceHashtags(text, tagMap).replace(/\s+/g, ' ').trim();
   if (!clear) return 'Новость ТОС БГО';
   const firstSentence = clear.split(/[.!?]\s/)[0].trim();
-  return firstSentence.length > 90 ? firstSentence.slice(0, 87).trim() + '...' : firstSentence;
+  // Generated <title> appends " | ТОС БГО" (10 characters); SEO limit is 90.
+  return firstSentence.length > 80 ? firstSentence.slice(0, 77).trim() + '...' : firstSentence;
 }
 
 function makeLead(text, tagMap) {
@@ -128,8 +135,13 @@ function splitText(text, tagMap) {
 }
 
 function formatDate(unix) {
-  const d = new Date(unix * 1000);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  // VK timestamps are Unix seconds; publication dates should use local
+  // Moscow calendar days rather than the GitHub runner's timezone.
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Moscow', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).formatToParts(new Date(Number(unix) * 1000));
+  const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${value.year}-${value.month}-${value.day}`;
 }
 
 function collectPhotos(attachments = []) {
@@ -180,8 +192,9 @@ async function callVkWallGet() {
   if (!VK_OWNER_ID && !VK_DOMAIN) throw new Error('Не задан VK_OWNER_ID или VK_DOMAIN в переменных GitHub Actions.');
 
   const params = new URLSearchParams({ access_token: VK_TOKEN, v: VK_API_VERSION, count: String(VK_COUNT), extended: '0' });
+  // VK expects one wall locator; an explicit numeric owner ID has precedence.
   if (VK_OWNER_ID) params.set('owner_id', VK_OWNER_ID);
-  if (VK_DOMAIN) params.set('domain', VK_DOMAIN);
+  else if (VK_DOMAIN) params.set('domain', VK_DOMAIN);
 
   const res = await fetch(`https://api.vk.com/method/wall.get?${params.toString()}`);
   const data = await res.json();
@@ -191,7 +204,10 @@ async function callVkWallGet() {
     }
     throw new Error(`VK API error ${data.error.error_code}: ${data.error.error_msg}`);
   }
-  return data.response?.items || [];
+  if (!Array.isArray(data.response?.items)) {
+    throw new Error('VK API: ответ wall.get не содержит массив записей; импорт остановлен без изменения новостей.');
+  }
+  return data.response.items;
 }
 
 function convertVkPost(post, tagMap) {
