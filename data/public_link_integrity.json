@@ -1,106 +1,82 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-29T09:28:12.863Z",
+  "generated_at": "2026-10-30T18:40:14.997Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 372,
-  "pages_checked": 372,
-  "links_discovered": 8949,
-  "internal_links_checked": 6381,
-  "unique_internal_targets": 921,
-  "external_links_ignored": 451,
+  "pages_indexed": 376,
+  "pages_checked": 376,
+  "links_discovered": 9038,
+  "internal_links_checked": 6454,
+  "unique_internal_targets": 929,
+  "external_links_ignored": 458,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
+      "route": "/done/kalinka-kolodec-dusha-poselka-2023/index.html",
+      "status": 200,
+      "duration_ms": 1013,
+      "bytes": 7920
+    },
+    {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 78,
+      "duration_ms": 67,
       "bytes": 8695
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 40,
+      "duration_ms": 34,
       "bytes": 8158
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 38,
+      "duration_ms": 34,
       "bytes": 7931
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 37,
+      "duration_ms": 32,
       "bytes": 11768
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 36,
-      "bytes": 9430
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 35,
+      "duration_ms": 31,
       "bytes": 15978
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 34,
-      "bytes": 23099
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 29,
       "bytes": 15879
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 28,
-      "bytes": 23597
+      "duration_ms": 29,
+      "bytes": 23099
     },
     {
-      "route": "/data-dictionary/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 26,
-      "bytes": 10644
+      "duration_ms": 29,
+      "bytes": 9430
     },
     {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 24,
-      "bytes": 15409
-    },
-    {
-      "route": "/data-quality/index.html",
+      "route": "/create-tos/index.html",
       "status": 200,
       "duration_ms": 23,
-      "bytes": 7786
-    },
-    {
-      "route": "/chairperson/meeting/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 8176
-    },
-    {
-      "route": "/documents/templates/create-territory/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 5292
+      "bytes": 19408
     },
     {
       "route": "/chairperson/verify-card/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 19,
       "bytes": 10450
     },
     {
@@ -110,28 +86,52 @@
       "bytes": 5818
     },
     {
-      "route": "/documents/templates/chairperson-annual-report/index.html",
+      "route": "/communication-kit/index.html",
       "status": 200,
       "duration_ms": 18,
-      "bytes": 9790
-    },
-    {
-      "route": "/documents/templates/create-initiative-card/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 5126
-    },
-    {
-      "route": "/documents/templates/decision-action-register/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 10937
+      "bytes": 24905
     },
     {
       "route": "/contacts/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 18,
       "bytes": 22241
+    },
+    {
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 5404
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 15409
+    },
+    {
+      "route": "/documents/templates/project-photo-report/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 21458
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 23597
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 8176
+    },
+    {
+      "route": "/data-update/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 8520
     }
   ]
 }

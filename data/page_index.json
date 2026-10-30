@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-29T09:28:30.450Z",
-  "total": 372,
+  "generated_at": "2026-10-30T18:40:31.078Z",
+  "total": 376,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1266,6 +1266,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/tos-mentoring-and-peer-support/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-mentoring-and-peer-support/",
+      "title": "Наставничество и обмен опытом: как ТОСам помогать друг другу | Материалы ТОС БГО",
+      "description": "Практическая схема взаимопомощи председателей и активистов: выбрать конкретный вопрос, найти опытного коллегу, провести встречу, договориться о…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/territory-future-workshop/index.html",
       "url": "https://tosborisoglebsk.ru/materials/territory-future-workshop/",
       "title": "От образа будущего к первому делу: встреча на 60 минут | Материалы ТОС БГО",
@@ -1329,6 +1338,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "news/voronezh-tos-krai-rodnoi-action-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/voronezh-tos-krai-rodnoi-action-2026/",
+      "title": "Акция ТОС «Край родной, навек любимый»: участие до 15 ноября | ТОС БГО",
+      "description": "До 15 ноября председатели и активисты ТОС могут организовать мероприятие для жителей, опубликовать отчёт в официальной группе ТОС и направить ссылку организаторам.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "editorial"
+    },
+    {
       "path": "news/znamenie-created-2024/index.html",
       "url": "https://tosborisoglebsk.ru/news/znamenie-created-2024/",
       "title": "Борисоглебская городская Дума поддержала создание ТОС «Знамение» | ТОС БГО",
@@ -1363,6 +1381,15 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "verified"
+    },
+    {
+      "path": "news/voronezh-tos-public-chamber-roundtable-2026-10/index.html",
+      "url": "https://tosborisoglebsk.ru/news/voronezh-tos-public-chamber-roundtable-2026-10/",
+      "title": "В Общественной палате Воронежской области обсудили поддержку и обучение ТОС | ТОС БГО",
+      "description": "На круглом столе 28 октября представители региона обозначили необходимость системного обучения активистов, наставничества и сопровождения проектов между конкурсами.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "editorial"
     },
     {
       "path": "news/petrovskoe-water-well-2023/index.html",
@@ -1405,6 +1432,15 @@
       "url": "https://tosborisoglebsk.ru/news/vk-community-channel-2026/",
       "title": "Для ТОСов БГО появился единый онлайн-канал связи | ТОС БГО",
       "description": "Материалы для сайта, новости, фотоотчёты и исправления карточек ТОС можно направлять через сообщество ВКонтакте.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "news/sluzhenie-municipal-award-tos-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/sluzhenie-municipal-award-tos-2026/",
+      "title": "До 29 ноября представители ТОС могут подать заявку на премию «Служение» | ТОС БГО",
+      "description": "На IV Всероссийскую муниципальную премию принимают реализованные проекты, инициативы и управленческие решения. Председатели и члены ТОС входят в число возможных участников.",
       "section": "Новости",
       "search_group": "news",
       "content_origin": "editorial"
