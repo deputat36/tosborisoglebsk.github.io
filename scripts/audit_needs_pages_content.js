@@ -43,10 +43,10 @@ function main() {
   const tosSlugs = new Set(Array.isArray(toses) ? toses.map((tos) => tos.slug).filter(Boolean) : []);
 
   expectIncludes(errors, 'needs index', indexHtml, '<html lang="ru">', 'page must declare Russian language');
-  expectIncludes(errors, 'needs index', indexHtml, '<title>Нужна помощь ТОСам БГО — витрина потребностей и партнёрской поддержки</title>', 'unexpected title');
+  expectIncludes(errors, 'needs index', indexHtml, '<title>Нужна помощь ТОСам БГО — потребности и редакционные запросы</title>', 'unexpected title');
   expectIncludes(errors, 'needs index', indexHtml, '<link rel="canonical" href="https://tosborisoglebsk.ru/needs/"', 'missing canonical URL');
   expectIncludes(errors, 'needs index', indexHtml, '<meta property="og:url" content="https://tosborisoglebsk.ru/needs/"', 'missing Open Graph URL');
-  expectIncludes(errors, 'needs index', indexHtml, '<h1>Витрина конкретных задач для ТОСов БГО</h1>', 'missing h1');
+  expectIncludes(errors, 'needs index', indexHtml, '<h1>Потребности ТОС и способы помочь</h1>', 'missing h1');
   expectIncludes(errors, 'needs index', indexHtml, 'потребность должна быть конкретной', 'specific-need principle is missing');
   expectIncludes(errors, 'needs index', indexHtml, 'id="need-statuses"', 'need status guide is missing');
   expectIncludes(errors, 'needs index', indexHtml, 'Как читать статусы и метки потребностей', 'need status heading is missing');
