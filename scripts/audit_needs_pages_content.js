@@ -91,6 +91,38 @@ function main() {
     errors.push('needs script: catalog presence must not receive urgency styling');
   }
 
+  // Static fallback is part of the public content contract, not just a
+  // temporary loading indicator. Editorial intake requests are excluded.
+  const needsStart = '<!-- collection:needs-list:start -->';
+  const needsEnd = '<!-- collection:needs-list:end -->';
+  const summaryStart = '<!-- collection:needs-summary:start -->';
+  const summaryEnd = '<!-- collection:needs-summary:end -->';
+  expectIncludes(errors, 'needs index', indexHtml, needsStart, 'missing static needs fallback');
+  expectIncludes(errors, 'needs index', indexHtml, needsEnd, 'missing static needs fallback end');
+  expectIncludes(errors, 'needs index', indexHtml, summaryStart, 'missing static needs summary');
+  expectIncludes(errors, 'needs index', indexHtml, summaryEnd, 'missing static needs summary end');
+  expectIncludes(errors, 'needs index', indexHtml, '/needs/?origin=request#needs-list', 'missing explicit editorial request filter');
+  expectIncludes(errors, 'needs index', indexHtml, 'публикация записи не означает', 'missing current-status disclaimer');
+  expectIncludes(errors, 'needs script', script, 'filtered.map((item) => needCard(item, toses))', 'default browser must render only filtered records');
+  if (indexHtml.includes(needsStart) && indexHtml.includes(needsEnd)) {
+    const fallback = indexHtml.split(needsStart)[1].split(needsEnd)[0];
+    const expected = needs.filter((item) => item && item.status !== 'draft' &&
+      item.content_origin !== 'request' &&
+      !(String(item.id || '').startsWith('update-data-') && !['verified','editorial','starter'].includes(item.content_origin)));
+    const rendered = [...fallback.matchAll(/<article class="list-item need-card" data-content-origin="([^"]+)"/g)];
+    if (rendered.length !== expected.length) {
+      errors.push(`Needs fallback: expected ${expected.length} substantive cards, found ${rendered.length}`);
+    }
+    if (rendered.some((match) => match[1] === 'request')) {
+      errors.push('Needs fallback: editorial verification requests must be excluded');
+    }
+    for (const item of expected) {
+      if (!fallback.includes(`href="/needs/${item.id}/"`)) {
+        errors.push(`Needs fallback: missing linked substantive item ${item.id}`);
+      }
+    }
+  }
+
   needs.filter((item) => item && item.status !== 'draft').forEach((item, index) => {
     const line = `need page ${index + 1} ${item.id || 'unknown'}`;
     const id = item.id || '';
