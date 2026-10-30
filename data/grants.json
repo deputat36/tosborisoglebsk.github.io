@@ -1,5 +1,29 @@
 [
   {
+    "id": "sluzhenie-award-2026",
+    "title": "IV Всероссийская муниципальная премия «Служение»",
+    "category": "Премия / признание",
+    "status": "Приём заявок до 29 ноября 2026 года; проверьте правила номинации",
+    "call_status": "announced",
+    "amount": "Премия: не путать с грантовым финансированием",
+    "deadline": "29 ноября 2026 года (точное время завершения не указано)",
+    "deadline_at": "2026-11-29T00:00:00+03:00",
+    "source_checked_at": "2026-10-30",
+    "difficulty": "Средняя",
+    "who": "Председатели и члены ТОС и другие категории участников по положению премии",
+    "best_for": "Реализованные общественно полезные инициативы, проекты развития территории и муниципальные практики с подтверждаемым результатом.",
+    "prepare": [
+      "Прочитать положение, порядок подачи и требования выбранной номинации на «Муниципалитеты.РФ».",
+      "Выбрать уже реализованную инициативу и собрать доказательства результата.",
+      "Описать конкретную пользу для жителей, участие сообщества и устойчивость результата.",
+      "Сверить согласие на публикацию фотографий и персональных данных.",
+      "Заранее заполнить заявку в личном кабинете, не откладывая на последний день."
+    ],
+    "project_links": [],
+    "source": "https://smo71.ru/otkryt-priem-zayavok-na-iv-vserossijskuyu-municipalnuyu-premiyu-sluzhenie.html",
+    "note": "Внимание: это муниципальная премия, а не объявление о гранте. Из опубликованных сведений известна дата 29.11.2026, но не час закрытия приёма. Указанная техническая дата deadline_at означает начало последнего дня и нужна только для осторожной автоматической индикации; она не является официальным временем прекращения приёма."
+  },
+  {
     "id": "obraz-individual-2026-october",
     "title": "Конкурс инициатив физических лиц — «Образ Будущего», октябрь 2026",
     "category": "Инициативы жителей",
@@ -52,7 +76,7 @@
     "conditions_url": "https://obraz36.ru/konkursy-grantov/tos/konkurs-mini-grantov-tos-2026",
     "note": "Продление сверено по объявлению от 12 октября 2026 года. На странице условий указано ограничение для ТОС — победителей конкурсов проектов ТОС 2026 года, проведённых АНО «Образ Будущего» или Ассоциацией «Совет муниципальных образований Воронежской области». Перед подачей проверьте положение и соответствие своего ТОС требованиям."
   },
-{
+  {
     "id": "tos-voronezh-projects-2026",
     "title": "Конкурс общественно полезных проектов ТОС Воронежской области",
     "category": "Конкурс ТОС",
@@ -73,7 +97,15 @@
       "Показать вклад жителей и партнёров.",
       "Продумать, кто будет содержать объект после реализации."
     ],
-    "project_links": ["child-sport-playground", "memorial-renovation", "healthy-route-sport-zone", "eco-platform", "center-of-attraction", "lighting-safe-way", "safe-path-or-sidewalk"],
+    "project_links": [
+      "child-sport-playground",
+      "memorial-renovation",
+      "healthy-route-sport-zone",
+      "eco-platform",
+      "center-of-attraction",
+      "lighting-safe-way",
+      "safe-path-or-sidewalk"
+    ],
     "source": "",
     "note": "Главная региональная конкурсная логика для ТОСов. Перед подачей обязательно проверять новое положение, сроки, сумму поддержки, требования к заявителю и перечень документов."
   },
@@ -97,7 +129,12 @@
       "Использовать материалы ассоциации как ориентир для взаимодействия с муниципалитетом.",
       "Проверять актуальные контакты и официальные объявления перед участием."
     ],
-    "project_links": ["project-school-for-tos", "information-stand-tos", "photo-project-archive", "center-of-attraction"],
+    "project_links": [
+      "project-school-for-tos",
+      "information-stand-tos",
+      "photo-project-archive",
+      "center-of-attraction"
+    ],
     "source": "",
     "note": "Это не грантовый оператор, а важная региональная площадка муниципальной повестки. На портале нужно учитывать её отдельно от федеральных добровольческих платформ."
   },
@@ -121,7 +158,13 @@
       "Показывать собственные результаты: фото, новости, проекты, потребности.",
       "Переносить лучшие практики других ТОСов в банк проектов БГО."
     ],
-    "project_links": ["project-school-for-tos", "photo-project-archive", "neighbor-festival", "green-yard-flowerbeds", "memorial-renovation"],
+    "project_links": [
+      "project-school-for-tos",
+      "photo-project-archive",
+      "neighbor-festival",
+      "green-yard-flowerbeds",
+      "memorial-renovation"
+    ],
     "source": "",
     "note": "Для развития сайта ТОС БГО это один из ключевых источников практик: важно собирать не только гранты, но и живой опыт соседних территорий."
   },
@@ -145,7 +188,13 @@
       "Проверить, какие программы или встречи актуальны сейчас.",
       "Использовать участие как способ усилить проект перед конкурсом или партнёрами."
     ],
-    "project_links": ["project-school-for-tos", "center-of-attraction", "neighbor-festival", "information-stand-tos", "photo-project-archive"],
+    "project_links": [
+      "project-school-for-tos",
+      "center-of-attraction",
+      "neighbor-festival",
+      "information-stand-tos",
+      "photo-project-archive"
+    ],
     "source": "https://obraz36.ru/sobitiya/-dorogie-druzja-napominaem-chto-ostalos-7-dnej-dlja-podachi-zajavok-na-konkurs-tos-ot-slov-k-delu-",
     "note": "Проверено 07.09.2026 по официальной публикации АНО «Образ Будущего». Конкурс был открыт для ТОС Воронежской области, реализовавших инициативы в 2025 году, по 12 номинациям. До публикации нового объявления не считать приём открытым."
   },
@@ -169,7 +218,12 @@
       "Собрать волонтёров, мешки, перчатки, транспорт, партнёров.",
       "После акции обязательно сделать фотоотчёт и публичную благодарность."
     ],
-    "project_links": ["eco-platform", "green-yard-flowerbeds", "photo-project-archive", "center-of-attraction"],
+    "project_links": [
+      "eco-platform",
+      "green-yard-flowerbeds",
+      "photo-project-archive",
+      "center-of-attraction"
+    ],
     "source": "",
     "note": "Такие инициативы ближе к повседневной жизни ТОС, чем крупные федеральные премии: их важно вывести в отдельную региональную группу."
   },
@@ -193,7 +247,13 @@
       "Подготовить календарный план и измеримые результаты.",
       "Продумать публичность, отчётность и устойчивость проекта."
     ],
-    "project_links": ["support-elderly-neighbors", "neighbor-festival", "history-route-memory", "project-school-for-tos", "photo-project-archive"],
+    "project_links": [
+      "support-elderly-neighbors",
+      "neighbor-festival",
+      "history-route-memory",
+      "project-school-for-tos",
+      "photo-project-archive"
+    ],
     "source": "https://xn--b1agd0aean.xn--80af5akm8c.xn--p1ai/",
     "note": "По официальной информации на конкурс 2026 года представлено 87 проектов, 80 направлены на экспертную оценку. ТОСам стоит изучать победителей и заранее искать партнёров из НКО."
   },
@@ -217,7 +277,13 @@
       "Уточнить, кто является балансодержателем или ответственным за объект.",
       "Продумать возможное софинансирование, вклад жителей или партнёров."
     ],
-    "project_links": ["lighting-safe-way", "safe-path-or-sidewalk", "yard-small-repair", "green-yard-flowerbeds", "center-of-attraction"],
+    "project_links": [
+      "lighting-safe-way",
+      "safe-path-or-sidewalk",
+      "yard-small-repair",
+      "green-yard-flowerbeds",
+      "center-of-attraction"
+    ],
     "source": "",
     "note": "Подходит для проектов, где жители готовы участвовать в выборе, подготовке и общественном контроле. Условия нужно уточнять на уровне муниципалитета и региона."
   },
@@ -241,7 +307,11 @@
       "Показать социальный эффект и срочность.",
       "Отдельно указать, что жители готовы сделать сами."
     ],
-    "project_links": ["lighting-safe-way", "safe-path-or-sidewalk", "water-supply-improvement"],
+    "project_links": [
+      "lighting-safe-way",
+      "safe-path-or-sidewalk",
+      "water-supply-improvement"
+    ],
     "source": "",
     "note": "Для таких инициатив важны фото, карта, подписи, краткое обоснование и понятный адрес проблемы."
   },
@@ -265,7 +335,12 @@
       "Предложить публичную благодарность и фотоотчёт.",
       "После помощи обязательно показать результат."
     ],
-    "project_links": ["green-yard-flowerbeds", "yard-small-repair", "neighbor-festival", "information-stand-tos"],
+    "project_links": [
+      "green-yard-flowerbeds",
+      "yard-small-repair",
+      "neighbor-festival",
+      "information-stand-tos"
+    ],
     "source": "",
     "note": "Иногда это быстрее гранта: попросить конкретный ресурс, а затем публично показать результат и поблагодарить партнёра."
   },
@@ -289,7 +364,12 @@
       "Разработать календарный план, бюджет и показатели результата.",
       "Проверить соответствие проекта направлениям конкурса."
     ],
-    "project_links": ["support-elderly-neighbors", "history-route-memory", "project-school-for-tos", "neighbor-festival"],
+    "project_links": [
+      "support-elderly-neighbors",
+      "history-route-memory",
+      "project-school-for-tos",
+      "neighbor-festival"
+    ],
     "source": "https://президентскиегранты.рф/",
     "note": "Полезно для проектов, которые требуют партнёрства с НКО и дают общественный эффект за пределами одного двора. Условия и сроки нужно проверять только на официальном сайте фонда."
   },
@@ -313,7 +393,13 @@
       "Собрать календарный план, смету и партнёров.",
       "Проверить сроки и условия в личном кабинете ФГАИС «Молодёжь России»."
     ],
-    "project_links": ["project-school-for-tos", "neighbor-festival", "history-route-memory", "healthy-route-sport-zone", "photo-project-archive"],
+    "project_links": [
+      "project-school-for-tos",
+      "neighbor-festival",
+      "history-route-memory",
+      "healthy-route-sport-zone",
+      "photo-project-archive"
+    ],
     "source": "https://myrosmol.ru/",
     "note": "Для ТОС это чаще партнёрская возможность: через молодёжную команду, учреждение, НКО или активистов 14–35 лет. Перед работой обязательно проверять конкретный конкурс и требования к заявителю."
   },
@@ -337,7 +423,14 @@
       "Выбрать подходящую категорию заявки.",
       "Проверить актуальные правила на официальной странице премии."
     ],
-    "project_links": ["support-elderly-neighbors", "neighbor-festival", "history-route-memory", "project-school-for-tos", "photo-project-archive", "green-yard-flowerbeds"],
+    "project_links": [
+      "support-elderly-neighbors",
+      "neighbor-festival",
+      "history-route-memory",
+      "project-school-for-tos",
+      "photo-project-archive",
+      "green-yard-flowerbeds"
+    ],
     "source": "https://dobro.ru/",
     "note": "Дата 14 июня 2026 года уже прошла. Карточка сохранена как ориентир для подготовки кейсов и отслеживания следующего цикла, а не как действующий приём заявок. Федеральная платформа остаётся дополнительной возможностью, а не центральным инструментом развития ТОС Воронежской области."
   },
@@ -361,7 +454,11 @@
       "Использовать полученные знания для проектов ТОС и работы с жителями.",
       "Сохранять подтверждения участия, публикации и результаты."
     ],
-    "project_links": ["project-school-for-tos", "support-elderly-neighbors", "photo-project-archive"],
+    "project_links": [
+      "project-school-for-tos",
+      "support-elderly-neighbors",
+      "photo-project-archive"
+    ],
     "source": "https://dobro.ru/",
     "note": "Полезная федеральная платформа, но в структуре портала должна идти после региональных конкурсов, ассоциаций и партнёрских площадок Воронежской области."
   },
@@ -386,7 +483,10 @@
       "Неделя 5: проверить документы, поддержку жителей и план содержания.",
       "Неделя 6: подготовить финальный текст заявки и приложения."
     ],
-    "project_links": ["photo-project-archive", "project-school-for-tos"],
+    "project_links": [
+      "photo-project-archive",
+      "project-school-for-tos"
+    ],
     "source": "",
     "note": "Это не отдельный конкурс, а рабочая памятка: собирать материалы нужно заранее, не дожидаясь объявления приёма заявок."
   }
