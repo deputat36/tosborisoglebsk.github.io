@@ -72,7 +72,7 @@ function makePage(item, toses) {
   const contextLinks = buildCollectionContextLinks('needs', item, tos, origin);
   const contextSectionId = collectionContextSectionId('needs');
   const isDataRequest = origin === 'request';
-  const correctionUrl = `/update-tos/?${item.tos_slug ? `tos=${encodeURIComponent(item.tos_slug)}&amp;` : ''}type=card#message-builder`;
+  const correctionUrl = `/update-tos/?${item.tos_slug ? `tos=${encodeURIComponent(item.tos_slug)}&` : ''}type=card#message-builder`;
   const primaryHref = isDataRequest ? correctionUrl : '/contacts/';
   const primaryLabel = isDataRequest ? 'Уточнить сведения ТОС' : 'Предложить помощь';
   const instructionsTitle = isDataRequest ? 'Как уточнить данные' : 'Как помочь';
