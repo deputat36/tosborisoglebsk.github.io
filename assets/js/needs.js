@@ -45,7 +45,10 @@ function needsOriginTag(item) {
 
 async function loadNeedsData() {
   const [needs, toses] = await Promise.all([
-    fetch('/data/needs.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []),
+    fetch('/data/needs.json', { cache: 'no-store' }).then((response) => {
+      if (!response.ok) throw new Error('Не удалось загрузить актуальные потребности');
+      return response.json();
+    }),
     fetch('/data/toses.json', { cache: 'no-store' }).then((response) => response.ok ? response.json() : []).catch(() => [])
   ]);
   return { needs: needs.filter(needsPublished), toses };
@@ -170,10 +173,10 @@ async function renderNeeds() {
         return String(b.date || '').localeCompare(String(a.date || ''));
       };
       const filtered = originPool.filter(matchesActiveFilters).sort(sortNeeds);
-      const renderPool = state.origin ? filtered : needs.filter(matchesActiveFilters).sort(sortNeeds);
-
+      // Render only the selected origin pool. Hidden editorial requests must
+      // not accumulate in the default DOM, screen-reader tree or card counts.
       root.innerHTML = filtered.length
-        ? renderPool.map((item) => needCard(item, toses, !state.origin && !needsDefaultVisible(item))).join('')
+        ? filtered.map((item) => needCard(item, toses)).join('')
         : '<div class="empty">По выбранным фильтрам содержательные потребности не найдены. Для редакционных запросов выберите происхождение «Запрос данных».</div>';
       renderNeedsSummary(filtered, originPool.length);
       needsCore.setStatus(statusText, filtered.length, originPool.length, needsCore.activeFilterCount(state));
@@ -194,8 +197,12 @@ async function renderNeeds() {
     });
     apply(true);
   } catch (error) {
-    root.innerHTML = '<div class="empty">Раздел не загрузился. Проверьте файл data/needs.json</div>';
-    if (statusText) statusText.textContent = 'Ошибка загрузки потребностей.';
+    // The checked-in HTML already contains the editorial fallback. Keep it
+    // available when the JSON endpoint or browser scripting fails.
+    if (!root.querySelector('.need-card')) {
+      root.innerHTML = '<div class="empty">Список временно недоступен. Отправьте уточнение через страницу контактов.</div>';
+    }
+    if (statusText) statusText.textContent = 'Не удалось обновить список. Показана сохранённая версия; перед предложением помощи уточните её актуальность.';
   }
 }
 
