@@ -29,7 +29,7 @@ const diffHeaders = [
   'next_step'
 ];
 const allowedOwnerStatuses = new Set(['todo', 'in_progress', 'done', 'blocked']);
-const allowedMatchStatuses = new Set(['existing', 'missing', 'renamed', 'needs_official_confirmation', 'low_evidence_candidate']);
+const allowedMatchStatuses = new Set(['existing', 'missing', 'renamed', 'needs_official_confirmation', 'low_evidence_candidate', 'possible_existing_match']);
 const allowedTerritoryTypes = new Set(['Городской', 'Сельский', 'городской', 'сельский', 'не подтверждено', 'unknown']);
 const allowedYesNo = new Set(['да', 'нет']);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -133,6 +133,12 @@ function auditDiff(errors, rows) {
 
     if (matchStatus === 'needs_official_confirmation' && needsManualReview !== 'да') {
       errors.push(`${line}: needs_official_confirmation requires manual review`);
+    }
+
+    if (matchStatus === 'possible_existing_match') {
+      if (createCard !== 'нет' || updateExisting !== 'нет' || needsManualReview !== 'да') {
+        errors.push(`${line}: possible_existing_match forbids new cards and updates until manual confirmation`);
+      }
     }
 
     if (createCard === 'да' && !sourceDate) {
