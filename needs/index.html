@@ -35,13 +35,181 @@
 
     <section class="section"><div class="container section-head"><div><h2>Как понять срочность</h2><p>Приоритет помогает быстро выбрать, на что реагировать в первую очередь</p></div></div><div class="container grid"><article class="card"><div class="card-inner"><span class="tag warn">Высокий</span><h3>Нужно быстро</h3><p>Есть срок, событие, дедлайн, погодное окно, заявка, субботник или риск, что работа сорвётся.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Средний</span><h3>Нужно в ближайшее время</h3><p>Потребность важна, но можно спокойно подобрать партнёра, материалы или волонтёров.</p></div></article><article class="card"><div class="card-inner"><span class="tag">Низкий</span><h3>Можно помочь по возможности</h3><p>Задача полезная, но не срочная: фото, текст, архив, консультация, небольшая информационная поддержка.</p></div></article></div></section>
 
-    <section class="section" data-collection-browser-version="2026-07-22"><div class="container section-head"><div><h2>Потребности и запросы</h2><p>Фильтруйте по типу помощи, ТОСу, статусу, приоритету и происхождению материала. Выбранное состояние сохраняется в ссылке.</p></div><a class="btn" href="/update-tos/?type=need#message-builder">Добавить потребность</a></div><div class="container toolbar"><input class="input" id="needs-search" placeholder="Поиск: саженцы, волонтёры, покраска, транспорт, фото..." aria-label="Поиск потребностей"/><select class="select" id="needs-type-filter" aria-label="Фильтр потребностей по типу помощи"><option value="">Все типы помощи</option></select><select class="select" id="needs-tos-filter" aria-label="Фильтр потребностей по ТОС"><option value="">Все ТОС</option></select><select class="select" id="needs-priority-filter" aria-label="Фильтр потребностей по приоритету"><option value="">Любой приоритет</option></select><select class="select" id="needs-status-filter" aria-label="Фильтр потребностей по статусу"><option value="">Любой статус</option><option value="active">Незакрытые</option><option value="closed">Закрытые</option><option value="partner">Для партнёров</option></select><select class="select" id="needs-origin-filter" aria-label="Фильтр потребностей по происхождению материала"><option value="">Любое происхождение</option><option value="verified">Подтверждено источником</option><option value="editorial">Редакционный материал</option><option value="starter">Стартовый материал</option><option value="request">Запрос данных</option></select><button class="btn" id="needs-reset-filters" type="button">Сбросить фильтры</button></div><div class="container tos-summary" id="needs-summary"><div class="empty">Загрузка сводки...</div></div><div class="container tiny" id="needs-filter-status" role="status" aria-live="polite"></div></section>
+    <section class="section" data-collection-browser-version="2026-07-22"><div class="container section-head"><div><h2>Потребности и запросы</h2><p>Фильтруйте по типу помощи, ТОСу, статусу, приоритету и происхождению материала. Выбранное состояние сохраняется в ссылке.</p></div><a class="btn" href="/update-tos/?type=need#message-builder">Добавить потребность</a></div><div class="container toolbar"><input class="input" id="needs-search" placeholder="Поиск: саженцы, волонтёры, покраска, транспорт, фото..." aria-label="Поиск потребностей"/><select class="select" id="needs-type-filter" aria-label="Фильтр потребностей по типу помощи"><option value="">Все типы помощи</option></select><select class="select" id="needs-tos-filter" aria-label="Фильтр потребностей по ТОС"><option value="">Все ТОС</option></select><select class="select" id="needs-priority-filter" aria-label="Фильтр потребностей по приоритету"><option value="">Любой приоритет</option></select><select class="select" id="needs-status-filter" aria-label="Фильтр потребностей по статусу"><option value="">Любой статус</option><option value="active">Незакрытые</option><option value="closed">Закрытые</option><option value="partner">Для партнёров</option></select><select class="select" id="needs-origin-filter" aria-label="Фильтр потребностей по происхождению материала"><option value="">Любое происхождение</option><option value="verified">Подтверждено источником</option><option value="editorial">Редакционный материал</option><option value="starter">Стартовый материал</option><option value="request">Запрос данных</option></select><button class="btn" id="needs-reset-filters" type="button">Сбросить фильтры</button></div><div class="container tos-summary" id="needs-summary"><!-- collection:needs-summary:start --><div class="summary-grid"><div class="summary-tile"><b>8</b><span>показано из 8</span></div><div class="summary-tile"><b>8</b><span>незакрытые записи</span></div><div class="summary-tile"><b>0</b><span>закрытые и архивные</span></div><div class="summary-tile"><b>8</b><span>редакционные материалы</span></div><div class="summary-tile"><b>0</b><span>запросы данных</span></div><div class="summary-tile"><b>1</b><span>для партнёров</span></div></div><!-- collection:needs-summary:end --></div><div class="container tiny" id="needs-filter-status" role="status" aria-live="polite"></div></section>
 
     <section class="section tight" aria-label="Пояснение к списку потребностей">
       <div class="container notice"><b>Что здесь действительно требуется:</b> список по умолчанию содержит редакционные и другие содержательные предложения помощи, но публикация записи не означает, что конкретный ТОС подтвердил актуальную потребность. Перед передачей ресурсов уточните запрос у ответственного. Редакционные просьбы проверить карточки ТОС отделены от списка: <a href="/needs/?origin=request#needs-list">открыть запросы сведений</a>. <noscript>Без JavaScript доступен сохранённый список материалов. Для отправки уточнений используйте <a href="/contacts/">контакты редакции</a>.</noscript></div>
     </section>
 
-    <section class="section"><div class="container list" id="needs-list"><div class="empty">Загрузка потребностей...</div></div></section>
+    <section class="section"><div class="container list" id="needs-list"><!-- collection:needs-list:start --><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Актуализация данных</span>
+      <span class="tag warn">Высокий</span>
+      <span class="tag">23 мая 2026 г.</span>
+      
+      
+    </div>
+    <h3>Нужно проверить и обновить карточки ТОСов</h3>
+    <p>Председателям и активистам нужно проверить данные своих ТОСов: председатель, телефон, email, ссылки на группы, границы, численность жителей, описание и год создания. Исправления можно прислать через ВК-сообщество ТОС БГО.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/update-tos-cards-contacts-2026/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Контент для сайта</span>
+      <span class="tag warn">Высокий</span>
+      <span class="tag">23 мая 2026 г.</span>
+      
+      
+    </div>
+    <h3>Нужны новости и фотоотчёты от ТОСов БГО</h3>
+    <p>Для наполнения портала нужны реальные новости: субботники, собрания, праздники, итоги проектов, благоустройство, помощь жителям, участие в конкурсах и другие события территорий. Желательно присылать короткий текст и 3–10 фото.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/collect-tos-news-2026/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Архив проектов</span>
+      <span class="tag ">Средний</span>
+      <span class="tag">23 мая 2026 г.</span>
+      
+      <span class="tag ok">подходит партнёрам</span>
+    </div>
+    <h3>Нужны сведения о реализованных проектах ТОСов</h3>
+    <p>Для раздела проектов нужен архив: название проекта, год, что было сделано, где находится объект, кто участвовал, какие были партнёры, фото до и после. Это поможет показать опыт ТОСов и готовить новые заявки.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/collect-project-archive-2026/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Соцсети и коммуникации</span>
+      <span class="tag ">Средний</span>
+      <span class="tag">23 мая 2026 г.</span>
+      
+      
+    </div>
+    <h3>Нужны актуальные ссылки на сообщества ТОСов</h3>
+    <p>Для карточек ТОС нужны рабочие ссылки на группы ВКонтакте, Одноклассники, Telegram-чаты или другие публичные страницы. Если у ТОС пока нет сообщества, можно сообщить об этом отдельно.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/need-tos-community-links-2026/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Озеленение</span>
+      <span class="tag ">Средний</span>
+      <span class="tag">20 мая 2026 г.</span>
+      
+      
+    </div>
+    <h3>Нужны саженцы и помощь с озеленением территорий ТОС</h3>
+    <p>ТОСам часто требуется помощь с саженцами, грунтом, инвентарём и участием жителей в посадке деревьев, кустарников и цветов. Можно предложить помощь для конкретной территории или для общего распределения между ТОСами.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/seedlings-for-greening/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Волонтёры</span>
+      <span class="tag warn">Высокий</span>
+      <span class="tag">20 мая 2026 г.</span>
+      
+      
+    </div>
+    <h3>Нужны волонтёры для субботников и благоустройства</h3>
+    <p>Актуальная потребность для дворов, улиц, сельских территорий и общественных пространств: уборка мусора, покраска малых форм, подготовка клумб, помощь пожилым жителям.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/volunteers-for-cleanup/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Материалы</span>
+      <span class="tag ">Средний</span>
+      <span class="tag">20 мая 2026 г.</span>
+      
+      
+    </div>
+    <h3>Нужны материалы для мелкого ремонта и благоустройства</h3>
+    <p>Для локальных инициатив могут быть полезны краска, кисти, перчатки, мешки для мусора, доски, крепёж, грунт, песок, щебень и другие расходные материалы.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/materials-for-small-repairs/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><article class="list-item need-card" data-content-origin="editorial">
+    <div class="meta">
+      <span class="tag ">Редакционный материал</span>
+      <span class="tag ">В каталоге</span>
+      <span class="tag">Информационная помощь</span>
+      <span class="tag ">Низкий</span>
+      <span class="tag">20 мая 2026 г.</span>
+      
+      
+    </div>
+    <h3>Нужна помощь с фотоотчётами и публикациями</h3>
+    <p>Для заявок на конкурсы и публичной отчётности ТОСам нужны качественные фото до/после, короткие описания мероприятий, публикации в соцсетях и новости для сайта.</p>
+    <div class="notice"><b style="color:var(--text)">Как помочь</b><br>Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.</div>
+    
+    <p class="tiny"><b>Контакт:</b> Ирина Алексеевна Сотниченко, +7 (910) 249-82-84, https://vk.ru/tosbgo</p>
+    <div class="card-actions">
+      <a class="btn primary" href="/needs/photo-and-media-help/">Подробнее</a>
+      
+      <a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://vk.ru/tosbgo">Источник</a>
+    </div>
+  </article><!-- collection:needs-list:end --></div></section>
 
     <section class="section" id="offer-help"><div class="container section-head"><div><h2>Что делать, если вы готовы помочь</h2><p>Простой порядок, чтобы помощь быстро дошла до территории</p></div><a class="btn" href="/partners/action-routes/">Маршрут партнёра</a></div><div class="container grid"><article class="card"><div class="card-inner"><span class="tag">1</span><h3>Выберите потребность</h3><p>Посмотрите, что именно нужно, срок, контакт и тип помощи.</p></div></article><article class="card"><div class="card-inner"><span class="tag">2</span><h3>Свяжитесь с ответственным</h3><p>Напишите через ВК-сообщество или по указанному контакту, что именно можете предложить.</p></div></article><article class="card"><div class="card-inner"><span class="tag">3</span><h3>Уточните детали</h3><p>Количество, место передачи, срок, кто примет помощь и нужен ли фотоотчёт.</p></div></article><article class="card"><div class="card-inner"><span class="tag">4</span><h3>Покажите результат</h3><p>После помощи желательно сделать короткую новость: кто помог, чем помог и что получилось.</p></div></article></div><div class="container prose"><div class="notice">Организация / человек:<br>Чем готовы помочь:<br>Для какого ТОСа или любой территории:<br>Количество / объём:<br>Сроки:<br>Нужна ли публичная благодарность: да / нет<br>Контакт:<br>Комментарий:</div><div class="card-actions"><a class="btn primary" href="https://vk.ru/tosbgo" target="_blank" rel="noopener">Отправить через ВК</a><a class="btn" href="/contacts/">Контакты</a><a class="btn" href="/partners/action-routes/">Партнёрам</a><a class="btn" href="/partner-thanks/">Как поблагодарить</a></div></div></section>
 

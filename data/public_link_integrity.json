@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-30T19:16:04.445Z",
+  "generated_at": "2026-10-30T19:51:31.705Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 376,
   "pages_checked": 376,
-  "links_discovered": 9038,
-  "internal_links_checked": 6454,
-  "unique_internal_targets": 929,
-  "external_links_ignored": 458,
+  "links_discovered": 9072,
+  "internal_links_checked": 6487,
+  "unique_internal_targets": 938,
+  "external_links_ignored": 466,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 1065,
+      "bytes": 7931
+    },
+    {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 73,
+      "duration_ms": 56,
       "bytes": 8695
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 41,
+      "duration_ms": 28,
       "bytes": 15978
-    },
-    {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 39,
-      "bytes": 7931
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 38,
+      "duration_ms": 28,
       "bytes": 11768
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 37,
-      "bytes": 8158
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 36,
-      "bytes": 23099
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 36,
+      "duration_ms": 27,
       "bytes": 9430
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 34,
+      "duration_ms": 24,
       "bytes": 15879
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 5404
+      "duration_ms": 24,
+      "bytes": 23099
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 10450
-    },
-    {
-      "route": "/chairperson/meeting/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 8176
-    },
-    {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 5818
-    },
-    {
-      "route": "/documents/templates/meeting-registration/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 5560
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 23597
-    },
-    {
-      "route": "/communication-kit/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 24905
-    },
-    {
-      "route": "/contacts/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 22241
+      "duration_ms": 24,
+      "bytes": 8158
     },
     {
       "route": "/content-standards/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 17,
       "bytes": 13193
     },
     {
-      "route": "/done/tretyaki-seven-projects/index.html",
+      "route": "/documents/templates/legal-check-before-meeting/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 12859
+    },
+    {
+      "route": "/documents/templates/project-partner-letter/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 11359
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 8032
+      "bytes": 8176
     },
     {
-      "route": "/documents/templates/meeting-agenda/index.html",
+      "route": "/chairperson/verify-card/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 4424
+      "duration_ms": 14,
+      "bytes": 10450
     },
     {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
+      "route": "/check-tos/index.html",
       "status": 200,
       "duration_ms": 13,
-      "bytes": 3948
+      "bytes": 5818
+    },
+    {
+      "route": "/create-tos/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 12658
+    },
+    {
+      "route": "/documents/templates/create-initiative-card/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 5126
+    },
+    {
+      "route": "/contacts/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 22241
+    },
+    {
+      "route": "/documents/templates/create-territory/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 5292
+    },
+    {
+      "route": "/documents/templates/decision-action-register/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 10937
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 15409
     }
   ]
 }
