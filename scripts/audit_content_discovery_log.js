@@ -26,7 +26,11 @@ const candidateTypes = new Set([
   'registry_candidate',
   'news_candidate',
   'archive_candidate',
-  'official_result'
+  'official_result',
+  // Current, sourced editorial opportunities and region-wide TOS news.
+  'active_tos_event',
+  'active_award',
+  'regional_tos_news'
 ]);
 const sourceLevels = new Set(['primary', 'secondary']);
 const statuses = new Set([
@@ -35,7 +39,9 @@ const statuses = new Set([
   'result_check',
   'result_source_found',
   'verified_source',
-  'rejected'
+  'rejected',
+  // Source has already been reviewed and the article was published.
+  'published'
 ]);
 
 function isHttpUrl(value) {
@@ -93,6 +99,10 @@ function main() {
     if (status === 'verified_source') {
       if (sourceLevel !== 'primary') errors.push(`line ${line}: verified_source requires primary source_level`);
       if (!sourceDate) errors.push(`line ${line}: verified_source requires source_date`);
+    }
+    // Publishing must not bypass the evidence date needed for rechecking.
+    if (status === 'published' && !sourceDate) {
+      errors.push(`line ${line}: published status requires source_date`);
     }
     if (candidateType === 'official_result' && sourceLevel !== 'primary') {
       errors.push(`line ${line}: official_result requires primary source_level`);
