@@ -3,8 +3,13 @@
   "title": "Проверка полноты каталога ТОС БГО",
   "summary": {
     "target_total_from_open_source": 46,
+    "open_source_as_of": "2024-06-03",
+    "current_2026_official_total": null,
+    "comparison_type": "historical_reference_not_current_register",
     "current_catalog_total": 24,
     "minimum_gap_to_check": 22,
+    "minimum_gap_is_confirmed": false,
+    "comparison_note": "Разница 22 относится только к опубликованной в 2024 году оценке. Актуальная численность ТОС на 2026 год не подтверждена.",
     "known_missing_candidates": 4,
     "unknown_missing_slots": 18,
     "city_total_from_open_source": 25,
@@ -23,7 +28,7 @@
       "publisher": "Мой Борисоглебск",
       "date": "2024-06-03",
       "url": "https://mybsk.ru/tos-sila-obedinyayushhaya-gorod/",
-      "what_confirms": "В БГО действует 46 ТОС: 25 городских и 21 сельский. С 2015 года реализовано более 80 проектов, привлечено около 50 млн рублей.",
+      "what_confirms": "По состоянию на публикацию 3 июня 2024 года сообщалось о 46 ТОС: 25 городских и 21 сельском. Эти сведения не подтверждают численность на 2026 год.",
       "verification_level": "open_publication"
     },
     {
