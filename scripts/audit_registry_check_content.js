@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
+const { parseCsv } = require('./lib/csv');
 
 const htmlPath = path.join(process.cwd(), 'registry-check', 'index.html');
 
@@ -115,6 +116,35 @@ function main() {
       errors.push(`registry-check/index.html: missing linked local page ${localPath}`);
     }
   });
+
+  // A historical media count must never silently become an official 2026 total.
+  const registry = JSON.parse(read(path.join(process.cwd(), 'data', 'tos_registry_check.json')));
+  const summary = registry.summary || {};
+  if (summary.open_source_as_of !== '2024-06-03'
+      || summary.current_2026_official_total !== null
+      || summary.comparison_type !== 'historical_reference_not_current_register'
+      || summary.minimum_gap_is_confirmed !== false) {
+    errors.push('Registry source requires dated historical comparison and unconfirmed 2026 total');
+  }
+
+  // Prevent a named candidate from being treated as missing when it already
+  // has a TOS card. The only valid overlap is an identity-review case.
+  const current = JSON.parse(read(path.join(process.cwd(), 'data', 'toses.json')));
+  const catalogSlugs = new Set(current.map(item => item.slug));
+  const csvRows = parseCsv(read(path.join(process.cwd(), 'data', 'tos_candidate_verification.csv')));
+  const headers = csvRows[0] || [];
+  const slugCol = headers.indexOf('slug_draft');
+  const statusCol = headers.indexOf('editorial_status');
+  if (slugCol < 0 || statusCol < 0) {
+    errors.push('Candidate verification CSV is missing identity-review fields');
+  } else {
+    for (const cells of csvRows.slice(1)) {
+      if (!cells[slugCol]) continue;
+      if (catalogSlugs.has(cells[slugCol]) && !String(cells[statusCol] || '').startsWith('existing_card_')) {
+        errors.push(`Candidate ${cells[slugCol]} duplicates existing catalog TOS without identity review`);
+      }
+    }
+  }
 
   if (errors.length) {
     throw new Error(`Registry check content audit failed:\n${errors.join('\n')}`);
