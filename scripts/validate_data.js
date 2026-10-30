@@ -122,6 +122,15 @@ function main() {
 
   validateToses(toses);
   validateCollection(news, 'data/news.json');
+  // Generated news pages append " | ТОС БГО" (10 characters) to the H1 title.
+  // Catch overlong SEO titles in the early data validation step, rather than
+  // after the expensive site generation and publication audit has run.
+  for (const item of news) {
+    if (item.status === 'draft' || !item.title) continue;
+    if (String(item.title).length > 80) {
+      errors.push(`data/news.json: ${item.id || 'без id'} — заголовок слишком длинный для SEO (${String(item.title).length} символов; максимум 80 до суффикса сайта)`);
+    }
+  }
   validateCollection(articles, 'data/articles.json');
   validateCollection(projects, 'data/projects.json');
   validateCollection(done, 'data/done.json');
