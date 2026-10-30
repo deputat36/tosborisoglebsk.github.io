@@ -168,6 +168,7 @@ function runCli() {
     for (const error of errors) console.error(`- ${error}`);
     // Print concrete failing routes before exiting: CI-generated reports are
     // not committed when this gate fails, so a generic count is not actionable.
+    const siteHealth = loadJson(siteHealthPath);
     const pages = siteHealth.pages || {};
     if (pages.seo_warnings_count || pages.broken_internal_links_count) {
       console.error(`Current-build SEO warnings: ${pages.seo_warnings_count || 0}; broken internal links: ${pages.broken_internal_links_count || 0}.`);
