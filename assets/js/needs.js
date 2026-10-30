@@ -96,6 +96,10 @@ function needCard(item, toses, hidden = false) {
     : 'Свяжитесь с ответственным и уточните, чем именно можете помочь: материалами, временем, транспортом, волонтёрами, фото или информационной поддержкой.';
   const helpText = item.how_to_help || item.help || defaultHelp;
   const resultText = item.result || item.closed_result || '';
+  const correctionUrl = `/update-tos/?${item.tos_slug ? `tos=${encodeURIComponent(item.tos_slug)}&` : ''}type=card#message-builder`;
+  const actionLinks = origin === 'request'
+    ? `<a class="btn primary" href="${needsEsc(correctionUrl)}">Уточнить сведения ТОС</a><a class="btn" href="/contacts/">Связаться с редакцией</a>`
+    : '<a class="btn" href="/contacts/">Предложить помощь</a><a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>';
   return `<article class="list-item need-card" data-content-origin="${needsEsc(origin)}"${hidden ? ' hidden' : ''}>
     <div class="meta">
       ${needsOriginTag(item)}
@@ -114,8 +118,7 @@ function needCard(item, toses, hidden = false) {
     <div class="card-actions">
       <a class="btn primary" href="/needs/${needsEsc(item.id)}/">Подробнее</a>
       ${item.tos_slug ? `<a class="btn" href="/tos/${needsEsc(item.tos_slug)}/">Открыть ТОС</a>` : ''}
-      <a class="btn" href="/contacts/">Предложить помощь</a>
-      <a class="btn" href="/update-tos/?type=need#message-builder">Уточнить потребность</a>
+      ${actionLinks}
       ${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${needsEsc(item.source_url)}">Источник</a>` : ''}
     </div>
   </article>`;
