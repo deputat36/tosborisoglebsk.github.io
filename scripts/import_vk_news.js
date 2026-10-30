@@ -287,5 +287,11 @@ if (require.main === module) {
 }
 
 module.exports = {
+  extractHashtags,
+  detectTosSlug,
+  hasAllowedHashtag,
+  stripServiceHashtags,
+  makeTitle,
+  formatDate,
   mergeImportedNews
 };
