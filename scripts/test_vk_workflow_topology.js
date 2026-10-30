@@ -1,5 +1,8 @@
 const { runSelfTest } = require('./audit_vk_workflow_topology');
-const { mergeImportedNews } = require('./import_vk_news');
+const {
+  mergeImportedNews, extractHashtags, detectTosSlug, hasAllowedHashtag,
+  stripServiceHashtags, makeTitle, formatDate
+} = require('./import_vk_news');
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -46,5 +49,23 @@ function runMergeRetentionTest() {
   console.log('VK news merge retention self-test OK');
 }
 
+function runImportTextRegressionTest() {
+  const tosTags = new Map([['#богана', 'bogana'], ['#тосмиролюбие', 'mirolyubie']]);
+  assert(hasAllowedHashtag('Новости! #НоВоСтЬтОсБгО'), 'case-insensitive allowed tag not detected');
+  assert(!hasAllowedHashtag('Новости! #новостьТОСБГОлишнее'), 'partial allowlist tag accepted');
+  assert(!hasAllowedHashtag('Текст #неразрешенный'), 'post without approved hashtag accepted');
+  assert(extractHashtags('Обновление #БОГАНА #Богана').size === 1, 'case folding must deduplicate tags');
+  assert(detectTosSlug('Встреча #Богана', tosTags) === 'bogana', 'TOS hashtag not detected');
+  assert(detectTosSlug('Встреча #БоганаСобытия', tosTags) === '', 'TOS resolved from partial tag');
+  const cleaned = stripServiceHashtags('Новости #новостьТОСБГО #БОГАНА #БоганаСобытия', tosTags);
+  assert(!cleaned.includes('#новостьТОСБГО') && !cleaned.includes('#БОГАНА'), 'approved tags not removed');
+  assert(cleaned.includes('#БоганаСобытия'), 'unrelated hashtag lost when stripping service tags');
+  assert(makeTitle('Длинный ' + 'А'.repeat(200) + ' #новостьТОСБГО', tosTags).length <= 80, 'generated news title exceeds SEO limit');
+  const utcTime = Date.UTC(2026, 9, 29, 22, 30) / 1000;
+  assert(formatDate(utcTime) === '2026-10-30', 'Moscow publication calendar day not used');
+  console.log('VK hashtag parsing, SEO title and timezone regression OK');
+}
+
 runSelfTest();
+runImportTextRegressionTest();
 runMergeRetentionTest();
