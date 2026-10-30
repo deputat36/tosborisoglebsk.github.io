@@ -169,7 +169,14 @@ function main() {
     expectIncludes(errors, line, html, '/contacts/', 'contacts link is missing');
     expectIncludes(errors, line, html, '/partners/', 'partners link is missing');
     expectIncludes(errors, line, html, '/done/', 'done link is missing');
-    expectIncludes(errors, line, html, 'Как помочь', 'how-to-help block is missing');
+    if (item.content_origin === 'request') {
+      expectIncludes(errors, line, html, 'Как уточнить данные', 'editorial intake request must ask for information, not physical resources');
+      expectIncludes(errors, line, html, 'не требуется передавать деньги, вещи или материалы', 'editorial request safety statement is missing');
+      const correctionUrl = `/update-tos/?${item.tos_slug ? `tos=${item.tos_slug}&amp;` : ''}type=card#message-builder`;
+      expectIncludes(errors, line, html, `href="${correctionUrl}"`, 'editorial request card-correction link is missing');
+    } else {
+      expectIncludes(errors, line, html, 'Как помочь', 'how-to-help block is missing');
+    }
 
     if (needType) expectIncludes(errors, line, html, needType, 'need type is missing');
     if (priority) expectIncludes(errors, line, html, priority, 'priority is missing');
