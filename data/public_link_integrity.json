@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-30T18:43:58.248Z",
+  "generated_at": "2026-10-30T18:55:55.243Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 376,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/done/result-archive-needed-ipas/index.html",
       "status": 200,
-      "duration_ms": 1012,
-      "bytes": 7931
+      "duration_ms": 1063,
+      "bytes": 8284
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 181,
+      "duration_ms": 70,
       "bytes": 8695
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 39,
+      "bytes": 7931
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 98,
+      "duration_ms": 38,
       "bytes": 15978
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 96,
-      "bytes": 9430
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 96,
+      "duration_ms": 37,
       "bytes": 11768
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 36,
+      "bytes": 8158
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 35,
+      "bytes": 9430
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 94,
+      "duration_ms": 33,
       "bytes": 15879
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 94,
+      "duration_ms": 33,
       "bytes": 23099
     },
     {
-      "route": "/chairperson/conflicts/index.html",
+      "route": "/done/kalinka-kolodec-dusha-poselka-2023/index.html",
       "status": 200,
-      "duration_ms": 94,
-      "bytes": 8158
+      "duration_ms": 33,
+      "bytes": 7920
     },
     {
-      "route": "/create-tos/index.html",
+      "route": "/done/result-archive-needed-bogana/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 19408
-    },
-    {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 5818
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 23597
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 15409
-    },
-    {
-      "route": "/documents/templates/project-problem/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 9944
-    },
-    {
-      "route": "/documents/templates/tos-charter-draft/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 5626
-    },
-    {
-      "route": "/chairperson/meeting/index.html",
-      "status": 200,
-      "duration_ms": 9,
-      "bytes": 8176
+      "duration_ms": 22,
+      "bytes": 8280
     },
     {
       "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 9,
+      "duration_ms": 21,
       "bytes": 5404
     },
     {
-      "route": "/content-standards/index.html",
+      "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 9,
-      "bytes": 13193
+      "duration_ms": 21,
+      "bytes": 15409
     },
     {
-      "route": "/documents/templates/tos-creation-kit/index.html",
+      "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 9,
-      "bytes": 6200
+      "duration_ms": 19,
+      "bytes": 23597
     },
     {
-      "route": "/materials/index.html",
+      "route": "/check-tos/index.html",
       "status": 200,
-      "duration_ms": 9,
-      "bytes": 132650
+      "duration_ms": 18,
+      "bytes": 5818
     },
     {
-      "route": "/materials/project-bank/index.html",
+      "route": "/done/index.html",
       "status": 200,
-      "duration_ms": 9,
-      "bytes": 6660
+      "duration_ms": 18,
+      "bytes": 17466
+    },
+    {
+      "route": "/create-tos/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 12658
+    },
+    {
+      "route": "/done/result-archive-needed-mechta/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 8470
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 10450
+    },
+    {
+      "route": "/done/result-archive-needed-mirolyubie/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 8562
     }
   ]
 }
