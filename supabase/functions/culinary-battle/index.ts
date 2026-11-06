@@ -91,7 +91,9 @@ Deno.serve(async (req: Request) => {
       || req.headers.get('x-real-ip')
       || (req.headers.get('x-forwarded-for') || '').split(',')[0].trim()
       || 'unknown';
-    const clientDigest = await digest('client:' + clientIp + '|' + (req.headers.get('user-agent') || '').slice(0, 180));
+    // Without a trustworthy forwarded IP, avoid globally throttling all browsers with the same UA.
+    const clientDigest = await digest('client:' + clientIp + '|' + (req.headers.get('user-agent') || '').slice(0, 180)
+      + (clientIp === 'unknown' ? '|' + input.team_id : ''));
     const codeDigest = await digest('code:' + normalized);
     const result = await db('rpc/battle_reveal', 'POST', {
       p_event_slug: input.event,
