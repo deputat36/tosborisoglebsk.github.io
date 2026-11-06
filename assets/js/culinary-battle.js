@@ -5,6 +5,9 @@
   // Заменить только после создания отдельного проекта, миграции и проверки API.
   // Публичный URL Edge Function не является секретом. Никакие ключи не добавлять.
   const API_ENDPOINT = '';
+  // Пробный режим не обращается к API; не является ни жеребьёвкой, ни серверной авторизацией.
+  const isDemo = new URLSearchParams(location.search).get('demo') === '1';
+  let demoDishes = [];
   const $ = (id) => document.getElementById(id);
   const form = $('battle-form');
   if (!form) return;
@@ -48,13 +51,13 @@
     if (matching.some((t) => t.id === previous)) team.value = previous;
   }
   function updateControls() {
-    const enabled = Boolean(API_ENDPOINT) && ['open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 18;
+    const enabled = (isDemo || Boolean(API_ENDPOINT)) && ['open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 18;
     search.disabled = !enabled;
     team.disabled = !enabled;
     code.disabled = !enabled;
     visibility.disabled = !enabled;
     submit.disabled = !enabled;
-    submit.textContent = currentStatus === 'open' ? '✦ Вытянуть блюдо ✦' : 'Посмотреть своё блюдо';
+    submit.textContent = isDemo ? '✦ Вытянуть демо-блюдо ✦' : currentStatus === 'open' ? '✦ Вытянуть блюдо ✦' : 'Посмотреть своё блюдо';
   }
   async function request(path, options = {}) {
     const controller = new AbortController();
@@ -84,6 +87,55 @@
     }
   }
   async function initialize() {
+    if (isDemo) {
+      // Фиктивный набор допустим для проверки интерфейса и никогда не попадает в RPC.
+      try {
+        const response = await fetch('/culinary-battle/demo-data.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Демо-данные недоступны.');
+        const data = await response.json();
+        const valid = data.demo === true && data.teams?.length === 18 && data.dishes?.length === 18
+          && new Set(data.teams.map((t) => t.id)).size === 18
+          && new Set(data.teams.map((t) => t.name)).size === 18
+          && new Set(data.dishes.map((d) => d.title)).size === 18
+          && data.teams.every((t, i) => t.id === 'demo-' + String(i + 1).padStart(2, '0'))
+          && data.dishes.every((d) => typeof d.title === 'string');
+        if (!valid) throw new Error('Проверьте целостность тестовых списков.');
+        teams = data.teams;
+        demoDishes = data.dishes.map((d) => d.title);
+        currentStatus = 'open';
+        document.body.classList.add('battle-is-demo');
+        const demoBanner = document.createElement('div');
+        demoBanner.className = 'battle-demo-banner';
+        demoBanner.setAttribute('role', 'note');
+        demoBanner.textContent = 'ДЕМО · Учебные ТОСы и блюда. Результаты имитируются браузером, не являются секретными и не сохраняются на сервере.';
+        $('battle-panel').prepend(demoBanner);
+        document.querySelector('.battle-hint').textContent = 'Выберите учебную команду, введите её демонстрационный код и посмотрите, как откроется карточка.';
+        document.querySelector('.battle-warning').textContent = 'Это только проверка интерфейса. Для настоящего мероприятия коды и задания будут защищены сервером.';
+        document.querySelector('.battle-result-card .battle-small').textContent = 'Учебный результат не является конкурсным заданием. Его можно просмотреть повторно по тому же демонстрационному коду.';
+        const codeHint = document.createElement('p');
+        codeHint.id = 'battle-demo-code-hint';
+        codeHint.className = 'battle-demo-code-hint';
+        codeHint.setAttribute('aria-live', 'polite');
+        codeHint.textContent = 'Сначала выберите учебный ТОС, чтобы увидеть его демонстрационный код.';
+        code.after(codeHint);
+        const updateDemoCode = () => {
+          const index = teams.findIndex((entry) => entry.id === team.value);
+          codeHint.textContent = index < 0
+            ? 'Сначала выберите учебный ТОС, чтобы увидеть его демонстрационный код.'
+            : 'Демонстрационный код: DEMO-' + String(index + 1).padStart(2, '0') + '-2026';
+          code.value = '';
+        };
+        team.addEventListener('change', updateDemoCode);
+        search.addEventListener('input', updateDemoCode);
+        refreshOptions();
+        setStatus('Демонстрация открыта — все 18 учебных команд и 18 блюд доступны для проверки.', 'open');
+        updateControls();
+      } catch {
+        setStatus('Ошибка загрузки демонстрационных данных. Обновите страницу позже.', 'draft');
+        updateControls();
+      }
+      return;
+    }
     if (!API_ENDPOINT) {
       setStatus('Жеребьёвка готовится к запуску. Коды и задания появятся после утверждения участников.', 'draft');
       updateControls();
@@ -117,6 +169,21 @@
     }
   }
   search.addEventListener('input', refreshOptions);
+  function demoPick() {
+    const index = teams.findIndex((entry) => entry.id === team.value);
+    if (index < 0 || index >= 18) throw new Error('Выберите учебный ТОС из списка.');
+    const expectedCode = 'DEMO-' + String(index + 1).padStart(2, '0') + '-2026';
+    if (code.value.trim().toUpperCase() !== expectedCode) {
+      throw new Error('Для этого учебного ТОСа указан другой демо-код.');
+    }
+    // Условная взаимно-однозначная перестановка: gcd(5,18)=1.
+    // Не криптография и не настоящий доступ; назначение открыто в клиентском коде.
+    const dishIndex = (index * 5 + 7) % 18;
+    return { team_name: teams[index].name, dish_name: demoDishes[dishIndex] };
+  }
+  function displayTeamName(name) {
+    return /^(?:учебный\s+)?ТОС\b/i.test(name) ? name : 'ТОС «' + name + '»';
+  }
   visibility.addEventListener('click', () => {
     const show = code.type === 'password';
     code.type = show ? 'text' : 'password';
@@ -135,8 +202,8 @@
     busy = true;
     updateControls();
     try {
-      // Сервер фиксирует открытие до анимации; браузер не выбирает блюдо.
-      const data = await request('', {
+      // Только в демо результат имитируется браузером. В реальном режиме определяет сервер.
+      const data = isDemo ? demoPick() : await request('', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ event: EVENT_SLUG, team_id: team.value, code: code.value.trim() })
@@ -164,7 +231,7 @@
     const show = () => {
       reveal.classList.remove('is-playing');
       reveal.hidden = true;
-      $('battle-result-team').textContent = 'ТОС «' + resultData.team + '»';
+      $('battle-result-team').textContent = displayTeamName(resultData.team);
       $('battle-result-dish').textContent = resultData.dish;
       result.hidden = false;
       result.focus({ preventScroll: true });
@@ -246,7 +313,7 @@
     ctx.fillStyle = '#B62D36'; ctx.font = '900 61px system-ui, sans-serif';
     ctx.fillText('ПОЗДРАВЛЯЕМ!', 540, 456);
     ctx.fillStyle = '#33302C'; ctx.font = '800 51px system-ui, sans-serif';
-    drawWrapped(ctx, 'ТОС «' + resultData.team + '»', 540, 545, 850, 65, 3);
+    drawWrapped(ctx, displayTeamName(resultData.team), 540, 545, 850, 65, 3);
     ctx.fillStyle = '#77654E'; ctx.font = '750 40px system-ui, sans-serif';
     ctx.fillText('ВАШЕ БЛЮДО —', 540, 780);
     ctx.fillStyle = '#B62D36'; ctx.font = '900 71px system-ui, sans-serif';
@@ -254,6 +321,17 @@
     ctx.fillStyle = '#453D37'; ctx.font = '500 30px system-ui, sans-serif';
     ctx.fillText('Готовьте с душой и удивляйте соседей!', 540, 1130, 875);
     ctx.font = '700 28px system-ui, sans-serif'; ctx.fillText('tosborisoglebsk.ru', 540, 1220);
+    if (isDemo) {
+      ctx.save();
+      ctx.translate(540, 685);
+      ctx.rotate(-0.20);
+      ctx.textAlign = 'center';
+      ctx.globalAlpha = .24;
+      ctx.fillStyle = '#B62D36';
+      ctx.font = '900 100px system-ui, sans-serif';
+      ctx.fillText('ДЕМО · НЕ ДЛЯ БАТЛА', 0, 0, 950);
+      ctx.restore();
+    }
     const link = document.createElement('a');
     link.href = canvas.toDataURL('image/png');
     link.download = 'kulinarniy-batl-' + resultData.team.toLocaleLowerCase('ru').replace(/[^\p{L}\p{N}-]+/gu, '-').slice(0, 60) + '.png';
