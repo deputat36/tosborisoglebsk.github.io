@@ -50,3 +50,13 @@
 @media(max-width:900px){.battle-hero-grid{grid-template-columns:1fr 280px;gap:8px}.battle-layout{grid-template-columns:1fr}.battle-side{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.battle-hero{padding:26px 0 20px}.battle-hero-grid{grid-template-columns:1fr}.battle-intro h1{font-size:clamp(37px,9vw,54px);margin:17px 0}.battle-subtitle{font-size:19px;margin-bottom:17px}.battle-art{max-width:310px;margin:-13px auto -19px}.battle-chips span{font-size:11px;padding:7px 10px}.battle-main-section{padding-bottom:24px}.battle-side{grid-template-columns:1fr}.battle-panel,.battle-howto{border-radius:22px;padding:22px}.battle-howto ol{margin-top:20px}.battle-message{padding:18px}.battle-result-section{padding-bottom:45px}.battle-reveal,.battle-result-card{border-radius:23px}}
 @media(prefers-reduced-motion:reduce){.battle-draw-button,.battle-back,.battle-confetti-piece{animation:none!important;transition:none!important}}
+
+/* The selected center card enlarges and flips after the shuffle ends. */
+.battle-reveal.is-finishing .battle-back:not(:nth-child(3)){opacity:0;transform:translateY(26px) scale(.82);transition:opacity .35s,transform .5s}
+.battle-reveal.is-finishing .battle-back:nth-child(3){position:relative;z-index:2;animation:battle-final-flip 1s cubic-bezier(.25,.78,.27,1) forwards}
+@keyframes battle-final-flip{
+  0%{transform:translateY(0) scale(1) rotateY(0)}
+  45%{transform:translateY(-16px) scale(1.45) rotateY(0)}
+  100%{transform:translateY(-16px) scale(1.65) rotateY(180deg)}
+}
+@media(prefers-reduced-motion:reduce){.battle-reveal.is-finishing .battle-back{animation:none!important;transition:none!important}}
