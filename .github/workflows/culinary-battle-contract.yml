@@ -1,0 +1,39 @@
+name: Culinary battle contracts
+on:
+  pull_request:
+    branches: [release-2025-12-22]
+    paths:
+      - 'culinary-battle/**'
+      - 'assets/css/culinary-battle.css'
+      - 'assets/js/culinary-battle.js'
+      - 'scripts/prepare_culinary_battle.mjs'
+      - 'scripts/test_culinary_battle_contract.js'
+      - 'supabase/**'
+      - '.github/workflows/culinary-battle-contract.yml'
+  push:
+    branches: [feature/culinary-battle-2026]
+    paths:
+      - 'culinary-battle/**'
+      - 'assets/css/culinary-battle.css'
+      - 'assets/js/culinary-battle.js'
+      - 'scripts/prepare_culinary_battle.mjs'
+      - 'scripts/test_culinary_battle_contract.js'
+      - 'supabase/**'
+      - '.github/workflows/culinary-battle-contract.yml'
+permissions:
+  contents: read
+jobs:
+  synthetic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check client and preparation code syntax
+        run: |
+          node --check assets/js/culinary-battle.js
+          node --check scripts/prepare_culinary_battle.mjs
+          node --check scripts/test_culinary_battle_contract.js
+      - name: Synthetic 18-team and secret-leak regression
+        run: node scripts/test_culinary_battle_contract.js
