@@ -10,7 +10,11 @@ const allowedReferenceFiles = new Set([
   'data/foreign_module_inventory.json',
   'docs/NAV-V2-ISOLATION.md',
   'docs/AUDIT-2026-07-10.md',
-  'docs/STATUS.md'
+  'docs/STATUS.md',
+  // Dedicated Culinary Battle integration only: no broad Supabase allowlist.
+  'docs/CULINARY-BATTLE.md',
+  'docs/DECISIONS.md',
+  'scripts/test_culinary_battle_contract.js'
 ]);
 
 const ignoredDirs = new Set([

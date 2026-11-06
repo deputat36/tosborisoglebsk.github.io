@@ -1,0 +1,73 @@
+name: Culinary battle contracts
+on:
+  pull_request:
+    branches: [release-2025-12-22]
+    paths:
+      - 'culinary-battle/**'
+      - 'assets/css/culinary-battle.css'
+      - 'assets/js/culinary-battle.js'
+      - 'scripts/prepare_culinary_battle.mjs'
+      - 'scripts/test_culinary_battle_contract.js'
+      - 'scripts/test_culinary_battle_browser.js'
+      - 'supabase/**'
+      - '.github/workflows/culinary-battle-contract.yml'
+  push:
+    branches: [feature/culinary-battle-2026]
+    paths:
+      - 'culinary-battle/**'
+      - 'assets/css/culinary-battle.css'
+      - 'assets/js/culinary-battle.js'
+      - 'scripts/prepare_culinary_battle.mjs'
+      - 'scripts/test_culinary_battle_contract.js'
+      - 'scripts/test_culinary_battle_browser.js'
+      - 'supabase/**'
+      - '.github/workflows/culinary-battle-contract.yml'
+permissions:
+  contents: read
+jobs:
+  synthetic-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Check client and preparation code syntax
+        run: |
+          node --check assets/js/culinary-battle.js
+          node --check scripts/prepare_culinary_battle.mjs
+          node --check scripts/test_culinary_battle_contract.js
+      - name: Synthetic 18-team and secret-leak regression
+        run: node scripts/test_culinary_battle_contract.js
+
+  browser-demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install browser test dependency
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local static preview
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/culinary-preview-server.log 2>&1 &
+          for attempt in $(seq 1 25); do
+            if curl -fsS http://127.0.0.1:4173/culinary-battle/demo-data.json > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/culinary-preview-server.log
+          exit 1
+      - name: Exercise the 18x18 demo in Chromium
+        run: node scripts/test_culinary_battle_browser.js
+      - name: Upload demo screenshot and PNG evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: culinary-battle-demo-screenshots
+          path: .artifacts/culinary-battle/
+          if-no-files-found: warn
+          retention-days: 14
