@@ -167,8 +167,186 @@ declare
   v_new boolean := false;
   v_now timestamptz := clock_timestamp();
 begin
-  if p_code_digest !~ '^[a-f0-9]{64}$'
-     or p_client_digest !~ '^[a-f0-9]{64}$' then
+  if p_code_digest is null or p_client_digest is null
+     or p_code_digest !~ '^[a-f0-9]{64}
+    return jsonb_build_object('error','invalid_credentials');
+  end if;
+  select * into v_event from public.battle_events
+    where slug = p_event_slug for share;
+  if not found then return jsonb_build_object('error','invalid_credentials'); end if;
+  -- The current team row is locked so simultaneous requests cannot reveal twice.
+  select * into v_team from public.battle_teams
+    where id = p_team_id and event_id = v_event.id for update;
+  if not found then return jsonb_build_object('error','invalid_credentials'); end if;
+
+  insert into public.battle_rate_limits(identity,window_started,attempts)
+    values ('ip:' || v_event.id || ':' || p_client_digest, v_now, 1)
+    on conflict (identity) do update set
+      attempts = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then 1 else public.battle_rate_limits.attempts + 1 end,
+      window_started = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then v_now else public.battle_rate_limits.window_started end
+    returning attempts into v_ip_attempts;
+
+  insert into public.battle_rate_limits(identity,window_started,attempts)
+    values ('team:' || v_event.id || ':' || v_team.id, v_now, 1)
+    on conflict (identity) do update set
+      attempts = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then 1 else public.battle_rate_limits.attempts + 1 end,
+      window_started = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then v_now else public.battle_rate_limits.window_started end
+    returning attempts into v_team_attempts;
+
+  if v_ip_attempts > 12 or v_team_attempts > 30 then
+    insert into public.battle_actions(event_id,team_id,action,client_digest)
+      values(v_event.id,v_team.id,'rate_limited',p_client_digest);
+    return jsonb_build_object('error','rate_limited');
+  end if;
+
+  if v_team.code_digest <> p_code_digest then
+    insert into public.battle_actions(event_id,team_id,action,client_digest)
+      values(v_event.id,v_team.id,'invalid_code',p_client_digest);
+    return jsonb_build_object('error','invalid_credentials');
+  end if;
+
+  select * into v_assignment from public.battle_assignments
+    where event_id = v_event.id and team_id = v_team.id for update;
+  if not found then return jsonb_build_object('error','unavailable'); end if;
+
+  if v_assignment.revealed_at is null then
+    if v_event.status <> 'open' then
+      insert into public.battle_actions(event_id,team_id,action,client_digest)
+        values(v_event.id,v_team.id,'blocked',p_client_digest);
+      return jsonb_build_object('error', case when v_event.status in ('closed','published')
+                                      then 'closed' else 'not_open' end);
+    end if;
+    update public.battle_assignments
+      set revealed_at = v_now where event_id = v_event.id and team_id = v_team.id
+      returning * into v_assignment;
+    v_new := true;
+  end if;
+  select title into v_dish from public.battle_dishes
+    where event_id = v_event.id and id = v_assignment.dish_id;
+  insert into public.battle_actions(event_id,team_id,action,client_digest)
+    values(v_event.id,v_team.id,case when v_new then 'revealed' else 'viewed' end,p_client_digest);
+  return jsonb_build_object('team_name',v_team.name,'dish_name',v_dish,
+      'revealed_at',v_assignment.revealed_at,'first_open',v_new);
+end $$;
+
+-- The Data API must NEVER return assignments or code digests to public roles.
+alter table public.battle_events enable row level security;
+alter table public.battle_teams enable row level security;
+alter table public.battle_dishes enable row level security;
+alter table public.battle_assignments enable row level security;
+alter table public.battle_actions enable row level security;
+alter table public.battle_rate_limits enable row level security;
+
+revoke all on public.battle_events,public.battle_teams,public.battle_dishes,
+  public.battle_assignments,public.battle_actions,public.battle_rate_limits
+  from public, anon, authenticated;
+-- Explicit service-role grants: some isolated projects customize default grants.
+grant select,insert,update,delete on public.battle_events,public.battle_teams,
+  public.battle_dishes,public.battle_assignments,public.battle_actions,
+  public.battle_rate_limits to service_role;
+grant usage,select on sequence public.battle_actions_id_seq to service_role;
+revoke all on function public.battle_reveal(text,uuid,text,text) from public,anon,authenticated;
+grant execute on function public.battle_reveal(text,uuid,text,text) to service_role;
+revoke all on function public.battle_guard_event(),public.battle_guard_assignment(),
+  public.battle_guard_roster() from public,anon,authenticated;
+
+commit;
+
+     or p_client_digest !~ '^[a-f0-9]{64}
+    return jsonb_build_object('error','invalid_credentials');
+  end if;
+  select * into v_event from public.battle_events
+    where slug = p_event_slug for share;
+  if not found then return jsonb_build_object('error','invalid_credentials'); end if;
+  -- The current team row is locked so simultaneous requests cannot reveal twice.
+  select * into v_team from public.battle_teams
+    where id = p_team_id and event_id = v_event.id for update;
+  if not found then return jsonb_build_object('error','invalid_credentials'); end if;
+
+  insert into public.battle_rate_limits(identity,window_started,attempts)
+    values ('ip:' || v_event.id || ':' || p_client_digest, v_now, 1)
+    on conflict (identity) do update set
+      attempts = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then 1 else public.battle_rate_limits.attempts + 1 end,
+      window_started = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then v_now else public.battle_rate_limits.window_started end
+    returning attempts into v_ip_attempts;
+
+  insert into public.battle_rate_limits(identity,window_started,attempts)
+    values ('team:' || v_event.id || ':' || v_team.id, v_now, 1)
+    on conflict (identity) do update set
+      attempts = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then 1 else public.battle_rate_limits.attempts + 1 end,
+      window_started = case
+        when public.battle_rate_limits.window_started < v_now - interval '15 minutes'
+          then v_now else public.battle_rate_limits.window_started end
+    returning attempts into v_team_attempts;
+
+  if v_ip_attempts > 12 or v_team_attempts > 30 then
+    insert into public.battle_actions(event_id,team_id,action,client_digest)
+      values(v_event.id,v_team.id,'rate_limited',p_client_digest);
+    return jsonb_build_object('error','rate_limited');
+  end if;
+
+  if v_team.code_digest <> p_code_digest then
+    insert into public.battle_actions(event_id,team_id,action,client_digest)
+      values(v_event.id,v_team.id,'invalid_code',p_client_digest);
+    return jsonb_build_object('error','invalid_credentials');
+  end if;
+
+  select * into v_assignment from public.battle_assignments
+    where event_id = v_event.id and team_id = v_team.id for update;
+  if not found then return jsonb_build_object('error','unavailable'); end if;
+
+  if v_assignment.revealed_at is null then
+    if v_event.status <> 'open' then
+      insert into public.battle_actions(event_id,team_id,action,client_digest)
+        values(v_event.id,v_team.id,'blocked',p_client_digest);
+      return jsonb_build_object('error', case when v_event.status in ('closed','published')
+                                      then 'closed' else 'not_open' end);
+    end if;
+    update public.battle_assignments
+      set revealed_at = v_now where event_id = v_event.id and team_id = v_team.id
+      returning * into v_assignment;
+    v_new := true;
+  end if;
+  select title into v_dish from public.battle_dishes
+    where event_id = v_event.id and id = v_assignment.dish_id;
+  insert into public.battle_actions(event_id,team_id,action,client_digest)
+    values(v_event.id,v_team.id,case when v_new then 'revealed' else 'viewed' end,p_client_digest);
+  return jsonb_build_object('team_name',v_team.name,'dish_name',v_dish,
+      'revealed_at',v_assignment.revealed_at,'first_open',v_new);
+end $$;
+
+-- The Data API must NEVER return assignments or code digests to public roles.
+alter table public.battle_events enable row level security;
+alter table public.battle_teams enable row level security;
+alter table public.battle_dishes enable row level security;
+alter table public.battle_assignments enable row level security;
+alter table public.battle_actions enable row level security;
+alter table public.battle_rate_limits enable row level security;
+
+revoke all on public.battle_events,public.battle_teams,public.battle_dishes,
+  public.battle_assignments,public.battle_actions,public.battle_rate_limits
+  from public, anon, authenticated;
+revoke all on function public.battle_reveal(text,uuid,text,text) from public,anon,authenticated;
+grant execute on function public.battle_reveal(text,uuid,text,text) to service_role;
+revoke all on function public.battle_guard_event(),public.battle_guard_assignment(),
+  public.battle_guard_roster() from public,anon,authenticated;
+
+commit;
+ then
     return jsonb_build_object('error','invalid_credentials');
   end if;
   select * into v_event from public.battle_events
