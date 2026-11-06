@@ -1,4 +1,4 @@
-/* Клиентская часть жеребьёвки. В этом файле нет назначений, кодов и закрытых данных. */
+/* Клиентская часть. Здесь нет реальных кодов и назначений; отдельный деморежим использует публичную учебную перестановку. */
 (() => {
   'use strict';
   const EVENT_SLUG = 'culinary-battle-2026';
@@ -117,7 +117,7 @@
         codeHint.className = 'battle-demo-code-hint';
         codeHint.setAttribute('aria-live', 'polite');
         codeHint.textContent = 'Сначала выберите учебный ТОС, чтобы увидеть его демонстрационный код.';
-        code.after(codeHint);
+        code.closest('.battle-code-field').after(codeHint);
         const updateDemoCode = () => {
           const index = teams.findIndex((entry) => entry.id === team.value);
           codeHint.textContent = index < 0
@@ -182,7 +182,7 @@
     return { team_name: teams[index].name, dish_name: demoDishes[dishIndex] };
   }
   function displayTeamName(name) {
-    return /^(?:учебный\s+)?ТОС\b/i.test(name) ? name : 'ТОС «' + name + '»';
+    return /^(?:учебный\s+)?ТОС(?=\s|«|$)/i.test(name) ? name : 'ТОС «' + name + '»';
   }
   visibility.addEventListener('click', () => {
     const show = code.type === 'password';
