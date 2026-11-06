@@ -175,15 +175,22 @@
     return new Promise((resolve) => {
       let finished = false;
       let timer;
+      let flipTimer;
       const finish = () => {
         if (finished) return;
         finished = true;
         clearTimeout(timer);
+        clearTimeout(flipTimer);
+        reveal.classList.remove('is-finishing');
         skip.removeEventListener('click', finish);
         show();
         resolve();
       };
       skip.addEventListener('click', finish);
+      flipTimer = setTimeout(() => {
+        reveal.classList.remove('is-playing');
+        reveal.classList.add('is-finishing');
+      }, 2500);
       timer = setTimeout(finish, 3600);
     });
   }
