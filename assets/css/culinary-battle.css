@@ -60,3 +60,9 @@
   100%{transform:translateY(-16px) scale(1.65) rotateY(180deg)}
 }
 @media(prefers-reduced-motion:reduce){.battle-reveal.is-finishing .battle-back{animation:none!important;transition:none!important}}
+
+/* Demo is explicitly opt-in (?demo=1) and can never be mistaken for the real draw. */
+.battle-demo-banner{margin:0 0 19px;padding:14px 17px;border:2px dashed #B62D36;border-radius:17px;background:color-mix(in srgb,#D3A33D 14%,var(--surface));color:var(--text);font-weight:850;font-size:14px;line-height:1.55}
+.battle-demo-code-hint{margin:5px 0 8px;padding:11px 14px;border-radius:12px;background:color-mix(in srgb,var(--accent) 18%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 48%,var(--line));color:var(--text);font-size:14px;font-weight:850;overflow-wrap:anywhere}
+.battle-is-demo .battle-result-card:before{content:"УЧЕБНАЯ КАРТОЧКА · ДЕМО";position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.08em;font-weight:900;color:var(--brand);white-space:nowrap}
+.battle-is-demo .battle-result-card{padding-top:53px}
