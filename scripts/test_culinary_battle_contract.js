@@ -49,6 +49,25 @@ try {
   assert.match(sql, /enable row level security/g);
   assert.match(sql, /revoke all on public\.battle_events/);
   assert.match(sql, /security definer/);
+  // Explicitly synthetic preview data: no actual teams, server codes, or results.
+  const demo = JSON.parse(fs.readFileSync(path.join(repo, 'culinary-battle/demo-data.json'), 'utf8'));
+  assert.equal(demo.demo, true);
+  assert.equal(demo.teams.length, 18);
+  assert.equal(demo.dishes.length, 18);
+  assert.equal(new Set(demo.teams.map((x) => x.id)).size, 18);
+  assert.equal(new Set(demo.teams.map((x) => x.name.toLowerCase())).size, 18);
+  assert.equal(new Set(demo.dishes.map((x) => x.title.toLowerCase())).size, 18);
+  assert.ok(demo.teams.every((x, i) => x.id === 'demo-' + String(i + 1).padStart(2, '0')));
+  assert.ok(demo.teams.every((x) => x.name.startsWith('Учебный ТОС')));
+  assert.equal(new Set(demo.teams.map((_, i) => (i * 5 + 7) % 18)).size, 18);
+  assert.match(js, /new URLSearchParams\(location\.search\)\.get\('demo'\)/);
+  assert.match(js, /const data = isDemo \? demoPick\(\) : await request/);
+  assert.match(js, /if \(isDemo\) \{/);
+  assert.match(js, /ДЕМО · НЕ ДЛЯ БАТЛА/);
+  assert.ok(!JSON.stringify(demo).includes('code_digest'));
+  assert.ok(!JSON.stringify(demo).includes('revealed_at'));
+  assert.ok(!JSON.stringify(demo).includes('SUPABASE_SERVICE_ROLE_KEY'));
+
   console.log('Synthetic 18x18 and static security contract: PASS');
 } finally {
   fs.rmSync(work, { recursive: true, force: true });
