@@ -11,8 +11,10 @@ try {
   const teams = path.join(work, 'teams.txt');
   const dishes = path.join(work, 'dishes.txt');
   const output = path.join(work, 'private');
-  fs.writeFileSync(teams, Array.from({ length: 18 }, (_, i) => 'Тестовый ТОС ' + (i + 1)).join('\n'));
-  fs.writeFileSync(dishes, Array.from({ length: 18 }, (_, i) => 'Тестовое блюдо ' + (i + 1)).join('\n'));
+  const demoFixture = JSON.parse(fs.readFileSync(path.join(repo, 'culinary-battle/demo-data.json'), 'utf8'));
+  assert.equal(demoFixture.demo, true);
+  fs.writeFileSync(teams, demoFixture.teams.map((item) => item.name).join('\n'));
+  fs.writeFileSync(dishes, demoFixture.dishes.map((item) => item.title).join('\n'));
   const result = execFileSync(process.execPath, [
     'scripts/prepare_culinary_battle.mjs', '--teams', teams, '--dishes', dishes,
     '--output', output, '--slug', 'test-battle-2026'
