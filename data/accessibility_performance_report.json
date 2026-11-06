@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T19:51:27.925Z",
+  "generated_at": "2026-11-06T12:36:39.808Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,7 +9,7 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 447,
+    "html_pages": 448,
     "public_pages": 386,
     "pages_with_issues": 0,
     "issue_counts": {},
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 124,
+    "asset_files": 126,
     "over_budget_assets": 0,
-    "total_css_bytes": 65504,
-    "total_js_bytes": 718103,
+    "total_css_bytes": 76408,
+    "total_js_bytes": 736461,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -75,6 +75,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 18681,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/culinary-battle.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 18358,
       "over_budget": false
     },
     {
@@ -176,6 +183,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/css/culinary-battle.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 10904,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/projects.js",
       "group": "js",
       "extension": ".js",
@@ -222,20 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 9688,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/project-budget.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9443,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/news.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9175,
       "over_budget": false
     }
   ],

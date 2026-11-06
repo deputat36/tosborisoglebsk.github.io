@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T19:51:28.148Z",
+  "generated_at": "2026-11-06T12:36:40.063Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-10-30T19:51:44.219Z",
+    "generated_at": "2026-11-06T12:36:59.262Z",
     "stale_after_days": 180,
     "total_tos": 24,
     "high_priority": 4,
@@ -55,9 +55,9 @@
     "average_score": 78
   },
   "pages": {
-    "total": 445,
+    "total": 446,
     "public": 386,
-    "noindex": 59,
+    "noindex": 60,
     "seo_warnings_count": 0,
     "broken_internal_links_count": 0
   },
@@ -195,7 +195,7 @@
     {
       "level": "good",
       "area": "Техническая база",
-      "finding": "Собрано 445 HTML-страниц, из них 386 публичных и 59 служебных."
+      "finding": "Собрано 446 HTML-страниц, из них 386 публичных и 60 служебных."
     },
     {
       "level": "good",
@@ -296,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-10-30T19:51:25.826Z",
+    "generated_at": "2026-11-06T12:36:37.231Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -344,7 +344,7 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-10-30T19:51:31.705Z",
+    "generated_at": "2026-11-06T12:36:43.703Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
@@ -404,9 +404,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Generate TOS pages",
-      "run_id": "41118576507",
-      "run_number": "1970",
-      "commit_sha": "7ba81b3366b3beba1155147099302851896a8e48"
+      "run_id": "42218937111",
+      "run_number": "1988",
+      "commit_sha": "da07b7298e5602998f87519bb2d27cfcf4bf04e8"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-10-30T19:51:44.219Z",
+    "generated_at": "2026-11-06T12:36:59.262Z",
     "total_tos": 24,
     "with_substantive_content": 22,
     "with_verified_content": 22,
