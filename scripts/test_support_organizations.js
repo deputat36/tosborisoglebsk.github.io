@@ -20,6 +20,7 @@ for (const org of orgs) {
 for (const item of grants) {
   assert(hub.includes(`id="grant-${item.id}"`), 'every opportunity is readable without JavaScript');
   if (item.organization_url) assert(paths.has(item.organization_url), 'no link to an unknown organization');
+  for (const label of Object.values(item.project_labels || {})) assert(/[А-Яа-яЁё]/.test(label), 'project links use reader-facing titles');
 }
 const local = orgs.find(org => org.id === 'budushchee-borisoglebska');
 assert(local.sections.some(section => section.paragraphs.some(text => text.includes('Содержание вложений ВК'))), 'unchecked eligibility remains visible');

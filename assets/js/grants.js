@@ -23,7 +23,7 @@ function grantProjectLinks(item) {
   const links = Array.isArray(item.project_links) ? item.project_links.filter(Boolean).slice(0, 6) : [];
   if (!links.length) return '';
 
-  return `<div class="card-actions">${links.map((slug) => `<a class="btn" href="/projects/${grantsEsc(slug)}/">${grantsEsc(slug.replace(/-/g, ' '))}</a>`).join('')}</div>`;
+  return `<div class="card-actions">${links.map((slug) => `<a class="btn" href="/projects/${grantsEsc(slug)}/">${grantsEsc(item.project_labels?.[slug] || 'Пример проекта ТОС')}</a>`).join('')}</div>`;
 }
 
 function grantPrepareList(item) {

@@ -48,7 +48,13 @@ function replaceBlock(html, key, body) {
 function main() {
   const orgs=read('data/support_organizations.json');
   assert.equal(new Set(orgs.map(o=>o.id)).size,orgs.length);
-  const grants=read('data/grants.json').filter(grantsPublished);
+  const allGrants=read('data/grants.json');
+  const projectTitles=new Map(read('data/projects.json').map(project=>[project.id,project.title]));
+  allGrants.forEach(item=>{
+    item.project_labels=Object.fromEntries((item.project_links||[]).filter(id=>projectTitles.has(id)).map(id=>[id,projectTitles.get(id)]));
+  });
+  fs.writeFileSync(path.join(root,'data/grants.json'),JSON.stringify(allGrants,null,2)+'\n');
+  const grants=allGrants.filter(grantsPublished);
   const file=path.join(root,'grants/index.html');let html=fs.readFileSync(file,'utf8');
   const header=html.slice(html.indexOf('<header'),html.indexOf('</header>')+9);
   const footer=html.slice(html.indexOf('<footer'),html.indexOf('</footer>')+9);
