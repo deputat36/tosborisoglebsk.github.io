@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-11T13:07:36.654Z",
-  "total": 389,
+  "generated_at": "2026-11-11T18:58:31.170Z",
+  "total": 394,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -519,10 +519,37 @@
       "content_origin": "reference"
     },
     {
+      "path": "grants/budushchee-borisoglebska/index.html",
+      "url": "https://tosborisoglebsk.ru/grants/budushchee-borisoglebska/",
+      "title": "«Будущее Борисоглебска»: фонд и конкурс инициатив | ТОС БГО",
+      "description": "Фонд помогает развивать общественно полезные инициативы для Борисоглебска: от предложения идеи до привлечения ресурсов и отчёта о результате.",
+      "section": "Конкурсы",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
+      "path": "grants/obraz-budushchego/index.html",
+      "url": "https://tosborisoglebsk.ru/grants/obraz-budushchego/",
+      "title": "«Образ Будущего»: программы и гранты для ТОС | ТОС БГО",
+      "description": "Конкурсы для ТОС, некоммерческих организаций и активных жителей Воронежской области. Выбирайте программу по статусу заявителя и содержанию проекта.",
+      "section": "Конкурсы",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
       "path": "grants/index.html",
       "url": "https://tosborisoglebsk.ru/grants/",
       "title": "Поддержка проектов ТОС БГО — региональные организации, конкурсы и гранты",
       "description": "Навигатор поддержки проектов ТОС БГО: региональные конкурсы, партнёры, ассоциации, инициативные проекты, НКО и федеральные возможности.",
+      "section": "Конкурсы",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
+      "path": "grants/sovet-municipalnyh-obrazovaniy/index.html",
+      "url": "https://tosborisoglebsk.ru/grants/sovet-municipalnyh-obrazovaniy/",
+      "title": "Совет муниципальных образований: поддержка ТОС | ТОС БГО",
+      "description": "Региональная организация муниципального сообщества, участвующая в конкурсах проектов ТОС, обучении и обмене практиками. Для каждого формата действуют…",
       "section": "Конкурсы",
       "search_group": "guides",
       "content_origin": "reference"
@@ -1455,6 +1482,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "news/sovet-kray-rodnoy-deadline-2026-11/index.html",
+      "url": "https://tosborisoglebsk.ru/news/sovet-kray-rodnoy-deadline-2026-11/",
+      "title": "Акция для ТОС «Край родной, навек любимый»: срок 15 ноября | ТОС БГО",
+      "description": "По опубликованным условиям Ассоциации ссылки на материалы мероприятий направляют до 15 ноября 2026 года. Это акция с поощрениями, а не грант на благоустройство.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
       "path": "news/voronezh-tos-krai-rodnoi-action-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/voronezh-tos-krai-rodnoi-action-2026/",
       "title": "Акция ТОС «Край родной, навек любимый»: участие до 15 ноября | ТОС БГО",
@@ -2107,6 +2143,15 @@
       "url": "https://tosborisoglebsk.ru/news/chkalovec-centr-prityazheniya-2024/",
       "title": "ТОС «Чкаловец» создал центр «Связь поколений» для мероприятий жителей | ТОС БГО",
       "description": "Закрытая беседка «Центр притяжения — связь поколений» стала местом для культурных, патриотических и обучающих мероприятий жителей дома на Аэродромной, 22.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "verified"
+    },
+    {
+      "path": "news/fond-borisoglebsk-contest-2026-11/index.html",
+      "url": "https://tosborisoglebsk.ru/news/fond-borisoglebsk-contest-2026-11/",
+      "title": "Фонд «Будущее Борисоглебска»: конкурс до 30 ноября | ТОС БГО",
+      "description": "По объявлению второго конкурса «Люби город. Создавай будущее» поддержка составляет до 100 тысяч рублей. Требования к заявителю нужно сверить с положением.",
       "section": "Новости",
       "search_group": "news",
       "content_origin": "verified"

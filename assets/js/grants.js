@@ -1,6 +1,7 @@
 (() => {
 'use strict';
-const core = window.GrantsCore;
+const isNode = typeof module === 'object' && Boolean(module.exports);
+const core = isNode ? require('./grants-core') : window.GrantsCore;
 if (!core) return;
 const grantsEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
   '&': '&amp;',
@@ -11,6 +12,12 @@ const grantsEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => (
 }[char]));
 
 const grantsPublished = (item) => item && item.status !== 'draft';
+
+function grantOrganizationLink(item) {
+  const href = String(item.organization_url || '');
+  return /^\/grants\/[a-z0-9-]+\/$/.test(href)
+    ? `<a class="btn" href="${grantsEsc(href)}">Об организации и программах</a>` : '';
+}
 
 function grantProjectLinks(item) {
   const links = Array.isArray(item.project_links) ? item.project_links.filter(Boolean).slice(0, 6) : [];
@@ -23,7 +30,7 @@ function grantPrepareList(item) {
   const steps = Array.isArray(item.prepare) ? item.prepare.filter(Boolean).slice(0, 5) : [];
   if (!steps.length) return '';
 
-  return `<div class="notice"><b style="color:var(--text)">Что подготовить</b><br>${steps.map((step) => `- ${grantsEsc(step)}`).join('<br>')}</div>`;
+  return `<div class="notice"><b>Что подготовить</b><br>${steps.map((step) => `- ${grantsEsc(step)}`).join('<br>')}</div>`;
 }
 
 function grantCard(item) {
@@ -36,7 +43,7 @@ function grantCard(item) {
     </div>
     <h3>${grantsEsc(item.title || 'Возможность поддержки')}</h3>
     <p>${grantsEsc(item.best_for || item.directions || '')}</p>
-    <div class="grid" style="margin:14px 0">
+    <div class="grid">
       <article class="card"><div class="card-inner"><span class="tag">Статус</span><p>${grantsEsc(core.statusLabel(item))}</p></div></article>
       <article class="card"><div class="card-inner"><span class="tag">Сумма / ресурс</span><p>${grantsEsc(item.amount || 'Уточняется')}</p></div></article>
       <article class="card"><div class="card-inner"><span class="tag">Срок</span><p>${grantsEsc(item.deadline || 'Уточняется')}</p></div></article>
@@ -51,6 +58,7 @@ function grantCard(item) {
       <a class="btn" href="/update-tos/?type=project#message-builder">Предложить проект</a>
       ${source}
       ${conditions}
+      ${grantOrganizationLink(item)}
     </div>
     ${grantProjectLinks(item)}
   </article>`;
@@ -62,7 +70,7 @@ function grantSummary(item) {
     <h3>${grantsEsc(item.title)}</h3>
     <p><b>Кому подходит:</b> ${grantsEsc(item.who)}</p>
     <p class="tiny">${grantsEsc(item.note)}</p>
-    <div class="card-actions"><a class="btn primary" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Объявление организатора</a><a class="btn" href="#grant-${grantsEsc(item.id)}">Что подготовить</a></div>
+    <div class="card-actions"><a class="btn primary" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Открыть объявление</a><a class="btn" href="#grant-${grantsEsc(item.id)}">Что подготовить</a>${grantOrganizationLink(item)}</div>
   </article>`;
 }
 
@@ -92,9 +100,15 @@ async function renderGrants() {
     // Keep a tab left open over a deadline from advertising an expired call.
     setInterval(render, 60000);
   } catch (error) {
-    root.innerHTML = '<div class="empty">Не удалось обновить список. Откройте объявления организаторов выше или попробуйте обновить страницу позже.</div>';
+    const message = '<div class="notice">Не удалось обновить список. Ниже сохранена датированная подборка. Перед подачей проверьте сроки и изменения у организатора.</div>';
+    if (root.querySelector('[data-grant-id]')) root.insertAdjacentHTML('afterbegin', message);
+    else root.innerHTML = message;
   }
 }
 
+if (isNode) {
+  module.exports = { grantCard, grantSummary, grantOrganizationLink, grantsPublished };
+  return;
+}
 renderGrants();
 })();

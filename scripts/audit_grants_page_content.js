@@ -46,7 +46,7 @@ function main() {
   expectIncludes(errors, 'grants index', html, 'Федеральные платформы Добро.рф, #МЫВМЕСТЕ и Росмолодёжь оставлены как дополнительные возможности', 'federal-platform caution is missing');
   expectIncludes(errors, 'grants index', html, 'Региональная экосистема ТОС Воронежской области', 'regional ecosystem block is missing');
   expectIncludes(errors, 'grants index', html, 'Конкурс проектов ТОС Воронежской области', 'regional TOS contest block is missing');
-  expectIncludes(errors, 'grants index', html, 'Ассоциация муниципальных образований', 'municipal association block is missing');
+  expectIncludes(errors, 'grants index', html, 'Ассоциация «Совет муниципальных образований Воронежской области»', 'municipal association block is missing');
   expectIncludes(errors, 'grants index', html, 'Ассоциации и объединения ТОС', 'TOS association block is missing');
   expectIncludes(errors, 'grants index', html, 'id="opportunity-check"', 'opportunity verification block is missing');
   expectIncludes(errors, 'grants index', html, 'Как проверить конкретную возможность', 'opportunity verification heading is missing');

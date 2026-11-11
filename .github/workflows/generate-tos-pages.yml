@@ -168,6 +168,10 @@ jobs:
         run: node scripts/generate_news_pages.js
       - name: Generate material pages
         run: node scripts/generate_material_pages.js
+      - name: Generate support organization pages and readable opportunities
+        run: node scripts/generate_support_pages.js
+      - name: Check support profiles and static opportunity coverage
+        run: node scripts/test_support_organizations.js
       - name: Generate readable collection fallbacks
         run: node scripts/generate_collection_fallbacks.js
       - name: Generate done pages
