@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-11T13:07:16.053Z",
+  "generated_at": "2026-11-11T19:16:01.439Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 462,
-    "public_pages": 399,
+    "html_pages": 467,
+    "public_pages": 404,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 126,
+    "asset_files": 127,
     "over_budget_assets": 0,
-    "total_css_bytes": 76408,
-    "total_js_bytes": 736519,
+    "total_css_bytes": 76595,
+    "total_js_bytes": 737204,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false

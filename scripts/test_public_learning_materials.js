@@ -11,7 +11,10 @@ const routes = [
   ['future', '/materials/territory-future-workshop/', 'Источники и границы применения'],
   ['zhkh-guide', '/residents/zhkh/', 'На чём основаны рекомендации'],
   ...JSON.parse(fs.readFileSync('data/articles.json', 'utf8')).filter(article => article.topic === 'zhkh')
-    .map(article => [article.id, `/materials/${article.id}/`, 'Источники и границы применения'])
+    .map(article => [article.id, `/materials/${article.id}/`, 'Источники и границы применения']),
+  ['support-index', '/grants/', 'Грантодатели и организации поддержки ТОС'],
+  ...JSON.parse(fs.readFileSync('data/support_organizations.json', 'utf8'))
+    .map(org => [`support-${org.id}`, `/grants/${org.slug}/`, 'Источники и границы проверки'])
 ];
 
 async function main() {
@@ -31,6 +34,9 @@ async function main() {
           assert.equal(await page.locator('main h1').count(), 1);
           assert(await page.getByRole('heading', { name: sourcesHeading, exact: true }).isVisible());
           assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, 'content fits a phone');
+          if (id.startsWith('support-') && id !== 'support-index') {
+            assert.equal(await page.locator('main h1').evaluate(node => node.scrollWidth > node.clientWidth + 1), false, 'organization title is readable without clipping');
+          }
           if (id === 'meeting') {
             const summary = page.locator('summary', { hasText: 'Как отвечать на трудные реплики' });
             await summary.press('Enter');
@@ -50,6 +56,10 @@ async function main() {
               assert((await response.text()).includes('Заполнение не отправляет обращение'));
             }
           }
+          if (id === 'support-index') {
+            assert.equal(await page.locator('#support-organizations .grid > article').count(), 3);
+            assert.equal(await page.locator('#grants-list [data-grant-id]').count(), JSON.parse(fs.readFileSync('data/grants.json')).filter(item => item.status !== 'draft').length, 'all opportunities remain readable without JavaScript');
+          }
           const links = await page.locator('main a[href^="/"]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href').split('#')[0]))]);
           for (const href of links) assert((await context.request.get(base + href)).ok(), `destination available: ${href}`);
           assert.deepEqual(errors, []);
@@ -64,6 +74,15 @@ async function main() {
       }
       await context.close();
     }
+    const offline = await browser.newContext({ viewport: { width: 375, height: 900 } });
+    await offline.route('**/data/grants.json', route => route.fulfill({ status: 503, body: 'unavailable' }));
+    const fallbackPage = await offline.newPage();
+    assert((await fallbackPage.goto(base + '/grants/', { waitUntil: 'networkidle' })).ok());
+    assert.equal(await fallbackPage.locator('#grants-list [data-grant-id]').count(), JSON.parse(fs.readFileSync('data/grants.json')).filter(item => item.status !== 'draft').length);
+    assert(await fallbackPage.getByText('Не удалось обновить список.', { exact: false }).isVisible());
+    await fallbackPage.screenshot({ path: `${output}/support-failed-data-mobile.png`, fullPage: true });
+    results.push({ mode: 'failed-data-mobile', route: '/grants/', passed: true });
+    await offline.close();
   } finally {
     await browser.close();
     fs.writeFileSync(path.join(output, 'report.json'), JSON.stringify({ results }, null, 2) + '\n');

@@ -1,6 +1,9 @@
 const CONTENT_ORIGINS = new Set(['verified', 'editorial', 'starter', 'request']);
 
 const VERIFIED_NEWS_IDS = new Set([
+  // Publication facts checked 2026-11-11; unavailable contest attachments are explicitly outside the checked scope.
+  'fond-borisoglebsk-contest-2026-11',
+  'sovet-kray-rodnoy-deadline-2026-11',
   // Official Obraz Budushchego deadline announcements, checked 2026-10-15.
   'obraz-tos-mini-deadline-2026-10',
   'obraz-individual-deadline-2026-10',
