@@ -1,0 +1,9 @@
+/* Long organization names and contacts must remain readable on a phone. */
+.support-profile {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.support-profile .btn {
+  max-width: 100%;
+}

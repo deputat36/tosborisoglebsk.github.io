@@ -61,7 +61,9 @@ function main() {
   for(const org of orgs) {
     assert(org.sources.length&&/^\d{4}-\d{2}-\d{2}$/.test(org.checked_at));
     const target=path.join(root,'grants',org.slug,'index.html');fs.mkdirSync(path.dirname(target),{recursive:true});
-    fs.writeFileSync(target,makePage(org,orgs,header,footer));
+    fs.writeFileSync(target,makePage(org,orgs,header,footer)
+      .replace('<main id="main">','<main id="main" class="support-profile">')
+      .replace('<script type="application/ld+json">','<link rel="stylesheet" href="/assets/css/support-organizations.css"/><script type="application/ld+json">'));
   }
   const cards=orgs.map(o=>`<article class="card"><div class="card-inner"><div class="meta"><span class="tag">${esc(o.kind)}</span></div><h3>${esc(o.name)}</h3><p>${esc(o.summary)}</p><p><b>Кому подходит:</b> ${esc(o.who)}</p><a class="btn primary" href="${route(o)}">Программы, контакты и подготовка</a></div></article>`).join('');
   const table=`<div class="container prose"><h3>Какой маршрут выбрать</h3><div style="overflow-x:auto" tabindex="0" role="region" aria-label="Сравнение организаций поддержки"><table><thead><tr><th>Задача команды</th><th>Куда смотреть</th><th>Что проверить</th></tr></thead><tbody><tr><td>Благоустройство или новый объект</td><td>Основной конкурс ТОС: «Образ Будущего» и Совет муниципальных образований</td><td>Новый сезон, право на участок, согласования и расходы</td></tr><tr><td>Социальное, культурное или волонтёрское дело</td><td>Соответствующая программа «Образа Будущего»; местный конкурс фонда</td><td>Статус заявителя, допустимые расходы и сроки</td></tr><tr><td>Представить проведённое мероприятие</td><td>Акция или конкурс практик Совета и других организаторов</td><td>Подтверждённый результат, публикация и формат поощрения</td></tr></tbody></table></div><p class="tiny">Участие в акции с призами, консультация и денежный грант — разные виды поддержки. Выбирайте по задаче и действующему положению.</p></div>`;

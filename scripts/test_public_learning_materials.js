@@ -34,6 +34,9 @@ async function main() {
           assert.equal(await page.locator('main h1').count(), 1);
           assert(await page.getByRole('heading', { name: sourcesHeading, exact: true }).isVisible());
           assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, 'content fits a phone');
+          if (id.startsWith('support-') && id !== 'support-index') {
+            assert.equal(await page.locator('main h1').evaluate(node => node.scrollWidth > node.clientWidth + 1), false, 'organization title is readable without clipping');
+          }
           if (id === 'meeting') {
             const summary = page.locator('summary', { hasText: 'Как отвечать на трудные реплики' });
             await summary.press('Enter');
