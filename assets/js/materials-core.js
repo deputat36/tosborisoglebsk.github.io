@@ -7,6 +7,7 @@
   const TOPICS = Object.freeze({
     start: 'Создание и управление ТОС',
     residents: 'Жители и собрания',
+    zhkh: 'Дом, двор и ЖКХ',
     projects: 'Проекты, сметы и конкурсы',
     team: 'Команда и партнёры',
     reports: 'Публикации и отчёты',
@@ -15,7 +16,7 @@
   });
   const CATEGORY_TOPICS = Object.freeze({
     'Создание ТОС': 'start', 'Инструкция': 'start', 'Председателю': 'start', 'Председателю ТОС': 'start', 'Документы': 'start',
-    'Вовлечение': 'residents', 'Собрания': 'residents', 'Работа с жителями': 'residents',
+    'ЖКХ': 'zhkh', 'Вовлечение': 'residents', 'Собрания': 'residents', 'Работа с жителями': 'residents',
     'Проекты': 'projects', 'Гранты': 'projects', 'Конкурс ТОС': 'projects', 'Смета': 'projects', 'Идеи проектов': 'projects',
     'Команда ТОС': 'team', 'Партнёрства': 'team', 'НКО и партнёрство': 'team', 'Потребности': 'team',
     'Отчётность': 'reports', 'Фотоотчёт': 'reports', 'Публичность и отчётность': 'reports', 'Соцсети': 'reports', 'Коммуникации': 'reports',

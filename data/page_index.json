@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-06T12:36:59.638Z",
-  "total": 376,
+  "generated_at": "2026-11-11T12:48:55.650Z",
+  "total": 389,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -434,6 +434,15 @@
       "title": "Актуализация данных ТОС БГО — 2026",
       "description": "Публичная сводка заполненности карточек ТОС Борисоглебского городского округа: контакты, председатель, границы, соцсети, описание, проекты и дата обновления.",
       "section": "Актуализация данных",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
+      "path": "residents/zhkh/index.html",
+      "url": "https://tosborisoglebsk.ru/residents/zhkh/",
+      "title": "Дом, двор и ЖКХ — инструкции и рабочие листы | ТОС БГО",
+      "description": "12 инструкций ЖКХ для жителей и ТОС: услуги, ремонт, квитанции, счётчики, мусор, капремонт, поддержка и соседские чаты. Восемь рабочих листов.",
+      "section": "Жителям",
       "search_group": "guides",
       "content_origin": "reference"
     },
@@ -1050,6 +1059,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/zhkh-information-and-appeals/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-information-and-appeals/",
+      "title": "Где искать документы дома и как подготовить обращение | Материалы ТОС БГО",
+      "description": "Запросите недостающий документ или объяснение расчёта, затем формулируйте требование по подтверждённым фактам. Просьба предоставить сведения и требование…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/tos-social-networks/index.html",
       "url": "https://tosborisoglebsk.ru/materials/tos-social-networks/",
       "title": "Как вести группу ТОС во ВКонтакте или Одноклассниках | Материалы ТОС БГО",
@@ -1072,6 +1090,15 @@
       "url": "https://tosborisoglebsk.ru/materials/choose-tos-project/",
       "title": "Как выбрать проект для ТОС: от проблемы жителей до заявки | Материалы ТОС БГО",
       "description": "Сильный проект начинается не со сметы, а с понятной проблемы, которую жители действительно хотят решить. Начните с простой инвентаризации территории: что…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/neighbor-conflict-resolution/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/neighbor-conflict-resolution/",
+      "title": "Как обсудить спорный вопрос и договориться о следующем шаге | Материалы ТОС БГО",
+      "description": "Цель спокойной встречи — понять интересы людей, проверить варианты и записать выполнимые договорённости. Несогласие не нужно скрывать ради красивого…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
@@ -1167,6 +1194,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/zhkh-bill-check/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-bill-check/",
+      "title": "Как проверить квитанцию ЖКХ и задать вопрос о начислении | Материалы ТОС БГО",
+      "description": "Проверяйте отдельную строку: период, объём, тариф, основание и перерасчёт. Лицевой счёт и полную квитанцию не публикуйте в соседской группе. Если сумма…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/tos-activists-roles/index.html",
       "url": "https://tosborisoglebsk.ru/materials/tos-activists-roles/",
       "title": "Как распределить роли в активе ТОС и не перегрузить председателя | Материалы ТОС БГО",
@@ -1257,10 +1293,28 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/zhkh-capital-repair/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-capital-repair/",
+      "title": "Капитальный ремонт: какие сведения проверить по своему дому | Материалы ТОС БГО",
+      "description": "Обещание ремонта и запись в долгосрочной программе ещё не означают, что работы начнутся в конкретном году. Проверяйте документы и их дату. Полезно иметь…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/community-resource-map/index.html",
       "url": "https://tosborisoglebsk.ru/materials/community-resource-map/",
       "title": "Карта ресурсов: чем сообщество может помочь проекту | Материалы ТОС БГО",
       "description": "Учтите людей, время, места, знания, материалы и деньги. Отделите подтверждённую помощь от возможностей, которые ещё нужно согласовать. Карта ресурсов…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/zhkh-waste/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-waste/",
+      "title": "Мусор не вывозят или площадка грязная: как различить проблему | Материалы ТОС БГО",
+      "description": "Вывоз отходов, содержание площадки и уборка мусора, просыпавшегося при погрузке, — разные работы. Это помогает выбрать адресата и нужное действие. Одна…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
@@ -1302,6 +1356,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/zhkh-service-quality/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-service-quality/",
+      "title": "Плохая уборка, протечка, перебои: как зафиксировать проблему | Материалы ТОС БГО",
+      "description": "Сохраните проверяемую историю: что произошло, кому сообщили, когда состоялась проверка и что изменилось после неё. Для уборки важны предусмотренная…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/index.html",
       "url": "https://tosborisoglebsk.ru/materials/",
       "title": "Полезные материалы для ТОС",
@@ -1311,6 +1374,42 @@
       "content_origin": "reference"
     },
     {
+      "path": "materials/neighbor-chat-rules/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/neighbor-chat-rules/",
+      "title": "Соседский чат и общая группа ТОС: правила полезного общения | Материалы ТОС БГО",
+      "description": "Группа помогает узнавать о делах территории, чат — обсуждать и координировать участие. Сайт сохраняет инструкции, сведения и результаты, к которым можно…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/zhkh-social-support/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-social-support/",
+      "title": "Субсидия или компенсация ЖКХ: как проверить возможность помощи | Материалы ТОС БГО",
+      "description": "Условия поддержки зависят от вида меры, региона и обстоятельств семьи. ТОС может помочь найти услугу, а решение принимает уполномоченный орган. Проверьте…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/zhkh-meters-and-savings/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-meters-and-savings/",
+      "title": "Счётчики и экономия: что проверить без риска | Материалы ТОС БГО",
+      "description": "Сначала разберитесь с учётом и потерями ресурса, затем оценивайте экономию. Работы с газом, электрикой и общими сетями оставьте специалистам. Фотография…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/zhkh-current-repair/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-current-repair/",
+      "title": "Текущий ремонт: вопросы к смете и контроль результата | Материалы ТОС БГО",
+      "description": "Сравнивайте предложения по одинаковому объёму работ и заранее фиксируйте, как будет проверяться результат. Предложение «починить крышу» слишком широко…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/tos-bgo-in-numbers/index.html",
       "url": "https://tosborisoglebsk.ru/materials/tos-bgo-in-numbers/",
       "title": "ТОС БГО в цифрах и фактах — справочный материал",
@@ -1318,6 +1417,24 @@
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "reference"
+    },
+    {
+      "path": "materials/zhkh-roles-and-responsibilities/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-roles-and-responsibilities/",
+      "title": "ТОС, совет дома, ТСЖ и УК: кто за что отвечает | Материалы ТОС БГО",
+      "description": "Прежде чем собирать подписи или обещать ремонт, определите объект, ответственного за него и того, кто вправе принимать решение. Например, сломанная…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/zhkh-yard-and-land/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/zhkh-yard-and-land/",
+      "title": "Чей двор и что согласовать перед благоустройством | Материалы ТОС БГО",
+      "description": "Начните с границ и документов: расположение рядом с домом не определяет собственника участка и ответственного за работы. Рабочая схема двора помогает…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
     },
     {
       "path": "materials/regional-tos-practices-voronezh/index.html",

@@ -8,7 +8,10 @@ const output = '.artifacts/visual-baseline/learning-materials';
 const routes = [
   ['meeting', '/meeting-kit/', 'На чём основаны рекомендации'],
   ['resources', '/materials/community-resource-map/', 'Источники и границы применения'],
-  ['future', '/materials/territory-future-workshop/', 'Источники и границы применения']
+  ['future', '/materials/territory-future-workshop/', 'Источники и границы применения'],
+  ['zhkh-guide', '/residents/zhkh/', 'На чём основаны рекомендации'],
+  ...JSON.parse(fs.readFileSync('data/articles.json', 'utf8')).filter(article => article.topic === 'zhkh')
+    .map(article => [article.id, `/materials/${article.id}/`, 'Источники и границы применения'])
 ];
 
 async function main() {
@@ -38,6 +41,15 @@ async function main() {
             assert((await download.text()).includes('Рабочий лист не заменяет протокол'));
           }
           if (id === 'future') assert((await page.locator('main').innerText()).includes('Художественный рассказ'));
+          if (id === 'zhkh-guide') {
+            assert.equal(await page.locator('main a[download]').count(), 8, 'all editable worksheets are available without scripts');
+            assert.equal(await page.locator('main form').count(), 0, 'the guide does not submit personal data');
+            for (const href of await page.locator('main a[download]').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))) {
+              const response = await context.request.get(base + href);
+              assert(response.ok());
+              assert((await response.text()).includes('Заполнение не отправляет обращение'));
+            }
+          }
           const links = await page.locator('main a[href^="/"]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href').split('#')[0]))]);
           for (const href of links) assert((await context.request.get(base + href)).ok(), `destination available: ${href}`);
           assert.deepEqual(errors, []);
