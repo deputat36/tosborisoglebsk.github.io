@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T19:05:29.252Z",
-  "base_url": "http://127.0.0.1:4177",
+  "generated_at": "2026-11-11T19:22:55.277Z",
+  "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 394,
   "pages_checked": 394,
@@ -16,122 +16,122 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1016,
+      "duration_ms": 1040,
       "bytes": 7931
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 69,
       "bytes": 8695
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 32,
-      "bytes": 9430
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 32,
+      "duration_ms": 37,
       "bytes": 8158
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 35,
+      "bytes": 11768
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 34,
+      "bytes": 15978
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 33,
+      "bytes": 9430
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 32,
       "bytes": 23099
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 28,
+      "duration_ms": 31,
       "bytes": 15879
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 28,
-      "bytes": 15978
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 28,
-      "bytes": 11768
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 23597
     },
     {
       "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 21,
       "bytes": 8176
     },
     {
       "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 17,
       "bytes": 15409
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/materials/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 10450
-    },
-    {
-      "route": "/contacts/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 22241
+      "duration_ms": 17,
+      "bytes": 196166
     },
     {
       "route": "/check-tos/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 16,
       "bytes": 5818
     },
     {
       "route": "/communication-kit/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 16,
       "bytes": 24905
     },
     {
-      "route": "/materials/index.html",
+      "route": "/contacts/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 196166
+      "duration_ms": 15,
+      "bytes": 22241
     },
     {
-      "route": "/news/vostochnyy-cleanups-news-2026/index.html",
+      "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 8354
+      "duration_ms": 14,
+      "bytes": 23597
     },
     {
-      "route": "/news/znamenie-created-2024/index.html",
+      "route": "/places/mirolyubie/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 7351
+      "duration_ms": 14,
+      "bytes": 6661
     },
     {
-      "route": "/open-data/index.html",
+      "route": "/create-tos/action-routes/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 13173
+      "duration_ms": 13,
+      "bytes": 12658
     },
     {
-      "route": "/news/voronezh-tos-public-chamber-roundtable-2026-10/index.html",
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 5404
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 8362
+      "bytes": 10450
+    },
+    {
+      "route": "/content-standards/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 13193
     }
   ]
 }
