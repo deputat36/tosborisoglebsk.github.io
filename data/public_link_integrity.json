@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-06T12:36:43.703Z",
+  "generated_at": "2026-11-11T12:57:04.458Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 376,
-  "pages_checked": 376,
-  "links_discovered": 9072,
-  "internal_links_checked": 6487,
-  "unique_internal_targets": 938,
-  "external_links_ignored": 466,
+  "pages_indexed": 389,
+  "pages_checked": 389,
+  "links_discovered": 9433,
+  "internal_links_checked": 6747,
+  "unique_internal_targets": 975,
+  "external_links_ignored": 488,
   "protocol_links_ignored": 34,
   "failed": 0,
   "failures": [],
@@ -16,122 +16,122 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1060,
+      "duration_ms": 1057,
       "bytes": 7931
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 70,
+      "duration_ms": 46,
       "bytes": 8695
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 36,
-      "bytes": 8158
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 34,
+      "duration_ms": 23,
       "bytes": 15978
     },
     {
-      "route": "/chairperson/documents/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 34,
-      "bytes": 11768
+      "duration_ms": 23,
+      "bytes": 8158
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 21,
       "bytes": 9430
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 32,
-      "bytes": 23099
+      "duration_ms": 21,
+      "bytes": 11768
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 31,
+      "duration_ms": 20,
       "bytes": 15879
     },
     {
-      "route": "/done/chigorak-tos-cultural-work/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 21,
-      "bytes": 8376
+      "duration_ms": 19,
+      "bytes": 23099
+    },
+    {
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 5404
     },
     {
       "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 12,
       "bytes": 15409
-    },
-    {
-      "route": "/data-update/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 8520
-    },
-    {
-      "route": "/data-dictionary/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 10644
-    },
-    {
-      "route": "/done/chkalovec-centr-prityazheniya-2024/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 8151
-    },
-    {
-      "route": "/done/chkalovec-cvetik-semicvetik-2022/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 7798
-    },
-    {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 5818
-    },
-    {
-      "route": "/content-standards/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 13193
-    },
-    {
-      "route": "/documents/templates/project-final-report/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 19397
-    },
-    {
-      "route": "/documents/templates/tos-founding-announcement/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 3198
     },
     {
       "route": "/chairperson/verify-card/index.html",
       "status": 200,
-      "duration_ms": 16,
+      "duration_ms": 12,
       "bytes": 10450
     },
     {
-      "route": "/contacts/index.html",
+      "route": "/communication-kit/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 22241
+      "duration_ms": 10,
+      "bytes": 24905
+    },
+    {
+      "route": "/materials/how-to-publish-tos-result/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 10924
+    },
+    {
+      "route": "/materials/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 194506
+    },
+    {
+      "route": "/materials/neighbor-chat-rules/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 11385
+    },
+    {
+      "route": "/materials/neighbor-conflict-resolution/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 11283
+    },
+    {
+      "route": "/materials/partnerships/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 9915
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 23597
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 8176
+    },
+    {
+      "route": "/check-tos/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 5818
     }
   ]
 }

@@ -94,7 +94,8 @@ concurrency:
 
 jobs:
   capture:
-    runs-on: ubuntu-latest
+    # Playwright 1.55 and approved raster evidence use Ubuntu 24.04.
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true

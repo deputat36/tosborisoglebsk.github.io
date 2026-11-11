@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-06T12:36:40.063Z",
+  "generated_at": "2026-11-11T12:59:22.564Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -55,9 +55,9 @@
     "average_score": 78
   },
   "pages": {
-    "total": 446,
-    "public": 386,
-    "noindex": 60,
+    "total": 460,
+    "public": 399,
+    "noindex": 61,
     "seo_warnings_count": 0,
     "broken_internal_links_count": 0
   },
@@ -195,12 +195,12 @@
     {
       "level": "good",
       "area": "Техническая база",
-      "finding": "Собрано 446 HTML-страниц, из них 386 публичных и 60 служебных."
+      "finding": "Собрано 460 HTML-страниц, из них 399 публичных и 61 служебных."
     },
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 376 страниц, 6487 внутренних переходов, 938 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 389 страниц, 6747 внутренних переходов, 975 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -344,17 +344,17 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-11-06T12:36:43.703Z",
+    "generated_at": "2026-11-11T12:57:04.458Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
-    "pages_indexed": 376,
-    "pages_checked": 376,
-    "links_discovered": 9072,
-    "internal_links_checked": 6487,
-    "unique_internal_targets": 938,
-    "external_links_ignored": 466,
+    "pages_indexed": 389,
+    "pages_checked": 389,
+    "links_discovered": 9433,
+    "internal_links_checked": 6747,
+    "unique_internal_targets": 975,
+    "external_links_ignored": 488,
     "protocol_links_ignored": 34,
     "failed": 0,
     "automation": {
@@ -402,11 +402,11 @@
       "visual_baseline_scope": "Проверяется в pull request; результат конкретного запуска хранится в GitHub Actions artifact."
     },
     "validation_context": {
-      "source": "github_actions",
-      "workflow": "Generate TOS pages",
-      "run_id": "42218937111",
-      "run_number": "1988",
-      "commit_sha": "da07b7298e5602998f87519bb2d27cfcf4bf04e8"
+      "source": "local",
+      "workflow": "",
+      "run_id": "",
+      "run_number": "",
+      "commit_sha": ""
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
