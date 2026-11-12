@@ -3,11 +3,11 @@
   "mode": "repository",
   "source_path": "assets/css/styles.css",
   "target_path": "assets/css/styles.css",
-  "canonical_sha256": "6fbd44fea2fc0ae6435e86dc3605d9ee83277606614759360edb8a90567bc92d",
-  "expected_canonical_sha256": "6fbd44fea2fc0ae6435e86dc3605d9ee83277606614759360edb8a90567bc92d",
+  "canonical_sha256": "d072862ffc3a2b9a8b2881a0e0d00454cbc70b6c55fd385dc70ceb016495c9ec",
+  "expected_canonical_sha256": "d072862ffc3a2b9a8b2881a0e0d00454cbc70b6c55fd385dc70ceb016495c9ec",
   "canonical_equal": true,
   "section_count": 14,
-  "line_count": 900,
+  "line_count": 921,
   "max_line_length": 140,
   "errors": []
 }

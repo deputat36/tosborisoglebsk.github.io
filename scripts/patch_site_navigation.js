@@ -65,7 +65,8 @@ const compactNavBlock = `function compactNav() {
     ['/contacts/', 'Контакты'],
     ['/sections/', 'Все разделы']
   ];
-  nav.innerHTML = links.map(([href, text]) => \`<a href="\${href}">\${text}</a>\`).join('');
+  const current = location.pathname.replace(/\\/index\\.html$/, '/');
+  nav.innerHTML = links.map(([href, text]) => \`<a href="\${href}"\${current.startsWith(href) ? ' class="active" aria-current="page"' : ''}>\${text}</a>\`).join('');
 }`;
 
 const footerHtml = `<b>Основные разделы</b><br><a href="/tos/">Каталог ТОС</a> · <a href="/residents/">Жителям</a> · <a href="/chairperson/">Председателю</a> · <a href="/projects/">Проекты</a> · <a href="/documents/">Документы</a> · <a href="/contacts/">Контакты</a><br><a href="/editorial-policy/">О портале</a> · <a href="/sources/">Источники данных</a> · <a href="/data-quality/">Качество данных</a> · <a href="/sections/">Все разделы</a> · <a href="https://vk.ru/tosbgo" target="_blank" rel="noopener">ВК-сообщество</a><br><span class="tiny">Редакционные инструменты собраны отдельно: <a href="/workbench/">рабочая панель</a>.</span>`;

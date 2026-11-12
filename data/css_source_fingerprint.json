@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
   "source_path": "assets/css/styles.css",
-  "canonical_sha256": "6fbd44fea2fc0ae6435e86dc3605d9ee83277606614759360edb8a90567bc92d",
+  "canonical_sha256": "d072862ffc3a2b9a8b2881a0e0d00454cbc70b6c55fd385dc70ceb016495c9ec",
   "section_count": 14,
-  "created_at": "2026-10-04",
-  "created_from_base_sha": "4ae9dfa3335dc5094ddbedef48cd2dbf11e5a175",
+  "created_at": "2026-11-12",
+  "created_from_base_sha": "c6054d2fb7efa88fdf94b2b7db8c463391e0b626",
   "visual_baseline_manifest": "docs/visual-baseline/manifest.json",
-  "scope": "owner_requested_brand_v2_redesign"
+  "scope": "owner_requested_usability_accessibility_and_outcomes"
 }

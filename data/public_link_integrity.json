@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T11:45:26.190Z",
+  "generated_at": "2026-11-12T13:52:23.056Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 414,
   "pages_checked": 414,
-  "links_discovered": 10343,
-  "internal_links_checked": 7264,
-  "unique_internal_targets": 1053,
-  "external_links_ignored": 577,
+  "links_discovered": 11278,
+  "internal_links_checked": 8008,
+  "unique_internal_targets": 1054,
+  "external_links_ignored": 578,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
@@ -16,122 +16,122 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1041,
-      "bytes": 7931
-    },
-    {
-      "route": "/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 328,
-      "bytes": 8695
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 177,
-      "bytes": 8158
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 176,
-      "bytes": 15978
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 176,
-      "bytes": 11768
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 175,
-      "bytes": 23099
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 175,
-      "bytes": 9430
+      "duration_ms": 1036,
+      "bytes": 8333
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 170,
-      "bytes": 15879
+      "duration_ms": 96,
+      "bytes": 16246
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 23597
+      "duration_ms": 93,
+      "bytes": 9062
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 8176
+      "duration_ms": 69,
+      "bytes": 9797
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 8,
-      "bytes": 15409
+      "duration_ms": 65,
+      "bytes": 12170
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 8,
-      "bytes": 10450
+      "duration_ms": 63,
+      "bytes": 8560
     },
     {
-      "route": "/check-tos/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 8,
-      "bytes": 5818
+      "duration_ms": 62,
+      "bytes": 23405
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 59,
+      "bytes": 16380
+    },
+    {
+      "route": "/needs/update-data-pobeda-2026/index.html",
+      "status": 200,
+      "duration_ms": 56,
+      "bytes": 8133
+    },
+    {
+      "route": "/needs/update-data-podstepki-2026/index.html",
+      "status": 200,
+      "duration_ms": 45,
+      "bytes": 8491
+    },
+    {
+      "route": "/needs/update-data-ulyanovka-2026/index.html",
+      "status": 200,
+      "duration_ms": 38,
+      "bytes": 8220
+    },
+    {
+      "route": "/needs/update-data-port-artur-2026/index.html",
+      "status": 200,
+      "duration_ms": 37,
+      "bytes": 8294
+    },
+    {
+      "route": "/needs/update-data-mirolyubie-2026/index.html",
+      "status": 200,
+      "duration_ms": 36,
+      "bytes": 8283
+    },
+    {
+      "route": "/needs/update-data-pervomayskiy-2026/index.html",
+      "status": 200,
+      "duration_ms": 30,
+      "bytes": 8315
+    },
+    {
+      "route": "/needs/update-data-uyutnyy-2026/index.html",
+      "status": 200,
+      "duration_ms": 30,
+      "bytes": 8205
     },
     {
       "route": "/communication-kit/index.html",
       "status": 200,
-      "duration_ms": 8,
-      "bytes": 24905
+      "duration_ms": 29,
+      "bytes": 25272
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/needs/update-data-prostornyy-2026/index.html",
       "status": 200,
-      "duration_ms": 7,
-      "bytes": 5404
+      "duration_ms": 28,
+      "bytes": 8305
     },
     {
-      "route": "/contacts/index.html",
+      "route": "/needs/update-data-tretyaki-2026/index.html",
       "status": 200,
-      "duration_ms": 7,
-      "bytes": 22241
+      "duration_ms": 27,
+      "bytes": 8256
     },
     {
-      "route": "/content-standards/index.html",
+      "route": "/materials/zhkh-waste/index.html",
       "status": 200,
-      "duration_ms": 6,
-      "bytes": 13193
+      "duration_ms": 26,
+      "bytes": 12133
     },
     {
-      "route": "/create-tos/action-routes/index.html",
+      "route": "/needs/update-data-vostochnyy-2026/index.html",
       "status": 200,
-      "duration_ms": 6,
-      "bytes": 12658
-    },
-    {
-      "route": "/create-tos/index.html",
-      "status": 200,
-      "duration_ms": 6,
-      "bytes": 19408
-    },
-    {
-      "route": "/data-quality/index.html",
-      "status": 200,
-      "duration_ms": 6,
-      "bytes": 7786
+      "duration_ms": 26,
+      "bytes": 8227
     }
   ]
 }

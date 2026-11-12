@@ -206,4 +206,5 @@ function main() {
   console.log(`CSS source structure OK: ${SECTION_TITLES.length} sections, canonical SHA-256 ${targetHash}`);
 }
 
-main();
+if (require.main === module) main();
+module.exports = { canonicalize };

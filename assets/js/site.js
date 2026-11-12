@@ -69,7 +69,8 @@ function compactNav() {
     ['/contacts/', 'Контакты'],
     ['/sections/', 'Все разделы']
   ];
-  nav.innerHTML = links.map(([href, text]) => `<a href="${href}">${text}</a>`).join('');
+  const current = location.pathname.replace(/\/index\.html$/, '/');
+  nav.innerHTML = links.map(([href, text]) => `<a href="${href}"${current.startsWith(href) ? ' class="active" aria-current="page"' : ''}>${text}</a>`).join('');
 }
 
 function ensureFooterLinks() {
@@ -253,7 +254,11 @@ function initCommonUi() {
   patchTosDetailRuntime();
   enhanceKeyboardAccessibility();
 
-  const savedTheme = localStorage.getItem('theme');
+  const themeStorage = {
+    get() { try { return localStorage.getItem('theme'); } catch { return null; } },
+    set(value) { try { localStorage.setItem('theme', value); } catch { /* Navigation and theme still work without storage. */ } }
+  };
+  const savedTheme = themeStorage.get();
   if (savedTheme === 'dark') document.documentElement.dataset.theme = 'dark';
   const syncBrandTheme = () => {
     const dark = document.documentElement.dataset.theme === 'dark';
@@ -270,10 +275,10 @@ function initCommonUi() {
     const isDark = document.documentElement.dataset.theme === 'dark';
     if (isDark) {
       delete document.documentElement.dataset.theme;
-      localStorage.setItem('theme', 'light');
+      themeStorage.set('light');
     } else {
       document.documentElement.dataset.theme = 'dark';
-      localStorage.setItem('theme', 'dark');
+      themeStorage.set('dark');
     }
     syncBrandTheme();
   });
@@ -302,6 +307,8 @@ function initCommonUi() {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     if (isOpen) window.requestAnimationFrame(() => nav?.querySelector('a')?.focus());
   });
+  // Collapse the fallback navigation only after its control is functional.
+  if (nav && menuButton) document.documentElement.classList.add('js-nav-ready');
 
   document.addEventListener('keydown', (event) => {
     if (!nav?.classList.contains('open')) return;

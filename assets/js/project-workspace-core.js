@@ -44,5 +44,25 @@
     if (!active || !sums.valid) return null;
     return {cash:budgetCore.money(sums.cash),total:budgetCore.money(sums.total),request:budgetCore.money(sums.request),inkind:budgetCore.money(sums.inkind),own:budgetCore.money(budgetCore.decimal(state.budget.own,2).value),partners:budgetCore.money(budgetCore.decimal(state.budget.partners,2).value),funding:budgetCore.money(budgetCore.decimal(state.budget.own,2).value+budgetCore.decimal(state.budget.partners,2).value)};
   }
-  return {KEY,FORMS,LABELS,fresh,normalize,budgetValues,signature};
+  function meaningful(value) {
+    const clean = String(value || '').replace(/\s+/g, ' ').trim();
+    return Boolean(clean) && !/^(?:нет|не указано|уточняется|фио|заполните|[-—_]+)$/iu.test(clean);
+  }
+  function fieldValue(state, form, meta) {
+    if (meta.common && Object.hasOwn(state.common, meta.common)) return state.common[meta.common];
+    if (Object.hasOwn(state.documents[form] || {}, meta.key)) return state.documents[form][meta.key];
+    if (meta.derived === 'period' && (state.common.start || state.common.end)) return [state.common.start, state.common.end].filter(Boolean).join(' — ');
+    const sums = meta.budget ? budgetValues(state) : null;
+    return sums ? sums[meta.budget] : meta.default || '';
+  }
+  function draftChecks(state) {
+    const checks = [
+      ['project','Название проекта'], ['territory','ТОС или территория'],
+      ['problem','Проблема'], ['goal','Цель и ожидаемый результат'],
+      ['beneficiaries','Кому полезен проект'], ['responsible','Ответственный за проект']
+    ].map(([key,label]) => ({key,label,ready:meaningful(state.common[key])}));
+    checks.push({key:'start',label:'Начало и завершение по плану',ready:meaningful(state.common.start) && meaningful(state.common.end)});
+    return checks;
+  }
+  return {KEY,FORMS,LABELS,fresh,normalize,budgetValues,signature,meaningful,fieldValue,draftChecks};
 });
