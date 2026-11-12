@@ -59,7 +59,7 @@ try{
   }
   assert.match(sql,/revoke all on function public\.battle_reveal/);
   assert.match(fn,/remaining: Math\.max\(0, 19 - assignments\.length\)/);
-  assert.match(js,/teams\.length === 24/);
+  assert.match(js,/teams\.length === 26/);
   assert.match(js,/free\[secureDemoIndex\(free\.length\)\]/);
   assert.match(js,/getDemoAssignments/);
   assert.match(js,/sold_out/);
