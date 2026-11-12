@@ -1,7 +1,7 @@
 (function(){
   'use strict';
-  const C=window.TerritoryMapCore,L=window.L,dataNode=document.getElementById('territory-map-data');
-  if(!C||!L||!dataNode)return;
+  const C=window.TerritoryMapCore,B=window.TerritoryMapBasemaps,L=window.L,dataNode=document.getElementById('territory-map-data');
+  if(!C||!B||!L||!dataNode)return;
   const $=name=>document.querySelector('[data-map-'+name+']');
   let data;try{data=JSON.parse(dataNode.textContent);}catch(_){return;}
   const catalog=data.catalog,reference=data.reference.features[0].geometry,published=data.public;
@@ -33,13 +33,40 @@
     if(!keepSelection||!feature())selected='';persist();render();
   }
   readSaved();
-  const map=L.map('territory-map',{scrollWheelZoom:false,doubleClickZoom:true,preferCanvas:false,zoomControl:false}).setView([51.368015,42.075169],11);
+  const map=L.map('territory-map',{scrollWheelZoom:false,doubleClickZoom:true,preferCanvas:false,zoomControl:false}).setView([51.368015,42.075169],14);
   L.control.zoom({zoomInTitle:'Приблизить',zoomOutTitle:'Отдалить'}).addTo(map);
+  L.control.scale({imperial:false,maxWidth:110}).addTo(map);
   map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
   map.attributionControl.addAttribution('Контур © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> · ODbL');
   const referenceLayer=L.geoJSON(data.reference,{style:{color:'#868e82',weight:2,fillColor:'#e2e5dc',fillOpacity:.75},interactive:false}).addTo(map);
   const shapes=L.layerGroup().addTo(map),vertices=L.layerGroup().addTo(map),drawLayer=L.layerGroup().addTo(map);
-  let tiles=null;
+  let tiles=null,layerSerial=0,providerId=B.settings(data.basemaps).defaultProvider;
+  const availableBasemaps=B.providers(data.basemaps);
+  const brand=L.control({position:'bottomleft'});
+  brand.onAdd=()=>{const link=el('a');link.href='https://yandex.ru/maps/';link.target='_blank';link.rel='noopener';link.className='map-yandex-logo';const img=el('img');img.src='/assets/img/yandex-tiles-logo.svg';img.alt='Яндекс Карты';img.width=88;img.height=48;link.append(img);L.DomEvent.disableClickPropagation(link);return link;};
+  availableBasemaps.forEach(p=>$('basemap').add(new Option(p.label,p.id)));
+  $('basemap-label').hidden=availableBasemaps.length<2;$('basemap').value=providerId;
+  function setBasemap(enabled,id=providerId,recovered=false){
+    const serial=++layerSerial;let successes=0,failures=0;
+    if(tiles){tiles.off();map.removeLayer(tiles);tiles=null;}brand.remove();
+    providerId=availableBasemaps.some(p=>p.id===id)?id:'osm';$('basemap').value=providerId;
+    $('tiles').setAttribute('aria-pressed',String(enabled));$('tiles').textContent=enabled?'Скрыть улицы':'Показать улицы';$('retry-tiles').hidden=true;
+    referenceLayer.setStyle({fillOpacity:enabled?0:.75});
+    if(!enabled){$('basemap-status').textContent='Подложка скрыта. Контуры остаются на карте.';return;}
+    const provider=availableBasemaps.find(p=>p.id===providerId),prefix=recovered?'Подложка Яндекса недоступна. Показываем OpenStreetMap. ':'';
+    if(providerId==='yandex')brand.addTo(map);
+    tiles=B.createLayer(L,provider);const active=tiles;
+    active.on('loading',()=>{if(serial===layerSerial){successes=0;failures=0;$('basemap-status').textContent=prefix+'Загружаем улицы и дома: '+provider.label+'.';}});
+    active.on('tileload',()=>{if(serial===layerSerial)successes++;});
+    active.on('tileerror',()=>{if(serial===layerSerial){failures++;$('retry-tiles').hidden=false;$('basemap-status').textContent='Часть подложки не загрузилась. Можно повторить загрузку; разметка сохраняется отдельно.';}});
+    active.on('load',()=>{
+      if(serial!==layerSerial)return;
+      if(failures&&successes===0&&providerId==='yandex'){setBasemap(true,'osm',true);return;}
+      $('retry-tiles').hidden=failures===0;
+      $('basemap-status').textContent=failures?(successes?'Часть карты не загрузилась. Нажмите «Повторить загрузку карты».':'Не удалось загрузить улицы и дома. Проверьте интернет и нажмите «Повторить загрузку карты».'):prefix+'Подложка: '+provider.label+'. Приблизьте карту для улиц, домов и подписей объектов.';
+    });
+    active.addTo(map);
+  }
   const fitGeometry=g=>{const b=C.bounds(g);if(b)map.fitBounds([[b[1],b[0]],[b[3],b[2]]],{padding:[24,24],maxZoom:17});};
   const visibleBoundaries=()=>current().features.filter(f=>f.geometry.type!=='Point');
   function options(){
@@ -91,10 +118,12 @@
     shapes.clearLayers();
     current().features.forEach(f=>{
       const p=f.properties,isPoint=f.geometry.type==='Point';
-      const layer=L.geoJSON(f,{interactive:!drawing,style:{color:editing?(p.kind==='initiative'?'#2f7d5a':'#a77512'):'#B62D36',weight:f.id===selected?4:2,fillOpacity:f.id===selected?.35:.2,dashArray:editing?'7 5':null},pointToLayer:(_,ll)=>L.circleMarker(ll,{radius:7,color:'#B62D36',fillOpacity:.8,interactive:!drawing})});
+      const fill=Number($('opacity').value)/100;
+      const layer=L.geoJSON(f,{interactive:!drawing,style:{color:editing?(p.kind==='initiative'?'#2f7d5a':'#a77512'):'#B62D36',weight:f.id===selected?4:2,fillOpacity:fill,dashArray:editing?'7 5':null},pointToLayer:(_,ll)=>L.circleMarker(ll,{radius:7,color:'#B62D36',fillOpacity:.8,interactive:!drawing})});
       const popup=el('div');popup.append(el('b',p.name||bySlug(p.slug)?.name||'Территория ТОС'),el('p',isPoint?'Точка-ориентир. Не является границей.':editing?'Рабочая разметка автора. Требует проверки.':p.public_note));
       if(p.slug){const link=el('a','Открыть карточку ТОС');link.href='/tos/'+p.slug+'/';popup.append(link);}
       if(!drawing)layer.bindPopup(popup);
+      if(!isPoint&&!drawing)layer.bindTooltip(el('span',(editing?(p.kind==='initiative'?'Идея: ':'Разметка: '):'')+(p.name||bySlug(p.slug)?.name||'ТОС')),{permanent:true,direction:'center',className:'map-area-label'});
       layer.on('click',e=>{if(drawing)return;if(editing&&f.id)choose(f.id);else lookup([e.latlng.lng,e.latlng.lat]);});layer.addTo(shapes);
     });
     $('inspector').hidden=!editing;$('working').hidden=!editing;$('drawbar').hidden=!editing;$('public').hidden=!editing;$('start').hidden=editing;
@@ -106,6 +135,8 @@
     $('delete').disabled=!feature()||!!drawing||concurrent;$('clear').disabled=!!drawing||concurrent;$('hole').disabled=!feature()||!!drawing||concurrent;$('draw').disabled=!!drawing||concurrent;
     $('save-description').disabled=!feature()||!!drawing||concurrent;
     $('apply-coordinates').disabled=!!drawing||concurrent;$('delete-hole').disabled=!feature()||ringIndex===0||!!drawing||concurrent;
+    $('crosshair').hidden=!drawing;
+    document.getElementById('territory-map').classList.toggle('is-drawing',!!drawing);
     for(const key of ['finish','center','cancel'])$(key).disabled=!drawing||key==='finish'&&drawing.points.length<3;
     $('back-point').disabled=!drawing||!drawing.points.length;
     selection();drawVertices();
@@ -141,13 +172,10 @@
   action('fit',()=>{const fs=visibleBoundaries().filter(f=>f.properties.slug===$('tos').value);if(fs.length)fitGeometry({type:'MultiPolygon',coordinates:fs.flatMap(f=>C.polygons(f.geometry))});});
   action('district',()=>map.fitBounds(referenceLayer.getBounds(),{padding:[16,16]}));
   action('city',()=>map.setView([51.368015,42.075169],15));
-  action('tiles',()=>{
-    if(tiles){map.removeLayer(tiles);tiles=null;referenceLayer.setStyle({fillOpacity:.75});$('tiles').textContent='Показать улицы';$('tiles').setAttribute('aria-pressed','false');return;}
-    // Standard OSM tiles are requested only after a human enables the basemap.
-    // No prefetch, offline packs, proxying, bulk download or automated tile warming.
-    tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'Улицы © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>'});
-    let reported=false;tiles.on('tileerror',()=>{if(!reported){reported=true;status('Подложка улиц недоступна. Контуры и сохранение работают. Можно повторно включить улицы позже.');}});tiles.addTo(map);referenceLayer.setStyle({fillOpacity:.18});$('tiles').textContent='Скрыть улицы';$('tiles').setAttribute('aria-pressed','true');
-  });
+  action('tiles',()=>setBasemap(!tiles));
+  action('retry-tiles',()=>setBasemap(true));
+  $('basemap').addEventListener('change',attempt(()=>setBasemap(true,$('basemap').value)));
+  $('opacity').addEventListener('input',()=>{$('opacity-value').textContent=$('opacity').value+'%';render();});
   action('share',()=>{const tos=bySlug($('tos').value);if(!tos)return;const url=new URL('/map/',location.origin);url.searchParams.set('tos',tos.slug);$('share-output').value=url.href;$('share-output').hidden=false;$('share-output').focus();$('share-output').select();status('Скопируйте ссылку из поля. Она открывает ТОС на общей карте и не передаёт вашу рабочую разметку.');});
   action('draw',()=>{writable();const props=description();drawing={points:[],props,hole:false};map.closePopup();map.doubleClickZoom.disable();refreshDraw();});
   action('hole',()=>{writable();if(!feature())return;drawing={points:[],hole:true,target:selected};map.closePopup();map.doubleClickZoom.disable();refreshDraw();});
@@ -187,8 +215,10 @@
     const list=el('ul');result.conflicts.forEach(pair=>list.append(el('li','Есть наложение: '+pair.map(names).join(' / ')+'. Уточните границы или части одного ТОС.')));result.outside.forEach(id=>list.append(el('li',names(id)+': участок выходит за картографический контур округа. Уточните положение.')));box.append(list);status('Проверка завершена. Найдено наложений: '+result.conflicts.length+'; участков вне контура округа: '+result.outside.length+'.');
   });
   window.addEventListener('storage',e=>{if(e.key===C.KEY&&e.newValue!==savedRaw){concurrent=true;render();status('Разметка изменена в другой вкладке. Скачайте свою версию и обновите страницу перед правкой.');}});
-  $('app').hidden=false;$('fallback').hidden=true;map.invalidateSize();map.fitBounds(referenceLayer.getBounds(),{padding:[16,16]});
+  $('app').hidden=false;$('fallback').hidden=true;map.invalidateSize();map.setView([51.368015,42.075169],14,{animate:false});
   const query=new URL(location.href).searchParams.get('tos');if(bySlug(query))$('tos').value=query;
+  const initial=published.features.filter(f=>f.properties.slug===query&&f.geometry.type!=='Point');if(initial.length)fitGeometry({type:'MultiPolygon',coordinates:initial.flatMap(f=>C.polygons(f.geometry))});
   render();
+  setBasemap(true);
   if(published.features.length===0&&!storageBlocked)status('Проверенные границы ТОС пока не опубликованы. Вы можете подготовить разметку; отсутствие контура не означает свободную территорию.');
 })();

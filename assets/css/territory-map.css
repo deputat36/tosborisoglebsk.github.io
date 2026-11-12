@@ -78,3 +78,22 @@
   .map-canvas { height:155mm; }
   .map-stage { border:0; padding:0; }
 }
+
+.map-view-options { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:4px 0 8px; }
+.map-view-options label { display:flex; align-items:center; gap:10px; font-size:14px; }
+.map-view-options input[type=range] { width:110px; accent-color:#B62D36; }
+.map-view-options output { min-width:34px; }
+.map-basemap-picker { display:flex; align-items:center; gap:8px; font-size:14px; }
+.map-basemap-picker select { font:inherit; color:var(--text); background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px; min-height:44px; }
+.map-basemap-status { margin:8px 0 12px; color:var(--muted); font-size:14px; min-height:21px; }
+.map-crosshair { position:absolute; width:24px; height:24px; left:50%; top:50%; transform:translate(-50%,-50%); z-index:650; pointer-events:none; filter:drop-shadow(0 0 2px white); }
+.map-crosshair::before,.map-crosshair::after { content:''; position:absolute; background:#B62D36; }
+.map-crosshair::before { width:24px; height:2px; top:11px; left:0; }
+.map-crosshair::after { width:2px; height:24px; top:0; left:11px; }
+.map-canvas.is-drawing { cursor:crosshair; }
+.map-canvas .map-area-label { white-space:normal; max-width:190px; text-align:center; font-weight:650; background:rgba(255,255,255,.92); color:#70212a; border:1px solid #b62d3670; border-radius:8px; font-size:12px; padding:4px 7px; pointer-events:none; }
+.map-yandex-logo { display:block; width:88px; height:48px; background:white; border-radius:6px; }
+.map-yandex-logo img { display:block; width:88px; height:48px; max-width:none; }
+.map-canvas .leaflet-control-scale-line { color:#222; background:rgba(255,255,255,.92); border-color:#555; }
+.map-areas,.map-selection,.map-result { overflow-wrap:anywhere; }
+@media(max-width:620px) { .map-drawbar .btn { flex-basis:105px; } .map-basemap-picker select { font-size:16px; } }
