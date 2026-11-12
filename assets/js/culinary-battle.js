@@ -259,7 +259,7 @@
   });
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (busy || !['open', 'closed', 'published'].includes(currentStatus)) return;
+    if (busy || !['pilot', 'open', 'closed', 'published'].includes(currentStatus)) return;
     setError();
     clearPreviousResult();
     if (!team.value || !code.value.trim()) {
