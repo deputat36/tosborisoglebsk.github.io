@@ -9,13 +9,13 @@
 .zhkh-tools .btn { max-width: 100%; }
 .zhkh-tools .card-actions { margin-top: 16px; }
 .zhkh-filters { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; margin-top: 24px; }
-.zhkh-filters label { display: grid; gap: 6px; flex: 1 1 260px; min-width: 0; font-weight: 650; }
+.zhkh-filters .zhkh-field { display: grid; gap: 6px; flex: 1 1 260px; min-width: 0; font-weight: 650; }
 .zhkh-filters select { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; color: var(--text); background: var(--surface); }
 .zhkh-lessons { padding-left: 24px; }
 .zhkh-lessons > li { margin-bottom: 26px; }
 @media (max-width: 700px) {
   .zhkh-case-grid { grid-template-columns: minmax(0,1fr); }
-  .zhkh-filters label { flex-basis: 100%; }
+  .zhkh-filters .zhkh-field { flex-basis: 100%; }
 }
 @media print {
   .zhkh-filters { display: none; }
