@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tosborisoglebsk.ru/</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/action-routes/</loc><lastmod>2026-06-21</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/calendar/</loc><lastmod>2026-07-21</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/calendar/action-routes/</loc><lastmod>2026-07-09</lastmod></url>
@@ -60,6 +60,12 @@
   <url><loc>https://tosborisoglebsk.ru/done/chkalovec-many-projects/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/done/chkalovec-parkovka-2021/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/done/chkalovec-russkie-tradicii-2023/</loc><lastmod>2026-10-04</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/done/gorelka-bashnya-rozhnovskogo-2020/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/done/gorelka-bratskaya-mogila-359-2021/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/done/gorelka-dvorik-detstva-2025/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/done/gorelka-kladbishche-ograzhdenie-2019/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/done/gorelka-ostrovok-detstva-2016/</loc><lastmod>2026-11-12</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/done/gorelka-remont-dorogi-2017/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/done/gubari-projects-archive/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/done/gubari-svecha-pamyati-2026/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/done/kalinka-kolodec-dusha-poselka-2023/</loc><lastmod>2026-10-04</lastmod></url>
@@ -228,9 +234,11 @@
   <url><loc>https://tosborisoglebsk.ru/news/resident-survey-template/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-bogana-2026/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-dzerzhinskogo-2026/</loc><lastmod>2026-10-04</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/news/send-news-gorelka-2026/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-ipas-2026/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-ivanovka-2026/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-kalinka-2026/</loc><lastmod>2026-10-04</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/news/send-news-makashevka-2026/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-mayak-2026/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-mechta-2026/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/news/send-news-mirolyubie-2026/</loc><lastmod>2026-10-04</lastmod></url>
@@ -266,14 +274,16 @@
   <url><loc>https://tosborisoglebsk.ru/partner-thanks/</loc><lastmod>2026-07-09</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/partners/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/partners/action-routes/</loc><lastmod>2026-07-09</lastmod></url>
-  <url><loc>https://tosborisoglebsk.ru/places/</loc><lastmod>2026-07-23</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/places/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/bogana/</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/borisoglebsk/</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/chigorak/</loc><lastmod>2026-07-23</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/places/gorelka/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/gubari/</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/ivanovka/</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/kalinino/</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/mahrovka/</loc><lastmod>2026-07-23</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/places/makashevka/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/mirolyubie/</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/petrovskoe/</loc><lastmod>2026-07-23</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/places/podstepki/</loc><lastmod>2026-07-23</lastmod></url>
@@ -356,7 +366,7 @@
   <url><loc>https://tosborisoglebsk.ru/projects/water-supply-improvement/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/projects/yard-small-repair/</loc><lastmod>2026-10-04</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/publication-templates/</loc><lastmod>2026-07-09</lastmod></url>
-  <url><loc>https://tosborisoglebsk.ru/registry-check/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/registry-check/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/residents/</loc><lastmod>2026-11-11</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/residents/action-routes/</loc><lastmod>2026-07-18</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/residents/zhkh/</loc><lastmod>2026-11-12</lastmod></url>
@@ -366,15 +376,17 @@
   <url><loc>https://tosborisoglebsk.ru/site-index/</loc><lastmod>2026-06-16</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/sources/</loc><lastmod>2026-06-24</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/submit-materials/</loc><lastmod>2026-07-17</lastmod></url>
-  <url><loc>https://tosborisoglebsk.ru/tos/</loc><lastmod>2026-07-24</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/tos/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/bogana/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/chkalovec/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/dzerzhinskogo/</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/tos/gorelka/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/gubari/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/ipas/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/ivanovka/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/kalinka/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/mahrovka/</loc><lastmod>2026-10-15</lastmod></url>
+  <url><loc>https://tosborisoglebsk.ru/tos/makashevka/</loc><lastmod>2026-11-12</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/mayak/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/mechta/</loc><lastmod>2026-10-15</lastmod></url>
   <url><loc>https://tosborisoglebsk.ru/tos/mirolyubie/</loc><lastmod>2026-10-29</lastmod></url>

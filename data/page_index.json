@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-12T10:31:05.825Z",
-  "total": 395,
+  "generated_at": "2026-11-12T11:23:37.874Z",
+  "total": 407,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -396,7 +396,7 @@
       "path": "registry-check/index.html",
       "url": "https://tosborisoglebsk.ru/registry-check/",
       "title": "Проверка полноты каталога ТОС БГО",
-      "description": "Сверка каталога ТОС БГО: 24 карточки на сайте и историческая оценка 46 ТОС на 3 июня 2024 года. Актуальное число и состав требуют официального подтверждения.",
+      "description": "Сверка каталога ТОС БГО: 26 карточек на сайте и историческая оценка 46 ТОС на 3 июня 2024 года. Актуальное число и состав требуют официального подтверждения.",
       "section": "registry-check",
       "search_group": "other",
       "content_origin": "reference"
@@ -879,6 +879,15 @@
       "content_origin": "reference"
     },
     {
+      "path": "tos/gorelka/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/gorelka/",
+      "title": "ТОС «Горелка» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Горелка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Территория села Горелка (по сообщению…",
+      "section": "Каталог ТОС",
+      "search_group": "tos",
+      "content_origin": "reference"
+    },
+    {
       "path": "tos/gubari/index.html",
       "url": "https://tosborisoglebsk.ru/tos/gubari/",
       "title": "ТОС «Губари» — контакты, границы, председатель | ТОС БГО",
@@ -928,6 +937,15 @@
       "url": "https://tosborisoglebsk.ru/tos/kalinka/",
       "title": "ТОС «Калинка» — контакты, границы, председатель | ТОС БГО",
       "description": "ТОС «Калинка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Улицы Центральная и Лесная п. Калинино",
+      "section": "Каталог ТОС",
+      "search_group": "tos",
+      "content_origin": "reference"
+    },
+    {
+      "path": "tos/makashevka/index.html",
+      "url": "https://tosborisoglebsk.ru/tos/makashevka/",
+      "title": "ТОС «Макашевка» — контакты, границы, председатель | ТОС БГО",
+      "description": "ТОС «Макашевка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Уточняются: совпадение границ ТОС и села…",
       "section": "Каталог ТОС",
       "search_group": "tos",
       "content_origin": "reference"
@@ -1806,6 +1824,15 @@
       "content_origin": "verified"
     },
     {
+      "path": "news/send-news-gorelka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-gorelka-2026/",
+      "title": "ТОС «Горелка» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Горелка» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "request"
+    },
+    {
       "path": "news/gubari-projects-archive-news-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/gubari-projects-archive-news-2026/",
       "title": "ТОС «Губари» показывает опыт разных проектов: от площадки до водоснабжения | ТОС БГО",
@@ -1891,6 +1918,15 @@
       "url": "https://tosborisoglebsk.ru/news/send-news-kalinka-2026/",
       "title": "ТОС «Калинка» приглашает присылать новости и фото | ТОС БГО",
       "description": "Для карточки ТОС «Калинка» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "request"
+    },
+    {
+      "path": "news/send-news-makashevka-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/news/send-news-makashevka-2026/",
+      "title": "ТОС «Макашевка» приглашает присылать новости и фото | ТОС БГО",
+      "description": "Для карточки ТОС «Макашевка» нужны новости, фотографии, сведения о проектах, потребностях и предложениях жителей.",
       "section": "Новости",
       "search_group": "news",
       "content_origin": "request"
@@ -3174,6 +3210,60 @@
       "content_origin": "verified"
     },
     {
+      "path": "done/gorelka-ostrovok-detstva-2016/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gorelka-ostrovok-detstva-2016/",
+      "title": "ТОС «Горелка», 2016: «Островок детства»: установлена… | Сделано ТОСами БГО",
+      "description": "По сведениям, переданным представителем ТОС «Горелка» 12 ноября 2026 года, в 2016 году реализован проект «Островок детства»: установлена детская игровая…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/gorelka-remont-dorogi-2017/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gorelka-remont-dorogi-2017/",
+      "title": "ТОС «Горелка», 2017: «Ремонт дороги»: работы на улице… | Сделано ТОСами БГО",
+      "description": "По сведениям, переданным представителем ТОС «Горелка» 12 ноября 2026 года, в 2017 году реализован проект «Ремонт дороги»: работы на улице Молодёжной.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/gorelka-kladbishche-ograzhdenie-2019/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gorelka-kladbishche-ograzhdenie-2019/",
+      "title": "ТОС «Горелка», 2019: «Благоустройство кладбища»: новое… | Сделано ТОСами БГО",
+      "description": "По сведениям, переданным представителем ТОС «Горелка» 12 ноября 2026 года, в 2019 году реализован проект «Благоустройство кладбища»: новое ограждение.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/gorelka-bashnya-rozhnovskogo-2020/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gorelka-bashnya-rozhnovskogo-2020/",
+      "title": "ТОС «Горелка», 2020: «Установка водонапорной башни Рожн… | Сделано ТОСами БГО",
+      "description": "По сведениям, переданным представителем ТОС «Горелка» 12 ноября 2026 года, в 2020 году реализован проект «Установка водонапорной башни Рожновского».",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/gorelka-bratskaya-mogila-359-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gorelka-bratskaya-mogila-359-2021/",
+      "title": "ТОС «Горелка», 2021: «Братская могила № 359»: ремонт и… | Сделано ТОСами БГО",
+      "description": "По сведениям, переданным представителем ТОС «Горелка» 12 ноября 2026 года, в 2021 году реализован проект «Братская могила № 359»: ремонт и благоустройство.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/gorelka-dvorik-detstva-2025/index.html",
+      "url": "https://tosborisoglebsk.ru/done/gorelka-dvorik-detstva-2025/",
+      "title": "ТОС «Горелка», 2025: «Дворик детства»: усовершенствован… | Сделано ТОСами БГО",
+      "description": "По сведениям, переданным представителем ТОС «Горелка» 12 ноября 2026 года, в 2025 году реализован проект «Дворик детства»: усовершенствование детской…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
       "path": "done/gubari-projects-archive/index.html",
       "url": "https://tosborisoglebsk.ru/done/gubari-projects-archive/",
       "title": "ТОС «Губари»: водонапорная башня и ремонт десяти колодц… | Сделано ТОСами БГО",
@@ -3498,10 +3588,28 @@
       "content_origin": "reference"
     },
     {
+      "path": "places/gorelka/index.html",
+      "url": "https://tosborisoglebsk.ru/places/gorelka/",
+      "title": "с. Горелка | Территории ТОС БГО",
+      "description": "с. Горелка: связанные карточки ТОС и опубликованные в них границы территорий Борисоглебского городского округа.",
+      "section": "Территории",
+      "search_group": "places",
+      "content_origin": "reference"
+    },
+    {
       "path": "places/gubari/index.html",
       "url": "https://tosborisoglebsk.ru/places/gubari/",
       "title": "с. Губари | Территории ТОС БГО",
       "description": "с. Губари: связанные карточки ТОС и опубликованные в них границы территорий Борисоглебского городского округа.",
+      "section": "Территории",
+      "search_group": "places",
+      "content_origin": "reference"
+    },
+    {
+      "path": "places/makashevka/index.html",
+      "url": "https://tosborisoglebsk.ru/places/makashevka/",
+      "title": "с. Макашевка | Территории ТОС БГО",
+      "description": "с. Макашевка: связанные карточки ТОС и опубликованные в них границы территорий Борисоглебского городского округа.",
       "section": "Территории",
       "search_group": "places",
       "content_origin": "reference"

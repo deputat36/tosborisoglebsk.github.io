@@ -1,35 +1,132 @@
 {
   "summary": {
-    "generated_at": "2026-11-12T10:31:05.521Z",
+    "generated_at": "2026-11-12T11:23:37.610Z",
     "stale_after_days": 180,
-    "total_tos": 24,
-    "high_priority": 4,
+    "total_tos": 26,
+    "high_priority": 5,
     "medium_priority": 2,
-    "low_priority": 18,
+    "low_priority": 19,
     "verified_count": 0,
     "partial_count": 0,
-    "needs_review_count": 24,
+    "needs_review_count": 26,
     "unknown_count": 0,
     "stale_count": 0,
-    "without_phone": 4,
-    "without_social": 4,
-    "without_news": 2,
-    "without_done": 9,
-    "without_needs": 24,
-    "without_projects": 0,
-    "request_only_news": 2,
+    "without_phone": 5,
+    "without_social": 5,
+    "without_news": 4,
+    "without_done": 10,
+    "without_needs": 26,
+    "without_projects": 2,
+    "request_only_news": 4,
     "request_only_done": 9,
     "request_only_needs": 24,
     "request_only_projects": 0,
     "editorial_requests": {
-      "news": 17,
+      "news": 19,
       "done": 9,
       "needs": 24,
       "projects": 0
     },
-    "average_score": 78
+    "average_score": 77
   },
   "items": [
+    {
+      "slug": "makashevka",
+      "name": "Макашевка",
+      "type": "Сельский",
+      "location": "с. Макашевка",
+      "chairperson": "",
+      "updated_at": "2026-11-12",
+      "score": 31,
+      "priority": "Высокий",
+      "missing": [
+        "Председатель",
+        "Телефон",
+        "Email",
+        "Соцсети",
+        "Логотип",
+        "Численность жителей",
+        "Год создания",
+        "Новости",
+        "Истории результата",
+        "Потребности",
+        "Проекты"
+      ],
+      "linked": {
+        "news": 0,
+        "done": 0,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_all": {
+        "news": 1,
+        "done": 0,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_requests": {
+        "news": 1,
+        "done": 0,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_origins": {
+        "news": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "done": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        },
+        "needs": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        },
+        "projects": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        },
+        "events": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        }
+      },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
+        "stale": false,
+        "source": "https://borisoglebsk.riavrn.ru/news/gorod-dlya-lyudej-kak-v-borisoglebske-blagoustraivayut-territorii-dlya-massovogo-otdyha/",
+        "note": "Независимая публикация РИА «Воронеж» подтверждает создание сквера, но не современный состав совета, устав и границы. Данные о руководителе не предоставлены."
+      },
+      "registry_group": "Срочно проверить",
+      "contact_ready": false,
+      "recommendations": [
+        "уточнить телефон председателя или ответственного",
+        "добавить email для связи",
+        "добавить группу или страницу в соцсетях",
+        "подготовить логотип или временный знак ТОС",
+        "заменить запрос материалов содержательной новостью или фотоотчётом",
+        "собрать минимум одну историю результата",
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
+      ]
+    },
     {
       "slug": "ivanovka",
       "name": "Ивановка",
@@ -552,6 +649,92 @@
         "заменить запрос материалов содержательной новостью или фотоотчётом",
         "заменить заготовку подтверждённой историей результата",
         "уточнить и подтвердить реальную актуальную потребность территории"
+      ]
+    },
+    {
+      "slug": "gorelka",
+      "name": "Горелка",
+      "type": "Сельский",
+      "location": "с. Горелка",
+      "chairperson": "Артемова Ирина Васильевна",
+      "updated_at": "2026-11-12",
+      "score": 75,
+      "priority": "Низкий",
+      "missing": [
+        "Логотип",
+        "Новости",
+        "Потребности",
+        "Проекты"
+      ],
+      "linked": {
+        "news": 0,
+        "done": 6,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_all": {
+        "news": 1,
+        "done": 6,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_requests": {
+        "news": 1,
+        "done": 0,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_origins": {
+        "news": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "done": {
+          "verified": 0,
+          "editorial": 6,
+          "starter": 0,
+          "request": 0
+        },
+        "needs": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        },
+        "projects": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        },
+        "events": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        }
+      },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
+        "stale": false,
+        "source": "Сведения для публикации переданы редакции 12.11.2026",
+        "note": "Основные сведения и перечень шести работ предоставлены пользователем по сообщению представителя ТОС 12.11.2026. Факты не сверены с официальным реестром и актами выполнения."
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
+      "recommendations": [
+        "подготовить логотип или временный знак ТОС",
+        "заменить запрос материалов содержательной новостью или фотоотчётом",
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
       ]
     },
     {

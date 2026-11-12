@@ -4,24 +4,24 @@
   "privacy_rule": "inventory_only_no_legal_conclusion",
   "values_redacted": true,
   "metrics": {
-    "cards_total": 24,
-    "cards_with_personal_publication": 24,
-    "cards_with_phone": 20,
-    "cards_with_email": 8,
+    "cards_total": 26,
+    "cards_with_personal_publication": 25,
+    "cards_with_phone": 21,
+    "cards_with_email": 9,
     "cards_with_personal_profile": 11,
-    "cards_with_community_channel": 14,
+    "cards_with_community_channel": 15,
     "cards_with_media": 0,
-    "cards_with_source_ref": 1,
+    "cards_with_source_ref": 3,
     "cards_with_publication_consent_ref": 0,
     "basis_documented": 0,
     "basis_review_required": 23,
-    "source_only_consent_missing": 1,
-    "no_personal_publication": 0,
-    "personal_fields_total": 64,
-    "phones_total": 20,
-    "emails_total": 8,
+    "source_only_consent_missing": 2,
+    "no_personal_publication": 1,
+    "personal_fields_total": 68,
+    "phones_total": 21,
+    "emails_total": 9,
     "personal_profiles_total": 11,
-    "community_channels_total": 16
+    "community_channels_total": 17
   },
   "records": [
     {
@@ -96,6 +96,33 @@
         "phones"
       ],
       "basis_status": "basis_review_required"
+    },
+    {
+      "slug": "gorelka",
+      "title": "ТОС «Горелка»",
+      "verification_status": "needs_review",
+      "personal_fields": [
+        "chairperson",
+        "phones",
+        "emails",
+        "chairperson_links"
+      ],
+      "personal_field_count": 4,
+      "phone_count": 1,
+      "email_count": 1,
+      "personal_profile_count": 0,
+      "community_count": 1,
+      "other_public_link_count": 1,
+      "media_count": 0,
+      "has_source_ref": true,
+      "has_publication_consent_ref": false,
+      "missing_verification_scope": [
+        "chairperson",
+        "phones",
+        "emails",
+        "chairperson_links"
+      ],
+      "basis_status": "source_only_consent_missing"
     },
     {
       "slug": "gubari",
@@ -215,6 +242,23 @@
         "chairperson_links"
       ],
       "basis_status": "basis_review_required"
+    },
+    {
+      "slug": "makashevka",
+      "title": "ТОС «Макашевка»",
+      "verification_status": "needs_review",
+      "personal_fields": [],
+      "personal_field_count": 0,
+      "phone_count": 0,
+      "email_count": 0,
+      "personal_profile_count": 0,
+      "community_count": 0,
+      "other_public_link_count": 0,
+      "media_count": 0,
+      "has_source_ref": true,
+      "has_publication_consent_ref": false,
+      "missing_verification_scope": [],
+      "basis_status": "no_personal_publication"
     },
     {
       "slug": "mayak",

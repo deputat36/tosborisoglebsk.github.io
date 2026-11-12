@@ -1,41 +1,29 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T10:30:52.946Z",
+  "generated_at": "2026-11-12T11:23:25.952Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 395,
-  "pages_checked": 395,
-  "links_discovered": 9862,
-  "internal_links_checked": 6927,
-  "unique_internal_targets": 1003,
-  "external_links_ignored": 567,
-  "protocol_links_ignored": 38,
+  "pages_indexed": 407,
+  "pages_checked": 407,
+  "links_discovered": 10154,
+  "internal_links_checked": 7135,
+  "unique_internal_targets": 1038,
+  "external_links_ignored": 576,
+  "protocol_links_ignored": 40,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1046,
+      "duration_ms": 1016,
       "bytes": 7931
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 59,
+      "duration_ms": 47,
       "bytes": 8695
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 30,
-      "bytes": 11768
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 29,
-      "bytes": 8158
     },
     {
       "route": "/campaign/index.html",
@@ -44,40 +32,34 @@
       "bytes": 9430
     },
     {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 26,
+      "bytes": 11768
+    },
+    {
+      "route": "/calendar/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 24,
+      "bytes": 15879
+    },
+    {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 24,
       "bytes": 23099
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 24,
       "bytes": 15978
     },
     {
-      "route": "/calendar/action-routes/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 26,
-      "bytes": 15879
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 23597
-    },
-    {
-      "route": "/documents/templates/resident-appeals-register/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 9612
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 15409
+      "duration_ms": 24,
+      "bytes": 8158
     },
     {
       "route": "/chairperson/news/index.html",
@@ -86,52 +68,70 @@
       "bytes": 5404
     },
     {
-      "route": "/communication-kit/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 24905
-    },
-    {
-      "route": "/documents/templates/meeting-registration/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 5560
-    },
-    {
-      "route": "/done/chkalovec-centr-prityazheniya-2024/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 8151
-    },
-    {
       "route": "/contacts/index.html",
       "status": 200,
       "duration_ms": 10,
       "bytes": 22241
     },
     {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 23597
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 15409
+    },
+    {
+      "route": "/check-tos/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 5818
+    },
+    {
+      "route": "/communication-kit/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 24905
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 8,
+      "bytes": 8176
+    },
+    {
       "route": "/content-standards/index.html",
       "status": 200,
-      "duration_ms": 10,
+      "duration_ms": 8,
       "bytes": 13193
     },
     {
-      "route": "/documents/templates/project-support/index.html",
+      "route": "/create-tos/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 13611
+      "duration_ms": 8,
+      "bytes": 19408
     },
     {
-      "route": "/done/result-archive-needed-dzerzhinskogo/index.html",
+      "route": "/data-quality/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 8448
+      "duration_ms": 8,
+      "bytes": 7786
     },
     {
-      "route": "/done/severnyy-39-playground/index.html",
+      "route": "/done/mahrovka-project-experience/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 8243
+      "duration_ms": 8,
+      "bytes": 8260
+    },
+    {
+      "route": "/done/mirolyubie-blagodarim-pomnim-gordimsya-2022/index.html",
+      "status": 200,
+      "duration_ms": 8,
+      "bytes": 8681
     }
   ]
 }
