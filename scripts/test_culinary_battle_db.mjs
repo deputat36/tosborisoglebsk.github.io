@@ -44,8 +44,8 @@ try{
 
   const badPilot=parse(run(reveal(uyutnyy,1,'f'.repeat(64))));
   assert.equal(badPilot.error,'invalid_credentials');
-  const blocked=parse(run(reveal(others[0],2)));
-  assert.equal(blocked.error,'pilot_only');
+  const pilotBlocked=parse(run(reveal(others[0],2)));
+  assert.equal(pilotBlocked.error,'pilot_only');
   assert.equal(run('select count(*) from public.battle_assignments'),'0');
   const first=parse(run(reveal(uyutnyy,3)));
   assert.equal(first.first_open,true);
