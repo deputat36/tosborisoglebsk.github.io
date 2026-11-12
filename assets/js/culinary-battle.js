@@ -214,7 +214,13 @@
       updateControls();
     }
   }
-  search.addEventListener('input', refreshOptions);
+  function clearPreviousResult() {
+    resultData = null;
+    resultSection.hidden = true;
+    result.hidden = true;
+  }
+  search.addEventListener('input', () => { clearPreviousResult(); refreshOptions(); });
+  team.addEventListener('change', clearPreviousResult);
   function demoPick() {
     const index = teams.findIndex((entry) => entry.id === team.value);
     if (index < 0 || index >= 24) throw new Error('Выберите ТОС из списка.');
@@ -247,6 +253,7 @@
     event.preventDefault();
     if (busy || !['open', 'closed', 'published'].includes(currentStatus)) return;
     setError();
+    clearPreviousResult();
     if (!team.value || !code.value.trim()) {
       setError('Выберите ТОС и введите ваш индивидуальный код.');
       return;
