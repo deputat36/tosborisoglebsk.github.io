@@ -86,10 +86,14 @@ function main() {
     if (!location) errors.push(`${line}: missing location`);
     if (!boundaries) errors.push(`${line}: missing boundaries`);
     if (founded && !/^\d{4}$/.test(founded)) errors.push(`${line}: invalid founded ${founded}`);
-    if (!chairperson) errors.push(`${line}: missing chairperson`);
-    if (!contactsRaw) errors.push(`${line}: missing contacts_raw`);
+    // An evidence-backed directory may publish a partial record, as long as
+    // the missingness is explicitly labelled rather than silently invented.
+    const partial = item.verification_status === 'needs_review'
+      && String(item.verification_note || '').trim().length >= 30;
+    if (!chairperson && !partial) errors.push(`${line}: missing chairperson`);
+    if (!contactsRaw && !partial) errors.push(`${line}: missing contacts_raw`);
     if (typeof groupsRaw !== 'string') errors.push(`${line}: groups_raw must be a string`);
-    if (!population) errors.push(`${line}: missing population`);
+    if (!population && !partial) errors.push(`${line}: missing population`);
     if (!description) errors.push(`${line}: missing description`);
     if (description && description.length < 50) errors.push(`${line}: description is too short`);
     if (logo && !(logo.startsWith('/') || isHttpUrl(logo))) errors.push(`${line}: invalid logo ${logo}`);
