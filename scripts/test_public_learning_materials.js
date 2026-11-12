@@ -48,9 +48,33 @@ async function main() {
           }
           if (id === 'future') assert((await page.locator('main').innerText()).includes('Художественный рассказ'));
           if (id === 'zhkh-guide') {
-            assert.equal(await page.locator('main a[download]').count(), 8, 'all editable worksheets are available without scripts');
+            const worksheetLinks = await page.locator('main a[download]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href')))]);
+            assert.equal(worksheetLinks.length, 8, 'all eight editable worksheets remain available from instructions and scenarios');
             assert.equal(await page.locator('main form').count(), 0, 'the guide does not submit personal data');
-            for (const href of await page.locator('main a[download]').evaluateAll(nodes => nodes.map(node => node.getAttribute('href')))) {
+            const caseCount = JSON.parse(fs.readFileSync('data/zhkh_routes.json','utf8')).scenarios.length;
+            assert.equal(await page.locator('[data-zhkh-case]').count(), caseCount, 'all routes are rendered without a data request');
+            if (mode === 'without-js') {
+              assert.equal(await page.locator('[data-zhkh-controls]').isVisible(), false);
+              await page.locator('#zhkh-case-bill summary').press('Enter');
+              assert.equal(await page.locator('#zhkh-case-bill details').getAttribute('open'), '', 'first steps open with a keyboard without scripts');
+            } else {
+              await page.getByLabel('Тип жилья', {exact:true}).selectOption('house');
+              assert.equal(await page.locator('#zhkh-case-building').isVisible(), false, 'private house is not directed to MKD maintenance');
+              assert.equal(await page.locator('#zhkh-case-capital').isVisible(), false, 'private house is not directed to MKD capital fund');
+              assert(await page.locator('#zhkh-issue option[value="capital"]').isDisabled());
+              await page.getByLabel('Ваш вопрос', {exact:true}).selectOption('bill');
+              assert.equal(await page.locator('[data-zhkh-case]:visible').count(), 1);
+              assert.equal(await page.locator('#zhkh-case-bill details').getAttribute('open'), '');
+              assert(await page.locator('[data-zhkh-house-note]').isVisible());
+              await page.getByRole('button', {name:'Сбросить выбор',exact:true}).click();
+              assert.equal(await page.locator('[data-zhkh-case]:visible').count(), caseCount);
+              assert.equal(await page.evaluate(() => document.activeElement.id), 'zhkh-housing', 'reset restores a useful keyboard focus');
+              await page.getByLabel('Ваш вопрос', {exact:true}).selectOption('capital');
+              await page.getByLabel('Тип жилья', {exact:true}).selectOption('house');
+              assert.equal(await page.getByLabel('Ваш вопрос', {exact:true}).inputValue(), 'all', 'changing estate type clears an inapplicable prior question');
+              await page.getByRole('button', {name:'Сбросить выбор',exact:true}).click();
+            }
+            for (const href of worksheetLinks) {
               const response = await context.request.get(base + href);
               assert(response.ok());
               assert((await response.text()).includes('Заполнение не отправляет обращение'));
