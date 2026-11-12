@@ -34,9 +34,9 @@
       <div class="battle-intro">
         <span class="battle-kicker"><span aria-hidden="true">✦</span> Праздник добрых соседей</span>
         <h1>КУЛИНАРНЫЙ <span>БАТЛ</span> ТОС БГО</h1>
-        <p class="battle-subtitle">18 команд. 18 блюд. Один большой праздник вкуса!</p>
+        <p class="battle-subtitle">24 ТОСа. 19 блюд. Успейте вытянуть своё задание!</p>
         <div class="battle-chips" aria-label="О мероприятии">
-          <span>18 команд</span><span>Без повторов</span><span>Ваш результат — секрет</span>
+          <span>24 ТОСа</span><span>19 блюд</span><span>Пока блюда не закончились</span>
         </div>
       </div>
       <div class="battle-art" aria-hidden="true">
@@ -73,6 +73,7 @@
         <h2 id="draw-title">Узнайте своё блюдо</h2>
         <p class="battle-hint">Выберите ТОС, введите личный код и откройте карточку. Другие команды не увидят ваш результат.</p>
         <div id="battle-status" class="battle-state" role="status" aria-live="polite">Проверяем готовность жеребьёвки…</div>
+        <div id="battle-remaining" class="battle-remaining" aria-live="polite" hidden></div>
         <form id="battle-form" novalidate>
           <label for="battle-search">Найдите свой ТОС</label>
           <input id="battle-search" class="battle-input" type="search" placeholder="Начните вводить название…" autocomplete="off" disabled/>
@@ -87,13 +88,13 @@
           <div id="battle-error" class="battle-error" role="alert" hidden></div>
           <button id="battle-submit" class="battle-draw-button" type="submit" disabled><span aria-hidden="true">✦</span> Вытянуть блюдо <span aria-hidden="true">✦</span></button>
         </form>
-        <p class="battle-warning">Важно: результат определяется заранее, изменить или вытянуть другое блюдо нельзя.</p>
+        <p class="battle-warning">Важно: блюда выбираются случайно в момент первого участия. Каждому ТОСу — только одно блюдо. Жеребьёвка заканчивается после выдачи всех 19 блюд. Участники, которые не успеют, останутся без задания.</p>
       </article>
       <aside class="battle-side">
         <div class="battle-howto"><span class="battle-step"><span>02</span> Как это работает</span>
           <ol><li><b>Выберите свою команду.</b><span>Найдите ТОС по названию.</span></li>
               <li><b>Введите секретный код.</b><span>Он нужен, чтобы никто не открыл задание за вас.</span></li>
-              <li><b>Откройте блюдо!</b><span>Сохраните красивую карточку себе на память.</span></li></ol>
+              <li><b>Успейте вытянуть!</b><span>Доступно только 19 блюд на 24 ТОСа. Сохраните красивую карточку.</span></li></ol>
         </div>
         <div class="battle-message"><span aria-hidden="true">♡</span><p>Самое вкусное на празднике — когда соседи собираются вместе!</p></div>
       </aside>
