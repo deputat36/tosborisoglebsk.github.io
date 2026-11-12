@@ -68,7 +68,7 @@ function main() {
   expectIncludes(errors, 'done index', indexHtml, '/assets/js/done.js', 'done.js is missing');
   expectIncludes(errors, 'done index', indexHtml, '/done/action-routes/', 'done action route is missing');
   expectIncludes(errors, 'done index', indexHtml, '/update-tos/?type=photo#message-builder', 'photo report submission link is missing');
-  expectIncludes(errors, 'done index', indexHtml, 'Истории хранятся в data/done.json', 'data footer note is missing');
+  expectIncludes(errors, 'done index', indexHtml, 'Истории уточняются по материалам председателей и актива ТОС.', 'source clarification note is missing');
 
   expectIncludes(errors, 'done script', script, "fetch('/data/done.json'", 'done data fetch is missing');
   expectIncludes(errors, 'done script', script, "fetch('/data/toses.json'", 'TOS data fetch is missing');

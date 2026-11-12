@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T14:02:35.657Z",
+  "generated_at": "2026-11-12T14:11:56.882Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 129,
+    "asset_files": 134,
     "over_budget_assets": 0,
-    "total_css_bytes": 78426,
-    "total_js_bytes": 743912,
+    "total_css_bytes": 84175,
+    "total_js_bytes": 764062,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -39,7 +39,7 @@
       "path": "assets/js/site.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 35471,
+      "size_bytes": 35975,
       "over_budget": false
     },
     {
@@ -99,6 +99,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/project-workspace.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 15610,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/update-center.js",
       "group": "js",
       "extension": ".js",
@@ -109,14 +116,14 @@
       "path": "assets/js/publication-basis-execution-ui.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 14674,
+      "size_bytes": 14676,
       "over_budget": false
     },
     {
       "path": "assets/css/styles.css",
       "group": "css",
       "extension": ".css",
-      "size_bytes": 14001,
+      "size_bytes": 14533,
       "over_budget": false
     },
     {
@@ -124,13 +131,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 13752,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/project-workspace.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 13659,
       "over_budget": false
     },
     {
@@ -197,6 +197,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/project-packet.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 10874,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/workbench-drafts.js",
       "group": "js",
       "extension": ".js",
@@ -207,7 +214,7 @@
       "path": "assets/js/publication-basis-execution.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 10218,
+      "size_bytes": 10301,
       "over_budget": false
     },
     {
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10059,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/done.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 9688,
       "over_budget": false
     }
   ],

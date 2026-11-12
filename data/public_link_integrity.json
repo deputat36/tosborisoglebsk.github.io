@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T14:02:39.523Z",
+  "generated_at": "2026-11-12T14:12:14.407Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 414,
   "pages_checked": 414,
-  "links_discovered": 10343,
-  "internal_links_checked": 7264,
-  "unique_internal_targets": 1053,
-  "external_links_ignored": 577,
+  "links_discovered": 11278,
+  "internal_links_checked": 8008,
+  "unique_internal_targets": 1054,
+  "external_links_ignored": 578,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/action-routes/index.html",
+      "route": "/materials/zhkh-service-quality/index.html",
       "status": 200,
-      "duration_ms": 492,
-      "bytes": 8695
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 236,
-      "bytes": 9430
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 234,
-      "bytes": 11768
+      "duration_ms": 1023,
+      "bytes": 11452
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 233,
-      "bytes": 7931
+      "duration_ms": 1017,
+      "bytes": 8333
     },
     {
-      "route": "/chairperson/conflicts/index.html",
+      "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 231,
-      "bytes": 8158
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 230,
-      "bytes": 23099
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 230,
-      "bytes": 15978
+      "duration_ms": 64,
+      "bytes": 9062
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 228,
-      "bytes": 15879
+      "duration_ms": 60,
+      "bytes": 16246
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 8176
+      "duration_ms": 60,
+      "bytes": 16380
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 23597
+      "duration_ms": 57,
+      "bytes": 9797
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 15409
+      "duration_ms": 54,
+      "bytes": 23405
     },
     {
-      "route": "/materials/community-resource-map/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 11100
+      "duration_ms": 50,
+      "bytes": 8560
     },
     {
-      "route": "/materials/documents-for-tos/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 6292
+      "duration_ms": 47,
+      "bytes": 12170
     },
     {
-      "route": "/check-tos/index.html",
+      "route": "/create-tos/action-routes/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 5818
+      "duration_ms": 27,
+      "bytes": 13025
     },
     {
-      "route": "/communication-kit/index.html",
+      "route": "/content-standards/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 24905
+      "duration_ms": 24,
+      "bytes": 13560
+    },
+    {
+      "route": "/needs/update-data-ulyanovka-2026/index.html",
+      "status": 200,
+      "duration_ms": 24,
+      "bytes": 8220
     },
     {
       "route": "/contacts/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 22241
+      "duration_ms": 23,
+      "bytes": 22305
     },
     {
-      "route": "/materials/find-nko-partner-for-grant/index.html",
+      "route": "/data-dictionary/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 8124
+      "duration_ms": 22,
+      "bytes": 11011
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/create-tos/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 5404
+      "duration_ms": 21,
+      "bytes": 19775
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/data-update/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 10450
+      "duration_ms": 21,
+      "bytes": 8887
     },
     {
-      "route": "/materials/chairperson-first-100-days/index.html",
+      "route": "/documents/templates/project-passport/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 11100
+      "duration_ms": 21,
+      "bytes": 14893
+    },
+    {
+      "route": "/needs/update-data-vostochnyy-2026/index.html",
+      "status": 200,
+      "duration_ms": 21,
+      "bytes": 8227
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 23798
+    },
+    {
+      "route": "/needs/update-data-uyutnyy-2026/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 8205
     }
   ]
 }

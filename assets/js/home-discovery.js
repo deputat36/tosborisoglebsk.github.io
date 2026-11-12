@@ -1,61 +1,30 @@
 document.addEventListener('DOMContentLoaded',()=>{
-  const core=window.HomeDiscoveryCore;
+  const core=window.HomeDiscoveryCore,view=window.HomeView;
+  const root=document.querySelector('#home-tos-search-results');
   const input=document.querySelector('#home-tos-search');
-  const clear=document.querySelector('#home-tos-search-clear');
-  const resultsRoot=document.querySelector('#home-tos-search-results');
-  const overviewRoot=document.querySelector('#home-current-overview');
-  if(!core||(!resultsRoot&&!overviewRoot))return;
-
-  const statusMap={
-    verified:{label:'Подтверждено источником',className:'ok'},
-    partial:{label:'Проверено частично',className:'info'},
-    stale:{label:'Нужно перепроверить',className:'bad'},
-    needs_review:{label:'Требует проверки',className:'warn'}
-  };
-  const esc=value=>String(value??'').replace(/[&<>'"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
-  const formatDate=(value,withTime=false)=>{
-    const date=new Date(value);
-    if(Number.isNaN(date.getTime()))return'дата уточняется';
-    return new Intl.DateTimeFormat('ru-RU',withTime?{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}:{day:'numeric',month:'long',year:'numeric'}).format(date);
-  };
-  async function getJson(url,fallback){try{const response=await fetch(url,{cache:'no-store'});return response.ok?await response.json():fallback;}catch{return fallback;}}
-
-  function setupFinder(toses){
-    if(!input||!resultsRoot)return;
-    function render(){
-      const query=input.value.trim();
-      if(!query){resultsRoot.innerHTML='<div class="home-finder-empty">Введите название ТОС, населённый пункт, улицу, микрорайон или фамилию председателя.</div>';return;}
-      if(core.normalize(query).length<2){resultsRoot.innerHTML='<div class="home-finder-empty">Введите минимум два символа.</div>';return;}
-      const items=core.searchToses(toses,query);
-      if(!items.length){resultsRoot.innerHTML='<div class="home-finder-empty"><b>Совпадений в опубликованном каталоге нет.</b><br>Попробуйте другой вариант или передайте уточнение редакции.<div class="card-actions"><a class="btn" href="/update-tos/?type=card#message-builder">Сообщить адрес или исправление</a></div></div>';return;}
-      resultsRoot.innerHTML=items.map(item=>{
-        const status=statusMap[core.verificationStatus(item)];
-        return `<a class="home-search-result" href="/tos/${esc(item.slug)}/"><span><b>ТОС «${esc(item.name||'Без названия')}»</b><small>${esc(item.location||'Территория уточняется')}</small></span><span class="status-pill ${esc(status.className)}"><span class="status-dot"></span>${esc(status.label)}</span></a>`;
-      }).join('');
-    }
-    input.addEventListener('input',render);
-    input.addEventListener('keydown',event=>{if(event.key==='Escape'){input.value='';render();}});
-    clear?.addEventListener('click',()=>{input.value='';input.focus();render();});
-    render();
+  const controls=document.querySelector('[data-home-finder-controls]');
+  if(!core||!view||!root||!input)return;
+  let rows;
+  try {rows=JSON.parse(document.querySelector('#home-directory-data').textContent);if(!Array.isArray(rows)||!rows.length)return;}catch{return;}
+  const initial=root.innerHTML;
+  function render(){
+    const query=input.value.trim();
+    if(!query){root.innerHTML=initial;return;}
+    if(core.normalize(query).length<2){root.innerHTML='<p class="home-finder-empty">Введите минимум два символа.</p>';return;}
+    const items=core.searchToses(rows,query,rows.length);
+    root.innerHTML=items.length?items.map(view.row).join(''):'<div class="home-finder-empty"><b>Совпадений в опубликованном каталоге нет.</b><p>Попробуйте другое название или населённый пункт.</p><a href="/update-tos/?type=card#message-builder">Передать уточнение</a></div>';
   }
-
-  function renderOverview(overview){
-    if(!overviewRoot)return;
-    const catalog=overview.catalog||{};
-    const generated=overview.generatedAt?`<article class="home-current-item"><span class="tag">Техническая сборка</span><h3>${esc(formatDate(overview.generatedAt,true))}</h3><p>Это дата автоматического обновления сайта, а не дата проверки контактов, границ или полномочий.</p></article>`:'';
-    const catalogCard=`<article class="home-current-item"><span class="tag">Каталог</span><h3>${esc(catalog.total_tos??'24')} карточки ТОС</h3><p>Подтверждено полностью: ${esc(catalog.verified_count??0)}. Требуют проверки: ${esc(catalog.needs_review_count??'уточняется')}.</p><a href="/data-quality/">Посмотреть качество данных →</a></article>`;
-    const events=overview.upcoming.length?overview.upcoming.map(item=>`<article class="home-current-item"><span class="tag ${item.source_url?'info':'warn'}">${item.source_url?'По опубликованному источнику':'Редакционный ориентир'}</span><h3>${esc(item.title||'Событие')}</h3><p><b>${esc(formatDate(`${item.date}T${item.time||'12:00'}:00`))}</b>${item.place?` · ${esc(item.place)}`:''}</p><div class="card-actions"><a href="/calendar/">Открыть календарь</a>${item.source_url?`<a target="_blank" rel="noopener" href="${esc(item.source_url)}">Источник</a>`:''}</div></article>`).join(''):'<article class="home-current-item"><span class="tag warn">Календарь</span><h3>Ближайшие даты не опубликованы</h3><p>Проверьте календарь или передайте редакции подтверждённое событие.</p><a href="/calendar/">Открыть календарь →</a></article>';
-    const news=overview.freshNews.length?overview.freshNews.map(item=>`<article class="home-current-item"><span class="tag">Свежая публикация</span><h3>${esc(item.title||'Новость')}</h3><p>${esc(formatDate(`${item.date}T12:00:00`))} · ${esc(item.source||'Источник указан в публикации')}</p><a href="/news/${esc(item.id)}/">Открыть публикацию →</a></article>`).join(''):`<article class="home-current-item attention"><span class="tag warn">Нужны свежие сведения</span><h3>За последние ${esc(overview.freshDays)} дней новых опубликованных новостей нет</h3><p>${overview.latestNews?`Последняя публикация датирована ${esc(formatDate(`${overview.latestNews.date}T12:00:00`))}. `:''}Черновики и неподтверждённые сообщения не выдаются за новости.</p><div class="card-actions"><a href="/update-tos/?type=news#message-builder">Прислать новость</a><a href="/news/">Архив публикаций</a></div></article>`;
-    overviewRoot.innerHTML=`${generated}${catalogCard}${events}${news}`;
-  }
-
-  Promise.all([
-    getJson('/data/toses.json',[]),
-    getJson('/data/events.json',[]),
-    getJson('/data/news.json',[]),
-    getJson('/data/site_health.json',{})
-  ]).then(([toses,events,news,health])=>{
-    setupFinder(toses);
-    renderOverview(core.buildCurrentOverview({events,news,health}));
+  controls.hidden=false;
+  input.addEventListener('input',render);
+  input.addEventListener('keydown',e=>{if(e.key==='Escape'){input.value='';render();}});
+  document.querySelector('#home-tos-search-clear')?.addEventListener('click',()=>{input.value='';input.focus();render();});
+  // Search is ready from the published page; optional updates never block it.
+  async function get(url){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),4000);try{const r=await fetch(url,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('unavailable');const a=await r.json();if(!Array.isArray(a))throw Error('invalid');return a;}finally{clearTimeout(timer);}}
+  get('/data/toses.json').then(next=>{if(next.length){rows=next;render();}}).catch(()=>{});
+  const details=document.querySelector('[data-home-current]');
+  details?.addEventListener('toggle',async()=>{
+    if(!details.open||details.dataset.refreshed)return;
+    details.dataset.refreshed='true';
+    try{const [events,news]=await Promise.all([get('/data/events.json'),get('/data/news.json')]);document.querySelector('#home-current-overview').innerHTML=view.overview(core.buildCurrentOverview({events,news}));}catch{/* Keep the dated public page readable. */}
   });
 });

@@ -36,7 +36,9 @@ function requireToken(content, token, label) {
   'id="home-current-overview"',
   'Найдите свой ТОС прямо здесь',
   'Что актуально сейчас',
-  'Дата технической сборки не считается датой проверки сведений',
+  'Даты и условия сверяйте по источнику публикации',
+  'id="home-directory-data"',
+  '<!-- public:finder:start -->',
   '/assets/js/home-discovery-core.js',
   '/assets/js/home-discovery.js'
 ].forEach((token) => requireToken(page, token, 'index.html'));
@@ -57,13 +59,12 @@ if (page.includes('Ближайшие события и дедлайны')) erro
 if (/phones|emails|social_links|contacts_raw/.test(core)) errors.push('home finder core must not index direct contact fields');
 
 [
-  "getJson('/data/toses.json',[])",
-  "getJson('/data/events.json',[])",
-  "getJson('/data/news.json',[])",
-  "getJson('/data/site_health.json',{})",
-  'Техническая сборка',
-  'Редакционный ориентир',
-  'Черновики и неподтверждённые сообщения не выдаются за новости'
+  "get('/data/toses.json')",
+  "get('/data/events.json')",
+  "get('/data/news.json')",
+  'home-directory-data',
+  'controls.hidden=false',
+  'root.innerHTML=initial'
 ].forEach((token) => requireToken(ui, token, 'home-discovery.js'));
 if (/fetch\([^)]*,\s*\{[^}]*method\s*:/is.test(ui)) errors.push('home discovery UI must not specify write methods');
 if (/\b(?:POST|PUT|PATCH|DELETE|localStorage|sessionStorage|sendBeacon|WebSocket)\b/.test(ui)) errors.push('home discovery UI must remain read-only and storage-free');

@@ -15,6 +15,26 @@
   const say = message => { status.textContent = message; };
   const readValue = el => el.type === 'checkbox' ? (el.checked ? '1':'0') : el.isContentEditable ? el.innerText.replace(/\r/g,'') : el.value;
   const observed = new Map();
+  const draftSummary = root.querySelector('[data-project-readiness]');
+  function refreshChecks() {
+    if (draftSummary) {
+      const checks = core.draftChecks(state);
+      const count=root.querySelector('[data-project-readiness-count]');
+      if(count)count.textContent=`${checks.filter(x=>x.ready).length} / ${checks.length}`;
+      draftSummary.replaceChildren();
+      const summary = document.createElement('p');
+      summary.textContent = `Указано ${checks.filter(x=>x.ready).length} из ${checks.length} основных сведений для черновика.`;
+      const list = document.createElement('ul');
+      for (const check of checks) {
+        const li=document.createElement('li');li.dataset.ready=String(check.ready);
+        if(check.ready)li.textContent=check.label+' — указано';
+        else {const button=document.createElement('button');button.type='button';button.dataset.projectFocus=check.key;button.textContent=check.label+' — добавьте';li.appendChild(button);}
+        list.appendChild(li);
+      }
+      draftSummary.append(summary,list);
+    }
+    window.dispatchEvent(new CustomEvent('project-workspace-change'));
+  }
   function warn(message) { notice.textContent = message; notice.hidden = !message; }
   try {
     const raw = localStorage.getItem(core.KEY);
@@ -79,9 +99,11 @@
     undoButton.hidden = !undo;
     root.querySelectorAll('[data-project-progress]').forEach(el => {
       const slug = el.dataset.projectProgress;
-      const count = Object.values(state.documents[slug] || {}).filter(value => value && value !== '0').length;
-      el.textContent = slug === 'budget' && sums ? 'Расчёт сохранён' : count ? `Сохранено полей: ${count}` : 'Открыть и заполнить';
+      const count = Object.values(state.documents[slug] || {}).filter(value => core.meaningful(value) && value !== '0').length;
+      const identity = core.meaningful(state.common.project) && core.meaningful(state.common.territory);
+      el.textContent = slug === 'budget' && sums ? 'Плановый расчёт сохранён' : count ? 'В форме есть ваши изменения' : identity ? 'Название и территория перенесутся в форму' : 'Открыть и заполнить';
     });
+    refreshChecks();
   }
   function updateField(el) {
     let value = readValue(el);
@@ -101,6 +123,7 @@
     }
     nodes.forEach(node=>{if(node===el || (el.dataset.projectCommon && node.dataset.projectCommon===el.dataset.projectCommon))observed.set(node,readValue(node));});
     save();
+    refreshChecks();
   }
   function flushFields(){
     for(const el of nodes)if(el.isConnected && readValue(el)!==observed.get(el))updateField(el);
@@ -138,6 +161,8 @@
     apply(); save();
   }
   root.addEventListener('click',event => {
+    const focus=event.target.closest('[data-project-focus]');
+    if(focus){const target=nodes.find(node=>node.dataset.projectCommon===focus.dataset.projectFocus);if(target){let parent=target.parentElement;while(parent&&parent!==root){if(parent.tagName==='DETAILS')parent.open=true;parent=parent.parentElement;}target.focus();}return;}
     const button = event.target.closest('[data-project-action]');
     if (!button) return;
     const action = button.dataset.projectAction;
@@ -189,6 +214,7 @@
     state.budget = window.ProjectBudgetCore.normalize(event.detail);
     for(const key of ['project','territory','responsible'])state.common[key]=state.budget.meta[key];
     save();
+    refreshChecks();
   });
   if(window.ProjectBudgetEditor) {
     if(state.budget) window.ProjectBudgetEditor.replace(state.budget);
@@ -203,5 +229,6 @@
   apply();
   if(!hadProject && state.budget && !corrupt) save();
   if(!corrupt)say(state.updated_at?'Черновик восстановлен. Изменения сохраняются в этом браузере.':'Заполняйте поля — изменения сохраняются в этом браузере.');
+  window.ProjectWorkspace = { snapshot() { flushFields(); return core.normalize(JSON.parse(JSON.stringify(state))); } };
   document.dispatchEvent(new CustomEvent('project-workspace-ready'));
 })();

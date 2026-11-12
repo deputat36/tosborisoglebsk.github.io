@@ -1,0 +1,15 @@
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.PortalUseCaseCore=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  const KEY='tos-portal-use-case-v1';
+  const FIELDS={date:'Дата применения',tos:'ТОС или территория',tool:'Инструмент портала',task:'Исходная задача',result:'Что фактически получилось',before:'Время без инструмента в минутах',after:'Время с инструментом в минутах',method:'Как сравнивали и считали',evidence:'Чем подтверждается результат',limits:'Что ещё требует проверки'};
+  function fresh(){return {kind:'tos-portal-use-case',version:1,fields:Object.fromEntries(Object.keys(FIELDS).map(k=>[k,''])),author_confirmed:false};}
+  function normalize(raw){
+    if(!raw||raw.kind!=='tos-portal-use-case'||raw.version!==1||!raw.fields||Array.isArray(raw.fields)||typeof raw.fields!=='object')throw Error('Выберите файл случая применения, скачанный на этой странице.');
+    if(Object.keys(raw.fields).some(k=>!Object.hasOwn(FIELDS,k)))throw Error('В файле есть неизвестные поля.');
+    const result=fresh();for(const k of Object.keys(FIELDS)){const v=raw.fields[k]??'';if(typeof v!=='string'||v.length>(['task','result','method','evidence','limits'].includes(k)?5000:300))throw Error('Неподходящее или слишком длинное значение.');result.fields[k]=v;}
+    if(raw.author_confirmed!==undefined&&typeof raw.author_confirmed!=='boolean')throw Error('Проверьте отметку автора.');result.author_confirmed=raw.author_confirmed===true;return result;
+  }
+  function validDate(value){if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const date=new Date(value+'T12:00:00Z');return Number.isFinite(date.getTime())&&date.toISOString().slice(0,10)===value;}
+  function checks(state){const required=['date','tos','tool','task','result','evidence'];const missing=required.filter(k=>!state.fields[k].trim()).map(k=>FIELDS[k]);if(state.fields.date&&!validDate(state.fields.date))missing.push('Существующая дата в формате ГГГГ-ММ-ДД');if((state.fields.before||state.fields.after)&&(!state.fields.before||!state.fields.after||!state.fields.method.trim()))missing.push('Оба замера времени и способ сравнения');for(const k of ['before','after'])if(state.fields[k]&&!/^\d+(?:[.,]\d{1,2})?$/.test(state.fields[k]))missing.push(FIELDS[k]+': неотрицательное число');if(!state.author_confirmed)missing.push('Подтверждение автора о выполненном случае');return missing;}
+  function toText(state){const missing=checks(state);return ['СЛУЧАЙ ПРИМЕНЕНИЯ ПОРТАЛА ТОС БГО',missing.length?'Рабочий черновик. Требует дополнения.':'Сведения указаны автором. Требуется редакционная проверка.','',...Object.entries(FIELDS).map(([k,label])=>label+': '+(state.fields[k]||'не указано')),'','Автор описывает выполненный случай: '+(state.author_confirmed?'да':'не подтверждено'),'Редакционная проверка: не проводилась.',...(missing.length?['Добавить: '+missing.join('; ')]:[]),'','Сохранение файла и печать не подтверждают результат и не публикуют запись.'].join('\n');}
+  return {KEY,FIELDS,fresh,normalize,checks,toText};
+});

@@ -231,6 +231,10 @@ jobs:
       - name: Patch internal tools accessibility
         run: node scripts/patch_accessibility_internal_tools.js
       - name: Generate accessibility and performance baseline
+        run: node scripts/generate_public_experience.js
+      - name: Check draft guidance and honest use records
+        run: node scripts/test_portal_usability.js
+      - name: Measure accessibility and performance baseline
         run: node scripts/generate_accessibility_performance_report.js
       - name: Generate site health report
         run: node scripts/generate_site_health_report.js

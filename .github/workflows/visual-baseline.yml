@@ -19,6 +19,11 @@ on:
       - 'scripts/test_public_materials_catalog.js'
       - 'documents/templates/**'
       - 'scripts/test_public_project_workspace.js'
+      - 'scripts/test_public_portal_usability.js'
+      - 'scripts/test_portal_usability.js'
+      - 'scripts/generate_public_experience.js'
+      - 'methodology/index.html'
+      - 'done/action-routes/index.html'
       - 'scripts/test_project_workspace.js'
       - 'index.html'
       - 'tos/index.html'
@@ -198,6 +203,8 @@ jobs:
         run: node scripts/patch_page_index_labels.js
 
       - name: Generate visual-run public index
+        run: node scripts/generate_public_experience.js
+      - name: Index visual-run public pages
         run: node scripts/generate_page_index.js
 
       - name: Start local static server
@@ -252,6 +259,8 @@ jobs:
 
       - name: Test linked project documents and portable drafts
         run: node scripts/test_public_project_workspace.js
+      - name: Test resilient navigation, printable packets and honest use records
+        run: node scripts/test_public_portal_usability.js
 
       - name: Test public card navigation
         env:

@@ -13,7 +13,7 @@ const paths = {
   register: 'data/publication_basis_confirmation_register.csv',
   queue: 'data/publication_basis_review_queue.csv',
   templates: 'data/publication_basis_confirmation_templates.json',
-  tos: 'data/tos.json'
+  tos: 'data/toses.json'
 };
 
 function read(relativePath) {
@@ -45,7 +45,8 @@ function main() {
   const templatesById = execution.indexBy(templates.templates || [], 'id');
   const tosBySlug = execution.buildTosIndex(tos);
 
-  if (register.length !== 24) errors.push(`register must contain 24 rows, found ${register.length}`);
+  const catalogCount=JSON.parse(read('data/toses.json')).length;
+  if (register.length !== catalogCount) errors.push(`register must cover ${catalogCount} current territories, found ${register.length}`);
   if (register.some((item) => item.request_status !== 'draft')) errors.push('canonical register must remain draft in this technical change');
   if (tosBySlug.get('tancyrey')?.name !== 'Танцырей') errors.push('tancyrey compatibility alias is missing');
   if (tosBySlug.get('chkalovec')?.name !== 'Чкаловец') errors.push('chkalovec compatibility alias is missing');
@@ -84,7 +85,7 @@ function main() {
     "loadCsv('/data/publication_basis_confirmation_register.csv')",
     "loadCsv('/data/publication_basis_review_queue.csv')",
     "loadJson('/data/publication_basis_confirmation_templates.json')",
-    "loadJson('/data/tos.json')",
+    "loadJson('/data/toses.json')",
     'tosBySlug = api.buildTosIndex(tos)',
     'Редакционный запрос действительно отправлен',
     'Скачать строку sent',
@@ -121,7 +122,7 @@ function main() {
   ]);
 
   if (errors.length) throw new Error(`Publication basis execution workspace audit failed:\n${Array.from(new Set(errors)).join('\n')}`);
-  console.log('Publication basis execution workspace OK: 24 packets, local-only UI, guarded sent export');
+  console.log(`Publication basis execution workspace OK: ${catalogCount} packets, local-only UI, guarded sent export`);
 }
 
 main();

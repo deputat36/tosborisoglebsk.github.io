@@ -253,7 +253,7 @@
     loadCsv('/data/publication_basis_confirmation_register.csv'),
     loadCsv('/data/publication_basis_review_queue.csv'),
     loadJson('/data/publication_basis_confirmation_templates.json'),
-    loadJson('/data/tos.json')
+    loadJson('/data/toses.json')
   ]).then(([register, queue, templates, tos]) => {
     registerRows = register.filter((item) => item.request_status === 'draft');
     queueBySlug = api.indexBy(queue, 'slug');

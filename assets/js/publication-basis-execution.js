@@ -60,7 +60,7 @@
   }
 
   function buildTosIndex(rows) {
-    const byId = indexBy(rows, 'id');
+    const byId = new Map((rows || []).filter(row=>clean(row.slug || row.id)).map(row=>[clean(row.slug || row.id),row]));
     Object.entries(TOS_ID_ALIASES).forEach(([publicSlug, sourceId]) => {
       if (!byId.has(publicSlug) && byId.has(sourceId)) byId.set(publicSlug, byId.get(sourceId));
     });
