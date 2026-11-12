@@ -9,11 +9,12 @@ on:
       - 'scripts/prepare_culinary_battle.mjs'
       - 'scripts/test_culinary_battle_contract.js'
       - 'scripts/test_culinary_battle_browser.js'
+      - 'scripts/test_culinary_battle_live_client.js'
       - 'scripts/test_culinary_battle_db.mjs'
       - 'supabase/**'
       - '.github/workflows/culinary-battle-contract.yml'
   push:
-    branches: [feature/culinary-battle-24-teams-19-dishes]
+    branches: [feature/culinary-battle-live-go-live]
     paths:
       - 'culinary-battle/**'
       - 'assets/css/culinary-battle.css'
@@ -40,7 +41,7 @@ jobs:
           node --check scripts/prepare_culinary_battle.mjs
           node --check scripts/test_culinary_battle_contract.js
           node --check scripts/test_culinary_battle_db.mjs
-      - name: Check 24 teams, 19 dishes, individual code generation and secret boundaries
+      - name: Check 26 teams, 19 dishes, individual code generation and secret boundaries
         run: node scripts/test_culinary_battle_contract.js
 
   browser-demo:
@@ -64,8 +65,10 @@ jobs:
           done
           cat /tmp/culinary-preview-server.log
           exit 1
-      - name: Exercise 19 scarce dish draws with 24 teams in Chromium
+      - name: Exercise 19 scarce dish draws with 26 teams in Chromium
         run: node scripts/test_culinary_battle_browser.js
+      - name: Test real API client contract using HTTP stubs
+        run: node scripts/test_culinary_battle_live_client.js
       - name: Upload demo screenshot and PNG evidence
         if: always()
         uses: actions/upload-artifact@v4
