@@ -7,7 +7,7 @@ const BASE = process.env.BATTLE_DEMO_BASE_URL || 'http://127.0.0.1:4173';
 const API = 'https://otulfnouybahfnsycxqn.supabase.co/functions/v1/tos-culinary-battle-2026';
 const eventId = 'culinary-battle-2026';
 const teams = Array.from({length:26},(_,i)=>({
-  id:'00000000-0000-4000-8000-'+String(i+1).padStart(12,'0'),
+  id:i===0?'uyutnyy':'test-'+String(i+1).padStart(2,'0'),
   name:i===0?'Уютный':'Test TOS '+String(i+1).padStart(2,'0'),
   tos_slug:i===0?'uyutnyy':'test-'+String(i+1).padStart(2,'0')
 }));
