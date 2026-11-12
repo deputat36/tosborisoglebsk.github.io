@@ -14,7 +14,7 @@ try{
   assert.equal(roster.length,24);
   assert.equal(demo.teams.length,24);
   assert.equal(demo.dishes.length,19);
-  assert.deepEqual(demo.teams.map(t=>[t.tos_slug,t.name]),roster.map(t=>[t.id,t.name]));
+  assert.deepEqual(demo.teams.map(t=>[t.tos_slug,t.name]),roster.map(t=>[t.slug,t.name]));
   assert.deepEqual(demo.teams.map(t=>t.id),Array.from({length:24},(_,i)=>'demo-'+String(i+1).padStart(2,'0')));
   assert.equal(new Set(demo.teams.map(t=>t.name.toLowerCase())).size,24);
   assert.equal(new Set(demo.dishes.map(d=>d.title.toLowerCase())).size,19);
