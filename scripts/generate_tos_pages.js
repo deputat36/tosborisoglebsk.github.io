@@ -354,7 +354,7 @@ function makePage(tos, data) {
   const relNews = related(data.news, tos.slug, 6).map(newsCard).join('');
   const relEvents = related(data.events, tos.slug, 6, byDateAsc).map(eventCard).join('');
   const relProjects = related(data.projects, tos.slug, 6).map(projectCard).join('');
-  const relDone = related(data.done, tos.slug, 4).map(doneCard).join('');
+  const relDone = related(data.done, tos.slug, 12).map(doneCard).join('');
   const relNeeds = related(data.needs, tos.slug, 6).map(needCard).join('');
   const activitySummaryHtml = activitySummary(tos, data);
   const contentActionPlanHtml = contentActionPlan(tos, data);
