@@ -54,7 +54,7 @@ function main() {
       name: item.name || '',
       slug: item.slug || '',
       location: item.location || '',
-      chairperson: item.chairperson || '',
+      chairperson: item.chairperson || 'Требует уточнения',
       score: item.score ?? '',
       verification: item.verification?.label || item.verification?.status || '',
       missing: item.missing || [],
