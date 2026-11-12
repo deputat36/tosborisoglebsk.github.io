@@ -21,8 +21,8 @@ async function run(){
       const response=await page.goto(BASE+'/culinary-battle/?demo=1',{waitUntil:'domcontentloaded'});
       assert.equal(response.status(),200);
       await page.waitForFunction(()=>!document.getElementById('battle-team').disabled);
-      assert.equal(await page.locator('#battle-team option').count(),25);
-      assert.match(await page.locator('#battle-status').innerText(),/24 ТОСа, 19 блюд/);
+      assert.equal(await page.locator('#battle-team option').count(),27);
+      assert.match(await page.locator('#battle-status').innerText(),/26 ТОСов, 19 блюд/);
       assert.match(await page.locator('#battle-remaining').innerText(),/осталось 19 из 19/);
       assert.match(await page.locator('.battle-demo-banner').innerText(),/ДЕМО/);
       const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
@@ -73,11 +73,17 @@ async function run(){
       }
       assert.match(await page.locator('#battle-remaining').innerText(),/осталось 0 из 19/);
       assert.match(await page.locator('#battle-status').innerText(),/ДЕМО завершено/);
-      await page.locator('#battle-team').selectOption('demo-21');
-      await page.locator('#battle-code').fill(code(21));
+      await page.locator('#battle-team').selectOption('demo-25');
+      assert.match(await page.locator('#battle-demo-code-hint').innerText(),/DEMO-25-2026/);
+      await page.locator('#battle-code').fill(code(25));
       await page.locator('#battle-submit').click();
       assert.match(await page.locator('#battle-error').innerText(),/Все 19 блюд уже распределены/);
       assert.equal(await page.locator('#battle-result').isVisible(),false);
+      await page.locator('#battle-team').selectOption('demo-26');
+      assert.match(await page.locator('#battle-demo-code-hint').innerText(),/DEMO-26-2026/);
+      await page.locator('#battle-code').fill(code(26));
+      await page.locator('#battle-submit').click();
+      assert.match(await page.locator('#battle-error').innerText(),/Все 19 блюд уже распределены/);
       await page.locator('#battle-team').selectOption('demo-02');
       await page.locator('#battle-code').fill(code(2));
       await page.locator('#battle-submit').click();
@@ -89,7 +95,7 @@ async function run(){
       assert.equal(await page.locator('.battle-demo-banner').count(),0);
       assert.deepEqual(errors,[],'Uncaught script errors');
       await context.close();
-      console.log('PASS '+viewport.name+': 24 TOS, 19 distinct draws, sold-out, repeat, PNG, demo separation');
+      console.log('PASS '+viewport.name+': 26 TOS, 19 distinct draws, sold-out, repeat, PNG, demo separation');
     }
   } finally{await browser.close();}
 }
