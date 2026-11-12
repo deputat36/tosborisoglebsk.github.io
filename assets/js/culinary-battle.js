@@ -2,11 +2,11 @@
 (() => {
   'use strict';
   const EVENT_SLUG = 'culinary-battle-2026';
-  // Заменить только после создания отдельного проекта, миграции и проверки API.
-  // Публичный URL Edge Function не является секретом. Никакие ключи не добавлять.
-  const API_ENDPOINT = '';
-  // Пробный режим не обращается к API; не является ни жеребьёвкой, ни серверной авторизацией.
-  const isDemo = new URLSearchParams(location.search).get('demo') === '1';
+  // Configure PUBLIC endpoint via <meta name="culinary-battle-api"> only after a verified deployment.
+  // Never put service keys, code digests, participant codes or BATTLE_PEPPER in HTML/JS.
+  const API_ENDPOINT = (document.querySelector('meta[name="culinary-battle-api"]')?.content || '').trim().replace(/\/$/, '');
+  // Demo is disabled automatically as soon as the live API endpoint is configured.
+  const isDemo = !API_ENDPOINT && new URLSearchParams(location.search).get('demo') === '1';
   let demoDishes = [];
   let demoAssignments = {};
   const DEMO_STORAGE_KEY = 'tosbgo-culinary-battle-demo-26x19-v1';
@@ -28,6 +28,7 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let teams = [];
   let currentStatus = 'draft';
+  let pilotTeamSlug = '';
   let busy = false;
   let resultData = null;
 
@@ -45,7 +46,8 @@
   function refreshOptions() {
     const previous = team.value;
     const term = normalize(search.value);
-    const matching = teams.filter((t) => normalize(t.name).includes(term)).sort((a,b) => a.name.localeCompare(b.name,'ru'));
+    const matching = teams.filter((t) => (!pilotTeamSlug || currentStatus !== 'pilot' || t.tos_slug === pilotTeamSlug)
+      && normalize(t.name).includes(term)).sort((a,b) => a.name.localeCompare(b.name,'ru'));
     const fragment = document.createDocumentFragment();
     const placeholder = new Option(matching.length ? 'Выберите свой ТОС' : 'Совпадений не найдено', '');
     fragment.append(placeholder);
@@ -54,7 +56,7 @@
     if (matching.some((t) => t.id === previous)) team.value = previous;
   }
   function updateControls() {
-    const enabled = (isDemo || Boolean(API_ENDPOINT)) && ['open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 26;
+    const enabled = (isDemo || Boolean(API_ENDPOINT)) && ['pilot', 'open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 26;
     search.disabled = !enabled;
     team.disabled = !enabled;
     code.disabled = !enabled;
@@ -62,7 +64,7 @@
     submit.disabled = !enabled;
     submit.textContent = isDemo
       ? '✦ Вытянуть демо-блюдо ✦'
-      : currentStatus === 'open' ? '✦ Вытянуть блюдо ✦' : 'Посмотреть своё блюдо';
+      : ['pilot', 'open'].includes(currentStatus) ? '✦ Вытянуть блюдо ✦' : 'Посмотреть своё блюдо';
   }
   async function request(path, options = {}) {
     const controller = new AbortController();
@@ -80,6 +82,7 @@
         const messages = {
           invalid_credentials: 'Неверный код для выбранного ТОСа. Проверьте название команды и код.',
           rate_limited: 'Слишком много попыток. Попробуйте снова через 15 минут.',
+          pilot_only: 'Пока идёт проверка системы с ТОС «Уютный». Остальные команды смогут участвовать после официального открытия.',
           not_open: 'Жеребьёвка ещё не открыта.',
           closed: 'Жеребьёвка закрыта. Если вы уже получили блюдо, можете посмотреть его по своему коду.',
           sold_out: 'Все 19 блюд уже распределены. Новые участники больше не могут получить блюдо.',
@@ -183,19 +186,24 @@
     }
     try {
       const data = await request('?event=' + encodeURIComponent(EVENT_SLUG));
-      if (!Array.isArray(data.teams) || !['draft', 'ready', 'open', 'closed', 'published'].includes(data.status)) {
+      if (!Array.isArray(data.teams) || !['draft', 'ready', 'pilot', 'open', 'closed', 'published'].includes(data.status)) {
         throw new Error('Получен некорректный ответ сервера.');
       }
       if (data.total_teams !== 26 || data.total_dishes !== 19 || !Number.isInteger(data.remaining) || data.remaining < 0 || data.remaining > 19) {
         throw new Error('Неверные счётчики жеребьёвки.');
       }
       currentStatus = data.status;
+      pilotTeamSlug = data.status === 'pilot' && typeof data.pilot_team_slug === 'string' ? data.pilot_team_slug : '';
+      if (currentStatus === 'pilot' && pilotTeamSlug !== 'uyutnyy') {
+        throw new Error('Список команды для пилотной проверки не совпадает с ожидаемым.');
+      }
       teams = data.teams
-        .filter((t) => t && typeof t.id === 'string' && typeof t.name === 'string')
-        .map((t) => ({ id: t.id, name: t.name }));
+        .filter((t) => t && typeof t.id === 'string' && typeof t.name === 'string' && typeof t.tos_slug === 'string')
+        .map((t) => ({ id: t.id, name: t.name, tos_slug: t.tos_slug }));
       const messages = {
         draft: 'Идёт подготовка мероприятия. Жеребьёвка пока закрыта.',
         ready: 'Участники и блюда проверены. Ожидаем открытия жеребьёвки.',
+        pilot: 'Проверяем реальную жеребьёвку: сейчас блюдо может вытянуть только ТОС «Уютный». После подтверждения организатора откроется доступ остальных ТОСов.',
         open: 'Жеребьёвка открыта! Первые 19 ТОСов получают блюда. Выберите свою команду и введите код.',
         closed: data.remaining === 0
           ? 'Все 19 блюд распределены. Новое участие завершено; ранее выданное блюдо можно посмотреть по своему коду.'
@@ -205,7 +213,7 @@
       setStatus(messages[currentStatus], currentStatus);
       showRemaining(data.remaining);
       refreshOptions();
-      if (teams.length !== 26 && currentStatus === 'open') {
+      if (teams.length !== 26 && ['pilot', 'open'].includes(currentStatus)) {
         setStatus('Список команд требует проверки организатором. Участие временно недоступно.', 'draft');
       }
       updateControls();
@@ -251,7 +259,7 @@
   });
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (busy || !['open', 'closed', 'published'].includes(currentStatus)) return;
+    if (busy || !['pilot', 'open', 'closed', 'published'].includes(currentStatus)) return;
     setError();
     clearPreviousResult();
     if (!team.value || !code.value.trim()) {

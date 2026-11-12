@@ -8,7 +8,8 @@ create table public.battle_events (
  id uuid primary key default gen_random_uuid(),
  slug text not null unique check(slug ~ '^[a-z0-9-]{4,80}$'),
  title text not null,
- status text not null default 'draft' check(status in('draft','ready','open','closed','published')),
+ status text not null default 'draft' check(status in('draft','ready','pilot','open','closed','published')),
+ pilot_tos_slug text check(pilot_tos_slug is null or pilot_tos_slug ~ '^[a-z0-9-]{2,100}$'),
  created_at timestamptz not null default now(),
  updated_at timestamptz not null default now()
 );
@@ -72,10 +73,20 @@ begin
  if new.status is distinct from old.status then
    if not (
      (old.status='draft' and new.status='ready') or
-     (old.status='ready' and new.status in ('open','closed')) or
+     (old.status='ready' and new.status in ('pilot','open','closed')) or
+     (old.status='pilot' and new.status in ('open','closed')) or
      (old.status='open' and new.status='closed') or
      (old.status='closed' and new.status='published')
    ) then raise exception 'Invalid battle status transition'; end if;
+   if new.status='pilot' then
+     if new.pilot_tos_slug is null or not exists (
+       select 1 from public.battle_teams
+       where event_id=new.id and tos_slug=new.pilot_tos_slug
+     ) then raise exception 'Pilot team must belong to event'; end if;
+   end if;
+   if new.status='open' and new.pilot_tos_slug is not null then
+     raise exception 'Clear pilot team when opening the full draw';
+   end if;
    if new.status='ready' then
      select count(*) into v_teams from public.battle_teams where event_id=new.id;
      select count(*) into v_dishes from public.battle_dishes where event_id=new.id;
@@ -125,7 +136,7 @@ declare v_status text; v_event uuid;
 begin
  v_event := case when tg_op='DELETE' then old.event_id else new.event_id end;
  select status into v_status from public.battle_events where id=v_event;
- if tg_op<>'INSERT' or v_status<>'open' then
+ if tg_op<>'INSERT' or v_status not in ('pilot','open') then
    raise exception 'Assignment is immutable and requires open event';
  end if;
  return new;
@@ -206,7 +217,7 @@ begin
    return jsonb_build_object('team_name',v_team.name,'dish_name',v_dish.title,
      'revealed_at',v_assignment.revealed_at,'first_open',false);
  end if;
- if v_event.status<>'open' then
+ if v_event.status not in ('pilot','open') then
    insert into public.battle_actions(event_id,team_id,action,client_digest)
      values(v_event.id,v_team.id,'blocked',p_client_digest);
    return jsonb_build_object('error',case
@@ -217,6 +228,14 @@ begin
      else 'not_open' end);
  end if;
 
+ -- In pilot, all other valid team codes remain locked. Existing assignments may
+ -- still be viewed above, without disclosing any unused dishes.
+ if v_event.status='pilot' and v_team.tos_slug is distinct from v_event.pilot_tos_slug then
+   insert into public.battle_actions(event_id,team_id,action,client_digest)
+   values(v_event.id,v_team.id,'blocked',p_client_digest);
+   return jsonb_build_object('error','pilot_only');
+ end if;
+
  -- gen_random_uuid() uses OS-backed cryptographic randomness; exclude taken dishes.
  select d.* into v_dish from public.battle_dishes d
  where d.event_id=v_event.id and not exists (
@@ -224,7 +243,7 @@ begin
    where a.event_id=d.event_id and a.dish_id=d.id)
  order by gen_random_uuid() limit 1;
  if not found then
-   update public.battle_events set status='closed' where id=v_event.id and status='open';
+   update public.battle_events set status='closed' where id=v_event.id and status in ('open','pilot');
    return jsonb_build_object('error','sold_out');
  end if;
  insert into public.battle_assignments(event_id,team_id,dish_id,revealed_at)

@@ -60,14 +60,14 @@ Deno.serve(async (req: Request) => {
     if (req.method === 'GET') {
       const slug = new URL(req.url).searchParams.get('event') || '';
       if (!/^[a-z0-9-]{4,80}$/.test(slug)) return respond({ error: 'invalid_request' }, 400, origin);
-      const events = await db('battle_events?select=id,status&slug=eq.' + encodeURIComponent(slug)) as
-        Array<{ id: string; status: string }>;
+      const events = await db('battle_events?select=id,status,pilot_tos_slug&slug=eq.' + encodeURIComponent(slug)) as
+        Array<{ id: string; status: string; pilot_tos_slug: string | null }>;
       if (!Array.isArray(events) || events.length !== 1) return respond({ error: 'unavailable' }, 404, origin);
       const event = events[0];
-      let teams: Array<{ id: string; name: string }> = [];
+      let teams: Array<{ id: string; name: string; tos_slug: string }> = [];
       if (event.status !== 'draft') {
-        teams = await db('battle_teams?select=id,name&event_id=eq.' + encodeURIComponent(event.id) + '&order=name.asc') as
-          Array<{ id: string; name: string }>;
+        teams = await db('battle_teams?select=id,name,tos_slug&event_id=eq.' + encodeURIComponent(event.id) + '&order=name.asc') as
+          Array<{ id: string; name: string; tos_slug: string }>;
       }
       const assignments = await db('battle_assignments?select=team_id&event_id=eq.' + encodeURIComponent(event.id)) as
         Array<{ team_id: string }>;
@@ -75,6 +75,7 @@ Deno.serve(async (req: Request) => {
       // Counts only. Never expose the assignment mapping or dish selection via GET.
       return respond({
         status: event.status,
+        pilot_team_slug: event.status === 'pilot' ? event.pilot_tos_slug : null,
         teams,
         total_teams: 26,
         total_dishes: 19,

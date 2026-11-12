@@ -32,26 +32,43 @@ try{
   file(path.join(dir,'seed-private.sql'));
   const initial=run("select status||'|'||(select count(*) from public.battle_teams)||'|'||(select count(*) from public.battle_dishes)||'|'||(select count(*) from public.battle_assignments) from public.battle_events where slug='test-battle-2026'");
   assert.equal(initial,'ready|26|19|0');
-  run("update public.battle_events set status='open' where slug='test-battle-2026'");
-  const rows=run('select id,code_digest from public.battle_teams order by name')
-    .split('\n').map(line=>{const [id,digest]=line.split('|');return{id,digest};});
+  // Pilot must give the first *real* meal only to Uyutny, then unlock others.
+  run("update public.battle_events set status='pilot',pilot_tos_slug='uyutnyy' where slug='test-battle-2026' and status='ready'");
+  const rows=run('select id,code_digest,tos_slug from public.battle_teams order by name')
+    .split('\n').map(line=>{const [id,digest,slug]=line.split('|');return{id,digest,slug};});
   assert.equal(rows.length,26);
+  const uyutnyy=rows.find(team=>team.slug==='uyutnyy');
+  assert(uyutnyy,'Uyutny pilot team should exist');
+  const others=rows.filter(team=>team.slug!=='uyutnyy');
+  assert.equal(others.length,25);
 
-  const invalid=parse(run(reveal(rows[0],1,'f'.repeat(64))));
-  assert.equal(invalid.error,'invalid_credentials');
-  const dishes=new Set();
-  for(let i=0;i<18;i++){
-    const answer=parse(run(reveal(rows[i],i+2)));
+  const badPilot=parse(run(reveal(uyutnyy,1,'f'.repeat(64))));
+  assert.equal(badPilot.error,'invalid_credentials');
+  const pilotBlocked=parse(run(reveal(others[0],2)));
+  assert.equal(pilotBlocked.error,'pilot_only');
+  assert.equal(run('select count(*) from public.battle_assignments'),'0');
+  const first=parse(run(reveal(uyutnyy,3)));
+  assert.equal(first.first_open,true);
+  assert.equal(first.remaining,18);
+  const repeat=parse(run(reveal(uyutnyy,3)));
+  assert.equal(repeat.first_open,false);
+  assert.equal(repeat.dish_name,first.dish_name);
+  assert.equal(run('select count(*) from public.battle_assignments'),'1');
+
+  run("update public.battle_events set status='open',pilot_tos_slug=null where slug='test-battle-2026' and status='pilot'");
+  const dishes=new Set([first.dish_name]);
+  for(let i=0;i<17;i++){
+    const answer=parse(run(reveal(others[i],i+4)));
     assert.equal(answer.first_open,true);
     assert.ok(answer.dish_name);
-    assert.equal(answer.remaining,18-i);
+    assert.equal(answer.remaining,17-i);
     assert.ok(!dishes.has(answer.dish_name));
     dishes.add(answer.dish_name);
   }
   assert.equal(run("select status from public.battle_events where slug='test-battle-2026'"),'open');
   // Race two separate connections for the exact LAST dish.
-  const race=await Promise.all([18,19].map(async(i)=>{
-    const {stdout}=await runAsync('psql',[...psql,'-c',reveal(rows[i],i+2)],{env,encoding:'utf8'});
+  const race=await Promise.all([17,18].map(async(i)=>{
+    const {stdout}=await runAsync('psql',[...psql,'-c',reveal(others[i],i+4)],{env,encoding:'utf8'});
     return parse(stdout);
   }));
   assert.equal(race.filter(v=>v.first_open===true).length,1);
@@ -59,11 +76,11 @@ try{
   dishes.add(race.find(v=>v.first_open).dish_name);
   assert.equal(dishes.size,19);
   assert.equal(run("select status from public.battle_events where slug='test-battle-2026'"),'closed');
-  assert.equal(run('select count(*)||\'|\'||count(distinct dish_id)||\'|\'||count(distinct team_id) from public.battle_assignments'),'19|19|19');
-  for(let i=20;i<26;i++)assert.equal(parse(run(reveal(rows[i],i+2))).error,'sold_out');
-  const before=parse(run(reveal(rows[0],1)));
-  assert.equal(before.first_open,false);
-  assert.ok(dishes.has(before.dish_name));
+  assert.equal(run(`select count(*)||'|'||count(distinct dish_id)||'|'||count(distinct team_id) from public.battle_assignments`),'19|19|19');
+  for(let i=19;i<others.length;i++)assert.equal(parse(run(reveal(others[i],i+4))).error,'sold_out');
+  const after=parse(run(reveal(uyutnyy,3)));
+  assert.equal(after.first_open,false);
+  assert.equal(after.dish_name,first.dish_name);
   assert.equal(run('select count(*) from public.battle_assignments'),'19');
   // Public roles must not read team code digests, assignments or action logs.
   let blocked=false;
@@ -74,5 +91,5 @@ try{
   try{run('set role authenticated; select code_digest from public.battle_teams;');}
   catch{blocked=true;}
   assert.equal(blocked,true);
-  console.log('PASS PostgreSQL: 26 codes, 19 distinct atomic draws, last-dish race, closure, repeat access, grants');
+  console.log('PASS PostgreSQL: Uyutny-only pilot, unlock 25 teams, 19 atomic draws, last-dish race, closure, repeat, grants');
 }finally{fs.rmSync(temp,{recursive:true,force:true});}
