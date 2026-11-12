@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-12T11:23:37.874Z",
-  "total": 407,
+  "generated_at": "2026-11-12T11:45:38.618Z",
+  "total": 414,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -945,7 +945,7 @@
       "path": "tos/makashevka/index.html",
       "url": "https://tosborisoglebsk.ru/tos/makashevka/",
       "title": "ТОС «Макашевка» — контакты, границы, председатель | ТОС БГО",
-      "description": "ТОС «Макашевка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. Уточняются: совпадение границ ТОС и села…",
+      "description": "ТОС «Макашевка»: председатель, контакты, границы, новости, события, проекты, потребности и результаты работы. село Макашевка (по предоставленной справке…",
       "section": "Каталог ТОС",
       "search_group": "tos",
       "content_origin": "reference"
@@ -3334,6 +3334,69 @@
       "section": "Сделано",
       "search_group": "done",
       "content_origin": "verified"
+    },
+    {
+      "path": "done/makashevka-dvorik-detstva-2016/index.html",
+      "url": "https://tosborisoglebsk.ru/done/makashevka-dvorik-detstva-2016/",
+      "title": "ТОС «Макашевка», 2016: Детская площадка «Дворик детства» | Сделано ТОСами БГО",
+      "description": "В предоставленной справке ТОС «Макашевка» за 2016 год указан проект «Детская площадка «Дворик детства»». Подробности реализации и документы уточняются.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/makashevka-kladbishche-ograzhdenie-2017/index.html",
+      "url": "https://tosborisoglebsk.ru/done/makashevka-kladbishche-ograzhdenie-2017/",
+      "title": "ТОС «Макашевка», 2017: Ограждение гражданского кладбища | Сделано ТОСами БГО",
+      "description": "В предоставленной справке ТОС «Макашевка» за 2017 год указан проект «Ограждение гражданского кладбища». Подробности реализации и документы уточняются.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/makashevka-territoriya-otdyha-2019/index.html",
+      "url": "https://tosborisoglebsk.ru/done/makashevka-territoriya-otdyha-2019/",
+      "title": "ТОС «Макашевка», 2019: Благоустройство территории и… | Сделано ТОСами БГО",
+      "description": "В предоставленной справке ТОС «Макашевка» за 2019 год указан проект «Благоустройство территории и места отдыха». Подробности реализации и документы…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/makashevka-skver-lyubvi-soglasiya-2021/index.html",
+      "url": "https://tosborisoglebsk.ru/done/makashevka-skver-lyubvi-soglasiya-2021/",
+      "title": "ТОС «Макашевка», 2021: Сквер «Любви и согласия» | Сделано ТОСами БГО",
+      "description": "В предоставленной справке ТОС «Макашевка» за 2021 год указан проект «Сквер «Любви и согласия»». Создание сквера также описано в публикации РИА «Воронеж».",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/makashevka-kokhanochka-reboot-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/done/makashevka-kokhanochka-reboot-2022/",
+      "title": "ТОС «Макашевка», 2022: «Коханочка. Перезагрузка» | Сделано ТОСами БГО",
+      "description": "В предоставленной справке ТОС «Макашевка» за 2022 год указан проект ««Коханочка. Перезагрузка»». Подробности реализации и документы уточняются.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/makashevka-dvorik-detstva-update-2022/index.html",
+      "url": "https://tosborisoglebsk.ru/done/makashevka-dvorik-detstva-update-2022/",
+      "title": "ТОС «Макашевка», 2022: Усовершенствование площадки «Дво… | Сделано ТОСами БГО",
+      "description": "В предоставленной справке ТОС «Макашевка» за 2022 год указан проект «Усовершенствование площадки «Дворик детства»». Подробности реализации и документы…",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/makashevka-chistaya-voda-2023/index.html",
+      "url": "https://tosborisoglebsk.ru/done/makashevka-chistaya-voda-2023/",
+      "title": "ТОС «Макашевка», 2023: «Чистая вода» | Сделано ТОСами БГО",
+      "description": "В предоставленной справке ТОС «Макашевка» за 2023 год указан проект ««Чистая вода»». Подробности реализации и документы уточняются.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
     },
     {
       "path": "done/mahrovka-project-experience/index.html",
