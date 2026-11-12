@@ -13,6 +13,8 @@ on:
       - release-2025-12-22
     paths:
       - 'map/**'
+      - 'data/map-basemaps.json'
+      - 'assets/img/yandex-tiles-logo.svg'
       - 'data/bgo-reference.geojson'
       - 'data/toses.geojson'
       - 'scripts/test_public_territory_map.js'
