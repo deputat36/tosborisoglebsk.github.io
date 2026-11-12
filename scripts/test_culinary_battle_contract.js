@@ -47,6 +47,12 @@ try{
   assert.match(sql,/v_teams<>26 or v_dishes<>19 or v_assignments<>0/);
   assert.match(sql,/order by gen_random_uuid\(\) limit 1/);
   assert.match(sql,/for update/);
+  assert.match(sql,/status in\('draft','ready','pilot','open','closed','published'\)/);
+  assert.match(sql,/v_event\.status='pilot'/);
+  assert.match(sql,/pilot_only/);
+  assert.match(fn,/pilot_team_slug:/);
+  assert.match(js,/pilotTeamSlug/);
+
   assert.match(sql,/v_remaining=0/);
   assert.match(sql,/primary key\(event_id,team_id\)/);
   assert.match(sql,/unique\(event_id,dish_id\)/);
