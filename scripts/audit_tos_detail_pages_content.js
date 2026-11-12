@@ -22,7 +22,7 @@ const relatedConfigs = {
   news: { file: 'news.json', limit: 6, direction: 'desc', detailRoot: '/news/', hasOrigin: true },
   events: { file: 'events.json', limit: 6, direction: 'asc', detailRoot: '/calendar/', hasOrigin: false },
   projects: { file: 'projects.json', limit: 6, direction: 'desc', detailRoot: '/projects/', hasOrigin: true },
-  done: { file: 'done.json', limit: 4, direction: 'desc', detailRoot: '/done/', hasOrigin: true },
+  done: { file: 'done.json', limit: 12, direction: 'desc', detailRoot: '/done/', hasOrigin: true },
   needs: { file: 'needs.json', limit: 6, direction: 'desc', detailRoot: '/needs/', hasOrigin: true }
 };
 
