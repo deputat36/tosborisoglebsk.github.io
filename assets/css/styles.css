@@ -37,8 +37,13 @@
 }
 
 @media(prefers-reduced-motion:reduce) {
-  html { scroll-behavior:auto }
-  *,*:before,*:after { animation:none!important; transition:none!important }
+  html {
+    scroll-behavior:auto
+  }
+  *,*:before,*:after {
+    animation:none!important;
+    transition:none!important
+  }
 }
 
 * {
@@ -754,7 +759,9 @@ button.stat.active {
 /* 12. Адаптивные правила */
 
 @media(max-width:1120px) {
-  html:not(.js-nav-ready) .header-inner { flex-wrap:wrap }
+  html:not(.js-nav-ready) .header-inner {
+    flex-wrap:wrap
+  }
   html:not(.js-nav-ready) .header .nav {
     display:flex;
     position:static;
@@ -765,7 +772,9 @@ button.stat.active {
     box-shadow:none;
     order:3
   }
-  html:not(.js-nav-ready) .menu-btn { display:none }
+  html:not(.js-nav-ready) .menu-btn {
+    display:none
+  }
   .nav {
     display:none;
     position:absolute;
