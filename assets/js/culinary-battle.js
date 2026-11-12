@@ -9,7 +9,7 @@
   const isDemo = new URLSearchParams(location.search).get('demo') === '1';
   let demoDishes = [];
   let demoAssignments = {};
-  const DEMO_STORAGE_KEY = 'tosbgo-culinary-battle-demo-24x19-v1';
+  const DEMO_STORAGE_KEY = 'tosbgo-culinary-battle-demo-26x19-v1';
   const $ = (id) => document.getElementById(id);
   const form = $('battle-form');
   if (!form) return;
@@ -45,7 +45,7 @@
   function refreshOptions() {
     const previous = team.value;
     const term = normalize(search.value);
-    const matching = teams.filter((t) => normalize(t.name).includes(term));
+    const matching = teams.filter((t) => normalize(t.name).includes(term)).sort((a,b) => a.name.localeCompare(b.name,'ru'));
     const fragment = document.createDocumentFragment();
     const placeholder = new Option(matching.length ? 'Выберите свой ТОС' : 'Совпадений не найдено', '');
     fragment.append(placeholder);
@@ -54,7 +54,7 @@
     if (matching.some((t) => t.id === previous)) team.value = previous;
   }
   function updateControls() {
-    const enabled = (isDemo || Boolean(API_ENDPOINT)) && ['open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 24;
+    const enabled = (isDemo || Boolean(API_ENDPOINT)) && ['open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 26;
     search.disabled = !enabled;
     team.disabled = !enabled;
     code.disabled = !enabled;
@@ -122,7 +122,7 @@
     currentStatus = left === 0 ? 'closed' : 'open';
     setStatus(left === 0
       ? 'ДЕМО завершено: все 19 блюд вытянуты. Ранее участвовавшие команды могут посмотреть своё блюдо.'
-      : 'ДЕМО открыто: 24 ТОСа, 19 блюд. Задания выдаются до окончания списка.', currentStatus);
+      : 'ДЕМО открыто: 26 ТОСов, 19 блюд. Задания выдаются до окончания списка.', currentStatus);
     showRemaining(left, true);
     updateControls();
   }
@@ -133,9 +133,9 @@
         const response = await fetch('/culinary-battle/demo-data.json', { cache: 'no-store' });
         if (!response.ok) throw new Error('Демо-данные недоступны.');
         const data = await response.json();
-        const valid = data.demo === true && data.teams?.length === 24 && data.dishes?.length === 19
-          && new Set(data.teams.map((t) => t.id)).size === 24
-          && new Set(data.teams.map((t) => t.name)).size === 24
+        const valid = data.demo === true && data.teams?.length === 26 && data.dishes?.length === 19
+          && new Set(data.teams.map((t) => t.id)).size === 26
+          && new Set(data.teams.map((t) => t.name)).size === 26
           && new Set(data.dishes.map((d) => d.title)).size === 19
           && data.teams.every((t, i) => t.id === 'demo-' + String(i + 1).padStart(2, '0'))
           && data.dishes.every((d) => typeof d.title === 'string');
@@ -148,7 +148,7 @@
         const demoBanner = document.createElement('div');
         demoBanner.className = 'battle-demo-banner';
         demoBanner.setAttribute('role', 'note');
-        demoBanner.textContent = 'ДЕМО · Реальные названия 24 ТОСов и 19 блюд. Пробные коды и результаты действуют только в вашем браузере, не являются настоящей жеребьёвкой.';
+        demoBanner.textContent = 'ДЕМО · Реальные названия 26 ТОСов и 19 блюд. Пробные коды и результаты действуют только в вашем браузере, не являются настоящей жеребьёвкой.';
         $('battle-panel').prepend(demoBanner);
         document.querySelector('.battle-hint').textContent = 'Выберите ТОС, введите учебный код, вытяните блюдо из оставшихся и посмотрите карточку. Первые 19 учебных команд получат разные блюда в этом браузере.';
         document.querySelector('.battle-warning').textContent = 'Это только проверка интерфейса. Для настоящего мероприятия коды и задания будут защищены сервером.';
@@ -186,7 +186,7 @@
       if (!Array.isArray(data.teams) || !['draft', 'ready', 'open', 'closed', 'published'].includes(data.status)) {
         throw new Error('Получен некорректный ответ сервера.');
       }
-      if (data.total_teams !== 24 || data.total_dishes !== 19 || !Number.isInteger(data.remaining) || data.remaining < 0 || data.remaining > 19) {
+      if (data.total_teams !== 26 || data.total_dishes !== 19 || !Number.isInteger(data.remaining) || data.remaining < 0 || data.remaining > 19) {
         throw new Error('Неверные счётчики жеребьёвки.');
       }
       currentStatus = data.status;
@@ -205,7 +205,7 @@
       setStatus(messages[currentStatus], currentStatus);
       showRemaining(data.remaining);
       refreshOptions();
-      if (teams.length !== 24 && currentStatus === 'open') {
+      if (teams.length !== 26 && currentStatus === 'open') {
         setStatus('Список команд требует проверки организатором. Участие временно недоступно.', 'draft');
       }
       updateControls();
@@ -223,7 +223,7 @@
   team.addEventListener('change', clearPreviousResult);
   function demoPick() {
     const index = teams.findIndex((entry) => entry.id === team.value);
-    if (index < 0 || index >= 24) throw new Error('Выберите ТОС из списка.');
+    if (index < 0 || index >= 26) throw new Error('Выберите ТОС из списка.');
     const expectedCode = 'DEMO-' + String(index + 1).padStart(2, '0') + '-2026';
     if (code.value.trim().toUpperCase() !== expectedCode) {
       throw new Error('Для этого ТОСа указан другой учебный код.');

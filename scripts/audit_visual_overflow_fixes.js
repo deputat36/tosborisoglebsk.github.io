@@ -73,7 +73,8 @@ function main() {
   }
 
   const pages = detailPages();
-  if (pages.length !== 24) errors.push(`expected 24 TOS detail pages, received ${pages.length}`);
+  const expected = JSON.parse(fs.readFileSync(TOSES_PATH, 'utf8')).filter(tos => tos && tos.slug && tos.status !== 'draft').length;
+  if (pages.length !== expected) errors.push(`expected ${expected} TOS detail pages, received ${pages.length}`);
   pages.forEach((filePath) => {
     const html = fs.readFileSync(filePath, 'utf8');
     if (!html.includes(RESPONSIVE_LINK)) errors.push(`${path.relative(ROOT, filePath)} is missing the responsive stylesheet link`);

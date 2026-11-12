@@ -318,7 +318,11 @@ function main() {
       seo_warnings_count: pageAudit.seoWarnings.length,
       broken_internal_links_count: pageAudit.linkErrors.length
     },
-    priority_tos: (contentAudit.items || []).filter((item) => item.priority === 'Высокий').map((item) => ({
+    // Display ALL high-priority cards, including newly added TOS. Readiness is
+    // enriched only where a separate evidence workflow has been initialized.
+    priority_tos: (contentAudit.items || []).filter((item) =>
+      item.priority === 'Высокий'
+    ).map((item) => ({
       slug: item.slug,
       name: item.name,
       location: item.location,

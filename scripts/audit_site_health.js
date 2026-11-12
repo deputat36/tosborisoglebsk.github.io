@@ -169,7 +169,11 @@ function main() {
   (data.priority_tos || []).forEach((item, index) => {
     const expected = readinessBySlug.get(item.slug);
     if (!expected) {
-      errors.push(`priority_tos[${index}] has no readiness source for ${item.slug}`);
+      // A newly listed high-priority TOS must remain visible even before it
+      // joins the separate evidence/readiness workflow. Never invent a stage.
+      if (item.readiness != null) {
+        errors.push(`priority_tos[${index}] has premature readiness data for ${item.slug}`);
+      }
       return;
     }
     if (!isObject(item.readiness)) {

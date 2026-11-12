@@ -76,7 +76,7 @@ Deno.serve(async (req: Request) => {
       return respond({
         status: event.status,
         teams,
-        total_teams: 24,
+        total_teams: 26,
         total_dishes: 19,
         remaining: Math.max(0, 19 - assignments.length)
       }, 200, origin);

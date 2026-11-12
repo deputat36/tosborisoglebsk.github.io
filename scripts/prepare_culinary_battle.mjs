@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Prepare 24 individual cryptographic codes and 19 unassigned dishes offline.
+// Prepare 26 individual cryptographic codes and 19 unassigned dishes offline.
 // Never commit secrets, code digests, private SQL, or generated participant files.
 // Preferred: BATTLE_PEPPER=<32+ chars> node scripts/prepare_culinary_battle.mjs \
 //   --output /secure/battle-output --slug culinary-battle-2026
@@ -37,12 +37,12 @@ if(args.teams&&args.dishes){
   teams=roster.map(t=>({name:t.name,slug:t.slug,id:randomUUID()}));
   dishes=fixture.dishes.map(d=>({title:d.title,id:randomUUID()}));
   // Require exact match to the approved public contest snapshot.
-  if(JSON.stringify(roster.map(t=>[t.slug,t.name]))!==
-    JSON.stringify(fixture.teams.map(t=>[t.tos_slug,t.name]))) {
-    die('Catalog roster changed: review the 24 teams before provisioning.');
+  if(JSON.stringify(roster.map(t=>[t.slug,t.name]).sort((a,b)=>a[0].localeCompare(b[0])))!==
+    JSON.stringify(fixture.teams.map(t=>[t.tos_slug,t.name]).sort((a,b)=>a[0].localeCompare(b[0])))) {
+    die('Catalog roster changed: review the 26 teams before provisioning.');
   }
 }else die('Provide both --teams and --dishes, or neither.');
-if(teams.length!==24||dishes.length!==19) die('Expected 24 teams and exactly 19 dishes.');
+if(teams.length!==26||dishes.length!==19) die('Expected 26 teams and exactly 19 dishes.');
 function unique(values,label){
   if(new Set(values.map(x=>String(x).toLocaleLowerCase('ru').replace(/ё/g,'е').trim())).size!==values.length)
     die('Duplicate '+label);
@@ -95,5 +95,5 @@ mkdirSync(output,{recursive:true,mode:0o700});
 writeFileSync(join(output,'seed-private.sql'),sql,{flag:'wx',mode:0o600});
 writeFileSync(join(output,'codes-private.csv'),'\uFEFF'+participantCsv,{flag:'wx',mode:0o600});
 writeFileSync(join(output,'organizer-results.sql'),querySql,{flag:'wx',mode:0o600});
-console.log('Prepared 24 unique private codes and 19 unassigned dishes.');
+console.log('Prepared 26 unique private codes and 19 unassigned dishes.');
 console.log('Event is READY, not OPEN. Distribution begins only after real launch.');

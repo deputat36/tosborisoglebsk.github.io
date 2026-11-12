@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-06-23",
+  "generated_at": "2026-11-12",
   "title": "Проверка полноты каталога ТОС БГО",
   "summary": {
     "target_total_from_open_source": 46,
     "open_source_as_of": "2024-06-03",
     "current_2026_official_total": null,
     "comparison_type": "historical_reference_not_current_register",
-    "current_catalog_total": 24,
-    "minimum_gap_to_check": 22,
+    "current_catalog_total": 26,
+    "minimum_gap_to_check": 20,
     "minimum_gap_is_confirmed": false,
-    "comparison_note": "Разница 22 относится только к опубликованной в 2024 году оценке. Актуальная численность ТОС на 2026 год не подтверждена.",
-    "known_missing_candidates": 4,
-    "unknown_missing_slots": 18,
+    "comparison_note": "Разница 20 — лишь сопоставление 26 текущих карточек портала с исторической оценкой 46 ТОС по состоянию на июнь 2024 года. Актуальная численность ТОС на 2026 год требует официальной сверки.",
+    "known_missing_candidates": 3,
+    "unknown_missing_slots": 17,
     "city_total_from_open_source": 25,
     "rural_total_from_open_source": 21
   },
@@ -51,44 +51,201 @@
     }
   ],
   "current_catalog": [
-    { "name": "Богана", "slug": "bogana", "type": "Сельский", "location": "с. Богана", "status": "in_catalog" },
-    { "name": "Восточный", "slug": "vostochnyy", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
-    { "name": "Губари", "slug": "gubari", "type": "Сельский", "location": "с. Губари", "status": "in_catalog" },
-    { "name": "Дзержинского", "slug": "dzerzhinskogo", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
-    { "name": "Знамение", "slug": "znamenie", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
-    { "name": "Ивановка", "slug": "ivanovka", "type": "Сельский", "location": "п. Ивановка", "status": "in_catalog" },
-    { "name": "Ипас", "slug": "ipas", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
-    { "name": "Калинка", "slug": "kalinka", "type": "Сельский", "location": "п. Калинино", "status": "in_catalog", "aliases_to_check": ["Калинки"] },
-    { "name": "Махровка", "slug": "mahrovka", "type": "Сельский", "location": "с. Махровка", "status": "in_catalog" },
-    { "name": "Маяк", "slug": "mayak", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
-    { "name": "Мечта", "slug": "mechta", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
-    { "name": "Миролюбие", "slug": "mirolyubie", "type": "Сельский", "location": "п. Миролюбие", "status": "in_catalog" },
-    { "name": "Первомайский", "slug": "pervomayskiy", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
-    { "name": "Петровское", "slug": "petrovskoe", "type": "Сельский", "location": "с. Петровское", "status": "in_catalog" },
-    { "name": "Победа", "slug": "pobeda", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
-    { "name": "Подстёпки", "slug": "podstepki", "type": "Сельский", "location": "п. Подстёпки", "status": "in_catalog" },
-    { "name": "Порт Артур", "slug": "port-artur", "type": "Сельский", "location": "с. Чигорак", "status": "in_catalog" },
-    { "name": "Просторный", "slug": "prostornyy", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
-    { "name": "Северный 39", "slug": "severnyy-39", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
-    { "name": "Танцырей", "slug": "tancyrey", "type": "Сельский", "location": "с. Танцырей", "status": "in_catalog" },
-    { "name": "Третьяки", "slug": "tretyaki", "type": "Сельский", "location": "с. Третьяки", "status": "in_catalog" },
-    { "name": "Ульяновка", "slug": "ulyanovka", "type": "Сельский", "location": "с. Ульяновка", "status": "in_catalog" },
-    { "name": "Уютный", "slug": "uyutnyy", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" },
-    { "name": "Чкаловец", "slug": "chkalovec", "type": "Городской", "location": "г. Борисоглебск", "status": "in_catalog" }
+    {
+      "name": "Богана",
+      "slug": "bogana",
+      "type": "Сельский",
+      "location": "с. Богана",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Восточный",
+      "slug": "vostochnyy",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Горелка",
+      "slug": "gorelka",
+      "type": "Сельский",
+      "location": "с. Горелка",
+      "status": "in_catalog",
+      "verification_note": "Сведения поступили от представителя ТОС 12.11.2026, официальные границы требуют сверки"
+    },
+    {
+      "name": "Губари",
+      "slug": "gubari",
+      "type": "Сельский",
+      "location": "с. Губари",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Дзержинского",
+      "slug": "dzerzhinskogo",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Знамение",
+      "slug": "znamenie",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Ивановка",
+      "slug": "ivanovka",
+      "type": "Сельский",
+      "location": "п. Ивановка",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Ипас",
+      "slug": "ipas",
+      "type": "Сельский",
+      "location": "с. Чигорак",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Калинка",
+      "slug": "kalinka",
+      "type": "Сельский",
+      "location": "п. Калинино",
+      "status": "in_catalog",
+      "aliases_to_check": [
+        "Калинки"
+      ]
+    },
+    {
+      "name": "Макашевка",
+      "slug": "makashevka",
+      "type": "Сельский",
+      "location": "с. Макашевка",
+      "status": "in_catalog",
+      "verification_note": "Только историческое упоминание 2021 года, председатель и границы уточняются"
+    },
+    {
+      "name": "Махровка",
+      "slug": "mahrovka",
+      "type": "Сельский",
+      "location": "с. Махровка",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Маяк",
+      "slug": "mayak",
+      "type": "Сельский",
+      "location": "с. Чигорак",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Мечта",
+      "slug": "mechta",
+      "type": "Сельский",
+      "location": "с. Чигорак",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Миролюбие",
+      "slug": "mirolyubie",
+      "type": "Сельский",
+      "location": "п. Миролюбие",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Первомайский",
+      "slug": "pervomayskiy",
+      "type": "Сельский",
+      "location": "с. Чигорак",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Петровское",
+      "slug": "petrovskoe",
+      "type": "Сельский",
+      "location": "с. Петровское",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Победа",
+      "slug": "pobeda",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Подстёпки",
+      "slug": "podstepki",
+      "type": "Сельский",
+      "location": "п. Подстёпки",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Порт Артур",
+      "slug": "port-artur",
+      "type": "Сельский",
+      "location": "с. Чигорак",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Просторный",
+      "slug": "prostornyy",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Северный 39",
+      "slug": "severnyy-39",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Танцырей",
+      "slug": "tancyrey",
+      "type": "Сельский",
+      "location": "с. Танцырей",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Третьяки",
+      "slug": "tretyaki",
+      "type": "Сельский",
+      "location": "с. Третьяки",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Ульяновка",
+      "slug": "ulyanovka",
+      "type": "Сельский",
+      "location": "с. Ульяновка",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Уютный",
+      "slug": "uyutnyy",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    },
+    {
+      "name": "Чкаловец",
+      "slug": "chkalovec",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "status": "in_catalog"
+    }
   ],
   "missing_candidates": [
     {
-      "name": "Горелка",
-      "slug_draft": "gorelka",
-      "source_ids": ["bloknot-2023-contest-16"],
-      "evidence": "Перечислен среди 16 ТОСов Борисоглебского округа, допущенных к публичной защите проектов в 2023 году.",
-      "status": "needs_registry_confirmation",
-      "next_step": "Уточнить территорию, председателя, статус регистрации и наличие открытых контактов."
-    },
-    {
       "name": "Хоперский берег",
       "slug_draft": "hoperskiy-bereg",
-      "source_ids": ["bloknot-2023-contest-16"],
+      "source_ids": [
+        "bloknot-2023-contest-16"
+      ],
       "evidence": "Перечислен среди 16 ТОСов Борисоглебского округа, допущенных к публичной защите проектов в 2023 году.",
       "status": "needs_registry_confirmation",
       "next_step": "Уточнить территорию, председателя, статус регистрации и наличие открытых контактов."
@@ -96,7 +253,9 @@
     {
       "name": "Тюковка",
       "slug_draft": "tyukovka",
-      "source_ids": ["bloknot-2023-contest-16"],
+      "source_ids": [
+        "bloknot-2023-contest-16"
+      ],
       "evidence": "Перечислен среди 16 ТОСов Борисоглебского округа, допущенных к публичной защите проектов в 2023 году.",
       "status": "needs_registry_confirmation",
       "next_step": "Уточнить территорию, председателя, статус регистрации и наличие открытых контактов."
@@ -104,7 +263,9 @@
     {
       "name": "Ручей",
       "slug_draft": "ruchey",
-      "source_ids": ["bgo-report-2022-search-snippet"],
+      "source_ids": [
+        "bgo-report-2022-search-snippet"
+      ],
       "evidence": "В поисковой выдаче по отчёту главы за 2022 год указано, что в 2022 году зарегистрированы ТОС «Уютный» и ТОС «Ручей». Требуется ручная проверка PDF или официального реестра.",
       "status": "needs_manual_source_check",
       "next_step": "Открыть официальный PDF вручную или запросить подтверждение в администрации/у координатора ТОС."
@@ -126,7 +287,7 @@
   "next_actions": [
     "Запросить официальный актуальный реестр 46 ТОС БГО.",
     "Сверить городские и сельские ТОС отдельно: 25 городских и 21 сельский.",
-    "Проверить четыре найденных кандидата: Горелка, Хоперский берег, Тюковка, Ручей.",
+    "Проверить трёх оставшихся кандидатов: Хоперский берег, Тюковка, Ручей.",
     "После подтверждения создавать новые карточки не сразу пачкой, а по одной: сначала минимальная карточка, затем контакты и материалы.",
     "Для уже опубликованных 24 карточек параллельно повышать статус верификации."
   ]

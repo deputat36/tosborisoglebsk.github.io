@@ -1,4 +1,4 @@
--- Culinary Battle TOS BGO: 24 eligible TOS, 19 dishes, first 19 valid draws win.
+-- Culinary Battle TOS BGO: 26 eligible TOS, 19 dishes, first 19 valid draws win.
 -- Source migration for a NEW, ISOLATED Supabase project only; never apply to CRM.
 -- Previous 18x18 SQL was NOT applied to any project, and contained corrupted duplication.
 -- No pre-assigned dishes. All choices made atomically on first successful authenticated draw.
@@ -80,8 +80,8 @@ begin
      select count(*) into v_teams from public.battle_teams where event_id=new.id;
      select count(*) into v_dishes from public.battle_dishes where event_id=new.id;
      select count(*) into v_assignments from public.battle_assignments where event_id=new.id;
-     if v_teams<>24 or v_dishes<>19 or v_assignments<>0 then
-       raise exception 'Ready requires exactly 24 teams, 19 dishes and zero assignments';
+     if v_teams<>26 or v_dishes<>19 or v_assignments<>0 then
+       raise exception 'Ready requires exactly 26 teams, 19 dishes and zero assignments';
      end if;
    end if;
    insert into public.battle_actions(event_id,action,detail)

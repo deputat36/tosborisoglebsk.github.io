@@ -233,7 +233,7 @@ function main() {
     errors.push('theme toggle is missing');
   }
 
-  const heroCount = Number(textMatch(html, /<div class="proof-card big"><b>(\d+)<\/b><span>ТОСа в каталоге<\/span>/));
+  const heroCount = Number(textMatch(html, /<div class="proof-card big"><b>(\d+)<\/b><span>ТОС(?:а|ов) в каталоге<\/span>/));
   if (!Number.isInteger(heroCount) || heroCount !== toses.length) {
     errors.push(`homepage TOS count must match data/toses.json: ${heroCount} !== ${toses.length}`);
   }

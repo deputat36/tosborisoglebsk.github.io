@@ -119,8 +119,9 @@ function main() {
     errors.push('data/tos_content_audit.json must contain items array');
   }
 
-  if (tosesAudit && tosesAudit.summary && tosesAudit.summary.high_priority !== requiredHighPrioritySlugs.size) {
-    errors.push(`data/tos_content_audit.json summary.high_priority must be ${requiredHighPrioritySlugs.size}`);
+  if (tosesAudit && tosesAudit.summary &&
+      tosesAudit.summary.high_priority < requiredHighPrioritySlugs.size) {
+    errors.push('data/tos_content_audit.json must retain all four original high-priority TOS');
   }
 
   if (rows.length < 2) {
@@ -141,8 +142,10 @@ function main() {
       : []
   );
 
-  if (!setEquals(auditHighPrioritySlugs, requiredHighPrioritySlugs)) {
-    errors.push(`data/tos_content_audit.json high priority slugs mismatch: ${Array.from(auditHighPrioritySlugs).join(', ')}`);
+  // New incomplete catalog cards may add high-priority tasks without
+  // removing the four previously approved outreach priorities.
+  if (![...requiredHighPrioritySlugs].every(slug => auditHighPrioritySlugs.has(slug))) {
+    errors.push(`data/tos_content_audit.json lost a required priority: ${Array.from(auditHighPrioritySlugs).join(', ')}`);
   }
 
   const headers = rows[0].map(normalizeHeader);
