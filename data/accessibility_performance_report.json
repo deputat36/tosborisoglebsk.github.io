@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T13:59:36.154Z",
+  "generated_at": "2026-11-12T14:11:56.882Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -20,8 +20,8 @@
     },
     "asset_files": 134,
     "over_budget_assets": 0,
-    "total_css_bytes": 84147,
-    "total_js_bytes": 763020,
+    "total_css_bytes": 84175,
+    "total_js_bytes": 764062,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -53,7 +53,7 @@
       "path": "assets/js/culinary-battle.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 21937,
+      "size_bytes": 22979,
       "over_budget": false
     },
     {
@@ -123,7 +123,7 @@
       "path": "assets/css/styles.css",
       "group": "css",
       "extension": ".css",
-      "size_bytes": 14505,
+      "size_bytes": 14533,
       "over_budget": false
     },
     {

@@ -7,7 +7,7 @@
   "expected_canonical_sha256": "d072862ffc3a2b9a8b2881a0e0d00454cbc70b6c55fd385dc70ceb016495c9ec",
   "canonical_equal": true,
   "section_count": 14,
-  "line_count": 921,
+  "line_count": 930,
   "max_line_length": 140,
   "errors": []
 }
