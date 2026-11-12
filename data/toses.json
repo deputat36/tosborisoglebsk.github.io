@@ -74,6 +74,44 @@
     }
   },
   {
+    "slug": "gorelka",
+    "name": "Горелка",
+    "title": "ТОС «Горелка»",
+    "type": "Сельский",
+    "location": "с. Горелка",
+    "boundaries": "Территория села Горелка (по сообщению представителя ТОС; официальный документ о границах требует сверки)",
+    "founded": "2014",
+    "chairperson": "Артемова Ирина Васильевна",
+    "contacts_raw": "89081393251 irinaartemova103@gmail.com https://vk.ru/artirina1963",
+    "phones": [
+      "+7 (908) 139-32-51"
+    ],
+    "emails": [
+      "irinaartemova103@gmail.com"
+    ],
+    "chairperson_links": [
+      "https://vk.ru/artirina1963"
+    ],
+    "groups_raw": "https://vk.ru/club224472980",
+    "social_links": [
+      "https://vk.ru/club224472980"
+    ],
+    "population": "210",
+    "description": "ТОС «Горелка» создан в 2014 году на основе территориального единства и общих интересов жителей села Горелка. По сообщению представителя ТОС, активом реализовано шесть проектов с 2016 по 2025 год: детские площадки, ремонт дороги, благоустройство кладбища и воинского захоронения, установка водонапорной башни. Подробности проектов представлены в разделе результатов; сведения о границах и текущем состоянии объектов требуют документальной сверки.",
+    "updated_at": "2026-11-12",
+    "verification_status": "needs_review",
+    "verification_note": "Основные сведения и перечень шести работ предоставлены пользователем по сообщению представителя ТОС 12.11.2026. Факты не сверены с официальным реестром и актами выполнения.",
+    "trust": {
+      "source_type": "direct_submission",
+      "source_ref": "Сведения для публикации переданы редакции 12.11.2026",
+      "checked_at": "",
+      "checked_by": "",
+      "recheck_after": "",
+      "verification_scope": [],
+      "publication_consent_ref": ""
+    }
+  },
+  {
     "slug": "gubari",
     "name": "Губари",
     "title": "ТОС «Губари»",
@@ -263,6 +301,36 @@
         "location",
         "founded"
       ],
+      "publication_consent_ref": ""
+    }
+  },
+  {
+    "slug": "makashevka",
+    "name": "Макашевка",
+    "title": "ТОС «Макашевка»",
+    "type": "Сельский",
+    "location": "с. Макашевка",
+    "boundaries": "Уточняются: совпадение границ ТОС и села Макашевка не подтверждено.",
+    "founded": "",
+    "chairperson": "",
+    "contacts_raw": "",
+    "phones": [],
+    "emails": [],
+    "chairperson_links": [],
+    "groups_raw": "",
+    "social_links": [],
+    "population": "",
+    "description": "ТОС «Макашевка» упоминается в материалах областного конкурса общественно полезных проектов 2021 года. В публикациях указан проект благоустройства сквера «Любви и согласия» в селе Макашевка. Актуальные границы, дата создания, председатель, контакты и статус выполнения проекта требуют уточнения.",
+    "updated_at": "2026-11-12",
+    "verification_status": "needs_review",
+    "verification_note": "Название и связь с селом подтверждаются открытой конкурсной публикацией 2021 года. Текущие руководство, границы и контакты не установлены.",
+    "trust": {
+      "source_type": "historical_publication",
+      "source_ref": "https://bloknotborisoglebsk.ru/news/v-bogane-reshili-ustanovit-ulichnye-trenazhery-1420174",
+      "checked_at": "",
+      "checked_by": "",
+      "recheck_after": "",
+      "verification_scope": [],
       "publication_consent_ref": ""
     }
   },
