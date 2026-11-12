@@ -5,98 +5,122 @@
   "teams": [
     {
       "id": "demo-01",
+      "tos_slug": "bogana",
       "name": "Богана"
     },
     {
       "id": "demo-02",
+      "tos_slug": "vostochnyy",
       "name": "Восточный"
     },
     {
       "id": "demo-03",
+      "tos_slug": "gubari",
       "name": "Губари"
     },
     {
       "id": "demo-04",
+      "tos_slug": "dzerzhinskogo",
       "name": "Дзержинского"
     },
     {
       "id": "demo-05",
+      "tos_slug": "znamenie",
       "name": "Знамение"
     },
     {
       "id": "demo-06",
+      "tos_slug": "ivanovka",
       "name": "Ивановка"
     },
     {
       "id": "demo-07",
+      "tos_slug": "ipas",
       "name": "Ипас"
     },
     {
       "id": "demo-08",
+      "tos_slug": "kalinka",
       "name": "Калинка"
     },
     {
       "id": "demo-09",
+      "tos_slug": "mahrovka",
       "name": "Махровка"
     },
     {
       "id": "demo-10",
+      "tos_slug": "mayak",
       "name": "Маяк"
     },
     {
       "id": "demo-11",
+      "tos_slug": "mechta",
       "name": "Мечта"
     },
     {
       "id": "demo-12",
+      "tos_slug": "mirolyubie",
       "name": "Миролюбие"
     },
     {
       "id": "demo-13",
+      "tos_slug": "pervomayskiy",
       "name": "Первомайский"
     },
     {
       "id": "demo-14",
+      "tos_slug": "petrovskoe",
       "name": "Петровское"
     },
     {
       "id": "demo-15",
+      "tos_slug": "pobeda",
       "name": "Победа"
     },
     {
       "id": "demo-16",
+      "tos_slug": "podstepki",
       "name": "Подстёпки"
     },
     {
       "id": "demo-17",
+      "tos_slug": "port-artur",
       "name": "Порт Артур"
     },
     {
       "id": "demo-18",
+      "tos_slug": "prostornyy",
       "name": "Просторный"
     },
     {
       "id": "demo-19",
+      "tos_slug": "severnyy-39",
       "name": "Северный 39"
     },
     {
       "id": "demo-20",
+      "tos_slug": "tancyrey",
       "name": "Танцырей"
     },
     {
       "id": "demo-21",
+      "tos_slug": "tretyaki",
       "name": "Третьяки"
     },
     {
       "id": "demo-22",
+      "tos_slug": "ulyanovka",
       "name": "Ульяновка"
     },
     {
       "id": "demo-23",
+      "tos_slug": "uyutnyy",
       "name": "Уютный"
     },
     {
       "id": "demo-24",
+      "tos_slug": "chkalovec",
       "name": "Чкаловец"
     }
   ],
