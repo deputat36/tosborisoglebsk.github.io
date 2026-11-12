@@ -230,6 +230,11 @@ jobs:
         run: node scripts/patch_accessibility_public_controls.js
       - name: Patch internal tools accessibility
         run: node scripts/patch_accessibility_internal_tools.js
+      - name: Generate territory map and validate geometry tools
+        run: |
+          node scripts/generate_territory_map.js
+          node scripts/test_territory_map_core.js
+          node scripts/audit_map_content.js
       - name: Generate accessibility and performance baseline
         run: node scripts/generate_public_experience.js
       - name: Check draft guidance and honest use records
