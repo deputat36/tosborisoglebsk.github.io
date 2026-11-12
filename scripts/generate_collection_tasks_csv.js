@@ -52,7 +52,7 @@ function main() {
         item.name || '',
         item.slug || '',
         item.location || '',
-        item.chairperson || '',
+        item.chairperson || 'Требует уточнения',
         item.priority || '',
         item.score || '',
         (item.missing || []).join(', '),
