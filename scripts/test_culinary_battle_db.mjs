@@ -31,11 +31,11 @@ try{
   ],{cwd:root,env:{...env,BATTLE_PEPPER:'ci-only-synthetic-pepper-not-for-actual-event-123'},stdio:'pipe'});
   file(path.join(dir,'seed-private.sql'));
   const initial=run("select status||'|'||(select count(*) from public.battle_teams)||'|'||(select count(*) from public.battle_dishes)||'|'||(select count(*) from public.battle_assignments) from public.battle_events where slug='test-battle-2026'");
-  assert.equal(initial,'ready|24|19|0');
+  assert.equal(initial,'ready|26|19|0');
   run("update public.battle_events set status='open' where slug='test-battle-2026'");
   const rows=run('select id,code_digest from public.battle_teams order by name')
     .split('\n').map(line=>{const [id,digest]=line.split('|');return{id,digest};});
-  assert.equal(rows.length,24);
+  assert.equal(rows.length,26);
 
   const invalid=parse(run(reveal(rows[0],1,'f'.repeat(64))));
   assert.equal(invalid.error,'invalid_credentials');
@@ -60,7 +60,7 @@ try{
   assert.equal(dishes.size,19);
   assert.equal(run("select status from public.battle_events where slug='test-battle-2026'"),'closed');
   assert.equal(run('select count(*)||\'|\'||count(distinct dish_id)||\'|\'||count(distinct team_id) from public.battle_assignments'),'19|19|19');
-  for(let i=20;i<24;i++)assert.equal(parse(run(reveal(rows[i],i+2))).error,'sold_out');
+  for(let i=20;i<26;i++)assert.equal(parse(run(reveal(rows[i],i+2))).error,'sold_out');
   const before=parse(run(reveal(rows[0],1)));
   assert.equal(before.first_open,false);
   assert.ok(dishes.has(before.dish_name));
@@ -74,5 +74,5 @@ try{
   try{run('set role authenticated; select code_digest from public.battle_teams;');}
   catch{blocked=true;}
   assert.equal(blocked,true);
-  console.log('PASS PostgreSQL: 24 codes, 19 distinct atomic draws, last-dish race, closure, repeat access, grants');
+  console.log('PASS PostgreSQL: 26 codes, 19 distinct atomic draws, last-dish race, closure, repeat access, grants');
 }finally{fs.rmSync(temp,{recursive:true,force:true});}
