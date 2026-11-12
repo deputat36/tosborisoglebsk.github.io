@@ -34,10 +34,10 @@ if(args.teams&&args.dishes){
   dishes=lines(args.dishes).map(title=>({title,id:randomUUID()}));
 }else if(!args.teams&&!args.dishes){
   const roster=JSON.parse(readFileSync(resolve('data/toses.json'),'utf8'));
-  teams=roster.map(t=>({name:t.name,slug:t.id,id:randomUUID()}));
+  teams=roster.map(t=>({name:t.name,slug:t.slug,id:randomUUID()}));
   dishes=fixture.dishes.map(d=>({title:d.title,id:randomUUID()}));
   // Require exact match to the approved public contest snapshot.
-  if(JSON.stringify(roster.map(t=>[t.id,t.name]))!==
+  if(JSON.stringify(roster.map(t=>[t.slug,t.name]))!==
     JSON.stringify(fixture.teams.map(t=>[t.tos_slug,t.name]))) {
     die('Catalog roster changed: review the 24 teams before provisioning.');
   }
