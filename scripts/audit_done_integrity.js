@@ -92,7 +92,11 @@ function main() {
     if (id) seenIds.add(id);
 
     if (!allowedStatuses.has(status)) errors.push(`${line}: unsupported status ${status}`);
-    if (!isIsoDate(date)) errors.push(`${line}: invalid date ${date}`);
+    // Year-only reports do not justify inventing a precise calendar date.
+    const yearOnly = !date && /^20[0-9]{2}$/.test(String(item.year || ''))
+      && item.content_origin === 'editorial'
+      && /представител/i.test(String(item.source_label || ''));
+    if (!isIsoDate(date) && !yearOnly) errors.push(`${line}: invalid date ${date}`);
     if (!tosSlug) errors.push(`${line}: missing tos_slug`);
     if (tosSlug && !tosSlugs.has(tosSlug)) errors.push(`${line}: unknown tos_slug ${tosSlug}`);
     if (tosSlug && !repoPathExists(`/tos/${tosSlug}/`)) errors.push(`${line}: missing TOS page /tos/${tosSlug}/`);
