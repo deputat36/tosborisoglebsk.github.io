@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T05:59:16.715Z",
+  "generated_at": "2026-11-12T10:30:49.144Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -20,8 +20,8 @@
     },
     "asset_files": 129,
     "over_budget_assets": 0,
-    "total_css_bytes": 77982,
-    "total_js_bytes": 739291,
+    "total_css_bytes": 78426,
+    "total_js_bytes": 742819,
     "total_image_bytes": 13333,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -50,6 +50,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/culinary-battle.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 21886,
+      "over_budget": false
+    },
+    {
       "path": "assets/css/design-upgrades.css",
       "group": "css",
       "extension": ".css",
@@ -75,13 +82,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 18681,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/culinary-battle.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 18358,
       "over_budget": false
     },
     {
@@ -169,6 +169,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/css/culinary-battle.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 11348,
+      "over_budget": false
+    },
+    {
       "path": "admin/admin-dashboard.js",
       "group": "js",
       "extension": ".js",
@@ -180,13 +187,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11185,
-      "over_budget": false
-    },
-    {
-      "path": "assets/css/culinary-battle.css",
-      "group": "css",
-      "extension": ".css",
-      "size_bytes": 10904,
       "over_budget": false
     },
     {
