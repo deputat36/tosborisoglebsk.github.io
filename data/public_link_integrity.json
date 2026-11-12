@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T19:54:28.692Z",
+  "generated_at": "2026-11-12T20:42:54.867Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 414,
@@ -16,104 +16,80 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1024,
+      "duration_ms": 1008,
       "bytes": 8333
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 61,
+      "duration_ms": 76,
       "bytes": 9062
     },
     {
-      "route": "/projects/port-artur-blagoustroystvo-kladbishcha-2021/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
       "duration_ms": 40,
-      "bytes": 10509
-    },
-    {
-      "route": "/projects/podstepki-ograzhdenie-kladbishcha-2021/index.html",
-      "status": 200,
-      "duration_ms": 39,
-      "bytes": 10335
-    },
-    {
-      "route": "/projects/public-stand-and-ideas-chkalovec/index.html",
-      "status": 200,
-      "duration_ms": 39,
-      "bytes": 10139
-    },
-    {
-      "route": "/projects/public-stand-and-ideas-dzerzhinskogo/index.html",
-      "status": 200,
-      "duration_ms": 39,
-      "bytes": 10277
-    },
-    {
-      "route": "/projects/photo-project-archive/index.html",
-      "status": 200,
-      "duration_ms": 38,
-      "bytes": 8283
-    },
-    {
-      "route": "/projects/public-stand-and-ideas-bogana/index.html",
-      "status": 200,
-      "duration_ms": 38,
-      "bytes": 10056
-    },
-    {
-      "route": "/projects/project-school-for-tos/index.html",
-      "status": 200,
-      "duration_ms": 37,
-      "bytes": 8388
+      "bytes": 8560
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 33,
+      "duration_ms": 39,
       "bytes": 16380
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 31,
+      "duration_ms": 39,
       "bytes": 12170
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 37,
       "bytes": 9797
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 29,
-      "bytes": 8560
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 28,
+      "duration_ms": 35,
       "bytes": 16246
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 28,
+      "duration_ms": 35,
       "bytes": 23405
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 10852
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 15811
+    },
+    {
+      "route": "/documents/templates/tos-creation-checklist/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 3948
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 14,
       "bytes": 23798
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/chairperson/news/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 8578
+      "bytes": 5806
     },
     {
       "route": "/check-tos/index.html",
@@ -122,16 +98,40 @@
       "bytes": 6185
     },
     {
-      "route": "/content-standards/index.html",
+      "route": "/communication-kit/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 13560
+      "bytes": 25272
     },
     {
-      "route": "/documents/templates/project-kit/index.html",
+      "route": "/materials/chairperson-first-100-days/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 11164
+    },
+    {
+      "route": "/documents/templates/tos-creation-kit/index.html",
       "status": 200,
       "duration_ms": 13,
-      "bytes": 14282
+      "bytes": 6602
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 8578
+    },
+    {
+      "route": "/documents/templates/project-schedule/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 16054
+    },
+    {
+      "route": "/documents/templates/project-support/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 14006
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T19:54:25.391Z",
+  "generated_at": "2026-11-12T20:42:50.830Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,11 +18,11 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 145,
+    "asset_files": 147,
     "over_budget_assets": 0,
-    "total_css_bytes": 105041,
-    "total_js_bytes": 948558,
-    "total_image_bytes": 38604,
+    "total_css_bytes": 106890,
+    "total_js_bytes": 955434,
+    "total_image_bytes": 45000,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
@@ -50,17 +50,17 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/territory-map.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 27153,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/workbench.js",
       "group": "js",
       "extension": ".js",
       "size_bytes": 25417,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/territory-map.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 24068,
       "over_budget": false
     },
     {
