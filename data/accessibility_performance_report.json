@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T14:20:57.472Z",
+  "generated_at": "2026-11-12T19:54:25.391Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,16 +18,23 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 134,
+    "asset_files": 145,
     "over_budget_assets": 0,
-    "total_css_bytes": 84175,
-    "total_js_bytes": 764062,
-    "total_image_bytes": 13333,
+    "total_css_bytes": 105041,
+    "total_js_bytes": 948558,
+    "total_image_bytes": 38604,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
   "page_findings": [],
   "largest_assets": [
+    {
+      "path": "assets/vendor/leaflet/leaflet.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 147552,
+      "over_budget": false
+    },
     {
       "path": "data/tos.data.js",
       "group": "js",
@@ -39,7 +46,7 @@
       "path": "assets/js/site.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 35975,
+      "size_bytes": 35976,
       "over_budget": false
     },
     {
@@ -47,6 +54,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 25417,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/territory-map.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 24068,
       "over_budget": false
     },
     {
@@ -75,6 +89,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 19451,
+      "over_budget": false
+    },
+    {
+      "path": "assets/img/bgo-reference.svg",
+      "group": "images",
+      "extension": ".svg",
+      "size_bytes": 18768,
       "over_budget": false
     },
     {
@@ -113,6 +134,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/vendor/leaflet/leaflet.css",
+      "group": "css",
+      "extension": ".css",
+      "size_bytes": 14806,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-execution-ui.js",
       "group": "js",
       "extension": ".js",
@@ -131,6 +159,13 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 13752,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/territory-map-core.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 12875,
       "over_budget": false
     },
     {
@@ -201,41 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10874,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/workbench-drafts.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10349,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/publication-basis-execution.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10301,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/collection-board.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10200,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/outreach-execution.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10143,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/personal-data-decision-validation.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10059,
       "over_budget": false
     }
   ],
