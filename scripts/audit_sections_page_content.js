@@ -61,7 +61,7 @@ const requiredCopy = [
   'Основные разделы',
   'Маршруты по роли',
   'Дополнительные публичные разделы',
-  'Состояние геоданных',
+  'Карта территорий ТОС',
   'Служебные инструменты собраны в рабочей панели',
   'Не нашли нужный маршрут?'
 ];
@@ -141,7 +141,7 @@ function main() {
     errors.push('hero must contain only public user routes');
   }
 
-  if (!html.includes('<h3>Состояние геоданных</h3>') || !html.includes('нельзя считать официальными без подтверждённых геометрий')) {
+  if (!html.includes('<h3>Карта территорий ТОС</h3>') || !html.includes('Неразмеченные участки требуют проверки по реестру')) {
     errors.push('map route must be presented as data status, not as an accurate public map');
   }
 

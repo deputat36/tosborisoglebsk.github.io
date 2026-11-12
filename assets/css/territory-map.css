@@ -1,0 +1,80 @@
+.territory-map-page .map-intro { padding:32px 0 20px; }
+.map-intro h1 { font-size:clamp(30px,4vw,48px); line-height:1.12; margin:8px 0 12px; }
+.map-intro .lead { max-width:850px; font-size:18px; }
+.map-workspace { display:grid; grid-template-columns:300px minmax(0,1fr); gap:18px; align-items:start; }
+.map-sidebar,.map-stage,.map-guide,.map-inspector { border:1px solid var(--line); border-radius:18px; background:var(--surface); padding:20px; min-width:0; }
+.map-sidebar h2,.map-inspector h2 { font-size:21px; margin:0 0 14px; }
+.map-sidebar label,.map-inspector label { display:grid; gap:6px; margin:12px 0; font-weight:600; }
+.map-sidebar input,.map-sidebar select,.map-inspector input,.map-inspector textarea,.map-inspector select { width:100%; min-width:0; font:inherit; padding:11px; color:var(--text); background:var(--surface2); border:1px solid var(--line); border-radius:10px; }
+.map-sidebar .card-actions,.map-inspector .card-actions { gap:8px; }
+.map-stage { padding:14px; }
+.map-stage .btn,.map-sidebar .btn,.map-inspector .btn { min-height:44px; }
+.map-stage .btn:disabled,.map-sidebar .btn:disabled,.map-inspector .btn:disabled { opacity:.48; cursor:not-allowed; box-shadow:none; }
+.map-toolbar,.map-drawbar,.map-filebar,.map-legend { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+.map-toolbar { margin-bottom:10px; }
+.map-drawbar { padding:10px; margin-bottom:10px; border:1px solid var(--line); border-radius:12px; background:var(--surface2); }
+.map-canvas { height:600px; width:100%; border:1px solid var(--line); border-radius:12px; background:#f1f0e8; z-index:0; }
+.map-canvas.leaflet-container { font-family:inherit; }
+.map-canvas .leaflet-control-attribution { color:#222; background:rgba(255,255,255,.94); }
+.map-canvas .leaflet-control-attribution a { color:#343434; }
+.map-canvas .leaflet-control-zoom a { color:#222; background:white; }
+.map-canvas .leaflet-popup-content-wrapper,.map-canvas .leaflet-popup-tip { color:#222; background:white; }
+.map-canvas .leaflet-popup-content { font-size:14px; line-height:1.5; overflow-wrap:anywhere; }
+.map-canvas .leaflet-popup-content a { color:#9b2630; }
+.map-legend { font-size:13px; color:var(--muted); padding:12px 0 4px; }
+.map-legend span { display:inline-flex; gap:6px; align-items:center; }
+.map-key { display:inline-block; width:17px; height:13px; border:2px solid #B62D36; background:#B62D3633; border-radius:3px; }
+.map-key.draft { border-color:#ac7814; background:#d5a73b33; border-style:dashed; }
+.map-key.idea { border-color:#2f7d5a; background:#2f7d5a33; }
+.map-key.unmapped { border-color:#8f948d; background:repeating-linear-gradient(45deg,#f0f0eb,#f0f0eb 3px,#cdd2c9 3px,#cdd2c9 4px); }
+.map-info { font-size:14px; color:var(--muted); margin:10px 0; }
+.map-mode-note { padding:14px 18px; border:1px solid var(--line); border-radius:12px; margin-bottom:16px; background:var(--surface2); }
+.map-selection { min-height:48px; line-height:1.5; }
+.map-selection b { display:block; margin-bottom:3px; }
+.map-result { border-top:1px solid var(--line); padding-top:14px; margin-top:14px; }
+.map-stat { font-size:14px; color:var(--muted); margin:10px 0 14px; }
+.map-stat b { font-size:22px; color:var(--text); margin-right:5px; }
+.map-inspector { margin-top:18px; }
+.map-filebar { margin:14px 0; }
+.map-working h2 { font-size:22px; margin:20px 0 8px; }
+.map-areas { padding:0; margin:14px 0; list-style:none; max-height:220px; overflow:auto; }
+.map-areas button { width:100%; text-align:left; padding:10px; font:inherit; color:var(--text); background:var(--surface2); border:1px solid var(--line); border-radius:9px; margin-bottom:6px; cursor:pointer; }
+.map-areas button[aria-pressed=true] { border-color:var(--brand); box-shadow:inset 3px 0 var(--brand); }
+.map-areas small { display:block; color:var(--muted); margin-top:3px; }
+.map-vertex { background:#fff; border:2px solid #B62D36; border-radius:50%; box-shadow:0 1px 3px #2225; }
+.map-vertex[role=button] { cursor:move; }
+.map-point { background:#B62D36; border:2px solid white; border-radius:50%; }
+.map-coordinate-editor { margin-top:14px; }
+.map-coordinate-editor summary,.map-guide summary { cursor:pointer; font-weight:650; padding:8px 0; }
+.map-coordinate-editor textarea { min-height:160px; font:14px/1.5 monospace; resize:vertical; }
+.map-guide { margin-top:20px; }
+.map-guide h2 { margin:0 0 12px; font-size:24px; }
+.map-guide p,.map-guide li { max-width:1000px; }
+.map-status { min-height:24px; margin:10px 0; font-size:14px; }
+.map-check-results { overflow-wrap:anywhere; }
+.map-fallback-image { display:block; width:100%; height:auto; max-height:500px; object-fit:contain; background:#fafaf7; border:1px solid var(--line); border-radius:12px; }
+.map-link-output { display:block; width:100%; padding:10px; margin-top:8px; color:var(--text); background:var(--surface2); border:1px solid var(--line); }
+@media(max-width:980px) {
+  .map-workspace { grid-template-columns:1fr; }
+  .map-sidebar { display:grid; grid-template-columns:1fr 1fr; gap:0 18px; }
+  .map-sidebar h2,.map-sidebar .map-stat,.map-sidebar .map-result,.map-sidebar .map-editor-start { grid-column:1/-1; }
+  .map-sidebar label { margin-top:4px; }
+  .map-canvas { height:520px; }
+}
+@media(max-width:620px) {
+  .territory-map-page .map-intro { padding:20px 0 12px; }
+  .map-workspace { gap:12px; }
+  .map-sidebar { display:block; padding:16px; }
+  .map-stage { padding:10px; }
+  .map-toolbar .btn,.map-drawbar .btn,.map-filebar .btn { flex:1 1 125px; font-size:14px; }
+  .map-canvas { height:420px; }
+  .map-guide,.map-inspector { padding:16px; }
+  .map-legend { font-size:12px; gap:8px 12px; }
+  .map-sidebar input,.map-sidebar select,.map-inspector input,.map-inspector textarea,.map-inspector select { font-size:16px; }
+}
+@media print {
+  .territory-map-page .header,.territory-map-page .footer,.map-sidebar,.map-toolbar,.map-drawbar,.map-filebar,.map-inspector,.map-guide,.map-mode-note,.map-status { display:none!important; }
+  .map-workspace { display:block; }
+  .map-canvas { height:155mm; }
+  .map-stage { border:0; padding:0; }
+}

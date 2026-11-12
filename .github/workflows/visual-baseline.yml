@@ -12,6 +12,13 @@ on:
     branches:
       - release-2025-12-22
     paths:
+      - 'map/**'
+      - 'data/bgo-reference.geojson'
+      - 'data/toses.geojson'
+      - 'scripts/test_public_territory_map.js'
+      - 'scripts/test_territory_map_core.js'
+      - 'scripts/generate_territory_map.js'
+      - 'assets/vendor/leaflet/**'
       - 'meeting-kit/index.html'
       - 'materials/**'
       - 'docs/templates/podgotovka-sobraniya-tos.txt'
@@ -261,6 +268,9 @@ jobs:
         run: node scripts/test_public_project_workspace.js
       - name: Test resilient navigation, printable packets and honest use records
         run: node scripts/test_public_portal_usability.js
+
+      - name: Test public territory map and local boundary editor
+        run: node scripts/test_public_territory_map.js
 
       - name: Test public card navigation
         env:
