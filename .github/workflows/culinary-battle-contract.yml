@@ -9,10 +9,11 @@ on:
       - 'scripts/prepare_culinary_battle.mjs'
       - 'scripts/test_culinary_battle_contract.js'
       - 'scripts/test_culinary_battle_browser.js'
+      - 'scripts/test_culinary_battle_db.mjs'
       - 'supabase/**'
       - '.github/workflows/culinary-battle-contract.yml'
   push:
-    branches: [feature/culinary-battle-2026]
+    branches: [feature/culinary-battle-24-teams-19-dishes]
     paths:
       - 'culinary-battle/**'
       - 'assets/css/culinary-battle.css'
@@ -20,13 +21,14 @@ on:
       - 'scripts/prepare_culinary_battle.mjs'
       - 'scripts/test_culinary_battle_contract.js'
       - 'scripts/test_culinary_battle_browser.js'
+      - 'scripts/test_culinary_battle_db.mjs'
       - 'supabase/**'
       - '.github/workflows/culinary-battle-contract.yml'
 permissions:
   contents: read
 jobs:
   synthetic-checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,11 +39,12 @@ jobs:
           node --check assets/js/culinary-battle.js
           node --check scripts/prepare_culinary_battle.mjs
           node --check scripts/test_culinary_battle_contract.js
-      - name: Synthetic 18-team and secret-leak regression
+          node --check scripts/test_culinary_battle_db.mjs
+      - name: Check 24 teams, 19 dishes, individual code generation and secret boundaries
         run: node scripts/test_culinary_battle_contract.js
 
   browser-demo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +64,7 @@ jobs:
           done
           cat /tmp/culinary-preview-server.log
           exit 1
-      - name: Exercise the 18x18 demo in Chromium
+      - name: Exercise 19 scarce dish draws with 24 teams in Chromium
         run: node scripts/test_culinary_battle_browser.js
       - name: Upload demo screenshot and PNG evidence
         if: always()
@@ -71,3 +74,37 @@ jobs:
           path: .artifacts/culinary-battle/
           if-no-files-found: warn
           retention-days: 14
+
+  database-integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: culinary_ci_disposable
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d culinary_ci_disposable"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      PGHOST: 127.0.0.1
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      BATTLE_DB_TEST_MODE: '1'
+      BATTLE_DB_TEST_DB_NAME: culinary_ci_disposable
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install PostgreSQL client
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+      - name: Test migration and simultaneous last-dish draws
+        run: node scripts/test_culinary_battle_db.mjs

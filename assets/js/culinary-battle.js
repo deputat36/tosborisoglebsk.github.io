@@ -1,4 +1,4 @@
-/* Клиентская часть. Здесь нет реальных кодов и назначений; отдельный деморежим использует публичную учебную перестановку. */
+/* Клиентская часть. Реальные секретные коды и распределения хранятся только на сервере. */
 (() => {
   'use strict';
   const EVENT_SLUG = 'culinary-battle-2026';
@@ -8,6 +8,8 @@
   // Пробный режим не обращается к API; не является ни жеребьёвкой, ни серверной авторизацией.
   const isDemo = new URLSearchParams(location.search).get('demo') === '1';
   let demoDishes = [];
+  let demoAssignments = {};
+  const DEMO_STORAGE_KEY = 'tosbgo-culinary-battle-demo-24x19-v1';
   const $ = (id) => document.getElementById(id);
   const form = $('battle-form');
   if (!form) return;
@@ -16,6 +18,7 @@
   const code = $('battle-code');
   const submit = $('battle-submit');
   const status = $('battle-status');
+  const remainingDisplay = $('battle-remaining');
   const error = $('battle-error');
   const visibility = $('battle-visibility');
   const resultSection = $('battle-result-section');
@@ -51,13 +54,15 @@
     if (matching.some((t) => t.id === previous)) team.value = previous;
   }
   function updateControls() {
-    const enabled = (isDemo || Boolean(API_ENDPOINT)) && ['open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 18;
+    const enabled = (isDemo || Boolean(API_ENDPOINT)) && ['open', 'closed', 'published'].includes(currentStatus) && !busy && teams.length === 24;
     search.disabled = !enabled;
     team.disabled = !enabled;
     code.disabled = !enabled;
     visibility.disabled = !enabled;
     submit.disabled = !enabled;
-    submit.textContent = isDemo ? '✦ Вытянуть демо-блюдо ✦' : currentStatus === 'open' ? '✦ Вытянуть блюдо ✦' : 'Посмотреть своё блюдо';
+    submit.textContent = isDemo
+      ? '✦ Вытянуть демо-блюдо ✦'
+      : currentStatus === 'open' ? '✦ Вытянуть блюдо ✦' : 'Посмотреть своё блюдо';
   }
   async function request(path, options = {}) {
     const controller = new AbortController();
@@ -76,7 +81,8 @@
           invalid_credentials: 'Неверный код для выбранного ТОСа. Проверьте название команды и код.',
           rate_limited: 'Слишком много попыток. Попробуйте снова через 15 минут.',
           not_open: 'Жеребьёвка ещё не открыта.',
-          closed: 'Жеребьёвка завершена. Новое открытие блюда недоступно.',
+          closed: 'Жеребьёвка закрыта. Если вы уже получили блюдо, можете посмотреть его по своему коду.',
+          sold_out: 'Все 19 блюд уже распределены. Новые участники больше не могут получить блюдо.',
           unavailable: 'Сервис жеребьёвки временно недоступен. Повторите попытку позже.'
         };
         throw new Error(messages[body.error] || 'Не удалось получить результат. Попробуйте снова.');
@@ -86,6 +92,40 @@
       clearTimeout(timer);
     }
   }
+  function showRemaining(count, demo = false) {
+    if (!remainingDisplay) return;
+    remainingDisplay.hidden = false;
+    remainingDisplay.textContent = demo
+      ? 'ДЕМО: осталось ' + count + ' из 19 блюд · Только в этом браузере'
+      : 'Свободных блюд: ' + count + ' из 19';
+  }
+  function secureDemoIndex(max) {
+    // Demonstration-only random selection; only real server draw is authoritative.
+    if (max < 1) throw new Error('Доступных блюд больше нет.');
+    const sample = new Uint32Array(1);
+    const limit = Math.floor(4294967296 / max) * max;
+    do { crypto.getRandomValues(sample); } while (sample[0] >= limit);
+    return sample[0] % max;
+  }
+  function getDemoAssignments() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(DEMO_STORAGE_KEY) || '{}');
+      if (!saved || Array.isArray(saved) || typeof saved !== 'object') return {};
+      const entries = Object.entries(saved).filter(([id, dish]) =>
+        teams.some((t) => t.id === id) && demoDishes.includes(dish));
+      if (entries.length > 19 || new Set(entries.map((item) => item[1])).size !== entries.length) return {};
+      return Object.fromEntries(entries);
+    } catch { return {}; }
+  }
+  function updateDemoProgress() {
+    const left = Math.max(0, 19 - Object.keys(demoAssignments).length);
+    currentStatus = left === 0 ? 'closed' : 'open';
+    setStatus(left === 0
+      ? 'ДЕМО завершено: все 19 блюд вытянуты. Ранее участвовавшие команды могут посмотреть своё блюдо.'
+      : 'ДЕМО открыто: 24 ТОСа, 19 блюд. Задания выдаются до окончания списка.', currentStatus);
+    showRemaining(left, true);
+    updateControls();
+  }
   async function initialize() {
     if (isDemo) {
       // Фиктивный набор допустим для проверки интерфейса и никогда не попадает в RPC.
@@ -93,43 +133,43 @@
         const response = await fetch('/culinary-battle/demo-data.json', { cache: 'no-store' });
         if (!response.ok) throw new Error('Демо-данные недоступны.');
         const data = await response.json();
-        const valid = data.demo === true && data.teams?.length === 18 && data.dishes?.length === 18
-          && new Set(data.teams.map((t) => t.id)).size === 18
-          && new Set(data.teams.map((t) => t.name)).size === 18
-          && new Set(data.dishes.map((d) => d.title)).size === 18
+        const valid = data.demo === true && data.teams?.length === 24 && data.dishes?.length === 19
+          && new Set(data.teams.map((t) => t.id)).size === 24
+          && new Set(data.teams.map((t) => t.name)).size === 24
+          && new Set(data.dishes.map((d) => d.title)).size === 19
           && data.teams.every((t, i) => t.id === 'demo-' + String(i + 1).padStart(2, '0'))
           && data.dishes.every((d) => typeof d.title === 'string');
         if (!valid) throw new Error('Проверьте целостность тестовых списков.');
         teams = data.teams;
         demoDishes = data.dishes.map((d) => d.title);
+        demoAssignments = getDemoAssignments();
         currentStatus = 'open';
         document.body.classList.add('battle-is-demo');
         const demoBanner = document.createElement('div');
         demoBanner.className = 'battle-demo-banner';
         demoBanner.setAttribute('role', 'note');
-        demoBanner.textContent = 'ДЕМО · Учебные ТОСы и блюда. Результаты имитируются браузером, не являются секретными и не сохраняются на сервере.';
+        demoBanner.textContent = 'ДЕМО · Реальные названия 24 ТОСов и 19 блюд. Пробные коды и результаты действуют только в вашем браузере, не являются настоящей жеребьёвкой.';
         $('battle-panel').prepend(demoBanner);
-        document.querySelector('.battle-hint').textContent = 'Выберите учебную команду, введите её демонстрационный код и посмотрите, как откроется карточка.';
+        document.querySelector('.battle-hint').textContent = 'Выберите ТОС, введите учебный код, вытяните блюдо из оставшихся и посмотрите карточку. Первые 19 учебных команд получат разные блюда в этом браузере.';
         document.querySelector('.battle-warning').textContent = 'Это только проверка интерфейса. Для настоящего мероприятия коды и задания будут защищены сервером.';
         document.querySelector('.battle-result-card .battle-small').textContent = 'Учебный результат не является конкурсным заданием. Его можно просмотреть повторно по тому же демонстрационному коду.';
         const codeHint = document.createElement('p');
         codeHint.id = 'battle-demo-code-hint';
         codeHint.className = 'battle-demo-code-hint';
         codeHint.setAttribute('aria-live', 'polite');
-        codeHint.textContent = 'Сначала выберите учебный ТОС, чтобы увидеть его демонстрационный код.';
+        codeHint.textContent = 'Выберите ТОС, чтобы увидеть его учебный код.';
         code.closest('.battle-code-field').after(codeHint);
         const updateDemoCode = () => {
           const index = teams.findIndex((entry) => entry.id === team.value);
           codeHint.textContent = index < 0
-            ? 'Сначала выберите учебный ТОС, чтобы увидеть его демонстрационный код.'
+            ? 'Выберите ТОС, чтобы увидеть его учебный код.'
             : 'Демонстрационный код: DEMO-' + String(index + 1).padStart(2, '0') + '-2026';
           code.value = '';
         };
         team.addEventListener('change', updateDemoCode);
         search.addEventListener('input', updateDemoCode);
         refreshOptions();
-        setStatus('Демонстрация открыта — все 18 учебных команд и 18 блюд доступны для проверки.', 'open');
-        updateControls();
+        updateDemoProgress();
       } catch {
         setStatus('Ошибка загрузки демонстрационных данных. Обновите страницу позже.', 'draft');
         updateControls();
@@ -137,7 +177,7 @@
       return;
     }
     if (!API_ENDPOINT) {
-      setStatus('Жеребьёвка готовится к запуску. Коды и задания появятся после утверждения участников.', 'draft');
+      setStatus('Жеребьёвка готовится к запуску. Участники и блюда подготовлены; индивидуальные коды будут выданы перед открытием.', 'draft');
       updateControls();
       return;
     }
@@ -146,6 +186,9 @@
       if (!Array.isArray(data.teams) || !['draft', 'ready', 'open', 'closed', 'published'].includes(data.status)) {
         throw new Error('Получен некорректный ответ сервера.');
       }
+      if (data.total_teams !== 24 || data.total_dishes !== 19 || !Number.isInteger(data.remaining) || data.remaining < 0 || data.remaining > 19) {
+        throw new Error('Неверные счётчики жеребьёвки.');
+      }
       currentStatus = data.status;
       teams = data.teams
         .filter((t) => t && typeof t.id === 'string' && typeof t.name === 'string')
@@ -153,13 +196,16 @@
       const messages = {
         draft: 'Идёт подготовка мероприятия. Жеребьёвка пока закрыта.',
         ready: 'Участники и блюда проверены. Ожидаем открытия жеребьёвки.',
-        open: 'Жеребьёвка открыта! Выберите свой ТОС и введите персональный код.',
-        closed: 'Жеребьёвка завершена. Ранее открытое блюдо можно посмотреть повторно по своему коду.',
+        open: 'Жеребьёвка открыта! Первые 19 ТОСов получают блюда. Выберите свою команду и введите код.',
+        closed: data.remaining === 0
+          ? 'Все 19 блюд распределены. Новое участие завершено; ранее выданное блюдо можно посмотреть по своему коду.'
+          : 'Жеребьёвка закрыта организатором. Ранее выданное блюдо можно посмотреть по своему коду.',
         published: 'Мероприятие завершено. Своё задание можно посмотреть повторно по коду.'
       };
       setStatus(messages[currentStatus], currentStatus);
+      showRemaining(data.remaining);
       refreshOptions();
-      if (teams.length !== 18 && currentStatus === 'open') {
+      if (teams.length !== 24 && currentStatus === 'open') {
         setStatus('Список команд требует проверки организатором. Участие временно недоступно.', 'draft');
       }
       updateControls();
@@ -168,18 +214,30 @@
       updateControls();
     }
   }
-  search.addEventListener('input', refreshOptions);
+  function clearPreviousResult() {
+    resultData = null;
+    resultSection.hidden = true;
+    result.hidden = true;
+  }
+  search.addEventListener('input', () => { clearPreviousResult(); refreshOptions(); });
+  team.addEventListener('change', clearPreviousResult);
   function demoPick() {
     const index = teams.findIndex((entry) => entry.id === team.value);
-    if (index < 0 || index >= 18) throw new Error('Выберите учебный ТОС из списка.');
+    if (index < 0 || index >= 24) throw new Error('Выберите ТОС из списка.');
     const expectedCode = 'DEMO-' + String(index + 1).padStart(2, '0') + '-2026';
     if (code.value.trim().toUpperCase() !== expectedCode) {
-      throw new Error('Для этого учебного ТОСа указан другой демо-код.');
+      throw new Error('Для этого ТОСа указан другой учебный код.');
     }
-    // Условная взаимно-однозначная перестановка: gcd(5,18)=1.
-    // Не криптография и не настоящий доступ; назначение открыто в клиентском коде.
-    const dishIndex = (index * 5 + 7) % 18;
-    return { team_name: teams[index].name, dish_name: demoDishes[dishIndex] };
+    const existing = demoAssignments[team.value];
+    if (existing) return { team_name: teams[index].name, dish_name: existing };
+    const used = new Set(Object.values(demoAssignments));
+    const free = demoDishes.filter((dish) => !used.has(dish));
+    if (!free.length) throw new Error('Все 19 блюд уже распределены. Демо закончилось.');
+    const dish = free[secureDemoIndex(free.length)];
+    demoAssignments[team.value] = dish;
+    localStorage.setItem(DEMO_STORAGE_KEY, JSON.stringify(demoAssignments));
+    updateDemoProgress();
+    return { team_name: teams[index].name, dish_name: dish };
   }
   function displayTeamName(name) {
     return /^(?:учебный\s+)?ТОС(?=\s|«|$)/i.test(name) ? name : 'ТОС «' + name + '»';
@@ -195,6 +253,7 @@
     event.preventDefault();
     if (busy || !['open', 'closed', 'published'].includes(currentStatus)) return;
     setError();
+    clearPreviousResult();
     if (!team.value || !code.value.trim()) {
       setError('Выберите ТОС и введите ваш индивидуальный код.');
       return;
@@ -212,6 +271,13 @@
         throw new Error('Сервер вернул неполный результат. Введите код повторно.');
       }
       resultData = { team: data.team_name, dish: data.dish_name };
+      if (!isDemo && Number.isInteger(data.remaining)) {
+        showRemaining(data.remaining);
+        if (data.remaining === 0) {
+          currentStatus = 'closed';
+          setStatus('Все 19 блюд распределены. Новое участие завершено; свой результат доступен по коду.', 'closed');
+        }
+      }
       code.value = '';
       await animateReveal();
     } catch (err) {

@@ -66,3 +66,16 @@
 .battle-demo-code-hint{margin:5px 0 8px;padding:11px 14px;border-radius:12px;background:color-mix(in srgb,var(--accent) 18%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 48%,var(--line));color:var(--text);font-size:14px;font-weight:850;overflow-wrap:anywhere}
 .battle-is-demo .battle-result-card:before{content:"УЧЕБНАЯ КАРТОЧКА · ДЕМО";position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.08em;font-weight:900;color:var(--brand);white-space:nowrap}
 .battle-is-demo .battle-result-card{padding-top:53px}
+
+/* Scarce 24-team / 19-dish draw counter: legible on both light and dark themes. */
+.battle-remaining {
+  margin: 10px 0 18px;
+  padding: 12px 17px;
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent,#D3A33D) 46%, transparent);
+  background: color-mix(in srgb, var(--accent,#D3A33D) 13%, var(--surface,#fff));
+  color: var(--text,#262420);
+  font-size: clamp(15px, 2vw, 18px);
+  line-height: 1.4;
+  font-weight: 900;
+}

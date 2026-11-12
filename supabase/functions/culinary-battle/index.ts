@@ -69,7 +69,17 @@ Deno.serve(async (req: Request) => {
         teams = await db('battle_teams?select=id,name&event_id=eq.' + encodeURIComponent(event.id) + '&order=name.asc') as
           Array<{ id: string; name: string }>;
       }
-      return respond({ status: event.status, teams }, 200, origin);
+      const assignments = await db('battle_assignments?select=team_id&event_id=eq.' + encodeURIComponent(event.id)) as
+        Array<{ team_id: string }>;
+      if (!Array.isArray(assignments)) throw new Error('Invalid draw counter.');
+      // Counts only. Never expose the assignment mapping or dish selection via GET.
+      return respond({
+        status: event.status,
+        teams,
+        total_teams: 24,
+        total_dishes: 19,
+        remaining: Math.max(0, 19 - assignments.length)
+      }, 200, origin);
     }
     if (req.method !== 'POST') return respond({ error: 'method_not_allowed' }, 405, origin);
     const raw = await req.text();
