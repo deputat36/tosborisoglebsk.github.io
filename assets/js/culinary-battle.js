@@ -2,11 +2,11 @@
 (() => {
   'use strict';
   const EVENT_SLUG = 'culinary-battle-2026';
-  // Заменить только после создания отдельного проекта, миграции и проверки API.
-  // Публичный URL Edge Function не является секретом. Никакие ключи не добавлять.
-  const API_ENDPOINT = '';
-  // Пробный режим не обращается к API; не является ни жеребьёвкой, ни серверной авторизацией.
-  const isDemo = new URLSearchParams(location.search).get('demo') === '1';
+  // Configure PUBLIC endpoint via <meta name="culinary-battle-api"> only after a verified deployment.
+  // Never put service keys, code digests, participant codes or BATTLE_PEPPER in HTML/JS.
+  const API_ENDPOINT = (document.querySelector('meta[name="culinary-battle-api"]')?.content || '').trim().replace(/\\/$/, '');
+  // Demo is disabled automatically as soon as the live API endpoint is configured.
+  const isDemo = !API_ENDPOINT && new URLSearchParams(location.search).get('demo') === '1';
   let demoDishes = [];
   let demoAssignments = {};
   const DEMO_STORAGE_KEY = 'tosbgo-culinary-battle-demo-26x19-v1';
