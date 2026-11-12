@@ -12,6 +12,7 @@ const allowedContextRoutes = new Set([
   '/projects/',
   '/partners/',
   '/materials/',
+  '/materials/sluzhenie-award-guide/',
   '/verification-guide/',
   '/residents/',
   '/update-tos/'

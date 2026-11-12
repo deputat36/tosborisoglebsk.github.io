@@ -74,6 +74,9 @@ function buildContextLinks(item, tos, origin){
   };
 
   if(tos) add(`/tos/${tos.slug}/`, `Карточка ТОС «${tos.name}»`);
+  if(item.id === 'sluzhenie-municipal-award-tos-2026') {
+    add('/materials/sluzhenie-award-guide/', 'Как ТОС подготовить заявку на премию Служение');
+  }
 
   const topicRules = [
     {pattern: /(грант|конкурс|субсид|заявк)/i, href: '/grants/', label: 'Конкурсы и гранты'},

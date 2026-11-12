@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-12T04:34:07.899Z",
-  "total": 394,
+  "generated_at": "2026-11-12T05:42:50.931Z",
+  "total": 395,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1399,6 +1399,15 @@
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "reference"
+    },
+    {
+      "path": "materials/sluzhenie-award-guide/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/sluzhenie-award-guide/",
+      "title": "Премия Служение 2027 — как ТОС подготовить заявку | Материалы ТОС БГО",
+      "description": "IV премия: заявки до 29 ноября 2026 года. Как выбрать номинацию, подтвердить результат и подготовить материалы представителю ТОС. Премия «Служение»…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
     },
     {
       "path": "materials/neighbor-chat-rules/index.html",
