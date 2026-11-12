@@ -19,6 +19,12 @@ function grantOrganizationLink(item) {
     ? `<a class="btn" href="${grantsEsc(href)}">Об организации и программах</a>` : '';
 }
 
+function grantGuideLink(item) {
+  const href = String(item.guide_url || '');
+  return /^\/materials\/[a-z0-9-]+\/$/.test(href)
+    ? `<a class="btn" href="${grantsEsc(href)}">Как подготовить заявку</a>` : '';
+}
+
 function grantProjectLinks(item) {
   const links = Array.isArray(item.project_links) ? item.project_links.filter(Boolean).slice(0, 6) : [];
   if (!links.length) return '';
@@ -59,6 +65,7 @@ function grantCard(item) {
       ${source}
       ${conditions}
       ${grantOrganizationLink(item)}
+      ${grantGuideLink(item)}
     </div>
     ${grantProjectLinks(item)}
   </article>`;
@@ -70,7 +77,7 @@ function grantSummary(item) {
     <h3>${grantsEsc(item.title)}</h3>
     <p><b>Кому подходит:</b> ${grantsEsc(item.who)}</p>
     <p class="tiny">${grantsEsc(item.note)}</p>
-    <div class="card-actions"><a class="btn primary" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Открыть объявление</a><a class="btn" href="#grant-${grantsEsc(item.id)}">Что подготовить</a>${grantOrganizationLink(item)}</div>
+    <div class="card-actions"><a class="btn primary" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Открыть объявление</a><a class="btn" href="#grant-${grantsEsc(item.id)}">Что подготовить</a>${grantOrganizationLink(item)}${grantGuideLink(item)}</div>
   </article>`;
 }
 
