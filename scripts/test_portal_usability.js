@@ -16,4 +16,7 @@ assert.deepEqual(use.normalize(JSON.parse(JSON.stringify(record))),record);
 assert.throws(()=>use.normalize({...record,fields:{unknown:'x'}}));assert.throws(()=>use.normalize({...record,author_confirmed:'yes'}));assert.throws(()=>use.normalize({...record,fields:{...record.fields,result:'x'.repeat(5001)}}));
 const page=fs.readFileSync('index.html','utf8'),count=JSON.parse(fs.readFileSync('data/toses.json')).filter(x=>x.status!=='draft').length;
 const embedded=JSON.parse(page.match(/<script type="application\/json" id="home-directory-data">([\s\S]*?)<\/script>/)[1]);assert.equal(embedded.length,count);assert(!embedded.some(x=>x.phones||x.emails||x.contacts_raw),'search snapshot excludes direct contacts');assert(!page.includes('Загрузка каталога...'));
+
+
+const impossible=use.fresh();impossible.fields.date="2026-02-30";assert(use.checks(impossible).some(x=>x.includes("Существующая дата")));
 console.log('Portal usability checks OK: draft guidance, independent roles and actual dates, safe use records, complete static directory');

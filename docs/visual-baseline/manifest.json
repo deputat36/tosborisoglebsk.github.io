@@ -29,8 +29,8 @@
       "expected_check": "Hero, карточки, портал и футер без смещений",
       "focus_capture": null,
       "screenshot": "css-reg-001.png",
-      "sha256": "7eaf291a5f683205217eab243d6cc4d180430a135c0b15bf4e20b825c55459cb",
-      "bytes": 127624,
+      "sha256": "30dacc047aa09a18fd09113aa51754d0592ee4764020fedbbea665f5d8e319c5",
+      "bytes": 126569,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "light",
@@ -59,7 +59,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43231970525",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
+        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
+        "captured_at": "2026-11-12T14:02:17.158Z",
+        "reviewed_at": "2026-11-12",
+        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+      }
     },
     {
       "case_id": "css-reg-002",
@@ -76,8 +85,8 @@
       "expected_check": "Тёмная тема сохраняет контраст, поверхности и границы",
       "focus_capture": null,
       "screenshot": "css-reg-002.png",
-      "sha256": "d18534f3ca4dd3487b8877758e16f405e8cf96ba110863b7558cb6bbe60a2662",
-      "bytes": 131636,
+      "sha256": "73e62f58f3c6d99693e8617a124d3373b0c3287893b79d61cf4f51aba8818dfa",
+      "bytes": 130680,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "dark",
@@ -106,7 +115,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43231970525",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
+        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
+        "captured_at": "2026-11-12T14:02:17.158Z",
+        "reviewed_at": "2026-11-12",
+        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+      }
     },
     {
       "case_id": "css-reg-003",
@@ -123,8 +141,8 @@
       "expected_check": "Мобильное меню открывается, не выходит за экран и не перекрывает действия",
       "focus_capture": null,
       "screenshot": "css-reg-003.png",
-      "sha256": "b7f9d8c592a2fb742febd33a2cbe7fe89df4f4ab8f986c8c4eae0723917c676e",
-      "bytes": 41956,
+      "sha256": "4dae2cbafdc5f594f0c8644a637e07a26d3ef20e50227909543b9d5f7b1e704c",
+      "bytes": 35558,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "light",
@@ -153,7 +171,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43231970525",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
+        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
+        "captured_at": "2026-11-12T14:02:17.158Z",
+        "reviewed_at": "2026-11-12",
+        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+      }
     },
     {
       "case_id": "css-reg-004",
@@ -170,8 +197,8 @@
       "expected_check": "Фильтры, карточки и логотипы сохраняют сетку",
       "focus_capture": null,
       "screenshot": "css-reg-004.png",
-      "sha256": "28c17b8628a9490184f07cb5d7ba9f7fa0ba45b5bef1f437ae48d4161cf1b174",
-      "bytes": 133888,
+      "sha256": "b68321ea7cdcd76f956cbe4456c1ad6b95a38a497659ba9a1de4724c963e33b3",
+      "bytes": 134477,
       "diagnostics": {
         "title": "Каталог ТОС Борисоглебского городского округа",
         "htmlTheme": "light",
@@ -200,7 +227,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43231970525",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
+        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
+        "captured_at": "2026-11-12T14:02:17.158Z",
+        "reviewed_at": "2026-11-12",
+        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+      }
     },
     {
       "case_id": "css-reg-005",
@@ -264,8 +300,8 @@
       "expected_check": "Hero, паспорт, связанные блоки и действия отображаются без смещений",
       "focus_capture": null,
       "screenshot": "css-reg-006.png",
-      "sha256": "e56b266c351250e5c05b0e22d91becf71f2655f5457ff2f08c10d20b7bbc0c2d",
-      "bytes": 69983,
+      "sha256": "4899848c88672439cf0aab0feead5d75747e1ac71574a902c88e781b331d7cf2",
+      "bytes": 70585,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "light",
@@ -295,9 +331,15 @@
       "console_errors": [],
       "page_errors": [],
       "failed_requests": [],
-      "reviewed_at": "2026-10-15",
-      "review_note": "Просмотрен экран с новым переходом к истории ТОС; компоновка, статус проверки и мобильные действия читаемы. Пороги сравнения сохранены.",
-      "source_workflow_run_id": "38791341591"
+      "reviewed_capture": {
+        "workflow_run_id": "43231970525",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
+        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
+        "captured_at": "2026-11-12T14:02:17.158Z",
+        "reviewed_at": "2026-11-12",
+        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+      }
     },
     {
       "case_id": "css-reg-007",
@@ -847,5 +889,19 @@
       "page_errors": [],
       "failed_requests": []
     }
-  ]
+  ],
+  "latest_review": {
+    "date": "2026-11-12",
+    "workflow_run_id": "43231970525",
+    "capture_artifact": "visual-baseline-426-1",
+    "updated_cases": [
+      "css-reg-001",
+      "css-reg-002",
+      "css-reg-003",
+      "css-reg-004",
+      "css-reg-006"
+    ],
+    "preserved_cases": 11,
+    "thresholds_changed": false
+  }
 }
