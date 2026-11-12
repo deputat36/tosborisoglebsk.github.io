@@ -14,7 +14,10 @@ const allowedReferenceFiles = new Set([
   // Dedicated Culinary Battle integration only: no broad Supabase allowlist.
   'docs/CULINARY-BATTLE.md',
   'docs/DECISIONS.md',
-  'scripts/test_culinary_battle_contract.js'
+  'scripts/test_culinary_battle_contract.js',
+  'culinary-battle/index.html',
+  'scripts/test_culinary_battle_simple_ui.js',
+  'scripts/test_culinary_battle_simple_api_smoke.js'
 ]);
 
 const ignoredDirs = new Set([
