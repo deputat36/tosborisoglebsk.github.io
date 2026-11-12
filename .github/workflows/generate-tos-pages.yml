@@ -160,6 +160,8 @@ jobs:
         run: node scripts/cleanup_generated_collection_pages.js
       - name: Generate TOS pages
         run: node scripts/generate_tos_pages.js
+      - name: Verify Makashevka submitted facts and seven results
+        run: node scripts/test_makashevka_document.js
       - name: Audit generated TOS detail trust pages
         run: node scripts/audit_tos_detail_pages_content.js
       - name: Audit visual overflow fixes
