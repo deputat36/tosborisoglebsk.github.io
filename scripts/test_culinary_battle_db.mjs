@@ -35,7 +35,7 @@ try{
   // Pilot must give the first *real* meal only to Uyutny, then unlock others.
   run("update public.battle_events set status='pilot',pilot_tos_slug='uyutnyy' where slug='test-battle-2026' and status='ready'");
   const rows=run('select id,code_digest,tos_slug from public.battle_teams order by name')
-    .split('\\n').map(line=>{const [id,digest,slug]=line.split('|');return{id,digest,slug};});
+    .split('\n').map(line=>{const [id,digest,slug]=line.split('|');return{id,digest,slug};});
   assert.equal(rows.length,26);
   const uyutnyy=rows.find(team=>team.slug==='uyutnyy');
   assert(uyutnyy,'Uyutny pilot team should exist');
@@ -76,7 +76,7 @@ try{
   dishes.add(race.find(v=>v.first_open).dish_name);
   assert.equal(dishes.size,19);
   assert.equal(run("select status from public.battle_events where slug='test-battle-2026'"),'closed');
-  assert.equal(run('select count(*)||\\'|\\'||count(distinct dish_id)||\\'|\\'||count(distinct team_id) from public.battle_assignments'),'19|19|19');
+  assert.equal(run(`select count(*)||'|'||count(distinct dish_id)||'|'||count(distinct team_id) from public.battle_assignments`),'19|19|19');
   for(let i=19;i<others.length;i++)assert.equal(parse(run(reveal(others[i],i+4))).error,'sold_out');
   const after=parse(run(reveal(uyutnyy,3)));
   assert.equal(after.first_open,false);
