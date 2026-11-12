@@ -61,7 +61,11 @@
     active.on('tileerror',()=>{if(serial===layerSerial){failures++;$('retry-tiles').hidden=false;$('basemap-status').textContent='Часть подложки не загрузилась. Можно повторить загрузку; разметка сохраняется отдельно.';}});
     active.on('load',()=>{
       if(serial!==layerSerial)return;
-      if(failures&&successes===0&&providerId==='yandex'){setBasemap(true,'osm',true);return;}
+      if(failures&&successes===0&&providerId==='yandex'){
+        // Leaflet still uses the current layer after its synchronous load event.
+        // Replace it on the next turn, and ignore a superseded recovery.
+        setTimeout(()=>{if(serial===layerSerial)setBasemap(true,'osm',true);},0);return;
+      }
       $('retry-tiles').hidden=failures===0;
       $('basemap-status').textContent=failures?(successes?'Часть карты не загрузилась. Нажмите «Повторить загрузку карты».':'Не удалось загрузить улицы и дома. Проверьте интернет и нажмите «Повторить загрузку карты».'):prefix+'Подложка: '+provider.label+'. Приблизьте карту для улиц, домов и подписей объектов.';
     });
