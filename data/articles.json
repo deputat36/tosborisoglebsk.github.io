@@ -883,6 +883,14 @@
       {
         "label": "Проверить адресата обращения",
         "href": "/materials/how-to-route-resident-request/"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -958,6 +966,14 @@
       {
         "label": "Как сохранить доказательства",
         "href": "/materials/evidence-pack-for-resident-request/"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1027,6 +1043,14 @@
       {
         "label": "Маршрут проекта",
         "href": "/projects/action-routes/"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1095,6 +1119,14 @@
       {
         "label": "Лист сравнения предложений",
         "href": "/residents/zhkh/#worksheets"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1171,6 +1203,14 @@
       {
         "label": "Рабочий запрос исполнителю",
         "href": "/residents/zhkh/#worksheets"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1232,6 +1272,14 @@
       {
         "label": "Все инструкции по дому и двору",
         "href": "/residents/zhkh/"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1315,6 +1363,14 @@
       {
         "label": "Записать наблюдения и заявки",
         "href": "/residents/zhkh/#worksheets"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1353,6 +1409,14 @@
         "paragraphs": [
           "ТОС может организовать понятное информирование и помочь собрать вопросы. Выбор способа формирования фонда, распоряжение средствами и решения собственников оформляются в установленном порядке. Пособие не является основанием менять счёт, прекращать взносы или обещать конкретную стоимость. Сведения о выполненном ремонте публикуйте после подтверждения, а не по факту включения в программу."
         ]
+      },
+      {
+        "title": "Для жителей Воронежской области",
+        "paragraphs": [
+          "На сайте регионального фонда капитального ремонта есть материалы для собственников и пояснения о разграничении текущего и капитального ремонта. В публикации от 7 октября 2026 года фонд также описывает информационную помощь жителям.",
+          "По своему дому уточните способ формирования фонда, владельца счёта, вид работ и источник планового срока. Если есть текущая протечка, отдельно сообщите о ней исполнителю содержания дома: ожидание капремонта не заменяет осмотр и необходимые текущие меры."
+        ],
+        "items": []
       }
     ],
     "content_origin": "editorial",
@@ -1370,12 +1434,26 @@
         "url": "https://life.er.ru/",
         "note": "Учебное пособие. Практические шаги ниже написаны редакцией портала; нормы, тарифы и местные условия следует проверять отдельно.",
         "locator": "Страницы PDF: 131–145"
+      },
+      {
+        "title": "Фонд капремонта МКД Воронежской области: встреча с жителями",
+        "url": "https://www.fkr36.ru/news/v-fonde-kapitalnogo-remonta-mnogokvartirnyx-domov-voronezskoi-oblasti-prosla-vstreca-s-ziteliami-mnogoetazek-v-ramkax-federalnogo-proekta-skola-zkx",
+        "locator": "Публикация 07.10.2026, сведения сверены 12.11.2026",
+        "note": "Информационная помощь и разграничение видов ремонта; сроки и финансирование конкретного дома не устанавливались."
       }
     ],
     "related_links": [
       {
         "label": "Все инструкции по дому и двору",
         "href": "/residents/zhkh/"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1458,6 +1536,14 @@
       {
         "label": "Рабочая карточка маршрутизации",
         "href": "/documents/templates/resident-request-routing/"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1523,6 +1609,14 @@
       {
         "label": "Все инструкции по дому и двору",
         "href": "/residents/zhkh/"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1603,6 +1697,14 @@
       {
         "label": "Правила и сообщения для печати",
         "href": "/residents/zhkh/#worksheets"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   },
@@ -1679,6 +1781,14 @@
       {
         "label": "Рабочие листы встречи",
         "href": "/residents/zhkh/#worksheets"
+      },
+      {
+        "label": "Выбрать ситуацию по дому и ЖКХ",
+        "href": "/residents/zhkh/#zhkh-navigator"
+      },
+      {
+        "label": "Официальные ссылки для Борисоглебска",
+        "href": "/residents/zhkh/#local-help"
       }
     ]
   }

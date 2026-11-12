@@ -1,0 +1,24 @@
+/* Scoped additions use the portal's existing palette and controls. */
+.zhkh-tools { overflow-wrap: anywhere; }
+.zhkh-tools h2 { font-size: clamp(24px,3vw,36px); line-height: 1.2; }
+.zhkh-tools h3 { margin-top: 10px; }
+.zhkh-tools summary { cursor: pointer; font-weight: 650; }
+.zhkh-case-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin-top: 20px; align-items: start; }
+.zhkh-case-grid > .card { grid-column: auto; }
+.zhkh-case[hidden],.zhkh-tools [hidden] { display: none; }
+.zhkh-tools .btn { max-width: 100%; }
+.zhkh-tools .card-actions { margin-top: 16px; }
+.zhkh-filters { display: flex; flex-wrap: wrap; gap: 16px; align-items: end; margin-top: 24px; }
+.zhkh-filters .zhkh-field { display: grid; gap: 6px; flex: 1 1 260px; min-width: 0; font-weight: 650; }
+.zhkh-filters select { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; color: var(--text); background: var(--surface); }
+.zhkh-lessons { padding-left: 24px; }
+.zhkh-lessons > li { margin-bottom: 26px; }
+@media (max-width: 700px) {
+  .zhkh-case-grid { grid-template-columns: minmax(0,1fr); }
+  .zhkh-filters .zhkh-field { flex-basis: 100%; }
+}
+@media print {
+  .zhkh-filters { display: none; }
+  .zhkh-case-grid { display: block; }
+  .zhkh-case-grid > .card { margin-bottom: 16px; break-inside: avoid; }
+}
