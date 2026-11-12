@@ -9,6 +9,7 @@
 .map-sidebar .card-actions,.map-inspector .card-actions { gap:8px; }
 .map-stage { padding:14px; }
 .map-stage .btn,.map-sidebar .btn,.map-inspector .btn { min-height:44px; }
+.map-stage .btn:disabled,.map-sidebar .btn:disabled,.map-inspector .btn:disabled { opacity:.48; cursor:not-allowed; box-shadow:none; }
 .map-toolbar,.map-drawbar,.map-filebar,.map-legend { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
 .map-toolbar { margin-bottom:10px; }
 .map-drawbar { padding:10px; margin-bottom:10px; border:1px solid var(--line); border-radius:12px; background:var(--surface2); }

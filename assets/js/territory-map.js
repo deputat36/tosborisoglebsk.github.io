@@ -105,6 +105,7 @@
     $('undo').disabled=!history.length||!!drawing||concurrent;$('redo').disabled=!future.length||!!drawing||concurrent;
     $('delete').disabled=!feature()||!!drawing||concurrent;$('clear').disabled=!!drawing||concurrent;$('hole').disabled=!feature()||!!drawing||concurrent;$('draw').disabled=!!drawing||concurrent;
     $('save-description').disabled=!feature()||!!drawing||concurrent;
+    $('apply-coordinates').disabled=!!drawing||concurrent;$('delete-hole').disabled=!feature()||ringIndex===0||!!drawing||concurrent;
     for(const key of ['finish','center','cancel'])$(key).disabled=!drawing||key==='finish'&&drawing.points.length<3;
     $('back-point').disabled=!drawing||!drawing.points.length;
     selection();drawVertices();
