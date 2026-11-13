@@ -172,8 +172,13 @@ function main() {
     errors.push('news cards must link to detail pages');
   }
 
-  if (!script.includes('/tos/${newsEsc(item.tos_slug)}/')) {
-    errors.push('news cards must link to related TOS cards');
+  const vm = require('node:vm');
+  const context = vm.createContext({window:{CollectionBrowserCore:require('../assets/js/collection-browser-core')},document:{querySelector:()=>null},URLSearchParams});
+  vm.runInContext(script,context);
+  const renderCard = vm.runInContext('newsCard',context);
+  const sharedCard = renderCard({id:'shared-sample',title:'Проверка',tos_slug:'one',tos_slugs:['one','two']},[{slug:'one',name:'Первый'},{slug:'two',name:'Второй'}]);
+  for (const slug of ['one','two']) if (!sharedCard.includes(`/tos/${slug}/`)) {
+    errors.push('news cards must link to every explicitly related TOS: ' + slug);
   }
 
   if (!script.includes('newsOriginNotice')) {

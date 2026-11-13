@@ -1,8 +1,8 @@
 (function (root, factory) {
-  const api = factory(typeof module === 'object' && module.exports ? require('./tos-catalog-core.js') : root.TosCatalogCore);
+  const api = factory(typeof module === 'object' && module.exports ? require('./tos-catalog-core.js') : root.TosCatalogCore, typeof module === 'object' && module.exports ? require('./collection-browser-core.js') : root.CollectionBrowserCore);
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.ResidentAreaCore = api;
-})(typeof globalThis !== 'undefined' ? globalThis : this, function (catalog) {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (catalog, relations) {
   'use strict';
   const HELP = ['all', 'time', 'materials', 'information'];
   const publicItem = item => Boolean(item) && !['draft', 'archived', 'archive', 'deleted'].includes(item.status);
@@ -60,7 +60,7 @@
   }
   function overview(data, slug = '', now = new Date(), help = 'all') {
     const area = findArea(data.toses || [], slug);
-    const match = item => !area || item.tos_slug === area.slug;
+    const match = item => !area || relations.belongsToTos(item, area.slug);
     const recent = (a, b) => String(b.date || '').localeCompare(String(a.date || ''));
     const hasFact = item => publicItem(item) && validSlug(item.id) && item.content_origin === 'verified' && sourceUrl(item) && checkedDate(item.date) && item.date <= today(now);
     const results = (data.done || []).filter(hasFact).filter(match).sort(recent);
@@ -68,13 +68,13 @@
     const news = (data.news || []).filter(sourcedNews).filter(match).sort(recent);
     const actualProjects = (data.projects || []).filter(item => publicItem(item) && item.content_origin === 'verified' && sourceUrl(item)).filter(match);
     const events = (data.events || []).filter(item => publicItem(item) && validSlug(item.id) && !['request', 'starter', 'editorial'].includes(item.content_origin) && recentSourceCheck(item, now) && checkedDate(item.date) && item.date >= today(now)).sort((a, b) => a.date.localeCompare(b.date));
-    const needs = (data.needs || []).filter(publicItem).filter(item => validSlug(item.id)).filter(item => !area || !item.tos_slug || match(item)).filter(item => help === 'all' || helpKind(item) === help);
+    const needs = (data.needs || []).filter(publicItem).filter(item => validSlug(item.id)).filter(item => !area || !relations.tosSlugs(item).length || match(item)).filter(item => help === 'all' || helpKind(item) === help);
     return {
       area, results, news, projects: actualProjects,
       localEvents: area ? events.filter(item => match(item)) : [],
-      commonEvents: events.filter(item => !item.tos_slug),
+      commonEvents: events.filter(item => !relations.tosSlugs(item).length),
       needs: needs.filter(item => !['request', 'idea', 'expired'].includes(needState(item, now))),
-      ideas: needs.filter(item => needState(item, now) === 'idea' && !item.tos_slug),
+      ideas: needs.filter(item => needState(item, now) === 'idea' && !relations.tosSlugs(item).length),
       requests: needs.filter(item => needState(item, now) === 'request'),
       date: today(now)
     };

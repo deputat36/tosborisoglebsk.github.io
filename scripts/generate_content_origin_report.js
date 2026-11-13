@@ -1,3 +1,4 @@
+const {tosSlugs} = require('../assets/js/collection-browser-core');
 const fs = require('fs');
 const path = require('path');
 const { inferContentOrigin } = require('./lib/content_origin');
@@ -52,7 +53,7 @@ function main() {
       counts[origin] += 1;
       report.totals.total += 1;
       report.totals[origin] += 1;
-      if (item.tos_slug && coverage.has(item.tos_slug)) coverage.get(item.tos_slug).add(origin);
+      for (const slug of tosSlugs(item)) if (coverage.has(slug)) coverage.get(slug).add(origin);
     });
 
     report.collections[collection] = counts;

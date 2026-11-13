@@ -86,6 +86,10 @@
       {
         "label": "Шаблоны документов",
         "href": "/documents/"
+      },
+      {
+        "href": "/projects/practices/#mentor-meeting",
+        "label": "Встреча «Уютного» с наставником"
       }
     ],
     "content_origin": "editorial"
@@ -389,7 +393,13 @@
       "Опишите результат: что появится, кто будет пользоваться, как объект будет содержаться после проекта, кто отвечает за порядок и сохранность.",
       "Проверьте заявку по простой цепочке: проблема → жители → фото → решение → смета → команда → реализация → отчёт."
     ],
-    "content_origin": "editorial"
+    "content_origin": "editorial",
+    "related_links": [
+      {
+        "href": "/projects/practices/#grant-team",
+        "label": "Местный пример: подготовка заявки командой"
+      }
+    ]
   },
   {
     "id": "how-to-involve-residents",
@@ -486,6 +496,10 @@
       {
         "label": "Дом и двор: инструкции ЖКХ",
         "href": "/residents/zhkh/"
+      },
+      {
+        "href": "/projects/practices/#village-digest",
+        "label": "Местные примеры: дайджест и молодёжная редакция"
       }
     ]
   },

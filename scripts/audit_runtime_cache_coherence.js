@@ -4,7 +4,7 @@ const { createHash } = require('crypto');
 
 // Avoid combining new HTML with an older cached module after deployment.
 const archivePages = fs.existsSync('news/archive') ? fs.readdirSync('news/archive').filter(name => /^\d+$/.test(name)).map(name => `news/archive/${name}/index.html`) : [];
-const pages = ['news/index.html', ...archivePages, 'materials/index.html', 'grants/index.html', 'update-tos/index.html', 'residents/my-area/index.html', 'residents/zhkh/index.html', ...['kit','problem','support','passport','budget','schedule','partner-letter','checklist','photo-report','final-report'].map(form => `documents/templates/project-${form}/index.html`)];
+const pages = ['projects/index.html', 'done/index.html', 'projects/practices/index.html', 'news/index.html', ...archivePages, 'materials/index.html', 'grants/index.html', 'update-tos/index.html', 'residents/my-area/index.html', 'residents/zhkh/index.html', ...['kit','problem','support','passport','budget','schedule','partner-letter','checklist','photo-report','final-report'].map(form => `documents/templates/project-${form}/index.html`)];
 const write = process.argv.includes('--write');
 const errors = [];
 let assets = 0;

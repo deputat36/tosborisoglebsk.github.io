@@ -48,6 +48,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Prepare portal from current sources
+        run: node scripts/publish_vk_archive.js
+
       - name: Check JavaScript syntax
         run: |
           node --check assets/js/github-pages-manual-check.js

@@ -15,6 +15,17 @@
     return String(value || '').toLowerCase().trim().replace(/ё/g, 'е');
   }
 
+  // A shared story is one record, even when several TOS participated.
+  // Keep tos_slug readable by older tools; only explicit relationships count.
+  function tosSlugs(item) {
+    const values = [item?.tos_slug, ...(Array.isArray(item?.tos_slugs) ? item.tos_slugs : [])];
+    return [...new Set(values.filter(value => typeof value === 'string' && /^[a-z0-9][a-z0-9-]{0,99}$/.test(value)))];
+  }
+
+  function belongsToTos(item, slug) {
+    return Boolean(slug) && tosSlugs(item).includes(slug);
+  }
+
   function normalizeOrigin(value, fallback = 'editorial') {
     return ORIGINS.includes(value) ? value : fallback;
   }
@@ -93,6 +104,8 @@
     ORIGINS,
     ORIGIN_LABELS,
     normalizeText,
+    tosSlugs,
+    belongsToTos,
     normalizeOrigin,
     originLabel,
     parseState,

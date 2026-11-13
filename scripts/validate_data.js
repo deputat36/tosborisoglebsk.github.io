@@ -105,6 +105,11 @@ function validateTosLinks(items, file, slugs) {
     if (item.tos_slug && !slugs.has(item.tos_slug)) {
       errors.push(`${file}: ${item.id || item.title || 'запись'} — tos_slug=${item.tos_slug} не найден в data/toses.json`);
     }
+    if (item.tos_slugs !== undefined) {
+      if (!Array.isArray(item.tos_slugs) || item.tos_slugs.some(slug => !slugs.has(slug)) || new Set(item.tos_slugs).size !== item.tos_slugs.length) {
+        errors.push(`${file}: ${item.id || 'запись'} — tos_slugs должен содержать разные slug из каталога ТОС`);
+      }
+    }
   }
 }
 

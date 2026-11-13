@@ -1,4 +1,8 @@
 .tos-verification-strip { padding: 10px 0 0; }
+/* Keep full VK hashtags readable without letting their intrinsic width expand
+   the related-content column on a phone. */
+[data-related-collection] { min-width:0; overflow-wrap:anywhere; }
+#tos-news .list, #tos-done .list, #tos-needs .list { grid-template-columns:minmax(0,1fr); }
 .tos-verification-box { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:14px 16px; border:1px solid var(--line); border-radius:18px; background:var(--card); }
 .tos-verification-main { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 .tos-verification-actions { display:flex; gap:8px; flex-wrap:wrap; }

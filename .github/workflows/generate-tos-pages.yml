@@ -79,6 +79,8 @@ jobs:
         run: node scripts/migrate_tos_trust_metadata.js
       - name: Migrate document legal statuses
         run: node scripts/migrate_document_legal_statuses.js
+      - name: Build practices and apply reviewed VK relationships
+        run: node scripts/generate_tos_practices.js
       - name: Synchronize content origins
         run: node scripts/migrate_content_origins.js
       - name: Generate content origin metrics
@@ -190,6 +192,8 @@ jobs:
         run: node scripts/audit_generated_page_cleanup.js
       - name: Generate project pages
         run: node scripts/generate_project_pages.js
+      - name: Test shared TOS stories and editorial reuse
+        run: node scripts/test_vk_content_reuse.js
       - name: Audit project legacy redirects
         env:
           PROJECT_LEGACY_REDIRECTS_STRICT: 'true'
