@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-12T20:42:50.830Z",
+  "generated_at": "2026-11-13T05:23:23.087Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 487,
-    "public_pages": 424,
+    "html_pages": 488,
+    "public_pages": 425,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 147,
+    "asset_files": 151,
     "over_budget_assets": 0,
-    "total_css_bytes": 106890,
-    "total_js_bytes": 955434,
+    "total_css_bytes": 112713,
+    "total_js_bytes": 985494,
     "total_image_bytes": 45000,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -162,6 +162,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/resident-area-view.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 13322,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/territory-map-core.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 10875,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/project-packet.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10874,
       "over_budget": false
     }
   ],

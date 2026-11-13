@@ -235,6 +235,11 @@ jobs:
           node scripts/generate_territory_map.js
           node scripts/test_territory_map_core.js
           node scripts/audit_map_content.js
+      - name: Generate resident territory page and validate public usefulness
+        run: |
+          node scripts/generate_resident_area.js
+          node scripts/test_resident_area.js
+          node scripts/audit_runtime_cache_coherence.js --write
       - name: Generate accessibility and performance baseline
         run: node scripts/generate_public_experience.js
       - name: Check draft guidance and honest use records

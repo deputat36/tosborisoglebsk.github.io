@@ -29,6 +29,9 @@ on:
       - 'documents/templates/**'
       - 'scripts/test_public_project_workspace.js'
       - 'scripts/test_public_portal_usability.js'
+      - 'residents/my-area/**'
+      - 'scripts/test_public_resident_area.js'
+      - 'scripts/generate_resident_area.js'
       - 'scripts/test_portal_usability.js'
       - 'scripts/generate_public_experience.js'
       - 'methodology/index.html'
@@ -213,6 +216,10 @@ jobs:
 
       - name: Generate visual-run public index
         run: node scripts/generate_public_experience.js
+      - name: Generate resident territory selection
+        run: |
+          node scripts/generate_resident_area.js
+          node scripts/audit_runtime_cache_coherence.js --write
       - name: Index visual-run public pages
         run: node scripts/generate_page_index.js
 
@@ -270,6 +277,8 @@ jobs:
         run: node scripts/test_public_project_workspace.js
       - name: Test resilient navigation, printable packets and honest use records
         run: node scripts/test_public_portal_usability.js
+      - name: Test resident territory selection, help, calendar and housing links
+        run: node scripts/test_public_resident_area.js
 
       - name: Test public territory map and local boundary editor
         run: node scripts/test_public_territory_map.js

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-12T20:43:10.958Z",
-  "total": 414,
+  "generated_at": "2026-11-13T05:23:36.461Z",
+  "total": 415,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -460,6 +460,15 @@
       "url": "https://tosborisoglebsk.ru/residents/action-routes/",
       "title": "Куда обратиться жителю — навигатор по вопросам территории и ТОС",
       "description": "Интерактивный навигатор жителя Борисоглебского городского округа: понять, куда направить вопрос дома, территории, проекта, события, новости или исправления сайта.",
+      "section": "Жителям",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
+      "path": "residents/my-area/index.html",
+      "url": "https://tosborisoglebsk.ru/residents/my-area/",
+      "title": "Моя территория — дела, события и помощь рядом | ТОС БГО",
+      "description": "Выберите ТОС Борисоглебского округа: контакты, карта, события, способы помочь, истории результата и инструкции по дому и двору. Без регистрации.",
       "section": "Жителям",
       "search_group": "guides",
       "content_origin": "reference"

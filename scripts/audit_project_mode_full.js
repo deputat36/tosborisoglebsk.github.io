@@ -26,6 +26,7 @@ const checks = [
   ['Project budget calculations and file safety', 'scripts/test_project_budget.js'],
   ['Linked project drafts and portable files', 'scripts/test_project_workspace.js'],
   ['Runtime cache coherence', 'scripts/audit_runtime_cache_coherence.js'],
+  ['Resident territory usefulness and truthful status', 'scripts/test_resident_area.js'],
   ['Public search ownership and trust consistency', 'scripts/test_public_search_and_trust.js'],
   ['Current opportunity deadlines', 'scripts/test_current_opportunities.js'],
   ['CSV parser self-test', 'scripts/test_csv_parser.js'],
