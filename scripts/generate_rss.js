@@ -52,7 +52,7 @@ function main() {
   // запросы сведений, но не отправляются подписчикам как новости.
   const news = readJson(NEWS_PATH)
     .filter(isRssNews)
-    .sort((a, b) => String(b.published_at || b.date || '').localeCompare(String(a.published_at || a.date || '')));
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.published_at || '').localeCompare(String(a.published_at || '')));
 
   const items = news.map((item) => {
     const link = `${SITE_URL}/news/${item.id}/`;

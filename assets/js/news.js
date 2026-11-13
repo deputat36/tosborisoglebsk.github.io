@@ -124,7 +124,7 @@ async function renderNewsPage() {
     if (controls.tos) controls.tos.innerHTML = '<option value="">Все ТОС</option>' + usedTos.map((slug) => `<option value="${newsEsc(slug)}">${newsEsc(newsTosName(slug, toses))}</option>`).join('');
 
     const initial = newsCore.parseState(window.location.search, newsFields);
-    let page = Math.max(1, Number(initial.page) || Number(window.location.pathname.match(/\/archive\/(\d+)\//)?.[1]) || 1);
+    let page = Math.max(1, Math.floor(Number(initial.page)) || Number(window.location.pathname.match(/\/archive\/(\d+)\//)?.[1]) || 1);
     newsCore.applyControls(initial, controls);
 
     function apply(sync = true) {
@@ -142,7 +142,7 @@ async function renderNewsPage() {
           const hay = newsCore.normalizeText([item.title, item.lead, item.category, item.source, item.tos_slug, tosName, newsOrigin(item), ...(item.text || []), ...(item.reposts || []).flatMap(part => part.text || [])].join(' '));
           return !query || hay.includes(query);
         })
-        .sort((a, b) => String(b.published_at || b.date || '').localeCompare(String(a.published_at || a.date || '')));
+        .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.published_at || b.date || '').localeCompare(String(a.published_at || a.date || '')));
 
       const pages = Math.max(1, Math.ceil(filtered.length / NEWS_PAGE_SIZE));
       page = Math.min(page, pages);

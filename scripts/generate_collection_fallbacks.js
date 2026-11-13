@@ -23,7 +23,7 @@ function main(){
  const context=vm.createContext({window:{CollectionBrowserCore:core,TosNewsMedia:newsMedia},document:{querySelector:selector=>selector==='#news-summary'?summary:null},URLSearchParams});
  vm.runInContext(fs.readFileSync('assets/js/news.js','utf8'),context);
  const api=vm.runInContext('({newsCard,newsDefaultVisible,renderNewsSummary})',context);
- const news=JSON.parse(fs.readFileSync('data/news.json')).filter(x=>x.status!=='draft').filter(api.newsDefaultVisible).sort((a,b)=>String(b.published_at||b.date||'').localeCompare(String(a.published_at||a.date||'')));
+ const news=JSON.parse(fs.readFileSync('data/news.json')).filter(x=>x.status!=='draft').filter(api.newsDefaultVisible).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))||String(b.published_at||'').localeCompare(String(a.published_at||'')));
  const toses=JSON.parse(fs.readFileSync('data/toses.json'));
  const pageSize=24, totalPages=Math.max(1,Math.ceil(news.length/pageSize));
  replaceMount('news/index.html','news-feed',news.slice(0,pageSize).map(x=>api.newsCard(x,toses)).join(''));

@@ -207,7 +207,7 @@ function convertVkPost(post, tagMap = new Map()) {
   };
 }
 function sortNews(a,b) {
-  return String(b.published_at || b.date || '').localeCompare(String(a.published_at || a.date || '')) || (Number(b.vk_post_id) || 0) - (Number(a.vk_post_id) || 0);
+  return String(b.date || '').localeCompare(String(a.date || '')) || String(b.published_at || '').localeCompare(String(a.published_at || '')) || (Number(b.vk_post_id) || 0) - (Number(a.vk_post_id) || 0);
 }
 function mergeImportedNews(existing, imported, vkLimit = Infinity) {
   const byId = new Map(existing.map(item => [item.id,item]));

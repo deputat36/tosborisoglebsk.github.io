@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const vk = require('./import_vk_news');
 const photo = (id=1) => ({type:'photo',photo:{owner_id:-9,id,sizes:[{width:480,height:320,url:`https://sun1.vkuserphoto.ru/${id}-small.jpg`},{width:1280,height:853,url:`https://sun1.vkuserphoto.ru/${id}-large.jpg`},{width:2560,height:1707,url:`https://sun1.vkuserphoto.ru/${id}-full.jpg`}]}});
 const post = (id,other={}) => ({id,owner_id:-9,date:1760000000+id,text:`Запись ${id}`,attachments:[],...other});
+assert(vk.sortNews({date:'2026-11-13',published_at:'2026-11-12T22:00:00Z'},{date:'2026-11-12'})<0,'Moscow publication day sorts before the previous editorial day');
 const config = {...vk.configuration({}),pageSize:2,maxPages:100};
 const pause = async()=>{};
 async function main() {
