@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T18:20:54.921Z",
+  "generated_at": "2026-11-13T18:24:15.897Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1412,
@@ -16,122 +16,122 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1038,
+      "duration_ms": 1048,
       "bytes": 8333
     },
     {
-      "route": "/news/vk-238997964-97/index.html",
+      "route": "/news/vk-238997964-805/index.html",
       "status": 200,
-      "duration_ms": 1002,
-      "bytes": 15719
+      "duration_ms": 1036,
+      "bytes": 8894
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 225,
+      "duration_ms": 33,
       "bytes": 9062
+    },
+    {
+      "route": "/done/chigorak-tos-cultural-work/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 8432
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 123,
+      "duration_ms": 17,
       "bytes": 12170
     },
     {
-      "route": "/chairperson/action-routes/index.html",
+      "route": "/done/chigorak-eco-team-2026/index.html",
       "status": 200,
-      "duration_ms": 122,
-      "bytes": 16380
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 121,
-      "bytes": 9797
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 120,
-      "bytes": 23405
+      "duration_ms": 17,
+      "bytes": 8784
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 120,
+      "duration_ms": 16,
       "bytes": 8560
+    },
+    {
+      "route": "/done/chkalovec-cvetik-semicvetik-2022/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 7854
+    },
+    {
+      "route": "/done/chkalovec-many-projects/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 8564
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 16380
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 119,
+      "duration_ms": 14,
       "bytes": 16246
     },
     {
-      "route": "/news/vk-238997964-973/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 18580
-    },
-    {
-      "route": "/content-standards/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 13560
+      "bytes": 9797
     },
     {
-      "route": "/data-dictionary/index.html",
+      "route": "/done/chkalovec-centr-prityazheniya-2024/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 8207
+    },
+    {
+      "route": "/places/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 20320
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 23405
+    },
+    {
+      "route": "/done/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 17801
+    },
+    {
+      "route": "/done/chkalovec-parkovka-2021/index.html",
       "status": 200,
       "duration_ms": 12,
-      "bytes": 11011
+      "bytes": 8124
     },
     {
-      "route": "/documents/templates/create-initiative-card/index.html",
+      "route": "/done/result-archive-needed-mechta/index.html",
       "status": 200,
       "duration_ms": 12,
-      "bytes": 5528
+      "bytes": 8526
     },
     {
-      "route": "/documents/templates/project-budget/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 13148
-    },
-    {
-      "route": "/contacts/index.html",
+      "route": "/chairperson/news/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 22305
+      "bytes": 5806
     },
     {
-      "route": "/create-tos/action-routes/index.html",
+      "route": "/documents/templates/tos-start-list/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 13025
-    },
-    {
-      "route": "/news/archive/33/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 54502
-    },
-    {
-      "route": "/news/vk-238997964-972/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 15976
-    },
-    {
-      "route": "/news/vk-238997964-974/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 12618
-    },
-    {
-      "route": "/news/vk-238997964-975/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 14244
+      "bytes": 2632
     }
   ]
 }
