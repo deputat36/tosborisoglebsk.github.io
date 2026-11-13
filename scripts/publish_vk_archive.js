@@ -5,6 +5,7 @@ const commands = [
   ['generate_tos_practices.js'], ['generate_done_pages.js'], ['generate_project_pages.js'],
   ['generate_need_pages.js'], ['generate_support_pages.js'],
   ['generate_publication_basis_inventory.js'], ['generate_publication_basis_review_queue.js'],
+  ['sync_publication_basis_confirmation_register.js'],
   ['generate_admin_surface_inventory.js'],
   ['migrate_content_origins.js'], ['generate_content_origin_report.js'],
   ['generate_news_pages.js'], ['generate_material_pages.js'], ['generate_tos_pages.js'],
