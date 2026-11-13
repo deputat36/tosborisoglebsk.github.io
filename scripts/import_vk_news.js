@@ -1,52 +1,45 @@
-/*
-  Импорт новостей из сообщества ВКонтакте в data/news.json.
-  Работает через GitHub Actions без сервера и без платного хостинга.
-
-  Требуемые переменные окружения:
-  - VK_TOKEN — пользовательский или сервисный токен ВК с доступом к wall.get.
-    Group/community access token для wall.get не поддерживается.
-
-  Источник сообщества:
-  - VK_OWNER_ID — необязательный ID сообщества со знаком минус;
-  - VK_DOMAIN — необязательное короткое имя сообщества; по умолчанию используется публичный домен портала tosbgo.
-
-  Дополнительные переменные:
-  - VK_HASHTAGS — хештеги для отбора через запятую. По умолчанию: #наСайтТОСБГО,#новостьТОСБГО,#новостиТОСБГО
-  - VK_COUNT — сколько последних постов проверять. По умолчанию: 50
-  - NEWS_LIMIT — сколько импортированных из VK новостей хранить. Канонические материалы портала этим лимитом не обрезаются. По умолчанию: 100
-*/
-
-const fs = require('fs');
-const path = require('path');
-
+/* Public community wall → complete site archive. Media URLs stay on VK.
+ * One owner: .github/workflows/update-vk-news.yml. Never logs credentials.
+ * VK_TOKEN: user/service token; group/community access token is incompatible.
+ */
+const fs = require('node:fs');
+const path = require('node:path');
+const media = require('../assets/js/news-media');
 const ROOT = process.cwd();
 const NEWS_PATH = path.join(ROOT, 'data', 'news.json');
 const TOSES_PATH = path.join(ROOT, 'data', 'toses.json');
-const ARTICLES_PATH = path.join(ROOT, 'data', 'articles.json');
-const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
-const SITE_URL = 'https://tosborisoglebsk.ru';
+const STATE_PATH = path.join(ROOT, 'data', 'vk_sync_state.json');
+const PENDING_PATH = path.join(ROOT, 'data', 'vk_import_pending.json');
+const REPORT_PATH = path.join(ROOT, 'data', 'vk_import_report.json');
 const DEFAULT_VK_DOMAIN = 'tosbgo';
-
 const VK_TOKEN = process.env.VK_TOKEN || '';
-const VK_OWNER_ID = process.env.VK_OWNER_ID || '';
 const VK_DOMAIN = process.env.VK_DOMAIN || DEFAULT_VK_DOMAIN;
-const VK_COUNT = Number(process.env.VK_COUNT || 50);
-const NEWS_LIMIT = Number(process.env.NEWS_LIMIT || 100);
 const VK_API_VERSION = process.env.VK_API_VERSION || '5.199';
-const HASHTAGS = (process.env.VK_HASHTAGS || '#наСайтТОСБГО,#новостьТОСБГО,#новостиТОСБГО')
-  .split(',')
-  .map((s) => s.trim().toLowerCase())
-  .filter(Boolean);
-
-function escapeHtml(value) {
-  return String(value || '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
+const HASHTAGS = (process.env.VK_HASHTAGS || '#наСайтТОСБГО,#новостьТОСБГО,#новостиТОСБГО').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+const STOP_TAGS = (process.env.VK_EXCLUDE_HASHTAGS || '#неНаСайтТОСБГО').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+function readJson(file, fallback) {
+  if (!fs.existsSync(file)) return fallback;
+  // Malformed existing data must abort, never silently replace the archive.
+  return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
-
+function writeJson(file, value) {
+  fs.mkdirSync(path.dirname(file), {recursive: true});
+  const temporary = file + '.tmp';
+  fs.writeFileSync(temporary, JSON.stringify(value, null, 2) + '\n');
+  fs.renameSync(temporary, file);
+}
+function configuration(env = process.env) {
+  const mode = env.VK_IMPORT_MODE || 'all';
+  if (!['all', 'tagged'].includes(mode)) throw Error('VK_IMPORT_MODE: expected all or tagged.');
+  const pageSize = Number(env.VK_COUNT || 100), maxPages = Number(env.VK_MAX_PAGES || 100);
+  if (!Number.isInteger(pageSize) || pageSize < 1 || pageSize > 100) throw Error('VK_COUNT: expected 1..100 (page size, not archive limit).');
+  if (!Number.isInteger(maxPages) || maxPages < 1 || maxPages > 1000) throw Error('VK_MAX_PAGES: expected 1..1000.');
+  const owner = env.VK_OWNER_ID || '';
+  if (owner && !/^-[1-9]\d*$/.test(owner)) throw Error('VK_OWNER_ID: expected negative community ID.');
+  // NEWS_LIMIT has intentionally been retired: archive retention is unlimited.
+  return {mode, pageSize, maxPages, owner, domain: env.VK_DOMAIN || DEFAULT_VK_DOMAIN};
+}
 function slugify(text) {
   const map = {а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'c',ч:'ch',ш:'sh',щ:'sch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya'};
   return String(text || '')
@@ -102,7 +95,7 @@ function detectTosSlug(text, tagMap) {
 }
 
 function stripServiceHashtags(text, tagMap = new Map()) {
-  const serviceTags = new Set([...HASHTAGS, ...tagMap.keys()]);
+  const serviceTags = new Set([...HASHTAGS, ...STOP_TAGS, ...tagMap.keys()]);
   return String(text || '')
     .replace(/#[\p{L}\p{N}_]+/gu, (tag) => serviceTags.has(tag.toLowerCase()) ? '' : tag)
     .replace(/\n{3,}/g, '\n\n')
@@ -144,154 +137,203 @@ function formatDate(unix) {
   return `${value.year}-${value.month}-${value.day}`;
 }
 
-function collectPhotos(attachments = []) {
-  return attachments
-    .filter((a) => a.type === 'photo' && a.photo && Array.isArray(a.photo.sizes))
-    .map((a) => a.photo.sizes.slice().sort((x, y) => (y.width || 0) - (x.width || 0))[0]?.url)
-    .filter(Boolean);
+
+function postKey(post) { return `vk-${Math.abs(post.owner_id)}-${post.id}`; }
+function postParts(post, depth = 0) {
+  if (!post || depth > 5) return [];
+  return [post, ...(Array.isArray(post.copy_history) ? post.copy_history.flatMap(item => postParts(item, depth + 1)) : [])];
 }
-
-function readJson(file, fallback) {
-  try {
-    if (!fs.existsSync(file)) return fallback;
-    return JSON.parse(fs.readFileSync(file, 'utf8'));
-  } catch (error) {
-    console.error(`Ошибка чтения JSON ${file}:`, error.message);
-    return fallback;
-  }
+function postText(post) { return postParts(post).map(item => item.text || '').filter(Boolean).join('\n\n'); }
+function shouldImport(post, mode = 'all') {
+  const tags = extractHashtags(postText(post));
+  if (STOP_TAGS.some(tag => tags.has(tag))) return false;
+  return mode === 'all' || hasAllowedHashtag(postText(post));
 }
-
-function writeJson(file, data) {
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
+function choosePhoto(photo) {
+  const sizes = (photo?.sizes || []).filter(size => media.safeUrl(size.url)).sort((a,b) => (a.width || 0) - (b.width || 0));
+  if (!sizes.length) return null;
+  const full = sizes[sizes.length - 1];
+  const display = sizes.find(size => size.width >= 1000) || full;
+  const thumb = sizes.find(size => size.width >= 480) || display;
+  return {src: media.safeUrl(display.url), thumbnail: media.safeUrl(thumb.url), full: media.safeUrl(full.url), width: display.width || 0, height: display.height || 0};
 }
-
-function mergeImportedNews(existing, imported, vkLimit = NEWS_LIMIT) {
-  const existingItems = Array.isArray(existing) ? existing.filter((item) => item && item.id) : [];
-  const importedItems = Array.isArray(imported) ? imported.filter((item) => item && item.id) : [];
-  const byId = new Map(existingItems.map((item) => [item.id, item]));
-
-  for (const item of importedItems) {
-    byId.set(item.id, { ...(byId.get(item.id) || {}), ...item });
-  }
-
-  const records = Array.from(byId.values());
-  const canonical = records.filter((item) => item.imported_from !== 'vk');
-  const effectiveLimit = Number.isFinite(Number(vkLimit)) ? Math.max(0, Math.floor(Number(vkLimit))) : 100;
-  const vkItems = records
-    .filter((item) => item.imported_from === 'vk')
-    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
-    .slice(0, effectiveLimit);
-
-  return [...canonical, ...vkItems]
-    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
-}
-
-async function callVkWallGet() {
-  if (!VK_TOKEN) throw new Error('Не задан VK_TOKEN в GitHub Secrets.');
-  if (!VK_OWNER_ID && !VK_DOMAIN) throw new Error('Не задан VK_OWNER_ID или VK_DOMAIN в переменных GitHub Actions.');
-
-  const params = new URLSearchParams({ access_token: VK_TOKEN, v: VK_API_VERSION, count: String(VK_COUNT), extended: '0' });
-  // VK expects one wall locator; an explicit numeric owner ID has precedence.
-  if (VK_OWNER_ID) params.set('owner_id', VK_OWNER_ID);
-  else if (VK_DOMAIN) params.set('domain', VK_DOMAIN);
-
-  const res = await fetch(`https://api.vk.com/method/wall.get?${params.toString()}`);
-  const data = await res.json();
-  if (data.error) {
-    if (Number(data.error.error_code) === 27) {
-      throw new Error('VK API error 27: wall.get недоступен с group/community access token. Замените GitHub Secret VK_TOKEN на совместимый пользовательский или сервисный токен; см. docs/VK-IMPORT-OWNERSHIP-2026-07-14.md.');
+function collectMedia(parts) {
+  const images = [], attachments = [], seen = new Set();
+  for (const part of parts) for (const item of part.attachments || []) {
+    if (item.type === 'photo') {
+      const photo = choosePhoto(item.photo);
+      const key = `photo:${item.photo?.owner_id}_${item.photo?.id || photo?.src}`;
+      if (photo && !seen.has(key)) {seen.add(key); images.push(photo);}
+    } else if (item.type === 'video') {
+      const video = item.video || {};
+      if (!Number.isInteger(video.owner_id) || !Number.isInteger(video.id)) continue;
+      const url = `https://vk.com/video${video.owner_id}_${video.id}`;
+      if (!seen.has(url)) {seen.add(url); attachments.push({type:'video', title:video.title || 'Видео ВКонтакте', url, player:media.safePlayer(video.player), preview:choosePhoto({sizes:video.image || video.first_frame || []})?.thumbnail || ''});}
+    } else if (item.type === 'doc') {
+      const doc = item.doc || {}, url = media.safeUrl(doc.url);
+      if (url && !seen.has(url)) {seen.add(url); attachments.push({type:'document',title:doc.title || 'Документ',url,extension:String(doc.ext || ''),size:Number(doc.size) || 0});}
+    } else if (item.type === 'link') {
+      const link = item.link || {}, url = media.safeUrl(link.url);
+      if (url && !seen.has(url)) {seen.add(url); attachments.push({type:'link',title:link.title || 'Материал по ссылке',url});}
+    } else if (item.type === 'audio') {
+      const audio = item.audio || {};
+      // Audio streams must not be downloaded or reconstructed.
+      const url = Number.isInteger(audio.owner_id) && Number.isInteger(audio.id) ? `https://vk.com/audio${audio.owner_id}_${audio.id}` : '';
+      if (url && !seen.has(url)) {seen.add(url); attachments.push({type:'audio',title:[audio.artist,audio.title].filter(Boolean).join(' — ') || 'Аудиозапись ВКонтакте',url});}
     }
-    throw new Error(`VK API error ${data.error.error_code}: ${data.error.error_msg}`);
   }
-  if (!Array.isArray(data.response?.items)) {
-    throw new Error('VK API: ответ wall.get не содержит массив записей; импорт остановлен без изменения новостей.');
-  }
-  return data.response.items;
+  return {images, attachments};
 }
-
-function convertVkPost(post, tagMap) {
-  const ownerId = post.owner_id;
-  const postId = post.id;
-  const photos = collectPhotos(post.attachments || []);
-  const tosSlug = detectTosSlug(post.text, tagMap);
-
+function convertVkPost(post, tagMap = new Map()) {
+  const parts = postParts(post), combinedText = postText(post), {images,attachments} = collectMedia(parts);
+  const tosSlug = detectTosSlug(combinedText, tagMap);
+  const body = stripServiceHashtags(post.text, tagMap);
+  const sourceUrl = part => `https://vk.com/wall${part.owner_id}_${part.id}`;
+  const reposts = parts.slice(1).map(part => ({
+    source_url: sourceUrl(part), date: Number.isFinite(Number(part.date)) && part.date ? formatDate(part.date) : '',
+    text: stripServiceHashtags(part.text, tagMap).split(/\n\s*\n/g).map(p => p.trim()).filter(Boolean)
+  }));
+  const text = body ? body.split(/\n\s*\n/g).map(p => p.trim()).filter(Boolean) : [];
+  const clear = stripServiceHashtags(combinedText, tagMap);
   return {
-    id: `vk-${Math.abs(ownerId)}-${postId}`,
-    status: 'published',
-    date: formatDate(post.date),
-    category: tosSlug ? 'Новости ТОС' : 'Новости ТОС БГО',
-    title: makeTitle(post.text, tagMap),
-    lead: makeLead(post.text, tagMap),
-    text: splitText(post.text, tagMap),
-    source: 'ВКонтакте',
-    source_url: `https://vk.com/wall${ownerId}_${postId}`,
-    image: photos[0] || '',
-    images: photos,
-    tos_slug: tosSlug,
-    external: true,
-    imported_from: 'vk',
-    vk_owner_id: ownerId,
-    vk_post_id: postId,
-    imported_at: new Date().toISOString()
+    id:postKey(post), status:'published', date:formatDate(post.date), published_at:new Date(Number(post.date)*1000).toISOString(),
+    category:tosSlug ? 'Новости ТОС' : 'Новости ТОС БГО',
+    title:clear ? makeTitle(combinedText, tagMap) : reposts.length ? 'Публикация из сообщества ВКонтакте' : images.length ? 'Фотографии из сообщества ТОС БГО' : 'Публикация сообщества ТОС БГО',
+    lead:makeLead(combinedText,tagMap), text: text.length ? text : [reposts.length ? 'Репост публикации ВКонтакте.' : 'Материалы опубликованы в сообществе ТОС БГО.'],
+    source:'ВКонтакте', source_url:sourceUrl(post), image:images[0]?.src || '', images, attachments, reposts,
+    tos_slug:tosSlug, external:true, imported_from:'vk', content_origin:'editorial',
+    vk_owner_id:post.owner_id, vk_post_id:post.id,
+    vk_edited: Number(post.edited) || 0
   };
 }
-
-function generateNewsPage(news) {
-  const dir = path.join(ROOT, 'news', news.id);
-  fs.mkdirSync(dir, { recursive: true });
-  const paragraphs = Array.isArray(news.text) ? news.text.map((p) => `<p>${escapeHtml(p)}</p>`).join('\n') : `<p>${escapeHtml(news.text || news.lead || '')}</p>`;
-  const images = Array.isArray(news.images) && news.images.length
-    ? `<div class="grid">${news.images.slice(0, 8).map((url) => `<img src="${escapeHtml(url)}" alt="${escapeHtml(news.title)}" style="width:100%;border-radius:20px;border:1px solid var(--line);">`).join('')}</div>`
-    : (news.image ? `<img src="${escapeHtml(news.image)}" alt="${escapeHtml(news.title)}" style="width:100%;border-radius:24px;margin:18px 0;border:1px solid var(--line);">` : '');
-  const tosLink = news.tos_slug ? `<p><a class="btn" href="/tos/${escapeHtml(news.tos_slug)}/">Открыть связанный ТОС</a></p>` : '';
-  const source = news.source_url ? `<p class="source"><b>Источник:</b> ${escapeHtml(news.source || 'Источник')}<br><a href="${escapeHtml(news.source_url)}" target="_blank" rel="noopener">${escapeHtml(news.source_url)}</a></p>` : `<p class="source"><b>Источник:</b> ${escapeHtml(news.source || 'Редакция портала')}</p>`;
-  const html = `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>${escapeHtml(news.title)} | ТОС БГО</title><meta name="description" content="${escapeHtml(news.lead)}"/><link rel="canonical" href="${SITE_URL}/news/${news.id}/"/><meta property="og:title" content="${escapeHtml(news.title)}"/><meta property="og:description" content="${escapeHtml(news.lead)}"/><meta property="og:type" content="article"/><meta property="og:url" content="${SITE_URL}/news/${news.id}/"/><meta property="og:image" content="${escapeHtml(news.image || `${SITE_URL}/assets/img/og-cover.svg`)}"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="stylesheet" href="/assets/css/styles.css"/></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"><a href="/tos/">Каталог ТОС</a><a href="/news/">Новости</a><a href="/grants/">Конкурсы</a><a href="/projects/">Проекты</a><a href="/materials/">Материалы</a><a href="/documents/">Документы</a><a href="/create-tos/">Как создать ТОС</a><a href="/contacts/">Контакты</a></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header><main id="main"><section class="hero"><div class="container hero-card"><a class="chip" href="/news/">← Новости</a><div class="eyebrow">${escapeHtml(news.category || 'Новости')} · ${escapeHtml(news.date || '')}</div><h1>${escapeHtml(news.title)}</h1><p class="lead">${escapeHtml(news.lead)}</p></div></section><section class="section"><div class="container prose">${images}${paragraphs}${tosLink}<hr class="sep"/>${source}</div></section></main><footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru.</div></div><div class="tiny">Новость импортирована или обновлена автоматически.</div></div></footer><script src="/assets/js/site.js"></script></body></html>`;
-  fs.writeFileSync(path.join(dir, 'index.html'), html, 'utf8');
+function sortNews(a,b) {
+  return String(b.published_at || b.date || '').localeCompare(String(a.published_at || a.date || '')) || (Number(b.vk_post_id) || 0) - (Number(a.vk_post_id) || 0);
 }
-
-function updateSitemap(newsList) {
-  const staticUrls = ['/', '/tos/', '/news/', '/grants/', '/projects/', '/materials/', '/documents/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/search/'];
-  let urls = staticUrls.map((u) => `${SITE_URL}${u}`);
-  for (const tos of readJson(TOSES_PATH, [])) if (tos.slug && tos.status !== 'draft') urls.push(`${SITE_URL}/tos/${tos.slug}/`);
-  for (const news of newsList) if (news.id && news.status !== 'draft') urls.push(`${SITE_URL}/news/${news.id}/`);
-  for (const article of readJson(ARTICLES_PATH, [])) if (article.id && article.status !== 'draft') urls.push(`${SITE_URL}/materials/${article.id}/`);
-  urls = [...new Set(urls)];
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`;
-  fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
+function mergeImportedNews(existing, imported, vkLimit = Infinity) {
+  const byId = new Map(existing.map(item => [item.id,item]));
+  for (const item of imported) {
+    const previous = byId.get(item.id);
+    if (previous && previous.imported_from !== 'vk') throw Error('VK ID collides with canonical material.');
+    // Keep first-import timestamp and editorial provenance; never duplicate stable IDs.
+    byId.set(item.id,{...previous,...item,imported_at:previous?.imported_at || new Date().toISOString()});
+  }
+  const records = [...byId.values()];
+  const canonical = records.filter(item => item.imported_from !== 'vk');
+  const effectiveLimit = vkLimit === Infinity ? Infinity : Math.max(0, Math.floor(Number(vkLimit)) || 0);
+  const vkItems = records.filter(item => item.imported_from === 'vk').sort(sortNews).slice(0,effectiveLimit);
+  return [...canonical,...vkItems].sort(sortNews);
 }
-
+function createApi({token, version = VK_API_VERSION, fetcher = fetch, pause = wait}) {
+  return async function api(method, parameters) {
+    for (let attempt=0; attempt<5; attempt++) {
+      let response, data;
+      try {
+        response = await fetcher(`https://api.vk.com/method/${method}`, {
+          method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:new URLSearchParams({...parameters,access_token:token,v:version}), signal:AbortSignal.timeout(30000)
+        });
+        if (!response.ok) {
+          if (response.status === 429 || response.status >= 500) {await pause(1000 * 2**attempt); continue;}
+          throw Error(`VK HTTP ${response.status}`);
+        }
+        data = await response.json();
+      } catch (error) {
+        if (attempt<4 && (!response || response.ok)) {await pause(1000*2**attempt);continue;}
+        // Do not echo the fetch request, token or VK request_params in errors.
+        throw Error('Сетевая ошибка ВК; опубликованные новости сохранены.');
+      }
+      if (data.error) {
+        const code = Number(data.error.error_code);
+        if ([1,6,9,10,29].includes(code) && attempt<4) {await pause(1000*2**attempt);continue;}
+        if (code === 27) throw Error('VK API error 27: group/community access token не поддерживает wall.get; нужен сервисный или пользовательский токен.');
+        throw Error(`VK API error ${code}; опубликованные новости сохранены.`);
+      }
+      return data.response;
+    }
+    throw Error('ВК временно ограничил запросы; повторите перенос позже.');
+  };
+}
+function validPost(post) {
+  return post && Number.isInteger(post.owner_id) && post.owner_id < 0 && Number.isInteger(post.id) && post.id>0 && Number.isFinite(Number(post.date)) && post.date>0;
+}
+async function scanWall({fetchPage, config, pending, onCheckpoint = () => {}, tagMap = new Map(), pause = wait}) {
+  const fingerprint = JSON.stringify({owner:config.owner, domain:config.domain, mode:config.mode, pageSize:config.pageSize, stop:STOP_TAGS, hashtags:HASHTAGS});
+  const saved = pending?.fingerprint === fingerprint ? pending : null;
+  const records = new Map((saved?.records || []).map(item => [item.id,item]));
+  const observed = new Set(saved?.observed || []), excluded = new Set(saved?.excluded || []);
+  let owner = saved?.owner || Number(config.owner) || null;
+  // Recheck the overlap after a retry; offsets can shift as new posts arrive.
+  let offset = Math.max(0,(saved?.next_offset || 0) - config.pageSize*2), count = null;
+  let pages = 0;
+  while (pages<config.maxPages) {
+    const page = await fetchPage(offset,config.pageSize);
+    if (!page || !Array.isArray(page.items) || !Number.isInteger(page.count) || page.count<0) throw Error('Некорректный ответ wall.get; новости не изменены.');
+    if (page.count>offset && !page.items.length) throw Error('ВК вернул пустую страницу до конца архива; новости не изменены.');
+    count = page.count;
+    let added=0;
+    for (const post of page.items) {
+      if (!validPost(post)) throw Error('ВК вернул некорректную запись; новости не изменены.');
+      owner ||= post.owner_id;
+      if (owner !== post.owner_id) throw Error('Источник ВК изменился внутри выгрузки; новости не изменены.');
+      const key = postKey(post);
+      if (!observed.has(key)) added++;
+      observed.add(key);
+      if (shouldImport(post,config.mode)) {records.set(key,convertVkPost(post,tagMap));excluded.delete(key);}
+      else {records.delete(key);excluded.add(key);}
+    }
+    pages++;
+    offset += config.pageSize;
+    const checkpoint = {schema_version:1,fingerprint,owner,next_offset:offset,source_count:count,observed:[...observed],excluded:[...excluded],records:[...records.values()]};
+    await onCheckpoint(checkpoint);
+    if (offset>=count) return {...checkpoint,complete:true,pages,resumed:Boolean(saved)};
+    if (!added && page.items.length && offset > (saved?.next_offset || 0)) throw Error('ВК повторяет страницу архива; выгрузка остановлена без изменения новостей.');
+    await pause(400);
+  }
+  throw Error('Сохранена часть архива: достигнут лимит страниц одного запуска. Следующий запуск продолжит перенос.');
+}
+function reconcile(existing, scan, state = {}, now = new Date().toISOString()) {
+  const observed = new Set(scan.observed), excluded = new Set(scan.excluded);
+  const previous = existing.filter(item => item.imported_from === 'vk' && item.vk_owner_id === scan.owner);
+  const missing = previous.filter(item => !observed.has(item.id));
+  const plausible = scan.complete && observed.size >= scan.source_count - 1 && (previous.length === 0 || missing.length/previous.length<=0.2);
+  const confirmations = {}, removed = [];
+  for (const item of missing) {
+    confirmations[item.id] = plausible ? (state.missing_confirmations?.[item.id] || 0)+1 : 0;
+    if (confirmations[item.id]>=2) removed.push(item.id);
+  }
+  for (const id of excluded) if (existing.some(item => item.id === id && item.imported_from === 'vk')) removed.push(id);
+  const removalSet = new Set(removed);
+  // Never retract editorial records or another wall's archive.
+  const retained = existing.filter(item => item.imported_from !== 'vk' || item.vk_owner_id !== scan.owner || !removalSet.has(item.id));
+  const merged = mergeImportedNews(retained,scan.records);
+  return {merged, removed, state:{schema_version:1,owner_id:scan.owner,archive_complete:true,last_successful_sync:now,source_count:scan.source_count,observed_count:scan.observed.length,missing_confirmations:confirmations},deletion_review:!plausible && missing.length>0};
+}
 async function main() {
-  const tagMap = loadTosHashtagMap();
-  const existing = readJson(NEWS_PATH, []);
-  const posts = await callVkWallGet();
-  const imported = posts.filter((post) => !post.is_pinned).filter((post) => hasAllowedHashtag(post.text)).map((post) => convertVkPost(post, tagMap));
-  const merged = mergeImportedNews(existing, imported, NEWS_LIMIT);
-
-  writeJson(NEWS_PATH, merged);
-  for (const item of merged.filter((item) => item.status !== 'draft')) generateNewsPage(item);
-  updateSitemap(merged);
-
-  console.log(`Проверено постов ВК: ${posts.length}`);
-  console.log(`Импортировано/обновлено постов по хештегам: ${imported.length}`);
-  console.log(`Привязано к ТОСам: ${imported.filter((item) => item.tos_slug).length}`);
-  console.log(`VK-новостей после применения лимита: ${merged.filter((item) => item.imported_from === 'vk').length}`);
-  console.log(`Всего новостей в data/news.json: ${merged.length}`);
-}
-
-if (require.main === module) {
-  main().catch((error) => {
-    console.error(error);
-    process.exit(1);
+  if (!VK_TOKEN) throw Error('Не задан VK_TOKEN в GitHub Secrets.');
+  const config = configuration(), existing = readJson(NEWS_PATH,[]);
+  if (!Array.isArray(existing)) throw Error('data/news.json должен быть массивом.');
+  const api = createApi({token:VK_TOKEN});
+  const previousState = readJson(STATE_PATH,{});
+  const scan = await scanWall({
+    config, pending:readJson(PENDING_PATH,null), tagMap:loadTosHashtagMap(),
+    fetchPage:(offset,count) => api('wall.get',{...(config.owner ? {owner_id:config.owner} : {domain:config.domain}),filter:'all',extended:'0',offset,count}),
+    onCheckpoint:checkpoint => writeJson(PENDING_PATH,checkpoint)
   });
+  const outcome = reconcile(existing,scan,previousState);
+  const imported = outcome.merged.filter(item => item.imported_from === 'vk');
+  const report = {schema_version:1,status:'complete',synced_at:outcome.state.last_successful_sync,mode:config.mode,domain:config.domain,owner_id:scan.owner,
+    source_count:scan.source_count,unique_wall_posts:scan.observed.length,eligible_posts:scan.records.length,
+    excluded_posts:scan.excluded.length,pages_this_run:scan.pages,resumed:scan.resumed,
+    published_vk_posts:imported.length,canonical_posts:outcome.merged.length-imported.length,
+    reposts:imported.filter(item => item.reposts?.length).length,photos:imported.reduce((n,item)=>n+(item.images?.length || 0),0),
+    videos:imported.reduce((n,item)=>n+(item.attachments || []).filter(a=>a.type==='video').length,0),
+    removed_ids:outcome.removed,deletion_review:outcome.deletion_review,media_storage:'vk_remote',archive_limit:null};
+  writeJson(NEWS_PATH,outcome.merged);
+  writeJson(STATE_PATH,outcome.state);
+  writeJson(REPORT_PATH,report);
+  writeJson(PENDING_PATH,null);
+  console.log(JSON.stringify(report,null,2));
 }
-
-module.exports = {
-  extractHashtags,
-  detectTosSlug,
-  hasAllowedHashtag,
-  stripServiceHashtags,
-  makeTitle,
-  formatDate,
-  mergeImportedNews
-};
+if (require.main === module) main().catch(error => {console.error(error.message);process.exitCode=1;});
+module.exports = {extractHashtags,detectTosSlug,hasAllowedHashtag,stripServiceHashtags,makeTitle,formatDate,mergeImportedNews,
+  configuration,shouldImport,convertVkPost,choosePhoto,createApi,scanWall,reconcile,postText,sortNews};

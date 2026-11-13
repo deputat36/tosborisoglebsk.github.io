@@ -3,7 +3,15 @@ const media = require('../assets/js/news-media');
 for (const value of ['javascript:alert(1)', 'data:image/png,x', 'http://example.com/x.jpg', '//example.com/x.jpg', '/a/../secret', '/a\\b.jpg', 'https://user:password@example.com/x.jpg']) assert.equal(media.safeUrl(value), '');
 const item = {title:'Фото <события>',image:'/assets/img/a.jpg',images:['/assets/img/a.jpg',{src:'https://example.com/b.jpg',alt:'" alt',caption:'<script>alert(1)</script>'}]};
 assert.equal(media.images(item).length,2);
-assert.equal(media.images({...item,images:Array.from({length:20},(_,i)=>'/assets/img/'+i+'.jpg')}).length,8);
+assert.equal(media.images({...item,images:Array.from({length:20},(_,i)=>'/assets/img/'+i+'.jpg')}).length,21);
 const html=media.render(item); assert.equal((html.match(/<img /g)||[]).length,2);assert.ok(html.includes('loading="lazy"'));assert.ok(html.includes('&lt;script&gt;'));assert.ok(!html.includes('<script>'));assert.equal((media.render(item,true).match(/<img /g)||[]).length,1);
 assert.equal(media.render({title:'Без фото'}),'');
 console.log('News media validation, deduplication, gallery and escaping OK');
+
+assert.equal(media.safePlayer('https://example.com/video_ext.php'),'');
+assert.equal(media.safePlayer('https://vk.com.evil.test/video_ext.php'),'');
+assert.equal(media.safePlayer('https://vk.com/video_ext.php?oid=-1&id=2'),'https://vk.com/video_ext.php?oid=-1&id=2');
+const repost=media.renderReposts({reposts:[{source_url:'https://vk.com/wall-1_2',text:['<script>текст</script>']}]});assert(repost.includes('&lt;script&gt;'));assert(repost.includes('Исходная публикация'));
+const video=media.render({attachments:[{type:'video',title:'Фильм',url:'https://vk.com/video-1_2',player:'https://vk.com/video_ext.php?oid=-1&id=2'}]});assert(video.includes('<iframe'));assert(video.includes('Смотреть видео'));
+assert(!media.render({attachments:[{type:'video',url:'https://vk.com/video-1_2',player:'https://evil.test/x'}]}).includes('<iframe'));
+console.log('Remote photos, video players, attachment links and repost provenance OK');

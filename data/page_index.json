@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-13T05:42:33.307Z",
-  "total": 415,
+  "generated_at": "2026-11-13T06:53:29.151Z",
+  "total": 417,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1534,6 +1534,24 @@
       "section": "Новости",
       "search_group": "news",
       "content_origin": "editorial"
+    },
+    {
+      "path": "news/archive/2/index.html",
+      "url": "https://tosborisoglebsk.ru/news/archive/2/",
+      "title": "Архив новостей — страница 2 | ТОС БГО",
+      "description": "Новости, фотографии и полезные материалы территориальных общественных самоуправлений Борисоглебского округа. Архив: страница 2 из 3.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "reference"
+    },
+    {
+      "path": "news/archive/3/index.html",
+      "url": "https://tosborisoglebsk.ru/news/archive/3/",
+      "title": "Архив новостей — страница 3 | ТОС БГО",
+      "description": "Новости, фотографии и полезные материалы территориальных общественных самоуправлений Борисоглебского округа. Архив: страница 3 из 3.",
+      "section": "Новости",
+      "search_group": "news",
+      "content_origin": "reference"
     },
     {
       "path": "news/znamenie-created-2024/index.html",

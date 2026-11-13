@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T05:42:13.957Z",
+  "generated_at": "2026-11-13T06:55:40.722Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 488,
-    "public_pages": 425,
+    "html_pages": 490,
+    "public_pages": 427,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -21,7 +21,7 @@
     "asset_files": 151,
     "over_budget_assets": 0,
     "total_css_bytes": 112713,
-    "total_js_bytes": 985520,
+    "total_js_bytes": 991649,
     "total_image_bytes": 45000,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -165,7 +165,7 @@
       "path": "assets/js/resident-area-view.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 13322,
+      "size_bytes": 13539,
       "over_budget": false
     },
     {
@@ -218,6 +218,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/news.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 11263,
+      "over_budget": false
+    },
+    {
       "path": "admin/admin-dashboard.js",
       "group": "js",
       "extension": ".js",
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11185,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/projects.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 10875,
       "over_budget": false
     }
   ],

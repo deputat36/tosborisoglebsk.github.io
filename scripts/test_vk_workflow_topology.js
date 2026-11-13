@@ -69,3 +69,5 @@ function runImportTextRegressionTest() {
 runSelfTest();
 runImportTextRegressionTest();
 runMergeRetentionTest();
+
+require('node:child_process').execFileSync(process.execPath, [require('node:path').join(__dirname,'test_vk_archive.js')], {stdio:'inherit'});

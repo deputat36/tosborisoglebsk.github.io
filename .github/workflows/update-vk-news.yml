@@ -3,18 +3,26 @@ name: Update VK news
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '0 * * * *'
+  push:
+    branches: [release-2025-12-22]
+    paths:
+      - 'scripts/import_vk_news.js'
+      - 'scripts/publish_vk_archive.js'
+      - '.github/workflows/update-vk-news.yml'
+      - 'data/vk_import_control.json'
 
 permissions:
   contents: write
 
 concurrency:
   group: update-vk-news-release
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update-vk-news:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,6 +35,8 @@ jobs:
           node-version: '24'
       - name: Test VK workflow topology
         run: node scripts/test_vk_workflow_topology.js
+      - name: Test complete VK archive and media
+        run: node scripts/test_vk_archive.js && node scripts/test_news_media.js
       - name: Audit VK workflow topology
         run: node scripts/audit_vk_workflow_topology.js
       - name: Import VK posts to news.json
@@ -34,31 +44,38 @@ jobs:
           VK_TOKEN: ${{ secrets.VK_TOKEN }}
           VK_OWNER_ID: ${{ vars.VK_OWNER_ID }}
           VK_DOMAIN: ${{ vars.VK_DOMAIN }}
+          VK_IMPORT_MODE: all
           VK_HASHTAGS: ${{ vars.VK_HASHTAGS }}
+          VK_EXCLUDE_HASHTAGS: '#неНаСайтТОСБГО'
           VK_COUNT: ${{ vars.VK_COUNT }}
-          NEWS_LIMIT: ${{ vars.NEWS_LIMIT }}
+          VK_MAX_PAGES: ${{ vars.VK_MAX_PAGES }}
         run: node scripts/import_vk_news.js
-      - name: Synchronize content origins
-        run: node scripts/migrate_content_origins.js
-      - name: Generate content origin metrics
-        run: node scripts/generate_content_origin_report.js
-      - name: Generate trusted news pages
-        run: node scripts/generate_news_pages.js
-      - name: Regenerate dependent material pages
-        run: node scripts/generate_material_pages.js
-      - name: Generate readable collection fallbacks
-        run: node scripts/generate_collection_fallbacks.js
-      - name: Generate accurate sitemap
-        run: node scripts/generate_sitemap.js
-      - name: Audit content origins
-        run: node scripts/audit_content_origins.js
-      - name: Audit internal links
-        run: node scripts/audit_site_links.js
-      - name: Audit SEO basics
-        run: node scripts/audit_seo.js
+      - name: Regenerate and validate public archive and dependent pages
+        run: node scripts/publish_vk_archive.js
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Auto update trusted news from VK'
+          commit_message: 'Auto update complete VK news archive'
           branch: release-2025-12-22
-          file_pattern: 'data/news.json data/content_origin_report.json news/index.html news/*/index.html materials/index.html materials/*/index.html sitemap.xml'
+          file_pattern: 'data/news.json data/vk_sync_state.json data/vk_import_report.json data/vk_import_pending.json data/content_origin_report.json data/page_index.json index.html **/index.html rss.xml sitemap.xml'
+          disable_globbing: false
+      - name: Preserve a resumable checkpoint after failure
+        if: failure()
+        run: |
+          if [ -f data/vk_import_pending.json ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add data/vk_import_pending.json
+            if ! git diff --cached --quiet; then
+              git commit -m 'Preserve VK archive import progress'
+              git push origin HEAD:release-2025-12-22
+            fi
+          fi
+      - name: Upload non-secret import counters
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vk-import-report
+          path: data/vk_import_report.json
+          if-no-files-found: ignore
+          retention-days: 14

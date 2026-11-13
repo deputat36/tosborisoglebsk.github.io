@@ -56,3 +56,8 @@ for (const slug of actual.toses.map(item => item.slug)) {
 }
 assert(page.includes('rel="canonical" href="https://tosborisoglebsk.ru/residents/my-area/"'));
 console.log('Resident area: truthful scope, need freshness, Moscow dates, safe rendering, calendar export and no-script directory passed');
+
+const vkNews = {...fact, id:'vk-9-4', content_origin:'editorial', imported_from:'vk', source_url:'https://vk.com/wall-9_4'};
+assert.equal(core.overview({...data,news:[vkNews]},'one',now).news.length,1);
+assert.equal(core.overview({...data,news:[{...vkNews,source_url:'https://example.org/fake'}]},'one',now).news.length,0);
+assert(view.dashboard({...data,news:[vkNews]},'one','all',now).includes('Из сообщества ВКонтакте'));

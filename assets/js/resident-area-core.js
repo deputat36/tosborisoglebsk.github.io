@@ -64,7 +64,8 @@
     const recent = (a, b) => String(b.date || '').localeCompare(String(a.date || ''));
     const hasFact = item => publicItem(item) && validSlug(item.id) && item.content_origin === 'verified' && sourceUrl(item) && checkedDate(item.date) && item.date <= today(now);
     const results = (data.done || []).filter(hasFact).filter(match).sort(recent);
-    const news = (data.news || []).filter(hasFact).filter(match).sort(recent);
+    const sourcedNews = item => hasFact(item) || (publicItem(item) && validSlug(item.id) && item.imported_from === 'vk' && /^https:\/\/vk\.com\/wall-\d+_\d+$/.test(item.source_url || '') && checkedDate(item.date) && item.date <= today(now));
+    const news = (data.news || []).filter(sourcedNews).filter(match).sort(recent);
     const actualProjects = (data.projects || []).filter(item => publicItem(item) && item.content_origin === 'verified' && sourceUrl(item)).filter(match);
     const events = (data.events || []).filter(item => publicItem(item) && validSlug(item.id) && !['request', 'starter', 'editorial'].includes(item.content_origin) && recentSourceCheck(item, now) && checkedDate(item.date) && item.date >= today(now)).sort((a, b) => a.date.localeCompare(b.date));
     const needs = (data.needs || []).filter(publicItem).filter(item => validSlug(item.id)).filter(item => !area || !item.tos_slug || match(item)).filter(item => help === 'all' || helpKind(item) === help);
