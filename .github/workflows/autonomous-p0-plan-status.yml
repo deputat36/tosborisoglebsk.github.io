@@ -38,6 +38,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Prepare portal from current sources
+        run: node scripts/publish_vk_archive.js
+
       - name: Check JavaScript syntax
         run: |
           node --check scripts/audit_autonomous_p0_plan_status.js

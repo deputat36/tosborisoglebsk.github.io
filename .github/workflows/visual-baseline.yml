@@ -130,6 +130,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Prepare portal from current sources
+        run: node scripts/publish_vk_archive.js
+
       - name: Install Playwright Chromium and PNG comparator
         run: |
           npm install --no-save --package-lock=false playwright@1.55.0 pngjs@7.0.0

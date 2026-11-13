@@ -47,6 +47,9 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Prepare portal from current sources
+        run: node scripts/publish_vk_archive.js
+
       - name: Initialize diagnostics directory
         run: mkdir -p .artifacts/css-source-structure
 
