@@ -29,6 +29,11 @@ async function main() {
   assert.equal(checkpoint.next_offset,2);
   const resumed=await vk.scanWall({config,pause,pending:checkpoint,fetchPage:async offset=>pages[offset]});
   assert.equal(resumed.records.length,6);assert.equal(resumed.resumed,true);
+  const grown=Array.from({length:16},(_,i)=>post(16-i));
+  const resumedWithNew=await vk.scanWall({config,pause,pending:checkpoint,fetchPage:async(offset,size)=>({count:grown.length,items:grown.slice(offset,offset+size)})});
+  assert.equal(resumedWithNew.records.length,16,'A retry collects more than two pages of new posts before continuing history');
+  const duplicates=await vk.scanWall({config,pause,fetchPage:async offset=>({count:5,items:offset===0?[post(9,{is_pinned:1}),post(8)]:offset===2?[post(7),post(6)]:[post(9),post(5)]})});
+  assert.equal(duplicates.records.length,5,'Pinned copy is retained exactly once');
   await assert.rejects(()=>vk.scanWall({config,pause,fetchPage:async()=>({count:6,items:[]})}),/пустую страницу/);
   await assert.rejects(()=>vk.scanWall({config,pause,fetchPage:async()=>({items:[post(1)]})}),/Некорректный ответ/);
   await assert.rejects(()=>vk.scanWall({config,pause,fetchPage:async()=>({count:6,items:[post(1),post(2,{owner_id:-10})]})}),/Источник/);
@@ -43,6 +48,13 @@ async function main() {
   assert.deepEqual(await api('wall.get',{}),{count:0,items:[]});assert.equal(calls,2);
   const bad=vk.createApi({token:'TEST_SECRET',pause,fetcher:async()=>({ok:true,json:async()=>({error:{error_code:5,error_msg:'TEST_SECRET',request_params:'TEST_SECRET'}})})});
   await assert.rejects(()=>bad('wall.get',{}),error=>!error.message.includes('TEST_SECRET'));
+  const {makePage}=require('./generate_news_pages');
+  const unsafe=vk.convertVkPost(post(17,{text:'Встреча </script><script>alert(1)</script> \"соседи\"',copy_history:[post(22,{text:'Оригинал <img src=x onerror=alert(1)>'})]}));
+  const html=makePage(unsafe,[]);
+  assert(!html.includes('<script>alert(1)</script>'));
+  assert(html.includes('&lt;img src=x'));
+  const schema=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+  assert.equal(schema.headline,unsafe.title);assert.equal(schema.datePublished,unsafe.published_at);
   console.log('VK archive OK: all pages, 180+ posts, pinned, reposts, remote media, resume, exclusions, no mass deletion or credential leaks');
 }
 main().catch(error=>{console.error(error);process.exitCode=1;});

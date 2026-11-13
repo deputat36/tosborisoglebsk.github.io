@@ -262,34 +262,63 @@ async function scanWall({fetchPage, config, pending, onCheckpoint = () => {}, ta
   const records = new Map((saved?.records || []).map(item => [item.id,item]));
   const observed = new Set(saved?.observed || []), excluded = new Set(saved?.excluded || []);
   let owner = saved?.owner || Number(config.owner) || null;
-  // Recheck the overlap after a retry; offsets can shift as new posts arrive.
-  let offset = Math.max(0,(saved?.next_offset || 0) - config.pageSize*2), count = null;
-  let pages = 0;
-  while (pages<config.maxPages) {
-    const page = await fetchPage(offset,config.pageSize);
+  let offset = 0, count = null, firstCount = null, pages = 0;
+  const limitMessage = 'Сохранена часть архива: достигнут лимит страниц одного запуска. Следующий запуск продолжит перенос.';
+  const checkpoint = () => ({schema_version:1,fingerprint,owner,next_offset:offset,source_count:count,observed:[...observed],excluded:[...excluded],records:[...records.values()]});
+  async function get(offsetToRead) {
+    if (pages>=config.maxPages) throw Error(limitMessage);
+    const page = await fetchPage(offsetToRead,config.pageSize);
     if (!page || !Array.isArray(page.items) || !Number.isInteger(page.count) || page.count<0) throw Error('Некорректный ответ wall.get; новости не изменены.');
-    if (page.count>offset && !page.items.length) throw Error('ВК вернул пустую страницу до конца архива; новости не изменены.');
-    count = page.count;
-    let added=0;
+    if (page.count>offsetToRead && !page.items.length) throw Error('ВК вернул пустую страницу до конца архива; новости не изменены.');
+    count = page.count; firstCount ??= count; pages++;
     for (const post of page.items) {
       if (!validPost(post)) throw Error('ВК вернул некорректную запись; новости не изменены.');
       owner ||= post.owner_id;
       if (owner !== post.owner_id) throw Error('Источник ВК изменился внутри выгрузки; новости не изменены.');
-      const key = postKey(post);
-      if (!observed.has(key)) added++;
-      observed.add(key);
+      const key = postKey(post); observed.add(key);
       if (shouldImport(post,config.mode)) {records.set(key,convertVkPost(post,tagMap));excluded.delete(key);}
       else {records.delete(key);excluded.add(key);}
     }
-    pages++;
-    offset += config.pageSize;
-    const checkpoint = {schema_version:1,fingerprint,owner,next_offset:offset,source_count:count,observed:[...observed],excluded:[...excluded],records:[...records.values()]};
-    await onCheckpoint(checkpoint);
-    if (offset>=count) return {...checkpoint,complete:true,pages,resumed:Boolean(saved)};
-    if (!added && page.items.length && offset > (saved?.next_offset || 0)) throw Error('ВК повторяет страницу архива; выгрузка остановлена без изменения новостей.');
+    return page;
+  }
+  // A retry may happen after hundreds of NEW posts. Re-read the head until a
+  // known non-pinned record, rather than assuming two pages cover that outage.
+  async function refreshHead() {
+    const known = new Set(observed);
+    let headOffset=0;
+    while (true) {
+      const page=await get(headOffset);
+      headOffset+=config.pageSize;
+      const boundary=page.items.some(post=>!post.is_pinned && known.has(postKey(post)));
+      await onCheckpoint(checkpoint());
+      if (headOffset>=count || (boundary && headOffset>=config.pageSize*2)) return headOffset;
+      await pause(400);
+    }
+  }
+  if (saved) {
+    // Preserve backfill progress while refreshing the moving newest part.
+    offset=saved.next_offset;
+    const headEnd=await refreshHead();
+    if (headEnd>=count) return {...checkpoint(),complete:true,pages,resumed:true};
+    const shift=Math.max(0,count-saved.source_count);
+    offset=Math.max(headEnd,saved.next_offset+shift-config.pageSize*2);
+  }
+  const seenPages=new Set();
+  while (pages<config.maxPages) {
+    const page=await get(offset);
+    const signature=page.items.map(postKey).join(',');
+    if (page.items.length && seenPages.has(signature)) throw Error('ВК повторяет страницу архива; выгрузка остановлена без изменения новостей.');
+    seenPages.add(signature);
+    offset+=config.pageSize;
+    await onCheckpoint(checkpoint());
+    if (offset>=count) {
+      // If the wall grew during this traversal, collect the new head as well.
+      if (count!==firstCount) await refreshHead();
+      return {...checkpoint(),complete:true,pages,resumed:Boolean(saved)};
+    }
     await pause(400);
   }
-  throw Error('Сохранена часть архива: достигнут лимит страниц одного запуска. Следующий запуск продолжит перенос.');
+  throw Error(limitMessage);
 }
 function reconcile(existing, scan, state = {}, now = new Date().toISOString()) {
   const observed = new Set(scan.observed), excluded = new Set(scan.excluded);

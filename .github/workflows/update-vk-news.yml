@@ -52,12 +52,27 @@ jobs:
         run: node scripts/import_vk_news.js
       - name: Regenerate and validate public archive and dependent pages
         run: node scripts/publish_vk_archive.js
+      - name: Verify current-build HTTP links and update integrity metrics
+        env:
+          PUBLIC_LINK_BASE_URL: http://127.0.0.1:4173
+          PUBLIC_LINK_REPORT: data/public_link_integrity.json
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/vk-http-server.log 2>&1 &
+          VK_HTTP_PID=$!
+          trap 'kill "$VK_HTTP_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          node scripts/test_public_link_integrity.js
+          node scripts/enrich_site_health_technical_integrity.js
+          node scripts/audit_site_health_technical_integrity.js
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: 'Auto update complete VK news archive'
           branch: release-2025-12-22
-          file_pattern: 'data/news.json data/vk_sync_state.json data/vk_import_report.json data/vk_import_pending.json data/content_origin_report.json data/page_index.json index.html **/index.html rss.xml sitemap.xml'
+          file_pattern: 'data/news.json data/vk_sync_state.json data/vk_import_report.json data/vk_import_pending.json data/content_origin_report.json data/page_index.json data/accessibility_performance_report.json data/site_health.json data/public_link_integrity.json docs/STATUS.md index.html **/index.html rss.xml sitemap.xml'
           disable_globbing: false
       - name: Preserve a resumable checkpoint after failure
         if: failure()

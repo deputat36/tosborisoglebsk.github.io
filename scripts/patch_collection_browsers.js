@@ -43,10 +43,11 @@ function patchPage(config) {
     changed = true;
   }
 
-  const pageScript = `<script src="/assets/js/${config.script}"></script>`;
-  if (!content.includes(CORE_SCRIPT)) {
-    if (!content.includes(pageScript)) throw new Error(`${config.path}: page script marker not found`);
-    content = content.replace(pageScript, `${CORE_SCRIPT}\n${pageScript}`);
+  const corePresent = /<script\b[^>]*src="\/assets\/js\/collection-browser-core\.js(?:\?[^"\s]*)?"/.test(content);
+  if (!corePresent) {
+    const pageScript = new RegExp('<script\\b[^>]*src="/assets/js/' + config.script.replace(/\./g,'\\.') + '(?:\\?[^"\\s]*)?"[^>]*><\\/script>');
+    if (!pageScript.test(content)) throw new Error(`${config.path}: page script marker not found`);
+    content = content.replace(pageScript, match => `${CORE_SCRIPT}\n${match}`);
     changed = true;
   }
 

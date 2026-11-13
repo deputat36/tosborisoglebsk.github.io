@@ -2,7 +2,6 @@ const fs = require('fs');
 const newsMedia = require('../assets/js/news-media');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
-require('./generate_tos_starter_news');
 
 const ROOT = process.cwd();
 const SITE_URL = 'https://tosborisoglebsk.ru';
@@ -144,10 +143,12 @@ function updateSitemap(news){
   fs.writeFileSync(SITEMAP_PATH, xml, 'utf8');
 }
 function main(){
+  require('./generate_tos_starter_news');
   const news = readJson(NEWS_PATH).filter(n => n.id && isPublished(n));
   const toses = readJson(TOSES_PATH);
   news.forEach(item => write(path.join(ROOT, 'news', item.id, 'index.html'), makePage(item, toses)));
   updateSitemap(news);
   console.log(`Generated news pages: ${news.length}`);
 }
-main();
+if (require.main === module) main();
+module.exports = {makePage};

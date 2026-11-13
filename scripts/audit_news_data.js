@@ -86,6 +86,8 @@ function main() {
     const source = item.source || '';
     const sourceUrl = item.source_url || '';
     const publicUrl = `${siteUrl}/news/${id}/`;
+    const vkSource = item.imported_from === 'vk';
+    if (vkSource && (!Number.isInteger(item.vk_owner_id) || item.vk_owner_id >= 0 || !Number.isInteger(item.vk_post_id) || id !== `vk-${Math.abs(item.vk_owner_id)}-${item.vk_post_id}` || item.source_url !== `https://vk.com/wall${item.vk_owner_id}_${item.vk_post_id}`)) errors.push(`${line}: invalid VK source identity`);
 
     if (!id) errors.push(`${line}: missing id`);
     if (id && !idPattern.test(id)) errors.push(`${line}: invalid id ${id}`);
@@ -97,15 +99,15 @@ function main() {
     if (tosSlug && !tosSlugs.has(tosSlug)) errors.push(`${line}: unknown tos_slug ${tosSlug}`);
     if (tosSlug && !repoPathExists(`/tos/${tosSlug}/`)) errors.push(`${line}: missing TOS page /tos/${tosSlug}/`);
     if (!title) errors.push(`${line}: missing title`);
-    if (title && title.length < 10) errors.push(`${line}: title is too short`);
+    if (!vkSource && title && title.length < 10) errors.push(`${line}: title is too short`);
     if (!lead) errors.push(`${line}: missing lead`);
-    if (lead && lead.length < 30) errors.push(`${line}: lead is too short`);
+    if (!vkSource && lead && lead.length < 30) errors.push(`${line}: lead is too short`);
 
     if (!Array.isArray(text) || text.length === 0) {
       errors.push(`${line}: text must be a non-empty array`);
     } else {
       text.forEach((paragraph, paragraphIndex) => {
-        if (typeof paragraph !== 'string' || paragraph.trim().length < 20) {
+        if (typeof paragraph !== 'string' || paragraph.trim().length < (vkSource ? 1 : 20)) {
           errors.push(`${line}: text paragraph ${paragraphIndex + 1} is too short`);
         }
       });

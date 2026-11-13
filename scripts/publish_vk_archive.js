@@ -7,6 +7,9 @@ const commands = [
   ['cleanup_generated_collection_pages.js'], ['generate_collection_fallbacks.js'],
   ['generate_resident_area.js'], ['generate_public_experience.js'], ['generate_rss.js'],
   ['audit_runtime_cache_coherence.js','--write'], ['generate_page_index.js'], ['generate_sitemap.js'],
+  ['generate_accessibility_performance_report.js'], ['generate_site_health_report.js'], ['enrich_site_health_readiness.js'],
+  ['generate_actions_check_page.js'], ['update_status_document_metrics.js'],
+  ['validate_data.js'], ['audit_status_document.js'],
   ['audit_content_origins.js'], ['audit_news_data.js'], ['audit_news_page_content.js'], ['audit_news_detail_pages_content.js'], ['audit_generated_page_cleanup.js'], ['audit_site_links.js'], ['audit_seo.js'],
   ['audit_runtime_cache_coherence.js'], ['test_resident_area.js']
 ];
