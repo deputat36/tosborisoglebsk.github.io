@@ -153,6 +153,16 @@
         "url": "https://obraz36.ru/sobitiya/-dorogie-druzja-napominaem-chto-ostalos-7-dnej-dlja-podachi-zajavok-na-konkurs-tos-ot-slov-k-delu-",
         "note": ""
       }
+    ],
+    "experience_links": [
+      {
+        "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+        "label": "Миролюбие: конкурсный результат и история площадки"
+      },
+      {
+        "href": "/done/chigorak-eco-team-2026/",
+        "label": "Чигорак: поддержанный проект автора и участие двух ТОСов"
+      }
     ]
   },
   {
@@ -267,6 +277,16 @@
         "url": "https://oatos.ru/news/v-voronezhskoy-oblasti-proshel-regionalnyy-forum-tos",
         "note": "Сообщение Общероссийской ассамблеи ТОС о форуме 22 мая 2026 года."
       }
+    ],
+    "experience_links": [
+      {
+        "href": "/projects/practices/#grant-team",
+        "label": "Подготовить заявку командой: местный организационный пример"
+      },
+      {
+        "href": "/materials/tos-mentoring-and-peer-support/",
+        "label": "Обмен опытом и помощь коллег: как организовать встречу"
+      }
     ]
   },
   {
@@ -372,6 +392,16 @@
         "title": "Пост фонда с документами второго конкурса",
         "url": "https://vk.ru/wall-233148982_181",
         "note": "Ссылка дана в объявлении. Содержание вложений не проверено; перед подачей прочитайте их у организатора."
+      }
+    ],
+    "experience_links": [
+      {
+        "href": "/projects/practices/",
+        "label": "Подобрать идею для собственной подготовки; это не перечень проектов, профинансированных фондом"
+      },
+      {
+        "href": "/materials/grant-application-guide/",
+        "label": "Проверить готовность описания инициативы"
       }
     ]
   }

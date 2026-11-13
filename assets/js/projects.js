@@ -58,7 +58,7 @@ function projectTosName(slug, toses) {
 }
 
 function projectCard(item, toses) {
-  const tosName = projectTosName(item.tos_slug, toses);
+  const tosName = projectCore.tosSlugs(item).map(slug => projectTosName(slug, toses)).join(' · ');
   const detailUrl = item.id ? `/projects/${projectEsc(item.id)}/` : '/projects/';
   const steps = Array.isArray(item.steps) ? item.steps.slice(0, 3) : [];
   const actual = projectIsVerifiedActual(item);
@@ -89,7 +89,7 @@ function projectCard(item, toses) {
     ${factualDetails}
     <div class="card-actions">
       <a class="btn primary" href="${detailUrl}">Подробнее</a>
-      ${item.tos_slug ? `<a class="btn" href="/tos/${projectEsc(item.tos_slug)}/">Открыть ТОС</a>` : ''}
+      ${projectCore.tosSlugs(item).map(slug => `<a class="btn" href="/tos/${projectEsc(slug)}/">${projectEsc(projectTosName(slug, toses))}</a>`).join('')}
       ${factualActions}
     </div>
   </article>`;
@@ -99,7 +99,7 @@ function renderProjectsSummary(items, total) {
   const root = document.querySelector('#projects-summary');
   if (!root) return;
   const counts = projectCore.countOrigins(items, projectOrigin);
-  const withTos = items.filter((item) => item.tos_slug).length;
+  const withTos = items.filter((item) => projectCore.tosSlugs(item).length).length;
   root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>показано из ${total}</span></div><div class="summary-tile"><b>${counts.verified}</b><span>подтверждено источником</span></div><div class="summary-tile"><b>${counts.editorial}</b><span>редакционные проекты</span></div><div class="summary-tile"><b>${counts.starter}</b><span>стартовые идеи</span></div><div class="summary-tile"><b>${withTos}</b><span>привязаны к ТОС</span></div></div>`;
 }
 
@@ -119,7 +119,7 @@ async function renderProjects() {
   try {
     const { projects, toses } = await loadProjectsData();
     const types = [...new Set(projects.map((item) => item.type).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
-    const usedTos = [...new Set(projects.map((item) => item.tos_slug).filter(Boolean))];
+    const usedTos = [...new Set(projects.flatMap((item) => projectCore.tosSlugs(item)))];
 
     if (controls.type) controls.type.innerHTML = '<option value="">Все типы проектов</option>' + types.map((value) => `<option>${projectEsc(value)}</option>`).join('');
     if (controls.tos) controls.tos.innerHTML = '<option value="">Все ТОС</option>' + usedTos.map((slug) => `<option value="${projectEsc(slug)}">${projectEsc(projectTosName(slug, toses))}</option>`).join('');
@@ -131,10 +131,10 @@ async function renderProjects() {
       const query = projectCore.normalizeText(state.q);
       const filtered = projects
         .filter((item) => !state.type || item.type === state.type)
-        .filter((item) => !state.tos || item.tos_slug === state.tos)
+        .filter((item) => !state.tos || projectCore.belongsToTos(item, state.tos))
         .filter((item) => !state.origin || projectOrigin(item) === state.origin)
         .filter((item) => {
-          const tosName = projectTosName(item.tos_slug, toses);
+          const tosName = projectCore.tosSlugs(item).map(slug => projectTosName(slug, toses)).join(' · ');
           const hay = projectCore.normalizeText([item.title, item.description, item.type, item.grant_logic, item.based_on, item.official_result, item.grant_amount, item.implementation_status, item.tos_slug, tosName, projectOrigin(item), ...(item.steps || [])].join(' '));
           return !query || hay.includes(query);
         })

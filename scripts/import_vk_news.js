@@ -222,7 +222,7 @@ function mergeImportedNews(existing, imported, vkLimit = Infinity) {
   const canonical = records.filter(item => item.imported_from !== 'vk');
   const effectiveLimit = vkLimit === Infinity ? Infinity : Math.max(0, Math.floor(Number(vkLimit)) || 0);
   const vkItems = records.filter(item => item.imported_from === 'vk').sort(sortNews).slice(0,effectiveLimit);
-  return [...canonical,...vkItems].sort(sortNews);
+  return require('./lib/vk_editorial_links').applyEditorialLinks([...canonical,...vkItems].sort(sortNews));
 }
 function createApi({token, version = VK_API_VERSION, fetcher = fetch, pause = wait}) {
   return async function api(method, parameters) {

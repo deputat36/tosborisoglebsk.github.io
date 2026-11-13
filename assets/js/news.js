@@ -68,7 +68,7 @@ function newsTosName(slug, toses) {
 }
 
 function newsCard(item, toses) {
-  const tosName = newsTosName(item.tos_slug, toses);
+  const tosName = newsCore.tosSlugs(item).map(slug => newsTosName(slug, toses)).join(' · ');
   return `<article class="list-item" data-content-origin="${newsEsc(newsOrigin(item))}">
     ${window.TosNewsMedia ? window.TosNewsMedia.render(item, true) : ''}
     <div class="meta">
@@ -83,7 +83,7 @@ function newsCard(item, toses) {
     ${newsOriginNotice(item)}
     <div class="card-actions">
       <a class="btn primary" href="/news/${newsEsc(item.id)}/">Читать</a>
-      ${item.tos_slug ? `<a class="btn" href="/tos/${newsEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}
+      ${newsCore.tosSlugs(item).map(slug => `<a class="btn" href="/tos/${newsEsc(slug)}/">${newsEsc(newsTosName(slug, toses))}</a>`).join('')}
       ${item.source_url ? `<a class="btn" target="_blank" rel="noopener" href="${newsEsc(item.source_url)}">Источник</a>` : ''}
     </div>
   </article>`;
@@ -117,7 +117,7 @@ async function renderNewsPage() {
     Object.values(controls).forEach(control => { if (control) control.disabled = false; });
     if (reset) reset.disabled = false;
     const categories = [...new Set(news.map((item) => item.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
-    const usedTos = [...new Set(news.map((item) => item.tos_slug).filter(Boolean))];
+    const usedTos = [...new Set(news.flatMap((item) => newsCore.tosSlugs(item)))];
 
     if (controls.year) controls.year.innerHTML = '<option value="">Все годы</option>' + [...new Set(news.map(item => String(item.date || '').slice(0,4)).filter(value => /^\d{4}$/.test(value)))].sort().reverse().map(year => `<option>${year}</option>`).join('');
     if (controls.category) controls.category.innerHTML = '<option value="">Все темы</option>' + categories.map((value) => `<option>${newsEsc(value)}</option>`).join('');
@@ -135,10 +135,10 @@ async function renderNewsPage() {
         : news.filter(newsDefaultVisible);
       const filtered = originPool
         .filter((item) => !state.category || item.category === state.category)
-        .filter((item) => !state.tos || item.tos_slug === state.tos)
+        .filter((item) => !state.tos || newsCore.belongsToTos(item, state.tos))
         .filter((item) => !state.year || String(item.date || '').startsWith(state.year))
         .filter((item) => {
-          const tosName = newsTosName(item.tos_slug, toses);
+          const tosName = newsCore.tosSlugs(item).map(slug => newsTosName(slug, toses)).join(' · ');
           const hay = newsCore.normalizeText([item.title, item.lead, item.category, item.source, item.tos_slug, tosName, newsOrigin(item), ...(item.text || []), ...(item.reposts || []).flatMap(part => part.text || [])].join(' '));
           return !query || hay.includes(query);
         })

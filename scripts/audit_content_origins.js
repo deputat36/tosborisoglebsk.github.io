@@ -1,3 +1,4 @@
+const {tosSlugs} = require('../assets/js/collection-browser-core');
 const fs = require('fs');
 const path = require('path');
 const { CONTENT_ORIGINS, inferContentOrigin } = require('./lib/content_origin');
@@ -70,7 +71,7 @@ function main() {
       counts[collection][origin] += 1;
       totalCounts.total += 1;
       totalCounts[origin] += 1;
-      if (item.tos_slug && coverage.has(item.tos_slug)) coverage.get(item.tos_slug).add(origin);
+      for (const slug of tosSlugs(item)) if (coverage.has(slug)) coverage.get(slug).add(origin);
 
       if (origin === 'verified') {
         const source = item.source || item.source_label;

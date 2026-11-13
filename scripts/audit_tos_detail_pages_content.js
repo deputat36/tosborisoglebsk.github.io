@@ -1,3 +1,4 @@
+const {belongsToTos} = require('../assets/js/collection-browser-core');
 const fs = require('fs');
 const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
@@ -95,7 +96,7 @@ function byDate(direction) {
 
 function expectedRelated(items, slug, config) {
   return (Array.isArray(items) ? items : [])
-    .filter((item) => isPublished(item) && item.tos_slug === slug)
+    .filter((item) => isPublished(item) && belongsToTos(item, slug))
     .sort(byDate(config.direction))
     .slice(0, config.limit);
 }
@@ -148,8 +149,8 @@ function auditRelatedContent(errors, line, html, slug, datasets) {
           errors.push(`${line}: ${collection}/${id} origin mismatch: ${marker.origin || 'missing'} !== ${origin}`);
         }
         expectIncludes(errors, line, html, `data-related-origin-notice="${collection}:${escapeHtml(id)}"`, `missing origin notice marker for ${collection}/${id}`);
-        expectIncludes(errors, line, html, escapeHtml(contentOriginLabel(origin)), `missing origin label for ${collection}/${id}`);
-        expectIncludes(errors, line, html, escapeHtml(contentOriginNotice(origin, collection)), `missing origin notice for ${collection}/${id}`);
+        expectIncludes(errors, line, html, escapeHtml(item.imported_from === 'vk' ? 'Из сообщества ВКонтакте' : contentOriginLabel(origin)), `missing origin label for ${collection}/${id}`);
+        expectIncludes(errors, line, html, escapeHtml(item.imported_from === 'vk' ? 'Публикация сообщества; дата и ссылка на исходную запись сохранены.' : contentOriginNotice(origin, collection)), `missing origin notice for ${collection}/${id}`);
       } else if (marker.origin) {
         errors.push(`${line}: ${collection}/${id} must not invent content origin`);
       }
@@ -200,7 +201,7 @@ function main() {
   if (!generator.includes('data-related-contact-policy=')) {
     errors.push('generator: related needs contact boundary marker is missing');
   }
-  const needRenderer = (generator.match(/function needCard\(n\) \{[\s\S]*?\n\}\nfunction (?:contentActionCard|block)/) || [])[0] || '';
+  const needRenderer = (generator.match(/function needCard\([^)]*\) \{[\s\S]*?\n\}\nfunction (?:contentActionCard|block)/) || [])[0] || '';
   if (!needRenderer) {
     errors.push('generator: needCard renderer cannot be located');
   } else {

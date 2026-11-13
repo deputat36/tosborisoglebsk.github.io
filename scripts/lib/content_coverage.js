@@ -1,4 +1,5 @@
 const { inferContentOrigin } = require('./content_origin');
+const { tosSlugs, belongsToTos } = require('../../assets/js/collection-browser-core');
 
 const ORIGIN_AWARE_COLLECTIONS = new Set(['news', 'projects', 'needs', 'done', 'articles']);
 
@@ -13,7 +14,7 @@ function originFor(item, collection = '') {
 
 function coverageFor(items, slug, collection = '') {
   const records = (Array.isArray(items) ? items : [])
-    .filter((item) => isPublished(item) && item.tos_slug === slug);
+    .filter((item) => isPublished(item) && belongsToTos(item, slug));
   const origins = { verified: 0, editorial: 0, starter: 0, request: 0 };
 
   records.forEach((item) => {
@@ -33,8 +34,8 @@ function coverageFor(items, slug, collection = '') {
 function coverageMap(items, collection = '') {
   const result = new Map();
   (Array.isArray(items) ? items : []).filter(isPublished).forEach((item) => {
-    if (!item.tos_slug) return;
-    const current = result.get(item.tos_slug) || {
+    for (const slug of tosSlugs(item)) {
+    const current = result.get(slug) || {
       all: 0,
       substantive: 0,
       requests: 0,
@@ -45,7 +46,8 @@ function coverageMap(items, collection = '') {
     if (origin === 'request') current.requests += 1;
     else current.substantive += 1;
     if (Object.prototype.hasOwnProperty.call(current.origins, origin)) current.origins[origin] += 1;
-    result.set(item.tos_slug, current);
+    result.set(slug, current);
+    }
   });
   return result;
 }

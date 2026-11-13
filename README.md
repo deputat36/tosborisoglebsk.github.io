@@ -49,3 +49,5 @@ Workflow `.github/workflows/generate-tos-pages.yml` проверяет JSON, п�
 - `docs/STATUS.md` — текущее состояние;
 - `docs/DECISIONS.md` — важные технические решения;
 - `docs/AUTONOMOUS-WORK-PLAN.md` — автономный план улучшений.
+
+В новостях, историях результатов и проектах связь с несколькими ТОС поддерживает необязательный массив `tos_slugs` дополняет прежнее поле `tos_slug`. Совместный результат хранится одной записью. `data/vk_editorial_links.json` сохраняет вручную проверенные связи и переходы после повторного импорта. `data/tos_practices.json` задаёт практики для `/projects/practices/`; сборка — `scripts/generate_tos_practices.js`.

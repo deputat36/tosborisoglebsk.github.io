@@ -1,0 +1,555 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-13",
+  "method": "Ручная сверка текстов исходных публикаций. Различаются участие ТОС и контекст территории; совпадение названия села не устанавливает роль организатора.",
+  "entries": [
+    {
+      "id": "vk-238997964-938",
+      "tos_slugs": [
+        "uyutnyy",
+        "prostornyy"
+      ],
+      "source_url": "https://vk.com/wall-229082435_50",
+      "relation_note": "Совместная история двух ТОСов. Сведения о ремонте приведены по сообщениям участников; бюджет и точная дата работ требуют уточнения.",
+      "links": [
+        {
+          "href": "/done/uyutnyy-prostornyy-road-2026/",
+          "label": "Общая история ремонта"
+        },
+        {
+          "href": "/projects/practices/#road-neighbours",
+          "label": "Как организовать дело соседних ТОСов"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-939",
+      "tos_slugs": [
+        "uyutnyy",
+        "prostornyy"
+      ],
+      "source_url": "https://vk.com/wall-228496080_169",
+      "relation_note": "Совместная история двух ТОСов. Сведения о ремонте приведены по сообщениям участников; бюджет и точная дата работ требуют уточнения.",
+      "links": [
+        {
+          "href": "/done/uyutnyy-prostornyy-road-2026/",
+          "label": "Общая история ремонта"
+        },
+        {
+          "href": "/projects/practices/#road-neighbours",
+          "label": "Как организовать дело соседних ТОСов"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-882",
+      "tos_slugs": [
+        "uyutnyy",
+        "chkalovec"
+      ],
+      "source_url": "https://vk.com/wall-229082435_46",
+      "relation_note": "«Уютный» — участники встречи; «Чкаловец» — наставническая помощь. Обсуждавшиеся планы не считаются выполненными решениями.",
+      "links": [
+        {
+          "href": "/projects/practices/#mentor-meeting",
+          "label": "Как подготовиться к встрече с наставником"
+        },
+        {
+          "href": "/done/uyutnyy-prostornyy-road-2026/",
+          "label": "Дальнейшая история дорожной задачи"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-497",
+      "tos_slugs": [
+        "mirolyubie"
+      ],
+      "source_url": "https://vk.com/wall-233604048_85",
+      "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются.",
+      "links": [
+        {
+          "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+          "label": "Один проект: подготовка, работы и открытие"
+        },
+        {
+          "href": "/projects/practices/#playground-opening",
+          "label": "Как оживить новую площадку"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-613",
+      "tos_slugs": [
+        "mirolyubie"
+      ],
+      "source_url": "https://vk.com/wall-233604048_92",
+      "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются.",
+      "links": [
+        {
+          "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+          "label": "Один проект: подготовка, работы и открытие"
+        },
+        {
+          "href": "/projects/practices/#playground-opening",
+          "label": "Как оживить новую площадку"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-736",
+      "tos_slugs": [
+        "mirolyubie"
+      ],
+      "source_url": "https://vk.com/wall-233604048_133",
+      "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются.",
+      "links": [
+        {
+          "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+          "label": "Один проект: подготовка, работы и открытие"
+        },
+        {
+          "href": "/projects/practices/#playground-opening",
+          "label": "Как оживить новую площадку"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-741",
+      "tos_slugs": [
+        "mirolyubie"
+      ],
+      "source_url": "https://vk.com/wall-107845040_34182",
+      "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются.",
+      "links": [
+        {
+          "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+          "label": "Один проект: подготовка, работы и открытие"
+        },
+        {
+          "href": "/projects/practices/#playground-opening",
+          "label": "Как оживить новую площадку"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-584",
+      "tos_slugs": [
+        "mechta",
+        "pervomayskiy"
+      ],
+      "source_url": "https://vk.com/wall-62084654_86441",
+      "relation_note": "ТОС «Мечта» и «Первомайский» участвовали в организации. Автор поддержанного проекта — культорганизатор Дома культуры; грант не приписывается каждому ТОС отдельно.",
+      "links": [
+        {
+          "href": "/done/chigorak-eco-team-2026/",
+          "label": "Общая история акции в Чигораке"
+        },
+        {
+          "href": "/projects/practices/#eco-game",
+          "label": "Как провести уборку с экологической игрой"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-895",
+      "tos_slugs": [
+        "chkalovec"
+      ],
+      "source_url": "https://vk.com/wall-217201282_2759",
+      "relation_note": "Рассказ о подготовке заявки, а не подтверждение победы в конкурсе.",
+      "links": [
+        {
+          "href": "/projects/practices/#grant-team",
+          "label": "Как распределить подготовку заявки"
+        },
+        {
+          "href": "/materials/grant-application-guide/",
+          "label": "Инструкция по конкурсной заявке"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-819",
+      "tos_slugs": [
+        "makashevka"
+      ],
+      "source_url": "https://vk.com/wall-188211247_57904",
+      "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году.",
+      "links": [
+        {
+          "href": "/projects/practices/#youth-editorial",
+          "label": "Молодёжная редакция и партнёрские ресурсы"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-852",
+      "tos_slugs": [
+        "makashevka"
+      ],
+      "source_url": "https://vk.com/wall-185762346_4547",
+      "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году.",
+      "links": [
+        {
+          "href": "/projects/practices/#youth-editorial",
+          "label": "Молодёжная редакция и партнёрские ресурсы"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-864",
+      "tos_slugs": [
+        "makashevka"
+      ],
+      "source_url": "https://vk.com/wall-185762346_4548",
+      "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году.",
+      "links": [
+        {
+          "href": "/projects/practices/#youth-editorial",
+          "label": "Молодёжная редакция и партнёрские ресурсы"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-961",
+      "tos_slugs": [
+        "makashevka"
+      ],
+      "source_url": "https://vk.com/wall-185762346_4552",
+      "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году.",
+      "links": [
+        {
+          "href": "/projects/practices/#youth-editorial",
+          "label": "Молодёжная редакция и партнёрские ресурсы"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-587",
+      "tos_slugs": [
+        "gubari"
+      ],
+      "source_url": "https://vk.com/wall-62084654_86443",
+      "relation_note": "Контекст села: результат конкурса и работа ДК не приписываются ТОС как собственное финансирование.",
+      "links": [
+        {
+          "href": "/tos/gubari/",
+          "label": "История и дела Губарей"
+        },
+        {
+          "href": "/projects/practices/#village-digest",
+          "label": "Как сделать местный дайджест"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-262",
+      "tos_slugs": [
+        "gubari"
+      ],
+      "source_url": "https://vk.com/wall-62084654_85690",
+      "relation_note": "Контекст села: результат конкурса и работа ДК не приписываются ТОС как собственное финансирование.",
+      "links": [
+        {
+          "href": "/tos/gubari/",
+          "label": "История и дела Губарей"
+        },
+        {
+          "href": "/projects/practices/#village-digest",
+          "label": "Как сделать местный дайджест"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-960",
+      "tos_slugs": [
+        "tretyaki"
+      ],
+      "source_url": "https://vk.com/wall-178746342_5239",
+      "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные.",
+      "links": [
+        {
+          "href": "/projects/practices/#regular-meetings",
+          "label": "Как организовать регулярные встречи"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Озеленение вместе с профильным партнёром"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-927",
+      "tos_slugs": [
+        "tretyaki"
+      ],
+      "source_url": "https://vk.com/wall-178746342_5227",
+      "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные.",
+      "links": [
+        {
+          "href": "/projects/practices/#regular-meetings",
+          "label": "Как организовать регулярные встречи"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Озеленение вместе с профильным партнёром"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-851",
+      "tos_slugs": [
+        "tretyaki"
+      ],
+      "source_url": "https://vk.com/wall-178746342_5220",
+      "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные.",
+      "links": [
+        {
+          "href": "/projects/practices/#regular-meetings",
+          "label": "Как организовать регулярные встречи"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Озеленение вместе с профильным партнёром"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-776",
+      "tos_slugs": [
+        "tretyaki"
+      ],
+      "source_url": "https://vk.com/wall-178746342_5191",
+      "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные.",
+      "links": [
+        {
+          "href": "/projects/practices/#regular-meetings",
+          "label": "Как организовать регулярные встречи"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Озеленение вместе с профильным партнёром"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-920",
+      "tos_slugs": [
+        "tretyaki"
+      ],
+      "source_url": "https://vk.com/wall-107845040_34464",
+      "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные.",
+      "links": [
+        {
+          "href": "/projects/practices/#regular-meetings",
+          "label": "Как организовать регулярные встречи"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Озеленение вместе с профильным партнёром"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-111",
+      "tos_slugs": [
+        "bogana"
+      ],
+      "source_url": "https://vk.com/wall-143755825_1060",
+      "relation_note": "Публикации о территории Боганы. Архивное расписание услуг требует актуального подтверждения.",
+      "links": [
+        {
+          "href": "/projects/practices/#local-services",
+          "label": "Как проверять полезные услуги"
+        },
+        {
+          "href": "/projects/practices/#memorial-care",
+          "label": "Как организовать уход за территорией"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-630",
+      "tos_slugs": [
+        "bogana"
+      ],
+      "source_url": "https://vk.com/wall-143755825_1136",
+      "relation_note": "Публикации о территории Боганы. Архивное расписание услуг требует актуального подтверждения.",
+      "links": [
+        {
+          "href": "/projects/practices/#local-services",
+          "label": "Как проверять полезные услуги"
+        },
+        {
+          "href": "/projects/practices/#memorial-care",
+          "label": "Как организовать уход за территорией"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-702",
+      "tos_slugs": [
+        "bogana"
+      ],
+      "source_url": "https://vk.com/wall-62084654_86778",
+      "relation_note": "Публикации о территории Боганы. Архивное расписание услуг требует актуального подтверждения.",
+      "links": [
+        {
+          "href": "/projects/practices/#local-services",
+          "label": "Как проверять полезные услуги"
+        },
+        {
+          "href": "/projects/practices/#memorial-care",
+          "label": "Как организовать уход за территорией"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-173",
+      "tos_slugs": [
+        "gorelka"
+      ],
+      "source_url": "https://vk.com/wall-178361755_6870",
+      "relation_note": "Публикации о жителях и памятных местах Горелки; роль ТОС и правовой статус объектов не выводятся из названия села.",
+      "links": [
+        {
+          "href": "/projects/practices/#memorial-care",
+          "label": "Уход за памятным местом: порядок действий"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-194",
+      "tos_slugs": [
+        "gorelka"
+      ],
+      "source_url": "https://vk.com/wall-224472980_601",
+      "relation_note": "Публикации о жителях и памятных местах Горелки; роль ТОС и правовой статус объектов не выводятся из названия села.",
+      "links": [
+        {
+          "href": "/projects/practices/#memorial-care",
+          "label": "Уход за памятным местом: порядок действий"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-570",
+      "tos_slugs": [
+        "gorelka"
+      ],
+      "source_url": "https://vk.com/wall-224472980_661",
+      "relation_note": "Публикации о жителях и памятных местах Горелки; роль ТОС и правовой статус объектов не выводятся из названия села.",
+      "links": [
+        {
+          "href": "/projects/practices/#memorial-care",
+          "label": "Уход за памятным местом: порядок действий"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-391",
+      "tos_slugs": [
+        "prostornyy"
+      ],
+      "source_url": "https://vk.com/wall-62084654_85949",
+      "relation_note": "В публикации прямо названо участие жителей ТОС «Просторный» 8 июля.",
+      "links": [
+        {
+          "href": "/projects/practices/#neighbour-day",
+          "label": "Как провести семейную встречу с продолжением"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-54",
+      "tos_slugs": [
+        "chkalovec"
+      ],
+      "source_url": "https://vk.com/wall-217201282_2402",
+      "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов.",
+      "links": [
+        {
+          "href": "/projects/practices/#neighbour-day",
+          "label": "День соседей и общие дела"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Посадки и последующий уход"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-63",
+      "tos_slugs": [
+        "chkalovec"
+      ],
+      "source_url": "https://vk.com/wall-145148657_8274",
+      "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов.",
+      "links": [
+        {
+          "href": "/projects/practices/#neighbour-day",
+          "label": "День соседей и общие дела"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Посадки и последующий уход"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-156",
+      "tos_slugs": [
+        "chkalovec"
+      ],
+      "source_url": "https://vk.com/wall-217201282_2423",
+      "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов.",
+      "links": [
+        {
+          "href": "/projects/practices/#neighbour-day",
+          "label": "День соседей и общие дела"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Посадки и последующий уход"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-680",
+      "tos_slugs": [
+        "chkalovec"
+      ],
+      "source_url": "https://vk.com/wall-217201282_2575",
+      "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов.",
+      "links": [
+        {
+          "href": "/projects/practices/#neighbour-day",
+          "label": "День соседей и общие дела"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Посадки и последующий уход"
+        }
+      ]
+    },
+    {
+      "id": "vk-238997964-887",
+      "tos_slugs": [
+        "chkalovec"
+      ],
+      "source_url": "https://vk.com/wall-62084654_87667",
+      "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов.",
+      "links": [
+        {
+          "href": "/projects/practices/#neighbour-day",
+          "label": "День соседей и общие дела"
+        },
+        {
+          "href": "/projects/practices/#trees-and-care",
+          "label": "Посадки и последующий уход"
+        }
+      ]
+    }
+  ]
+}

@@ -67,12 +67,12 @@ function renderDoneSummary(items, total) {
 }
 
 function doneCard(item, toses) {
-  const tosName = doneTosName(item.tos_slug, toses);
+  const tosName = doneCore.tosSlugs(item).map(slug => doneTosName(slug, toses)).join(' · ');
   const year = doneYear(item.date);
   const sourceLink = item.source_url
     ? `<a class="btn"${/^https?:\/\//i.test(item.source_url) ? ' target="_blank" rel="noopener"' : ''} href="${doneEsc(item.source_url)}">${doneEsc(item.source_label || 'Источник')}</a>`
     : '';
-  return `<article class="list-item done-story" data-content-origin="${doneEsc(doneOrigin(item))}"><div class="meta">${doneOriginTag(item)}<span class="tag">${doneEsc(item.type || 'История')}</span>${tosName ? `<span class="tag">${doneEsc(tosName)}</span>` : ''}<span class="tag">${doneEsc(year)}</span>${doneReviewTag(item)}</div><h3>${doneEsc(item.title || 'История ТОС')}</h3><p>${doneEsc(item.summary || '')}</p><div class="done-steps"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${doneEsc(item.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${doneEsc(item.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Стало</span><p>${doneEsc(item.result || 'Информация уточняется.')}</p></div></article></div>${item.participants ? `<p class="tiny"><b>Кто участвовал:</b> ${doneEsc(item.participants)}</p>` : ''}${item.needs_details ? `<div class="notice"><b style="color:var(--text)">Что нужно уточнить для полной истории</b><br>${doneEsc(item.needs_details)}</div>` : ''}<div class="card-actions"><a class="btn primary" href="/done/${doneEsc(item.id)}/">Подробнее</a>${sourceLink}${item.tos_slug ? `<a class="btn" href="/tos/${doneEsc(item.tos_slug)}/">Карточка ТОС</a>` : ''}<a class="btn" href="/partners/">Партнёрам</a><a class="btn" href="/contacts/">Прислать фото или детали</a></div></article>`;
+  return `<article class="list-item done-story" data-content-origin="${doneEsc(doneOrigin(item))}"><div class="meta">${doneOriginTag(item)}<span class="tag">${doneEsc(item.type || 'История')}</span>${tosName ? `<span class="tag">${doneEsc(tosName)}</span>` : ''}<span class="tag">${doneEsc(year)}</span>${doneReviewTag(item)}</div><h3>${doneEsc(item.title || 'История ТОС')}</h3><p>${doneEsc(item.summary || '')}</p><div class="done-steps"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${doneEsc(item.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${doneEsc(item.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Стало</span><p>${doneEsc(item.result || 'Информация уточняется.')}</p></div></article></div>${item.participants ? `<p class="tiny"><b>Кто участвовал:</b> ${doneEsc(item.participants)}</p>` : ''}${item.needs_details ? `<div class="notice"><b style="color:var(--text)">Что нужно уточнить для полной истории</b><br>${doneEsc(item.needs_details)}</div>` : ''}<div class="card-actions"><a class="btn primary" href="/done/${doneEsc(item.id)}/">Подробнее</a>${sourceLink}${doneCore.tosSlugs(item).map(slug => `<a class="btn" href="/tos/${doneEsc(slug)}/">${doneEsc(doneTosName(slug, toses))}</a>`).join('')}<a class="btn" href="/partners/">Партнёрам</a><a class="btn" href="/contacts/">Прислать фото или детали</a></div></article>`;
 }
 
 async function renderDone() {
@@ -94,7 +94,7 @@ async function renderDone() {
   try {
     const { done, toses } = await loadDoneData();
     const types = [...new Set(done.map((item) => item.type).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
-    const usedTos = [...new Set(done.map((item) => item.tos_slug).filter(Boolean))];
+    const usedTos = [...new Set(done.flatMap((item) => doneCore.tosSlugs(item)))];
     const years = [...new Set(done.map((item) => doneYear(item.date)).filter((value) => value !== 'Год уточняется'))].sort((a, b) => b.localeCompare(a));
 
     if (controls.type) controls.type.innerHTML = '<option value="">Все типы историй</option>' + types.map((value) => `<option>${doneEsc(value)}</option>`).join('');
@@ -111,13 +111,13 @@ async function renderDone() {
         : done.filter(doneDefaultVisible);
       const filtered = originPool
         .filter((item) => !state.type || item.type === state.type)
-        .filter((item) => !state.tos || item.tos_slug === state.tos)
+        .filter((item) => !state.tos || doneCore.belongsToTos(item, state.tos))
         .filter((item) => !state.year || doneYear(item.date) === state.year)
         .filter((item) => state.status !== 'needs-details' || Boolean(item.needs_details))
         .filter((item) => state.status !== 'has-participants' || Boolean(item.participants))
         .filter((item) => state.status !== 'has-source' || Boolean(item.source_url))
         .filter((item) => {
-          const tosName = doneTosName(item.tos_slug, toses);
+          const tosName = doneCore.tosSlugs(item).map(slug => doneTosName(slug, toses)).join(' · ');
           const hay = doneCore.normalizeText([item.title, item.summary, item.before, item.done, item.result, item.participants, item.needs_details, item.type, tosName, doneOrigin(item)].join(' '));
           return !query || hay.includes(query);
         })

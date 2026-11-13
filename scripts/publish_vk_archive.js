@@ -2,6 +2,8 @@
 // GitHub Actions commits the result only after every required check succeeds.
 const {execFileSync} = require('node:child_process');
 const commands = [
+  ['generate_tos_practices.js'], ['generate_done_pages.js'], ['generate_project_pages.js'],
+  ['generate_need_pages.js'], ['generate_support_pages.js'],
   ['migrate_content_origins.js'], ['generate_content_origin_report.js'],
   ['generate_news_pages.js'], ['generate_material_pages.js'], ['generate_tos_pages.js'],
   ['cleanup_generated_collection_pages.js'], ['generate_collection_fallbacks.js'],
