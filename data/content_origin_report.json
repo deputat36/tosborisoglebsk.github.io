@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T18:23:57.367Z",
+  "generated_at": "2026-11-13T22:27:49.356Z",
   "definitions": {
     "verified": "Материал имеет явный проверяемый источник; дополнительные детали всё равно могут требовать подтверждения.",
     "editorial": "Материал подготовлен редакцией и не считается автоматически подтверждённым.",
@@ -8,9 +8,9 @@
   },
   "collections": {
     "news": {
-      "total": 1030,
+      "total": 1032,
       "verified": 38,
-      "editorial": 973,
+      "editorial": 975,
       "starter": 0,
       "request": 19
     },
@@ -44,9 +44,9 @@
     }
   },
   "totals": {
-    "total": 1221,
+    "total": 1223,
     "verified": 84,
-    "editorial": 1061,
+    "editorial": 1063,
     "starter": 24,
     "request": 52
   },
