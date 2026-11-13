@@ -46,7 +46,7 @@ async function fit(page, name) { assert(await page.evaluate(() => document.docum
       await page.locator('.area-share summary').click();
       assert((await page.locator('[data-area-share-link]').inputValue()).includes('tos=makashevka&help=materials'));
       await fit(page, 'territory ' + width);
-      await page.evaluate(() => {document.activeElement?.blur(); window.scrollTo(0, 0);});
+      await page.evaluate(() => {document.documentElement.style.scrollBehavior = 'auto'; document.activeElement?.blur(); window.scrollTo(0, 0);});
       await page.screenshot({path: path.join(OUT, 'area-' + width + '.png')});
       const calendarButton = page.locator('[data-area-calendar]').first();
       assert(await calendarButton.isVisible(), 'Current common deadlines are available');
@@ -59,6 +59,7 @@ async function fit(page, name) { assert(await page.evaluate(() => document.docum
       assert(calendar.includes('DTSTART;VALUE=DATE:'));
       assert(!calendar.includes('TRIGGER:'));
       await page.getByRole('link', {name: 'Мусор не вывезен или площадка загрязнена', exact: false}).click();
+      await page.locator('[data-zhkh-controls]').waitFor({state: 'visible'});
       assert.equal(await page.locator('#zhkh-issue').inputValue(), 'waste');
       assert.equal(await page.locator('[data-zhkh-case]:visible').count(), 1);
       assert(await page.locator('[data-zhkh-case="waste"] details').evaluate(element => element.open));
