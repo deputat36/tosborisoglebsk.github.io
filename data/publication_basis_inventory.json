@@ -10,14 +10,14 @@
     "cards_with_email": 9,
     "cards_with_personal_profile": 11,
     "cards_with_community_channel": 15,
-    "cards_with_media": 0,
+    "cards_with_media": 1,
     "cards_with_source_ref": 3,
     "cards_with_publication_consent_ref": 0,
     "basis_documented": 0,
     "basis_review_required": 23,
     "source_only_consent_missing": 3,
     "no_personal_publication": 0,
-    "personal_fields_total": 70,
+    "personal_fields_total": 71,
     "phones_total": 22,
     "emails_total": 9,
     "personal_profiles_total": 11,
@@ -590,21 +590,23 @@
       "personal_fields": [
         "chairperson",
         "phones",
-        "chairperson_links"
+        "chairperson_links",
+        "logo"
       ],
-      "personal_field_count": 3,
+      "personal_field_count": 4,
       "phone_count": 1,
       "email_count": 0,
       "personal_profile_count": 0,
       "community_count": 0,
       "other_public_link_count": 2,
-      "media_count": 0,
+      "media_count": 1,
       "has_source_ref": false,
       "has_publication_consent_ref": false,
       "missing_verification_scope": [
         "chairperson",
         "phones",
-        "chairperson_links"
+        "chairperson_links",
+        "logo"
       ],
       "basis_status": "basis_review_required"
     },

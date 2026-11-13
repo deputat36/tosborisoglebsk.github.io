@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-11-13T07:29:04.226Z",
+    "generated_at": "2026-11-13T18:21:13.720Z",
     "stale_after_days": 180,
     "total_tos": 26,
     "high_priority": 4,
@@ -13,12 +13,12 @@
     "stale_count": 0,
     "without_phone": 4,
     "without_social": 5,
-    "without_news": 4,
-    "without_done": 9,
+    "without_news": 2,
+    "without_done": 7,
     "without_needs": 26,
     "without_projects": 2,
-    "request_only_news": 4,
-    "request_only_done": 9,
+    "request_only_news": 2,
+    "request_only_done": 7,
     "request_only_needs": 24,
     "request_only_projects": 0,
     "editorial_requests": {
@@ -27,7 +27,7 @@
       "needs": 24,
       "projects": 0
     },
-    "average_score": 78
+    "average_score": 79
   },
   "items": [
     {
@@ -225,14 +225,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 4,
+        "news": 10,
         "done": 2,
         "needs": 0,
         "projects": 3,
         "events": 0
       },
       "linked_all": {
-        "news": 4,
+        "news": 10,
         "done": 2,
         "needs": 1,
         "projects": 3,
@@ -248,7 +248,7 @@
       "linked_origins": {
         "news": {
           "verified": 3,
-          "editorial": 1,
+          "editorial": 7,
           "starter": 0,
           "request": 0
         },
@@ -475,25 +475,24 @@
       "location": "с. Макашевка",
       "chairperson": "Гробова Елена Николаевна",
       "updated_at": "2026-11-12",
-      "score": 63,
+      "score": 69,
       "priority": "Средний",
       "missing": [
         "Email",
         "Соцсети",
         "Логотип",
-        "Новости",
         "Потребности",
         "Проекты"
       ],
       "linked": {
-        "news": 0,
+        "news": 12,
         "done": 7,
         "needs": 0,
         "projects": 0,
         "events": 0
       },
       "linked_all": {
-        "news": 1,
+        "news": 13,
         "done": 7,
         "needs": 0,
         "projects": 0,
@@ -509,7 +508,7 @@
       "linked_origins": {
         "news": {
           "verified": 0,
-          "editorial": 0,
+          "editorial": 12,
           "starter": 0,
           "request": 1
         },
@@ -553,7 +552,6 @@
         "добавить email для связи",
         "добавить группу или страницу в соцсетях",
         "подготовить логотип или временный знак ТОС",
-        "заменить запрос материалов содержательной новостью или фотоотчётом",
         "уточнить актуальную потребность территории",
         "добавить проектную идею или инициативу"
       ]
@@ -642,92 +640,6 @@
         "заменить запрос материалов содержательной новостью или фотоотчётом",
         "заменить заготовку подтверждённой историей результата",
         "уточнить и подтвердить реальную актуальную потребность территории"
-      ]
-    },
-    {
-      "slug": "gorelka",
-      "name": "Горелка",
-      "type": "Сельский",
-      "location": "с. Горелка",
-      "chairperson": "Артемова Ирина Васильевна",
-      "updated_at": "2026-11-12",
-      "score": 75,
-      "priority": "Низкий",
-      "missing": [
-        "Логотип",
-        "Новости",
-        "Потребности",
-        "Проекты"
-      ],
-      "linked": {
-        "news": 0,
-        "done": 6,
-        "needs": 0,
-        "projects": 0,
-        "events": 0
-      },
-      "linked_all": {
-        "news": 1,
-        "done": 6,
-        "needs": 0,
-        "projects": 0,
-        "events": 0
-      },
-      "linked_requests": {
-        "news": 1,
-        "done": 0,
-        "needs": 0,
-        "projects": 0,
-        "events": 0
-      },
-      "linked_origins": {
-        "news": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "done": {
-          "verified": 0,
-          "editorial": 6,
-          "starter": 0,
-          "request": 0
-        },
-        "needs": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        },
-        "projects": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        },
-        "events": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        }
-      },
-      "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
-        "date": "",
-        "age_days": null,
-        "stale": false,
-        "source": "Сведения для публикации переданы редакции 12.11.2026",
-        "note": "Основные сведения и перечень шести работ предоставлены пользователем по сообщению представителя ТОС 12.11.2026. Факты не сверены с официальным реестром и актами выполнения."
-      },
-      "registry_group": "Запросить данные",
-      "contact_ready": true,
-      "recommendations": [
-        "подготовить логотип или временный знак ТОС",
-        "заменить запрос материалов содержательной новостью или фотоотчётом",
-        "уточнить актуальную потребность территории",
-        "добавить проектную идею или инициативу"
       ]
     },
     {
@@ -832,14 +744,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
+        "news": 7,
         "done": 0,
         "needs": 0,
         "projects": 1,
         "events": 0
       },
       "linked_all": {
-        "news": 2,
+        "news": 8,
         "done": 1,
         "needs": 1,
         "projects": 1,
@@ -855,7 +767,7 @@
       "linked_origins": {
         "news": {
           "verified": 1,
-          "editorial": 0,
+          "editorial": 6,
           "starter": 0,
           "request": 1
         },
@@ -989,178 +901,6 @@
       ]
     },
     {
-      "slug": "mechta",
-      "name": "Мечта",
-      "type": "Сельский",
-      "location": "с. Чигорак",
-      "chairperson": "Яценко Елена Александровна",
-      "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Низкий",
-      "missing": [
-        "Email",
-        "Логотип",
-        "Истории результата",
-        "Потребности"
-      ],
-      "linked": {
-        "news": 1,
-        "done": 0,
-        "needs": 0,
-        "projects": 2,
-        "events": 0
-      },
-      "linked_all": {
-        "news": 2,
-        "done": 1,
-        "needs": 1,
-        "projects": 2,
-        "events": 0
-      },
-      "linked_requests": {
-        "news": 1,
-        "done": 1,
-        "needs": 1,
-        "projects": 0,
-        "events": 0
-      },
-      "linked_origins": {
-        "news": {
-          "verified": 1,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "done": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "needs": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "projects": {
-          "verified": 1,
-          "editorial": 0,
-          "starter": 1,
-          "request": 0
-        },
-        "events": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        }
-      },
-      "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
-        "date": "",
-        "age_days": null,
-        "stale": false,
-        "source": "",
-        "note": ""
-      },
-      "registry_group": "Запросить данные",
-      "contact_ready": true,
-      "recommendations": [
-        "добавить email для связи",
-        "подготовить логотип или временный знак ТОС",
-        "заменить заготовку подтверждённой историей результата",
-        "уточнить и подтвердить реальную актуальную потребность территории"
-      ]
-    },
-    {
-      "slug": "pervomayskiy",
-      "name": "Первомайский",
-      "type": "Сельский",
-      "location": "с. Чигорак",
-      "chairperson": "Бозоров Рустам Сангиматович",
-      "updated_at": "2026-05-23",
-      "score": 75,
-      "priority": "Низкий",
-      "missing": [
-        "Email",
-        "Логотип",
-        "Истории результата",
-        "Потребности"
-      ],
-      "linked": {
-        "news": 1,
-        "done": 0,
-        "needs": 0,
-        "projects": 2,
-        "events": 0
-      },
-      "linked_all": {
-        "news": 2,
-        "done": 1,
-        "needs": 1,
-        "projects": 2,
-        "events": 0
-      },
-      "linked_requests": {
-        "news": 1,
-        "done": 1,
-        "needs": 1,
-        "projects": 0,
-        "events": 0
-      },
-      "linked_origins": {
-        "news": {
-          "verified": 1,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "done": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "needs": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "projects": {
-          "verified": 1,
-          "editorial": 0,
-          "starter": 1,
-          "request": 0
-        },
-        "events": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        }
-      },
-      "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
-        "date": "",
-        "age_days": null,
-        "stale": false,
-        "source": "",
-        "note": ""
-      },
-      "registry_group": "Запросить данные",
-      "contact_ready": true,
-      "recommendations": [
-        "добавить email для связи",
-        "подготовить логотип или временный знак ТОС",
-        "заменить заготовку подтверждённой историей результата",
-        "уточнить и подтвердить реальную актуальную потребность территории"
-      ]
-    },
-    {
       "slug": "port-artur",
       "name": "Порт Артур",
       "type": "Сельский",
@@ -1244,6 +984,90 @@
         "подготовить логотип или временный знак ТОС",
         "заменить заготовку подтверждённой историей результата",
         "уточнить и подтвердить реальную актуальную потребность территории"
+      ]
+    },
+    {
+      "slug": "gorelka",
+      "name": "Горелка",
+      "type": "Сельский",
+      "location": "с. Горелка",
+      "chairperson": "Артемова Ирина Васильевна",
+      "updated_at": "2026-11-12",
+      "score": 81,
+      "priority": "Низкий",
+      "missing": [
+        "Логотип",
+        "Потребности",
+        "Проекты"
+      ],
+      "linked": {
+        "news": 40,
+        "done": 6,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_all": {
+        "news": 41,
+        "done": 6,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_requests": {
+        "news": 1,
+        "done": 0,
+        "needs": 0,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_origins": {
+        "news": {
+          "verified": 0,
+          "editorial": 40,
+          "starter": 0,
+          "request": 1
+        },
+        "done": {
+          "verified": 0,
+          "editorial": 6,
+          "starter": 0,
+          "request": 0
+        },
+        "needs": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        },
+        "projects": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        },
+        "events": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        }
+      },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
+        "stale": false,
+        "source": "Сведения для публикации переданы редакции 12.11.2026",
+        "note": "Основные сведения и перечень шести работ предоставлены пользователем по сообщению представителя ТОС 12.11.2026. Факты не сверены с официальным реестром и актами выполнения."
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
+      "recommendations": [
+        "подготовить логотип или временный знак ТОС",
+        "уточнить актуальную потребность территории",
+        "добавить проектную идею или инициативу"
       ]
     },
     {
@@ -1331,6 +1155,90 @@
       ]
     },
     {
+      "slug": "mechta",
+      "name": "Мечта",
+      "type": "Сельский",
+      "location": "с. Чигорак",
+      "chairperson": "Яценко Елена Александровна",
+      "updated_at": "2026-05-23",
+      "score": 81,
+      "priority": "Низкий",
+      "missing": [
+        "Email",
+        "Логотип",
+        "Потребности"
+      ],
+      "linked": {
+        "news": 4,
+        "done": 1,
+        "needs": 0,
+        "projects": 2,
+        "events": 0
+      },
+      "linked_all": {
+        "news": 5,
+        "done": 2,
+        "needs": 1,
+        "projects": 2,
+        "events": 0
+      },
+      "linked_requests": {
+        "news": 1,
+        "done": 1,
+        "needs": 1,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_origins": {
+        "news": {
+          "verified": 1,
+          "editorial": 3,
+          "starter": 0,
+          "request": 1
+        },
+        "done": {
+          "verified": 0,
+          "editorial": 1,
+          "starter": 0,
+          "request": 1
+        },
+        "needs": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "projects": {
+          "verified": 1,
+          "editorial": 0,
+          "starter": 1,
+          "request": 0
+        },
+        "events": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        }
+      },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
+      "recommendations": [
+        "добавить email для связи",
+        "подготовить логотип или временный знак ТОС",
+        "уточнить и подтвердить реальную актуальную потребность территории"
+      ]
+    },
+    {
       "slug": "mirolyubie",
       "name": "Миролюбие",
       "type": "Сельский",
@@ -1345,14 +1253,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 2,
+        "news": 42,
         "done": 2,
         "needs": 0,
         "projects": 3,
         "events": 0
       },
       "linked_all": {
-        "news": 3,
+        "news": 43,
         "done": 2,
         "needs": 1,
         "projects": 3,
@@ -1368,7 +1276,7 @@
       "linked_origins": {
         "news": {
           "verified": 2,
-          "editorial": 0,
+          "editorial": 40,
           "starter": 0,
           "request": 1
         },
@@ -1415,6 +1323,90 @@
       ]
     },
     {
+      "slug": "pervomayskiy",
+      "name": "Первомайский",
+      "type": "Сельский",
+      "location": "с. Чигорак",
+      "chairperson": "Бозоров Рустам Сангиматович",
+      "updated_at": "2026-05-23",
+      "score": 81,
+      "priority": "Низкий",
+      "missing": [
+        "Email",
+        "Логотип",
+        "Потребности"
+      ],
+      "linked": {
+        "news": 2,
+        "done": 1,
+        "needs": 0,
+        "projects": 2,
+        "events": 0
+      },
+      "linked_all": {
+        "news": 3,
+        "done": 2,
+        "needs": 1,
+        "projects": 2,
+        "events": 0
+      },
+      "linked_requests": {
+        "news": 1,
+        "done": 1,
+        "needs": 1,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_origins": {
+        "news": {
+          "verified": 1,
+          "editorial": 1,
+          "starter": 0,
+          "request": 1
+        },
+        "done": {
+          "verified": 0,
+          "editorial": 1,
+          "starter": 0,
+          "request": 1
+        },
+        "needs": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "projects": {
+          "verified": 1,
+          "editorial": 0,
+          "starter": 1,
+          "request": 0
+        },
+        "events": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        }
+      },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
+      "recommendations": [
+        "добавить email для связи",
+        "подготовить логотип или временный знак ТОС",
+        "уточнить и подтвердить реальную актуальную потребность территории"
+      ]
+    },
+    {
       "slug": "petrovskoe",
       "name": "Петровское",
       "type": "Сельский",
@@ -1429,14 +1421,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
+        "news": 11,
         "done": 1,
         "needs": 0,
         "projects": 2,
         "events": 0
       },
       "linked_all": {
-        "news": 2,
+        "news": 12,
         "done": 1,
         "needs": 1,
         "projects": 2,
@@ -1452,7 +1444,7 @@
       "linked_origins": {
         "news": {
           "verified": 1,
-          "editorial": 0,
+          "editorial": 10,
           "starter": 0,
           "request": 1
         },
@@ -1513,15 +1505,15 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
-        "done": 1,
+        "news": 12,
+        "done": 2,
         "needs": 0,
         "projects": 1,
         "events": 0
       },
       "linked_all": {
-        "news": 2,
-        "done": 1,
+        "news": 13,
+        "done": 2,
         "needs": 1,
         "projects": 1,
         "events": 0
@@ -1536,13 +1528,13 @@
       "linked_origins": {
         "news": {
           "verified": 1,
-          "editorial": 0,
+          "editorial": 11,
           "starter": 0,
           "request": 1
         },
         "done": {
           "verified": 1,
-          "editorial": 0,
+          "editorial": 1,
           "starter": 0,
           "request": 0
         },
@@ -1597,14 +1589,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
+        "news": 7,
         "done": 1,
         "needs": 0,
         "projects": 2,
         "events": 0
       },
       "linked_all": {
-        "news": 1,
+        "news": 7,
         "done": 1,
         "needs": 1,
         "projects": 2,
@@ -1620,7 +1612,7 @@
       "linked_origins": {
         "news": {
           "verified": 1,
-          "editorial": 0,
+          "editorial": 6,
           "starter": 0,
           "request": 0
         },
@@ -1638,90 +1630,6 @@
         },
         "projects": {
           "verified": 1,
-          "editorial": 0,
-          "starter": 1,
-          "request": 0
-        },
-        "events": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        }
-      },
-      "verification": {
-        "status": "needs_review",
-        "label": "Требует проверки",
-        "date": "",
-        "age_days": null,
-        "stale": false,
-        "source": "",
-        "note": ""
-      },
-      "registry_group": "Запросить данные",
-      "contact_ready": true,
-      "recommendations": [
-        "добавить email для связи",
-        "подготовить логотип или временный знак ТОС",
-        "уточнить и подтвердить реальную актуальную потребность территории"
-      ]
-    },
-    {
-      "slug": "uyutnyy",
-      "name": "Уютный",
-      "type": "Городской",
-      "location": "г. Борисоглебск",
-      "chairperson": "Ковтун Алексей Вадимович",
-      "updated_at": "2026-05-23",
-      "score": 81,
-      "priority": "Низкий",
-      "missing": [
-        "Email",
-        "Логотип",
-        "Потребности"
-      ],
-      "linked": {
-        "news": 1,
-        "done": 1,
-        "needs": 0,
-        "projects": 1,
-        "events": 0
-      },
-      "linked_all": {
-        "news": 2,
-        "done": 1,
-        "needs": 1,
-        "projects": 1,
-        "events": 0
-      },
-      "linked_requests": {
-        "news": 1,
-        "done": 0,
-        "needs": 1,
-        "projects": 0,
-        "events": 0
-      },
-      "linked_origins": {
-        "news": {
-          "verified": 1,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "done": {
-          "verified": 1,
-          "editorial": 0,
-          "starter": 0,
-          "request": 0
-        },
-        "needs": {
-          "verified": 0,
-          "editorial": 0,
-          "starter": 0,
-          "request": 1
-        },
-        "projects": {
-          "verified": 0,
           "editorial": 0,
           "starter": 1,
           "request": 0
@@ -1765,14 +1673,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 6,
+        "news": 35,
         "done": 5,
         "needs": 0,
         "projects": 5,
         "events": 0
       },
       "linked_all": {
-        "news": 6,
+        "news": 35,
         "done": 5,
         "needs": 1,
         "projects": 5,
@@ -1788,7 +1696,7 @@
       "linked_origins": {
         "news": {
           "verified": 5,
-          "editorial": 1,
+          "editorial": 30,
           "starter": 0,
           "request": 0
         },
@@ -1848,14 +1756,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
+        "news": 72,
         "done": 1,
         "needs": 0,
         "projects": 2,
         "events": 0
       },
       "linked_all": {
-        "news": 2,
+        "news": 73,
         "done": 1,
         "needs": 1,
         "projects": 2,
@@ -1871,7 +1779,7 @@
       "linked_origins": {
         "news": {
           "verified": 1,
-          "editorial": 0,
+          "editorial": 71,
           "starter": 0,
           "request": 1
         },
@@ -2176,14 +2084,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 1,
+        "news": 4,
         "done": 1,
         "needs": 0,
         "projects": 2,
         "events": 0
       },
       "linked_all": {
-        "news": 2,
+        "news": 5,
         "done": 1,
         "needs": 1,
         "projects": 2,
@@ -2199,7 +2107,7 @@
       "linked_origins": {
         "news": {
           "verified": 1,
-          "editorial": 0,
+          "editorial": 3,
           "starter": 0,
           "request": 1
         },
@@ -2241,6 +2149,88 @@
       "contact_ready": true,
       "recommendations": [
         "подготовить логотип или временный знак ТОС",
+        "уточнить и подтвердить реальную актуальную потребность территории"
+      ]
+    },
+    {
+      "slug": "uyutnyy",
+      "name": "Уютный",
+      "type": "Городской",
+      "location": "г. Борисоглебск",
+      "chairperson": "Ковтун Алексей Вадимович",
+      "updated_at": "2026-11-13",
+      "score": 88,
+      "priority": "Низкий",
+      "missing": [
+        "Email",
+        "Потребности"
+      ],
+      "linked": {
+        "news": 5,
+        "done": 2,
+        "needs": 0,
+        "projects": 1,
+        "events": 0
+      },
+      "linked_all": {
+        "news": 6,
+        "done": 2,
+        "needs": 1,
+        "projects": 1,
+        "events": 0
+      },
+      "linked_requests": {
+        "news": 1,
+        "done": 0,
+        "needs": 1,
+        "projects": 0,
+        "events": 0
+      },
+      "linked_origins": {
+        "news": {
+          "verified": 1,
+          "editorial": 4,
+          "starter": 0,
+          "request": 1
+        },
+        "done": {
+          "verified": 1,
+          "editorial": 1,
+          "starter": 0,
+          "request": 0
+        },
+        "needs": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 1
+        },
+        "projects": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 1,
+          "request": 0
+        },
+        "events": {
+          "verified": 0,
+          "editorial": 0,
+          "starter": 0,
+          "request": 0
+        }
+      },
+      "verification": {
+        "status": "needs_review",
+        "label": "Требует проверки",
+        "date": "",
+        "age_days": null,
+        "stale": false,
+        "source": "",
+        "note": ""
+      },
+      "registry_group": "Запросить данные",
+      "contact_ready": true,
+      "recommendations": [
+        "добавить email для связи",
         "уточнить и подтвердить реальную актуальную потребность территории"
       ]
     }

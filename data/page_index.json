@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-13T16:04:48.973Z",
-  "total": 1409,
+  "generated_at": "2026-11-13T18:21:14.130Z",
+  "total": 1412,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -10188,7 +10188,7 @@
       "path": "news/mirolyubie-project-winner-2026/index.html",
       "url": "https://tosborisoglebsk.ru/news/mirolyubie-project-winner-2026/",
       "title": "ТОС «Миролюбие» реализовал проект «Играй и побеждай» в 2026 году | ТОС БГО",
-      "description": "Официальный протокол подтверждает грант 1 489 360 рублей, а публикация РИА «Воронеж» от 20 августа 2026 года — завершение площадки площадью 960 кв. м.",
+      "description": "Перечень победителей указывает запрашиваемые 1 489 360 рублей, а публикация РИА «Воронеж» от 20 августа 2026 года — завершение площадки площадью 960 кв. м.",
       "section": "Новости",
       "search_group": "news",
       "content_origin": "verified"
@@ -11403,7 +11403,7 @@
       "path": "needs/update-data-uyutnyy-2026/index.html",
       "url": "https://tosborisoglebsk.ru/needs/update-data-uyutnyy-2026/",
       "title": "Нужно уточнить данные и материалы ТОС «Уютный» | Нужна помощь ТОСам БГО",
-      "description": "Для карточки ТОС «Уютный» нужно собрать или подтвердить сведения: email для связи, логотип. Также полезно прислать 3–5 фотографий территории, новость о…",
+      "description": "Для карточки ТОС «Уютный» нужно уточнить email для связи. Логотип получен и размещён в карточке. Также полезно прислать 3–5 фотографий территории…",
       "section": "Потребности",
       "search_group": "needs",
       "content_origin": "request"
@@ -11796,6 +11796,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "projects/practices/index.html",
+      "url": "https://tosborisoglebsk.ru/projects/practices/",
+      "title": "Опыт ТОСов: как повторить | ТОС БГО",
+      "description": "Практики ТОСов Борисоглебского округа: реальные примеры, необходимые ресурсы, шаги и проверка результата. Дороги, экология, соседи и местные новости.",
+      "section": "Проекты",
+      "search_group": "projects",
+      "content_origin": "reference"
+    },
+    {
       "path": "projects/lighting-safe-way/index.html",
       "url": "https://tosborisoglebsk.ru/projects/lighting-safe-way/",
       "title": "Освещение и безопасный маршрут | Проекты ТОС БГО",
@@ -12126,6 +12135,24 @@
       "description": "Площадка или точка для экологического просвещения, раздельного сбора, обмена полезными привычками и вовлечения жителей в заботу о территории.",
       "section": "Проекты",
       "search_group": "projects",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/chigorak-eco-team-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/done/chigorak-eco-team-2026/",
+      "title": "«Мечта» и «Первомайский»: экологическая акция в Чигораке | Сделано ТОСами БГО",
+      "description": "Публикация об «Экоэкипаже: штурм берега» описывает уборку, экологическую игру и участие двух ТОСов в организации.",
+      "section": "Сделано",
+      "search_group": "done",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "done/uyutnyy-prostornyy-road-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/done/uyutnyy-prostornyy-road-2026/",
+      "title": "«Уютный» и «Просторный»: совместный ремонт дороги | Сделано ТОСами БГО",
+      "description": "В октябрьских публикациях участники сообщили о совместном сборе средств и ремонте участка дороги. История связывает два соседних ТОС.",
+      "section": "Сделано",
+      "search_group": "done",
       "content_origin": "editorial"
     },
     {

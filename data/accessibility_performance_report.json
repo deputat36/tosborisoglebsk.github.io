@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T16:05:01.275Z",
+  "generated_at": "2026-11-13T18:20:49.586Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 1482,
-    "public_pages": 1419,
+    "html_pages": 1485,
+    "public_pages": 1422,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 153,
+    "asset_files": 155,
     "over_budget_assets": 0,
-    "total_css_bytes": 113520,
-    "total_js_bytes": 991664,
+    "total_css_bytes": 116263,
+    "total_js_bytes": 995205,
     "total_image_bytes": 49648,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -204,6 +204,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/news.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 11458,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-basis-validation.js",
       "group": "js",
       "extension": ".js",
@@ -215,13 +222,6 @@
       "group": "css",
       "extension": ".css",
       "size_bytes": 11348,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/news.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 11338,
       "over_budget": false
     },
     {

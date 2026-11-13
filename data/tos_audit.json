@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-11-13T07:28:40.370Z",
+    "generated_at": "2026-11-13T18:20:43.936Z",
     "total": 26,
     "good": 21,
     "medium": 5,
@@ -13,7 +13,7 @@
     "without_phone": 4,
     "without_email": 17,
     "without_social": 5,
-    "without_logo": 26,
+    "without_logo": 25,
     "weak_description": 0,
     "duplicate_slugs": []
   },
@@ -351,25 +351,6 @@
       ]
     },
     {
-      "slug": "uyutnyy",
-      "name": "Уютный",
-      "location": "г. Борисоглебск",
-      "chairperson": "Ковтун Алексей Вадимович",
-      "updated_at": "2026-05-23",
-      "checked_at": "",
-      "recheck_after": "",
-      "verification_scope": [],
-      "score": 86,
-      "level": "good",
-      "verification_status": "needs_review",
-      "verification_label": "Требует проверки",
-      "issues": [
-        "нет email",
-        "нет логотипа",
-        "нет даты фактической проверки"
-      ]
-    },
-    {
       "slug": "chkalovec",
       "name": "Чкаловец",
       "location": "г. Борисоглебск",
@@ -511,6 +492,24 @@
       "verification_label": "Требует проверки",
       "issues": [
         "нет логотипа",
+        "нет даты фактической проверки"
+      ]
+    },
+    {
+      "slug": "uyutnyy",
+      "name": "Уютный",
+      "location": "г. Борисоглебск",
+      "chairperson": "Ковтун Алексей Вадимович",
+      "updated_at": "2026-11-13",
+      "checked_at": "",
+      "recheck_after": "",
+      "verification_scope": [],
+      "score": 93,
+      "level": "good",
+      "verification_status": "needs_review",
+      "verification_label": "Требует проверки",
+      "issues": [
+        "нет email",
         "нет даты фактической проверки"
       ]
     }

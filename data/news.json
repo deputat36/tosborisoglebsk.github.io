@@ -2314,14 +2314,25 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "makashevka",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 961,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "makashevka"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#youth-editorial",
+        "label": "Молодёжная редакция и партнёрские ресурсы"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году."
   },
   {
     "id": "vk-238997964-960",
@@ -2419,14 +2430,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "tretyaki",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 960,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "tretyaki"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#regular-meetings",
+        "label": "Как организовать регулярные встречи"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Озеленение вместе с профильным партнёром"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные."
   },
   {
     "id": "vk-238997964-959",
@@ -3775,7 +3801,23 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 939,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "prostornyy",
+      "uyutnyy"
+    ],
+    "editorial_links": [
+      {
+        "href": "/done/uyutnyy-prostornyy-road-2026/",
+        "label": "Общая история ремонта"
+      },
+      {
+        "href": "/projects/practices/#road-neighbours",
+        "label": "Как организовать дело соседних ТОСов"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Совместная история двух ТОСов. Сведения о ремонте приведены по сообщениям участников; бюджет и точная дата работ требуют уточнения."
   },
   {
     "id": "vk-238997964-938",
@@ -3810,14 +3852,30 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "uyutnyy",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 938,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "uyutnyy",
+      "prostornyy"
+    ],
+    "editorial_links": [
+      {
+        "href": "/done/uyutnyy-prostornyy-road-2026/",
+        "label": "Общая история ремонта"
+      },
+      {
+        "href": "/projects/practices/#road-neighbours",
+        "label": "Как организовать дело соседних ТОСов"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Совместная история двух ТОСов. Сведения о ремонте приведены по сообщениям участников; бюджет и точная дата работ требуют уточнения."
   },
   {
     "id": "vk-238997964-937",
@@ -4470,14 +4528,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "tretyaki",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 927,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "tretyaki"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#regular-meetings",
+        "label": "Как организовать регулярные встречи"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Озеленение вместе с профильным партнёром"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные."
   },
   {
     "id": "vk-238997964-926",
@@ -4978,14 +5051,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "tretyaki",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 920,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "tretyaki"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#regular-meetings",
+        "label": "Как организовать регулярные встречи"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Озеленение вместе с профильным партнёром"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные."
   },
   {
     "id": "vk-238997964-919",
@@ -6368,7 +6456,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 895,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "chkalovec"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#grant-team",
+        "label": "Как распределить подготовку заявки"
+      },
+      {
+        "href": "/materials/grant-application-guide/",
+        "label": "Инструкция по конкурсной заявке"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Рассказ о подготовке заявки, а не подтверждение победы в конкурсе."
   },
   {
     "id": "vk-238997964-894",
@@ -6918,14 +7021,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "chkalovec",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 887,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.840Z"
+    "imported_at": "2026-11-13T11:05:19.840Z",
+    "tos_slugs": [
+      "chkalovec"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#neighbour-day",
+        "label": "День соседей и общие дела"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Посадки и последующий уход"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов."
   },
   {
     "id": "vk-238997964-886",
@@ -7266,7 +7384,23 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 882,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "uyutnyy",
+      "chkalovec"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#mentor-meeting",
+        "label": "Как подготовиться к встрече с наставником"
+      },
+      {
+        "href": "/done/uyutnyy-prostornyy-road-2026/",
+        "label": "Дальнейшая история дорожной задачи"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "«Уютный» — участники встречи; «Чкаловец» — наставническая помощь. Обсуждавшиеся планы не считаются выполненными решениями."
   },
   {
     "id": "vk-238997964-881",
@@ -8199,14 +8333,25 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "makashevka",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 864,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "makashevka"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#youth-editorial",
+        "label": "Молодёжная редакция и партнёрские ресурсы"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году."
   },
   {
     "id": "vk-238997964-863",
@@ -8937,14 +9082,25 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "makashevka",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 852,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "makashevka"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#youth-editorial",
+        "label": "Молодёжная редакция и партнёрские ресурсы"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году."
   },
   {
     "id": "vk-238997964-851",
@@ -9042,14 +9198,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "tretyaki",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 851,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "tretyaki"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#regular-meetings",
+        "label": "Как организовать регулярные встречи"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Озеленение вместе с профильным партнёром"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные."
   },
   {
     "id": "vk-238997964-850",
@@ -10827,14 +10998,25 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "makashevka",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 819,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "makashevka"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#youth-editorial",
+        "label": "Молодёжная редакция и партнёрские ресурсы"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории и ресурсы Макашевского ДК. Не подтверждает получение гранта ТОС; объявленная поддержка студии относится к 2027 году."
   },
   {
     "id": "vk-238997964-818",
@@ -13501,14 +13683,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "tretyaki",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 776,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "tretyaki"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#regular-meetings",
+        "label": "Как организовать регулярные встречи"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Озеленение вместе с профильным партнёром"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Жизнь территории: в источниках названы КДЦ, жители или лесничество. Связь с карточкой не означает, что ТОС был единственным организатором; расписания архивные."
   },
   {
     "id": "vk-238997964-775",
@@ -15504,14 +15701,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "mirolyubie",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 741,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "mirolyubie"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+        "label": "Один проект: подготовка, работы и открытие"
+      },
+      {
+        "href": "/projects/practices/#playground-opening",
+        "label": "Как оживить новую площадку"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются."
   },
   {
     "id": "vk-238997964-740",
@@ -15852,7 +16064,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 736,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "mirolyubie"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+        "label": "Один проект: подготовка, работы и открытие"
+      },
+      {
+        "href": "/projects/practices/#playground-opening",
+        "label": "Как оживить новую площадку"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются."
   },
   {
     "id": "vk-238997964-735",
@@ -17862,14 +18089,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "bogana",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 702,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "bogana"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#local-services",
+        "label": "Как проверять полезные услуги"
+      },
+      {
+        "href": "/projects/practices/#memorial-care",
+        "label": "Как организовать уход за территорией"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикации о территории Боганы. Архивное расписание услуг требует актуального подтверждения."
   },
   {
     "id": "vk-238997964-701",
@@ -19368,7 +19610,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 680,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "chkalovec"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#neighbour-day",
+        "label": "День соседей и общие дела"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Посадки и последующий уход"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов."
   },
   {
     "id": "vk-238997964-679",
@@ -22261,7 +22518,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 630,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "bogana"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#local-services",
+        "label": "Как проверять полезные услуги"
+      },
+      {
+        "href": "/projects/practices/#memorial-care",
+        "label": "Как организовать уход за территорией"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикации о территории Боганы. Архивное расписание услуг требует актуального подтверждения."
   },
   {
     "id": "vk-238997964-629",
@@ -23387,7 +23659,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 613,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "mirolyubie"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+        "label": "Один проект: подготовка, работы и открытие"
+      },
+      {
+        "href": "/projects/practices/#playground-opening",
+        "label": "Как оживить новую площадку"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются."
   },
   {
     "id": "vk-238997964-612",
@@ -24949,14 +25236,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "gubari",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 587,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "gubari"
+    ],
+    "editorial_links": [
+      {
+        "href": "/tos/gubari/",
+        "label": "История и дела Губарей"
+      },
+      {
+        "href": "/projects/practices/#village-digest",
+        "label": "Как сделать местный дайджест"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Контекст села: результат конкурса и работа ДК не приписываются ТОС как собственное финансирование."
   },
   {
     "id": "vk-238997964-586",
@@ -25109,14 +25411,30 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "mechta",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 584,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "mechta",
+      "pervomayskiy"
+    ],
+    "editorial_links": [
+      {
+        "href": "/done/chigorak-eco-team-2026/",
+        "label": "Общая история акции в Чигораке"
+      },
+      {
+        "href": "/projects/practices/#eco-game",
+        "label": "Как провести уборку с экологической игрой"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "ТОС «Мечта» и «Первомайский» участвовали в организации. Автор поддержанного проекта — культорганизатор Дома культуры; грант не приписывается каждому ТОС отдельно."
   },
   {
     "id": "vk-238997964-583",
@@ -25976,7 +26294,18 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 570,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "gorelka"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#memorial-care",
+        "label": "Уход за памятным местом: порядок действий"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикации о жителях и памятных местах Горелки; роль ТОС и правовой статус объектов не выводятся из названия села."
   },
   {
     "id": "vk-238997964-569",
@@ -30104,7 +30433,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 497,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "mirolyubie"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/mirolyubie-igray-i-pobezhday-2026/",
+        "label": "Один проект: подготовка, работы и открытие"
+      },
+      {
+        "href": "/projects/practices/#playground-opening",
+        "label": "Как оживить новую площадку"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикация относится к этапам одного проекта «Играй и побеждай». Даты исходных сообщений и событий различаются."
   },
   {
     "id": "vk-238997964-496",
@@ -36603,14 +36947,25 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "prostornyy",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 391,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "prostornyy"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#neighbour-day",
+        "label": "Как провести семейную встречу с продолжением"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "В публикации прямо названо участие жителей ТОС «Просторный» 8 июля."
   },
   {
     "id": "vk-238997964-390",
@@ -44443,14 +44798,29 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "gubari",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 262,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "gubari"
+    ],
+    "editorial_links": [
+      {
+        "href": "/tos/gubari/",
+        "label": "История и дела Губарей"
+      },
+      {
+        "href": "/projects/practices/#village-digest",
+        "label": "Как сделать местный дайджест"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Контекст села: результат конкурса и работа ДК не приписываются ТОС как собственное финансирование."
   },
   {
     "id": "vk-238997964-261",
@@ -45072,12 +45442,12 @@
     "category": "Конкурсы",
     "tos_slug": "mirolyubie",
     "title": "ТОС «Миролюбие» реализовал проект «Играй и побеждай» в 2026 году",
-    "lead": "Официальный протокол подтверждает грант 1 489 360 рублей, а публикация РИА «Воронеж» от 20 августа 2026 года — завершение площадки площадью 960 кв. м.",
+    "lead": "Перечень победителей указывает запрашиваемые 1 489 360 рублей, а публикация РИА «Воронеж» от 20 августа 2026 года — завершение площадки площадью 960 кв. м.",
     "text": [
-      "Официальный перечень победителей, опубликованный 22 мая 2026 года, подтверждает победу ТОС «Миролюбие» с проектом «Играй и побеждай» и точную сумму гранта 1 489 360 рублей.",
+      "Официальный перечень победителей, опубликованный 22 мая 2026 года, подтверждает победу ТОС «Миролюбие» с проектом «Играй и побеждай» и запрашиваемую сумму 1 489 360 рублей. Это не документ о перечислении средств.",
       "20 августа 2026 года РИА «Воронеж» сообщило со ссылкой на председателя ТОС, что проект реализован: в посёлке Миролюбие благоустроена многофункциональная площадка для катания на роликах, самокатах и скейтбордах общей площадью 960 кв. м.",
       "По данным РИА «Воронеж», работы заняли около полутора месяцев. В расчистке территории участвовали взрослые и дети: собирали мусор, убирали кусты и ветки перед благоустройством площадки.",
-      "В публикации СМИ сумма гранта округлена до 1 млн 489 тыс. рублей. На портале сохранена точная сумма 1 489 360 рублей из первичного официального перечня победителей. Текст и фотографии СМИ на портал не копируются."
+      "СМИ сообщает о грантовой поддержке; в официальном перечне 1 489 360 рублей приведены как запрашиваемая сумма. Эти источники не подтверждают отдельно фактическое перечисление денег. Текст и фотографии СМИ на портал не копируются."
     ],
     "source": "Официальный протокол победителей конкурса общественно полезных проектов ТОС 2026 года",
     "source_url": "https://obraz36.ru/site_data/s273/2026/2026/%D0%9F%D0%BE%D0%B1%D0%B5%D0%B4%D0%B8%D1%82%D0%B5%D0%BB%D0%B8%20%D0%A2%D0%9E%D0%A1%202026.pdf",
@@ -48601,7 +48971,18 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 194,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "gorelka"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#memorial-care",
+        "label": "Уход за памятным местом: порядок действий"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикации о жителях и памятных местах Горелки; роль ТОС и правовой статус объектов не выводятся из названия села."
   },
   {
     "id": "vk-238997964-193",
@@ -49873,14 +50254,25 @@
         ]
       }
     ],
-    "tos_slug": "",
+    "tos_slug": "gorelka",
     "external": true,
     "imported_from": "vk",
     "content_origin": "editorial",
     "vk_owner_id": -238997964,
     "vk_post_id": 173,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "gorelka"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#memorial-care",
+        "label": "Уход за памятным местом: порядок действий"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикации о жителях и памятных местах Горелки; роль ТОС и правовой статус объектов не выводятся из названия села."
   },
   {
     "id": "vk-238997964-172",
@@ -51337,7 +51729,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 156,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "chkalovec"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#neighbour-day",
+        "label": "День соседей и общие дела"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Посадки и последующий уход"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов."
   },
   {
     "id": "vk-238997964-155",
@@ -53732,7 +54139,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 111,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.841Z"
+    "imported_at": "2026-11-13T11:05:19.841Z",
+    "tos_slugs": [
+      "bogana"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#local-services",
+        "label": "Как проверять полезные услуги"
+      },
+      {
+        "href": "/projects/practices/#memorial-care",
+        "label": "Как организовать уход за территорией"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Публикации о территории Боганы. Архивное расписание услуг требует актуального подтверждения."
   },
   {
     "id": "vk-238997964-110",
@@ -56848,7 +57270,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 63,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.842Z"
+    "imported_at": "2026-11-13T11:05:19.842Z",
+    "tos_slugs": [
+      "chkalovec"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#neighbour-day",
+        "label": "День соседей и общие дела"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Посадки и последующий уход"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов."
   },
   {
     "id": "vk-238997964-62",
@@ -57572,7 +58009,22 @@
     "vk_owner_id": -238997964,
     "vk_post_id": 54,
     "vk_edited": 0,
-    "imported_at": "2026-11-13T11:05:19.842Z"
+    "imported_at": "2026-11-13T11:05:19.842Z",
+    "tos_slugs": [
+      "chkalovec"
+    ],
+    "editorial_links": [
+      {
+        "href": "/projects/practices/#neighbour-day",
+        "label": "День соседей и общие дела"
+      },
+      {
+        "href": "/projects/practices/#trees-and-care",
+        "label": "Посадки и последующий уход"
+      }
+    ],
+    "editorial_checked_at": "2026-11-13",
+    "relation_note": "Материал связан с деятельностью «Чкаловца». Несколько публикаций об одном мероприятии не образуют несколько результатов."
   },
   {
     "id": "vk-238997964-53",
