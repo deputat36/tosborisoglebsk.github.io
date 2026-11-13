@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-13T06:55:40.722Z",
+  "generated_at": "2026-11-13T07:23:57.866Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 151,
     "over_budget_assets": 0,
     "total_css_bytes": 112713,
-    "total_js_bytes": 991649,
+    "total_js_bytes": 991724,
     "total_image_bytes": 45000,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -221,7 +221,7 @@
       "path": "assets/js/news.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 11263,
+      "size_bytes": 11338,
       "over_budget": false
     },
     {

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T06:58:15.836Z",
+  "generated_at": "2026-11-13T07:24:01.044Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 417,
@@ -14,40 +14,52 @@
   "failures": [],
   "slowest_pages": [
     {
+      "route": "/done/mahrovka-project-experience/index.html",
+      "status": 200,
+      "duration_ms": 1045,
+      "bytes": 8324
+    },
+    {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1030,
+      "duration_ms": 1011,
       "bytes": 8333
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 57,
+      "duration_ms": 61,
       "bytes": 9062
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 32,
+      "bytes": 9797
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 28,
+      "duration_ms": 30,
       "bytes": 16380
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 29,
       "bytes": 12170
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 28,
+      "bytes": 23405
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 26,
+      "duration_ms": 28,
       "bytes": 8560
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 25,
-      "bytes": 9797
     },
     {
       "route": "/calendar/action-routes/index.html",
@@ -56,82 +68,70 @@
       "bytes": 16246
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/done/makashevka-dvorik-detstva-2016/index.html",
       "status": 200,
-      "duration_ms": 24,
-      "bytes": 23405
+      "duration_ms": 20,
+      "bytes": 7753
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 15,
       "bytes": 23798
     },
     {
-      "route": "/legal/transition-calendar-2026-2028/index.html",
+      "route": "/done/makashevka-dvorik-detstva-update-2022/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 7938
+    },
+    {
+      "route": "/done/makashevka-kladbishche-ograzhdenie-2017/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 7849
+    },
+    {
+      "route": "/improvement-plan/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 8299
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 8578
+    },
+    {
+      "route": "/check-tos/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 6185
+    },
+    {
+      "route": "/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 50187
+    },
+    {
+      "route": "/communication-kit/index.html",
       "status": 200,
       "duration_ms": 13,
-      "bytes": 18881
+      "bytes": 25272
     },
     {
-      "route": "/map/index.html",
+      "route": "/done/gubari-svecha-pamyati-2026/index.html",
       "status": 200,
       "duration_ms": 13,
-      "bytes": 50581
+      "bytes": 8450
     },
     {
-      "route": "/materials/chairperson-first-100-days/index.html",
+      "route": "/done/index.html",
       "status": 200,
       "duration_ms": 13,
-      "bytes": 11164
-    },
-    {
-      "route": "/materials/choose-tos-project/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 7843
-    },
-    {
-      "route": "/materials/community-resource-map/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 11164
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 15811
-    },
-    {
-      "route": "/chairperson/verify-card/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 10852
-    },
-    {
-      "route": "/legal/federal-law-33/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 17594
-    },
-    {
-      "route": "/legal/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 19883
-    },
-    {
-      "route": "/contacts/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 22305
-    },
-    {
-      "route": "/create-tos/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 20460
+      "bytes": 17795
     }
   ]
 }
