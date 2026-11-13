@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "synced_at": "2026-11-13T11:05:19.840Z",
+  "mode": "all",
+  "domain": "tosbgo",
+  "owner_id": -238997964,
+  "source_count": 952,
+  "unique_wall_posts": 952,
+  "eligible_posts": 952,
+  "excluded_posts": 0,
+  "pages_this_run": 10,
+  "resumed": false,
+  "published_vk_posts": 952,
+  "canonical_posts": 78,
+  "reposts": 889,
+  "photos": 3254,
+  "videos": 124,
+  "removed_ids": [],
+  "deletion_review": false,
+  "media_storage": "vk_remote",
+  "archive_limit": null
+}

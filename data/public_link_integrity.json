@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T07:28:48.757Z",
+  "generated_at": "2026-11-13T11:05:32.941Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 417,
-  "pages_checked": 417,
-  "links_discovered": 11525,
-  "internal_links_checked": 8220,
-  "unique_internal_targets": 1122,
-  "external_links_ignored": 597,
+  "pages_indexed": 1409,
+  "pages_checked": 1409,
+  "links_discovered": 36450,
+  "internal_links_checked": 25886,
+  "unique_internal_targets": 3100,
+  "external_links_ignored": 6957,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
+      "route": "/news/fond-borisoglebsk-contest-2026-11/index.html",
+      "status": 200,
+      "duration_ms": 1032,
+      "bytes": 7327
+    },
+    {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1043,
+      "duration_ms": 1030,
       "bytes": 8333
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 73,
+      "duration_ms": 38,
       "bytes": 9062
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 37,
+      "duration_ms": 19,
       "bytes": 12170
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 36,
-      "bytes": 23405
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 36,
+      "duration_ms": 18,
       "bytes": 8560
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 34,
+      "duration_ms": 17,
       "bytes": 16380
     },
     {
-      "route": "/calendar/action-routes/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 32,
-      "bytes": 16246
+      "duration_ms": 16,
+      "bytes": 23405
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 32,
+      "duration_ms": 16,
       "bytes": 9797
     },
     {
-      "route": "/chairperson/news/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 5806
-    },
-    {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/news/vk-238997964-993/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 10852
+      "bytes": 19013
     },
     {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 6185
-    },
-    {
-      "route": "/contacts/index.html",
+      "route": "/calendar/action-routes/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 22305
+      "bytes": 16246
     },
     {
-      "route": "/materials/choose-tos-project/index.html",
+      "route": "/documents/templates/tos-founding-announcement/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 7843
+      "bytes": 3198
+    },
+    {
+      "route": "/news/voronezh-tos-krai-rodnoi-action-2026/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 9348
+    },
+    {
+      "route": "/news/vk-238997964-288/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 15364
+    },
+    {
+      "route": "/documents/templates/project-schedule/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 16054
+    },
+    {
+      "route": "/news/vk-238997964-29/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 18481
+    },
+    {
+      "route": "/news/vk-238997964-291/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 15532
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 11,
       "bytes": 23798
     },
     {
-      "route": "/communication-kit/index.html",
+      "route": "/news/vk-238997964-290/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 25272
+      "duration_ms": 11,
+      "bytes": 10606
     },
     {
-      "route": "/content-standards/index.html",
+      "route": "/news/vk-community-channel-2026/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 13560
+      "duration_ms": 11,
+      "bytes": 6470
     },
     {
-      "route": "/data-dictionary/index.html",
+      "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 11011
-    },
-    {
-      "route": "/done/mirolyubie-blagodarim-pomnim-gordimsya-2022/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 8745
-    },
-    {
-      "route": "/legal/transition-calendar-2026-2028/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 18881
-    },
-    {
-      "route": "/documents/templates/tos-start-list/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 2632
+      "duration_ms": 10,
+      "bytes": 5806
     }
   ]
 }
