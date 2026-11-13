@@ -160,7 +160,7 @@ function main() {
     errors.push('default origin filter label must explain that the feed contains substantive publications');
   }
 
-  if (!script.includes('renderNewsSummary(filtered, originPool.length)') || !script.includes('newsCore.setStatus(status, filtered.length, originPool.length')) {
+  if (!script.includes('renderNewsSummary(filtered, originPool.length)') || !script.includes('newsCore.setStatus(status, shown.length, filtered.length')) {
     errors.push('news summary and status must count the active origin pool rather than hidden request items');
   }
 

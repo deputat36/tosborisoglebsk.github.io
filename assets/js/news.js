@@ -94,7 +94,7 @@ function renderNewsSummary(items, total) {
   if (!root) return;
   const counts = newsCore.countOrigins(items, newsOrigin);
   const vkCount = items.filter(item => item.imported_from === 'vk').length;
-  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>показано из ${total}</span></div><div class="summary-tile"><b>${counts.verified}</b><span>подтверждено источником</span></div><div class="summary-tile"><b>${counts.editorial-vkCount}</b><span>редакционные материалы</span></div><div class="summary-tile"><b>${vkCount}</b><span>из сообщества ВКонтакте</span></div><div class="summary-tile"><b>${counts.starter}</b><span>стартовые материалы</span></div><div class="summary-tile"><b>${counts.request}</b><span>запросы материалов</span></div></div>`;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>найдено из ${total}</span></div><div class="summary-tile"><b>${counts.verified}</b><span>подтверждено источником</span></div><div class="summary-tile"><b>${counts.editorial-vkCount}</b><span>редакционные материалы</span></div><div class="summary-tile"><b>${vkCount}</b><span>из сообщества ВКонтакте</span></div><div class="summary-tile"><b>${counts.starter}</b><span>стартовые материалы</span></div><div class="summary-tile"><b>${counts.request}</b><span>запросы материалов</span></div></div>`;
 }
 
 async function renderNewsPage() {
@@ -155,8 +155,9 @@ async function renderNewsPage() {
         pager.innerHTML = pages>1 ? `${page>1 ? link(page-1,'← Предыдущая') : ''}<span>Страница ${page} из ${pages}</span>${page<pages ? link(page+1,'Следующая →') : ''}` : '';
         pager.querySelectorAll('[data-news-page]').forEach(link => link.addEventListener('click', event => {event.preventDefault();page=Number(link.dataset.newsPage);apply(true);root.scrollIntoView({block:'start'});}));
       }
-      newsCore.setStatus(status, filtered.length, originPool.length, newsCore.activeFilterCount(state));
-      if (sync) newsCore.syncUrl({...state,page:page>1 || /\/archive\//.test(window.location.pathname) ? String(page) : ''}, newsFields);
+      newsCore.setStatus(status, shown.length, filtered.length, newsCore.activeFilterCount(state));
+      state.page = page>1 || /\/archive\//.test(window.location.pathname) ? String(page) : '';
+      if (sync) newsCore.syncUrl(state, newsFields);
     }
 
     newsCore.bindControls(controls, () => {page=1;apply(true);});
