@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T20:42:54.867Z",
+  "generated_at": "2026-11-13T05:27:09.100Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 414,
-  "pages_checked": 414,
-  "links_discovered": 11306,
-  "internal_links_checked": 8035,
-  "unique_internal_targets": 1082,
-  "external_links_ignored": 580,
+  "pages_indexed": 415,
+  "pages_checked": 415,
+  "links_discovered": 11283,
+  "internal_links_checked": 8059,
+  "unique_internal_targets": 1118,
+  "external_links_ignored": 593,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
@@ -16,122 +16,122 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1008,
+      "duration_ms": 1036,
       "bytes": 8333
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 76,
+      "duration_ms": 51,
       "bytes": 9062
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 40,
+      "duration_ms": 27,
       "bytes": 8560
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 39,
+      "duration_ms": 26,
       "bytes": 16380
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 39,
+      "duration_ms": 26,
       "bytes": 12170
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 37,
+      "duration_ms": 25,
       "bytes": 9797
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 35,
+      "duration_ms": 24,
       "bytes": 16246
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 35,
+      "duration_ms": 24,
       "bytes": 23405
-    },
-    {
-      "route": "/chairperson/verify-card/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 10852
     },
     {
       "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 13,
       "bytes": 15811
     },
     {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
+      "route": "/documents/templates/meeting-registration/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 3948
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 23798
-    },
-    {
-      "route": "/chairperson/news/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 5806
-    },
-    {
-      "route": "/check-tos/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 6185
-    },
-    {
-      "route": "/communication-kit/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 25272
+      "duration_ms": 12,
+      "bytes": 5962
     },
     {
       "route": "/materials/chairperson-first-100-days/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 12,
       "bytes": 11164
-    },
-    {
-      "route": "/documents/templates/tos-creation-kit/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 6602
     },
     {
       "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 11,
       "bytes": 8578
+    },
+    {
+      "route": "/chairperson/verify-card/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 10852
+    },
+    {
+      "route": "/communication-kit/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 25272
+    },
+    {
+      "route": "/contacts/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 22305
+    },
+    {
+      "route": "/materials/choose-tos-project/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 7843
+    },
+    {
+      "route": "/check-tos/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 6185
     },
     {
       "route": "/documents/templates/project-schedule/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 10,
       "bytes": 16054
     },
     {
-      "route": "/documents/templates/project-support/index.html",
+      "route": "/legal/federal-law-33/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 14006
+      "duration_ms": 10,
+      "bytes": 17594
+    },
+    {
+      "route": "/map/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 50581
     }
   ]
 }

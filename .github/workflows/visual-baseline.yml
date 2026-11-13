@@ -237,6 +237,9 @@ jobs:
           cat .artifacts/visual-baseline/server.log
           exit 1
 
+      - name: Test resident territory selection, help, calendar and housing links
+        run: node scripts/test_public_resident_area.js
+
       - name: Test brand redesign interactions
         run: node scripts/test_brand_redesign.js
 
@@ -277,8 +280,6 @@ jobs:
         run: node scripts/test_public_project_workspace.js
       - name: Test resilient navigation, printable packets and honest use records
         run: node scripts/test_public_portal_usability.js
-      - name: Test resident territory selection, help, calendar and housing links
-        run: node scripts/test_public_resident_area.js
 
       - name: Test public territory map and local boundary editor
         run: node scripts/test_public_territory_map.js
