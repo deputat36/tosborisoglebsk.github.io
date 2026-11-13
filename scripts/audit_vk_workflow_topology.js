@@ -43,10 +43,10 @@ function validatePrimaryWorkflow(text) {
     'name: Update VK news',
     'workflow_dispatch:',
     'schedule:',
-    "cron: '0 */6 * * *'",
+    "cron: '0 * * * *'",
     'contents: write',
     'group: update-vk-news-release',
-    'cancel-in-progress: true',
+    'cancel-in-progress: false',
     'ref: release-2025-12-22',
     "node-version: '24'",
     'VK_TOKEN: ${{ secrets.VK_TOKEN }}',
@@ -54,24 +54,19 @@ function validatePrimaryWorkflow(text) {
     'VK_DOMAIN: ${{ vars.VK_DOMAIN }}',
     'VK_HASHTAGS: ${{ vars.VK_HASHTAGS }}',
     'VK_COUNT: ${{ vars.VK_COUNT }}',
-    'NEWS_LIMIT: ${{ vars.NEWS_LIMIT }}',
+    'VK_IMPORT_MODE: all',
+    'push:',
+    'data/vk_import_pending.json',
+    'scripts/publish_vk_archive.js',
     'node scripts/test_vk_workflow_topology.js',
     'node scripts/audit_vk_workflow_topology.js',
     'node scripts/import_vk_news.js',
-    'node scripts/migrate_content_origins.js',
-    'node scripts/generate_content_origin_report.js',
-    'node scripts/generate_news_pages.js',
-    'node scripts/generate_material_pages.js',
-    'node scripts/generate_sitemap.js',
-    'node scripts/audit_content_origins.js',
-    'node scripts/audit_site_links.js',
-    'node scripts/audit_seo.js',
-    "commit_message: 'Auto update trusted news from VK'",
+    'node scripts/publish_vk_archive.js',
+    "commit_message: 'Auto update complete VK news archive'",
     'branch: release-2025-12-22',
     'data/news.json',
     'data/content_origin_report.json',
-    'news/*/index.html',
-    'materials/*/index.html',
+    '**/index.html',
     'sitemap.xml'
   ], errors, PRIMARY_WORKFLOW);
 
@@ -98,26 +93,28 @@ function validateImporter(text) {
     "const VK_TOKEN = process.env.VK_TOKEN || '';",
     "const VK_DOMAIN = process.env.VK_DOMAIN || DEFAULT_VK_DOMAIN;",
     "const VK_API_VERSION = process.env.VK_API_VERSION || '5.199';",
-    'hasAllowedHashtag(post.text)',
-    '.filter((post) => !post.is_pinned)',
-    'function mergeImportedNews(existing, imported, vkLimit = NEWS_LIMIT)',
+    "mode = env.VK_IMPORT_MODE || 'all'",
+    '#неНаСайтТОСБГО',
+    'function shouldImport(post',
+    'function mergeImportedNews(existing, imported, vkLimit = Infinity)',
     "item.imported_from !== 'vk'",
     "item.imported_from === 'vk'",
-    '.slice(0, effectiveLimit)',
-    'const merged = mergeImportedNews(existing, imported, NEWS_LIMIT);',
-    "status: 'published'",
-    "source: 'ВКонтакте'",
+    'function scanWall(',
+    'onCheckpoint',
+    'page.count',
+    'copy_history',
+    "status:'published'",
+    "source:'ВКонтакте'",
     'source_url:',
-    'writeJson(NEWS_PATH, merged)',
-    'generateNewsPage(item)',
-    'updateSitemap(merged)',
+    'writeJson(NEWS_PATH,outcome.merged)',
+    'missing_confirmations',
     'group/community access token',
     'if (require.main === module)',
-    'mergeImportedNews\n};'
+    'module.exports = {extractHashtags'
   ], errors, 'scripts/import_vk_news.js');
 
   if (text.includes('vk_posts.json')) errors.push('scripts/import_vk_news.js: legacy data target is forbidden');
-  if (!text.includes('HASHTAGS.some')) errors.push('scripts/import_vk_news.js: service hashtag allowlist is required');
+  if (!text.includes('STOP_TAGS.some')) errors.push('scripts/import_vk_news.js: exact exclusion marker is required');
   if (/Array\.from\([^\n]*\)\s*\n?\s*\.sort\([\s\S]{0,250}?\.slice\(0,\s*NEWS_LIMIT\)/.test(text)) {
     errors.push('scripts/import_vk_news.js: NEWS_LIMIT must not truncate the whole canonical news collection');
   }
@@ -148,7 +145,7 @@ function validateTopology(entries) {
 
 function runSelfTest() {
   const validEntries = [
-    { name: PRIMARY_WORKFLOW, text: "schedule:\n  - cron: '0 */6 * * *'\nenv:\n  VK_TOKEN: value\nrun: node scripts/import_vk_news.js" }
+    { name: PRIMARY_WORKFLOW, text: "schedule:\n  - cron: '0 * * * *'\nenv:\n  VK_TOKEN: value\nrun: node scripts/import_vk_news.js" }
   ];
   const validErrors = validateTopology(validEntries);
   if (validErrors.length) throw new Error(`valid topology rejected: ${validErrors.join('; ')}`);
@@ -173,8 +170,8 @@ function runSelfTest() {
   }
 
   const importerErrors = validateImporter("const NEWS_PATH = path.join(ROOT, 'data', 'news.json');");
-  if (!importerErrors.some((error) => error.includes('service hashtag allowlist is required'))) {
-    throw new Error('importer without hashtag allowlist was not rejected');
+  if (!importerErrors.some((error) => error.includes('exact exclusion marker is required'))) {
+    throw new Error('importer without exclusion marker was not rejected');
   }
   if (!importerErrors.some((error) => error.includes("DEFAULT_VK_DOMAIN = 'tosbgo'"))) {
     throw new Error('importer without public VK domain fallback was not rejected');
@@ -220,6 +217,7 @@ function runRepositoryAudit() {
 
   if (fs.existsSync(primaryWorkflowPath)) errors.push(...validatePrimaryWorkflow(read(primaryWorkflowPath)));
   if (fs.existsSync(PRIMARY_IMPORTER)) errors.push(...validateImporter(read(PRIMARY_IMPORTER)));
+  requireTokens(read(path.join(ROOT, 'scripts/publish_vk_archive.js')), ['generate_news_pages.js', 'generate_tos_pages.js', 'generate_resident_area.js', 'generate_collection_fallbacks.js', 'generate_public_experience.js', 'generate_page_index.js', 'generate_sitemap.js', 'audit_content_origins.js', 'audit_site_links.js', 'audit_seo.js'], errors, 'VK publication transaction');
 
   if (!fs.existsSync(DOC_PATH)) {
     errors.push('missing documentation: docs/VK-IMPORT-OWNERSHIP-2026-07-14.md');
@@ -229,8 +227,9 @@ function runRepositoryAudit() {
       '`update-vk-news.yml`',
       '`data/news.json`',
       '`data/vk_posts.json` не используется',
-      'Хештег является редакционным разрешением на импорт',
-      '`NEWS_LIMIT` ограничивает только',
+      'По поручению владельца от 13.11.2026',
+      '#неНаСайтТОСБГО',
+      'без ограничения архива',
       'error 27',
       '#350',
       'Успешный PR-CI не доказывает'

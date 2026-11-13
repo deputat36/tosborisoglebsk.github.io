@@ -27,7 +27,7 @@ function expectIncludes(errors, line, html, value, message) {
 }
 
 function htmlEntityAmp(value) {
-  return String(value || '').replace(/&/g, '&amp;');
+  return String(value || '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 }
 
 function contextLinksFromHtml(html) {
@@ -83,21 +83,25 @@ function main() {
     const date = item.date || '';
 
     expectIncludes(errors, line, html, '<html lang="ru">', 'page must declare Russian language');
-    expectIncludes(errors, line, html, `<title>${title} | ТОС БГО</title>`, 'title must match news title template');
+    expectIncludes(errors, line, html, `<title>${htmlEntityAmp(title)} | ТОС БГО</title>`, 'title must match news title template');
     expectIncludes(errors, line, html, `<meta name="description" content="${htmlEntityAmp(lead)}"`, 'meta description must match lead');
     expectIncludes(errors, line, html, `<link rel="canonical" href="${pageUrl}"`, 'missing canonical URL');
     expectIncludes(errors, line, html, '<meta property="og:type" content="article"', 'Open Graph type must be article');
     expectIncludes(errors, line, html, `<meta property="og:url" content="${pageUrl}"`, 'missing Open Graph URL');
-    expectIncludes(errors, line, html, `<h1>${title}</h1>`, 'h1 must match news title');
-    expectIncludes(errors, line, html, lead, 'lead text is missing');
+    expectIncludes(errors, line, html, `<h1>${htmlEntityAmp(title)}</h1>`, 'h1 must match news title');
+    expectIncludes(errors, line, html, htmlEntityAmp(lead), 'lead text is missing');
     expectIncludes(errors, line, html, '/assets/css/styles.css', 'styles.css is missing');
     expectIncludes(errors, line, html, '/assets/js/site.js', 'site.js is missing');
     expectIncludes(errors, line, html, 'data-action="menu"', 'menu control is missing');
     expectIncludes(errors, line, html, 'data-action="theme"', 'theme control is missing');
     expectIncludes(errors, line, html, 'Страница новости создана автоматически из data/news.json', 'generated-data footer note is missing');
     expectIncludes(errors, line, html, '"@type":"NewsArticle"', 'NewsArticle JSON-LD is missing');
-    expectIncludes(errors, line, html, `"headline":"${title}`, 'JSON-LD headline is missing');
-    expectIncludes(errors, line, html, `"datePublished":"${date}"`, 'JSON-LD datePublished is missing');
+    try {
+      const schema = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
+      if (schema.headline !== title) errors.push(`${line}: JSON-LD headline mismatch`);
+      if (schema.datePublished !== (item.published_at || date)) errors.push(`${line}: JSON-LD publication timestamp mismatch`);
+    } catch (_) {errors.push(`${line}: invalid JSON-LD`);}
+
     expectIncludes(errors, line, html, `"mainEntityOfPage":"${pageUrl}"`, 'JSON-LD mainEntityOfPage is missing');
     expectIncludes(errors, line, html, '<a class="chip" href="/news/">', 'back link to news feed is missing');
     expectIncludes(errors, line, html, 'id="news-context"', 'context navigation section is missing');
@@ -108,7 +112,7 @@ function main() {
 
     if (Array.isArray(item.text)) {
       item.text.forEach((paragraph, paragraphIndex) => {
-        if (paragraph && !html.includes(paragraph)) {
+        if (paragraph && !html.includes(htmlEntityAmp(paragraph))) {
           errors.push(`${line}: missing paragraph ${paragraphIndex + 1}`);
         }
       });

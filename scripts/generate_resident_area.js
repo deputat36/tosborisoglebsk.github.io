@@ -11,7 +11,7 @@ function dataForPage() {
     events: read('events').filter(core.publicItem).map(item => pick(item, ['id', 'status', 'date', 'time', 'title', 'description', 'place', 'tos_slug', 'source', 'source_url', 'source_checked_at', 'content_origin'])),
     needs: read('needs').filter(core.publicItem).map(item => pick(item, ['id', 'status', 'date', 'tos_slug', 'title', 'description', 'need_type', 'source', 'source_url', 'content_origin', 'source_checked_at', 'checked_at', 'valid_until', 'deadline'])),
     done: read('done').filter(item => core.publicItem(item) && item.content_origin === 'verified').map(item => pick(item, ['id', 'status', 'date', 'tos_slug', 'title', 'summary', 'source_url', 'content_origin'])),
-    news: read('news').filter(item => core.publicItem(item) && item.content_origin === 'verified' && item.tos_slug).map(item => pick(item, ['id', 'status', 'date', 'tos_slug', 'title', 'lead', 'summary', 'description', 'source_url', 'content_origin'])),
+    news: read('news').filter(item => core.publicItem(item) && (item.content_origin === 'verified' || item.imported_from === 'vk') && item.tos_slug).map(item => pick(item, ['id', 'status', 'date', 'tos_slug', 'title', 'lead', 'summary', 'description', 'source_url', 'content_origin', 'imported_from'])),
     scenarios: read('zhkh_routes').scenarios.map(item => pick(item, ['id', 'title']))
   };
 }

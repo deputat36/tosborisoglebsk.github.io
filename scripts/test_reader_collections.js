@@ -5,10 +5,10 @@ const expectedMaterials=require('../assets/js/materials-core').buildCatalog(JSON
  const c=await b.newContext({viewport:{width,height:900},javaScriptEnabled:mode!=='no-js'});
  if(mode==='failed-data')await c.route('**/data/*.json',r=>r.fulfill({status:503,body:'unavailable'}));
  for(const [route,selector,count]of [['/news/','#news-feed article',expectedNews],['/materials/','#articles-list article',expectedMaterials]]){
- const p=await c.newPage();await p.goto('http://127.0.0.1:4173'+route);await p.waitForTimeout(400);assert.equal(await p.locator(selector).count(),count);
+ const p=await c.newPage();await p.goto('http://127.0.0.1:4173'+route);await p.waitForTimeout(400);assert.equal(await p.locator(selector).count(),route==='/news/'?Math.min(24,count):count);
  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
  assert.equal((await p.locator('body').innerText()).includes('Проверьте файл data/'),false);
- if(route==='/news/'&&mode==='normal'){await p.locator('#news-search').fill('Подстепки');await p.waitForTimeout(150);assert.ok(await p.locator(selector).count()>0);assert.ok(await p.locator(selector).count()<expectedNews)}
+ if(route==='/news/'&&mode==='normal'){assert(await p.locator('#news-pagination').innerText().then(text=>text.includes('из')));await p.locator('#news-pagination a').last().click();await p.waitForTimeout(150);assert(new URL(p.url()).searchParams.get('page')==='2');await p.locator('#news-search').fill('Подстепки');await p.waitForTimeout(150);assert.ok(await p.locator(selector).count()>0);assert.ok(await p.locator(selector).count()<expectedNews)}
  if(route==='/news/'&&mode==='failed-data')assert.equal(await p.locator('#news-search').isDisabled(),true);
  await p.close();
  }await c.close();console.log('Reader collections OK',width,mode)

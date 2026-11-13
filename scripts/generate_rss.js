@@ -52,7 +52,7 @@ function main() {
   // запросы сведений, но не отправляются подписчикам как новости.
   const news = readJson(NEWS_PATH)
     .filter(isRssNews)
-    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.published_at || '').localeCompare(String(a.published_at || '')));
 
   const items = news.map((item) => {
     const link = `${SITE_URL}/news/${item.id}/`;
@@ -62,7 +62,7 @@ function main() {
       <title>${esc(title)}</title>
       <link>${esc(link)}</link>
       <guid isPermaLink="true">${esc(link)}</guid>
-      <pubDate>${pubDate(item.date)}</pubDate>
+      <pubDate>${item.published_at ? new Date(item.published_at).toUTCString() : pubDate(item.date)}</pubDate>
       <description>${esc(description)}</description>
     </item>`;
   }).join('\n');

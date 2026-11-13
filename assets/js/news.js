@@ -10,7 +10,8 @@ const newsEsc = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
 }[char]));
 
 const newsPublished = (item) => item.status !== 'draft';
-const newsFields = ['q', 'category', 'tos', 'origin'];
+const newsFields = ['q', 'category', 'tos', 'origin', 'year', 'page'];
+const NEWS_PAGE_SIZE = 24;
 
 function newsOrigin(item) {
   if (['verified', 'editorial', 'starter', 'request'].includes(item.content_origin)) return item.content_origin;
@@ -24,6 +25,7 @@ function newsDefaultVisible(item) {
 }
 
 function newsOriginTag(item) {
+  if (item.imported_from === 'vk') return '<span class="tag">Из сообщества ВКонтакте</span>';
   const origin = newsOrigin(item);
   const labels = {
     verified: 'Подтверждено источником',
@@ -36,6 +38,7 @@ function newsOriginTag(item) {
 }
 
 function newsOriginNotice(item) {
+  if (item.imported_from === 'vk') return '';
   const origin = newsOrigin(item);
   if (origin === 'verified') return '';
   if (origin === 'request') return '<div class="notice"><b class="news-origin-label">Это запрос материалов</b><br>Запись приглашает прислать сведения, фото или уточнение и не подтверждает, что событие уже произошло.</div>';
@@ -90,7 +93,8 @@ function renderNewsSummary(items, total) {
   const root = document.querySelector('#news-summary');
   if (!root) return;
   const counts = newsCore.countOrigins(items, newsOrigin);
-  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>показано из ${total}</span></div><div class="summary-tile"><b>${counts.verified}</b><span>подтверждено источником</span></div><div class="summary-tile"><b>${counts.editorial}</b><span>редакционные материалы</span></div><div class="summary-tile"><b>${counts.starter}</b><span>стартовые материалы</span></div><div class="summary-tile"><b>${counts.request}</b><span>запросы материалов</span></div></div>`;
+  const vkCount = items.filter(item => item.imported_from === 'vk').length;
+  root.innerHTML = `<div class="summary-grid"><div class="summary-tile"><b>${items.length}</b><span>найдено из ${total}</span></div><div class="summary-tile"><b>${counts.verified}</b><span>подтверждено источником</span></div><div class="summary-tile"><b>${counts.editorial-vkCount}</b><span>редакционные материалы</span></div><div class="summary-tile"><b>${vkCount}</b><span>из сообщества ВКонтакте</span></div><div class="summary-tile"><b>${counts.starter}</b><span>стартовые материалы</span></div><div class="summary-tile"><b>${counts.request}</b><span>запросы материалов</span></div></div>`;
 }
 
 async function renderNewsPage() {
@@ -101,7 +105,8 @@ async function renderNewsPage() {
     q: document.querySelector('#news-search'),
     category: document.querySelector('#news-category-filter'),
     tos: document.querySelector('#news-tos-filter'),
-    origin: document.querySelector('#news-origin-filter')
+    origin: document.querySelector('#news-origin-filter'),
+    year: document.querySelector('#news-year-filter')
   };
   if (controls.origin?.options?.[0]) controls.origin.options[0].textContent = 'Содержательные публикации';
   const reset = document.querySelector('#news-reset-filters');
@@ -114,10 +119,13 @@ async function renderNewsPage() {
     const categories = [...new Set(news.map((item) => item.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'ru'));
     const usedTos = [...new Set(news.map((item) => item.tos_slug).filter(Boolean))];
 
+    if (controls.year) controls.year.innerHTML = '<option value="">Все годы</option>' + [...new Set(news.map(item => String(item.date || '').slice(0,4)).filter(value => /^\d{4}$/.test(value)))].sort().reverse().map(year => `<option>${year}</option>`).join('');
     if (controls.category) controls.category.innerHTML = '<option value="">Все темы</option>' + categories.map((value) => `<option>${newsEsc(value)}</option>`).join('');
     if (controls.tos) controls.tos.innerHTML = '<option value="">Все ТОС</option>' + usedTos.map((slug) => `<option value="${newsEsc(slug)}">${newsEsc(newsTosName(slug, toses))}</option>`).join('');
 
-    newsCore.applyControls(newsCore.parseState(window.location.search, newsFields), controls);
+    const initial = newsCore.parseState(window.location.search, newsFields);
+    let page = Math.max(1, Math.floor(Number(initial.page)) || Number(window.location.pathname.match(/\/archive\/(\d+)\//)?.[1]) || 1);
+    newsCore.applyControls(initial, controls);
 
     function apply(sync = true) {
       const state = newsCore.readControls(controls);
@@ -128,22 +136,34 @@ async function renderNewsPage() {
       const filtered = originPool
         .filter((item) => !state.category || item.category === state.category)
         .filter((item) => !state.tos || item.tos_slug === state.tos)
+        .filter((item) => !state.year || String(item.date || '').startsWith(state.year))
         .filter((item) => {
           const tosName = newsTosName(item.tos_slug, toses);
-          const hay = newsCore.normalizeText([item.title, item.lead, item.category, item.source, item.tos_slug, tosName, newsOrigin(item), ...(item.text || [])].join(' '));
+          const hay = newsCore.normalizeText([item.title, item.lead, item.category, item.source, item.tos_slug, tosName, newsOrigin(item), ...(item.text || []), ...(item.reposts || []).flatMap(part => part.text || [])].join(' '));
           return !query || hay.includes(query);
         })
-        .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+        .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.published_at || b.date || '').localeCompare(String(a.published_at || a.date || '')));
 
-      root.innerHTML = filtered.length ? filtered.map((item) => newsCard(item, toses)).join('') : '<div class="empty">По выбранным фильтрам новости и материалы не найдены. Сбросьте фильтры или измените запрос.</div>';
+      const pages = Math.max(1, Math.ceil(filtered.length / NEWS_PAGE_SIZE));
+      page = Math.min(page, pages);
+      const shown = filtered.slice((page-1)*NEWS_PAGE_SIZE,page*NEWS_PAGE_SIZE);
+      root.innerHTML = shown.length ? shown.map((item) => newsCard(item, toses)).join('') : '<div class="empty">По выбранным фильтрам новости и материалы не найдены. Сбросьте фильтры или измените запрос.</div>';
       renderNewsSummary(filtered, originPool.length);
-      newsCore.setStatus(status, filtered.length, originPool.length, newsCore.activeFilterCount(state));
+      const pager = document.querySelector('#news-pagination');
+      if (pager) {
+        const link = (number,label) => {const query = new URLSearchParams({...state,page:String(number)});return `<a class="btn" href="/news/?${newsEsc(query.toString())}" data-news-page="${number}">${label}</a>`;};
+        pager.innerHTML = pages>1 ? `${page>1 ? link(page-1,'← Предыдущая') : ''}<span>Страница ${page} из ${pages}</span>${page<pages ? link(page+1,'Следующая →') : ''}` : '';
+        pager.querySelectorAll('[data-news-page]').forEach(link => link.addEventListener('click', event => {event.preventDefault();page=Number(link.dataset.newsPage);apply(true);root.scrollIntoView({block:'start'});}));
+      }
+      newsCore.setStatus(status, shown.length, filtered.length, newsCore.activeFilterCount(state));
+      state.page = page>1 || /\/archive\//.test(window.location.pathname) ? String(page) : '';
       if (sync) newsCore.syncUrl(state, newsFields);
     }
 
-    newsCore.bindControls(controls, () => apply(true));
+    newsCore.bindControls(controls, () => {page=1;apply(true);});
     reset?.addEventListener('click', () => {
       newsCore.resetControls(controls);
+      page=1;
       apply(true);
       controls.q?.focus();
     });

@@ -193,9 +193,9 @@ function relatedTrust(item, collection) {
   const origin = inferContentOrigin(item, collection);
   return {
     origin,
-    label: contentOriginLabel(origin),
+    label: item.imported_from === 'vk' ? 'Из сообщества ВКонтакте' : contentOriginLabel(origin),
     className: contentOriginClass(origin),
-    notice: contentOriginNotice(origin, collection)
+    notice: item.imported_from === 'vk' ? 'Публикация сообщества; дата и ссылка на исходную запись сохранены.' : contentOriginNotice(origin, collection)
   };
 }
 function relatedAttributes(item, collection, origin = '') {
