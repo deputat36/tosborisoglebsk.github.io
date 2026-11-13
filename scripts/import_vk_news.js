@@ -110,15 +110,16 @@ function hasAllowedHashtag(text) {
 function makeTitle(text, tagMap) {
   const clear = stripServiceHashtags(text, tagMap).replace(/\s+/g, ' ').trim();
   if (!clear) return 'Новость ТОС БГО';
-  const firstSentence = clear.split(/[.!?]\s/)[0].trim();
+  const sentence = clear.split(/[.!?]\s/)[0].trim();
+  const firstSentence = sentence.length>=8 ? sentence : sentence + ' — публикация ТОС БГО';
   // Generated <title> appends " | ТОС БГО" (10 characters); SEO limit is 90.
   return firstSentence.length > 80 ? firstSentence.slice(0, 77).trim() + '...' : firstSentence;
 }
 
 function makeLead(text, tagMap) {
   const clear = stripServiceHashtags(text, tagMap).replace(/\s+/g, ' ').trim();
-  if (!clear) return 'Новость из сообщества ВКонтакте.';
-  return clear.length > 170 ? clear.slice(0, 167).trim() + '...' : clear;
+  const lead = clear.length>=80 ? clear : (clear || 'Материалы сообщества ВКонтакте.') + ' Публикация ТОС БГО: сохранены дата, текст автора, доступные вложения и ссылка на исходную запись.';
+  return lead.length > 170 ? lead.slice(0, 167).trim() + '...' : lead;
 }
 
 function splitText(text, tagMap) {

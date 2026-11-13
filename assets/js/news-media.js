@@ -35,22 +35,22 @@
     const gallery = photos.slice(0,thumbnail ? 1 : undefined).map(image => {
       const src = thumbnail ? image.thumbnail : image.src;
       const dimensions = !thumbnail && image.width && image.height ? ` width="${image.width}" height="${image.height}"` : '';
-      const img = `<img src="${escape(src)}" alt="${escape(image.alt)}"${dimensions} loading="lazy" decoding="async" referrerpolicy="no-referrer" style="display:block;width:100%;height:auto;${thumbnail ? 'max-height:280px;object-fit:contain;' : ''}border-radius:16px"/>`;
-      return `<figure style="margin:0 0 20px">${thumbnail ? img : `<a href="${escape(image.full)}" target="_blank" rel="noopener noreferrer" aria-label="${escape('Открыть фотографию: ' + image.alt)}">${img}</a>`}${!thumbnail && image.caption ? `<figcaption class="tiny">${escape(image.caption)}</figcaption>` : ''}</figure>`;
+      const img = `<img src="${escape(src)}" alt="${escape(image.alt)}"${dimensions} loading="lazy" decoding="async" referrerpolicy="no-referrer" class="news-media-image${thumbnail ? ' news-media-thumbnail' : ''}"/>`;
+      return `<figure class="news-media-figure">${thumbnail ? img : `<a href="${escape(image.full)}" target="_blank" rel="noopener noreferrer" aria-label="${escape('Открыть фотографию: ' + image.alt)}">${img}</a>`}${!thumbnail && image.caption ? `<figcaption class="tiny">${escape(image.caption)}</figcaption>` : ''}</figure>`;
     }).join('');
     const attachments = (Array.isArray(item.attachments) ? item.attachments : []).filter(a => safeUrl(a.url));
     if (thumbnail) {
       if (gallery) return gallery;
       const video = attachments.find(a => a.type === 'video' && safeUrl(a.preview));
-      return video ? `<figure style="margin:0 0 20px"><img src="${escape(safeUrl(video.preview))}" alt="${escape(video.title || 'Видео к публикации')}" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="display:block;width:100%;max-height:280px;object-fit:contain;border-radius:16px"/><figcaption class="tiny">Видео ВКонтакте</figcaption></figure>` : '';
+      return video ? `<figure class="news-media-figure"><img src="${escape(safeUrl(video.preview))}" alt="${escape(video.title || 'Видео к публикации')}" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="news-media-image news-media-thumbnail"/><figcaption class="tiny">Видео ВКонтакте</figcaption></figure>` : '';
     }
-    return gallery + attachments.map(a => {
+    return (gallery ? `<div class="news-media-gallery${photos.length===1 ? ' news-media-single' : ''}">${gallery}</div>` : '') + attachments.map(a => {
       const title = escape(a.title || 'Открыть материал'), url = escape(safeUrl(a.url));
       const player = a.type === 'video' ? safePlayer(a.player) : '';
-      const preview = a.type === 'video' && !player && safeUrl(a.preview) ? `<img src="${escape(safeUrl(a.preview))}" alt="${title}" loading="lazy" decoding="async" referrerpolicy="no-referrer" style="display:block;width:100%;height:auto;border-radius:16px"/>` : '';
-      const embed = player ? `<iframe src="${escape(player)}" title="${title}" loading="lazy" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="width:100%;aspect-ratio:16/9;border:0;border-radius:16px"></iframe>` : preview;
+      const preview = a.type === 'video' && !player && safeUrl(a.preview) ? `<img src="${escape(safeUrl(a.preview))}" alt="${title}" loading="lazy" decoding="async" referrerpolicy="no-referrer" class="news-media-image"/>` : '';
+      const embed = player ? `<iframe src="${escape(player)}" title="${title}" loading="lazy" allow="fullscreen; encrypted-media; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" class="news-media-player"></iframe>` : preview;
       const label = {video:'Смотреть видео ВКонтакте',document:'Открыть документ',audio:'Слушать ВКонтакте',link:'Открыть материал'}[a.type] || 'Открыть материал';
-      return `<figure style="margin:0 0 24px">${embed}<figcaption><a href="${url}" target="_blank" rel="noopener noreferrer">${escape(label)}: ${title}</a></figcaption></figure>`;
+      return `<figure class="news-media-figure">${embed}<figcaption><a href="${url}" target="_blank" rel="noopener noreferrer">${escape(label)}: ${title}</a></figcaption></figure>`;
     }).join('');
   }
   function renderReposts(item) {

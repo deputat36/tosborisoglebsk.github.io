@@ -1,3 +1,4 @@
+const {decodeHtmlText} = require('./lib/html_text');
 const fs = require('fs');
 const path = require('path');
 
@@ -30,14 +31,14 @@ function readJson(relativePath, fallback = null) {
 }
 
 function getTitle(html) {
-  return (html.match(/<title>([^<]*)<\/title>/i) || [])[1] || '';
+  return decodeHtmlText((html.match(/<title>([^<]*)<\/title>/i) || [])[1] || '');
 }
 
 function getMeta(html, name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const reName = new RegExp(`<meta[^>]+name=["']${escaped}["'][^>]+content=["']([^"']*)["']`, 'i');
   const reProp = new RegExp(`<meta[^>]+property=["']${escaped}["'][^>]+content=["']([^"']*)["']`, 'i');
-  return (html.match(reName) || html.match(reProp) || [])[1] || '';
+  return decodeHtmlText((html.match(reName) || html.match(reProp) || [])[1] || '');
 }
 
 function getCanonical(html) {

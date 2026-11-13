@@ -15,3 +15,7 @@ const repost=media.renderReposts({reposts:[{source_url:'https://vk.com/wall-1_2'
 const video=media.render({attachments:[{type:'video',title:'Фильм',url:'https://vk.com/video-1_2',player:'https://vk.com/video_ext.php?oid=-1&id=2'}]});assert(video.includes('<iframe'));assert(video.includes('Смотреть видео'));
 assert(!media.render({attachments:[{type:'video',url:'https://vk.com/video-1_2',player:'https://evil.test/x'}]}).includes('<iframe'));
 console.log('Remote photos, video players, attachment links and repost provenance OK');
+assert(!media.render({...item,images:Array.from({length:20},(_,i)=>'/assets/img/'+i+'.jpg')}).includes('style='),'Large galleries use reusable CSS, not per-image inline styles');
+const decode=require('./lib/html_text').decodeHtmlText;
+assert.equal(decode('ТОС &quot;Уютный&quot; &#x1F333;'),'ТОС "Уютный" 🌳');
+assert.equal(decode('&amp;quot;'),'&quot;','Decode one HTML layer only');
