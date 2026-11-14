@@ -6,7 +6,7 @@
 .tos-detail .tos-detail-logo { float:right; margin:0 0 12px 20px; }
 .tos-detail .tos-detail-logo .large { margin-bottom:0; }
 .tos-detail .tos-passport-grid { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
-.tos-detail .tos-passport-grid .card { height:100%; }
+.tos-detail .tos-passport-grid>.card { grid-column:auto; height:100%; }
 .tos-field-source { margin:10px 0; font-size:13px; color:var(--muted); }
 .tos-field-source summary,.tos-related-source summary { cursor:pointer; padding-block:5px; }
 .tos-source-details { margin-block:18px; }
