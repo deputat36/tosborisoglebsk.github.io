@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T18:21:48.780Z",
+  "generated_at": "2026-11-14T18:45:47.997Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-11-14T18:22:29.604Z",
+    "generated_at": "2026-11-14T18:46:25.788Z",
     "stale_after_days": 180,
     "total_tos": 26,
     "high_priority": 4,
@@ -296,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-11-14T18:15:30.118Z",
+    "generated_at": "2026-11-14T18:45:39.982Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -344,7 +344,7 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-11-14T18:21:54.411Z",
+    "generated_at": "2026-11-14T18:45:52.734Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
@@ -402,11 +402,11 @@
       "visual_baseline_scope": "Проверяется в pull request; результат конкретного запуска хранится в GitHub Actions artifact."
     },
     "validation_context": {
-      "source": "local",
-      "workflow": "",
-      "run_id": "",
-      "run_number": "",
-      "commit_sha": ""
+      "source": "github_actions",
+      "workflow": "Generate TOS pages",
+      "run_id": "43628335750",
+      "run_number": "2083",
+      "commit_sha": "953cd7644a5a1dec4caf0a58ae442293e76687b4"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-11-14T18:22:29.604Z",
+    "generated_at": "2026-11-14T18:46:25.788Z",
     "total_tos": 26,
     "with_substantive_content": 24,
     "with_verified_content": 22,
