@@ -250,11 +250,18 @@ function enhanceKeyboardAccessibility() {
   });
 }
 
+function ensurePageHelperStyles() {
+  if ($('link[data-page-helper-styles]')) return;
+  const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = '/assets/css/page-helpers.css';
+  link.dataset.pageHelperStyles = ''; document.head.appendChild(link);
+}
+
 function addPageContents() {
   const main = $('#main');
   if (!main || $('[data-page-contents]') || /^\/(?:$|tos\/|map\/|culinary-battle\/|update-tos\/|news\/$)/.test(location.pathname)) return;
   const headings = [...main.querySelectorAll('h2')].filter(h => !h.closest('details'));
   if (headings.length < 5) return;
+  ensurePageHelperStyles();
   const box = document.createElement('details'); box.className = 'container page-contents'; box.dataset.pageContents = '';
   const summary = document.createElement('summary'); summary.textContent = 'На этой странице';
   const nav = document.createElement('nav'); nav.setAttribute('aria-label', 'Содержание страницы');
@@ -269,6 +276,7 @@ function addPageContents() {
 function handleUnavailableImages() {
   function fallback(image) {
     if (!image?.classList?.contains('news-media-image') || image.dataset.unavailable) return;
+    ensurePageHelperStyles();
     image.dataset.unavailable = 'true'; image.hidden = true;
     const text = document.createElement('p'); text.className = 'news-media-fallback';
     text.textContent = 'Изображение временно недоступно. Откройте публикацию по ссылке источника.';
