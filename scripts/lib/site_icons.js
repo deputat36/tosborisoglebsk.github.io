@@ -10,6 +10,11 @@ const ICON_LINKS = '<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x4
 function normalizeSiteIcons(html) {
   if (!/<head\b/i.test(html) || !/<\/head\s*>/i.test(html)) return html;
   return html.replace(/(<head\b[^>]*>)([\s\S]*?)(<\/head\s*>)/i, (_, open, head, close) => {
+    const current = (head.match(/<link\b[^>]*>/gi) || []).filter(tag => {
+      const rel = (tag.match(/\brel\s*=\s*["']([^"']*)["']/i) || [])[1] || '';
+      return /^(?:icon|shortcut\s+icon|apple-touch-icon(?:-precomposed)?)$/i.test(rel.trim());
+    }).join('');
+    if (current === ICON_LINKS) return open + head + close;
     const cleaned = head.replace(/<link\b[^>]*>/gi, tag => {
       const rel = (tag.match(/\brel\s*=\s*["']([^"']*)["']/i) || [])[1] || '';
       return /^(?:icon|shortcut\s+icon|apple-touch-icon(?:-precomposed)?)$/i.test(rel.trim()) ? '' : tag;
