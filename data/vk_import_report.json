@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "complete",
-  "synced_at": "2026-11-14T03:00:14.704Z",
+  "synced_at": "2026-11-14T10:11:20.009Z",
   "mode": "all",
   "domain": "tosbgo",
   "owner_id": -238997964,
@@ -14,7 +14,7 @@
   "published_vk_posts": 954,
   "canonical_posts": 78,
   "reposts": 891,
-  "photos": 3263,
+  "photos": 3264,
   "videos": 124,
   "removed_ids": [],
   "deletion_review": false,

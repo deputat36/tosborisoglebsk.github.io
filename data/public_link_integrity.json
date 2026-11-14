@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T07:02:57.613Z",
+  "generated_at": "2026-11-14T10:11:42.336Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1414,
   "pages_checked": 1414,
-  "links_discovered": 37124,
+  "links_discovered": 37125,
   "internal_links_checked": 26160,
   "unique_internal_targets": 3109,
-  "external_links_ignored": 7025,
+  "external_links_ignored": 7026,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
@@ -16,32 +16,26 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1055,
-      "bytes": 8333
-    },
-    {
-      "route": "/news/fond-borisoglebsk-contest-2026-11/index.html",
-      "status": 200,
       "duration_ms": 1008,
-      "bytes": 7359
+      "bytes": 8333
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 44,
+      "duration_ms": 41,
       "bytes": 9062
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 23,
+      "bytes": 8560
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 26,
+      "duration_ms": 22,
       "bytes": 16380
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 23,
-      "bytes": 23405
     },
     {
       "route": "/campaign/index.html",
@@ -50,88 +44,94 @@
       "bytes": 9797
     },
     {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 8560
-    },
-    {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 21,
       "bytes": 12170
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 19,
+      "duration_ms": 20,
       "bytes": 16246
     },
     {
-      "route": "/news/vk-238997964-994/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 17703
+      "duration_ms": 20,
+      "bytes": 23405
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/news/vk-238997964-288/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 8578
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 23798
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 15811
-    },
-    {
-      "route": "/news/vk-238997964-289/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 16517
-    },
-    {
-      "route": "/news/vk-238997964-991/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 20420
-    },
-    {
-      "route": "/news/vk-238997964-995/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 9878
-    },
-    {
-      "route": "/chairperson/news/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 5806
-    },
-    {
-      "route": "/chairperson/verify-card/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 10852
-    },
-    {
-      "route": "/news/vk-238997964-992/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 14005
+      "duration_ms": 14,
+      "bytes": 15396
     },
     {
       "route": "/news/vk-238997964-993/index.html",
       "status": 200,
-      "duration_ms": 10,
+      "duration_ms": 14,
       "bytes": 19107
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 23798
+    },
+    {
+      "route": "/news/vk-238997964-289/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 16517
+    },
+    {
+      "route": "/news/chkalovec-centr-prityazheniya-2024/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 7910
+    },
+    {
+      "route": "/news/chkalovec-parkovka-2021/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 7975
+    },
+    {
+      "route": "/news/vk-238997964-29/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 18513
+    },
+    {
+      "route": "/news/vk-238997964-995/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 9878
+    },
+    {
+      "route": "/news/voronezh-tos-krai-rodnoi-action-2026/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 9380
+    },
+    {
+      "route": "/news/voronezh-tos-public-chamber-roundtable-2026-10/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 8516
+    },
+    {
+      "route": "/news/znamenie-created-2024/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 7573
+    },
+    {
+      "route": "/news/chkalovec-cvetik-semicvetik-2022/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 7934
     }
   ]
 }
