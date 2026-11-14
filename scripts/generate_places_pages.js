@@ -1,3 +1,4 @@
+const { ICON_LINKS } = require('./lib/site_icons');
 const fs = require('fs');
 const path = require('path');
 const { auditPlacesBrowser } = require('./audit_places_browser');
@@ -144,7 +145,7 @@ function baseHead(title, description, canonical) {
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="${esc(canonical)}"/>
   <meta property="og:image" content="${SITE_URL}/assets/img/og-cover.svg"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  ${ICON_LINKS}
   <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>`;
 }

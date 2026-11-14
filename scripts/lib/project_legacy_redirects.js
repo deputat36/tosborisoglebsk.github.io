@@ -1,3 +1,4 @@
+const { ICON_LINKS } = require('./site_icons');
 const SITE_URL = 'https://tosborisoglebsk.ru';
 const LEGACY_REDIRECT_MARKER = 'Старая страница проекта перенаправлена генератором из scripts/lib/project_legacy_redirects.js.';
 
@@ -38,7 +39,7 @@ function renderLegacyProjectRedirect(target) {
   const escapedTarget = escapeHtml(target);
   const canonical = `${SITE_URL}${target}`;
 
-  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Страница проекта перемещена | ТОС БГО</title><meta name="description" content="Старая ссылка на проект ТОС сохранена и перенаправляет на актуальную страницу банка проектов."/><meta name="robots" content="noindex,follow"/><meta http-equiv="refresh" content="0; url=${escapedTarget}"/><link rel="canonical" href="${escapeHtml(canonical)}"/><link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="stylesheet" href="/assets/css/styles.css"/></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><main id="main"><section class="hero"><div class="container hero-card"><h1>Страница проекта перемещена</h1><p class="lead">Открываем актуальную страницу. Если переход не сработал автоматически, используйте кнопку ниже.</p><div class="hero-actions"><a class="btn primary" href="${escapedTarget}">Перейти к проекту</a><a class="btn" href="/projects/">Все проекты</a></div><p class="tiny">${LEGACY_REDIRECT_MARKER}</p></div></section></main></body></html>`;
+  return `<!doctype html><html lang="ru"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Страница проекта перемещена | ТОС БГО</title><meta name="description" content="Старая ссылка на проект ТОС сохранена и перенаправляет на актуальную страницу банка проектов."/><meta name="robots" content="noindex,follow"/><meta http-equiv="refresh" content="0; url=${escapedTarget}"/><link rel="canonical" href="${escapeHtml(canonical)}"/>${ICON_LINKS}<link rel="stylesheet" href="/assets/css/styles.css"/></head><body><a class="skip-link" href="#main">Перейти к содержимому</a><main id="main"><section class="hero"><div class="container hero-card"><h1>Страница проекта перемещена</h1><p class="lead">Открываем актуальную страницу. Если переход не сработал автоматически, используйте кнопку ниже.</p><div class="hero-actions"><a class="btn primary" href="${escapedTarget}">Перейти к проекту</a><a class="btn" href="/projects/">Все проекты</a></div><p class="tiny">${LEGACY_REDIRECT_MARKER}</p></div></section></main></body></html>`;
 }
 
 module.exports = {

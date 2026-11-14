@@ -1,3 +1,4 @@
+const { ICON_LINKS } = require('./lib/site_icons');
 const fs = require('fs');
 const path = require('path');
 const { inferContentOrigin, contentOriginLabel, contentOriginClass, contentOriginNotice } = require('./lib/content_origin');
@@ -104,7 +105,7 @@ function makePage(item, toses) {
   <meta property="og:type" content="article"/>
   <meta property="og:url" content="${esc(canonical)}"/>
   <meta property="og:image" content="${esc(imageFull)}"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  ${ICON_LINKS}
   <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>
   <script type="application/ld+json">${JSON.stringify(schema)}</script>

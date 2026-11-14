@@ -13,14 +13,15 @@
 - `https://tosborisoglebsk.ru/` ↔ `index.html`;
 - `https://tosborisoglebsk.ru/data/site_health.json` ↔ `data/site_health.json`;
 - `https://tosborisoglebsk.ru/actions-check/` ↔ `actions-check/index.html`;
-- `https://tosborisoglebsk.ru/sitemap.xml` ↔ `sitemap.xml`.
+- `https://tosborisoglebsk.ru/sitemap.xml` ↔ `sitemap.xml`;
+- `/favicon.ico`, `/favicon.png`, `/favicon.svg` и `/apple-touch-icon.png` на том же домене ↔ соответствующие корневые файлы.
 
 Для каждой обязательной цели проверяются:
 
 - успешный HTTP-ответ;
 - ожидаемый content type;
 - допустимый конечный hostname после redirect;
-- точное совпадение опубликованных файлов с текущим файлом рабочей ветки по нормализованному SHA-256.
+- точное совпадение опубликованных файлов с текущим файлом рабочей ветки по SHA-256: для текста нормализуются переносы строк, для PNG и ICO проверяются исходные байты без преобразования в UTF-8.
 
 Дополнительно проверяется GitHub Pages URL `https://deputat36.github.io/tosborisoglebsk.github.io/`. Он является диагностическим alias и не блокирует custom domain при отдельной ошибке.
 

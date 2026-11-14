@@ -1,3 +1,4 @@
+const { ICON_LINKS } = require('./lib/site_icons');
 const fs = require('fs');
 const newsMedia = require('../assets/js/news-media');
 const CatalogTrust = require('../assets/js/tos-catalog-core');
@@ -226,7 +227,11 @@ function doneCard(d, contextSlug = '') {
 }
 function needCard(n, contextSlug = '') {
   const trust = relatedTrust(n, 'needs');
-  return `<article class="list-item" ${relatedAttributes(n, 'needs', trust.origin, contextSlug)}><div class="meta"><span class="tag">${esc(n.need_type || 'Помощь')}</span><span class="tag ${n.priority === 'Высокий' ? 'warn' : ''}">${esc(n.priority || 'Приоритет уточняется')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span></div><h3>${esc(n.title || 'Потребность')}</h3><p>${esc(n.description || '')}</p>${relatedOriginNotice(n, 'needs', trust)}<p class="tiny" data-related-contact-policy="${esc(n.id || '')}">Контакт и способ помощи доступны в основной записи после проверки статуса материала.</p><div class="card-actions"><a class="btn" href="/needs/${esc(n.id)}/">Открыть запись</a><a class="btn" href="/contacts/">Предложить помощь</a></div></article>`;
+  const request = trust.origin === 'request';
+  const actionUrl = request ? updateUrl({slug: contextSlug || n.tos_slug || ''}, 'card') : '/contacts/';
+  const actionLabel = request ? 'Передать уточнение' : 'Предложить помощь';
+  const contactPolicy = request ? 'Это запрос сведений для карточки ТОС. Подготовьте сообщение и отправьте его редакции через ВКонтакте.' : 'Контакт и способ помощи доступны в основной записи после проверки статуса материала.';
+  return `<article class="list-item" ${relatedAttributes(n, 'needs', trust.origin, contextSlug)}><div class="meta"><span class="tag">${esc(n.need_type || 'Помощь')}</span><span class="tag ${n.priority === 'Высокий' ? 'warn' : ''}">${esc(n.priority || 'Приоритет уточняется')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span></div><h3>${esc(n.title || 'Потребность')}</h3><p>${esc(n.description || '')}</p>${relatedOriginNotice(n, 'needs', trust)}<p class="tiny" data-related-contact-policy="${esc(n.id || '')}">${esc(contactPolicy)}</p><div class="card-actions"><a class="btn" href="/needs/${esc(n.id)}/">Открыть запись</a><a class="btn" href="${esc(actionUrl)}">${esc(actionLabel)}</a></div></article>`;
 }
 function requestAnchor(states) {
   if (states.news.requests > 0) return 'tos-news';
@@ -414,7 +419,7 @@ function makePage(tos, data) {
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="${esc(canonical)}"/>
   <meta property="og:image" content="${esc(`${SITE_URL}${logo}`)}"/>
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+  ${ICON_LINKS}
   <link rel="manifest" href="/site.webmanifest"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>
   <link rel="stylesheet" href="/assets/css/tos-detail-responsive.css"/>
