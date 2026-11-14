@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { parseCsv } = require('./lib/csv');
+const { normalizeSiteIcons } = require('./lib/site_icons');
 
 const ROOT = process.cwd();
 const HEALTH_PATH = path.join(ROOT, 'data', 'site_health.json');
@@ -95,7 +96,7 @@ function buildPage({ health, diagnostics, workflow }) {
   const triggerText = triggerLabels.join(', ');
   const warnings = (statuses.warning || 0) + (statuses.pending || 0) + (statuses.failed || 0) + (statuses.blocked || 0);
 
-  return `<!doctype html>
+  return normalizeSiteIcons(`<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8"/>
@@ -157,7 +158,7 @@ function buildPage({ health, diagnostics, workflow }) {
 <script src="/assets/js/github-pages-manual-check-workspace.js"></script>
 </body>
 </html>
-`;
+`);
 }
 
 function loadInputs() {

@@ -7,12 +7,17 @@ on:
     paths:
       - 'assets/img/logo.svg'
       - 'assets/img/logo-dark.svg'
+      - 'assets/img/brand-mark.svg'
+      - 'assets/img/site-icon-512.png'
       - 'assets/img/og-cover.svg'
-      - 'favicon.svg'
+      - 'favicon.*'
+      - 'apple-touch-icon.png'
       - 'site.webmanifest'
       - 'index.html'
       - 'docs/BRAND-LOGO.md'
       - 'scripts/audit_brand_assets.js'
+      - 'scripts/lib/site_icons.js'
+      - 'scripts/sync_site_icons.js'
       - '.github/workflows/brand-assets-audit.yml'
   workflow_dispatch:
 
@@ -42,7 +47,9 @@ jobs:
         run: node --check scripts/audit_brand_assets.js
 
       - name: Audit logo package
-        run: node scripts/audit_brand_assets.js
+        run: |
+          node scripts/sync_site_icons.js
+          node scripts/audit_brand_assets.js
 
       - name: Upload brand package
         uses: actions/upload-artifact@v4
@@ -51,8 +58,14 @@ jobs:
           path: |
             assets/img/logo.svg
             assets/img/logo-dark.svg
+            assets/img/brand-mark.svg
+            assets/img/site-icon-512.png
             assets/img/og-cover.svg
             favicon.svg
+            favicon.ico
+            favicon.png
+            apple-touch-icon.png
+            site.webmanifest
             docs/BRAND-LOGO.md
           if-no-files-found: error
           retention-days: 14

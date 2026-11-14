@@ -17,6 +17,11 @@ on:
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
       - 'package.json'
+      - 'favicon.*'
+      - 'apple-touch-icon.png'
+      - 'site.webmanifest'
+      - 'assets/img/brand-mark.svg'
+      - 'assets/img/site-icon-512.png'
       - '.github/workflows/*.yml'
   push:
     branches:
@@ -33,6 +38,11 @@ on:
       - 'assets/css/*.css'
       - 'assets/img/tos-logos/*'
       - 'package.json'
+      - 'favicon.*'
+      - 'apple-touch-icon.png'
+      - 'site.webmanifest'
+      - 'assets/img/brand-mark.svg'
+      - 'assets/img/site-icon-512.png'
       - '.github/workflows/*.yml'
 
 permissions:
@@ -256,6 +266,8 @@ jobs:
         run: node scripts/enrich_site_health_readiness.js
       - name: Generate dynamic Actions check page
         run: node scripts/generate_actions_check_page.js
+      - name: Audit consistent site icons and browser fallbacks
+        run: node scripts/audit_brand_assets.js
       - name: Audit dynamic Actions check page
         run: node scripts/audit_actions_check_content.js
       - name: Update status document metrics

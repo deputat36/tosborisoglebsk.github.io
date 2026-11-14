@@ -11,13 +11,13 @@ function sha256(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
 }
 
-function readLocalFile(root, relativePath) {
+function readLocalFile(root, relativePath, binary = false) {
   const absolutePath = path.join(root, relativePath);
   const body = fs.readFileSync(absolutePath);
   return {
     absolutePath,
     bytes: body.length,
-    sha256: sha256(Buffer.from(normalizeText(body.toString('utf8')), 'utf8'))
+    sha256: sha256(binary ? body : Buffer.from(normalizeText(body.toString('utf8')), 'utf8'))
   };
 }
 
@@ -68,6 +68,20 @@ function createDefaultTargets({ root, env = process.env } = {}) {
       expectedContentType: 'xml',
       allowedFinalHosts: [cname]
     },
+    ...[
+      ['ico', 'favicon.ico', 'image/'],
+      ['png', 'favicon.png', 'image/png'],
+      ['svg', 'favicon.svg', 'image/svg+xml'],
+      ['apple', 'apple-touch-icon.png', 'image/png']
+    ].map(([format, file, contentType]) => ({
+      id: `custom-icon-${format}`,
+      url: `${customBase}/${file}`,
+      localPath: file,
+      binary: format !== 'svg',
+      required: true,
+      expectedContentType: contentType,
+      allowedFinalHosts: [cname]
+    })),
     {
       id: 'github-pages-alias',
       url: `${pagesBase}/`,
@@ -120,7 +134,7 @@ async function inspectTarget(target, options) {
   try {
     const response = await fetchWithTimeout(fetchImpl, target.url, timeoutMs);
     const body = Buffer.from(await response.arrayBuffer());
-    const normalizedRemote = Buffer.from(normalizeText(body.toString('utf8')), 'utf8');
+    const normalizedRemote = target.binary ? body : Buffer.from(normalizeText(body.toString('utf8')), 'utf8');
     const finalUrl = new URL(response.url || target.url);
     const contentType = response.headers.get('content-type') || '';
 
@@ -142,7 +156,7 @@ async function inspectTarget(target, options) {
     }
 
     if (target.localPath) {
-      const local = readLocalFile(root, target.localPath);
+      const local = readLocalFile(root, target.localPath, target.binary);
       result.local_bytes = local.bytes;
       result.local_sha256 = local.sha256;
       result.content_matches_repository = result.remote_sha256 === result.local_sha256;

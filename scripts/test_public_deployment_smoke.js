@@ -3,7 +3,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { runSmoke } = require('./lib/public_deployment_smoke');
+const { runSmoke, inspectTarget } = require('./lib/public_deployment_smoke');
 
 function response(body, options = {}) {
   return new Response(body, {
@@ -114,6 +114,13 @@ function response(body, options = {}) {
       failedReport.blocking_failures[0].errors.includes('Published content hash does not match repository file'),
       'The failure reason must explain the stale publication'
     );
+    // These invalid UTF-8 bytes used to collapse to the same replacement
+    // character. Binary icon verification must compare the actual bytes.
+    fs.writeFileSync(path.join(root, 'favicon.png'), Buffer.from([0x89, 0x50, 0x80, 0x0d, 0x0a]));
+    const binaryTarget = { id: 'icon', url: 'https://example.test/favicon.png', localPath: 'favicon.png', binary: true, required: true, expectedContentType: 'image/png' };
+    const inspectIcon = bytes => inspectTarget(binaryTarget, {root, timeoutMs: 2000, fetchImpl: async () => response(Buffer.from(bytes), { contentType: 'image/png' })});
+    assert.equal((await inspectIcon([0x89, 0x50, 0x80, 0x0d, 0x0a])).ok, true, 'Published icon bytes must match');
+    assert.equal((await inspectIcon([0x89, 0x50, 0x81, 0x0d, 0x0a])).ok, false, 'Different binary bytes must fail even when their UTF-8 decoding matches');
   } finally {
     if (originalResponseUrl) Object.defineProperty(Response.prototype, 'url', originalResponseUrl);
     fs.rmSync(root, { recursive: true, force: true });

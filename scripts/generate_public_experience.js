@@ -44,6 +44,7 @@ function main(){
     .replace('Потребности хранятся в data/needs.json и проходят ручную проверку перед публикацией.','Потребности проходят ручную проверку перед публикацией.');
   if(source!==before){fs.writeFileSync(file,source);changed++;}
  }
+ require('./sync_site_icons').syncSiteIcons(root);
  console.log(`Public experience generated: ${toses.length} TOS, readable homepage, ${changed} public page shells`);
 }
 if(require.main===module)main();

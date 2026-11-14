@@ -38,6 +38,12 @@ for (const tos of toses) {
   assert(html.includes(renderTosProfile(tos,data)),`stale profile HTML ${tos.slug}`);
   assert(html.includes('Сведения относятся к указанным годам'));
   assert(html.includes('href="#tos-profile"'), 'history is reachable from the first screen');
+  const requests = [...html.matchAll(/<article\b[^>]*data-related-collection="needs"[^>]*data-content-origin="request"[^>]*>[\s\S]*?<\/article>/g)].map(match => match[0]);
+  for (const request of requests) {
+    assert(!request.includes('Предложить помощь'), 'a request for profile data must not ask for material help');
+    assert(request.includes('Передать уточнение'));
+    assert(request.includes(`/update-tos/?tos=${tos.slug}&amp;type=card#message-builder`), 'the update form keeps the selected TOS');
+  }
 }
 for(const slug of ['ivanovka','podstepki']) assert.equal(data.profiles.find(p=>p.tos_slug===slug).facts.find(f=>f.id.endsWith('-competition')).kind,'award','competition selection is not completion');
 for(const slug of ['dzerzhinskogo','pobeda']) assert.equal(data.profiles.find(p=>p.tos_slug===slug).facts.length,0,'do not invent activity without sources');
