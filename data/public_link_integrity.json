@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T18:45:52.734Z",
+  "generated_at": "2026-11-14T21:19:48.109Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1422,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/improvement-plan/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1027,
-      "bytes": 8545
+      "duration_ms": 1053,
+      "bytes": 8579
     },
     {
-      "route": "/done/index.html",
+      "route": "/news/vk-238997964-446/index.html",
       "status": 200,
-      "duration_ms": 1017,
-      "bytes": 18214
+      "duration_ms": 1048,
+      "bytes": 20577
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 151,
+      "duration_ms": 30,
       "bytes": 9308
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 128,
+      "duration_ms": 15,
       "bytes": 12416
-    },
-    {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 123,
-      "bytes": 8579
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 122,
-      "bytes": 8808
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 120,
+      "duration_ms": 14,
       "bytes": 10043
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 8808
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 120,
+      "duration_ms": 13,
       "bytes": 16626
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 118,
-      "bytes": 23779
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 115,
+      "duration_ms": 12,
       "bytes": 16492
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 32,
-      "bytes": 24627
-    },
-    {
-      "route": "/chairperson/meeting/index.html",
-      "status": 200,
-      "duration_ms": 28,
-      "bytes": 8824
+      "duration_ms": 12,
+      "bytes": 23779
     },
     {
       "route": "/chairperson/learning/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 11,
       "bytes": 8116
     },
     {
-      "route": "/documents/templates/project-support/index.html",
+      "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 27,
-      "bytes": 14313
+      "duration_ms": 11,
+      "bytes": 8824
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 26,
-      "bytes": 16057
+      "duration_ms": 10,
+      "bytes": 24627
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/news/archive/7/index.html",
       "status": 200,
-      "duration_ms": 26,
-      "bytes": 11098
+      "duration_ms": 10,
+      "bytes": 56219
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/news/vk-238997964-292/index.html",
       "status": 200,
-      "duration_ms": 25,
-      "bytes": 6054
+      "duration_ms": 10,
+      "bytes": 10696
     },
     {
-      "route": "/documents/templates/resident-appeals-register/index.html",
+      "route": "/news/znamenie-created-2024/index.html",
       "status": 200,
-      "duration_ms": 25,
-      "bytes": 10261
+      "duration_ms": 10,
+      "bytes": 7821
     },
     {
-      "route": "/news/vk-238997964-274/index.html",
+      "route": "/open-data/index.html",
       "status": 200,
-      "duration_ms": 25,
-      "bytes": 11353
+      "duration_ms": 10,
+      "bytes": 13786
     },
     {
-      "route": "/check-tos/index.html",
+      "route": "/partner-thanks/index.html",
       "status": 200,
-      "duration_ms": 23,
-      "bytes": 6431
+      "duration_ms": 10,
+      "bytes": 13050
+    },
+    {
+      "route": "/done/result-archive-needed-bogana/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 8584
+    },
+    {
+      "route": "/done/result-archive-needed-mechta/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 8774
+    },
+    {
+      "route": "/news/bogana-sports-ground-2023/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 8585
     }
   ]
 }
