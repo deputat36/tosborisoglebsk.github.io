@@ -22,7 +22,7 @@ async function main() {
         try {
           const response = await page.goto(`${base}/tos/${profile.tos_slug}/`, { waitUntil: 'networkidle' });
           assert(response.ok(), 'card must load');
-          await page.getByRole('link', { name: 'История и дела', exact: true }).click();
+          await page.locator('.tos-section-nav').getByRole('link', { name: 'История и дела', exact: true }).click();
           assert.equal(new URL(page.url()).hash, '#tos-profile');
           const section = page.locator('#tos-profile');
           assert.equal(await section.locator('[data-profile-fact]').count(), profile.facts.length, 'all sourced facts survive rendering');
