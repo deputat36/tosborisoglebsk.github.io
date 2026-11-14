@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-14",
+  "checklists": [
+    {
+      "id": "general",
+      "title": "Общая подготовка проекта",
+      "opportunities": [],
+      "notice": "Редакционная проверка комплектности. Требования конкретного конкурса смотрите в его положении.",
+      "sources": [],
+      "items": [
+        {
+          "id": "problem",
+          "text": "Проблема подтверждена для выбранной территории.",
+          "tool": "/documents/templates/project-problem/",
+          "locator": "Рабочий ориентир",
+          "source_index": 0
+        },
+        {
+          "id": "goal",
+          "text": "Понятно, для кого проект и какое изменение ожидается.",
+          "tool": "/documents/templates/project-passport/",
+          "locator": "Рабочий ориентир",
+          "source_index": 0
+        },
+        {
+          "id": "people",
+          "text": "Согласованы участие команды и поддержка жителей.",
+          "tool": "/documents/templates/project-support/",
+          "locator": "Рабочий ориентир",
+          "source_index": 0
+        },
+        {
+          "id": "budget",
+          "text": "Расходы обоснованы; денежный и неденежный вклад разделены.",
+          "tool": "/documents/templates/project-budget/",
+          "locator": "Рабочий ориентир",
+          "source_index": 0
+        },
+        {
+          "id": "schedule",
+          "text": "У действий есть сроки, ответственные и зависимости.",
+          "tool": "/documents/templates/project-schedule/",
+          "locator": "Рабочий ориентир",
+          "source_index": 0
+        },
+        {
+          "id": "permission",
+          "text": "Уточнены заявитель, права на место и нужные согласования.",
+          "tool": "/documents/",
+          "locator": "Рабочий ориентир",
+          "source_index": 0
+        },
+        {
+          "id": "result",
+          "text": "Определены доказательства результата и дальнейшее содержание.",
+          "tool": "/documents/templates/project-final-report/",
+          "locator": "Рабочий ориентир",
+          "source_index": 0
+        }
+      ]
+    },
+    {
+      "id": "tos-2026",
+      "title": "Конкурс ТОС АНО «Образ Будущего» — 2026",
+      "opportunities": [
+        "tos-voronezh-projects-2026"
+      ],
+      "notice": "Завершённый сезон. Пункты помогают разобрать подготовку 2026 года и не устанавливают правила будущего конкурса.",
+      "sources": [
+        {
+          "title": "Новая редакция положения АНО 2026",
+          "url": "https://obraz36.ru/site_data/s273/2026/2026/Novaya_redaktsia_Polozhenia_TOS_2026.pdf",
+          "kind": "rules",
+          "checked_at": "2026-11-14",
+          "locator": "п. 19; приложение 1",
+          "note": "Приём до 11 февраля 18:00 мск. В шапке файла указан протокол 2025 года; дату утверждения редакции не уточняем."
+        },
+        {
+          "title": "Методика оценки заявок",
+          "url": "https://obraz36.ru/site_data/s273/2026/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B8%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BE%D0%BA%20%D0%A2%D0%9E%D0%A1.pdf",
+          "kind": "method",
+          "checked_at": "2026-11-14",
+          "locator": "п. 10",
+          "note": "Критерии именно этого конкурса."
+        }
+      ],
+      "items": [
+        {
+          "id": "status",
+          "text": "Проверены статус ТОС и ограничения участия.",
+          "tool": "/documents/",
+          "locator": "Положение, раздел IV",
+          "source_index": 0
+        },
+        {
+          "id": "papers",
+          "text": "Собраны устав, полномочия и решение о проекте.",
+          "tool": "/documents/templates/project-checklist/",
+          "locator": "Положение, п. 12",
+          "source_index": 0
+        },
+        {
+          "id": "territory",
+          "text": "Есть основания по границам и письменное разрешение на работы.",
+          "tool": "/map/",
+          "locator": "Положение, п. 3.2 и 12",
+          "source_index": 0
+        },
+        {
+          "id": "logic",
+          "text": "Проблема, действия и ожидаемый результат согласованы.",
+          "tool": "/documents/templates/project-passport/",
+          "locator": "Методика, п. 10",
+          "source_index": 1
+        },
+        {
+          "id": "costs",
+          "text": "Смета проверена на допустимость и подтверждение цен.",
+          "tool": "/documents/templates/project-budget/",
+          "locator": "Методика, п. 10–12",
+          "source_index": 1
+        },
+        {
+          "id": "involvement",
+          "text": "Описаны участие жителей, вклад и информирование.",
+          "tool": "/documents/templates/project-support/",
+          "locator": "Методика, п. 10",
+          "source_index": 1
+        }
+      ]
+    },
+    {
+      "id": "mini-2026",
+      "title": "Мини-гранты ТОС — 2026",
+      "opportunities": [
+        "obraz-tos-mini-2026-october"
+      ],
+      "notice": "Завершённый приём. Проверка относится к отдельному положению мини-грантов, а не основному конкурсу.",
+      "sources": [
+        {
+          "title": "Положение мини-грантов ТОС 2026",
+          "url": "https://obraz36.ru/site_data/s273/2026/2026/%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%B0%20%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B3%D1%80%D0%B0%D0%BD%D1%82%D0%BE%D0%B2%20%D0%A2%D0%9E%D0%A1%202026.pdf",
+          "kind": "rules",
+          "checked_at": "2026-11-14",
+          "locator": "разделы III–IV, VII–IX",
+          "note": "Отдельный конкурс: ограничения прошлых побед и расходов."
+        }
+      ],
+      "items": [
+        {
+          "id": "authority",
+          "text": "Уполномоченный представитель соответствует требованиям.",
+          "tool": "/documents/",
+          "locator": "Раздел IV",
+          "source_index": 0
+        },
+        {
+          "id": "past",
+          "text": "Проверены прошлые победы и принятая отчётность.",
+          "tool": "/grant-application-kit/",
+          "locator": "Пункты 9–10",
+          "source_index": 0
+        },
+        {
+          "id": "theme",
+          "text": "Социальная инициатива соответствует направлениям и ограничениям.",
+          "tool": "/projects/",
+          "locator": "Раздел III",
+          "source_index": 0
+        },
+        {
+          "id": "documents",
+          "text": "Подготовлены подтверждение полномочий и приложения.",
+          "tool": "/documents/templates/project-checklist/",
+          "locator": "Пункт 15",
+          "source_index": 0
+        },
+        {
+          "id": "costs",
+          "text": "Бюджет соответствует пределу и допустимым расходам.",
+          "tool": "/documents/templates/project-budget/",
+          "locator": "Раздел VII",
+          "source_index": 0
+        },
+        {
+          "id": "period",
+          "text": "План укладывается в установленный период реализации.",
+          "tool": "/documents/templates/project-schedule/",
+          "locator": "Пункт 40",
+          "source_index": 0
+        }
+      ]
+    },
+    {
+      "id": "pfki-27-2",
+      "title": "ПФКИ — конкурс 27-2",
+      "opportunities": [
+        "pfki-2027-second"
+      ],
+      "notice": "Сверка с положением и официальным чек-листом 27-2. Галочки отмечает сам пользователь: они не подтверждают допуск или решение экспертов.",
+      "sources": [
+        {
+          "title": "Положение ПФКИ 27-2",
+          "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/aoq/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BE%20%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%B5.pdf",
+          "kind": "rules",
+          "checked_at": "2026-11-14",
+          "locator": "раздел III; п. 8–13; раздел V",
+          "note": "Утверждено 22 октября 2026 года № 50."
+        },
+        {
+          "title": "Официальный чек-лист 27-2",
+          "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/xvl/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%A7%D0%B5%D0%BA-%D0%BB%D0%B8%D1%81%D1%82%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8.pdf",
+          "kind": "checklist",
+          "checked_at": "2026-11-14",
+          "locator": "разделы о целях, плане, бюджете и команде",
+          "note": ""
+        },
+        {
+          "title": "Рекомендации по бюджету 27-2",
+          "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/io0/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B5%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%B0%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0..pdf",
+          "kind": "method",
+          "checked_at": "2026-11-14",
+          "locator": "Подготовка расходов и обоснований",
+          "note": ""
+        }
+      ],
+      "items": [
+        {
+          "id": "applicant",
+          "text": "Проверены форма, полномочия и ограничения заявителя.",
+          "tool": "/documents/",
+          "locator": "Положение, раздел III",
+          "source_index": 0
+        },
+        {
+          "id": "idea",
+          "text": "Раскрыта культурная идея и её отличие от похожих решений.",
+          "tool": "/documents/templates/project-passport/",
+          "locator": "Чек-лист, с. 2",
+          "source_index": 1
+        },
+        {
+          "id": "audience",
+          "text": "Подтверждены аудитория и значимость проблемы.",
+          "tool": "/documents/templates/project-problem/",
+          "locator": "Чек-лист, с. 2–3",
+          "source_index": 1
+        },
+        {
+          "id": "plan",
+          "text": "Цель, действия и результаты согласованы между разделами.",
+          "tool": "/documents/templates/project-schedule/",
+          "locator": "Чек-лист, с. 3–4",
+          "source_index": 1
+        },
+        {
+          "id": "budget",
+          "text": "Проверены обоснования расходов и подтверждения стоимости.",
+          "tool": "/documents/templates/project-budget/",
+          "locator": "Рекомендации по бюджету",
+          "source_index": 2
+        },
+        {
+          "id": "team",
+          "text": "Показаны опыт команды и согласованный вклад партнёров.",
+          "tool": "/documents/templates/project-partner-letter/",
+          "locator": "Официальный чек-лист",
+          "source_index": 1
+        },
+        {
+          "id": "files",
+          "text": "Проверены приложения и электронная подача.",
+          "tool": "/documents/templates/project-checklist/",
+          "locator": "Положение, п. 8–13",
+          "source_index": 0
+        }
+      ]
+    }
+  ]
+}

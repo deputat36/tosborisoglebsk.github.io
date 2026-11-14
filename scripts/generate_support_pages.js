@@ -3,7 +3,7 @@ const {renderExperience} = require('./lib/content_experience');
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const { grantCard, grantSummary, grantsPublished } = require('../assets/js/grants');
+const { grantCard, grantSummary, grantsPublished, grantFilters } = require('../assets/js/grants');
 const core = require('../assets/js/grants-core');
 const root = process.cwd();
 const site = 'https://tosborisoglebsk.ru';
@@ -70,10 +70,22 @@ function main() {
   const cards=orgs.map(o=>`<article class="card"><div class="card-inner"><div class="meta"><span class="tag">${esc(o.kind)}</span></div><h3>${esc(o.name)}</h3><p>${esc(o.summary)}</p><p><b>Кому подходит:</b> ${esc(o.who)}</p><a class="btn primary" href="${route(o)}">Программы, контакты и подготовка</a></div></article>`).join('');
   const table=`<div class="container prose"><h3>Какой маршрут выбрать</h3><div style="overflow-x:auto" tabindex="0" role="region" aria-label="Сравнение организаций поддержки"><table><thead><tr><th>Задача команды</th><th>Куда смотреть</th><th>Что проверить</th></tr></thead><tbody><tr><td>Благоустройство или новый объект</td><td>Основной конкурс ТОС: «Образ Будущего» и Совет муниципальных образований</td><td>Новый сезон, право на участок, согласования и расходы</td></tr><tr><td>Социальное, культурное или волонтёрское дело</td><td>Соответствующая программа «Образа Будущего»; местный конкурс фонда</td><td>Статус заявителя, допустимые расходы и сроки</td></tr><tr><td>Представить проведённое мероприятие</td><td>Акция или конкурс практик Совета и других организаторов</td><td>Подтверждённый результат, публикация и формат поощрения</td></tr></tbody></table></div><p class="tiny">Участие в акции с призами, консультация и денежный грант — разные виды поддержки. Выбирайте по задаче и действующему положению.</p></div>`;
   html=replaceBlock(html,'organizations',`<section class="section" id="support-organizations" aria-labelledby="support-organizations-title"><div class="container section-head"><div><h2 id="support-organizations-title">Грантодатели и организации поддержки ТОС</h2><p>Три подробные справки: программы, контакты, ограничения и подготовка. Сверка 11 ноября 2026 года.</p></div></div><div class="container grid">${cards}</div>${table}</section>`);
-  const snapshot='<p class="tiny" data-grants-snapshot>Подборка подготовлена 11 ноября 2026 года. Перед подачей сверяйте дату и изменения в объявлении организатора.</p>';
+  const checked=grants.map(item=>item.source_checked_at||'').filter(Boolean).sort().at(-1);
+  const snapshot=`<p class="tiny" data-grants-snapshot>Подборка сверена ${checked.split('-').reverse().join('.')}. Перед подачей сверяйте дату и изменения в объявлении организатора.</p>`;
+  html=html.replace(/(<div class="container grant-filter" data-grant-filters hidden>)[\s\S]*?(<\/div><div class="container list" id="grants-list")/,(_,open,close)=>open+grantFilters()+close);
+  // Put the working finder before the long reference blocks.
+  const finderAt=html.indexOf('data-grant-filters'),finderStart=html.lastIndexOf('<section',finderAt);
+  const finderEnd=html.indexOf('</section>',html.indexOf('<!-- support:all:end -->',finderAt))+10;
+  assert(finderStart>=0&&finderEnd>finderAt,'Missing support finder section');
+  const finder=html.slice(finderStart,finderEnd).replace(/^<section\b[^>]*>/,'<section class="section" id="support-finder">');
+  html=html.slice(0,finderStart)+html.slice(finderEnd);
+  html=html.replace(/(<section class="hero">[\s\S]*?<\/section>)/,(_,hero)=>hero+finder);
+  html=html.replace('<a class="btn" href="#grants-list">Все возможности</a>','<a class="btn" href="#support-finder">Подобрать поддержку</a>');
+  html=html.replace('Сведения об организациях и выбранных объявлениях сверены 11 ноября 2026 года. У каждой возможности указаны собственные источник и дата проверки.','У каждой возможности указаны источник и дата проверки. Сверяйте документы своего сезона перед подачей.');
   html=replaceBlock(html,'current',snapshot+(core.current(grants).map(grantSummary).join('')||'<div class="notice">Ближайших сроков с недавно проверенными объявлениями нет. Ниже доступны направления поддержки и ссылки для подготовки.</div>'));
   html=replaceBlock(html,'all',snapshot+grants.map(grantCard).join(''));
   fs.writeFileSync(file,html.replace(/[ \t]+$/gm,''));
+  require('./generate_support_learning').main();
   console.log(`Support pages: ${orgs.length} organizations; ${grants.length} static opportunity cards`);
 }
 if(require.main===module)main();

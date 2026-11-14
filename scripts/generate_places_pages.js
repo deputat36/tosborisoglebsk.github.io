@@ -1,3 +1,4 @@
+const { navLinks } = require('./generate_public_experience');
 const { ICON_LINKS } = require('./lib/site_icons');
 const fs = require('fs');
 const path = require('path');
@@ -147,12 +148,12 @@ function baseHead(title, description, canonical) {
   <meta property="og:image" content="${SITE_URL}/assets/img/og-cover.svg"/>
   ${ICON_LINKS}
   <link rel="manifest" href="/site.webmanifest"/>
-  <link rel="stylesheet" href="/assets/css/styles.css"/>`;
+  <link rel="stylesheet" href="/assets/css/styles.css"/><link rel="stylesheet" href="/assets/css/portal-usability.css"/>`;
 }
 
 function header() {
   return `<a class="skip-link" href="#main">Перейти к содержимому</a>
-<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>`;
+<header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация">${navLinks.map(([href,label])=>`<a href="${href}">${esc(label)}</a>`).join('')}</nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>`;
 }
 
 function footer(note = 'Справочник территорий формируется автоматически из каталога ТОС.') {

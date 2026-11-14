@@ -35,7 +35,7 @@ function lead(article){
   return article.lead || arr(article.content)[0] || 'Полезный материал для председателей и активистов ТОС Борисоглебского городского округа.';
 }
 function desc(article){
-  const text = [article.lead, ...arr(article.content)].filter(Boolean).join(' ') || lead(article);
+  const text = [article.lead, ...arr(article.content), ...arr(article.sections).flatMap(section=>[section.title,...arr(section.paragraphs),...arr(section.items)])].filter(Boolean).join(' ') || lead(article);
   return compactText(text, 155);
 }
 function relatedLinks(article){

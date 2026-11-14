@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T16:56:57.193Z",
+  "generated_at": "2026-11-14T18:35:32.162Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -9,8 +9,8 @@
     "total_js_bytes": 1536000
   },
   "summary": {
-    "html_pages": 1487,
-    "public_pages": 1420,
+    "html_pages": 1499,
+    "public_pages": 1432,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 159,
+    "asset_files": 161,
     "over_budget_assets": 0,
-    "total_css_bytes": 120644,
-    "total_js_bytes": 1004070,
+    "total_css_bytes": 122524,
+    "total_js_bytes": 1021069,
     "total_image_bytes": 94065,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -176,10 +176,24 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/grants.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 13252,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/territory-map-core.js",
       "group": "js",
       "extension": ".js",
       "size_bytes": 12875,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/project-packet.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 12512,
       "over_budget": false
     },
     {
@@ -222,20 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11423,
-      "over_budget": false
-    },
-    {
-      "path": "assets/css/culinary-battle.css",
-      "group": "css",
-      "extension": ".css",
-      "size_bytes": 11348,
-      "over_budget": false
-    },
-    {
-      "path": "admin/admin-dashboard.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 11249,
       "over_budget": false
     }
   ],

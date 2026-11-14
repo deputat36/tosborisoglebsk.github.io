@@ -189,7 +189,10 @@ jobs:
       - name: Generate support organization pages and readable opportunities
         run: node scripts/generate_support_pages.js
       - name: Check support profiles and static opportunity coverage
-        run: node scripts/test_support_organizations.js
+        run: |
+          node scripts/test_support_organizations.js
+          node scripts/test_support_research.js
+          node scripts/test_support_source_review.js
       - name: Generate readable collection fallbacks
         run: node scripts/generate_collection_fallbacks.js
       - name: Generate done pages

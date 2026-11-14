@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-14",
+  "examples": [
+    {
+      "id": "shramovka-stage",
+      "title": "Сцена как место общего дела: опыт Шрамовки",
+      "location": "ТОС «Фортуна», Шрамовка, Россошанский район",
+      "source_date": "2026-10-07",
+      "source_url": "https://obraz36.ru/sobitiya/-v-sele-shramovka-rossoshanskogo-rajona-otkryli-mnogofunktsionalnoe-kreativnoe-prostranstvo-",
+      "url": "/materials/regional-practice-shramovka-stage/",
+      "summary": "В сообщении оператора описаны уличная сцена и благоустройство."
+    },
+    {
+      "id": "novaya-usman-path",
+      "title": "Безопасный пешеходный маршрут: опыт Новой Усмани",
+      "location": "ТОС «Медовый», Новая Усмань",
+      "source_date": "2026-10-06",
+      "source_url": "https://obraz36.ru/sobitiya/-poslednij-kilometr-projden-v-novoj-usmani-stalo-bezopasnee-i-komfortnee-",
+      "url": "/materials/regional-practice-novaya-usman-path/",
+      "summary": "Оператор сообщает о тротуаре проекта «Последний километр» и сопутствующих элементах."
+    },
+    {
+      "id": "popovka-playground",
+      "title": "Детская площадка: опыт Поповки и дальнейшее содержание",
+      "location": "ТОС «Центр», Поповка, Россошанский район",
+      "source_date": "2026-10-05",
+      "source_url": "https://obraz36.ru/sobitiya/-v-sele-popovka-rossoshanskogo-rajona-tos-tsentr-zavershil-proekt-schastlivoe-detstvo-",
+      "url": "/materials/regional-practice-popovka-playground/",
+      "summary": "В публикации описаны обновление площадки, игровое и спортивное оборудование и ограждение."
+    }
+  ]
+}

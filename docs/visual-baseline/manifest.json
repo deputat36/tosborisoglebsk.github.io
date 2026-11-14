@@ -309,8 +309,8 @@
       "expected_check": "Hero, паспорт, связанные блоки и действия отображаются без смещений",
       "focus_capture": null,
       "screenshot": "css-reg-006.png",
-      "sha256": "aa5228f5adccdfabb2453ea51fc5a113721470a192d86de11d62b51dab4f08c8",
-      "bytes": 85507,
+      "sha256": "8c76e427501e947c58b36b9012ca47b861aef45b617cc84544fef6acfbb0c65c",
+      "bytes": 85475,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "light",
@@ -341,13 +341,13 @@
       "page_errors": [],
       "failed_requests": [],
       "reviewed_capture": {
-        "workflow_run_id": "43575321567",
+        "workflow_run_id": "43626445561",
         "workflow_run_attempt": "1",
-        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
-        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
-        "captured_at": "2026-11-14T08:27:40.921Z",
+        "feature_head_sha": "e7bab45271000ad85fc0d93b364d4fb61be9c6de",
+        "captured_commit_sha": "b4e5e51bc8013784ba8e6f9e0d3552598b5bb30e",
+        "captured_at": "2026-11-14T18:32:18.118Z",
         "reviewed_at": "2026-11-14",
-        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
+        "reason": "Owner-authorized portal implementation: generator preserves current navigation; reviewed change is the approved brand color on the active catalogue link, with unchanged page geometry."
       }
     },
     {
@@ -954,17 +954,13 @@
     }
   ],
   "latest_review": {
-    "date": "2026-11-12",
-    "workflow_run_id": "43231970525",
-    "capture_artifact": "visual-baseline-426-1",
+    "date": "2026-11-14",
+    "workflow_run_id": "43626445561",
+    "capture_artifact": "visual-baseline-458-1",
     "updated_cases": [
-      "css-reg-001",
-      "css-reg-002",
-      "css-reg-003",
-      "css-reg-004",
       "css-reg-006"
     ],
-    "preserved_cases": 11,
+    "preserved_cases": 15,
     "thresholds_changed": false
   }
 }

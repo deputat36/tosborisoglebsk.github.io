@@ -14,6 +14,8 @@
     territory: 'Территория и опыт',
     other: 'Другие материалы'
   });
+  const TYPES = Object.freeze({section:'Рабочий раздел',article:'Статья',form:'Формы документов',method:'Методика / рекомендации',book:'Книга'});
+  const REGIONS = Object.freeze({bgo:'Борисоглебский округ',voronezh:'Воронежская область',russia:'Общие материалы России',other:'Опыт других регионов'});
   const CATEGORY_TOPICS = Object.freeze({
     'Создание ТОС': 'start', 'Инструкция': 'start', 'Председателю': 'start', 'Председателю ТОС': 'start', 'Документы': 'start',
     'ЖКХ': 'zhkh', 'Вовлечение': 'residents', 'Собрания': 'residents', 'Работа с жителями': 'residents',
@@ -45,13 +47,13 @@
       if (!url || !String(item.title || '').trim()) return;
       const key = destination(url);
       const previous = byUrl.get(key);
-      const text = [item.title, item.category, item.description, item.audience, ...(item.tags || []), ...(article?.content || []), ...(article?.sections || []).flatMap(section => [section.title, ...(section.paragraphs || []), ...(section.items || [])])].filter(Boolean).join(' ');
+      const text = [item.title, item.category, item.description, item.audience, item.author, item.year, item.review_scope, ...(item.tags || []), ...(article?.content || []), ...(article?.sections || []).flatMap(section => [section.title, ...(section.paragraphs || []), ...(section.items || [])])].filter(Boolean).join(' ');
       if (previous) {
         previous.search = normalize(previous.search + ' ' + text);
         if (article) previous.kind = 'article';
         return;
       }
-      const row = { ...item, url, kind: article ? 'article' : 'section', topic: TOPICS[item.topic] ? item.topic : CATEGORY_TOPICS[item.category] || 'other', search: normalize(text) };
+      const row = { ...item, url, kind: article ? 'article' : 'section', material_type:TYPES[item.material_type]?item.material_type:article?'article':'section', region:REGIONS[item.region]?item.region:'bgo', topic: TOPICS[item.topic] ? item.topic : CATEGORY_TOPICS[item.category] || 'other', search: normalize(text) };
       byUrl.set(key, row);
       result.push(row);
     }
@@ -64,19 +66,20 @@
   }
   function matches(item, state = {}) {
     const words = normalize(state.q).split(' ').filter(Boolean);
-    return (!state.topic || item.topic === state.topic) && words.every(word => normalize(item.search).includes(word));
+    return (!state.topic || item.topic === state.topic) && (!state.type || item.material_type === state.type) && (!state.region || item.region === state.region) && words.every(word => normalize(item.search).includes(word));
   }
   function relevance(item, query) {
     const title = normalize(item.title), category = normalize(item.category), description = normalize(item.description);
-    return normalize(query).split(' ').filter(Boolean).reduce((sum, word) => sum + (title.includes(word) ? 12 : 0) + (category.includes(word) ? 6 : 0) + (description.includes(word) ? 3 : 0), 0);
+    return normalize(query).split(' ').filter(Boolean).reduce((sum, word) => sum + (title.includes(word) ? 12 : 0) + (category.includes(word) ? 6 : 0) + (category === word ? 10 : 0) + (description.includes(word) ? 3 : 0), 0);
   }
   function render(item) {
     const url = href(item.url);
     if (!url) return '';
     const target = /^https:\/\//.test(url) ? ' target="_blank" rel="noopener noreferrer"' : '';
-    const kind = item.kind === 'article' ? 'Статья' : 'Рабочий раздел';
-    const label = item.kind === 'article' ? 'Читать' : 'Открыть раздел';
-    return `<article class="card" data-material-id="${esc(item.id)}" data-material-topic="${esc(item.topic)}" data-material-search="${esc(item.search)}"><div class="card-inner"><div class="meta"><span class="tag">${esc(item.category)}</span><span class="tiny">${kind}</span></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><div class="tiny">Для кого: ${esc(item.audience)}</div><div class="card-actions"><a class="btn primary" href="${esc(url)}"${target} aria-label="${label}: ${esc(item.title)}">${label}</a></div></div></article>`;
+    const kind = TYPES[item.material_type] || (item.kind === 'article' ? 'Статья' : 'Рабочий раздел');
+    const label = target ? 'Открыть источник' : item.kind === 'article' ? 'Читать' : 'Открыть раздел';
+    const metadata=[item.author,item.year,item.format,item.size,REGIONS[item.region]].filter(Boolean);
+    return `<article class="card" data-material-id="${esc(item.id)}" data-material-topic="${esc(item.topic)}" data-material-type="${esc(item.material_type||'section')}" data-material-region="${esc(item.region||'bgo')}" data-material-search="${esc(item.search)}"><div class="card-inner"><div class="meta"><span class="tag">${esc(item.category)}</span><span class="tiny">${kind}</span></div><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p><div class="tiny">Для кого: ${esc(item.audience)}</div>${metadata.length?`<p class="tiny">${metadata.map(esc).join(' · ')}</p>`:''}${item.review_scope?`<p class="tiny"><b>Проверка:</b> ${esc(item.review_scope)}${item.checked_at?' · '+esc(item.checked_at):''}</p>`:''}<div class="card-actions"><a class="btn primary" href="${esc(url)}"${target} aria-label="${label}: ${esc(item.title)}">${label}</a></div></div></article>`;
   }
-  return Object.freeze({ TOPICS, buildCatalog, normalize, matches, relevance, render });
+  return Object.freeze({ TOPICS, TYPES, REGIONS, buildCatalog, normalize, matches, relevance, render });
 }));

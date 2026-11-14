@@ -10,7 +10,7 @@
     "current": "Январский конкурс ТОС и осенние приёмы 2026 года завершены. Условия будущего сезона проверяют после нового объявления.",
     "website": "https://obraz36.ru/",
     "website_label": "Сайт организации",
-    "checked_at": "2026-11-11",
+    "checked_at": "2026-11-14",
     "contacts": [
       {
         "label": "Официальное сообщество",
@@ -74,10 +74,10 @@
       {
         "name": "Основной конкурс проектов ТОС — 2026",
         "amount": "До 1 500 000 ₽",
-        "period": "14 января — 4 февраля 2026 года",
-        "who": "ТОС Воронежской области по правилам сезона",
-        "url": "https://obraz36.ru/sobitiya/-dorogie-druzja-otkryt-priem-zajavok-na-konkurs-proektov-tos-",
-        "state": "Сезон 2026: приём завершён"
+        "period": "14 января — 11 февраля 2026 года, до 18:00 мск; новая редакция положения АНО",
+        "who": "ТОС без образования юридического лица по положению АНО 2026 года",
+        "url": "https://obraz36.ru/site_data/s273/2026/2026/Novaya_redaktsia_Polozhenia_TOS_2026.pdf",
+        "state": "Приём завершён. Правила второго оператора и будущего сезона проверяются отдельно."
       },
       {
         "name": "Мини-гранты ТОС — 2026",
@@ -152,6 +152,11 @@
         "title": "«ТОС: от слов — к делу»: объявление",
         "url": "https://obraz36.ru/sobitiya/-dorogie-druzja-napominaem-chto-ostalos-7-dnej-dlja-podachi-zajavok-na-konkurs-tos-ot-slov-k-delu-",
         "note": ""
+      },
+      {
+        "title": "Новая редакция положения ТОС АНО 2026",
+        "url": "https://obraz36.ru/site_data/s273/2026/2026/Novaya_redaktsia_Polozhenia_TOS_2026.pdf",
+        "note": "Срок 11 февраля, 18:00 мск; требования к заявителю и направлениям."
       }
     ],
     "experience_links": [

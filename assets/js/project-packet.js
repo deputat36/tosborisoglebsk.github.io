@@ -7,6 +7,12 @@
   let preparedSignature='',preparedSelection='',loaded=false;
   root.hidden=false;
   const selection=()=>[...root.querySelectorAll('[data-packet-document]:checked')].map(x=>x.value).filter(x=>core.FORMS.includes(x));
+  function resultSelection(){
+    root.querySelectorAll('[data-packet-document]').forEach(node=>{node.checked=['photo-report','final-report'].includes(node.value);});
+    print.hidden=true;loaded=false;status.textContent='Выбран комплект результата: фотоотчёт и итоговый отчёт. Соберите его из вашего проекта и проверьте фактические сведения.';
+  }
+  root.querySelector('[data-packet-result]')?.addEventListener('click',resultSelection);
+  if(new URLSearchParams(location.search).get('packet')==='result')resultSelection();
   const make=(doc,tag,text)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
   function budgetPaper(doc,state){
     const article=make(doc,'article');article.className='template-paper';article.append(make(doc,'h1','СМЕТА ПРОЕКТА ТОС'));
@@ -63,6 +69,12 @@
       const missing=core.draftChecks(state).filter(x=>!x.ready);if(missing.length)cover.append(make(doc,'p','Основные сведения, которые ещё нужно добавить: '+missing.map(x=>x.label).join(', ')+'.'));
       const ul=make(doc,'ul');for(const form of selected){const checkbox=root.querySelector('[data-packet-document][value="'+form+'"]');ul.append(make(doc,'li',checkbox.closest('label').textContent.trim()));}cover.append(ul);
       if(selected.includes('support'))cover.append(make(doc,'p','Лист поддержки может содержать личные сведения и подписи. Заполненный комплект не предназначен для открытой публикации.'));
+      if(selected.includes('final-report')&&selected.every(form=>['photo-report','final-report'].includes(form))){
+        cover.append(make(doc,'h2','Подтверждения результата'));
+        const evidence=make(doc,'ul');
+        for(const text of ['Фото с датами, местом и пояснениями.','Документы о фактически выполненных работах и расходах.','Ссылки на публикации и согласованные подтверждения.','План содержания результата и ответственные.'])evidence.append(make(doc,'li',text));
+        cover.append(evidence,make(doc,'p','Это перечень для проверки приложений. Наличие файла в комплекте не подтверждает выполнение проекта; плановые значения не переносятся в фактический результат.'));
+      }
       doc.body.append(cover);
       for(const result of results){const item=result.value;doc.body.append(item.budget?budgetPaper(doc,state):doc.importNode(item.article,true));}
       preparedSignature=signature;preparedSelection=selected.join();

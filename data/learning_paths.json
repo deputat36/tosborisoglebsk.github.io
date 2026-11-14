@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-14",
+  "modules": [
+    {
+      "id": "first-common-task",
+      "step": 1,
+      "title": "Первое общее дело: от жалобы к понятной задаче",
+      "result": "Результат занятия — карточка проблемы и следующий шаг команды.",
+      "url": "/materials/tos-school-first-common-task/",
+      "tools": [
+        {
+          "label": "Карточка проблемы",
+          "href": "/documents/templates/project-problem/"
+        },
+        {
+          "label": "Найти свой ТОС",
+          "href": "/residents/my-area/"
+        }
+      ]
+    },
+    {
+      "id": "residents-meeting",
+      "step": 2,
+      "title": "Встреча жителей: подготовить обсуждение и решение",
+      "result": "Результат занятия — повестка, способ приглашения и перечень нужных форм.",
+      "url": "/materials/tos-school-residents-meeting/",
+      "tools": [
+        {
+          "label": "Набор для собрания",
+          "href": "/meeting-kit/"
+        },
+        {
+          "label": "Документы для создания ТОС",
+          "href": "/create-tos/"
+        }
+      ]
+    },
+    {
+      "id": "choose-support",
+      "step": 3,
+      "title": "Поддержка проекта: подобрать маршрут и заявителя",
+      "result": "Результат занятия — подходящая возможность и вопросы организатору.",
+      "url": "/materials/tos-school-choose-support/",
+      "tools": [
+        {
+          "label": "Подобрать поддержку",
+          "href": "/grants/"
+        },
+        {
+          "label": "Сопоставить организации",
+          "href": "/grants/#support-organizations"
+        }
+      ]
+    },
+    {
+      "id": "project-and-budget",
+      "step": 4,
+      "title": "Проект и смета: согласовать действия и ресурсы",
+      "result": "Результат занятия — согласованный паспорт проекта и плановый расчёт.",
+      "url": "/materials/tos-school-project-and-budget/",
+      "tools": [
+        {
+          "label": "Единый комплект проекта",
+          "href": "/documents/templates/project-kit/"
+        },
+        {
+          "label": "Калькулятор сметы",
+          "href": "/documents/templates/project-budget/"
+        }
+      ]
+    },
+    {
+      "id": "implementation-open",
+      "step": 5,
+      "title": "Реализация: сохранять изменения и рассказывать о ходе",
+      "result": "Результат занятия — план информирования и перечень подтверждений.",
+      "url": "/materials/tos-school-implementation-open/",
+      "tools": [
+        {
+          "label": "Фотоотчёт",
+          "href": "/documents/templates/project-photo-report/"
+        },
+        {
+          "label": "Передать новость",
+          "href": "/update-tos/?type=news#message-builder"
+        }
+      ]
+    },
+    {
+      "id": "result-and-care",
+      "step": 6,
+      "title": "Отчёт и содержание результата",
+      "result": "Результат занятия — подтверждённая история и план последующего содержания.",
+      "url": "/materials/tos-school-result-and-care/",
+      "tools": [
+        {
+          "label": "Итоговый отчёт",
+          "href": "/documents/templates/project-final-report/"
+        },
+        {
+          "label": "Опыт ТОСов",
+          "href": "/projects/practices/"
+        }
+      ]
+    }
+  ]
+}
