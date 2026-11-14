@@ -13,6 +13,9 @@ const routes = [
   ...JSON.parse(fs.readFileSync('data/articles.json', 'utf8')).filter(article => article.topic === 'zhkh')
     .map(article => [article.id, `/materials/${article.id}/`, 'Источники и границы применения']),
   ['support-index', '/grants/', 'Грантодатели и организации поддержки ТОС'],
+  ['learning-route','/chairperson/learning/','Шесть шагов: от идеи ТОС до отчёта'],
+  ['contest-check','/grant-application-kit/?opportunity=pfki-2027-second#contest-check','Проверить комплект по конкретному конкурсу'],
+  ['result-packet','/documents/templates/project-kit/?packet=result','Проект ТОС: от проблемы до отчёта'],
   ...JSON.parse(fs.readFileSync('data/support_organizations.json', 'utf8'))
     .map(org => [`support-${org.id}`, `/grants/${org.slug}/`, 'Источники и границы проверки'])
 ];
@@ -83,6 +86,42 @@ async function main() {
           if (id === 'support-index') {
             assert.equal(await page.locator('#support-organizations .grid > article').count(), 3);
             assert.equal(await page.locator('#grants-list [data-grant-id]').count(), JSON.parse(fs.readFileSync('data/grants.json')).filter(item => item.status !== 'draft').length, 'all opportunities remain readable without JavaScript');
+            if(mode!=='without-js'){
+              await page.getByLabel('Кто подаёт',{exact:true}).selectOption('nonprofit');
+              await page.getByLabel('Задача проекта',{exact:true}).selectOption('culture');
+              assert.equal(await page.locator('#grants-list #grant-pfki-2027-second').count(),1,'a suitable legal form can find the cultural route');
+              await page.getByLabel('Кто подаёт',{exact:true}).selectOption('tos-no-entity');
+              assert.equal(await page.locator('#grants-list #grant-pfki-2027-second').count(),0,'an unincorporated TOS is not advertised as an eligible PFKI applicant');
+              assert.equal(await page.locator('#grants-list #grant-fond-borisoglebsk-second-2026').count(),1,'unknown eligibility stays visible as a question');
+              await page.reload({waitUntil:'networkidle'});
+              assert.equal(await page.getByLabel('Кто подаёт',{exact:true}).inputValue(),'tos-no-entity');
+              await page.getByRole('button',{name:'Сбросить фильтры',exact:true}).click();
+            }
+          }
+          if(id==='learning-route')assert.equal(await page.locator('.learning-card').count(),6);
+          if(id==='contest-check'){
+            assert.equal(await page.locator('#contest-check').count(),1,'there is one interactive root');
+            if(mode==='without-js'){
+              assert.equal(await page.locator('[data-contest-choice]').isVisible(),false);
+              assert.equal(await page.locator('[data-contest-items] li').count(),7);
+            }else{
+              await page.locator('[data-contest-choice]').waitFor({state:'visible'});
+              assert.equal(await page.locator('[data-contest-choice]').inputValue(),'pfki-2027-second');
+              await page.locator('[data-contest-items] input').first().check();
+              await page.getByLabel('Возможность и сезон',{exact:true}).selectOption('tos-voronezh-projects-2026');
+              assert.equal(await page.locator('[data-contest-items] input:checked').count(),0);
+              assert((await page.locator('[data-contest-state]').innerText()).includes('Завершённый сезон'));
+              await page.getByLabel('Возможность и сезон',{exact:true}).selectOption('pfki-2027-second');
+              assert.equal(await page.locator('[data-contest-items] input:checked').count(),1,'marks remain separate in this tab');
+              const download=page.waitForEvent('download');
+              await page.getByRole('button',{name:'Скачать список',exact:true}).click();
+              const saved=await download;assert(fs.readFileSync(await saved.path(),'utf8').includes('23:30'));
+            }
+          }
+          if(id==='result-packet'&&mode!=='without-js'){
+            assert.deepEqual(await page.locator('[data-packet-document]:checked').evaluateAll(nodes=>nodes.map(node=>node.value)),['photo-report','final-report']);
+            await page.locator('[data-packet-prepare]').click();
+            await page.frameLocator('[data-packet-preview]').getByRole('heading',{name:'Подтверждения результата',exact:true}).waitFor();
           }
           const links = await page.locator('main a[href^="/"]').evaluateAll(nodes => [...new Set(nodes.map(node => node.getAttribute('href').split('#')[0]))]);
           for (const href of links) assert((await context.request.get(base + href)).ok(), `destination available: ${href}`);

@@ -8,7 +8,6 @@
     "amount": "До 100 000 рублей",
     "deadline": "30 ноября 2026 года; время закрытия не указано",
     "deadline_date": "2026-11-30",
-    "deadline_at": "2026-12-01T00:00:00+03:00",
     "source_checked_at": "2026-11-11",
     "difficulty": "Средняя",
     "who": "Авторы инициатив для Борисоглебска; возраст, состав группы и статус заявителя проверяются по положению второго конкурса.",
@@ -30,7 +29,37 @@
     "project_labels": {
       "project-school-for-tos": "Школа подготовки проектов ТОС",
       "neighbor-festival": "Праздник двора, улицы или села"
-    }
+    },
+    "opportunity_type": "grant",
+    "season": "2026",
+    "operator": "Фонд «Будущее Борисоглебска»",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "bgo"
+      ],
+      "verification": "announcement",
+      "note": "Положение второго конкурса не прочитано. По выбранному статусу нужно уточнить допуск у фонда."
+    },
+    "deadline_precision": "day",
+    "source_documents": [
+      {
+        "title": "Объявление / источник сведений",
+        "url": "https://mybsk.ru/est-ideya-dlya-goroda-fond-budushhee-borisoglebska-gotov-podderzhat-eyo-rublyom/",
+        "kind": "announcement",
+        "checked_at": "2026-11-11",
+        "locator": "",
+        "note": "Подробные условия см. у организатора."
+      }
+    ]
   },
   {
     "id": "sovet-kray-rodnoy-2026",
@@ -41,7 +70,6 @@
     "amount": "Благодарности, сувениры и сертификаты по условиям акции; не грант на ремонт",
     "deadline": "15 ноября 2026 года; время отправки ссылки уточните у организатора",
     "deadline_date": "2026-11-15",
-    "deadline_at": "2026-11-16T00:00:00+03:00",
     "source_checked_at": "2026-11-11",
     "difficulty": "Низкая / средняя",
     "who": "Председатели и активисты ТОС Воронежской области как организаторы мероприятий",
@@ -63,7 +91,36 @@
     "project_labels": {
       "neighbor-festival": "Праздник двора, улицы или села",
       "photo-project-archive": "Архив реализованных проектов ТОС"
-    }
+    },
+    "opportunity_type": "award",
+    "season": "2026",
+    "operator": "Совет муниципальных образований Воронежской области",
+    "eligibility": {
+      "applicant_types": [
+        "tos-no-entity",
+        "tos-entity"
+      ],
+      "themes": [
+        "culture",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "announcement",
+      "note": "Подбор показывает возможный маршрут. Допуск и полный перечень требований определяет организатор."
+    },
+    "deadline_precision": "day",
+    "source_documents": [
+      {
+        "title": "Объявление / источник сведений",
+        "url": "https://boguchar-vesti.ru/?action=view&id=17863&module=articles",
+        "kind": "announcement",
+        "checked_at": "2026-11-11",
+        "locator": "",
+        "note": "Подробные условия см. у организатора."
+      }
+    ]
   },
   {
     "id": "sluzhenie-award-2026",
@@ -73,7 +130,6 @@
     "call_status": "announced",
     "amount": "Премия: не путать с грантовым финансированием",
     "deadline": "29 ноября 2026 года (точное время завершения не указано)",
-    "deadline_at": "2026-11-30T00:00:00+03:00",
     "source_checked_at": "2026-11-12",
     "difficulty": "Средняя",
     "who": "Председатели и члены органов ТОС и другие категории участников по действующему положению премии",
@@ -90,7 +146,207 @@
     "note": "IV премия с вручением в 2027 году. Премия не является грантом. Точное время закрытия приёма в прочитанном объявлении не указано. Критерии номинации, комплект документов и правила команды нужно проверить по действующему положению.",
     "project_labels": {},
     "conditions_url": "https://xn--80akhabrdiu7abc5b4e.xn--p1ai/premija-sluzhenie",
-    "guide_url": "/materials/sluzhenie-award-guide/"
+    "guide_url": "/materials/sluzhenie-award-guide/",
+    "opportunity_type": "award",
+    "season": "IV сезон, вручение 2027",
+    "operator": "ВАРМСУ",
+    "eligibility": {
+      "applicant_types": [
+        "tos-no-entity",
+        "tos-entity",
+        "individual"
+      ],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "announcement",
+      "note": "Подбор показывает возможный маршрут. Допуск и полный перечень требований определяет организатор."
+    },
+    "deadline_date": "2026-11-29",
+    "deadline_precision": "day",
+    "source_documents": [
+      {
+        "title": "Объявление / источник сведений",
+        "url": "https://varmsu.ru/news/v_regionakh_startuet_forum_varmsu_malaya_rodina_sila_rossii/",
+        "kind": "announcement",
+        "checked_at": "2026-11-12",
+        "locator": "",
+        "note": "Подробные условия см. у организатора."
+      }
+    ]
+  },
+  {
+    "id": "pfki-2027-second",
+    "title": "ПФКИ: второй конкурс 2027 года (27-2)",
+    "category": "Культура и творческие проекты",
+    "status": "Приём заявок до 7 декабря 2026 года",
+    "call_status": "announced",
+    "opportunity_type": "grant",
+    "season": "27-2 / 2027",
+    "operator": "Президентский фонд культурных инициатив",
+    "amount": "Запрашиваемая сумма — по обоснованному бюджету и правилам конкурса",
+    "deadline": "7 декабря 2026 года, 23:30 мск",
+    "deadline_date": "2026-12-07",
+    "deadline_at": "2026-12-07T23:30:00+03:00",
+    "deadline_precision": "minute",
+    "source_checked_at": "2026-11-14",
+    "difficulty": "Высокая",
+    "who": "Подходящие НКО, коммерческие и муниципальные организации, ИП. ТОС без юридического лица — через соответствующего правилам партнёра.",
+    "best_for": "Культурные проекты, местная история, творческие инициативы, фестивали и культурное просвещение.",
+    "prepare": [
+      "Проверить форму и ограничения юридического заявителя по разделу III положения 27-2.",
+      "Обосновать культурную идею, аудиторию и общественную пользу.",
+      "Согласовать действия, бюджет, подтверждения цен и партнёров.",
+      "Сверить электронную заявку с официальным чек-листом и сохранить подтверждение подачи."
+    ],
+    "project_links": [
+      "history-route-memory",
+      "neighbor-festival"
+    ],
+    "source": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/news/8762",
+    "conditions_url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/aoq/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BE%20%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%B5.pdf",
+    "guide_url": "/materials/pfki-27-2-preparation/",
+    "note": "Изучено положение 27-2, утверждённое 22.10.2026 № 50, и официальный чек-лист. Это культурный конкурс; выбор в подборке не подтверждает выполнение всех требований заявителя.",
+    "eligibility": {
+      "applicant_types": [
+        "tos-entity",
+        "nonprofit",
+        "entrepreneur",
+        "municipal",
+        "commercial"
+      ],
+      "excluded_types": [
+        "tos-no-entity",
+        "individual"
+      ],
+      "themes": [
+        "culture"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "rules_read",
+      "note": "Муниципальные казённые и государственные учреждения исключены. Регистрация ТОС как НКО сама по себе не подтверждает выполнение всех требований."
+    },
+    "source_documents": [
+      {
+        "title": "Положение ПФКИ 27-2",
+        "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/aoq/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BE%20%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%B5.pdf",
+        "kind": "rules",
+        "checked_at": "2026-11-14",
+        "locator": "раздел III; п. 8–13; раздел V",
+        "note": "Утверждено 22 октября 2026 года № 50."
+      },
+      {
+        "title": "Официальный чек-лист 27-2",
+        "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/xvl/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%A7%D0%B5%D0%BA-%D0%BB%D0%B8%D1%81%D1%82%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8.pdf",
+        "kind": "checklist",
+        "checked_at": "2026-11-14",
+        "locator": "разделы о целях, плане, бюджете и команде",
+        "note": ""
+      },
+      {
+        "title": "Рекомендации по бюджету 27-2",
+        "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/io0/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D0%B5%20%D0%B1%D1%8E%D0%B4%D0%B6%D0%B5%D1%82%D0%B0%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0..pdf",
+        "kind": "method",
+        "checked_at": "2026-11-14",
+        "locator": "Подготовка расходов и обоснований",
+        "note": ""
+      },
+      {
+        "title": "Объявление конкурса",
+        "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/news/8762",
+        "kind": "announcement",
+        "checked_at": "2026-11-14",
+        "locator": "",
+        "note": "",
+        "published_at": "2026-10-27"
+      }
+    ],
+    "project_labels": {
+      "history-route-memory": "Исторический маршрут территории",
+      "neighbor-festival": "Праздник двора, улицы или села"
+    }
+  },
+  {
+    "id": "fpg-2027-first",
+    "title": "ФПГ: первый конкурс 2027 года",
+    "category": "Федеральный конкурс НКО",
+    "status": "Приём первого конкурса 2027 года завершён",
+    "call_status": "closed",
+    "opportunity_type": "grant",
+    "season": "2027-1",
+    "operator": "Фонд президентских грантов",
+    "amount": "По правилам соответствующего конкурса",
+    "deadline": "9 ноября 2026 года, 23:30 мск; приём завершён",
+    "deadline_date": "2026-11-09",
+    "deadline_at": "2026-11-09T23:30:00+03:00",
+    "deadline_precision": "minute",
+    "source_checked_at": "2026-11-14",
+    "difficulty": "Высокая",
+    "who": "НКО по требованиям сезона; статус и стаж организации проверяются отдельно.",
+    "best_for": "Социальные и общественно полезные проекты НКО. Сейчас доступна подготовка и проверка поданной заявки.",
+    "prepare": [
+      "Открыть личный кабинет фонда и проверить статус уже поданной заявки.",
+      "Сохранить сообщение о завершении и текущие документы своего сезона.",
+      "Собрать подтверждения проблемы, план и бюджет следующей инициативы.",
+      "Следующий приём проверять по новому официальному объявлению."
+    ],
+    "project_links": [],
+    "source": "https://t.me/s/presidentialgrants",
+    "conditions_url": "https://президентскиегранты.рф/",
+    "note": "Официальный канал подтвердил продление до 9 ноября и завершение. Название «2027» не означает открытый приём в ноябре после срока. Полные условия не заменяются сообщением канала.",
+    "eligibility": {
+      "applicant_types": [
+        "tos-entity",
+        "nonprofit"
+      ],
+      "excluded_types": [
+        "tos-no-entity",
+        "individual",
+        "entrepreneur",
+        "municipal"
+      ],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "announcement",
+      "note": "Дополнительные требования к НКО проверяются по положению первого конкурса 2027."
+    },
+    "source_documents": [
+      {
+        "title": "Официальный канал: срок и завершение",
+        "url": "https://t.me/s/presidentialgrants",
+        "kind": "announcement",
+        "checked_at": "2026-11-14",
+        "locator": "",
+        "note": ""
+      },
+      {
+        "title": "Официальное сообщение о продлении",
+        "url": "https://t.me/s/presidentialgrants?before=6153",
+        "kind": "extension",
+        "checked_at": "2026-11-14",
+        "locator": "",
+        "note": "Продление до 9 ноября; 23:30 мск."
+      }
+    ],
+    "project_labels": {}
   },
   {
     "id": "obraz-individual-2026-october",
@@ -119,18 +375,50 @@
     "organization_url": "/grants/obraz-budushchego/",
     "project_labels": {
       "project-school-for-tos": "Школа подготовки проектов ТОС"
-    }
+    },
+    "opportunity_type": "grant",
+    "season": "2026",
+    "operator": "АНО «Образ Будущего»",
+    "eligibility": {
+      "applicant_types": [
+        "individual"
+      ],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "reference",
+      "note": "Подбор показывает возможный маршрут. Допуск и полный перечень требований определяет организатор."
+    },
+    "deadline_date": "2026-10-18",
+    "deadline_precision": "minute",
+    "source_documents": [
+      {
+        "title": "Объявление / источник сведений",
+        "url": "https://obraz36.ru/sobitiya/-dorogie-druzja-vazhnoe-napominanie-konkurs-fizicheskih-lits-skoro-zavershitsja-ostalis-schitannye-d",
+        "kind": "announcement",
+        "checked_at": "2026-10-15",
+        "locator": "",
+        "note": "Подробные условия см. у организатора."
+      }
+    ]
   },
   {
     "id": "obraz-tos-mini-2026-october",
     "title": "Мини-гранты ТОС Воронежской области — 2026",
     "category": "Конкурс ТОС",
     "status": "Объявлено продление приёма; проверьте допуск ТОС",
-    "call_status": "announced",
+    "call_status": "closed",
     "amount": "До 200 000 рублей",
     "deadline": "19 октября 2026 года, 23:59 мск",
     "deadline_at": "2026-10-19T23:59:59+03:00",
-    "source_checked_at": "2026-10-15",
+    "source_checked_at": "2026-11-14",
     "difficulty": "Средняя",
     "who": "Представители ТОС Воронежской области с учётом ограничений конкурса",
     "best_for": "Социальные и культурные инициативы, добровольчество, туризм и активное долголетие. Благоустройство и инфраструктурные работы исключены положением 2026 года.",
@@ -152,21 +440,64 @@
     "project_labels": {
       "project-school-for-tos": "Школа подготовки проектов ТОС",
       "neighbor-festival": "Праздник двора, улицы или села"
-    }
+    },
+    "opportunity_type": "grant",
+    "season": "2026",
+    "operator": "АНО «Образ Будущего»",
+    "eligibility": {
+      "applicant_types": [
+        "tos-no-entity",
+        "tos-entity",
+        "individual"
+      ],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "rules_read",
+      "note": "Заявитель — уполномоченный представитель ТОС: гражданин от 18 лет с регистрацией в Воронежской области. Проверить полномочия, прошлые победы и отчётность."
+    },
+    "deadline_date": "2026-10-19",
+    "deadline_precision": "minute",
+    "source_documents": [
+      {
+        "title": "Продление приёма до 19 октября",
+        "url": "https://obraz36.ru/sobitiya/-druzja-u-nas-otlichnye-novosti-my-prodlevaem-priem-zajavok-na-konkurs-proektov-mini-grantov-tos-do-",
+        "kind": "extension",
+        "checked_at": "2026-11-14",
+        "locator": "",
+        "note": "23:59 мск.",
+        "published_at": "2026-10-12"
+      },
+      {
+        "title": "Положение мини-грантов ТОС 2026",
+        "url": "https://obraz36.ru/site_data/s273/2026/2026/%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%B0%20%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B3%D1%80%D0%B0%D0%BD%D1%82%D0%BE%D0%B2%20%D0%A2%D0%9E%D0%A1%202026.pdf",
+        "kind": "rules",
+        "checked_at": "2026-11-14",
+        "locator": "разделы III–IV, VII–IX",
+        "note": "Отдельный конкурс: ограничения прошлых побед и расходов."
+      }
+    ]
   },
   {
     "id": "tos-voronezh-projects-2026",
-    "title": "Конкурс общественно полезных проектов ТОС Воронежской области",
+    "title": "Конкурс ТОС АНО «Образ Будущего» — 2026",
     "category": "Конкурс ТОС",
     "status": "Приём основного конкурса 2026 года завершён",
-    "amount": "До 1 500 000 рублей по объявлению 2026 года",
+    "amount": "До 1 500 000 рублей",
     "budget": "проверять в новом положении конкурса",
-    "deadline": "4 февраля 2026 года; завершённый сезон",
+    "deadline": "11 февраля 2026 года, 18:00 мск; приём завершён",
     "difficulty": "Средняя",
     "start_prepare": "За 2–3 месяца до объявления конкурса",
-    "directions": "Благоустройство, детские и спортивные площадки, общественные пространства, памятные места, досуг, озеленение, тротуары, освещение и другие локальные проекты",
-    "who": "ТОСы Воронежской области",
-    "best_for": "Детские и спортивные площадки, памятные места, благоустройство, освещение, тротуары, места отдыха, озеленение, локальные инфраструктурные проекты.",
+    "directions": "Некоторые виды благоустройства, площадки, тротуары, освещение и досуг по положению АНО 2026 года.",
+    "who": "ТОС Воронежской области без образования юридического лица; полномочия, документы и исключения — по положению.",
+    "best_for": "Площадки, тротуары, освещение, места отдыха и другие разрешённые проекты. Озеленение и капитальные работы за счёт гранта исключены.",
     "prepare": [
       "Выбрать одну понятную проблему территории.",
       "Сделать фотофиксацию до начала работ.",
@@ -179,27 +510,88 @@
       "child-sport-playground",
       "memorial-renovation",
       "healthy-route-sport-zone",
-      "eco-platform",
       "center-of-attraction",
       "lighting-safe-way",
       "safe-path-or-sidewalk"
     ],
-    "source": "https://obraz36.ru/sobitiya/-dorogie-druzja-otkryt-priem-zajavok-na-konkurs-proektov-tos-",
-    "note": "Главная региональная конкурсная логика для ТОСов. Перед подачей обязательно проверять новое положение, сроки, сумму поддержки, требования к заявителю и перечень документов.",
+    "source": "https://obraz36.ru/site_data/s273/2026/2026/Novaya_redaktsia_Polozhenia_TOS_2026.pdf",
+    "note": "Срок исправлен по новой редакции положения АНО: п. 19 и приложение 1. Первоначальное объявление содержало 4 февраля. Правила Совета муниципальных образований проверяются отдельно; даты нового сезона не установлены.",
     "organization_url": "/grants/obraz-budushchego/",
-    "call_status": "announced",
-    "deadline_date": "2026-02-04",
-    "deadline_at": "2026-02-05T00:00:00+03:00",
-    "source_checked_at": "2026-11-11",
+    "call_status": "closed",
+    "deadline_date": "2026-02-11",
+    "source_checked_at": "2026-11-14",
     "project_labels": {
       "child-sport-playground": "Детская или спортивная площадка",
       "memorial-renovation": "Ремонт памятника или памятного места",
       "healthy-route-sport-zone": "Маршрут здоровья или небольшая спортивная зона",
-      "eco-platform": "Экоплощадка или экологическая точка ТОС",
       "center-of-attraction": "Центр притяжения жителей",
       "lighting-safe-way": "Освещение и безопасный маршрут",
       "safe-path-or-sidewalk": "Безопасная дорожка или тротуар"
-    }
+    },
+    "opportunity_type": "grant",
+    "season": "2026",
+    "operator": "АНО «Образ Будущего»",
+    "eligibility": {
+      "applicant_types": [
+        "tos-no-entity"
+      ],
+      "themes": [
+        "landscaping",
+        "culture",
+        "sport"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "rules_read",
+      "note": "Только ТОС без юридического лица. Проверить зарегистрированный устав, полномочия и ограничения для прошлых победителей.",
+      "excluded_types": [
+        "tos-entity",
+        "nonprofit",
+        "individual",
+        "entrepreneur",
+        "municipal"
+      ]
+    },
+    "deadline_precision": "minute",
+    "source_documents": [
+      {
+        "title": "Первоначальное объявление: срок 4 февраля",
+        "url": "https://obraz36.ru/sobitiya/-dorogie-druzja-otkryt-priem-zajavok-na-konkurs-proektov-tos-",
+        "kind": "announcement",
+        "checked_at": "2026-11-14",
+        "locator": "",
+        "note": "Ранняя дата; для АНО заменена сроком из новой редакции.",
+        "published_at": "2026-01-14"
+      },
+      {
+        "title": "Новая редакция положения АНО 2026",
+        "url": "https://obraz36.ru/site_data/s273/2026/2026/Novaya_redaktsia_Polozhenia_TOS_2026.pdf",
+        "kind": "rules",
+        "checked_at": "2026-11-14",
+        "locator": "п. 19; приложение 1",
+        "note": "Приём до 11 февраля 18:00 мск. В шапке файла указан протокол 2025 года; дату утверждения редакции не уточняем."
+      },
+      {
+        "title": "Методика оценки заявок",
+        "url": "https://obraz36.ru/site_data/s273/2026/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B8%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BE%D0%BA%20%D0%A2%D0%9E%D0%A1.pdf",
+        "kind": "method",
+        "checked_at": "2026-11-14",
+        "locator": "п. 10",
+        "note": "Критерии именно этого конкурса."
+      }
+    ],
+    "deadline_at": "2026-02-11T18:00:00+03:00",
+    "conditions_url": "https://obraz36.ru/konkursy-grantov/tos/konkurs-tos-2026",
+    "guide_url": "/materials/tos-contest-selfcheck-2026/",
+    "source_history": [
+      {
+        "checked_at": "2026-11-14",
+        "title": "Уточнение срока и допустимых направлений",
+        "text": "Срок АНО изменён с 4 на 11 февраля по новой редакции. Озеленение исключено из подходящих расходов. Это архив 2026 года.",
+        "url": "https://obraz36.ru/site_data/s273/2026/2026/Novaya_redaktsia_Polozhenia_TOS_2026.pdf"
+      }
+    ]
   },
   {
     "id": "association-municipalities-voronezh",
@@ -236,7 +628,37 @@
       "information-stand-tos": "Информационный стенд ТОС",
       "photo-project-archive": "Архив реализованных проектов ТОС",
       "center-of-attraction": "Центр притяжения жителей"
-    }
+    },
+    "opportunity_type": "organization",
+    "season": "",
+    "operator": "Совет муниципальных образований Воронежской области",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none",
+    "source_documents": [
+      {
+        "title": "Объявление / источник сведений",
+        "url": "https://obraz36.ru/sobitiya/-dorogie-druzja-otkryt-priem-zajavok-na-konkurs-proektov-tos-",
+        "kind": "reference",
+        "checked_at": "2026-11-11",
+        "locator": "",
+        "note": "Подробные условия см. у организатора."
+      }
+    ]
   },
   {
     "id": "association-tos-voronezh",
@@ -273,7 +695,27 @@
       "neighbor-festival": "Праздник двора, улицы или села",
       "green-yard-flowerbeds": "Озеленение, клумбы и уход за зелёными зонами",
       "memorial-renovation": "Ремонт памятника или памятного места"
-    }
+    },
+    "opportunity_type": "organization",
+    "season": "",
+    "operator": "Объединения ТОС Воронежской области",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "obraz-budushchego",
@@ -312,7 +754,37 @@
       "neighbor-festival": "Праздник двора, улицы или села",
       "information-stand-tos": "Информационный стенд ТОС",
       "photo-project-archive": "Архив реализованных проектов ТОС"
-    }
+    },
+    "opportunity_type": "organization",
+    "season": "",
+    "operator": "АНО «Образ Будущего»",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none",
+    "source_documents": [
+      {
+        "title": "Объявление / источник сведений",
+        "url": "https://obraz36.ru/",
+        "kind": "reference",
+        "checked_at": "2026-11-11",
+        "locator": "",
+        "note": "Подробные условия см. у организатора."
+      }
+    ]
   },
   {
     "id": "rodnye-berega",
@@ -347,7 +819,22 @@
       "green-yard-flowerbeds": "Озеленение, клумбы и уход за зелёными зонами",
       "photo-project-archive": "Архив реализованных проектов ТОС",
       "center-of-attraction": "Центр притяжения жителей"
-    }
+    },
+    "opportunity_type": "resource",
+    "season": "",
+    "operator": "АНО «Образ Будущего»",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "ecology"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "sonko-voronezh-2026",
@@ -385,7 +872,29 @@
       "history-route-memory": "Исторический маршрут территории",
       "project-school-for-tos": "Школа подготовки проектов ТОС",
       "photo-project-archive": "Архив реализованных проектов ТОС"
-    }
+    },
+    "opportunity_type": "grant",
+    "season": "2026",
+    "operator": "Региональный конкурс СО НКО",
+    "eligibility": {
+      "applicant_types": [
+        "tos-entity",
+        "nonprofit"
+      ],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "reference",
+      "note": "Подбор показывает возможный маршрут. Допуск и полный перечень требований определяет организатор."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "initiative-budgeting",
@@ -422,7 +931,27 @@
       "yard-small-repair": "Мелкий ремонт дворовой или сельской инфраструктуры",
       "green-yard-flowerbeds": "Озеленение, клумбы и уход за зелёными зонами",
       "center-of-attraction": "Центр притяжения жителей"
-    }
+    },
+    "opportunity_type": "resource",
+    "season": "",
+    "operator": "Муниципальные и областные программы",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "voronezh"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "municipal-deputy-initiatives",
@@ -455,7 +984,27 @@
       "lighting-safe-way": "Освещение и безопасный маршрут",
       "safe-path-or-sidewalk": "Безопасная дорожка или тротуар",
       "water-supply-improvement": "Ремонт или улучшение системы водоснабжения"
-    }
+    },
+    "opportunity_type": "resource",
+    "season": "",
+    "operator": "Муниципальные и депутатские инициативы",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "bgo"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "business-partnership",
@@ -490,7 +1039,27 @@
       "yard-small-repair": "Мелкий ремонт дворовой или сельской инфраструктуры",
       "neighbor-festival": "Праздник двора, улицы или села",
       "information-stand-tos": "Информационный стенд ТОС"
-    }
+    },
+    "opportunity_type": "resource",
+    "season": "",
+    "operator": "Местные партнёры",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "bgo"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "presidential-grants",
@@ -525,7 +1094,29 @@
       "history-route-memory": "Исторический маршрут территории",
       "project-school-for-tos": "Школа подготовки проектов ТОС",
       "neighbor-festival": "Праздник двора, улицы или села"
-    }
+    },
+    "opportunity_type": "organization",
+    "season": "",
+    "operator": "Фонд президентских грантов",
+    "eligibility": {
+      "applicant_types": [
+        "tos-entity",
+        "nonprofit"
+      ],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "reference",
+      "note": "Подбор показывает возможный маршрут. Допуск и полный перечень требований определяет организатор."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "rosmol-grants-2026",
@@ -562,7 +1153,26 @@
       "history-route-memory": "Исторический маршрут территории",
       "healthy-route-sport-zone": "Маршрут здоровья или небольшая спортивная зона",
       "photo-project-archive": "Архив реализованных проектов ТОС"
-    }
+    },
+    "opportunity_type": "resource",
+    "season": "",
+    "operator": "Росмолодёжь",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "myvmeste-award-2026",
@@ -601,7 +1211,25 @@
       "project-school-for-tos": "Школа подготовки проектов ТОС",
       "photo-project-archive": "Архив реализованных проектов ТОС",
       "green-yard-flowerbeds": "Озеленение, клумбы и уход за зелёными зонами"
-    }
+    },
+    "opportunity_type": "award",
+    "season": "2026",
+    "operator": "#МЫВМЕСТЕ",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "team"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "dobro-volunteering-learning",
@@ -634,7 +1262,26 @@
       "project-school-for-tos": "Школа подготовки проектов ТОС",
       "support-elderly-neighbors": "Соседская помощь пожилым жителям",
       "photo-project-archive": "Архив реализованных проектов ТОС"
-    }
+    },
+    "opportunity_type": "preparation",
+    "season": "",
+    "operator": "Добро.рф",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   },
   {
     "id": "application-preparation-calendar",
@@ -666,6 +1313,26 @@
     "project_labels": {
       "photo-project-archive": "Архив реализованных проектов ТОС",
       "project-school-for-tos": "Школа подготовки проектов ТОС"
-    }
+    },
+    "opportunity_type": "preparation",
+    "season": "",
+    "operator": "Редакция ТОС БГО",
+    "eligibility": {
+      "applicant_types": [],
+      "themes": [
+        "landscaping",
+        "social",
+        "culture",
+        "ecology",
+        "sport",
+        "team"
+      ],
+      "geography": [
+        "russia"
+      ],
+      "verification": "reference",
+      "note": "Статус заявителя проверяется по положению конкретного отбора или условиям партнёра."
+    },
+    "deadline_precision": "none"
   }
 ]

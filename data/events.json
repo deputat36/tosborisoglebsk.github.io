@@ -272,5 +272,19 @@
     "tos_slug": "",
     "source": "Объявление Ассоциации в «Богучарских вестях», 15.09.2026; сверено 11.11.2026",
     "source_url": "https://boguchar-vesti.ru/?action=view&id=17863&module=articles"
+  },
+  {
+    "id": "pfki-2027-second-deadline",
+    "status": "published",
+    "date": "2026-12-07",
+    "time": "23:30",
+    "type": "Грантовый дедлайн",
+    "title": "Срок подачи: второй конкурс ПФКИ 2027 года (27-2)",
+    "description": "Приём завершается 7 декабря 2026 года в 23:30 по московскому времени. Сверено по пункту 13 положения 27-2; перед подачей проверьте изменения и полный допуск заявителя.",
+    "place": "Россия, онлайн",
+    "tos_slug": "",
+    "source": "Президентский фонд культурных инициатив; положение 27-2, п. 13",
+    "source_url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/aoq/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%9F%D0%BE%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%BE%20%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D1%81%D0%B5.pdf",
+    "content_origin": "verified"
   }
 ]

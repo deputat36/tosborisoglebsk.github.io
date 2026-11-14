@@ -213,5 +213,177 @@
       "ВКонтакте"
     ],
     "status": "published"
+  },
+  {
+    "id": "voronezh-tos-document-method-2025",
+    "title": "Документы ТОС: региональные рекомендации и формы",
+    "url": "https://obraz36.ru/site_data/s273/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%20%D0%BF%D0%BE%20%D0%BE%D1%84%D0%BE%D1%80%D0%BC%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2%20%D1%82%D0%B5%D1%80%D1%80%D0%B8%D1%82%D0%BE%D1%80%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE%20%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE%20%D1%81%D0%B0%D0%BC%D0%BE%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F.docx",
+    "category": "Документы",
+    "topic": "start",
+    "description": "Образцы уставов, протоколов и регистрационных материалов. Для применения в БГО сверяйте местные акты.",
+    "author": "Ассоциация ТОС и местных сообществ Воронежской области",
+    "year": "2025",
+    "region": "voronezh",
+    "format": "DOCX",
+    "material_type": "form",
+    "review_scope": "Изучены структура и формы",
+    "audience": "Председатели и активисты",
+    "status": "published",
+    "checked_at": "2026-11-14",
+    "tags": [
+      "методические материалы",
+      "2025",
+      "Ассоциация ТОС и местных сообществ Воронежской области"
+    ]
+  },
+  {
+    "id": "voronezh-tos-scoring-2026",
+    "title": "Как оценивают заявку ТОС: методика конкурса АНО 2026",
+    "url": "https://obraz36.ru/site_data/s273/2026/%D0%9C%D0%B5%D1%82%D0%BE%D0%B4%D0%B8%D0%BA%D0%B0%20%D0%BE%D1%86%D0%B5%D0%BD%D0%BA%D0%B8%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BE%D0%BA%20%D0%A2%D0%9E%D0%A1.pdf",
+    "category": "Конкурс ТОС",
+    "topic": "projects",
+    "description": "Критерии конкретного завершённого конкурса; помогают проверить аргументы и подтверждения.",
+    "author": "АНО «Образ Будущего»",
+    "year": "2026",
+    "region": "voronezh",
+    "format": "PDF · 8 страниц",
+    "material_type": "method",
+    "review_scope": "Изучены критерии и порядок оценки",
+    "audience": "Председатели и активисты",
+    "status": "published",
+    "checked_at": "2026-11-14",
+    "tags": [
+      "методические материалы",
+      "2026",
+      "АНО «Образ Будущего»"
+    ]
+  },
+  {
+    "id": "tos-knowledge-qa-2025",
+    "title": "База знаний о ТОСах: вопросы и ответы",
+    "url": "https://kaykino10.com/wp-content/uploads/2025/09/baza-znanij-o-tos.pdf",
+    "category": "Председателю",
+    "topic": "start",
+    "description": "Создание ТОС, юридический статус, устав и вовлечение. Процедуры другого региона проверяйте отдельно.",
+    "author": "Публикация на сайте «Кайкино»",
+    "year": "2025",
+    "region": "other",
+    "format": "PDF · 23 страницы",
+    "material_type": "method",
+    "review_scope": "Изучены выбранные разделы",
+    "audience": "Председатели и активисты",
+    "status": "published",
+    "checked_at": "2026-11-14",
+    "tags": [
+      "методические материалы",
+      "2025",
+      "Публикация на сайте «Кайкино»"
+    ]
+  },
+  {
+    "id": "nifi-72-questions-2023",
+    "title": "72 вопроса об инициативном бюджетировании",
+    "url": "https://www.nifi.ru/images/72_questionIB.pdf",
+    "category": "Проекты",
+    "topic": "projects",
+    "description": "Роль ТОС, участие жителей, городские и сельские инициативы. Правовые сведения издания требуют актуальной сверки.",
+    "author": "НИФИ Минфина России · под ред. В. В. Вагина",
+    "year": "2023",
+    "region": "russia",
+    "format": "PDF · 232 страницы",
+    "material_type": "book",
+    "review_scope": "Изучены оглавление и выбранные главы, включая вопросы 40–42",
+    "audience": "Председатели и активисты",
+    "status": "published",
+    "checked_at": "2026-11-14",
+    "tags": [
+      "методические материалы",
+      "2023",
+      "НИФИ Минфина России · под ред. В. В. Вагина"
+    ]
+  },
+  {
+    "id": "nifi-best-practices-2026",
+    "title": "Лучшие практики инициативного бюджетирования: доклад 2026",
+    "url": "https://www.nifi.ru/images/FILES/IB/2026/Doklad_o_luchshikh_praktikakh_razvitiya.pdf",
+    "category": "Практики Воронежской области",
+    "topic": "territory",
+    "description": "Обзор участия граждан, сопровождения инициатив и цифровых решений разных регионов; в основном данные за 2025 год.",
+    "author": "НИФИ / Минфин России",
+    "year": "2026",
+    "region": "russia",
+    "format": "PDF · 117 страниц",
+    "material_type": "method",
+    "review_scope": "Изучены отдельные разделы",
+    "audience": "Председатели и активисты",
+    "status": "published",
+    "checked_at": "2026-11-14",
+    "tags": [
+      "методические материалы",
+      "2026",
+      "НИФИ / Минфин России"
+    ]
+  },
+  {
+    "id": "community-manager-book-2021",
+    "title": "Настольная книга менеджера местного сообщества",
+    "url": "https://publications.hse.ru/books/508083160",
+    "category": "Команда ТОС",
+    "topic": "team",
+    "description": "Кузнецов С. А., Лукичев А. Н., Шомина Е. С. Библиографическая карточка; полного текста в исследовании нет.",
+    "author": "С. А. Кузнецов, А. Н. Лукичев, Е. С. Шомина",
+    "year": "2021",
+    "region": "russia",
+    "format": "Библиографическая запись",
+    "material_type": "book",
+    "review_scope": "Проверена библиография; полный текст не изучен",
+    "audience": "Председатели и активисты",
+    "status": "published",
+    "checked_at": "2026-11-14",
+    "tags": [
+      "методические материалы",
+      "2021",
+      "С. А. Кузнецов, А. Н. Лукичев, Е. С. Шомина"
+    ]
+  },
+  {
+    "id": "pfki-27-2-official-checklist",
+    "title": "ПФКИ 27-2: официальный чек-лист заявки",
+    "url": "https://xn--80aeeqaabljrdbg6a3ahhcl4ay9hsa.xn--p1ai/upload/docs/xvl/%D0%9F%D0%A4%D0%9A%D0%98-27-2%20%D0%A7%D0%B5%D0%BA-%D0%BB%D0%B8%D1%81%D1%82%20%D0%B4%D0%BB%D1%8F%20%D1%81%D0%B0%D0%BC%D0%BE%D0%BF%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%BA%D0%B8%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D0%B8.pdf",
+    "category": "Гранты",
+    "topic": "projects",
+    "description": "Вопросы для проверки творческой идеи, аудитории, результатов, календаря, бюджета и команды конкретного конкурса.",
+    "author": "Президентский фонд культурных инициатив",
+    "year": "2027 · конкурс 27-2",
+    "region": "russia",
+    "format": "PDF · 7 страниц",
+    "material_type": "method",
+    "review_scope": "Документ изучен; допуск определяется полным положением",
+    "audience": "Председатели и активисты",
+    "status": "published",
+    "checked_at": "2026-11-14",
+    "tags": [
+      "методические материалы",
+      "2027 · конкурс 27-2",
+      "Президентский фонд культурных инициатив"
+    ]
+  },
+  {
+    "id": "tos-learning-route",
+    "title": "Шесть шагов: от идеи ТОС до отчёта",
+    "category": "Председателю",
+    "topic": "projects",
+    "audience": "Председатели и инициативные группы",
+    "description": "Короткие занятия с рабочими формами: проблема, жители, поддержка, смета, реализация и результат.",
+    "url": "/chairperson/learning/",
+    "tags": [
+      "обучение",
+      "проект",
+      "документы"
+    ],
+    "status": "published",
+    "material_type": "section",
+    "checked_at": "2026-11-14",
+    "region": "bgo"
   }
 ]

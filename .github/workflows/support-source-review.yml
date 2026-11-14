@@ -1,0 +1,21 @@
+name: Review support source changes
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Observe documents and queue editorial checks
+        run: node scripts/check_support_sources.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: support-source-review
+          path: .artifacts/support-source-review.json
+          if-no-files-found: error
+          retention-days: 30

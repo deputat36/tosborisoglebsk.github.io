@@ -1,4 +1,5 @@
 const { ICON_LINKS } = require('./lib/site_icons');
+const { navLinks } = require('./generate_public_experience');
 const fs = require('fs');
 const newsMedia = require('../assets/js/news-media');
 const CatalogTrust = require('../assets/js/tos-catalog-core');
@@ -424,10 +425,10 @@ function makePage(tos, data) {
   <link rel="stylesheet" href="/assets/css/styles.css"/>
   <link rel="stylesheet" href="/assets/css/tos-detail-responsive.css"/>
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
-</head>
+<link rel="stylesheet" href="/assets/css/portal-usability.css"/></head>
 <body>
   <a class="skip-link" href="#main">Перейти к содержимому</a>
-  <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
+  <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация">${navLinks.map(([href,label])=>`<a href="${href}"${href==='/tos/'?' class="active" aria-current="page"':''}>${esc(label)}</a>`).join('')}</nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
   <main id="main" class="tos-detail">
     <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><div class="tos-detail-logo">${tos.logo ? `<img class="tos-logo-img large" src="${esc(tos.logo)}" alt="Логотип ТОС «${esc(tos.name)}»"/>` : `<div class="avatar large" aria-hidden="true">${esc(tos.name.slice(0,1))}</div>`}</div><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><a class="btn" href="#tos-profile">История и дела</a><button class="btn" type="button" onclick="window.print()">Распечатать</button></div></div></section>
     ${sectionNav}

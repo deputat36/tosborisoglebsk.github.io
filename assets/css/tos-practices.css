@@ -1,4 +1,4 @@
-.tos-practices .practice-filters{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:16px;align-items:end;margin:28px 0 12px;padding:22px;background:var(--surface,#fff);border:1px solid var(--line);border-radius:20px}
+.tos-practices .practice-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:end;margin:28px 0 12px;padding:22px;background:var(--surface,#fff);border:1px solid var(--line);border-radius:20px}
 .tos-practices .practice-filters[hidden],.tos-practices [hidden]{display:none}
 .tos-practices .practice-filters label{display:block;font-weight:650;margin-bottom:8px}
 .tos-practices .practice-filters input,.tos-practices .practice-filters select{width:100%;max-width:100%;min-width:0;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg,#fff);color:var(--text);font:inherit}

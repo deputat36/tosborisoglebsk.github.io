@@ -12,6 +12,8 @@ function main(){
  const toses=read('data/toses.json').filter(x=>x.status!=='draft');
  let html=fs.readFileSync('index.html','utf8');
  html=block(html,'finder',view.directory(toses));
+ const residentEntry='<!-- resident-entry:start --><section class="section tight"><div class="container notice"><h2>Что происходит в моём ТОС?</h2><p>Выберите территорию: новости, результаты, проекты и способы участия собраны на одной странице.</p><a class="btn primary" href="/residents/my-area/">Открыть мой ТОС</a></div></section><!-- resident-entry:end -->';
+ html=html.includes('<!-- resident-entry:start -->')?html.replace(/<!-- resident-entry:start -->[\s\S]*?<!-- resident-entry:end -->/,residentEntry):html.replace('</main>',residentEntry+'</main>');
  const fields=['slug','name','location','boundaries','chairperson','description','verification_status','verified_at','verification_source','trust'];
  const directory=toses.map(x=>Object.fromEntries(fields.filter(k=>Object.hasOwn(x,k)).map(k=>[k,x[k]])));
  html=block(html,'finder-data','<script type="application/json" id="home-directory-data">'+JSON.stringify(directory).replace(/</g,'\\u003c')+'</script>');

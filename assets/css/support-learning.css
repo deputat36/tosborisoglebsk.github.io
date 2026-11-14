@@ -1,0 +1,15 @@
+.support-learning .learning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.support-learning .learning-card{min-width:0;border:1px solid var(--line);border-top:4px solid var(--brand);border-radius:18px;padding:24px;background:var(--surface,#fff);overflow-wrap:anywhere}
+.support-learning .learning-card h2{font-size:1.4rem;line-height:1.35;margin:12px 0}
+.support-learning .learning-card .card-actions{flex-wrap:wrap}
+.support-learning [hidden],.contest-check [hidden]{display:none}
+.contest-check .check-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:24px;align-items:start}
+.contest-check .check-list{padding-left:24px}
+.contest-check .check-list li{margin:16px 0;break-inside:avoid}
+.contest-check .check-list label{display:flex;align-items:flex-start;gap:10px;font-weight:600;cursor:pointer}
+.contest-check input[type=checkbox]{width:20px;height:20px;flex:none;accent-color:var(--brand);margin-top:3px}
+.contest-check select{width:100%;min-width:0;margin:8px 0 16px}
+.contest-check .check-actions{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.contest-check a,.contest-check p,.contest-check li{overflow-wrap:anywhere}
+@media(max-width:760px){.support-learning .learning-grid,.contest-check .check-layout{grid-template-columns:1fr}.support-learning .learning-card{padding:20px}}
+@media print{body.contest-check-printing .header,body.contest-check-printing .footer,body.contest-check-printing main>:not(#contest-check),body.contest-check-printing #contest-check [data-contest-controls],body.contest-check-printing .check-actions{display:none!important}body.contest-check-printing .contest-check .check-layout{display:block}.support-learning .learning-grid{display:block}.support-learning .learning-card{break-inside:avoid;margin:14px 0}}

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-14T16:56:47.366Z",
-  "total": 1410,
+  "generated_at": "2026-11-14T18:22:30.638Z",
+  "total": 1422,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -753,6 +753,15 @@
       "content_origin": "reference"
     },
     {
+      "path": "chairperson/learning/index.html",
+      "url": "https://tosborisoglebsk.ru/chairperson/learning/",
+      "title": "Шесть шагов: от идеи ТОС до отчёта | ТОС БГО",
+      "description": "Самостоятельная подготовка проекта ТОС: жители, конкурс, документы, смета, реализация и отчёт. Короткие занятия связаны с рабочими формами.",
+      "section": "Председателю",
+      "search_group": "guides",
+      "content_origin": "reference"
+    },
+    {
       "path": "submit-materials/index.html",
       "url": "https://tosborisoglebsk.ru/submit-materials/",
       "title": "Как прислать материал на портал ТОС БГО",
@@ -1113,10 +1122,37 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/regional-practice-novaya-usman-path/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/regional-practice-novaya-usman-path/",
+      "title": "Безопасный пешеходный маршрут: опыт Новой Усмани | Материалы ТОС БГО",
+      "description": "Аннотированный региональный пример: ТОС «Медовый», Новая Усмань. Разберите исходную публикацию и вопросы для своей команды. Перед переносом решения…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/tos-school-residents-meeting/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-school-residents-meeting/",
+      "title": "Встреча жителей: подготовить обсуждение и решение | Материалы ТОС БГО",
+      "description": "Результат занятия — повестка, способ приглашения и перечень нужных форм. Начните с одного реального проекта своей территории. После занятия сохраните…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/zhkh-information-and-appeals/index.html",
       "url": "https://tosborisoglebsk.ru/materials/zhkh-information-and-appeals/",
       "title": "Где искать документы дома и как подготовить обращение | Материалы ТОС БГО",
       "description": "Запросите недостающий документ или объяснение расчёта, затем формулируйте требование по подтверждённым фактам. Просьба предоставить сведения и требование…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/regional-practice-popovka-playground/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/regional-practice-popovka-playground/",
+      "title": "Детская площадка: опыт Поповки и дальнейшее содержание | Материалы ТОС БГО",
+      "description": "Аннотированный региональный пример: ТОС «Центр», Поповка, Россошанский район. Разберите исходную публикацию и вопросы для своей команды. Перед переносом…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
@@ -1365,6 +1401,15 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/tos-contest-selfcheck-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-contest-selfcheck-2026/",
+      "title": "Конкурс ТОС 2026: документы и самопроверка | Материалы ТОС БГО",
+      "description": "Как разобрать подготовку к завершённому конкурсу АНО и проверить свой пакет по его документам. Проверка относится к завершённому сезону АНО 2026 года…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/zhkh-waste/index.html",
       "url": "https://tosborisoglebsk.ru/materials/zhkh-waste/",
       "title": "Мусор не вывозят или площадка грязная: как различить проблему | Материалы ТОС БГО",
@@ -1401,6 +1446,24 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/tos-school-result-and-care/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-school-result-and-care/",
+      "title": "Отчёт и содержание результата | Материалы ТОС БГО",
+      "description": "Результат занятия — подтверждённая история и план последующего содержания. Начните с одного реального проекта своей территории. После занятия сохраните…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/tos-school-first-common-task/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-school-first-common-task/",
+      "title": "Первое общее дело: от жалобы к понятной задаче | Материалы ТОС БГО",
+      "description": "Результат занятия — карточка проблемы и следующий шаг команды. Начните с одного реального проекта своей территории. После занятия сохраните результат в…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/chairperson-first-100-days/index.html",
       "url": "https://tosborisoglebsk.ru/materials/chairperson-first-100-days/",
       "title": "Первые 100 дней председателя ТОС: практический план работы | Материалы ТОС БГО",
@@ -1414,6 +1477,15 @@
       "url": "https://tosborisoglebsk.ru/materials/zhkh-service-quality/",
       "title": "Плохая уборка, протечка, перебои: как зафиксировать проблему | Материалы ТОС БГО",
       "description": "Сохраните проверяемую историю: что произошло, кому сообщили, когда состоялась проверка и что изменилось после неё. Для уборки важны предусмотренная…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/tos-school-choose-support/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-school-choose-support/",
+      "title": "Поддержка проекта: подобрать маршрут и заявителя | Материалы ТОС БГО",
+      "description": "Результат занятия — подходящая возможность и вопросы организатору. Начните с одного реального проекта своей территории. После занятия сохраните результат…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
@@ -1437,6 +1509,33 @@
       "content_origin": "editorial"
     },
     {
+      "path": "materials/tos-school-project-and-budget/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-school-project-and-budget/",
+      "title": "Проект и смета: согласовать действия и ресурсы | Материалы ТОС БГО",
+      "description": "Результат занятия — согласованный паспорт проекта и плановый расчёт. Начните с одного реального проекта своей территории. После занятия сохраните…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/pfki-27-2-preparation/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/pfki-27-2-preparation/",
+      "title": "ПФКИ 27-2: подготовка культурного проекта | Материалы ТОС БГО",
+      "description": "Выберите подходящего заявителя, свяжите культурную идею с результатом и проверьте комплект. Подготовку ведите в одном комплекте проекта. Официальные…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/tos-school-implementation-open/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/tos-school-implementation-open/",
+      "title": "Реализация: сохранять изменения и рассказывать о ходе | Материалы ТОС БГО",
+      "description": "Результат занятия — план информирования и перечень подтверждений. Начните с одного реального проекта своей территории. После занятия сохраните результат…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
       "path": "materials/neighbor-chat-rules/index.html",
       "url": "https://tosborisoglebsk.ru/materials/neighbor-chat-rules/",
       "title": "Соседский чат и общая группа ТОС: правила полезного общения | Материалы ТОС БГО",
@@ -1450,6 +1549,15 @@
       "url": "https://tosborisoglebsk.ru/materials/zhkh-social-support/",
       "title": "Субсидия или компенсация ЖКХ: как проверить возможность помощи | Материалы ТОС БГО",
       "description": "Условия поддержки зависят от вида меры, региона и обстоятельств семьи. ТОС может помочь найти услугу, а решение принимает уполномоченный орган. Проверьте…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/regional-practice-shramovka-stage/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/regional-practice-shramovka-stage/",
+      "title": "Сцена как место общего дела: опыт Шрамовки | Материалы ТОС БГО",
+      "description": "Аннотированный региональный пример: ТОС «Фортуна», Шрамовка, Россошанский район. Разберите исходную публикацию и вопросы для своей команды. Перед…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
