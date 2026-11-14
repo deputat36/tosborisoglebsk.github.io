@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T10:11:42.336Z",
+  "generated_at": "2026-11-14T12:21:30.905Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 1414,
-  "pages_checked": 1414,
-  "links_discovered": 37125,
-  "internal_links_checked": 26160,
-  "unique_internal_targets": 3109,
-  "external_links_ignored": 7026,
+  "pages_indexed": 1410,
+  "pages_checked": 1410,
+  "links_discovered": 37229,
+  "internal_links_checked": 26210,
+  "unique_internal_targets": 3205,
+  "external_links_ignored": 7018,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
@@ -16,7 +16,7 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1008,
+      "duration_ms": 1004,
       "bytes": 8333
     },
     {
@@ -26,100 +26,100 @@
       "bytes": 9062
     },
     {
-      "route": "/chairperson/conflicts/index.html",
+      "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 23,
-      "bytes": 8560
+      "duration_ms": 19,
+      "bytes": 16246
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 22,
+      "duration_ms": 19,
       "bytes": 16380
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 9797
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 21,
+      "duration_ms": 19,
       "bytes": 12170
-    },
-    {
-      "route": "/calendar/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 16246
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 20,
-      "bytes": 23405
+      "duration_ms": 18,
+      "bytes": 23533
     },
     {
-      "route": "/news/vk-238997964-288/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 15396
+      "duration_ms": 17,
+      "bytes": 9797
     },
     {
-      "route": "/news/vk-238997964-993/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 19107
+      "duration_ms": 16,
+      "bytes": 8560
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 14,
       "bytes": 23798
     },
     {
       "route": "/news/vk-238997964-289/index.html",
       "status": 200,
+      "duration_ms": 14,
+      "bytes": 16490
+    },
+    {
+      "route": "/contacts/index.html",
+      "status": 200,
       "duration_ms": 13,
-      "bytes": 16517
-    },
-    {
-      "route": "/news/chkalovec-centr-prityazheniya-2024/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 7910
-    },
-    {
-      "route": "/news/chkalovec-parkovka-2021/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 7975
+      "bytes": 22433
     },
     {
       "route": "/news/vk-238997964-29/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 18513
-    },
-    {
-      "route": "/news/vk-238997964-995/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 9878
-    },
-    {
-      "route": "/news/voronezh-tos-krai-rodnoi-action-2026/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 9380
+      "duration_ms": 13,
+      "bytes": 18491
     },
     {
       "route": "/news/voronezh-tos-public-chamber-roundtable-2026-10/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 13,
       "bytes": 8516
+    },
+    {
+      "route": "/news/vk-238997964-291/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 15540
+    },
+    {
+      "route": "/news/vk-238997964-77/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 7900
+    },
+    {
+      "route": "/news/vk-238997964-994/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 17720
+    },
+    {
+      "route": "/news/vk-community-channel-2026/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 6502
+    },
+    {
+      "route": "/news/vostochnyy-cleanups-news-2026/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 8580
     },
     {
       "route": "/news/znamenie-created-2024/index.html",
@@ -128,10 +128,10 @@
       "bytes": 7573
     },
     {
-      "route": "/news/chkalovec-cvetik-semicvetik-2022/index.html",
+      "route": "/done/chkalovec-cvetik-semicvetik-2022/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 7934
+      "bytes": 7854
     }
   ]
 }

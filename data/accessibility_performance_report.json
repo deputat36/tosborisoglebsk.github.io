@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T10:11:35.824Z",
+  "generated_at": "2026-11-14T12:21:23.917Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -10,7 +10,7 @@
   },
   "summary": {
     "html_pages": 1487,
-    "public_pages": 1424,
+    "public_pages": 1420,
     "pages_with_issues": 0,
     "issue_counts": {},
     "issue_severity": {
@@ -18,10 +18,10 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 155,
+    "asset_files": 156,
     "over_budget_assets": 0,
-    "total_css_bytes": 116919,
-    "total_js_bytes": 995061,
+    "total_css_bytes": 120644,
+    "total_js_bytes": 1004387,
     "total_image_bytes": 49648,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -36,17 +36,17 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/site.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 38671,
+      "over_budget": false
+    },
+    {
       "path": "data/tos.data.js",
       "group": "js",
       "extension": ".js",
       "size_bytes": 38580,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/site.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 35976,
       "over_budget": false
     },
     {
@@ -113,6 +113,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/js/update-center.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 16205,
+      "over_budget": false
+    },
+    {
       "path": "assets/js/publication-queue-import.js",
       "group": "js",
       "extension": ".js",
@@ -124,13 +131,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 15610,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/update-center.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 15348,
       "over_budget": false
     },
     {
@@ -207,7 +207,7 @@
       "path": "assets/js/news.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 11458,
+      "size_bytes": 11516,
       "over_budget": false
     },
     {
