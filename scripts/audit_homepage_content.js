@@ -209,10 +209,13 @@ function main() {
   }
 
   const primaryActions = countMatches(html, /data-home-primary-action/g);
-  if (primaryActions !== 5) {
-    errors.push(`homepage must contain exactly 5 primary user actions, found ${primaryActions}`);
+  if (primaryActions !== 3) {
+    errors.push(`homepage must contain exactly 3 primary user actions, found ${primaryActions}`);
   }
 
+  for (const route of ['/residents/zhkh/', '/documents/templates/project-kit/', '/update-tos/?type=card#message-builder']) {
+    if (!html.includes(`href="${route}"`)) errors.push(`missing primary action ${route}`);
+  }
   if (!html.includes('data-portal-working-status')) {
     errors.push('homepage must retain the working-version status');
   }

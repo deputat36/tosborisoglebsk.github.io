@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { inferContentOrigin } = require('./lib/content_origin');
+const newsMedia = require('../assets/js/news-media');
 
 const ROOT = process.cwd();
 const filePath = path.join(ROOT, 'data', 'page_index.json');
@@ -156,8 +157,15 @@ function main() {
       const expectedPath = `${config.route}/${item.id}/index.html`;
       const page = pageByPath.get(expectedPath);
       const origin = inferContentOrigin(item, collection);
-      expectedMaterialPages += 1;
       expectedCounts[origin] += 1;
+      if (collection === 'news' && newsMedia.presentation(item).unavailable_only) {
+        const archivedPath = path.join(ROOT, expectedPath);
+        if (!fs.existsSync(archivedPath)) errors.push(`missing archived source page ${expectedPath}`);
+        else if (!/<meta name="robots" content="noindex,follow"/.test(fs.readFileSync(archivedPath, 'utf8'))) errors.push(`unavailable source page must declare noindex ${expectedPath}`);
+        if (page) errors.push(`unavailable source page must stay outside search index ${expectedPath}`);
+        return;
+      }
+      expectedMaterialPages += 1;
 
       if (!page) {
         errors.push(`missing indexed material page ${expectedPath}`);

@@ -1,3 +1,4 @@
+const newsMedia = require('../assets/js/news-media');
 const fs = require('fs');
 const path = require('path');
 const { repoPathExists } = require('./lib/path_checks');
@@ -60,7 +61,8 @@ function main() {
 
   const tosSlugs = new Set(Array.isArray(toses) ? toses.map((tos) => tos.slug).filter(Boolean) : []);
 
-  news.filter((item) => item && item.status !== 'draft').forEach((item, index) => {
+  news.filter((item) => item && item.status !== 'draft').forEach((raw, index) => {
+    const item = newsMedia.presentation(raw);
     const line = `news page ${index + 1} ${item.id || 'unknown'}`;
     const id = item.id || '';
     const filePath = pagePathForNews(id);
@@ -78,13 +80,14 @@ function main() {
 
     const html = fs.readFileSync(filePath, 'utf8');
     const title = item.title || '';
+    const meta = newsMedia.searchMetadata(item);
     const lead = item.lead || '';
     const category = item.category || '';
     const date = item.date || '';
 
     expectIncludes(errors, line, html, '<html lang="ru">', 'page must declare Russian language');
-    expectIncludes(errors, line, html, `<title>${htmlEntityAmp(title)} | ТОС БГО</title>`, 'title must match news title template');
-    expectIncludes(errors, line, html, `<meta name="description" content="${htmlEntityAmp(lead)}"`, 'meta description must match lead');
+    expectIncludes(errors, line, html, `<title>${htmlEntityAmp(meta.title)} | ТОС БГО</title>`, 'title must match news title template');
+    expectIncludes(errors, line, html, `<meta name="description" content="${htmlEntityAmp(meta.description)}"`, 'meta description must match lead');
     expectIncludes(errors, line, html, `<link rel="canonical" href="${pageUrl}"`, 'missing canonical URL');
     expectIncludes(errors, line, html, '<meta property="og:type" content="article"', 'Open Graph type must be article');
     expectIncludes(errors, line, html, `<meta property="og:url" content="${pageUrl}"`, 'missing Open Graph URL');

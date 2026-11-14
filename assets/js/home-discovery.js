@@ -21,10 +21,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Search is ready from the published page; optional updates never block it.
   async function get(url){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),4000);try{const r=await fetch(url,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('unavailable');const a=await r.json();if(!Array.isArray(a))throw Error('invalid');return a;}finally{clearTimeout(timer);}}
   get('/data/toses.json').then(next=>{if(next.length){rows=next;render();}}).catch(()=>{});
-  const details=document.querySelector('[data-home-current]');
-  details?.addEventListener('toggle',async()=>{
-    if(!details.open||details.dataset.refreshed)return;
-    details.dataset.refreshed='true';
-    try{const [events,news]=await Promise.all([get('/data/events.json'),get('/data/news.json')]);document.querySelector('#home-current-overview').innerHTML=view.overview(core.buildCurrentOverview({events,news}));}catch{/* Keep the dated public page readable. */}
-  });
+  let currentData=null;
+  function showCurrent(){if(currentData)document.querySelector('#home-current-overview').innerHTML=view.overview(core.buildCurrentOverview(currentData));}
+  async function refreshCurrent(){
+    try{const [events,news,grants]=await Promise.all([get('/data/events.json'),get('/data/news.json'),get('/data/grants.json')]);currentData={events,news,grants};showCurrent();}catch{/* Keep the dated public page readable. */}
+  }
+  refreshCurrent();
+  setInterval(showCurrent,60000);
 });

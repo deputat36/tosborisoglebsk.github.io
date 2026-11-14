@@ -51,6 +51,11 @@ const SECTION_LABELS = {
   'site-index': 'Индекс страниц',
   'check-tos': 'Проверить ТОС',
   'submit-materials': 'Прислать материал',
+  'update-tos': 'Передать материал или исправление',
+  'grant-application-kit': 'Комплект заявки',
+  'meeting-kit': 'Подготовка собрания',
+  'project-passport': 'Паспорт проекта',
+  'verification-guide': 'Проверка сведений',
   faq: 'Вопросы и ответы',
   'editorial-policy': 'О портале',
   'create-tos': 'Как создать ТОС',
@@ -92,7 +97,7 @@ function injectBreadcrumbs() {
   if (!parts.length) return;
   const first = parts[0];
   const links = [{ name: 'Главная', url: '/' }];
-  links.push({ name: SECTION_LABELS[first] || first, url: `/${first}/` });
+  links.push({ name: SECTION_LABELS[first] || (parts.length === 1 ? $('h1')?.textContent?.trim() : 'Раздел портала') || 'Раздел портала', url: `/${first}/` });
   if (parts.length > 1) {
     const h1 = $('h1')?.textContent?.trim();
     links.push({ name: h1 || parts[parts.length - 1], url: path });
@@ -245,6 +250,34 @@ function enhanceKeyboardAccessibility() {
   });
 }
 
+function addPageContents() {
+  const main = $('#main');
+  if (!main || $('[data-page-contents]') || /^\/(?:$|tos\/|map\/|culinary-battle\/|update-tos\/|news\/$)/.test(location.pathname)) return;
+  const headings = [...main.querySelectorAll('h2')].filter(h => !h.closest('details'));
+  if (headings.length < 5) return;
+  const box = document.createElement('details'); box.className = 'container page-contents'; box.dataset.pageContents = '';
+  const summary = document.createElement('summary'); summary.textContent = 'На этой странице';
+  const nav = document.createElement('nav'); nav.setAttribute('aria-label', 'Содержание страницы');
+  headings.forEach((heading, index) => {
+    if (!heading.id) { let id = `page-section-${index+1}`; while (document.getElementById(id)) id += '-x'; heading.id = id; }
+    const link = document.createElement('a'); link.href = '#'+heading.id; link.textContent = heading.textContent.trim(); nav.appendChild(link);
+  });
+  box.append(summary, nav); const hero = main.querySelector(':scope > .hero');
+  if (hero) hero.after(box); else main.prepend(box);
+}
+
+function handleUnavailableImages() {
+  function fallback(image) {
+    if (!image?.classList?.contains('news-media-image') || image.dataset.unavailable) return;
+    image.dataset.unavailable = 'true'; image.hidden = true;
+    const text = document.createElement('p'); text.className = 'news-media-fallback';
+    text.textContent = 'Изображение временно недоступно. Откройте публикацию по ссылке источника.';
+    (image.closest('figure') || image.parentElement)?.appendChild(text);
+  }
+  document.addEventListener('error', event => fallback(event.target), true);
+  document.querySelectorAll('img.news-media-image').forEach(image => { if (image.complete && !image.naturalWidth) fallback(image); });
+}
+
 function initCommonUi() {
   compactNav();
   ensureFooterLinks();
@@ -253,6 +286,8 @@ function initCommonUi() {
   patchLegacyUpdateLinks();
   patchTosDetailRuntime();
   enhanceKeyboardAccessibility();
+  addPageContents();
+  handleUnavailableImages();
 
   const themeStorage = {
     get() { try { return localStorage.getItem('theme'); } catch { return null; } },

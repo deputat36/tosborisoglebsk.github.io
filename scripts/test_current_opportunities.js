@@ -34,3 +34,7 @@ for (const rendered of [grantSummary(local), grantCard(local)]) {
   assert(!rendered.includes('00:00'), 'the internal expiry must not be presented as the submission time');
 }
 console.log('Current opportunities OK: Moscow deadlines, expiry, evidence, freshness, news and calendar');
+assert.equal(core.group({...item},end),'current');
+assert.equal(core.group({...item},end+1),'archive');
+assert.equal(core.group({id:'application-preparation-calendar',status:'Постоянно актуально'}),'prepare');
+assert.equal(core.group({id:'partner',status:'Уточнить'}),'support','a support direction is not advertised as an open call');

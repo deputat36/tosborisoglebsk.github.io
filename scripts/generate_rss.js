@@ -1,4 +1,5 @@
 const fs = require('fs');
+const newsMedia = require('../assets/js/news-media');
 const path = require('path');
 require('./generate_tos_starter_news');
 require('./generate_verified_news_wave12');
@@ -50,7 +51,7 @@ function main() {
   // RSS предназначен для содержательных публичных публикаций.
   // Редакционные request-записи остаются доступны на портале как рабочие
   // запросы сведений, но не отправляются подписчикам как новости.
-  const news = readJson(NEWS_PATH)
+  const news = readJson(NEWS_PATH).map(newsMedia.presentation)
     .filter(isRssNews)
     .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.published_at || '').localeCompare(String(a.published_at || '')));
 

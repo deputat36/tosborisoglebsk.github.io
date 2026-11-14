@@ -18,6 +18,12 @@ async function main() {
   assert.equal(vk.shouldImport(post(1,{copy_history:[post(100,{text:'#НеНаСайтТОСБГО'})]})),false);
   const repost = vk.convertVkPost(post(3,{text:'Комментарий автора',attachments:[photo(1)],copy_history:[post(99,{owner_id:-42,text:'Оригинальный текст #ТОСБогана',attachments:[photo(2),{type:'video',video:{owner_id:-42,id:8,title:'Видео',player:'https://vk.com/video_ext.php?oid=-42&id=8'}},{type:'doc',doc:{title:'Положение.pdf',url:'https://vk.com/doc-42_2',ext:'pdf',size:100}}]})]}),new Map([['#тосбогана','bogana']]));
   assert.equal(repost.tos_slug,'bogana');assert.equal(repost.images.length,2);assert.equal(repost.attachments.length,2);assert.equal(repost.reposts[0].source_url,'https://vk.com/wall-42_99');assert.deepEqual(repost.text,['Комментарий автора']);assert.equal(repost.reposts[0].text[0],'Оригинальный текст');assert.equal(repost.images[0].width,1280);assert.ok(repost.images[0].full.endsWith('-full.jpg'));
+  const lost=vk.convertVkPost(post(18,{text:'Комментарий жителей',copy_history:[post(19,{text:'Post deleted',is_deleted:1})]}));
+  assert.equal(lost.source_unavailable,true);assert.deepEqual(lost.text,['Комментарий жителей']);
+  assert.equal(lost.unavailable_only,false);assert.equal(lost.reposts[0].unavailable,true);
+  const recovered=vk.convertVkPost(post(18,{text:'Комментарий жителей',copy_history:[post(19,{text:'Текст снова доступен'})]}));
+  const merged=vk.mergeImportedNews([lost],[recovered]).find(x=>x.id===recovered.id);
+  assert.equal(merged.source_unavailable,false);assert.equal(merged.reposts[0].unavailable,false,'a recovered source is not stuck as unavailable');
   const pages = {0:{count:6,items:[post(6,{is_pinned:1}),post(5)]},2:{count:6,items:[post(4),post(3)]},4:{count:6,items:[post(2),post(1)]}};
   const offsets=[];let checkpoint;
   const full = await vk.scanWall({config,pause,fetchPage:async offset=>{offsets.push(offset);return pages[offset];},onCheckpoint:value=>{checkpoint=value;}});

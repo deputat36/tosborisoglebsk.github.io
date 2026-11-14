@@ -68,6 +68,7 @@ function newsTosName(slug, toses) {
 }
 
 function newsCard(item, toses) {
+  item = window.TosNewsMedia?.presentation(item) || item;
   const tosName = newsCore.tosSlugs(item).map(slug => newsTosName(slug, toses)).join(' · ');
   return `<article class="list-item" data-content-origin="${newsEsc(newsOrigin(item))}">
     ${window.TosNewsMedia ? window.TosNewsMedia.render(item, true) : ''}
