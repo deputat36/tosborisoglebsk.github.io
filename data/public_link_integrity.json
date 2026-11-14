@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T12:21:30.905Z",
+  "generated_at": "2026-11-14T12:28:05.190Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1410,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 1004,
-      "bytes": 8333
-    },
-    {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 41,
+      "duration_ms": 73,
       "bytes": 9062
-    },
-    {
-      "route": "/calendar/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 16246
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 16380
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 12170
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 23533
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 9797
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 16,
+      "duration_ms": 40,
       "bytes": 8560
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 23798
+      "duration_ms": 38,
+      "bytes": 8333
     },
     {
-      "route": "/news/vk-238997964-289/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 16490
+      "duration_ms": 37,
+      "bytes": 12170
     },
     {
-      "route": "/contacts/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 22433
+      "duration_ms": 36,
+      "bytes": 16380
     },
     {
-      "route": "/news/vk-238997964-29/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 18491
+      "duration_ms": 35,
+      "bytes": 9797
     },
     {
-      "route": "/news/voronezh-tos-public-chamber-roundtable-2026-10/index.html",
+      "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 8516
+      "duration_ms": 34,
+      "bytes": 16246
     },
     {
-      "route": "/news/vk-238997964-291/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 15540
-    },
-    {
-      "route": "/news/vk-238997964-77/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 7900
-    },
-    {
-      "route": "/news/vk-238997964-994/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 17720
-    },
-    {
-      "route": "/news/vk-community-channel-2026/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 6502
+      "duration_ms": 34,
+      "bytes": 23533
     },
     {
       "route": "/news/vostochnyy-cleanups-news-2026/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 26,
       "bytes": 8580
+    },
+    {
+      "route": "/partner-proposal/index.html",
+      "status": 200,
+      "duration_ms": 25,
+      "bytes": 14218
+    },
+    {
+      "route": "/open-data/index.html",
+      "status": 200,
+      "duration_ms": 24,
+      "bytes": 13540
+    },
+    {
+      "route": "/news/vk-238997964-29/index.html",
+      "status": 200,
+      "duration_ms": 23,
+      "bytes": 18491
     },
     {
       "route": "/news/znamenie-created-2024/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 22,
       "bytes": 7573
     },
     {
-      "route": "/done/chkalovec-cvetik-semicvetik-2022/index.html",
+      "route": "/partners/action-routes/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 7854
+      "duration_ms": 22,
+      "bytes": 18160
+    },
+    {
+      "route": "/partner-thanks/index.html",
+      "status": 200,
+      "duration_ms": 21,
+      "bytes": 12804
+    },
+    {
+      "route": "/news/vk-238997964-291/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 15540
+    },
+    {
+      "route": "/news/vk-238997964-282/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 10397
+    },
+    {
+      "route": "/news/catalog-unified-2026/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 5907
+    },
+    {
+      "route": "/news/vk-238997964-287/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 13018
+    },
+    {
+      "route": "/news/vk-238997964-293/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 13399
     }
   ]
 }

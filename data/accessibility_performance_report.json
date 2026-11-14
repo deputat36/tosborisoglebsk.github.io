@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-14T12:21:23.917Z",
+  "generated_at": "2026-11-14T12:28:00.081Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -21,7 +21,7 @@
     "asset_files": 156,
     "over_budget_assets": 0,
     "total_css_bytes": 120644,
-    "total_js_bytes": 1004387,
+    "total_js_bytes": 1004070,
     "total_image_bytes": 49648,
     "total_css_over_budget": false,
     "total_js_over_budget": false
@@ -36,17 +36,17 @@
       "over_budget": false
     },
     {
-      "path": "assets/js/site.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 38671,
-      "over_budget": false
-    },
-    {
       "path": "data/tos.data.js",
       "group": "js",
       "extension": ".js",
       "size_bytes": 38580,
+      "over_budget": false
+    },
+    {
+      "path": "assets/js/site.js",
+      "group": "js",
+      "extension": ".js",
+      "size_bytes": 38354,
       "over_budget": false
     },
     {
