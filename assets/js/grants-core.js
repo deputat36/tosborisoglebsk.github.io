@@ -19,5 +19,12 @@
   }
   function statusLabel(item,now){const phase=state(item,now);return phase==='closed'?'Срок подачи прошёл':phase==='announced'?'Приём по объявлению организатора':item.deadline_at?'Проверьте актуальное объявление':item.status||'Уточняется';}
   function current(items,now=Date.now()){return items.filter(item=>state(item,now)==='announced').sort((a,b)=>deadline(a)-deadline(b));}
-  return {deadline,state,statusLabel,current};
+  function group(item,now=Date.now()) {
+    const phase=state(item,now);
+    if(phase==='announced')return 'current';
+    if(phase==='closed'||/при[её]м.*заверш|срок.*про[шш]ёл|заверш[её]нн?ый сезон/i.test(item.status||''))return 'archive';
+    if(item.id==='application-preparation-calendar')return 'prepare';
+    return 'support';
+  }
+  return {deadline,state,statusLabel,current,group};
 });

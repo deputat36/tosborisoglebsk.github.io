@@ -194,6 +194,8 @@
       if (group?.firstElementChild) group.firstElementChild.textContent = field.label;
       if ('placeholder' in control) control.placeholder = field.placeholder || '';
       if (!control.required) control.classList.remove('field-error');
+      const optional=control.closest('[data-optional-fields]');
+      if(optional&&(control.required||String(control.value||'').trim()))optional.open=true;
     });
     preview.value = buildMessage();
     const result = qualityResult();
@@ -220,7 +222,15 @@
 
   function renderFields() {
     const scenario = scenarios[currentScenario];
-    fieldsRoot.replaceChildren(...scenario.fields.map(createField));
+    const primary=scenario.fields.filter(field=>field.required).map(createField);
+    const optional=scenario.fields.filter(field=>!field.required).map(createField);
+    if(optional.length){
+      const details=document.createElement('details');details.className='update-optional';details.dataset.optionalFields='';
+      const summary=document.createElement('summary');summary.textContent='Дополнительные сведения';
+      const grid=document.createElement('div');grid.className='form-grid';grid.append(...optional);
+      details.append(summary,grid);primary.push(details);
+    }
+    fieldsRoot.replaceChildren(...primary);
     document.querySelector('#scenario-help').textContent = scenario.help;
     restoreDraftValues();
     updatePreview();
@@ -286,6 +296,7 @@
     const result = qualityResult();
     if (!result.ready) {
       status.textContent = 'Заполните обязательные поля и подтвердите две проверки перед отправкой.';
+      const recommendations=document.querySelector('[data-quality-details]');if(recommendations)recommendations.open=true;
       document.querySelector('#quality-title')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return false;
     }

@@ -51,8 +51,16 @@ async function openRoute(page, route) {
   assert(response && response.ok(), `${route}: HTTP ${response ? response.status() : 'no response'}`);
 }
 
+async function openContribution(page) {
+  const details = page.locator('#tos-contribute');
+  assert(await details.getAttribute('open') === null, 'editorial actions start compact');
+  await details.locator(':scope > summary').press('Enter');
+  assert(await details.getAttribute('open') === '', 'editorial actions open from the keyboard');
+}
+
 async function inspectPlan(page, sample) {
   await openRoute(page, `/tos/${sample.tos.slug}/`);
+  await openContribution(page);
   const plan = page.locator('[data-tos-content-action-plan]');
   await plan.waitFor({ state: 'visible' });
   assert(await plan.getAttribute('data-tos-slug') === sample.tos.slug, `${sample.tos.slug}: wrong plan slug`);
@@ -108,6 +116,7 @@ async function testAddressedContentAction(page) {
   const [actionKey, scenario] = priority;
 
   await openRoute(page, `/tos/${sample.tos.slug}/`);
+  await openContribution(page);
   const link = page.locator(`[data-content-action="${actionKey}"] a.btn.primary`).first();
   await link.waitFor({ state: 'visible' });
 

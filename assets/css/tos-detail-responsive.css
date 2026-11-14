@@ -1,4 +1,25 @@
 .tos-verification-strip { padding: 10px 0 0; }
+.tos-section-nav { display:flex; flex-wrap:wrap; gap:8px; padding-block:10px; }
+.tos-section-nav a { display:flex; align-items:center; min-height:44px; padding:8px 13px; border:1px solid var(--line); border-radius:10px; background:var(--surface); font-size:14px; font-weight:700; }
+.tos-section-nav a:focus-visible,.tos-detail summary:focus-visible { outline:3px solid var(--brand); outline-offset:3px; }
+.tos-detail .hero-card { position:relative; }
+.tos-detail .tos-detail-logo { float:right; margin:0 0 12px 20px; }
+.tos-detail .tos-detail-logo .large { margin-bottom:0; }
+.tos-detail .tos-passport-grid { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
+.tos-detail .tos-passport-grid>.card { grid-column:auto; height:100%; }
+.tos-field-source { margin:10px 0; font-size:13px; color:var(--muted); }
+.tos-field-source summary,.tos-related-source summary { cursor:pointer; padding-block:5px; }
+.tos-source-details { margin-block:18px; }
+.tos-source-details>summary,.tos-count-details>summary,.tos-result-details>summary { cursor:pointer; padding:12px 0; font-weight:650; }
+.tos-related-source { color:var(--muted); font-size:13px; margin:8px 0; }
+.tos-count-details { margin-top:10px; color:var(--muted); }
+.tos-count-details .tile { display:inline-block; margin-block:8px; }
+.tos-result-details .grid { margin-top:12px; }
+.tos-contribute { margin:24px auto 40px; border:1px solid var(--line); border-radius:18px; padding:18px; background:var(--surface); }
+.tos-contribute>summary { cursor:pointer; font-size:20px; font-weight:750; padding:8px; }
+.tos-contribute>section .container { width:100%; }
+@media(max-width:900px) { .tos-detail .tos-passport-grid { grid-template-columns:minmax(0,1fr); } }
+@media print { .tos-section-nav { display:none; } .tos-detail details>* { display:block!important; } .tos-contribute { border:0; padding:0; } }
 /* Keep full VK hashtags readable without letting their intrinsic width expand
    the related-content column on a phone. */
 [data-related-collection] { min-width:0; overflow-wrap:anywhere; }
@@ -8,6 +29,7 @@
 .tos-verification-actions { display:flex; gap:8px; flex-wrap:wrap; }
 .tos-verification-badge { display:inline-flex; align-items:center; padding:7px 10px; border-radius:999px; font-size:12px; font-weight:800; background:var(--soft); color:var(--text); }
 @media (max-width: 620px) {
+  .tos-detail .tos-detail-logo .large { width:64px; height:64px; border-radius:18px; }
   .tos-verification-box { display:grid; }
   .tos-verification-actions .btn { flex:1; justify-content:center; }
   .header-inner {

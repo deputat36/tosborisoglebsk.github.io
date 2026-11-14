@@ -1,8 +1,9 @@
 (function(root,factory){
   const core=typeof module==='object'&&module.exports?require('./home-discovery-core'):root.HomeDiscoveryCore;
-  const api=factory(core);
+  const media=typeof module==='object'&&module.exports?require('./news-media'):root.TosNewsMedia;
+  const api=factory(core,media);
   if(typeof module==='object'&&module.exports)module.exports=api;else root.HomeView=api;
-})(typeof globalThis!=='undefined'?globalThis:this,function(core){
+})(typeof globalThis!=='undefined'?globalThis:this,function(core,media){
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const labels={verified:'Подтверждено источником',partial:'Проверено частично',stale:'Нужно перепроверить',needs_review:'Требует проверки'};
   function row(item){
@@ -16,9 +17,10 @@
   }
   function date(value){const s=String(value||'').slice(0,10);return /^\d{4}-\d{2}-\d{2}$/.test(s)?new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(s+'T12:00:00Z')):'Дата уточняется';}
   function overview(value){
-    const events=value.upcoming.map(x=>`<article class="home-current-item"><span class="tag">${x.source_url?'По опубликованному источнику':'Редакционный ориентир'}</span><h3>${esc(x.title)}</h3><p>${esc(date(x.date))}${x.time?' · '+esc(x.time):''}</p><a href="/calendar/">Посмотреть в календаре →</a></article>`).join('');
-    const news=value.freshNews.map(x=>`<article class="home-current-item"><span class="tag">Публикация</span><h3>${esc(x.title)}</h3><p>${esc(date(x.date))}</p><a href="/news/${esc(x.id)}/">Читать →</a></article>`).join('');
-    return events+news||'<div class="home-finder-empty">Посмотрите <a href="/calendar/">календарь</a> и <a href="/news/">последние публикации</a>.</div>';
+    const opportunities=(value.opportunities||[]).map(x=>`<article class="home-current-item"><span class="tag">Конкурс или акция</span><h3>${esc(x.title)}</h3><p class="home-deadline"><b>Срок:</b> ${esc(x.deadline)}</p><p><b>Поддержка:</b> ${esc(x.amount)}</p><a href="/grants/#grant-${esc(x.id)}">Условия и подготовка →</a></article>`).join('');
+    const events=value.upcoming.slice(0,Math.max(0,2-(value.opportunities||[]).length)).map(x=>`<article class="home-current-item"><span class="tag">${x.source_url?'По опубликованному источнику':'Редакционный ориентир'}</span><h3>${esc(x.title)}</h3><p>${esc(date(x.date))}${x.time?' · '+esc(x.time):''}</p><a href="/calendar/">Посмотреть в календаре →</a></article>`).join('');
+    const news=value.freshNews.map(x=>media?.presentation(x)||x).map(x=>`<article class="home-current-item"><span class="tag">Публикация</span><h3>${esc(x.title)}</h3><p>${esc(date(x.date))}</p><a href="/news/${esc(x.id)}/">Читать →</a></article>`).join('');
+    return opportunities+news+events||'<div class="home-finder-empty">Посмотрите <a href="/calendar/">календарь</a> и <a href="/news/">последние публикации</a>.</div>';
   }
   return {row,directory,overview,esc};
 });

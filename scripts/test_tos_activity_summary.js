@@ -114,6 +114,10 @@ async function verifyCase(browser, item) {
       assert(requestTag === 'DIV', `${item.slug}: zero request tile must not be a link`);
     }
 
+    const explanation = page.locator('.tos-count-details');
+    assert(await explanation.getAttribute('open') === null, `${item.slug}: detailed counters start compact`);
+    await explanation.locator('summary').press('Enter');
+    assert(await page.locator('[data-activity-summary-notice]').isVisible(), `${item.slug}: counter explanation opens from the keyboard`);
     const notice = await page.locator('[data-activity-summary-notice]').innerText();
     assert(notice.includes('не засчитываются, если запись является только просьбой редакции'), `${item.slug}: request boundary is missing`);
     assert(notice.includes(`Таких запросов в карточке: ${item.requests}`), `${item.slug}: request count explanation is missing`);

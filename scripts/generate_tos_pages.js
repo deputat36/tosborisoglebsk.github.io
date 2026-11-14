@@ -1,4 +1,5 @@
 const fs = require('fs');
+const newsMedia = require('../assets/js/news-media');
 const CatalogTrust = require('../assets/js/tos-catalog-core');
 const { belongsToTos } = require('../assets/js/collection-browser-core');
 const { renderTosProfile } = require('./lib/tos_profiles');
@@ -156,6 +157,7 @@ function fieldIsVerified(tos, field) {
   const trust = trustData(tos);
   return Boolean(trust.checkedAt && trust.sourceRef && trust.scope.includes(field));
 }
+const fieldNames = {location:'населённый пункт',boundaries:'границы',founded:'год создания',population:'численность жителей',chairperson:'председатель',phones:'телефоны',emails:'электронная почта',social_links:'социальные сети',logo:'логотип'};
 function scopeInfo(tos, fields) {
   const trust = trustData(tos);
   const matched = fields.filter(field => trust.scope.includes(field));
@@ -163,24 +165,24 @@ function scopeInfo(tos, fields) {
     return { className: 'warn', label: 'Поля не подтверждены отдельно', text: 'Источник и дата проверки этих полей не зафиксированы.' };
   }
   if (matched.length === fields.length) {
-    return { className: 'ok', label: 'Поля проверены', text: `Проверено ${niceDate(trust.checkedAt)}. Объём: ${matched.join(', ')}.` };
+    return { className: 'ok', label: 'Поля проверены', text: `Проверено ${niceDate(trust.checkedAt)}. Объём: ${matched.map(field => fieldNames[field] || field).join(', ')}.` };
   }
-  return { className: 'info', label: 'Проверено частично', text: `Проверено ${niceDate(trust.checkedAt)}: ${matched.join(', ')}.` };
+  return { className: 'info', label: 'Проверено частично', text: `Проверено ${niceDate(trust.checkedAt)}: ${matched.map(field => fieldNames[field] || field).join(', ')}.` };
 }
 function scopeBlock(name, info) {
-  return `<div class="meta" data-verification-block="${esc(name)}"><span class="tag ${verificationClass(info.className === 'ok' ? 'verified' : info.className === 'info' ? 'partial' : 'needs_review')}">${esc(info.label)}</span></div><p class="tiny">${esc(info.text)}</p>`;
+  return `<details class="tos-field-source" data-verification-block="${esc(name)}"><summary>${esc(info.label)}</summary><p class="tiny">${esc(info.text)}</p></details>`;
 }
 function verificationBlock(tos, info) {
   const details = [
     info.date ? `Дата фактической проверки: ${niceDate(info.date)}` : 'Дата фактической проверки не указана',
     info.source ? `Источник подтверждения: ${info.source}` : 'Источник подтверждения не указан',
-    info.scope.length ? `Проверенные поля: ${info.scope.join(', ')}` : 'Объём проверки не зафиксирован',
+    info.scope.length ? `Проверенные поля: ${info.scope.map(field => fieldNames[field] || field).join(', ')}` : 'Объём проверки не зафиксирован',
     info.recheckAfter ? `Перепроверить после: ${niceDate(info.recheckAfter)}` : ''
   ].filter(Boolean).join(' · ');
   const actionText = info.status === 'verified'
     ? 'Если сведения изменились, отправьте обновление через конструктор.'
     : 'Техническая публикация карточки не подтверждает актуальность председателя, контактов или границ.';
-  return `<div class="notice"><b style="color:var(--text)">Статус сведений: ${esc(info.label)}</b><br>${esc(details)}<br>${esc(actionText)}</div>`;
+  return `<details class="tos-source-details"><summary>Источник и дата проверки</summary><div class="notice"><b style="color:var(--text)">Статус сведений: ${esc(info.label)}</b><br>${esc(details)}<br>${esc(actionText)}</div></details>`;
 }
 function clarifyBlock(tos, qualityScore, verification) {
   const missing = missingFields(tos);
@@ -203,9 +205,10 @@ function relatedAttributes(item, collection, origin = '', contextSlug = '') {
   return `data-related-collection="${esc(collection)}" data-related-id="${esc(item.id || '')}" data-related-tos="${esc(contextSlug || item.tos_slug || '')}"${origin ? ` data-content-origin="${esc(origin)}"` : ''}`;
 }
 function relatedOriginNotice(item, collection, trust) {
-  return `<p class="tiny" data-related-origin-notice="${esc(`${collection}:${item.id || ''}`)}">${esc(trust.notice)}</p>`;
+  return `<details class="tos-related-source"><summary>О публикации</summary><p class="tiny" data-related-origin-notice="${esc(`${collection}:${item.id || ''}`)}">${esc(trust.notice)}</p></details>`;
 }
 function newsCard(n, contextSlug = '') {
+  n = newsMedia.presentation(n);
   const trust = relatedTrust(n, 'news');
   return `<article class="list-item" ${relatedAttributes(n, 'news', trust.origin, contextSlug)}><div class="meta"><span class="tag">${esc(n.category || 'Новость')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span><span class="tag">${esc(niceDate(n.date))}</span></div><h3>${esc(n.title || 'Новость')}</h3><p>${esc(n.lead || '')}</p>${relatedOriginNotice(n, 'news', trust)}<div class="card-actions"><a class="btn" href="/news/${esc(n.id)}/">Открыть запись</a>${n.source_url ? `<a class="btn" href="${esc(n.source_url)}" target="_blank" rel="noopener">Источник</a>` : ''}</div></article>`;
 }
@@ -219,7 +222,7 @@ function projectCard(p, contextSlug = '') {
 }
 function doneCard(d, contextSlug = '') {
   const trust = relatedTrust(d, 'done');
-  return `<article class="list-item" ${relatedAttributes(d, 'done', trust.origin, contextSlug)}><div class="meta"><span class="tag">${esc(d.type || 'Сделано')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span><span class="tag">${esc(niceDate(d.date))}</span></div><h3>${esc(d.title || 'История ТОС')}</h3><p>${esc(d.summary || '')}</p>${relatedOriginNotice(d, 'done', trust)}<div class="grid"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${esc(d.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${esc(d.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Результат</span><p>${esc(d.result || 'Информация уточняется.')}</p></div></article></div><div class="card-actions"><a class="btn" href="/done/${esc(d.id)}/">Открыть запись</a><a class="btn" href="${esc(updateUrl({ slug: d.tos_slug || '' }, 'photo'))}">Прислать фото</a></div></article>`;
+  return `<article class="list-item" ${relatedAttributes(d, 'done', trust.origin, contextSlug)}><div class="meta"><span class="tag">${esc(d.type || 'Сделано')}</span><span class="tag ${esc(trust.className)}">${esc(trust.label)}</span><span class="tag">${esc(niceDate(d.date))}</span></div><h3>${esc(d.title || 'История ТОС')}</h3><p>${esc(d.summary || '')}</p>${relatedOriginNotice(d, 'done', trust)}<details class="tos-result-details"><summary>Было, сделали, результат</summary><div class="grid"><article class="card"><div class="card-inner"><span class="tag">Было</span><p>${esc(d.before || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Сделали</span><p>${esc(d.done || 'Информация уточняется.')}</p></div></article><article class="card"><div class="card-inner"><span class="tag">Результат</span><p>${esc(d.result || 'Информация уточняется.')}</p></div></article></div></details><div class="card-actions"><a class="btn" href="/done/${esc(d.id)}/">Открыть запись</a><a class="btn" href="${esc(updateUrl({ slug: d.tos_slug || '' }, 'photo'))}">Прислать фото</a></div></article>`;
 }
 function needCard(n, contextSlug = '') {
   const trust = relatedTrust(n, 'needs');
@@ -256,10 +259,9 @@ function activitySummary(tos, data) {
     activityTile('events', 'событий и дат', counts.events, 'tos-events'),
     activityTile('projects', 'проектов и идей', counts.projects, 'tos-projects'),
     activityTile('done', 'историй результата', counts.done, 'tos-done'),
-    activityTile('needs', 'актуальных потребностей', counts.needs, 'tos-needs'),
-    activityTile('requests', 'редакционных запросов', requests, requestAnchor(states))
+    activityTile('needs', 'актуальных потребностей', counts.needs, 'tos-needs')
   ].join('');
-  return `<section class="section tight" id="tos-activity-summary" data-tos-activity-summary data-tos-slug="${esc(tos.slug)}" data-news-count="${counts.news}" data-events-count="${counts.events}" data-projects-count="${counts.projects}" data-done-count="${counts.done}" data-needs-count="${counts.needs}" data-request-count="${requests}" data-total-count="${total}" data-all-records-count="${allRecords}"><div class="container section-head"><div><h2>Материалы ТОС на портале</h2><p>Содержательные публикации учитываются отдельно от редакционных запросов на сбор и уточнение сведений.</p></div></div><div class="container kpi">${tiles}</div><div class="container notice" data-activity-summary-notice><b>Как читать счётчики:</b> новости, результаты и потребности не засчитываются, если запись является только просьбой редакции прислать или уточнить материал. Таких запросов в карточке: ${requests}. Ноль не означает отсутствие работы ТОС — он означает, что на портале пока нет соответствующей содержательной публикации.</div></section>`;
+  return `<section class="section tight" id="tos-activity-summary" data-tos-activity-summary data-tos-slug="${esc(tos.slug)}" data-news-count="${counts.news}" data-events-count="${counts.events}" data-projects-count="${counts.projects}" data-done-count="${counts.done}" data-needs-count="${counts.needs}" data-request-count="${requests}" data-total-count="${total}" data-all-records-count="${allRecords}"><div class="container section-head"><div><h2>Материалы ТОС на портале</h2><p>Содержательные публикации учитываются отдельно от редакционных запросов на сбор и уточнение сведений.</p></div></div><div class="container kpi">${tiles}</div><details class="container tos-count-details"><summary>Как считаются материалы</summary>${activityTile('requests', 'редакционных запросов', requests, requestAnchor(states))}<div class="notice" data-activity-summary-notice><b>Как читать счётчики:</b> новости, результаты и потребности не засчитываются, если запись является только просьбой редакции прислать или уточнить материал. Таких запросов в карточке: ${requests}. Ноль не означает отсутствие работы ТОС — он означает, что на портале пока нет соответствующей содержательной публикации.</div></details></section>`;
 }
 function contentActionCard(key, title, text, url, button, secondary = '') {
   return `<article class="card" data-content-action="${esc(key)}"><div class="card-inner"><span class="tag warn">Нужен материал</span><h3>${esc(title)}</h3><p>${esc(text)}</p><div class="card-actions"><a class="btn primary" href="${esc(url)}">${esc(button)}</a>${secondary}</div></div></article>`;
@@ -365,6 +367,11 @@ function makePage(tos, data) {
   const contactsScope = scopeInfo(tos, ['chairperson', 'phones', 'emails']);
   const publicScope = scopeInfo(tos, ['social_links', 'logo']);
   const territoryUrl = placeRoute(tos.location);
+  const sectionLinks = [['#tos-passport','Контакты и территория'],['#tos-profile','История и дела'],
+    ...(relNews ? [['#tos-news','Новости']] : []), ...(relDone ? [['#tos-done','Результаты']] : []),
+    ...(relProjects ? [['#tos-projects','Проекты']] : []), ['#tos-map','Карта'], ['#tos-contribute','Дополнить карточку']];
+  const sectionNav = `<nav class="container tos-section-nav" aria-label="Разделы карточки ТОС">${sectionLinks.map(([href,label])=>`<a href="${href}">${label}</a>`).join('')}</nav>`;
+
 
   const schema = {
     '@context': 'https://schema.org',
@@ -416,29 +423,33 @@ function makePage(tos, data) {
 <body>
   <a class="skip-link" href="#main">Перейти к содержимому</a>
   <header class="header"><div class="container header-inner"><a class="brand" href="/"><img src="/assets/img/logo.svg" alt="ТОС БГО"/></a><nav class="nav" id="site-nav" aria-label="Навигация"></nav><div class="actions"><a class="btn" href="/search/">Поиск</a><button class="btn menu-btn" type="button" data-action="menu" aria-expanded="false" aria-controls="site-nav">Меню</button><button class="btn" type="button" data-action="theme">Тема</button></div></div></header>
-  <main id="main">
-    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><a class="btn" href="#tos-profile">История и дела</a><button class="btn" type="button" onclick="window.print()">Распечатать</button></div></div></section>
+  <main id="main" class="tos-detail">
+    <section class="hero"><div class="container hero-card"><a class="chip" href="/tos/">← Каталог ТОС</a><div class="tos-detail-logo">${tos.logo ? `<img class="tos-logo-img large" src="${esc(tos.logo)}" alt="Логотип ТОС «${esc(tos.name)}»"/>` : `<div class="avatar large" aria-hidden="true">${esc(tos.name.slice(0,1))}</div>`}</div><h1>ТОС «${esc(tos.name)}»</h1><p class="lead">${esc(tos.location || 'Борисоглебский городской округ')}</p><div class="hero-actions"><a class="btn primary" href="${esc(updateUrl(tos, 'card'))}">Сообщить об ошибке</a><a class="btn" href="#tos-profile">История и дела</a><button class="btn" type="button" onclick="window.print()">Распечатать</button></div></div></section>
+    ${sectionNav}
     ${verificationStrip(tos, verification)}
 
-    <section class="section"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div><div class="tile"><b>${esc(verification.label)}</b><span>статус сведений</span></div></div><hr class="sep"/><div class="grid"><article class="card"><div class="card-inner"><h3>Территория</h3>${scopeBlock('territory', territoryScope)}<p><b>Населённый пункт:</b> <a data-tos-place-link href="${esc(territoryUrl)}">${esc(tos.location || 'уточняется')}</a></p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p><div class="card-actions"><a class="btn" data-tos-place-action href="${esc(territoryUrl)}">Открыть страницу территории</a></div></div></article><article class="card"><div class="card-inner"><h3>Председатель и контакты</h3>${scopeBlock('contacts', contactsScope)}<p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p>${tos.contact_address ? `<p><b>Адрес, указанный в справке ТОС:</b> ${esc(tos.contact_address)}</p>` : ''}<p><b>Телефон:</b></p><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '<li>Телефон уточняется</li>')}</ul><p><b>Email:</b></p><ul>${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '<li>Email уточняется</li>')}</ul><p><b>Публичная ссылка председателя:</b></p><ul>${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Открыть ссылку</a></li>`, '<li>Ссылка уточняется</li>')}</ul>${contactFallback(tos)}</div></article><article class="card"><div class="card-inner"><h3>Публичные ссылки</h3>${scopeBlock('public-links', publicScope)}<ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))}</a></li>`, '<li>Соцсети уточняются</li>')}</ul><p class="tiny"><b>Технически обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}. Эта дата не является проверкой сведений.</p></div></article></div>${verificationBlock(tos, verification)}<div class="notice"><b style="color:var(--text)">О территории</b><br>${esc(tos.description || 'Описание пока уточняется.')}</div></div></article></div></section>
+    <section class="section tight" id="tos-passport"><div class="container grid"><article class="card full"><div class="card-inner"><h2>Паспорт ТОС</h2><div class="kpi"><div class="tile"><b>${esc(tos.population || '—')}</b><span>примерно жителей</span></div><div class="tile"><b>${esc(tos.founded || '—')}</b><span>год создания</span></div><div class="tile"><b>${esc(tos.type || 'ТОС')}</b><span>тип ТОС</span></div></div><hr class="sep"/><div class="grid tos-passport-grid"><article class="card"><div class="card-inner"><h3>Председатель и контакты</h3>${scopeBlock('contacts', contactsScope)}<p><b>Председатель:</b> ${esc(tos.chairperson || 'уточняется')}</p>${tos.contact_address ? `<p><b>Адрес, указанный в справке ТОС:</b> ${esc(tos.contact_address)}</p>` : ''}<p><b>Телефон:</b></p><ul>${renderList(phones, p => `<li><a href="tel:${esc(phoneHref(p))}">${esc(p)}</a></li>`, '<li>Телефон уточняется</li>')}</ul><p><b>Email:</b></p><ul>${renderList(emails, e => `<li><a href="mailto:${esc(e)}">${esc(e)}</a></li>`, '<li>Email уточняется</li>')}</ul><p><b>Публичная ссылка председателя:</b></p><ul>${renderList(chairLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">Открыть ссылку</a></li>`, '<li>Ссылка уточняется</li>')}</ul>${contactFallback(tos)}</div></article><article class="card"><div class="card-inner"><h3>Территория</h3>${scopeBlock('territory', territoryScope)}<p><b>Населённый пункт:</b> <a data-tos-place-link href="${esc(territoryUrl)}">${esc(tos.location || 'уточняется')}</a></p><p><b>Границы:</b> ${esc(tos.boundaries || 'уточняются')}</p><div class="card-actions"><a class="btn" data-tos-place-action href="${esc(territoryUrl)}">Открыть страницу территории</a></div></div></article><article class="card"><div class="card-inner"><h3>Публичные ссылки</h3>${scopeBlock('public-links', publicScope)}<ul>${renderList(socialLinks, u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(socialName(u))}</a></li>`, '<li>Соцсети уточняются</li>')}</ul><p class="tiny"><b>Технически обновлено:</b> ${esc(tos.updated_at || 'дата уточняется')}. Эта дата не является проверкой сведений.</p></div></article></div>${verificationBlock(tos, verification)}<div class="notice"><b style="color:var(--text)">О территории</b><br>${esc(tos.description || 'Описание пока уточняется.')}</div></div></article></div></section>
 
     ${renderTosProfile(tos, data.profiles)}
 
+    ${activitySummaryHtml}
+
+    ${block('Новости и материалы этого ТОС', 'Публикации, связанные с территорией по данным портала.', 'Все новости ТОС', `/news/?tos=${encodeURIComponent(tos.slug)}`, relNews, 'list', 'tos-news') }
+    ${block('События и даты этого ТОС', 'Записи календаря, связанные с территорией; перед участием проверяйте источник и дату.', 'Календарь', '/calendar/', relEvents, 'list', 'tos-events') }
+    ${block('Проекты и идеи этого ТОС', 'Карточки могут быть подтверждёнными материалами, редакционными описаниями или стартовыми идеями.', 'Все проекты ТОС', `/projects/?tos=${encodeURIComponent(tos.slug)}`, relProjects, 'grid', 'tos-projects') }
+    ${block('Результаты и запросы этого ТОС', 'Истории и запросы материалов; подтверждённость указана в самой записи.', 'Все истории ТОС', `/done/?tos=${encodeURIComponent(tos.slug)}`, relDone, 'list', 'tos-done') }
+    ${block('Потребности и запросы этого ТОС', 'Перед передачей помощи проверьте статус, получателя и актуальность записи.', 'Все потребности ТОС', `/needs/?tos=${encodeURIComponent(tos.slug)}`, relNeeds, 'list', 'tos-needs') }
+    <section class="section" id="tos-map"><div class="container"><article class="card"><div class="card-inner"><h2>Территория на карте</h2><p>Посмотрите нанесённые границы или подготовьте рабочую разметку для проверки. Если контура ещё нет, это не означает отсутствие ТОС.</p><div class="card-actions"><a class="btn" data-tos-map-link href="/map/?tos=${encodeURIComponent(tos.slug)}">Открыть карту этого ТОС</a><a class="btn primary" data-tos-my-area-link href="/residents/my-area/?tos=${encodeURIComponent(tos.slug)}">Дела и события этого ТОС</a></div></div></article></div></section>
+    <details class="container tos-contribute" id="tos-contribute"><summary>Дополнить карточку и помочь ТОС</summary>
     ${clarifyBlock(tos, qualityScore, verification)}
 
-    ${activitySummaryHtml}
 
     ${contentActionPlanHtml}
 
     <section class="section" id="help-this-tos"><div class="container section-head"><div><h2>Другие способы участия</h2><p>Уточните паспорт ТОС, предложите проект или добавьте событие. Не отправляйте закрытые персональные данные.</p></div><a class="btn" href="/partners/">Партнёрам</a></div><div class="container grid">${actions}</div></section>
 
 
-    ${block('Новости и материалы этого ТОС', 'Публикации, связанные с территорией по данным портала.', 'Все новости', '/news/', relNews, 'list', 'tos-news') }
-    ${block('События и даты этого ТОС', 'Записи календаря, связанные с территорией; перед участием проверяйте источник и дату.', 'Календарь', '/calendar/', relEvents, 'list', 'tos-events') }
-    ${block('Проекты и идеи этого ТОС', 'Карточки могут быть подтверждёнными материалами, редакционными описаниями или стартовыми идеями.', 'Все проекты', '/projects/', relProjects, 'grid', 'tos-projects') }
-    ${block('Результаты и запросы этого ТОС', 'Истории и запросы материалов; подтверждённость указана в самой записи.', 'Все истории', '/done/', relDone, 'list', 'tos-done') }
-    ${block('Потребности и запросы этого ТОС', 'Перед передачей помощи проверьте статус, получателя и актуальность записи.', 'Все потребности', '/needs/', relNeeds, 'list', 'tos-needs') }
-    <section class="section"><div class="container"><article class="card"><div class="card-inner"><h2>Территория на карте</h2><p>Посмотрите нанесённые границы или подготовьте рабочую разметку для проверки. Если контура ещё нет, это не означает отсутствие ТОС.</p><div class="card-actions"><a class="btn" data-tos-map-link href="/map/?tos=${encodeURIComponent(tos.slug)}">Открыть карту этого ТОС</a><a class="btn primary" data-tos-my-area-link href="/residents/my-area/?tos=${encodeURIComponent(tos.slug)}">Дела и события этого ТОС</a></div></div></article></div></section>
+    </details>
   </main>
   <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><!-- Данные страницы обновляются автоматически из JSON-файлов сайта. --></div></footer>
   <script src="/assets/js/site.js"></script><script src="/assets/js/tos-logos.js"></script>

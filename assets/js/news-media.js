@@ -17,6 +17,32 @@
     catch (_) { return ''; }
   }
   function escape(value) { return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c])); }
+  function unavailableText(value) {
+    return /^(?:post deleted|this post (?:was|has been) deleted|запись удалена)[.!]?$/i.test(String(value || '').trim());
+  }
+  function presentation(item) {
+    if (!item || item.imported_from !== 'vk') return item;
+    const parts = Array.isArray(item.reposts) ? item.reposts : [];
+    const reposts = parts.map(part => ({...part,
+      unavailable: Boolean(part.unavailable || (Array.isArray(part.text) ? part.text : []).some(unavailableText)),
+      text: (Array.isArray(part.text) ? part.text : []).filter(value => !unavailableText(value))
+    }));
+    const text = (Array.isArray(item.text) ? item.text : [item.text]).filter(value => value && !unavailableText(value));
+    const unavailable = Boolean(item.source_unavailable || unavailableText(item.title) || reposts.some(part => part.unavailable));
+    const ownText = text.filter(value => !/^(Репост публикации ВКонтакте\.|Материалы опубликованы в сообществе ТОС БГО\.)$/.test(value));
+    const onlyUnavailable = unavailable && !ownText.length && !reposts.some(part => part.text.length) && !images(item).length && !(item.attachments || []).length;
+    return {...item, text, reposts, source_unavailable:unavailable, unavailable_only:onlyUnavailable,
+      title: (onlyUnavailable || unavailableText(item.title)) ? 'Исходная публикация недоступна' : item.title,
+      lead: (onlyUnavailable || unavailableText(item.title)) ? 'В архиве сохранён репост сообщества. Текст исходной публикации сейчас недоступен; доступные сведения можно уточнить по ссылке ВКонтакте.' : item.lead
+    };
+  }
+  function searchMetadata(item) {
+    const view=presentation(item);
+    const trim=(value,max)=>{const text=String(value||'').replace(/\s+/g,' ').trim();return text.length>max?text.slice(0,max-1).replace(/[\uD800-\uDBFF]$/,'').trim()+'…':text;};
+    if(view.imported_from!=='vk')return {title:view.title,description:view.lead};
+    const stamp=` · ${String(view.date||'').split('-').reverse().join('.')} · №${view.vk_post_id||String(view.id||'').split('-').pop()}`;
+    return {title:trim(view.title,77-stamp.length)+stamp,description:trim(`Запись ВКонтакте${stamp}. ${view.lead||''}`,170)};
+  }
   function images(item) {
     // Prefer structured entries (size, preview and original); legacy string URLs still work.
     const values = [...(Array.isArray(item.images) ? item.images : []),item.image];
@@ -54,7 +80,8 @@
     }).join('');
   }
   function renderReposts(item) {
-    return (Array.isArray(item.reposts) ? item.reposts : []).filter(part => safeUrl(part.source_url)).map(part => `<blockquote class="news-repost"><p class="tiny"><b>Репост</b>${part.date ? ' · '+escape(part.date) : ''} · <a href="${escape(safeUrl(part.source_url))}" target="_blank" rel="noopener noreferrer">Исходная публикация ВКонтакте</a></p>${(Array.isArray(part.text) ? part.text : []).map(p => `<p>${escape(p)}</p>`).join('')}</blockquote>`).join('');
+    const view = presentation(item);
+    return (Array.isArray(view.reposts) ? view.reposts : []).filter(part => safeUrl(part.source_url)).map(part => `<blockquote class="news-repost"><p class="tiny"><b>Репост</b>${part.date ? ' · '+escape(part.date) : ''} · <a href="${escape(safeUrl(part.source_url))}" target="_blank" rel="noopener noreferrer">Исходная публикация ВКонтакте</a></p>${part.unavailable ? '<p class="notice">Текст исходной публикации недоступен. Сохранены ссылка и доступные материалы репоста.</p>' : ''}${(Array.isArray(part.text) ? part.text : []).map(p => `<p>${escape(p)}</p>`).join('')}</blockquote>`).join('');
   }
-  return {safeUrl,safePlayer,images,render,renderReposts};
+  return {safeUrl,safePlayer,images,render,renderReposts,unavailableText,presentation,searchMetadata};
 });

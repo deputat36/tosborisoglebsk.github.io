@@ -19,3 +19,17 @@ assert(!media.render({...item,images:Array.from({length:20},(_,i)=>'/assets/img/
 const decode=require('./lib/html_text').decodeHtmlText;
 assert.equal(decode('ТОС &quot;Уютный&quot; &#x1F333;'),'ТОС "Уютный" 🌳');
 assert.equal(decode('&amp;quot;'),'&quot;','Decode one HTML layer only');
+const unavailable={id:'vk-1-8',vk_post_id:8,imported_from:'vk',date:'2026-06-12',title:'Post deleted',lead:'Post deleted',text:['Репост публикации ВКонтакте.'],reposts:[{source_url:'https://vk.com/wall-2_3',text:['Post deleted']}]};
+const visible=media.presentation(unavailable);
+assert.equal(visible.title,'Исходная публикация недоступна');
+assert.equal(visible.unavailable_only,true);
+assert.equal(unavailable.reposts[0].text[0],'Post deleted','display adaptation preserves the stored source');
+assert(!media.renderReposts(unavailable).includes('Post deleted'));
+assert(media.renderReposts(unavailable).includes('wall-2_3'),'the original source link stays available');
+const commented=media.presentation({...unavailable,title:'Комментарий жителей',text:['Наше пояснение']});
+assert.equal(commented.unavailable_only,false);assert.deepEqual(commented.text,['Наше пояснение']);
+assert.equal(media.presentation({...unavailable,imported_from:''}).title,'Post deleted','do not rewrite ordinary editorial text');
+const meta=media.searchMetadata(unavailable);assert(meta.title.length<=77);assert(meta.description.length<=170);
+assert.notEqual(meta.title,media.searchMetadata({...unavailable,vk_post_id:9}).title,'separate wall records get distinct search titles');
+const emojiMeta=media.searchMetadata({...unavailable,title:'🌳'.repeat(100),lead:'🎈'.repeat(200)});
+for(const value of Object.values(emojiMeta))assert.equal(Buffer.from(value).toString('utf8'),value,'metadata must remain valid Unicode after truncating emoji');

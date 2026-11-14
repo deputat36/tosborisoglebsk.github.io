@@ -186,17 +186,18 @@ function collectMedia(parts) {
   return {images, attachments};
 }
 function convertVkPost(post, tagMap = new Map()) {
-  const parts = postParts(post), combinedText = postText(post), {images,attachments} = collectMedia(parts);
+  const parts = postParts(post), combinedText = parts.map(part => part.text || '').filter(value => !media.unavailableText(value)).join('\n\n'), {images,attachments} = collectMedia(parts);
   const tosSlug = detectTosSlug(combinedText, tagMap);
   const body = stripServiceHashtags(post.text, tagMap);
   const sourceUrl = part => `https://vk.com/wall${part.owner_id}_${part.id}`;
   const reposts = parts.slice(1).map(part => ({
     source_url: sourceUrl(part), date: Number.isFinite(Number(part.date)) && part.date ? formatDate(part.date) : '',
+    unavailable: Boolean(part.is_deleted || media.unavailableText(part.text)),
     text: stripServiceHashtags(part.text, tagMap).split(/\n\s*\n/g).map(p => p.trim()).filter(Boolean)
   }));
   const text = body ? body.split(/\n\s*\n/g).map(p => p.trim()).filter(Boolean) : [];
   const clear = stripServiceHashtags(combinedText, tagMap);
-  return {
+  return media.presentation({
     id:postKey(post), status:'published', date:formatDate(post.date), published_at:new Date(Number(post.date)*1000).toISOString(),
     category:tosSlug ? 'Новости ТОС' : 'Новости ТОС БГО',
     title:clear ? makeTitle(combinedText, tagMap) : reposts.length ? 'Публикация из сообщества ВКонтакте' : images.length ? 'Фотографии из сообщества ТОС БГО' : 'Публикация сообщества ТОС БГО',
@@ -204,8 +205,9 @@ function convertVkPost(post, tagMap = new Map()) {
     source:'ВКонтакте', source_url:sourceUrl(post), image:images[0]?.src || '', images, attachments, reposts,
     tos_slug:tosSlug, external:true, imported_from:'vk', content_origin:'editorial',
     vk_owner_id:post.owner_id, vk_post_id:post.id,
-    vk_edited: Number(post.edited) || 0
-  };
+    vk_edited: Number(post.edited) || 0,
+    source_unavailable: Boolean(parts.some(part => part.is_deleted || media.unavailableText(part.text)))
+  });
 }
 function sortNews(a,b) {
   return String(b.date || '').localeCompare(String(a.date || '')) || String(b.published_at || '').localeCompare(String(a.published_at || '')) || (Number(b.vk_post_id) || 0) - (Number(a.vk_post_id) || 0);

@@ -114,25 +114,25 @@
           <div><h3 id="quality-title">3. Проверка готовности</h3><p class="tiny" id="quality-summary">Заполните сведения, чтобы увидеть рекомендации.</p></div>
           <span class="tag" id="quality-score">0 из 7</span>
         </div>
-        <ul class="quality-list" id="quality-list" aria-live="polite"></ul>
+        <details data-quality-details><summary>Рекомендации по заполнению</summary><ul class="quality-list" id="quality-list" aria-live="polite"></ul></details>
         <div class="notice compact"><b>Что означает проверка:</b> она помогает собрать материал без очевидных пропусков, но не подтверждает достоверность, согласие, авторские права или юридическую возможность публикации.</div>
       </section>
 
       <section class="update-panel update-preview" aria-labelledby="preview-title">
         <div class="update-panel-head">
-          <div><h3 id="preview-title">4. Готовое сообщение и редакционный пакет</h3><p class="tiny">Пустые необязательные поля в сообщение и CSV не попадут</p></div>
+          <div><h3 id="preview-title">4. Готовое сообщение</h3><p class="tiny">Скопируйте текст и отправьте его редакции через сообщество ВКонтакте. Эта форма сама ничего не отправляет.</p></div>
           <span class="tag" id="required-status">Заполните обязательные поля</span>
         </div>
         <textarea class="input preview-text" id="message-preview" rows="16" readonly aria-label="Готовое сообщение"></textarea>
         <div class="preview-actions">
           <button class="btn primary" id="copy-message" type="button">Скопировать сообщение</button>
           <button class="btn" id="download-message" type="button">Скачать TXT</button>
-          <button class="btn" id="download-intake-csv" type="button">Карточка приёма CSV</button>
-          <button class="btn" id="download-queue-csv" type="button">Строка очереди CSV</button>
+
           <a class="btn" id="open-vk" href="https://vk.ru/tosbgo" target="_blank" rel="noopener">Открыть ВК</a>
           <button class="btn" id="reset-form" type="button">Очистить</button>
         </div>
-        <div class="notice compact editorial-export-note"><b>Важно:</b> оба CSV создаются локально со статусом <code>draft</code>. Они не добавляются в очередь автоматически, не подтверждают источник или разрешения и могут содержать контакт для редакции. Перед добавлением в публичный репозиторий контактные и закрытые сведения нужно удалить или перенести в закрытое хранилище.</div>
+        <details class="update-editorial"><summary>Для редакции: выгрузка CSV</summary><div class="preview-actions">          <button class="btn" id="download-intake-csv" type="button">Карточка приёма CSV</button>
+          <button class="btn" id="download-queue-csv" type="button">Строка очереди CSV</button></div>        <div class="notice compact editorial-export-note"><b>Важно:</b> оба CSV создаются локально со статусом <code>draft</code>. Они не добавляются в очередь автоматически, не подтверждают источник или разрешения и могут содержать контакт для редакции. Перед добавлением в публичный репозиторий контактные и закрытые сведения нужно удалить или перенести в закрытое хранилище.</div></details>
         <div class="copy-status" id="copy-status" aria-live="polite"></div>
       </section>
     </div>
@@ -155,12 +155,12 @@
 </main>
 
 <footer class="footer"><div class="container footer-grid"><div><b>Портал ТОС БГО</b><div class="tiny">© <span id="year"></span> tosborisoglebsk.ru</div></div><div class="tiny">Материал публикуется после проверки редакцией.</div></div></footer>
-<script src="/assets/js/site.js?v=443f1dcd5b10"></script>
+<script src="/assets/js/site.js?v=795fa241d41b"></script>
 <script src="/assets/js/update-center-data.js?v=f54e84a8c76e"></script>
 <script src="/assets/js/update-center-quality.js?v=b8c0b8b0bb37"></script>
 <script src="/assets/js/publication-queue-contract.js?v=235240e73d57"></script>
 <script src="/assets/js/update-center-editorial-export.js?v=d99371b310e8"></script>
-<script src="/assets/js/update-center.js?v=b26cc0631969"></script>
+<script src="/assets/js/update-center.js?v=aa880a677a27"></script>
 <script src="/assets/js/update-center-editorial-ui.js?v=f9beed70dd54"></script>
 </body>
 </html>

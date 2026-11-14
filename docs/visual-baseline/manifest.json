@@ -29,8 +29,8 @@
       "expected_check": "Hero, карточки, портал и футер без смещений",
       "focus_capture": null,
       "screenshot": "css-reg-001.png",
-      "sha256": "30dacc047aa09a18fd09113aa51754d0592ee4764020fedbbea665f5d8e319c5",
-      "bytes": 126569,
+      "sha256": "d9d7495feea1a4e4f1ccb123633d48091575699735afb2166b5ca7efdd934aa2",
+      "bytes": 131862,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "light",
@@ -61,13 +61,13 @@
       "page_errors": [],
       "failed_requests": [],
       "reviewed_capture": {
-        "workflow_run_id": "43231970525",
+        "workflow_run_id": "43575321567",
         "workflow_run_attempt": "1",
-        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
-        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
-        "captured_at": "2026-11-12T14:02:17.158Z",
-        "reviewed_at": "2026-11-12",
-        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
       }
     },
     {
@@ -85,8 +85,8 @@
       "expected_check": "Тёмная тема сохраняет контраст, поверхности и границы",
       "focus_capture": null,
       "screenshot": "css-reg-002.png",
-      "sha256": "73e62f58f3c6d99693e8617a124d3373b0c3287893b79d61cf4f51aba8818dfa",
-      "bytes": 130680,
+      "sha256": "b6ee5848cf4e5f2af12e9c5fdffad3ff405d7ee949b71e388fb4c375ae34f391",
+      "bytes": 136185,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "dark",
@@ -117,13 +117,13 @@
       "page_errors": [],
       "failed_requests": [],
       "reviewed_capture": {
-        "workflow_run_id": "43231970525",
+        "workflow_run_id": "43575321567",
         "workflow_run_attempt": "1",
-        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
-        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
-        "captured_at": "2026-11-12T14:02:17.158Z",
-        "reviewed_at": "2026-11-12",
-        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
       }
     },
     {
@@ -141,8 +141,8 @@
       "expected_check": "Мобильное меню открывается, не выходит за экран и не перекрывает действия",
       "focus_capture": null,
       "screenshot": "css-reg-003.png",
-      "sha256": "4dae2cbafdc5f594f0c8644a637e07a26d3ef20e50227909543b9d5f7b1e704c",
-      "bytes": 35558,
+      "sha256": "f51378d4f5ed5c3f3dd8f43c72afedf66b20f74adcfb268edf7d79d712f45795",
+      "bytes": 36022,
       "diagnostics": {
         "title": "ТОС БГО — найти свой ТОС, проверить контакты и участвовать",
         "htmlTheme": "light",
@@ -173,13 +173,13 @@
       "page_errors": [],
       "failed_requests": [],
       "reviewed_capture": {
-        "workflow_run_id": "43231970525",
+        "workflow_run_id": "43575321567",
         "workflow_run_attempt": "1",
-        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
-        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
-        "captured_at": "2026-11-12T14:02:17.158Z",
-        "reviewed_at": "2026-11-12",
-        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
       }
     },
     {
@@ -197,8 +197,8 @@
       "expected_check": "Фильтры, карточки и логотипы сохраняют сетку",
       "focus_capture": null,
       "screenshot": "css-reg-004.png",
-      "sha256": "b68321ea7cdcd76f956cbe4456c1ad6b95a38a497659ba9a1de4724c963e33b3",
-      "bytes": 134477,
+      "sha256": "26146f0809afe9b7aa3c703ded565525ab3cebcd5c9fe0b22b84cb6bfeee819d",
+      "bytes": 133253,
       "diagnostics": {
         "title": "Каталог ТОС Борисоглебского городского округа",
         "htmlTheme": "light",
@@ -229,13 +229,13 @@
       "page_errors": [],
       "failed_requests": [],
       "reviewed_capture": {
-        "workflow_run_id": "43231970525",
+        "workflow_run_id": "43575321567",
         "workflow_run_attempt": "1",
-        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
-        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
-        "captured_at": "2026-11-12T14:02:17.158Z",
-        "reviewed_at": "2026-11-12",
-        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
       }
     },
     {
@@ -253,8 +253,8 @@
       "expected_check": "Фильтры и карточки переходят в одноколоночный режим без горизонтальной прокрутки",
       "focus_capture": null,
       "screenshot": "css-reg-005.png",
-      "sha256": "3f81d1efcd0121217dc8e256784ce17074995adc21df5f0aad5e15c6b1ba07f4",
-      "bytes": 98707,
+      "sha256": "452109c1c8087650694c5b79509be5dedb21da6286f78f44f7160ea2bb19a756",
+      "bytes": 91753,
       "diagnostics": {
         "title": "Каталог ТОС Борисоглебского городского округа",
         "htmlTheme": "light",
@@ -283,7 +283,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43575321567",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
+      }
     },
     {
       "case_id": "css-reg-006",
@@ -300,8 +309,8 @@
       "expected_check": "Hero, паспорт, связанные блоки и действия отображаются без смещений",
       "focus_capture": null,
       "screenshot": "css-reg-006.png",
-      "sha256": "4899848c88672439cf0aab0feead5d75747e1ac71574a902c88e781b331d7cf2",
-      "bytes": 70585,
+      "sha256": "aa5228f5adccdfabb2453ea51fc5a113721470a192d86de11d62b51dab4f08c8",
+      "bytes": 85507,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "light",
@@ -332,13 +341,13 @@
       "page_errors": [],
       "failed_requests": [],
       "reviewed_capture": {
-        "workflow_run_id": "43231970525",
+        "workflow_run_id": "43575321567",
         "workflow_run_attempt": "1",
-        "feature_head_sha": "62f6c57e3935f876372d5389469aafa38ecf6f4a",
-        "captured_commit_sha": "c61a3b993a1ef5e3fa67988b4a08c45f609482a8",
-        "captured_at": "2026-11-12T14:02:17.158Z",
-        "reviewed_at": "2026-11-12",
-        "reason": "Owner-requested public usability redesign: three actions and current-section navigation"
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
       }
     },
     {
@@ -356,8 +365,8 @@
       "expected_check": "Карточки складываются в одну колонку, текст и действия читаемы",
       "focus_capture": null,
       "screenshot": "css-reg-007.png",
-      "sha256": "bf85b409d5d250269c8663bdd25f3c990a3833ccd641c7f3f472a51f55168197",
-      "bytes": 44865,
+      "sha256": "6eee86dc412b1b6ba44d41ec6703d253fe85ae7ba0070026c575305e8845872f",
+      "bytes": 52293,
       "diagnostics": {
         "title": "ТОС «Миролюбие» — контакты, границы, председатель | ТОС БГО",
         "htmlTheme": "dark",
@@ -378,7 +387,28 @@
             "overflowX": "visible"
           }
         ],
-        "internalOverflowElements": [],
+        "internalOverflowElements": [
+          {
+            "selector": "section#tos-content-actions",
+            "left": 30,
+            "right": 330,
+            "width": 300,
+            "scrollWidth": 317,
+            "clientWidth": 300,
+            "position": "static",
+            "overflowX": "visible"
+          },
+          {
+            "selector": "div.container.section-head",
+            "left": 30,
+            "right": 330,
+            "width": 300,
+            "scrollWidth": 317,
+            "clientWidth": 300,
+            "position": "static",
+            "overflowX": "visible"
+          }
+        ],
         "overflowIsolationCandidates": [],
         "menuExpanded": "false",
         "menuOpen": false
@@ -387,9 +417,15 @@
       "console_errors": [],
       "page_errors": [],
       "failed_requests": [],
-      "reviewed_at": "2026-10-15",
-      "review_note": "Просмотрен экран с новым переходом к истории ТОС; компоновка, статус проверки и мобильные действия читаемы. Пороги сравнения сохранены.",
-      "source_workflow_run_id": "38791341591"
+      "reviewed_capture": {
+        "workflow_run_id": "43575321567",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
+      }
     },
     {
       "case_id": "css-reg-008",
@@ -555,8 +591,8 @@
       "expected_check": "Таблицы, метрики и уведомления не обрезаются",
       "focus_capture": null,
       "screenshot": "css-reg-011.png",
-      "sha256": "1d59005232b3b46b270115bb9d3f15c1dda49ccb903d540d7b2dcf453f24e6c2",
-      "bytes": 131882,
+      "sha256": "3a66c5cbf0bbe9a9bf0ae707ecb890ff158a208f6c3f1a43f683145df6c95b3c",
+      "bytes": 105360,
       "diagnostics": {
         "title": "Аудит и здоровье сайта ТОС БГО",
         "htmlTheme": "light",
@@ -585,7 +621,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43575321567",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
+      }
     },
     {
       "case_id": "css-reg-012",
@@ -602,8 +647,8 @@
       "expected_check": "Метрики и таблицы остаются доступными без наложений",
       "focus_capture": null,
       "screenshot": "css-reg-012.png",
-      "sha256": "306a56164da2e4315db1a5375eb3f8c9a5a47b7ff5222988315119825225d2b3",
-      "bytes": 99431,
+      "sha256": "1dd6d94a1db6b28f8cfb437fb62c3a7a6d88a33a2178bbad01946e60e7e97fa9",
+      "bytes": 92831,
       "diagnostics": {
         "title": "Аудит и здоровье сайта ТОС БГО",
         "htmlTheme": "dark",
@@ -793,7 +838,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43575321567",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
+      }
     },
     {
       "case_id": "css-reg-013",
@@ -810,8 +864,8 @@
       "expected_check": "Карточки маршрутов и группы кнопок сохраняют структуру",
       "focus_capture": null,
       "screenshot": "css-reg-013.png",
-      "sha256": "976a45dea20c97b0ed9c76c52fd627b095dca3311fbe4798e35c397c5a8ae3bd",
-      "bytes": 124514,
+      "sha256": "ae628aa4609fb8ad36d1333912e6dfbadc283eb0f7ca6428d9dafd7fcbfcc441",
+      "bytes": 125095,
       "diagnostics": {
         "title": "Быстрые маршруты редактора ТОС БГО",
         "htmlTheme": "light",
@@ -840,7 +894,16 @@
       "technical_violations": [],
       "console_errors": [],
       "page_errors": [],
-      "failed_requests": []
+      "failed_requests": [],
+      "reviewed_capture": {
+        "workflow_run_id": "43575321567",
+        "workflow_run_attempt": "1",
+        "feature_head_sha": "bb76478b0db88a6989b29f86e23956e4275d9b79",
+        "captured_commit_sha": "b2b22badc05302b057ec512370f0507661ab5632",
+        "captured_at": "2026-11-14T08:27:40.921Z",
+        "reviewed_at": "2026-11-14",
+        "reason": "Owner-authorized usability plan: clearer homepage, compact TOS cards, shared page contents and Russian navigation labels"
+      }
     },
     {
       "case_id": "css-reg-014",

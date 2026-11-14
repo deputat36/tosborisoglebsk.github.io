@@ -56,7 +56,7 @@ function grantFacts(item, includeDetails = false) {
 function grantCard(item) {
   const source = item.source ? `<a class="btn" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Источник</a>` : '';
   const conditions = item.conditions_url ? `<a class="btn" href="${grantsEsc(item.conditions_url)}" target="_blank" rel="noopener">Условия и документы</a>` : '';
-  return `<article class="list-item grant-card" id="grant-${grantsEsc(item.id)}" data-grant-id="${grantsEsc(item.id)}" data-call-state="${core.state(item)}">
+  return `<article class="list-item grant-card" id="grant-${grantsEsc(item.id)}" data-grant-group="${core.group(item)}" data-grant-id="${grantsEsc(item.id)}" data-call-state="${core.state(item)}">
     <div class="meta">
       <span class="tag warn">${grantsEsc(item.category || 'Возможность')}</span>
       <span class="tag">${grantsEsc(item.difficulty || 'Сложность уточняется')}</span>
@@ -64,7 +64,7 @@ function grantCard(item) {
     <h3>${grantsEsc(item.title || 'Возможность поддержки')}</h3>
     <p>${grantsEsc(item.best_for || item.directions || '')}</p>
     ${grantFacts(item, true)}
-    ${grantPrepareList(item)}
+    <details class="grant-details"><summary>Подготовка, документы и источники</summary>${grantPrepareList(item)}
     ${item.note ? `<p class="tiny"><b>Редакционная пометка:</b> ${grantsEsc(item.note)}</p>` : ''}
     ${item.source_checked_at ? `<p class="tiny">Объявление сверено: <time datetime="${grantsEsc(item.source_checked_at)}">${grantsEsc(item.source_checked_at)}</time>. Перед подачей проверьте изменения у организатора.</p>` : ''}
     <div class="card-actions">
@@ -76,7 +76,7 @@ function grantCard(item) {
       ${grantOrganizationLink(item)}
       ${grantGuideLink(item)}
     </div>
-    ${grantProjectLinks(item)}
+    ${grantProjectLinks(item)}</details>
   </article>`;
 }
 
@@ -85,7 +85,7 @@ function grantSummary(item) {
     <h3>${grantsEsc(item.title)}</h3>
     ${grantFacts(item)}
     <p><b>Кому подходит:</b> ${grantsEsc(item.who)}</p>
-    <p class="tiny">${grantsEsc(item.note)}</p>
+    <p class="tiny">${grantsEsc(item.note)}</p>${item.source_checked_at ? `<p class="tiny">Объявление сверено: <time datetime="${grantsEsc(item.source_checked_at)}">${grantsEsc(item.source_checked_at)}</time></p>` : ''}
     <div class="card-actions"><a class="btn primary" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Открыть объявление</a><a class="btn" href="#grant-${grantsEsc(item.id)}">Что подготовить</a>${grantOrganizationLink(item)}${grantGuideLink(item)}</div>
   </article>`;
 }
@@ -100,19 +100,31 @@ async function renderGrants() {
     const grants = await response.json();
     if (!Array.isArray(grants)) throw new Error('invalid opportunities');
     const items = Array.isArray(grants) ? grants.filter(grantsPublished) : [];
+    const controls=document.querySelector('[data-grant-filters]');
+    const view=document.querySelector('#grant-view');
+    const status=document.querySelector('#grant-filter-status');
+    const groups=new Set(['current','archive','support','prepare']);
+    const params=new URLSearchParams(location.search);
+    if(view&&groups.has(params.get('view')))view.value=params.get('view');
+    if(controls)controls.hidden=false;
     let previousStates = null;
     const render = () => {
-      const states = items.map(item => core.state(item)).join('|');
+      const selected=view?.value||'';
+      const states = selected+'|'+items.map(item => core.group(item)).join('|');
       if (states === previousStates) return;
       previousStates = states;
-      root.innerHTML = items.length ? items.map(grantCard).join('') : '<div class="empty">Возможности поддержки пока не добавлены.</div>';
+      const shown=selected?items.filter(item=>core.group(item)===selected):items;
+      if(status)status.textContent=`Показано ${shown.length} из ${items.length}.`;
+      root.innerHTML = shown.length ? shown.map(grantCard).join('') : `<div class="empty">${selected?'По выбранному фильтру ничего не найдено. Выберите «Все возможности».':'Возможности поддержки пока не добавлены.'}</div>`;
       const currentRoot = document.querySelector('#current-grants');
       if (currentRoot) {
         const current = core.current(items);
         currentRoot.innerHTML = current.length ? current.map(grantSummary).join('') : '<div class="notice">Ближайших сроков с недавно проверенными объявлениями нет. Ниже доступны направления поддержки и ссылки для подготовки.</div>';
       }
     };
-    render();
+    view?.addEventListener('change',()=>{const url=new URL(location.href);if(view.value)url.searchParams.set('view',view.value);else url.searchParams.delete('view');if(url.hash.startsWith('#grant-'))url.hash='';history.replaceState(null,'',url);render();});
+    function revealHash(){if(location.hash.startsWith('#grant-')&&view){view.value='';render();document.getElementById(location.hash.slice(1))?.scrollIntoView({block:'start'});}}
+    render();revealHash();window.addEventListener('hashchange',revealHash);
     // Keep a tab left open over a deadline from advertising an expired call.
     setInterval(render, 60000);
   } catch (error) {

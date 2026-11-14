@@ -44,9 +44,12 @@ function patchGenerator() {
     changed = true;
   }
 
-  const cardResult = replaceOnce(content, CONTACT_CARD_BOUNDARY, CONTACT_CARD_REPLACEMENT, 'TOS contact card fallback');
-  content = cardResult.content;
-  changed = changed || cardResult.changed;
+  // The contacts card may precede either the territory or public links card.
+  if (!content.includes('${contactFallback(tos)}')) {
+    const cardResult = replaceOnce(content, CONTACT_CARD_BOUNDARY, CONTACT_CARD_REPLACEMENT, 'TOS contact card fallback');
+    content = cardResult.content;
+    changed = changed || cardResult.changed;
+  }
 
   const required = [
     'function hasDirectPublicContact(tos)',

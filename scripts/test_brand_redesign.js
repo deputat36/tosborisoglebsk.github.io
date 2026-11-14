@@ -21,8 +21,8 @@ async function main() {
       assert(await search.evaluate(node => node === document.activeElement));
       await page.locator('.catalog-details summary').click();
       assert(await page.locator('#home-stats').isVisible());
-      await page.locator('.home-current-card summary').click();
-      assert(await page.locator('#home-current-overview').isVisible());
+      assert(await page.locator('#home-current-overview').isVisible(), 'current information is visible without opening a disclosure');
+      assert((await page.locator('#home-current-overview').innerText()).trim().length > 0, 'the overview contains information or a useful fallback');
       await page.locator('[data-action=theme]').click();
       assert.strictEqual(await page.locator('html').getAttribute('data-theme'), 'dark');
       assert((await page.locator('.brand img').getAttribute('src')).endsWith('logo-dark.svg'));
