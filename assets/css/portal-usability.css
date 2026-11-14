@@ -38,6 +38,12 @@ h1,h2,h3,.card a,.notice { overflow-wrap:anywhere; }
 .use-case-fields input,.use-case-fields textarea,.use-case-fields select { width:100%; min-width:0; font:inherit; padding:12px; border:1px solid var(--line); border-radius:10px; background:var(--surface); color:var(--text); }
 .use-case-fields textarea { min-height:100px; resize:vertical; }
 .use-case-preview { white-space:pre-wrap; overflow-wrap:anywhere; padding:20px; border:1px solid var(--line); border-radius:12px; background:var(--surface); font:inherit; }
+/* Keep deadlines and support amounts easy to scan on both opportunity lists. */
+.grant-facts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:16px 0; }
+.grant-fact { min-width:0; padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface2); }
+.grant-fact--deadline,.grant-fact--amount { border-left:4px solid var(--brand); }
+.grant-fact dt { color:var(--muted); font-size:14px; font-weight:700; line-height:1.35; }
+.grant-fact dd { margin:5px 0 0; color:var(--text); font-size:17px; font-weight:700; line-height:1.4; overflow-wrap:anywhere; }
 @media(max-width:800px) {
   .methodology-benefits { grid-template-columns:1fr; }
   .project-packet-options { grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -48,6 +54,7 @@ h1,h2,h3,.card a,.notice { overflow-wrap:anywhere; }
   .header .nav a { padding:12px; }
   .home-hero .hero-actions { display:grid; grid-template-columns:1fr; }
   .home-current-overview,.project-readiness ul,.project-packet-options,.use-case-fields { grid-template-columns:1fr; }
+  .grant-facts { grid-template-columns:1fr; }
   .project-packet { padding:16px; }
   .project-packet iframe { height:520px; }
   .project-packet .card-actions .btn,.use-case-form .card-actions .btn { flex:1 1 180px; }

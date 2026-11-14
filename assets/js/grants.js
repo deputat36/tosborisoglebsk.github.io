@@ -39,6 +39,20 @@ function grantPrepareList(item) {
   return `<div class="notice"><b>Что подготовить</b><br>${steps.map((step) => `- ${grantsEsc(step)}`).join('<br>')}</div>`;
 }
 
+function grantFacts(item, includeDetails = false) {
+  const facts = [
+    ['Срок', item.deadline || 'Уточняется', 'deadline'],
+    ['Сумма / ресурс', item.amount || 'Уточняется', 'amount']
+  ];
+  if (includeDetails) {
+    facts.push(['Статус', core.statusLabel(item), 'status']);
+    facts.push(['Кому подходит', item.who || 'Уточняется', 'audience']);
+  }
+  return `<dl class="grant-facts">${facts.map(([label, value, kind]) =>
+    `<div class="grant-fact grant-fact--${kind}"><dt>${grantsEsc(label)}</dt><dd>${grantsEsc(value)}</dd></div>`
+  ).join('')}</dl>`;
+}
+
 function grantCard(item) {
   const source = item.source ? `<a class="btn" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Источник</a>` : '';
   const conditions = item.conditions_url ? `<a class="btn" href="${grantsEsc(item.conditions_url)}" target="_blank" rel="noopener">Условия и документы</a>` : '';
@@ -49,12 +63,7 @@ function grantCard(item) {
     </div>
     <h3>${grantsEsc(item.title || 'Возможность поддержки')}</h3>
     <p>${grantsEsc(item.best_for || item.directions || '')}</p>
-    <div class="grid">
-      <article class="card"><div class="card-inner"><span class="tag">Статус</span><p>${grantsEsc(core.statusLabel(item))}</p></div></article>
-      <article class="card"><div class="card-inner"><span class="tag">Сумма / ресурс</span><p>${grantsEsc(item.amount || 'Уточняется')}</p></div></article>
-      <article class="card"><div class="card-inner"><span class="tag">Срок</span><p>${grantsEsc(item.deadline || 'Уточняется')}</p></div></article>
-      <article class="card"><div class="card-inner"><span class="tag">Кому подходит</span><p>${grantsEsc(item.who || 'Уточняется')}</p></div></article>
-    </div>
+    ${grantFacts(item, true)}
     ${grantPrepareList(item)}
     ${item.note ? `<p class="tiny"><b>Редакционная пометка:</b> ${grantsEsc(item.note)}</p>` : ''}
     ${item.source_checked_at ? `<p class="tiny">Объявление сверено: <time datetime="${grantsEsc(item.source_checked_at)}">${grantsEsc(item.source_checked_at)}</time>. Перед подачей проверьте изменения у организатора.</p>` : ''}
@@ -73,8 +82,8 @@ function grantCard(item) {
 
 function grantSummary(item) {
   return `<article class="list-item" data-grant-id="${grantsEsc(item.id)}" data-call-state="${core.state(item)}">
-    <div class="meta"><span class="tag">${grantsEsc(item.deadline)}</span><span class="tag">${grantsEsc(item.amount)}</span></div>
     <h3>${grantsEsc(item.title)}</h3>
+    ${grantFacts(item)}
     <p><b>Кому подходит:</b> ${grantsEsc(item.who)}</p>
     <p class="tiny">${grantsEsc(item.note)}</p>
     <div class="card-actions"><a class="btn primary" href="${grantsEsc(item.source)}" target="_blank" rel="noopener">Открыть объявление</a><a class="btn" href="#grant-${grantsEsc(item.id)}">Что подготовить</a>${grantOrganizationLink(item)}${grantGuideLink(item)}</div>
