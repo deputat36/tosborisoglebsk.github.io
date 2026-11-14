@@ -3,6 +3,7 @@
 .tos-section-nav a { display:flex; align-items:center; min-height:44px; padding:8px 13px; border:1px solid var(--line); border-radius:10px; background:var(--surface); font-size:14px; font-weight:700; }
 .tos-section-nav a:focus-visible,.tos-detail summary:focus-visible { outline:3px solid var(--brand); outline-offset:3px; }
 .tos-detail .hero-card { position:relative; }
+.tos-detail .hero-card h1 { overflow-wrap:normal; }
 .tos-detail .tos-detail-logo { float:right; margin:0 0 12px 20px; }
 .tos-detail .tos-detail-logo .large { margin-bottom:0; }
 .tos-detail .tos-passport-grid { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
