@@ -1,6 +1,6 @@
 {
   "summary": {
-    "generated_at": "2026-11-13T18:21:13.720Z",
+    "generated_at": "2026-11-14T07:03:22.926Z",
     "stale_after_days": 180,
     "total_tos": 26,
     "high_priority": 4,
@@ -886,7 +886,7 @@
         "status": "needs_review",
         "label": "Требует проверки",
         "date": "2026-09-10",
-        "age_days": 64,
+        "age_days": 65,
         "stale": false,
         "source": "https://riavrn.ru/news/v-borisoglebskom-poselke-kalinino-pochistili-3-kolodca/",
         "note": ""
@@ -1756,14 +1756,14 @@
         "Потребности"
       ],
       "linked": {
-        "news": 72,
+        "news": 74,
         "done": 1,
         "needs": 0,
         "projects": 2,
         "events": 0
       },
       "linked_all": {
-        "news": 73,
+        "news": 75,
         "done": 1,
         "needs": 1,
         "projects": 2,
@@ -1779,7 +1779,7 @@
       "linked_origins": {
         "news": {
           "verified": 1,
-          "editorial": 71,
+          "editorial": 73,
           "starter": 0,
           "request": 1
         },
