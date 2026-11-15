@@ -90,7 +90,7 @@ function upsertHousingControlMatrix() {
   const index = data.items.findIndex((item) => item && item.id === HOUSING_CONTROL_MATRIX_ITEM.id);
   if (index >= 0) data.items[index] = { ...data.items[index], ...HOUSING_CONTROL_MATRIX_ITEM };
   else data.items.splice(2, 0, HOUSING_CONTROL_MATRIX_ITEM);
-  data.updated_at = '2026-09-11';
+  if(!data.updated_at || data.updated_at < '2026-09-11')data.updated_at = '2026-09-11';
   const next = `${JSON.stringify(data, null, 2)}\n`;
   return writeIfChanged(filePath, content, next, `${relativePath} housing-control item`);
 }
