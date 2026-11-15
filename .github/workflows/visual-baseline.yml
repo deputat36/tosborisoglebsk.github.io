@@ -12,6 +12,11 @@ on:
     branches:
       - release-2025-12-22
     paths:
+      - 'privacy/**'
+      - 'assets/js/analytics*.js'
+      - 'assets/css/analytics.css'
+      - 'scripts/sync_metrica.js'
+      - 'scripts/test_public_metrica.js'
       - 'map/**'
       - 'data/map-basemaps.json'
       - 'assets/img/yandex-tiles-logo.svg'
@@ -172,6 +177,7 @@ jobs:
 
       - name: Check public browser test syntax
         run: |
+          node --check scripts/test_public_metrica.js
           node --check scripts/test_public_browser_interactions.js
           node --check scripts/test_public_card_navigation.js
 
@@ -254,6 +260,9 @@ jobs:
 
       - name: Check learning materials, sources and worksheet on desktop and mobile
         run: node scripts/test_public_learning_materials.js
+
+      - name: Check Metrica consent and withdrawal on desktop and mobile without real tracking
+        run: node scripts/test_public_metrica.js
 
       - name: Generate visual-run public link integrity report
         env:

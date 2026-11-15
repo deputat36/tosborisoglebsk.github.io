@@ -47,6 +47,7 @@ function main(){
   if(source!==before){fs.writeFileSync(file,source);changed++;}
  }
  require('./sync_site_icons').syncSiteIcons(root);
+ require('./sync_metrica').sync(root);
  console.log(`Public experience generated: ${toses.length} TOS, readable homepage, ${changed} public page shells`);
 }
 if(require.main===module)main();
