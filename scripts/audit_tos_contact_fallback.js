@@ -85,7 +85,8 @@ function main() {
   requireFragments(errors, 'contact fallback patcher', patcher, [
     'function patchTosContactFallback()',
     'verifyMaterializedPages()',
-    'module.exports = { patchTosContactFallback, directChannels }'
+    'function ensureRelayScript(content)',
+    'module.exports = { patchTosContactFallback, directChannels, ensureRelayScript }'
   ]);
 
   requireFragments(errors, 'contact fallback browser test', test, [

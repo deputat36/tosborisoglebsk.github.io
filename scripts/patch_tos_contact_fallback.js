@@ -25,8 +25,15 @@ const CONTACT_CARD_REPLACEMENT = `</ul>\${contactFallback(tos)}</div></article><
 const RELAY_SECTION_MARKER = '<section class="section"><div class="container section-head"><div><h2>Что можно отправить</h2>';
 const RELAY_SECTION = `<section class="section" id="relay-tos" aria-labelledby="relay-tos-title"><div class="container section-head"><div><h2 id="relay-tos-title">Передать сообщение ТОС через редакцию</h2><p>Для случая, когда прямой публичный контакт нужного ТОС в карточке не указан</p></div><a class="btn" href="/tos/">Вернуться в каталог</a></div><div class="container grid"><article class="card half"><div class="card-inner"><span class="tag warn">Неофициальный канал</span><h3>Как работает передача</h3><p>Редакция портала принимает сообщение и проверяет, есть ли доступный способ передать его председателю или активу нужного ТОС. Передача и ответ не гарантируются.</p><div class="notice"><b>Важно:</b> этот канал не заменяет официальную приёмную, экстренную службу или регистрацию обращения. Не присылайте паспортные данные, платёжные реквизиты, пароли и другие лишние персональные сведения.</div><div class="card-actions"><a class="btn primary" href="https://vk.ru/tosbgo" target="_blank" rel="noopener">Отправить через ВК</a><a class="btn" href="tel:+79102498284">Позвонить ответственному контакту</a></div></div></article><article class="card half"><div class="card-inner"><span class="tag">Шаблон</span><h3>Подготовьте короткое сообщение</h3><p id="relay-tos-context" role="status" aria-live="polite">Укажите название ТОС или территорию в сообщении.</p><textarea class="input" id="relay-tos-template" rows="10" readonly aria-label="Шаблон сообщения для передачи ТОС"></textarea><div class="card-actions"><button class="btn primary" id="copy-relay-template" type="button">Скопировать шаблон</button><a class="btn" id="relay-tos-card-link" href="/tos/" hidden>Вернуться к карточке ТОС</a></div><p class="tiny" id="relay-copy-status" aria-live="polite"></p></div></article></div></section>`;
 
-const SCRIPT_MARKER = '<script src="/assets/js/site.js"></script></body></html>';
-const SCRIPT_REPLACEMENT = '<script src="/assets/js/site.js"></script><script src="/assets/js/contact-relay.js"></script></body></html>';
+function ensureRelayScript(content) {
+  const relay = /<script\b[^>]*\bsrc=["']\/assets\/js\/contact-relay\.js(?:\?[^"']*)?["'][^>]*>\s*<\/script>/gi;
+  const existing = [...content.matchAll(relay)];
+  if (existing.length > 1) throw new Error('Contacts relay script: duplicate script');
+  if (existing.length === 1) return { content, changed: false };
+  const site = /<script\b[^>]*\bsrc=["']\/assets\/js\/site\.js(?:\?[^"']*)?["'][^>]*>\s*<\/script>/i;
+  if (!site.test(content)) throw new Error('Contacts relay script: source marker not found');
+  return { content: content.replace(site, tag => tag + '<script src="/assets/js/contact-relay.js"></script>'), changed: true };
+}
 
 function replaceOnce(content, oldValue, newValue, label) {
   if (content.includes(newValue)) return { content, changed: false };
@@ -77,7 +84,7 @@ function patchContactsPage() {
     changed = true;
   }
 
-  const scriptResult = replaceOnce(content, SCRIPT_MARKER, SCRIPT_REPLACEMENT, 'Contacts relay script');
+  const scriptResult = ensureRelayScript(content);
   content = scriptResult.content;
   changed = changed || scriptResult.changed;
 
@@ -142,4 +149,4 @@ function patchTosContactFallback() {
 
 if (require.main === module) patchTosContactFallback();
 
-module.exports = { patchTosContactFallback, directChannels };
+module.exports = { patchTosContactFallback, directChannels, ensureRelayScript };

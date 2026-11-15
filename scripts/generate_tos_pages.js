@@ -462,7 +462,13 @@ function makePage(tos, data) {
 </body></html>`;
 }
 
-function writeFile(file, content) { fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content, 'utf8'); }
+function writeFile(file, content) {
+  const relative = path.relative(ROOT, file);
+  content = require('./lib/site_icons').normalizeSiteIcons(content);
+  content = require('./sync_metrica').normalize(content, relative, ROOT);
+  content = require('./sync_search_metadata').normalize(content, relative, ROOT);
+  fs.mkdirSync(path.dirname(file), { recursive: true }); fs.writeFileSync(file, content, 'utf8');
+}
 function updateSitemap(toses) {
   const baseUrls = ['/', '/tos/', '/residents/', '/partners/', '/news/', '/grants/', '/projects/', '/done/', '/calendar/', '/needs/', '/materials/', '/documents/', '/legal/', '/legal/federal-law-33/', '/places/', '/sources/', '/data-quality/', '/methodology/', '/glossary/', '/privacy/', '/create-tos/', '/chairperson/', '/update-tos/', '/map/', '/contacts/', '/editorial-policy/', '/search/', '/sections/'].map(u => `${SITE_URL}${u}`);
   const tosUrls = toses.filter(t => t.slug && t.status !== 'draft').map(t => `${SITE_URL}/tos/${t.slug}/`);
