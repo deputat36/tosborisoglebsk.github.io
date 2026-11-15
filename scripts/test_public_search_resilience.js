@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 const BASE = process.env.PUBLIC_BROWSER_BASE_URL || process.env.VISUAL_BASELINE_BASE_URL || 'http://127.0.0.1:4173';
 const OUT = '.artifacts/visual-baseline/search-resilience';
 const index = JSON.parse(fs.readFileSync('data/page_index.json', 'utf8'));
-const fixtures = index.pages.filter(p => p.search_group === 'news').slice(0, 122).map((p, i) => ({ ...p, title: 'Кейс поиска ' + String(i).padStart(3, '0'), description: 'Учебная проверка поиска', content_origin: 'editorial' }));
+const fixtures = index.pages.filter(p => p.search_group === 'news').slice(0, 122).map((p, i) => ({ ...p, title: 'Кейс поиска А' + String(i).padStart(3, '0'), description: 'Учебная проверка поиска', content_origin: 'editorial' }));
 assert.equal(fixtures.length, 122);
 const body = JSON.stringify({ pages: fixtures, search_groups: { news: 'Новости' } });
 const cards = '#search-results .search-result[data-search-group]';
@@ -43,7 +43,7 @@ async function main() {
       assert.equal(new Set(hrefs).size, 122, 'later batches do not duplicate earlier results');
       assert(hrefs.includes(new URL(fixtures[121].url).pathname), 'the last matching page is reachable');
       assert.equal(await page.locator('#search-more-results').isVisible(), false);
-      await page.locator('#site-search').fill('Кейс поиска 00');
+      await page.locator('#site-search').fill('Кейс поиска А00');
       assert.equal(await page.locator(cards).count(), 10);
       await page.locator('#site-search').fill('Кейс');
       assert.equal(await page.locator(cards).count(), 60, 'changing filters resets the displayed batch');
@@ -79,7 +79,7 @@ async function main() {
       assert.match(await page.locator('#search-filter-status').innerText(), /Поиск временно недоступен/);
       assert(!(await page.locator('#search-results').innerText()).includes('Ничего не найдено'));
       assert.equal(await page.locator('#search-results .search-result').count(), 4, 'routes remain available during a search failure');
-      await page.locator('#site-search').fill('Кейс поиска 00');
+      await page.locator('#site-search').fill('Кейс поиска А00');
       assert.match(await page.locator('#search-filter-status').innerText(), /Поиск временно недоступен/);
       assert.equal(new URL(page.url()).searchParams.get('type'), 'news');
       await fits(page);
@@ -87,7 +87,7 @@ async function main() {
       await page.locator('#search-retry').click();
       await ready(page);
       assert.equal(requests, 2, 'retry is explicit and does not loop');
-      assert.equal(await page.locator('#site-search').inputValue(), 'Кейс поиска 00');
+      assert.equal(await page.locator('#site-search').inputValue(), 'Кейс поиска А00');
       assert.equal(await page.locator('#search-type-filter').inputValue(), 'news');
       assert.equal(await page.locator(cards).count(), 10);
       assert.equal(await page.locator('#search-retry').isVisible(), false);
@@ -102,11 +102,11 @@ async function main() {
       await page.goto(BASE + '/search/?q=Старый&type=news&origin=editorial', { waitUntil: 'domcontentloaded' });
       await page.locator('#search-controls').waitFor({ state: 'visible' });
       assert.equal(await page.locator('#search-results').getAttribute('aria-busy'), 'true');
-      await page.locator('#site-search').fill('Кейс поиска 00');
+      await page.locator('#site-search').fill('Кейс поиска А00');
       assert.match(await page.locator('#search-filter-status').innerText(), /Загружаем поиск/);
       release();
       await ready(page);
-      assert.equal(await page.locator('#site-search').inputValue(), 'Кейс поиска 00', 'a delayed response must not overwrite what the visitor typed');
+      assert.equal(await page.locator('#site-search').inputValue(), 'Кейс поиска А00', 'a delayed response must not overwrite what the visitor typed');
       assert.equal(await page.locator(cards).count(), 10);
       await ctx.close();
     }
