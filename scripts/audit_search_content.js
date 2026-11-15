@@ -20,7 +20,8 @@ const requiredControls = [
   'search-reset-filters',
   'search-summary',
   'search-filter-status',
-  'search-results'
+  'search-results',
+  'search-controls', 'search-more-results', 'search-retry'
 ];
 
 const requiredCopy = [
@@ -77,7 +78,7 @@ function main() {
   if (!html.includes('<link rel="canonical" href="https://tosborisoglebsk.ru/search/"')) {
     errors.push('missing canonical link for search page');
   }
-  if (!html.includes('data-search-browser-version="2026-07-22"')) {
+  if (!html.includes('data-search-browser-version="2026-11-15"')) {
     errors.push('search browser version marker is missing');
   }
 

@@ -7,20 +7,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const summaryRoot = document.querySelector('#search-summary');
   const statusRoot = document.querySelector('#search-filter-status');
   const root = document.querySelector('#search-results');
+  const toolbar = document.querySelector('#search-controls');
+  const moreButton = document.querySelector('#search-more-results');
+  const retryButton = document.querySelector('#search-retry');
 
   if (!input || !typeFilter || !originFilter || !sortControl || !resetButton || !summaryRoot || !statusRoot || !root) return;
 
   const CollectionCore = window.CollectionBrowserCore;
   const SearchCore = window.SearchBrowserCore;
   if (!CollectionCore || !SearchCore) {
-    root.innerHTML = '<div class="empty">Поиск не загрузился: отсутствует служебный модуль.</div>';
+    statusRoot.textContent = 'Поиск по словам сейчас недоступен. Обновите страницу или откройте разделы ниже.';
     return;
   }
 
   const fields = ['q', 'type', 'origin', 'sort'];
   const controls = { q: input, type: typeFilter, origin: originFilter, sort: sortControl };
   const groupLabels = {};
+  const batchSize = 60;
   let pages = [];
+  let visibleLimit = batchSize;
+  let loadState = 'idle';
+  let pendingType = '';
 
   const quickLinks = [
     {
@@ -96,10 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>`;
   }
 
-  function renderQuickLinks() {
-    summaryRoot.innerHTML = '';
-    statusRoot.textContent = 'Введите не менее двух символов или выберите фильтр.';
-    root.innerHTML = `<div class="section-head"><div><h2>Быстрые ссылки</h2><p>Основные маршруты для жителей и инициативных групп</p></div></div>` + quickLinks.map((item) => `<article class="list-item search-result">
+  function quickLinkCards() {
+    return `<div class="section-head"><div><h2>Быстрые ссылки</h2><p>Основные маршруты для жителей и инициативных групп</p></div></div>` + quickLinks.map((item) => `<article class="list-item search-result">
       <div class="meta"><span class="tag">${esc(item.type)}</span><span class="tag">Справочная страница</span></div>
       <h3>${esc(item.title)}</h3>
       <p>${esc(item.text)}</p>
@@ -107,13 +112,21 @@ document.addEventListener('DOMContentLoaded', () => {
     </article>`).join('');
   }
 
+  function renderQuickLinks() {
+    summaryRoot.innerHTML = '';
+    statusRoot.textContent = 'Введите не менее двух символов или выберите фильтр.';
+    root.innerHTML = quickLinkCards();
+  }
+
   function currentState() {
     const state = CollectionCore.readControls(controls);
+    if (loadState !== 'ready') state.type = pendingType;
     state.sort = SearchCore.normalizeSort(state.sort);
     return state;
   }
 
-  function apply({ sync = true } = {}) {
+  function apply({ sync = true, resetLimit = true } = {}) {
+    if (resetLimit) visibleLimit = batchSize;
     const state = currentState();
     const query = SearchCore.normalizeText(state.q);
     const active = CollectionCore.activeFilterCount({
@@ -124,6 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (sync) CollectionCore.syncUrl(state, fields);
+    if (moreButton) moreButton.hidden = true;
+    if (retryButton) retryButton.hidden = loadState !== 'error';
+    root.setAttribute('aria-busy', String(loadState === 'loading'));
+
+    if (loadState !== 'ready') {
+      summaryRoot.innerHTML = '';
+      statusRoot.textContent = loadState === 'error'
+        ? 'Поиск временно недоступен. Повторите загрузку или откройте раздел ниже.'
+        : 'Загружаем поиск. Можно ввести запрос или открыть раздел ниже.';
+      root.innerHTML = (loadState === 'error'
+        ? '<div class="empty">Не удалось загрузить поиск. Ваш запрос и фильтры сохранены.</div>' : '') + quickLinkCards();
+      return;
+    }
 
     if (!query && !state.type && !state.origin && state.sort === 'relevance') {
       renderQuickLinks();
@@ -138,16 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const filtered = SearchCore.filterPages(pages, state);
-    const visible = filtered.slice(0, 60);
+    const visible = filtered.slice(0, visibleLimit);
     renderSummary(filtered);
     statusRoot.textContent = `Показано ${visible.length} из ${filtered.length}. Активных фильтров: ${active}.`;
     root.innerHTML = visible.length
       ? visible.map(pageCard).join('')
       : '<div class="empty">Ничего не найдено. Измените запрос или сбросьте фильтры.</div>';
+    if (moreButton && visible.length < filtered.length) {
+      moreButton.hidden = false;
+      moreButton.textContent = 'Показать ещё ' + Math.min(batchSize, filtered.length - visible.length);
+    }
   }
 
   function populateTypes() {
-    const current = typeFilter.value;
+    const current = loadState === 'ready' ? typeFilter.value : pendingType;
     const groups = SearchCore.availableGroups(pages)
       .sort((a, b) => String(groupLabels[a] || a).localeCompare(String(groupLabels[b] || b), 'ru'));
     typeFilter.innerHTML = '<option value="">Все типы страниц</option>'
@@ -159,27 +189,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = CollectionCore.parseState(window.location.search, fields);
     state.origin = SearchCore.normalizeOrigin(state.origin);
     state.sort = SearchCore.normalizeSort(state.sort);
+    pendingType = state.type;
+    state.q = state.q.slice(0, 200);
     CollectionCore.applyControls(state, controls);
   }
 
-  fetch('/data/page_index.json', { cache: 'no-store' })
-    .then((response) => response.ok ? response.json() : null)
-    .then((data) => {
-      pages = Array.isArray(data?.pages) ? data.pages : [];
+  async function loadIndex() {
+    if (loadState === 'loading') return;
+    loadState = 'loading';
+    typeFilter.disabled = true;
+    if (retryButton) retryButton.disabled = true;
+    apply({ sync: false });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch('/data/page_index.json', { cache: 'no-store', signal: controller.signal });
+      if (!response.ok) throw new Error('Search index HTTP error');
+      const data = await response.json();
+      if (!Array.isArray(data?.pages) || !data.pages.length) throw new Error('Search index is empty or invalid');
+      pages = data.pages;
       Object.assign(groupLabels, data?.search_groups || {});
       populateTypes();
-      applyInitialState();
+      loadState = 'ready';
+      typeFilter.disabled = false;
       apply({ sync: false });
-    })
-    .catch(() => {
+    } catch {
       pages = [];
-      root.innerHTML = '<div class="empty">Индекс поиска не загрузился. Попробуйте обновить страницу.</div>';
-      statusRoot.textContent = 'Поиск временно недоступен.';
-    });
+      loadState = 'error';
+      apply({ sync: false });
+    } finally {
+      clearTimeout(timer);
+      if (retryButton) retryButton.disabled = false;
+    }
+  }
 
   CollectionCore.bindControls(controls, () => apply());
   resetButton.addEventListener('click', () => {
     CollectionCore.resetControls(controls);
+    pendingType = '';
     sortControl.value = 'relevance';
     apply();
     input.focus();
@@ -190,4 +237,18 @@ document.addEventListener('DOMContentLoaded', () => {
       apply();
     }
   });
+  moreButton?.addEventListener('click', () => {
+    const firstNew = visibleLimit;
+    visibleLimit += batchSize;
+    apply({ sync: false, resetLimit: false });
+    root.querySelectorAll('.search-result a.btn')[firstNew]?.focus();
+  });
+  retryButton?.addEventListener('click', loadIndex);
+  window.addEventListener('popstate', () => {
+    applyInitialState();
+    apply({ sync: false });
+  });
+  applyInitialState();
+  if (toolbar) toolbar.hidden = false;
+  loadIndex();
 });

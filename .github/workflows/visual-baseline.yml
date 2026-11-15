@@ -19,6 +19,7 @@ on:
       - 'scripts/generate_portal_readiness.js'
       - 'scripts/sync_search_metadata.js'
       - 'scripts/test_public_portal_readiness.js'
+      - 'scripts/test_public_search_resilience.js'
       - 'privacy/**'
       - 'assets/js/analytics*.js'
       - 'assets/css/analytics.css'
@@ -273,6 +274,9 @@ jobs:
 
       - name: Check task routes, project evidence and sharing on desktop and mobile
         run: node scripts/test_public_portal_readiness.js
+
+      - name: Check complete search results, retry and no-script routes
+        run: node scripts/test_public_search_resilience.js
 
       - name: Generate visual-run public link integrity report
         env:
