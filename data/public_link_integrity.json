@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T18:00:28.937Z",
+  "generated_at": "2026-11-15T18:15:01.272Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1423,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/done/gorelka-ostrovok-detstva-2016/index.html",
       "status": 200,
-      "duration_ms": 1127,
-      "bytes": 10359
+      "duration_ms": 1058,
+      "bytes": 10101
     },
     {
-      "route": "/news/vk-238997964-292/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1038,
-      "bytes": 12786
+      "duration_ms": 1022,
+      "bytes": 10359
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 208,
+      "duration_ms": 56,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 187,
-      "bytes": 14177
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 186,
-      "bytes": 11759
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 186,
+      "duration_ms": 31,
       "bytes": 10644
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 184,
-      "bytes": 25409
+      "duration_ms": 30,
+      "bytes": 14177
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 184,
+      "duration_ms": 29,
       "bytes": 18440
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 27,
+      "bytes": 11759
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 26,
+      "bytes": 25409
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 183,
+      "duration_ms": 25,
       "bytes": 18279
     },
     {
-      "route": "/legal/changes-2025-2026/index.html",
+      "route": "/documents/templates/legal-check-before-meeting/index.html",
       "status": 200,
-      "duration_ms": 116,
-      "bytes": 24405
+      "duration_ms": 18,
+      "bytes": 15081
     },
     {
-      "route": "/grants/index.html",
+      "route": "/news/vk-238997964-891/index.html",
       "status": 200,
-      "duration_ms": 115,
-      "bytes": 133515
+      "duration_ms": 17,
+      "bytes": 14770
     },
     {
-      "route": "/index.html",
+      "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 115,
-      "bytes": 52273
+      "duration_ms": 15,
+      "bytes": 26308
     },
     {
-      "route": "/legal/chairperson-practical-checklist/index.html",
+      "route": "/chairperson/learning/index.html",
       "status": 200,
-      "duration_ms": 115,
-      "bytes": 18530
+      "duration_ms": 15,
+      "bytes": 9980
     },
     {
-      "route": "/grants/sovet-municipalnyh-obrazovaniy/index.html",
+      "route": "/documents/templates/meeting-protocol/index.html",
       "status": 200,
-      "duration_ms": 114,
-      "bytes": 18389
+      "duration_ms": 14,
+      "bytes": 8774
     },
     {
-      "route": "/improvement-plan/index.html",
+      "route": "/documents/templates/resident-request-routing/index.html",
       "status": 200,
-      "duration_ms": 114,
-      "bytes": 10320
+      "duration_ms": 14,
+      "bytes": 14573
     },
     {
-      "route": "/grants/obraz-budushchego/index.html",
+      "route": "/news/vk-238997964-887/index.html",
       "status": 200,
-      "duration_ms": 113,
-      "bytes": 21606
+      "duration_ms": 14,
+      "bytes": 18955
     },
     {
-      "route": "/news/voronezh-tos-public-chamber-roundtable-2026-10/index.html",
+      "route": "/news/vk-238997964-889/index.html",
       "status": 200,
-      "duration_ms": 79,
-      "bytes": 10869
+      "duration_ms": 14,
+      "bytes": 13870
     },
     {
-      "route": "/open-data/index.html",
+      "route": "/news/vk-238997964-890/index.html",
       "status": 200,
-      "duration_ms": 79,
-      "bytes": 15384
+      "duration_ms": 14,
+      "bytes": 29169
     },
     {
-      "route": "/news/vostochnyy-cleanups-news-2026/index.html",
+      "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 78,
-      "bytes": 10855
+      "duration_ms": 13,
+      "bytes": 7870
     },
     {
-      "route": "/news/znamenie-created-2024/index.html",
+      "route": "/done/chkalovec-russkie-tradicii-2023/index.html",
       "status": 200,
-      "duration_ms": 78,
-      "bytes": 9797
+      "duration_ms": 13,
+      "bytes": 10287
     }
   ]
 }
