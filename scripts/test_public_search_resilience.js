@@ -61,6 +61,9 @@ async function main() {
       await page.locator('#search-reset-filters').click();
       assert.equal(await page.locator('#search-results .search-result').count(), 4);
       await fits(page);
+      const aligned = await page.locator('#search-controls, #search-results').evaluateAll(nodes => nodes.map(n => n.getBoundingClientRect().left));
+      assert.equal(aligned.length, 2);
+      assert(Math.abs(aligned[0] - aligned[1]) <= 1, 'search filters align with the content container on every viewport');
       await page.screenshot({ path: path.join(OUT, 'search-' + width + '.png') });
       await ctx.close();
     }
