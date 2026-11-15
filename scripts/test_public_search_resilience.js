@@ -32,6 +32,8 @@ async function main() {
       await ctx.route('**/data/page_index.json', route => route.fulfill({ status: 200, contentType: 'application/json', body }));
       await page.goto(BASE + '/search/?q=Кейс&type=news&origin=editorial&sort=title');
       await ready(page);
+      const inputPosition = await page.locator('#site-search').evaluate(n => ({top:n.getBoundingClientRect().top,bottom:n.getBoundingClientRect().bottom}));
+      assert(inputPosition.top >= 0 && inputPosition.bottom <= 900, 'search input is available on the first screen, including mobile');
       assert.equal(await page.locator(cards).count(), 60);
       assert.match(await page.locator('#search-filter-status').innerText(), /Показано 60 из 122/);
       await page.locator('#search-more-results').click();
@@ -82,6 +84,8 @@ async function main() {
       assert.match(await page.locator('#search-filter-status').innerText(), /Поиск временно недоступен/);
       assert(!(await page.locator('#search-results').innerText()).includes('Ничего не найдено'));
       assert.equal(await page.locator('#search-results .search-result').count(), 4, 'routes remain available during a search failure');
+      const retryAboveRoutes = await page.evaluate(() => document.querySelector('#search-retry').getBoundingClientRect().top < document.querySelector('#search-results').getBoundingClientRect().top);
+      assert(retryAboveRoutes, 'retry is available above the fallback routes');
       await page.locator('#site-search').fill('Кейс поиска А00');
       assert.match(await page.locator('#search-filter-status').innerText(), /Поиск временно недоступен/);
       assert.equal(new URL(page.url()).searchParams.get('type'), 'news');
