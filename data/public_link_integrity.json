@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-14T21:19:48.109Z",
+  "generated_at": "2026-11-15T01:42:16.157Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1422,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/news/vk-238997964-910/index.html",
       "status": 200,
-      "duration_ms": 1053,
-      "bytes": 8579
+      "duration_ms": 1033,
+      "bytes": 19587
     },
     {
-      "route": "/news/vk-238997964-446/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1048,
-      "bytes": 20577
+      "duration_ms": 1011,
+      "bytes": 8579
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 31,
       "bytes": 9308
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 16,
       "bytes": 12416
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 23779
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 15,
       "bytes": 10043
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 8808
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 15,
       "bytes": 16626
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 13,
       "bytes": 16492
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 8808
+    },
+    {
+      "route": "/done/chigorak-tos-cultural-work/index.html",
       "status": 200,
       "duration_ms": 12,
-      "bytes": 23779
+      "bytes": 8680
     },
     {
-      "route": "/chairperson/learning/index.html",
+      "route": "/news/vk-238997964-905/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 8507
+    },
+    {
+      "route": "/documents/templates/tos-start-list/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 8116
+      "bytes": 2939
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/news/vk-238997964-906/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 8824
+      "bytes": 14206
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/news/vk-238997964-907/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 11609
+    },
+    {
+      "route": "/news/vk-238997964-908/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 20843
+    },
+    {
+      "route": "/news/vk-238997964-91/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 9523
+    },
+    {
+      "route": "/communication-kit/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 24627
+      "bytes": 25518
     },
     {
-      "route": "/news/archive/7/index.html",
+      "route": "/documents/templates/tos-founding-decisions/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 56219
+      "bytes": 3797
     },
     {
-      "route": "/news/vk-238997964-292/index.html",
+      "route": "/news/vk-238997964-240/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 10696
+      "bytes": 12534
     },
     {
-      "route": "/news/znamenie-created-2024/index.html",
+      "route": "/news/vk-238997964-246/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 7821
-    },
-    {
-      "route": "/open-data/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 13786
-    },
-    {
-      "route": "/partner-thanks/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 13050
-    },
-    {
-      "route": "/done/result-archive-needed-bogana/index.html",
-      "status": 200,
-      "duration_ms": 9,
-      "bytes": 8584
-    },
-    {
-      "route": "/done/result-archive-needed-mechta/index.html",
-      "status": 200,
-      "duration_ms": 9,
-      "bytes": 8774
-    },
-    {
-      "route": "/news/bogana-sports-ground-2023/index.html",
-      "status": 200,
-      "duration_ms": 9,
-      "bytes": 8585
+      "bytes": 15121
     }
   ]
 }
