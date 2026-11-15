@@ -14,6 +14,7 @@ const routes = [
     .map(article => [article.id, `/materials/${article.id}/`, 'Источники и границы применения']),
   ['support-index', '/grants/', 'Грантодатели и организации поддержки ТОС'],
   ['learning-route','/chairperson/learning/','Шесть шагов: от идеи ТОС до отчёта'],
+  ['bgo-documents','/materials/bgo-local-documents-2026/','Источники и границы применения'],
   ['contest-check','/grant-application-kit/?opportunity=pfki-2027-second#contest-check','Проверить комплект по конкретному конкурсу'],
   ['result-packet','/documents/templates/project-kit/?packet=result','Проект ТОС: от проблемы до отчёта'],
   ...JSON.parse(fs.readFileSync('data/support_organizations.json', 'utf8'))
@@ -116,6 +117,27 @@ async function main() {
               const download=page.waitForEvent('download');
               await page.getByRole('button',{name:'Скачать список',exact:true}).click();
               const saved=await download;assert(fs.readFileSync(await saved.path(),'utf8').includes('23:30'));
+              await page.locator('.contest-resume summary').click();
+              const portableDownload=page.waitForEvent('download');
+              await page.getByRole('button',{name:'Сохранить проверку в файл',exact:true}).click();
+              const portable=await portableDownload;
+              const portablePath=await portable.path();
+              const snapshot=JSON.parse(fs.readFileSync(portablePath,'utf8'));
+              assert.equal(snapshot.kind,'tos-contest-review');
+              await page.reload({waitUntil:'networkidle'});
+              await page.locator('[data-contest-choice]').waitFor({state:'visible'});
+              assert.equal(await page.locator('[data-contest-items] input:checked').count(),0,'marks are not silently stored in the browser');
+              await page.locator('.contest-resume summary').click();
+              await page.locator('[data-contest-file]').setInputFiles(portablePath);
+              await page.getByText('Файл открыт. Загружено отметок: 1.',{exact:true}).waitFor();
+              assert.equal(await page.locator('[data-contest-items] input:checked').count(),1,'a saved review can be resumed after reopening the page');
+              await page.locator('[data-contest-file]').setInputFiles({name:'broken.json',mimeType:'application/json',buffer:Buffer.from('{broken')});
+              await page.locator('[data-contest-file-status]').getByText('Файл не открыт.',{exact:false}).waitFor();
+              assert.equal(await page.locator('[data-contest-items] input:checked').count(),1,'invalid files preserve the current review');
+              snapshot.reviews.find(row=>row.scope==='pfki-2027-second').revision+=' obsolete';
+              await page.locator('[data-contest-file]').setInputFiles({name:'old-review.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(snapshot))});
+              await page.locator('[data-contest-file-status]').getByText('Условия или список изменились.',{exact:false}).waitFor();
+              assert.equal(await page.locator('[data-contest-items] input:checked').count(),0,'outdated conditions require a fresh review');
             }
           }
           if(id==='result-packet'&&mode!=='without-js'){

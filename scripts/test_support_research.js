@@ -1,5 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict');
+require('./test_contest_review');
 const fs=require('node:fs');
 const core=require('../assets/js/grants-core');
 const {grantCard,grantSources}=require('../assets/js/grants');

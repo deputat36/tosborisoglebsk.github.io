@@ -13,3 +13,7 @@
 .contest-check a,.contest-check p,.contest-check li{overflow-wrap:anywhere}
 @media(max-width:760px){.support-learning .learning-grid,.contest-check .check-layout{grid-template-columns:1fr}.support-learning .learning-card{padding:20px}}
 @media print{body.contest-check-printing .header,body.contest-check-printing .footer,body.contest-check-printing main>:not(#contest-check),body.contest-check-printing #contest-check [data-contest-controls],body.contest-check-printing .check-actions{display:none!important}body.contest-check-printing .contest-check .check-layout{display:block}.support-learning .learning-grid{display:block}.support-learning .learning-card{break-inside:avoid;margin:14px 0}}
+
+.contest-resume { margin-top:18px; padding:16px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+.contest-resume summary { cursor:pointer; min-height:44px; font-weight:700; }
+@media print { body.contest-check-printing .contest-resume { display:none!important; } }
