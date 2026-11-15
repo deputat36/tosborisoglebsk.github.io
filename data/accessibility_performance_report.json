@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T09:06:48.493Z",
+  "generated_at": "2026-11-15T15:00:15.721Z",
   "budgets": {
     "css_file_bytes": 256000,
     "js_file_bytes": 256000,
@@ -18,11 +18,11 @@
       "medium": 0,
       "low": 0
     },
-    "asset_files": 165,
+    "asset_files": 169,
     "over_budget_assets": 0,
-    "total_css_bytes": 124049,
-    "total_js_bytes": 1036664,
-    "total_image_bytes": 94065,
+    "total_css_bytes": 126936,
+    "total_js_bytes": 1040077,
+    "total_image_bytes": 150579,
     "total_css_over_budget": false,
     "total_js_over_budget": false
   },
@@ -36,6 +36,13 @@
       "over_budget": false
     },
     {
+      "path": "assets/img/og-cover.png",
+      "group": "images",
+      "extension": ".png",
+      "size_bytes": 53158,
+      "over_budget": false
+    },
+    {
       "path": "data/tos.data.js",
       "group": "js",
       "extension": ".js",
@@ -46,7 +53,7 @@
       "path": "assets/js/site.js",
       "group": "js",
       "extension": ".js",
-      "size_bytes": 38354,
+      "size_bytes": 38427,
       "over_budget": false
     },
     {
@@ -229,13 +236,6 @@
       "group": "js",
       "extension": ".js",
       "size_bytes": 11516,
-      "over_budget": false
-    },
-    {
-      "path": "assets/js/publication-basis-validation.js",
-      "group": "js",
-      "extension": ".js",
-      "size_bytes": 11423,
       "over_budget": false
     }
   ],
