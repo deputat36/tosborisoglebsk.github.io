@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T18:15:01.272Z",
+  "generated_at": "2026-11-15T21:38:32.987Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1423,
   "pages_checked": 1423,
-  "links_discovered": 37701,
-  "internal_links_checked": 26517,
+  "links_discovered": 37698,
+  "internal_links_checked": 26516,
   "unique_internal_targets": 3246,
-  "external_links_ignored": 7071,
+  "external_links_ignored": 7070,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/done/gorelka-ostrovok-detstva-2016/index.html",
+      "route": "/done/index.html",
       "status": 200,
-      "duration_ms": 1058,
-      "bytes": 10101
+      "duration_ms": 1062,
+      "bytes": 19812
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1022,
+      "duration_ms": 1011,
       "bytes": 10359
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 56,
+      "duration_ms": 42,
       "bytes": 11056
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 31,
+      "duration_ms": 20,
       "bytes": 10644
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 30,
+      "duration_ms": 20,
       "bytes": 14177
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 29,
+      "duration_ms": 19,
       "bytes": 18440
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 27,
-      "bytes": 11759
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 26,
+      "duration_ms": 18,
       "bytes": 25409
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 11759
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 25,
+      "duration_ms": 17,
       "bytes": 18279
     },
     {
-      "route": "/documents/templates/legal-check-before-meeting/index.html",
+      "route": "/documents/templates/tos-creation-kit/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 15081
+      "duration_ms": 12,
+      "bytes": 8457
     },
     {
-      "route": "/news/vk-238997964-891/index.html",
+      "route": "/documents/templates/tos-founding-decisions/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 14770
+      "duration_ms": 12,
+      "bytes": 5314
     },
     {
-      "route": "/chairperson/index.html",
+      "route": "/done/action-routes/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 26308
+      "duration_ms": 12,
+      "bytes": 19853
     },
     {
-      "route": "/chairperson/learning/index.html",
+      "route": "/done/chigorak-eco-team-2026/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 9980
+      "duration_ms": 12,
+      "bytes": 10949
     },
     {
-      "route": "/documents/templates/meeting-protocol/index.html",
+      "route": "/news/vk-238997964-952/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 8774
+      "duration_ms": 12,
+      "bytes": 16112
     },
     {
-      "route": "/documents/templates/resident-request-routing/index.html",
+      "route": "/news/vk-238997964-953/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 14573
+      "duration_ms": 12,
+      "bytes": 10440
     },
     {
-      "route": "/news/vk-238997964-887/index.html",
+      "route": "/news/vk-238997964-956/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 18955
+      "duration_ms": 12,
+      "bytes": 11010
     },
     {
-      "route": "/news/vk-238997964-889/index.html",
+      "route": "/documents/templates/tos-start-list/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 13870
+      "duration_ms": 11,
+      "bytes": 4406
     },
     {
-      "route": "/news/vk-238997964-890/index.html",
+      "route": "/news/vk-238997964-951/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 29169
+      "duration_ms": 11,
+      "bytes": 13838
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/news/vk-238997964-954/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 7870
+      "duration_ms": 11,
+      "bytes": 9871
     },
     {
-      "route": "/done/chkalovec-russkie-tradicii-2023/index.html",
+      "route": "/documents/templates/project-schedule/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 10287
+      "duration_ms": 10,
+      "bytes": 17871
     }
   ]
 }
