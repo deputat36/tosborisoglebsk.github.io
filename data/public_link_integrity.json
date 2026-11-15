@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T08:17:03.519Z",
+  "generated_at": "2026-11-15T09:06:57.429Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1423,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/news/vk-238997964-931/index.html",
       "status": 200,
-      "duration_ms": 1046,
-      "bytes": 8854
+      "duration_ms": 1044,
+      "bytes": 21524
     },
     {
-      "route": "/news/vk-238997964-454/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1030,
-      "bytes": 11289
+      "duration_ms": 1042,
+      "bytes": 8854
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 34,
+      "duration_ms": 52,
       "bytes": 9583
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 25,
+      "bytes": 16901
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 25,
+      "bytes": 9083
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 23,
       "bytes": 12691
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 19,
+      "duration_ms": 22,
       "bytes": 10318
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 9083
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 16901
-    },
-    {
-      "route": "/calendar/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 16767
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 21,
       "bytes": 24054
+    },
+    {
+      "route": "/calendar/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 16767
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 24902
     },
     {
       "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 18,
       "bytes": 9099
     },
     {
-      "route": "/documents/templates/resident-request-routing/index.html",
+      "route": "/news/archive/6/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 12968
+      "duration_ms": 17,
+      "bytes": 57011
     },
     {
-      "route": "/news/vk-238997964-281/index.html",
+      "route": "/news/vk-238997964-915/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 11702
+      "duration_ms": 17,
+      "bytes": 11812
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/news/archive/43/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 16332
+      "duration_ms": 16,
+      "bytes": 23362
     },
     {
-      "route": "/create-tos/action-routes/index.html",
+      "route": "/news/archive/42/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 13546
+      "duration_ms": 15,
+      "bytes": 51652
     },
     {
-      "route": "/news/vk-238997964-284/index.html",
+      "route": "/news/vk-238997964-91/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 20022
+      "duration_ms": 15,
+      "bytes": 9798
     },
     {
-      "route": "/news/vk-238997964-288/index.html",
+      "route": "/news/vk-238997964-911/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 15897
+      "duration_ms": 15,
+      "bytes": 9549
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/news/vk-238997964-912/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 11373
+      "duration_ms": 15,
+      "bytes": 11623
     },
     {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
+      "route": "/news/vk-238997964-913/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 4255
+      "duration_ms": 15,
+      "bytes": 7809
     },
     {
-      "route": "/documents/templates/tos-creation-kit/index.html",
+      "route": "/news/vk-238997964-914/index.html",
       "status": 200,
-      "duration_ms": 10,
-      "bytes": 6909
-    },
-    {
-      "route": "/documents/templates/tos-founding-announcement/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 3505
+      "duration_ms": 15,
+      "bytes": 12794
     }
   ]
 }
