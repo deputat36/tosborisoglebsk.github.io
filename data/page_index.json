@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-15T01:41:59.450Z",
-  "total": 1422,
+  "generated_at": "2026-11-15T07:13:32.285Z",
+  "total": 1423,
   "search_groups": {
     "tos": "Каталог ТОС",
     "news": "Новости",
@@ -1531,6 +1531,15 @@
       "url": "https://tosborisoglebsk.ru/materials/tos-school-implementation-open/",
       "title": "Реализация: сохранять изменения и рассказывать о ходе | Материалы ТОС БГО",
       "description": "Результат занятия — план информирования и перечень подтверждений. Начните с одного реального проекта своей территории. После занятия сохраните результат…",
+      "section": "Материалы",
+      "search_group": "materials",
+      "content_origin": "editorial"
+    },
+    {
+      "path": "materials/bgo-local-documents-2026/index.html",
+      "url": "https://tosborisoglebsk.ru/materials/bgo-local-documents-2026/",
+      "title": "Создание и работа ТОС в БГО: какие местные документы запросить | Материалы ТОС БГО",
+      "description": "Список местных актов и вопросов для подготовки собрания, предложения о границах и регистрации устава в Борисоглебском городском округе. Начните с вашей…",
       "section": "Материалы",
       "search_group": "materials",
       "content_origin": "editorial"
