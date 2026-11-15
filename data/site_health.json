@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-15T07:13:01.451Z",
+  "generated_at": "2026-11-15T08:16:59.088Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -25,7 +25,7 @@
     "происхождение публикаций и разделение содержательных материалов, стартовых заготовок и редакционных запросов"
   ],
   "catalog": {
-    "generated_at": "2026-11-15T07:13:31.917Z",
+    "generated_at": "2026-11-15T08:17:19.894Z",
     "stale_after_days": 180,
     "total_tos": 26,
     "high_priority": 4,
@@ -296,7 +296,7 @@
     "Нельзя использовать реальные фото и логотипы без понятного права на публикацию."
   ],
   "priority_readiness": {
-    "generated_at": "2026-11-15T07:12:55.827Z",
+    "generated_at": "2026-11-15T08:16:53.333Z",
     "privacy_note": "Отчёт содержит только рабочие статусы и признаки доказательств. Контакты, закрытая переписка, содержимое ответов и приватные источники в него не включаются.",
     "stages": {
       "find_channel": {
@@ -344,17 +344,17 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-11-15T07:13:06.468Z",
+    "generated_at": "2026-11-15T08:17:03.519Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
     "pages_indexed": 1423,
     "pages_checked": 1423,
-    "links_discovered": 37668,
+    "links_discovered": 37670,
     "internal_links_checked": 26497,
     "unique_internal_targets": 3244,
-    "external_links_ignored": 7069,
+    "external_links_ignored": 7071,
     "protocol_links_ignored": 41,
     "failed": 0,
     "automation": {
@@ -404,9 +404,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Generate TOS pages",
-      "run_id": "43688908902",
-      "run_number": "2085",
-      "commit_sha": "85184817727504e6e928c6945e8103e8d49b46e0"
+      "run_id": "43693734196",
+      "run_number": "2087",
+      "commit_sha": "bee182d354de34e27ebabb92cf66ef7d7f03955d"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
@@ -422,7 +422,7 @@
     ]
   },
   "content_maturity": {
-    "generated_at": "2026-11-15T07:13:31.917Z",
+    "generated_at": "2026-11-15T08:17:19.894Z",
     "total_tos": 26,
     "with_substantive_content": 24,
     "with_verified_content": 22,
