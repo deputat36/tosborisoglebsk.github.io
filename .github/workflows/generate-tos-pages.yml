@@ -261,6 +261,10 @@ jobs:
         run: node scripts/generate_public_experience.js
       - name: Check draft guidance and honest use records
         run: node scripts/test_portal_usability.js
+      - name: Check consent-gated Metrica and public page coverage
+        run: |
+          node scripts/test_metrica.js
+          node scripts/audit_metrica.js
       - name: Measure accessibility and performance baseline
         run: node scripts/generate_accessibility_performance_report.js
       - name: Generate site health report
