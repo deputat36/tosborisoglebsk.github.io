@@ -67,7 +67,10 @@ function main() {
   }
 
   requireToken(errors, ogCover, 'width="1200" height="630"', 'og-cover.svg');
-  requireToken(errors, ogCover, 'data-brand-mark="tos-bgo-community"', 'og-cover.svg');
+  requireToken(errors, ogCover, 'data-brand-mark="tos-bgo-people-oak-v3"', 'og-cover.svg');
+  if (ogCover !== require('./generate_share_cover').cover(logo)) errors.push('og-cover.svg must retain the approved outlined logo and current layout');
+  const coverPng = fs.readFileSync(path.join(ROOT, 'assets/img/og-cover.png'));
+  if (coverPng.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' || coverPng.readUInt32BE(16) !== 1200 || coverPng.readUInt32BE(20) !== 630) errors.push('og-cover.png: expected 1200x630 PNG');
   requireToken(errors, ogCover, 'Портал территориального общественного', 'og-cover.svg');
   requireToken(errors, ogCover, 'tosborisoglebsk.ru', 'og-cover.svg');
 
@@ -77,7 +80,7 @@ function main() {
     if (!icons.some(icon => icon.src === src && icon.sizes === size && icon.type === 'image/png')) errors.push(`site.webmanifest: missing ${size} icon`);
   }
   requireToken(errors, home, 'src="/assets/img/logo.svg"', 'index.html');
-  requireToken(errors, home, 'content="https://tosborisoglebsk.ru/assets/img/og-cover.svg"', 'index.html');
+  requireToken(errors, home, 'content="https://tosborisoglebsk.ru/assets/img/og-cover.png"', 'index.html');
 
   for (const token of ['Идея знака', 'Основная версия', 'Иконка', 'Социальная обложка', '#B62D36', '#D3A33D', '#242322']) {
     requireToken(errors, guide, token, 'BRAND-LOGO.md');

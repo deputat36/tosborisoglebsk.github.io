@@ -112,6 +112,7 @@ function injectBreadcrumbs() {
   if (firstSection) main.insertBefore(nav, firstSection);
   else main.prepend(nav);
 
+  if (document.querySelector('[data-portal-breadcrumb-schema]')) return;
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

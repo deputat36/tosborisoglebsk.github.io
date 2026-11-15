@@ -18,7 +18,12 @@ function normalize(html, file, root = process.cwd()) {
     const hash = createHash('sha256').update(fs.readFileSync(path.join(root, asset))).digest('hex').slice(0, 12);
     return asset.endsWith('.css') ? `<link rel="stylesheet" href="/${asset}?v=${hash}"/>` : `<script defer src="/${asset}?v=${hash}"></script>`;
   }).join('');
-  return clean.replace(/<\/head\s*>/i, begin + tags + end + '</head>');
+  const block = begin + tags + end;
+  if (html.includes(begin)) {
+    let retained = false;
+    return html.replace(/<!-- analytics:consent:start -->[\s\S]*?<!-- analytics:consent:end -->/g, () => { if (retained) return ''; retained = true; return block; });
+  }
+  return clean.replace(/<\/head\s*>/i, block + '</head>');
 }
 function sync(root = process.cwd()) {
   let changed = 0, enabled = 0;

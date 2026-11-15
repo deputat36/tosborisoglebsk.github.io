@@ -9,10 +9,11 @@ const navLinks=[['/tos/','Каталог ТОС'],['/residents/','Жителям
 function block(html,key,value){const begin=`<!-- public:${key}:start -->`,end=`<!-- public:${key}:end -->`;const pattern=new RegExp(begin+'[\\s\\S]*?'+end);if(!pattern.test(html))throw Error('Missing public block '+key);return html.replace(pattern,()=>begin+value+end);}
 function allHtml(dir='') {return fs.readdirSync(path.join(root,dir),{withFileTypes:true}).flatMap(x=>x.isDirectory()?['.git','.github','.artifacts','.openai','node_modules','scripts','docs','admin'].includes(x.name)?[]:allHtml(path.join(dir,x.name)):x.name.endsWith('.html')?[path.join(dir,x.name)]:[]);}
 function main(){
+ require('./generate_portal_readiness').main();
  const toses=read('data/toses.json').filter(x=>x.status!=='draft');
  let html=fs.readFileSync('index.html','utf8');
  html=block(html,'finder',view.directory(toses));
- const residentEntry='<!-- resident-entry:start --><section class="section tight"><div class="container notice"><h2>Что происходит в моём ТОС?</h2><p>Выберите территорию: новости, результаты, проекты и способы участия собраны на одной странице.</p><a class="btn primary" href="/residents/my-area/">Открыть мой ТОС</a></div></section><!-- resident-entry:end -->';
+ const residentEntry='<!-- resident-entry:start --><section class="section tight"><div class="container notice"><h2>Что происходит в моём ТОС?</h2><p>Выберите территорию: новости, результаты, проекты и способы участия собраны на одной странице.</p><div class="card-actions"><a class="btn primary" href="/residents/my-area/">Открыть мой ТОС</a><a class="btn" href="/sections/#choose-task">Выбрать другую задачу</a><a class="btn" href="/methodology/#project-evidence">Возможности и показатели портала</a></div></div></section><!-- resident-entry:end -->';
  html=html.includes('<!-- resident-entry:start -->')?html.replace(/<!-- resident-entry:start -->[\s\S]*?<!-- resident-entry:end -->/,residentEntry):html.replace('</main>',residentEntry+'</main>');
  const fields=['slug','name','location','boundaries','chairperson','description','verification_status','verified_at','verification_source','trust'];
  const directory=toses.map(x=>Object.fromEntries(fields.filter(k=>Object.hasOwn(x,k)).map(k=>[k,x[k]])));
@@ -48,6 +49,7 @@ function main(){
  }
  require('./sync_site_icons').syncSiteIcons(root);
  require('./sync_metrica').sync(root);
+ require('./sync_search_metadata').sync(root);
  console.log(`Public experience generated: ${toses.length} TOS, readable homepage, ${changed} public page shells`);
 }
 if(require.main===module)main();

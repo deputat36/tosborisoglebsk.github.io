@@ -20,6 +20,7 @@ patchTosContactFallback();
 require('./generate_sitemap');
 
 const checks = [
+  ['Useful task routes and truthful project evidence', 'scripts/test_portal_readiness.js'],
   ['Consent-gated analytics privacy scenarios', 'scripts/test_metrica.js'],
   ['Discoverable materials and search', 'scripts/test_materials_catalog.js'],
   ['Dated TOS profiles and sources', 'scripts/test_tos_profiles.js'],
