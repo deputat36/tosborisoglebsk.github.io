@@ -1,0 +1,10 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),{payload,selection}=require('./submit_indexnow');
+const config=JSON.parse(fs.readFileSync('data/indexnow.json','utf8'));
+assert.equal(fs.readFileSync(config.key+'.txt','utf8').trim(),config.key);
+const root='https://tosborisoglebsk.ru/',allowed=new Set([root,root+'tos/uyutnyy/',root+'sections/',root+'news/example/']);
+const p=payload([root,root],config,allowed);assert.equal(p.urlList.length,1);assert.equal(p.host,'tosborisoglebsk.ru');
+for(const url of ['https://attacker.test/','http://tosborisoglebsk.ru/',root+'?q=private',root+'#draft','https://person:secret@tosborisoglebsk.ru/',root+'admin/'])assert.throws(()=>payload([url],config,allowed));
+assert.throws(()=>payload([],config,allowed));assert.throws(()=>payload([root],{...config,key_location:'https://attacker.test/key.txt'},allowed));
+assert.equal(selection(allowed,'priority').length,3);assert.equal(selection(allowed,'all').length,4);assert.throws(()=>selection(allowed,'unknown'));
+console.log('IndexNow OK: one public proof file, canonical allowlist, no private/query/foreign URLs, deduplication and explicit submission only');

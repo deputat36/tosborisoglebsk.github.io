@@ -20,6 +20,7 @@ patchTosContactFallback();
 require('./generate_sitemap');
 
 const checks = [
+  ['Useful task routes and truthful project evidence', 'scripts/test_portal_readiness.js'],
   ['Consent-gated analytics privacy scenarios', 'scripts/test_metrica.js'],
   ['Discoverable materials and search', 'scripts/test_materials_catalog.js'],
   ['Dated TOS profiles and sources', 'scripts/test_tos_profiles.js'],
@@ -168,3 +169,16 @@ runChecks(checks, {
   verbose: true,
   successMessage: 'Project mode full audit OK'
 });
+
+// Several content audits rematerialize TOS and place pages. Finalize shared
+// metadata after those mutations so their generated output remains publishable.
+require('./sync_site_icons').syncSiteIcons();
+require('./sync_metrica').sync();
+require('./sync_search_metadata').sync();
+const { execFileSync } = require('node:child_process');
+execFileSync(process.execPath, ['scripts/generate_sitemap.js'], { stdio: 'inherit' });
+runChecks([
+  ['Final consent-gated analytics coverage', 'scripts/audit_metrica.js'],
+  ['Final static search and sharing metadata', 'scripts/audit_static_discovery.js'],
+  ['Final canonical sitemap', 'scripts/audit_sitemap.js']
+], { verbose: true, successMessage: 'Final public metadata audit OK' });

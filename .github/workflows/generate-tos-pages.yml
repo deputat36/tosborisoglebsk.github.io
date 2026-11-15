@@ -265,6 +265,11 @@ jobs:
         run: |
           node scripts/test_metrica.js
           node scripts/audit_metrica.js
+      - name: Check practical task routes, evidence and static discovery
+        run: |
+          node scripts/test_portal_readiness.js
+          node scripts/audit_static_discovery.js
+          node scripts/test_indexnow.js
       - name: Measure accessibility and performance baseline
         run: node scripts/generate_accessibility_performance_report.js
       - name: Generate site health report

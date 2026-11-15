@@ -10,6 +10,8 @@ on:
       - 'assets/img/brand-mark.svg'
       - 'assets/img/site-icon-512.png'
       - 'assets/img/og-cover.svg'
+      - 'assets/img/og-cover.png'
+      - 'scripts/generate_share_cover.js'
       - 'favicon.*'
       - 'apple-touch-icon.png'
       - 'site.webmanifest'
@@ -61,6 +63,7 @@ jobs:
             assets/img/brand-mark.svg
             assets/img/site-icon-512.png
             assets/img/og-cover.svg
+            assets/img/og-cover.png
             favicon.svg
             favicon.ico
             favicon.png

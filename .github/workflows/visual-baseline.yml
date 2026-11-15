@@ -12,6 +12,13 @@ on:
     branches:
       - release-2025-12-22
     paths:
+      - 'sections/index.html'
+      - 'data/portal_tasks.json'
+      - 'assets/js/portal-growth*.js'
+      - 'assets/css/portal-growth.css'
+      - 'scripts/generate_portal_readiness.js'
+      - 'scripts/sync_search_metadata.js'
+      - 'scripts/test_public_portal_readiness.js'
       - 'privacy/**'
       - 'assets/js/analytics*.js'
       - 'assets/css/analytics.css'
@@ -263,6 +270,9 @@ jobs:
 
       - name: Check Metrica consent and withdrawal on desktop and mobile without real tracking
         run: node scripts/test_public_metrica.js
+
+      - name: Check task routes, project evidence and sharing on desktop and mobile
+        run: node scripts/test_public_portal_readiness.js
 
       - name: Generate visual-run public link integrity report
         env:
