@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-16T01:47:23.339Z",
+  "generated_at": "2026-11-16T09:23:44.467Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1423,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/news/vk-238997964-297/index.html",
+      "route": "/done/makashevka-territoriya-otdyha-2019/index.html",
       "status": 200,
-      "duration_ms": 1031,
-      "bytes": 13211
+      "duration_ms": 1063,
+      "bytes": 10061
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1013,
+      "duration_ms": 1006,
       "bytes": 10359
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 40,
+      "duration_ms": 36,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 18440
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 11759
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 10644
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 14177
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 25409
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 23,
       "bytes": 18279
     },
     {
-      "route": "/news/vk-238997964-98/index.html",
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 21,
+      "bytes": 25409
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 11759
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 14177
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 10644
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 26308
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
       "duration_ms": 14,
-      "bytes": 13431
-    },
-    {
-      "route": "/news/vk-238997964-981/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 15454
-    },
-    {
-      "route": "/news/vk-238997964-983/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 10465
-    },
-    {
-      "route": "/news/vk-238997964-982/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 16456
-    },
-    {
-      "route": "/news/vk-238997964-979/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 23142
+      "bytes": 18440
     },
     {
       "route": "/chairperson/learning/index.html",
       "status": 200,
-      "duration_ms": 11,
+      "duration_ms": 14,
       "bytes": 9980
     },
     {
-      "route": "/news/vk-238997964-106/index.html",
+      "route": "/news/vk-238997964-960/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 18825
+      "duration_ms": 12,
+      "bytes": 21744
     },
     {
-      "route": "/news/vk-238997964-335/index.html",
+      "route": "/news/vk-238997964-962/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 15514
+      "duration_ms": 12,
+      "bytes": 12806
     },
     {
-      "route": "/news/vk-238997964-978/index.html",
+      "route": "/news/vk-238997964-961/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 15508
+      "bytes": 13361
     },
     {
-      "route": "/documents/templates/tos-creation-kit/index.html",
+      "route": "/documents/templates/tos-charter-draft/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 8457
+      "bytes": 7442
     },
     {
-      "route": "/grants/index.html",
+      "route": "/news/vk-238997964-959/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 131778
+      "bytes": 15448
+    },
+    {
+      "route": "/documents/templates/meeting-agenda/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 6690
+    },
+    {
+      "route": "/news/vk-238997964-274/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 13422
+    },
+    {
+      "route": "/news/vk-238997964-958/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 14464
+    },
+    {
+      "route": "/news/vk-238997964-96/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 13260
     }
   ]
 }
