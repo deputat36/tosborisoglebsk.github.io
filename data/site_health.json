@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-17T13:01:02.401Z",
+  "generated_at": "2026-11-17T22:09:25.537Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -54,8 +54,8 @@
     "average_score": 79
   },
   "pages": {
-    "total": 1498,
-    "public": 1433,
+    "total": 1500,
+    "public": 1435,
     "noindex": 65,
     "seo_warnings_count": 0,
     "broken_internal_links_count": 0
@@ -194,12 +194,12 @@
     {
       "level": "good",
       "area": "Техническая база",
-      "finding": "Собрано 1498 HTML-страниц, из них 1433 публичных и 65 служебных."
+      "finding": "Собрано 1500 HTML-страниц, из них 1435 публичных и 65 служебных."
     },
     {
       "level": "good",
       "area": "Навигационная целостность",
-      "finding": "HTTP-проверка прошла: 1423 страниц, 26516 внутренних переходов, 3246 уникальных целей, ошибок — 0."
+      "finding": "HTTP-проверка прошла: 1425 страниц, 26548 внутренних переходов, 3250 уникальных целей, ошибок — 0."
     },
     {
       "level": "good",
@@ -336,17 +336,17 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-11-17T13:01:09.350Z",
+    "generated_at": "2026-11-17T22:09:32.192Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
     "report_url": "/data/public_link_integrity.json",
-    "pages_indexed": 1423,
-    "pages_checked": 1423,
-    "links_discovered": 37698,
-    "internal_links_checked": 26516,
-    "unique_internal_targets": 3246,
-    "external_links_ignored": 7070,
+    "pages_indexed": 1425,
+    "pages_checked": 1425,
+    "links_discovered": 37747,
+    "internal_links_checked": 26548,
+    "unique_internal_targets": 3250,
+    "external_links_ignored": 7081,
     "protocol_links_ignored": 41,
     "failed": 0,
     "automation": {
@@ -396,9 +396,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Update VK news",
-      "run_id": "44088382435",
-      "run_number": "691",
-      "commit_sha": "2556035a5f505617aa5570830a9f09c721603172"
+      "run_id": "44187049218",
+      "run_number": "692",
+      "commit_sha": "62340fda309b8679d6668cb9b87cd12c30d49e43"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
