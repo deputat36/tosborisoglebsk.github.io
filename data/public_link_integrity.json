@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-18T04:07:15.920Z",
+  "generated_at": "2026-11-18T13:46:01.197Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1425,
@@ -16,26 +16,20 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1014,
+      "duration_ms": 1050,
       "bytes": 10359
     },
     {
-      "route": "/news/vk-238997964-510/index.html",
+      "route": "/news/obraz-tos-mini-deadline-2026-10/index.html",
       "status": 200,
-      "duration_ms": 1013,
-      "bytes": 14584
+      "duration_ms": 1049,
+      "bytes": 9165
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 34,
+      "duration_ms": 33,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 10644
     },
     {
       "route": "/campaign/index.html",
@@ -46,38 +40,26 @@
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 16,
+      "duration_ms": 17,
       "bytes": 18440
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 15,
+      "duration_ms": 17,
       "bytes": 14177
     },
     {
-      "route": "/documents/templates/tos-start-list/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 4406
+      "bytes": 25409
     },
     {
-      "route": "/done/action-routes/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 19853
-    },
-    {
-      "route": "/news/vk-238997964-984/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 21885
-    },
-    {
-      "route": "/news/vk-238997964-985/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 15103
+      "bytes": 10644
     },
     {
       "route": "/calendar/action-routes/index.html",
@@ -86,52 +68,70 @@
       "bytes": 18279
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/news/vk-238997964-947/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 25409
+      "duration_ms": 11,
+      "bytes": 11623
     },
     {
-      "route": "/news/vk-238997964-982/index.html",
+      "route": "/news/vk-238997964-940/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 16456
+      "duration_ms": 10,
+      "bytes": 14743
     },
     {
-      "route": "/news/vk-238997964-986/index.html",
+      "route": "/news/vk-238997964-944/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 12880
+      "duration_ms": 10,
+      "bytes": 11546
+    },
+    {
+      "route": "/news/vk-238997964-946/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 17104
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 9,
       "bytes": 26308
     },
     {
-      "route": "/done/chigorak-tos-cultural-work/index.html",
+      "route": "/documents/templates/meeting-protocol/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 10675
+      "duration_ms": 9,
+      "bytes": 8774
     },
     {
-      "route": "/news/tos-catalog-data-updated-2026-05-23/index.html",
+      "route": "/documents/templates/tos-creation-checklist/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 8498
+      "duration_ms": 9,
+      "bytes": 5777
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/documents/templates/tos-founding-decisions/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 10629
+      "duration_ms": 9,
+      "bytes": 5314
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/news/vk-238997964-943/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 7870
+      "duration_ms": 9,
+      "bytes": 21364
+    },
+    {
+      "route": "/news/vk-238997964-945/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 16155
+    },
+    {
+      "route": "/chairperson/learning/index.html",
+      "status": 200,
+      "duration_ms": 8,
+      "bytes": 9980
     }
   ]
 }
