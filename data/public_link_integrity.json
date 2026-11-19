@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-19T03:06:50.474Z",
+  "generated_at": "2026-11-19T12:46:11.435Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1425,
@@ -16,122 +16,122 @@
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 56,
+      "duration_ms": 52,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 30,
-      "bytes": 10359
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 29,
+      "duration_ms": 27,
       "bytes": 14177
     },
     {
-      "route": "/campaign/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 28,
-      "bytes": 11759
+      "duration_ms": 26,
+      "bytes": 10359
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 28,
+      "duration_ms": 25,
       "bytes": 10644
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 24,
+      "bytes": 11759
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 26,
+      "duration_ms": 22,
       "bytes": 25409
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 26,
+      "duration_ms": 22,
       "bytes": 18440
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 24,
+      "duration_ms": 21,
       "bytes": 18279
     },
     {
-      "route": "/news/vk-238997964-961/index.html",
+      "route": "/documents/templates/project-kit/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 16241
+    },
+    {
+      "route": "/documents/templates/create-initiative-card/index.html",
       "status": 200,
       "duration_ms": 18,
-      "bytes": 13361
+      "bytes": 7375
     },
     {
-      "route": "/done/chigorak-eco-team-2026/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 10949
-    },
-    {
-      "route": "/chairperson/learning/index.html",
+      "route": "/news/vk-238997964-273/index.html",
       "status": 200,
       "duration_ms": 16,
-      "bytes": 9980
+      "bytes": 11848
     },
     {
-      "route": "/news/vk-238997964-270/index.html",
+      "route": "/news/vk-238997964-953/index.html",
       "status": 200,
       "duration_ms": 16,
-      "bytes": 21310
+      "bytes": 10440
     },
     {
-      "route": "/news/vk-238997964-274/index.html",
+      "route": "/news/vk-238997964-958/index.html",
       "status": 200,
       "duration_ms": 16,
-      "bytes": 13422
+      "bytes": 14464
     },
     {
-      "route": "/news/vk-238997964-276/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 20008
-    },
-    {
-      "route": "/news/vk-238997964-96/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 13260
-    },
-    {
-      "route": "/chairperson/project/index.html",
+      "route": "/chairperson/verify-card/index.html",
       "status": 200,
       "duration_ms": 15,
-      "bytes": 17792
+      "bytes": 12939
     },
     {
-      "route": "/news/vk-238997964-279/index.html",
+      "route": "/documents/templates/create-territory/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 16184
+      "duration_ms": 15,
+      "bytes": 7532
     },
     {
-      "route": "/news/vk-238997964-960/index.html",
+      "route": "/news/vk-238997964-269/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 21744
+      "duration_ms": 15,
+      "bytes": 11577
     },
     {
-      "route": "/news/vk-238997964-962/index.html",
+      "route": "/news/vk-238997964-278/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 12806
+      "duration_ms": 15,
+      "bytes": 16977
+    },
+    {
+      "route": "/news/vk-238997964-957/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 13272
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 14,
       "bytes": 26308
+    },
+    {
+      "route": "/chairperson/learning/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 9980
     }
   ]
 }
