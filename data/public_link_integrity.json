@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-18T21:47:22.668Z",
+  "generated_at": "2026-11-19T03:06:50.474Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1425,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/news/vk-238997964-876/index.html",
+      "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 1051,
-      "bytes": 12936
+      "duration_ms": 56,
+      "bytes": 11056
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1017,
+      "duration_ms": 30,
       "bytes": 10359
-    },
-    {
-      "route": "/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 41,
-      "bytes": 11056
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 10644
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 29,
       "bytes": 14177
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 19,
+      "duration_ms": 28,
       "bytes": 11759
     },
     {
-      "route": "/chairperson/action-routes/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 19,
-      "bytes": 18440
+      "duration_ms": 28,
+      "bytes": 10644
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 26,
       "bytes": 25409
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 26,
+      "bytes": 18440
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 24,
       "bytes": 18279
     },
     {
-      "route": "/news/vk-238997964-947/index.html",
+      "route": "/news/vk-238997964-961/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 11623
-    },
-    {
-      "route": "/news/vk-238997964-948/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 16385
-    },
-    {
-      "route": "/news/vk-238997964-949/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 9902
-    },
-    {
-      "route": "/news/vk-238997964-95/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 9830
-    },
-    {
-      "route": "/news/vk-238997964-950/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 18872
+      "duration_ms": 18,
+      "bytes": 13361
     },
     {
       "route": "/done/chigorak-eco-team-2026/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 17,
       "bytes": 10949
+    },
+    {
+      "route": "/chairperson/learning/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 9980
+    },
+    {
+      "route": "/news/vk-238997964-270/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 21310
+    },
+    {
+      "route": "/news/vk-238997964-274/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 13422
+    },
+    {
+      "route": "/news/vk-238997964-276/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 20008
+    },
+    {
+      "route": "/news/vk-238997964-96/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 13260
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 17792
+    },
+    {
+      "route": "/news/vk-238997964-279/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 16184
+    },
+    {
+      "route": "/news/vk-238997964-960/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 21744
+    },
+    {
+      "route": "/news/vk-238997964-962/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 12806
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 11,
+      "duration_ms": 13,
       "bytes": 26308
-    },
-    {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 5777
-    },
-    {
-      "route": "/chairperson/news/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 7870
-    },
-    {
-      "route": "/news/port-artur-cemetery-competition-2021/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 9995
-    },
-    {
-      "route": "/news/project-archive-needed/index.html",
-      "status": 200,
-      "duration_ms": 10,
-      "bytes": 7880
     }
   ]
 }
