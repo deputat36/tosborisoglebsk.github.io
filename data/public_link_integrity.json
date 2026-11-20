@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-19T21:19:19.640Z",
+  "generated_at": "2026-11-20T02:57:03.327Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1425,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/news/vk-238997964-947/index.html",
+      "route": "/news/vk-238997964-959/index.html",
       "status": 200,
       "duration_ms": 1041,
-      "bytes": 11623
+      "bytes": 15448
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1026,
+      "duration_ms": 1028,
       "bytes": 10359
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 49,
+      "duration_ms": 30,
       "bytes": 11056
+    },
+    {
+      "route": "/documents/templates/tos-start-list/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 4406
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 23,
+      "duration_ms": 15,
       "bytes": 10644
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 23,
+      "duration_ms": 15,
       "bytes": 14177
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 18440
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 14,
       "bytes": 25409
+    },
+    {
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 18440
+    },
+    {
+      "route": "/documents/templates/tos-creation-kit/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 8457
+    },
+    {
+      "route": "/done/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 19853
+    },
+    {
+      "route": "/done/chigorak-eco-team-2026/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 10949
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 13,
       "bytes": 11759
+    },
+    {
+      "route": "/documents/templates/tos-founding-announcement/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 5014
+    },
+    {
+      "route": "/done/gorelka-remont-dorogi-2017/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 9915
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 19,
+      "duration_ms": 12,
       "bytes": 18279
     },
     {
-      "route": "/news/vk-238997964-273/index.html",
+      "route": "/done/chkalovec-centr-prityazheniya-2024/index.html",
       "status": 200,
-      "duration_ms": 17,
-      "bytes": 11848
-    },
-    {
-      "route": "/news/vk-238997964-935/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 14293
-    },
-    {
-      "route": "/news/vk-238997964-269/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 11577
-    },
-    {
-      "route": "/news/vk-238997964-271/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 21178
-    },
-    {
-      "route": "/news/vk-238997964-272/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 20165
-    },
-    {
-      "route": "/news/vk-238997964-274/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 13422
-    },
-    {
-      "route": "/news/vk-238997964-931/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 23313
-    },
-    {
-      "route": "/news/vk-238997964-934/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 15300
-    },
-    {
-      "route": "/news/vk-238997964-937/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 14552
+      "duration_ms": 11,
+      "bytes": 10395
     },
     {
       "route": "/chairperson/learning/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 10,
       "bytes": 9980
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/done/chigorak-tos-cultural-work/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 7870
+      "duration_ms": 10,
+      "bytes": 10675
+    },
+    {
+      "route": "/done/gubari-projects-archive/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 10792
+    },
+    {
+      "route": "/news/vk-238997964-291/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 17870
     }
   ]
 }
