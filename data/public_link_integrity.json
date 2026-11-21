@@ -1,137 +1,137 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-21T17:17:21.149Z",
+  "generated_at": "2026-11-21T23:00:02.066Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
-  "pages_indexed": 1427,
-  "pages_checked": 1427,
-  "links_discovered": 37802,
-  "internal_links_checked": 26584,
-  "unique_internal_targets": 3254,
-  "external_links_ignored": 7100,
+  "pages_indexed": 1428,
+  "pages_checked": 1428,
+  "links_discovered": 37832,
+  "internal_links_checked": 26602,
+  "unique_internal_targets": 3256,
+  "external_links_ignored": 7110,
   "protocol_links_ignored": 41,
   "failed": 0,
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/news/vk-238997964-311/index.html",
       "status": 200,
-      "duration_ms": 1066,
-      "bytes": 10359
+      "duration_ms": 1053,
+      "bytes": 22958
     },
     {
-      "route": "/news/vk-238997964-841/index.html",
+      "route": "/done/mahrovka-project-experience/index.html",
       "status": 200,
-      "duration_ms": 1010,
-      "bytes": 12179
+      "duration_ms": 1039,
+      "bytes": 10560
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 41,
+      "duration_ms": 62,
       "bytes": 11056
     },
     {
-      "route": "/campaign/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 23,
-      "bytes": 11759
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 10644
+      "duration_ms": 30,
+      "bytes": 10359
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 29,
       "bytes": 14177
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 28,
+      "bytes": 10644
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 27,
       "bytes": 18440
+    },
+    {
+      "route": "/campaign/index.html",
+      "status": 200,
+      "duration_ms": 26,
+      "bytes": 11759
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 16,
+      "duration_ms": 24,
       "bytes": 25409
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 23,
       "bytes": 18279
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/news/vk-238997964-977/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 10629
+      "duration_ms": 22,
+      "bytes": 14020
     },
     {
-      "route": "/documents/templates/project-problem/index.html",
+      "route": "/news/vk-238997964-978/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 12190
+      "duration_ms": 22,
+      "bytes": 15508
     },
     {
-      "route": "/documents/templates/tos-charter-draft/index.html",
+      "route": "/documents/templates/tos-founding-decisions/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 7442
+      "duration_ms": 20,
+      "bytes": 5314
+    },
+    {
+      "route": "/documents/templates/tos-founding-protocol/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 6450
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 18,
       "bytes": 26308
     },
     {
-      "route": "/chairperson/learning/index.html",
+      "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 9980
-    },
-    {
-      "route": "/chairperson/news/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 7870
-    },
-    {
-      "route": "/chairperson/project/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 17792
-    },
-    {
-      "route": "/documents/templates/create-territory/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 7532
-    },
-    {
-      "route": "/documents/templates/tos-creation-kit/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 8457
-    },
-    {
-      "route": "/documents/templates/project-support/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 15827
+      "duration_ms": 18,
+      "bytes": 10629
     },
     {
       "route": "/documents/templates/tos-creation-checklist/index.html",
       "status": 200,
-      "duration_ms": 11,
+      "duration_ms": 18,
       "bytes": 5777
+    },
+    {
+      "route": "/done/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 19853
+    },
+    {
+      "route": "/done/chigorak-eco-team-2026/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 10949
+    },
+    {
+      "route": "/documents/templates/project-support/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 15827
     }
   ]
 }
