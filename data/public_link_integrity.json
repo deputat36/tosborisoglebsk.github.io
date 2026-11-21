@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-21T01:18:55.824Z",
+  "generated_at": "2026-11-21T09:32:22.777Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1427,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/done/result-archive-needed-ipas/index.html",
       "status": 200,
-      "duration_ms": 1049,
-      "bytes": 10359
-    },
-    {
-      "route": "/done/gorelka-remont-dorogi-2017/index.html",
-      "status": 200,
-      "duration_ms": 1038,
-      "bytes": 9915
+      "duration_ms": 1057,
+      "bytes": 10519
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 40,
+      "duration_ms": 58,
       "bytes": 11056
-    },
-    {
-      "route": "/calendar/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 23,
-      "bytes": 18279
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 18440
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 14177
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 18,
-      "bytes": 10644
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 27,
       "bytes": 11759
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 27,
+      "bytes": 10359
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 26,
+      "bytes": 10644
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 24,
+      "bytes": 14177
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 16,
+      "duration_ms": 23,
       "bytes": 25409
     },
     {
-      "route": "/content-standards/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 15495
+      "duration_ms": 23,
+      "bytes": 18440
     },
     {
-      "route": "/documents/templates/tos-start-list/index.html",
+      "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 4406
+      "duration_ms": 22,
+      "bytes": 18279
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 12,
+      "duration_ms": 20,
       "bytes": 26308
     },
     {
-      "route": "/news/chkalovec-cvetik-semicvetik-2022/index.html",
+      "route": "/documents/templates/tos-charter-draft/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 10260
+      "duration_ms": 20,
+      "bytes": 7442
     },
     {
-      "route": "/news/vk-238997964-941/index.html",
+      "route": "/news/vk-238997964-847/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 12297
+      "duration_ms": 20,
+      "bytes": 17931
+    },
+    {
+      "route": "/chairperson/meeting/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 10629
+    },
+    {
+      "route": "/documents/templates/resident-appeals-register/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 11793
+    },
+    {
+      "route": "/documents/templates/resident-initiative-request/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 10797
     },
     {
       "route": "/chairperson/news/index.html",
       "status": 200,
-      "duration_ms": 11,
+      "duration_ms": 17,
       "bytes": 7870
     },
     {
-      "route": "/chairperson/project/index.html",
+      "route": "/documents/templates/tos-creation-kit/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 17792
+      "duration_ms": 17,
+      "bytes": 8457
     },
     {
-      "route": "/create-tos/action-routes/index.html",
+      "route": "/documents/templates/tos-founding-decisions/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 15095
+      "duration_ms": 17,
+      "bytes": 5314
     },
     {
-      "route": "/documents/templates/create-initiative-card/index.html",
+      "route": "/documents/templates/tos-founding-protocol/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 7375
+      "duration_ms": 17,
+      "bytes": 6450
     },
     {
-      "route": "/documents/templates/project-problem/index.html",
+      "route": "/done/chigorak-tos-cultural-work/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 12190
-    },
-    {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 5777
+      "duration_ms": 17,
+      "bytes": 10675
     }
   ]
 }
