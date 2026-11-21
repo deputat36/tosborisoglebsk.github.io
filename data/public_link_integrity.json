@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-20T19:55:15.917Z",
+  "generated_at": "2026-11-21T01:18:55.824Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1427,
@@ -16,122 +16,122 @@
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1038,
+      "duration_ms": 1049,
       "bytes": 10359
+    },
+    {
+      "route": "/done/gorelka-remont-dorogi-2017/index.html",
+      "status": 200,
+      "duration_ms": 1038,
+      "bytes": 9915
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 43,
+      "duration_ms": 40,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 25,
-      "bytes": 14177
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 18440
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 21,
-      "bytes": 10644
-    },
-    {
-      "route": "/calendar/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 25409
-    },
-    {
-      "route": "/campaign/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 11759
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 19,
-      "bytes": 26308
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 23,
       "bytes": 18279
     },
     {
-      "route": "/chairperson/meeting/index.html",
+      "route": "/chairperson/action-routes/index.html",
+      "status": 200,
+      "duration_ms": 20,
+      "bytes": 18440
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 19,
+      "bytes": 14177
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 18,
+      "bytes": 10644
+    },
+    {
+      "route": "/campaign/index.html",
       "status": 200,
       "duration_ms": 17,
-      "bytes": 10629
+      "bytes": 11759
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 16,
+      "bytes": 25409
+    },
+    {
+      "route": "/content-standards/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 15495
+    },
+    {
+      "route": "/documents/templates/tos-start-list/index.html",
+      "status": 200,
+      "duration_ms": 13,
+      "bytes": 4406
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 26308
+    },
+    {
+      "route": "/news/chkalovec-cvetik-semicvetik-2022/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 10260
+    },
+    {
+      "route": "/news/vk-238997964-941/index.html",
+      "status": 200,
+      "duration_ms": 12,
+      "bytes": 12297
+    },
+    {
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 11,
+      "bytes": 7870
     },
     {
       "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 11,
       "bytes": 17792
     },
     {
-      "route": "/chairperson/learning/index.html",
+      "route": "/create-tos/action-routes/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 9980
+      "duration_ms": 11,
+      "bytes": 15095
     },
     {
-      "route": "/news/vk-238997964-272/index.html",
+      "route": "/documents/templates/create-initiative-card/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 20165
+      "duration_ms": 11,
+      "bytes": 7375
     },
     {
-      "route": "/news/vk-238997964-944/index.html",
+      "route": "/documents/templates/project-problem/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 11546
+      "duration_ms": 11,
+      "bytes": 12190
     },
     {
-      "route": "/news/vk-238997964-948/index.html",
+      "route": "/documents/templates/tos-creation-checklist/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 16385
-    },
-    {
-      "route": "/news/vk-238997964-949/index.html",
-      "status": 200,
-      "duration_ms": 13,
-      "bytes": 9902
-    },
-    {
-      "route": "/chairperson/verify-card/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 12939
-    },
-    {
-      "route": "/news/vk-238997964-270/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 21310
-    },
-    {
-      "route": "/news/vk-238997964-276/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 20008
-    },
-    {
-      "route": "/news/vk-238997964-279/index.html",
-      "status": 200,
-      "duration_ms": 12,
-      "bytes": 16184
+      "duration_ms": 11,
+      "bytes": 5777
     }
   ]
 }
