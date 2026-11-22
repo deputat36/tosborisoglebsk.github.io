@@ -1,5 +1,41 @@
 [
   {
+    "id": "vk-238997964-1001",
+    "status": "published",
+    "date": "2026-11-22",
+    "published_at": "2026-11-22T07:27:33.000Z",
+    "category": "Новости ТОС БГО",
+    "title": "Фотографии из сообщества ТОС БГО",
+    "lead": "Материалы сообщества ВКонтакте. Публикация ТОС БГО: сохранены дата, текст автора, доступные вложения и ссылка на исходную запись.",
+    "text": [
+      "Материалы опубликованы в сообществе ТОС БГО."
+    ],
+    "source": "ВКонтакте",
+    "source_url": "https://vk.com/wall-238997964_1001",
+    "image": "https://sun9-83.userapi.com/s/v1/ig2/VSnjB2Kr-dpMuOXU51fLtoQBbO1V7ExGm4jjgZO7K2PjaRkvFas387nuU27qC_ES7_lsVNNRtJND232iRkyGemCr.jpg?quality=95&crop=0,0,1122,1402&as=32x40,48x60,72x90,108x135,160x200,240x300,360x450,480x600,540x675,640x800,720x900,1080x1350,1122x1402&from=bu&cs=1080x0",
+    "images": [
+      {
+        "src": "https://sun9-83.userapi.com/s/v1/ig2/VSnjB2Kr-dpMuOXU51fLtoQBbO1V7ExGm4jjgZO7K2PjaRkvFas387nuU27qC_ES7_lsVNNRtJND232iRkyGemCr.jpg?quality=95&crop=0,0,1122,1402&as=32x40,48x60,72x90,108x135,160x200,240x300,360x450,480x600,540x675,640x800,720x900,1080x1350,1122x1402&from=bu&cs=1080x0",
+        "thumbnail": "https://sun9-83.userapi.com/s/v1/ig2/VSnjB2Kr-dpMuOXU51fLtoQBbO1V7ExGm4jjgZO7K2PjaRkvFas387nuU27qC_ES7_lsVNNRtJND232iRkyGemCr.jpg?quality=95&crop=0,0,1122,1402&as=32x40,48x60,72x90,108x135,160x200,240x300,360x450,480x600,540x675,640x800,720x900,1080x1350,1122x1402&from=bu&cs=540x0",
+        "full": "https://sun9-83.userapi.com/s/v1/ig2/VSnjB2Kr-dpMuOXU51fLtoQBbO1V7ExGm4jjgZO7K2PjaRkvFas387nuU27qC_ES7_lsVNNRtJND232iRkyGemCr.jpg?quality=95&crop=0,0,1122,1402&as=32x40,48x60,72x90,108x135,160x200,240x300,360x450,480x600,540x675,640x800,720x900,1080x1350,1122x1402&from=bu",
+        "width": 1080,
+        "height": 1350
+      }
+    ],
+    "attachments": [],
+    "reposts": [],
+    "tos_slug": "",
+    "external": true,
+    "imported_from": "vk",
+    "content_origin": "editorial",
+    "vk_owner_id": -238997964,
+    "vk_post_id": 1001,
+    "vk_edited": 0,
+    "source_unavailable": false,
+    "unavailable_only": false,
+    "imported_at": "2026-11-22T11:09:30.617Z"
+  },
+  {
     "id": "vk-238997964-1000",
     "status": "published",
     "date": "2026-11-21",
@@ -11589,7 +11625,7 @@
       {
         "type": "document",
         "title": "ФГОС СОО НОВЫЙ.pdf",
-        "url": "https://vk.com/doc71478092_708552121?hash=MITqfRNTOxvAkTVZlltnynxqdWU8LTcraZ34uZWd7gc&api=1&no_preview=1",
+        "url": "https://vk.com/doc71478092_708552121?hash=8eCTaV0ke1KojnNot25Zk1SlO1hjTXd2lqY0EHJBkik&api=1&no_preview=1",
         "extension": "pdf",
         "size": 8774804
       }
@@ -56377,7 +56413,7 @@
       {
         "type": "document",
         "title": "Методические рекомендации по заключению договоров.docx",
-        "url": "https://vk.com/doc28462684_702700998?hash=SahrNBt0aQI8M4IVsfjrku16F6SBgln4C8zIrH6V1nw&api=1&no_preview=1",
+        "url": "https://vk.com/doc28462684_702700998?hash=96wnyveWRZ8h4GAjBOpVXmNPiJKwuDkCXv6SjzNfn7D&api=1&no_preview=1",
         "extension": "docx",
         "size": 20301
       }
