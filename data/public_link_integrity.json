@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-23T00:44:53.172Z",
+  "generated_at": "2026-11-23T08:51:35.661Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1429,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/projects/gubari-vodonapornaya-bashnya-2021/index.html",
-      "status": 200,
-      "duration_ms": 1065,
-      "bytes": 11361
-    },
-    {
-      "route": "/projects/healthy-route-sport-zone/index.html",
+      "route": "/news/vk-238997964-905/index.html",
       "status": 200,
       "duration_ms": 1064,
-      "bytes": 10406
+      "bytes": 10479
     },
     {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1010,
+      "duration_ms": 1059,
       "bytes": 10359
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 57,
+      "duration_ms": 38,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 32,
-      "bytes": 10644
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 28,
-      "bytes": 14177
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 21,
       "bytes": 18440
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 26,
+      "duration_ms": 19,
       "bytes": 11759
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 25,
-      "bytes": 25409
-    },
-    {
-      "route": "/chairperson/index.html",
-      "status": 200,
-      "duration_ms": 25,
-      "bytes": 26308
+      "duration_ms": 19,
+      "bytes": 10644
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 24,
+      "duration_ms": 17,
       "bytes": 18279
     },
     {
-      "route": "/chairperson/meeting/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 10629
-    },
-    {
-      "route": "/chairperson/learning/index.html",
+      "route": "/calendar/index.html",
       "status": 200,
       "duration_ms": 17,
-      "bytes": 9980
+      "bytes": 25409
     },
     {
-      "route": "/chairperson/news/index.html",
+      "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 7870
+      "duration_ms": 17,
+      "bytes": 14177
     },
     {
-      "route": "/documents/templates/tos-founding-protocol/index.html",
+      "route": "/news/vk-238997964-277/index.html",
       "status": 200,
-      "duration_ms": 16,
-      "bytes": 6450
+      "duration_ms": 12,
+      "bytes": 15579
     },
     {
-      "route": "/news/vk-238997964-888/index.html",
+      "route": "/news/archive/41/index.html",
       "status": 200,
-      "duration_ms": 15,
-      "bytes": 11015
+      "duration_ms": 11,
+      "bytes": 55897
     },
     {
-      "route": "/chairperson/verify-card/index.html",
+      "route": "/news/vk-238997964-276/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 12939
+      "duration_ms": 11,
+      "bytes": 20008
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 17792
+    },
+    {
+      "route": "/create-tos/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 23404
+    },
+    {
+      "route": "/chairperson/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 26308
     },
     {
       "route": "/data-update/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 9,
       "bytes": 10805
     },
     {
-      "route": "/documents/templates/tos-founding-announcement/index.html",
+      "route": "/news/archive/38/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 5014
+      "duration_ms": 9,
+      "bytes": 57048
     },
     {
-      "route": "/done/action-routes/index.html",
+      "route": "/news/archive/4/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 19853
+      "duration_ms": 9,
+      "bytes": 58033
+    },
+    {
+      "route": "/news/bogana-sports-ground-2023/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 10603
+    },
+    {
+      "route": "/news/vk-238997964-271/index.html",
+      "status": 200,
+      "duration_ms": 9,
+      "bytes": 21178
     }
   ]
 }
