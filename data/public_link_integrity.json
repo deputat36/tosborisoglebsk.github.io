@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-23T21:08:43.285Z",
+  "generated_at": "2026-11-24T05:51:56.360Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1429,
@@ -14,34 +14,28 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
-      "status": 200,
-      "duration_ms": 1061,
-      "bytes": 10359
-    },
-    {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 52,
+      "duration_ms": 54,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 28,
-      "bytes": 14177
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 27,
+      "duration_ms": 32,
       "bytes": 10644
     },
     {
-      "route": "/campaign/index.html",
+      "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 25,
-      "bytes": 11759
+      "duration_ms": 31,
+      "bytes": 10359
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 26,
+      "bytes": 14177
     },
     {
       "route": "/chairperson/action-routes/index.html",
@@ -50,88 +44,94 @@
       "bytes": 18440
     },
     {
-      "route": "/calendar/index.html",
+      "route": "/campaign/index.html",
       "status": 200,
       "duration_ms": 24,
+      "bytes": 11759
+    },
+    {
+      "route": "/calendar/index.html",
+      "status": 200,
+      "duration_ms": 23,
       "bytes": 25409
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 23,
+      "duration_ms": 22,
       "bytes": 18279
     },
     {
-      "route": "/documents/templates/resident-initiative-request/index.html",
+      "route": "/chairperson/meeting/index.html",
       "status": 200,
-      "duration_ms": 22,
-      "bytes": 10797
-    },
-    {
-      "route": "/documents/templates/resident-request-routing/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 14573
-    },
-    {
-      "route": "/chairperson/learning/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 9980
-    },
-    {
-      "route": "/documents/templates/project-passport/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 16673
-    },
-    {
-      "route": "/documents/templates/tos-creation-checklist/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 5777
-    },
-    {
-      "route": "/documents/templates/tos-founding-announcement/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 5014
-    },
-    {
-      "route": "/news/vk-238997964-893/index.html",
-      "status": 200,
-      "duration_ms": 15,
-      "bytes": 11603
+      "duration_ms": 21,
+      "bytes": 10629
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 14,
+      "duration_ms": 20,
       "bytes": 26308
     },
     {
-      "route": "/documents/templates/legal-check-before-meeting/index.html",
+      "route": "/chairperson/project/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 15081
+      "duration_ms": 18,
+      "bytes": 17792
     },
     {
-      "route": "/news/vk-238997964-897/index.html",
+      "route": "/chairperson/verify-card/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 11497
+      "duration_ms": 18,
+      "bytes": 12939
     },
     {
-      "route": "/news/vk-238997964-898/index.html",
+      "route": "/contacts/index.html",
       "status": 200,
-      "duration_ms": 14,
-      "bytes": 21203
+      "duration_ms": 18,
+      "bytes": 24304
     },
     {
-      "route": "/documents/templates/decision-action-register/index.html",
+      "route": "/chairperson/learning/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 13122
+      "duration_ms": 17,
+      "bytes": 9980
+    },
+    {
+      "route": "/chairperson/news/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 7870
+    },
+    {
+      "route": "/documents/templates/tos-founding-protocol/index.html",
+      "status": 200,
+      "duration_ms": 17,
+      "bytes": 6450
+    },
+    {
+      "route": "/news/vk-238997964-269/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 11577
+    },
+    {
+      "route": "/news/vk-238997964-270/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 21310
+    },
+    {
+      "route": "/news/vk-238997964-892/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 20274
+    },
+    {
+      "route": "/news/vk-238997964-268/index.html",
+      "status": 200,
+      "duration_ms": 14,
+      "bytes": 17998
     }
   ]
 }
