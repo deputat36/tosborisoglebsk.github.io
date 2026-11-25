@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-25T12:31:02.081Z",
+  "generated_at": "2026-11-25T22:20:34.940Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1429,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/projects/petrovskoe-remont-skvazhiny-2023/index.html",
-      "status": 200,
-      "duration_ms": 1063,
-      "bytes": 11452
-    },
-    {
       "route": "/chairperson/first-30-days/index.html",
       "status": 200,
-      "duration_ms": 1017,
+      "duration_ms": 1055,
       "bytes": 10359
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 40,
+      "duration_ms": 42,
       "bytes": 11056
     },
     {
       "route": "/chairperson/documents/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 22,
       "bytes": 14177
+    },
+    {
+      "route": "/chairperson/conflicts/index.html",
+      "status": 200,
+      "duration_ms": 21,
+      "bytes": 10644
     },
     {
       "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 19,
+      "duration_ms": 20,
       "bytes": 18440
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 19,
       "bytes": 11759
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 17,
+      "duration_ms": 18,
       "bytes": 25409
-    },
-    {
-      "route": "/chairperson/conflicts/index.html",
-      "status": 200,
-      "duration_ms": 17,
-      "bytes": 10644
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 16,
+      "duration_ms": 17,
       "bytes": 18279
     },
     {
-      "route": "/news/vk-238997964-976/index.html",
+      "route": "/news/vk-238997964-272/index.html",
       "status": 200,
       "duration_ms": 13,
-      "bytes": 9849
+      "bytes": 20165
     },
     {
-      "route": "/news/vk-238997964-98/index.html",
+      "route": "/news/vk-238997964-27/index.html",
       "status": 200,
       "duration_ms": 12,
-      "bytes": 13431
+      "bytes": 17808
     },
     {
-      "route": "/news/tos-project-passport/index.html",
+      "route": "/news/vk-238997964-273/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 7697
+      "bytes": 11848
     },
     {
-      "route": "/news/vk-238997964-977/index.html",
+      "route": "/news/vk-238997964-274/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 14020
+      "bytes": 13422
     },
     {
-      "route": "/news/vk-238997964-978/index.html",
+      "route": "/news/vk-238997964-937/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 15508
+      "bytes": 14552
     },
     {
-      "route": "/news/vk-238997964-979/index.html",
+      "route": "/news/vk-238997964-939/index.html",
       "status": 200,
       "duration_ms": 11,
-      "bytes": 23142
+      "bytes": 16031
     },
     {
-      "route": "/news/vk-238997964-981/index.html",
-      "status": 200,
-      "duration_ms": 11,
-      "bytes": 15454
-    },
-    {
-      "route": "/chairperson/index.html",
+      "route": "/documents/templates/tos-charter-draft/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 26308
+      "bytes": 7442
     },
     {
-      "route": "/news/tretyaki-seven-projects-news-2026/index.html",
+      "route": "/documents/templates/tos-creation-kit/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 10212
+      "bytes": 8457
     },
     {
-      "route": "/news/vk-238997964-269/index.html",
+      "route": "/news/chkalovec-centr-prityazheniya-2024/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 11577
+      "bytes": 10207
     },
     {
-      "route": "/news/vk-238997964-59/index.html",
+      "route": "/news/vk-238997964-270/index.html",
       "status": 200,
       "duration_ms": 10,
-      "bytes": 21300
+      "bytes": 21322
+    },
+    {
+      "route": "/news/vk-238997964-713/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 20600
+    },
+    {
+      "route": "/news/vk-238997964-934/index.html",
+      "status": 200,
+      "duration_ms": 10,
+      "bytes": 15330
     }
   ]
 }
