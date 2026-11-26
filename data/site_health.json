@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-25T22:20:28.765Z",
+  "generated_at": "2026-11-26T04:52:40.689Z",
   "site_url": "https://tosborisoglebsk.ru",
   "health_score": 0,
   "score_breakdown": {
@@ -336,7 +336,7 @@
     }
   },
   "technical_integrity": {
-    "generated_at": "2026-11-25T22:20:34.940Z",
+    "generated_at": "2026-11-26T04:52:48.762Z",
     "status": "passed",
     "status_label": "Проверка пройдена",
     "method": "Локальный HTTP-обход текущей сгенерированной версии",
@@ -396,9 +396,9 @@
     "validation_context": {
       "source": "github_actions",
       "workflow": "Update VK news",
-      "run_id": "45712256536",
-      "run_number": "716",
-      "commit_sha": "39ffb2cabe4889759f93493a1102002f60173793"
+      "run_id": "45757868457",
+      "run_number": "717",
+      "commit_sha": "649611d3a7f16605d6f864ecd11155fd4110d670"
     },
     "confirms": [
       "индексируемые страницы текущей сборки открываются по локальному HTTP",
