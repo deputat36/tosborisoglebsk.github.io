@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-27T18:02:57.030Z",
+  "generated_at": "2026-11-28T01:52:01.834Z",
   "base_url": "http://127.0.0.1:4173",
   "concurrency": 8,
   "pages_indexed": 1431,
@@ -14,124 +14,124 @@
   "failures": [],
   "slowest_pages": [
     {
-      "route": "/chairperson/first-30-days/index.html",
+      "route": "/news/vk-238997964-947/index.html",
       "status": 200,
-      "duration_ms": 1045,
-      "bytes": 10359
+      "duration_ms": 1017,
+      "bytes": 11623
     },
     {
       "route": "/action-routes/index.html",
       "status": 200,
-      "duration_ms": 42,
+      "duration_ms": 54,
       "bytes": 11056
-    },
-    {
-      "route": "/chairperson/documents/index.html",
-      "status": 200,
-      "duration_ms": 22,
-      "bytes": 14177
     },
     {
       "route": "/chairperson/conflicts/index.html",
       "status": 200,
-      "duration_ms": 21,
+      "duration_ms": 29,
       "bytes": 10644
+    },
+    {
+      "route": "/chairperson/first-30-days/index.html",
+      "status": 200,
+      "duration_ms": 28,
+      "bytes": 10359
+    },
+    {
+      "route": "/chairperson/documents/index.html",
+      "status": 200,
+      "duration_ms": 27,
+      "bytes": 14177
     },
     {
       "route": "/campaign/index.html",
       "status": 200,
-      "duration_ms": 20,
+      "duration_ms": 26,
       "bytes": 11759
-    },
-    {
-      "route": "/chairperson/action-routes/index.html",
-      "status": 200,
-      "duration_ms": 20,
-      "bytes": 18440
     },
     {
       "route": "/calendar/index.html",
       "status": 200,
-      "duration_ms": 19,
+      "duration_ms": 24,
       "bytes": 25409
     },
     {
-      "route": "/news/vk-238997964-941/index.html",
+      "route": "/chairperson/action-routes/index.html",
       "status": 200,
-      "duration_ms": 19,
-      "bytes": 12297
+      "duration_ms": 24,
+      "bytes": 18440
     },
     {
       "route": "/calendar/action-routes/index.html",
       "status": 200,
-      "duration_ms": 18,
+      "duration_ms": 22,
       "bytes": 18279
     },
     {
-      "route": "/news/vk-238997964-273/index.html",
+      "route": "/news/vk-238997964-27/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 11848
+      "duration_ms": 21,
+      "bytes": 17820
     },
     {
-      "route": "/news/vk-238997964-943/index.html",
+      "route": "/news/vk-238997964-270/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 21400
+      "duration_ms": 20,
+      "bytes": 21334
     },
     {
-      "route": "/news/vk-238997964-944/index.html",
+      "route": "/news/vk-238997964-268/index.html",
       "status": 200,
-      "duration_ms": 18,
-      "bytes": 11576
-    },
-    {
-      "route": "/news/vk-238997964-274/index.html",
-      "status": 200,
-      "duration_ms": 16,
-      "bytes": 13422
-    },
-    {
-      "route": "/news/vk-238997964-275/index.html",
-      "status": 200,
-      "duration_ms": 14,
-      "bytes": 9501
+      "duration_ms": 19,
+      "bytes": 18010
     },
     {
       "route": "/chairperson/index.html",
       "status": 200,
-      "duration_ms": 13,
+      "duration_ms": 18,
       "bytes": 26308
     },
     {
-      "route": "/chairperson/learning/index.html",
+      "route": "/news/vk-238997964-267/index.html",
       "status": 200,
-      "duration_ms": 13,
-      "bytes": 9980
+      "duration_ms": 18,
+      "bytes": 14775
     },
     {
-      "route": "/news/vk-238997964-276/index.html",
+      "route": "/news/vk-238997964-271/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 20074
+      "duration_ms": 18,
+      "bytes": 21238
     },
     {
-      "route": "/news/vk-238997964-94/index.html",
+      "route": "/news/vk-238997964-935/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 14120
+      "duration_ms": 18,
+      "bytes": 14305
     },
     {
-      "route": "/news/vk-238997964-942/index.html",
+      "route": "/news/vk-238997964-937/index.html",
       "status": 200,
-      "duration_ms": 12,
-      "bytes": 24603
+      "duration_ms": 17,
+      "bytes": 14552
     },
     {
-      "route": "/documents/templates/tos-charter-draft/index.html",
+      "route": "/news/vk-238997964-934/index.html",
       "status": 200,
-      "duration_ms": 11,
-      "bytes": 7442
+      "duration_ms": 16,
+      "bytes": 15330
+    },
+    {
+      "route": "/chairperson/project/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 17792
+    },
+    {
+      "route": "/documents/templates/resident-request-routing/index.html",
+      "status": 200,
+      "duration_ms": 15,
+      "bytes": 14573
     }
   ]
 }
